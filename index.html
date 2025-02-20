@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Tester Fresher CV</title>
+    <title>Game Tester CV - Lê Minh Hoàng</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
       * {
@@ -13,56 +13,73 @@
       }
 
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Segoe UI", Arial, sans-serif;
         line-height: 1.6;
-        background: #f0f2f5;
-        padding: 20px;
+        color: #333;
       }
 
-      .container {
+      .cv-container {
         max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .cv-wrapper {
-        background: white;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
       .header {
+        background: #2c3e50;
+        color: white;
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background: #2c3e50;
+        transform: skewY(-2deg);
+      }
+
+      .profile-section {
         display: flex;
         align-items: center;
         gap: 20px;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid #f0f0f0;
       }
 
       .profile-img {
-        width: 120px;
-        height: 120px;
-        border-radius: 60px;
-        object-fit: cover;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid white;
       }
 
-      .profile-info h1 {
-        font-size: 24px;
-        color: #2d3436;
+      .name {
+        font-size: 32px;
         margin-bottom: 5px;
       }
 
-      .profile-info h2 {
+      .title {
         font-size: 18px;
-        color: #636e72;
-        margin-bottom: 10px;
-        font-weight: normal;
+        color: #ecf0f1;
       }
 
-      .contact-info {
-        font-size: 14px;
-        color: #2d3436;
+      .main-content {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        min-height: 800px;
+      }
+
+      .sidebar {
+        background: #f5f5f5;
+        padding: 30px;
+      }
+
+      .content {
+        padding: 30px;
       }
 
       .section {
@@ -70,24 +87,74 @@
       }
 
       .section-title {
-        font-size: 18px;
-        color: #2d3436;
-        margin-bottom: 15px;
+        font-size: 20px;
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
         padding-bottom: 5px;
-        border-bottom: 2px solid #0984e3;
-      }
-
-      .content-box {
-        background: #f8f9fa;
-        padding: 15px;
-        border-radius: 6px;
         margin-bottom: 15px;
       }
 
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+      .info-item {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .info-item i {
+        color: #3498db;
+        width: 20px;
+      }
+
+      .skill-item {
+        margin-bottom: 12px;
+      }
+
+      .skill-name {
+        margin-bottom: 4px;
+        color: #2c3e50;
+        font-weight: 500;
+      }
+
+      .skill-level {
+        width: 100%;
+        height: 8px;
+        background: #ecf0f1;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .skill-level-fill {
+        height: 100%;
+        background: #3498db;
+        border-radius: 4px;
+      }
+
+      .content-item {
+        margin-bottom: 20px;
+      }
+
+      .content-title {
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #2c3e50;
+      }
+
+      .download-btn {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        background: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px auto;
+        width: 200px;
+        cursor: pointer;
+      }
+
+      .download-btn:hover {
+        background: #2980b9;
       }
 
       ul {
@@ -96,155 +163,141 @@
       }
 
       li {
-        margin-bottom: 8px;
-        padding-left: 5px;
-      }
-
-      .download-btn {
-        display: inline-block;
-        background: #0984e3;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-bottom: 20px;
-        text-decoration: none;
-      }
-
-      .download-btn:hover {
-        background: #0873c5;
-      }
-
-      .game-experience {
-        margin-bottom: 15px;
-      }
-
-      .game-title {
-        font-weight: bold;
         margin-bottom: 5px;
       }
 
-      @media (max-width: 600px) {
-        .header {
-          flex-direction: column;
-          text-align: center;
+      @media print {
+        .download-btn {
+          display: none;
         }
-
-        .skills-grid {
-          grid-template-columns: 1fr;
+        .cv-container {
+          box-shadow: none;
         }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <button class="download-btn" onclick="downloadPDF()">
-        Tải xuống PDF
-      </button>
+    <button class="download-btn" onclick="downloadPDF()">Tải xuống PDF</button>
 
-      <div class="cv-wrapper" id="cv-content">
-        <div class="header">
-          <img src="avatar.jpg" alt="Profile" class="profile-img" />
-          <div class="profile-info">
-            <h1>Lê Minh Hoàng</h1>
-            <h2>Game Tester (Fresher)</h2>
-            <div class="contact-info">
-              <div>📧 minhhoang@gmail.com</div>
-              <div>📱 0384.299.606</div>
-              <div>📍Thụy Khuê, Tây Hồ, Hà Nội</div>
-              <div>🎮 Discord: hoangsuc#cc1234</div>
+    <div class="cv-container" id="cv-content">
+      <div class="header">
+        <div class="profile-section">
+          <img src="avatar.jpg" alt="Lê Minh Hoàng" class="profile-img" />
+          <div>
+            <h1 class="name">Lê Minh Hoàng</h1>
+            <div class="title">Game Tester (Intern)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="sidebar">
+          <div class="section">
+            <h2 class="section-title">Thông tin liên hệ</h2>
+            <div class="info-item">
+              <i>📧</i>
+              <span>minhhoang@gmail.com</span>
+            </div>
+            <div class="info-item">
+              <i>📱</i>
+              <span>0384.299.606</span>
+            </div>
+            <div class="info-item">
+              <i>📍</i>
+              <span>Thụy Khuê, Tây Hồ, Hà Nội</span>
+            </div>
+            <div class="info-item">
+              <i>🎮</i>
+              <span>Discord: hoangsuc#cc1234</span>
             </div>
           </div>
-        </div>
 
-        <div class="section">
-          <h3 class="section-title">GIỚI THIỆU</h3>
-          <div class="content-box">
-            Tốt nghiệp ngành CNTT với đam mê mãnh liệt về game. Có kiến thức cơ
-            bản về game development thông qua các dự án cá nhân và tự học. Mong
-            muốn bắt đầu sự nghiệp trong ngành game với vị trí Game Tester.
-          </div>
-        </div>
-
-        <div class="section">
-          <h3 class="section-title">KIẾN THỨC & KỸ NĂNG</h3>
-          <div class="skills-grid">
-            <div class="content-box">
-              <strong>Nền tảng Game</strong>
+          <div class="section">
+            <h2 class="section-title">Học vấn</h2>
+            <div class="content-item">
+              <div class="content-title">Đại học FPT Hà Nội</div>
+              <div>Kỹ thuật phần mềm (.NET)</div>
+              <div>Tốt nghiệp: 12/2024</div>
+              <div>Các môn học chuyên ngành:</div>
               <ul>
-                <li>PC Gaming (Steam, Epic)</li>
-                <li>Mobile Gaming (Android, iOS)</li>
-                <li>Console (PS4, Switch)</li>
-                <li>Browser Games</li>
+                <li>C# Programming and Unity</li>
+                <li>Software Testing</li>
               </ul>
             </div>
-            <div class="content-box">
-              <strong>Công cụ & Phần mềm</strong>
-              <ul>
-                <li>Unity (Cơ bản)</li>
-                <li>Roblox Studio</li>
-                <li>MS Office</li>
-              </ul>
+          </div>
+
+          <div class="section">
+            <h2 class="section-title">Kỹ năng chuyên môn</h2>
+            <div class="skill-item">
+              <div class="skill-name">Unity Development</div>
+              <div class="skill-level">
+                <div class="skill-level-fill" style="width: 75%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Roblox Studio</div>
+              <div class="skill-level">
+                <div class="skill-level-fill" style="width: 70%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Game Testing</div>
+              <div class="skill-level">
+                <div class="skill-level-fill" style="width: 65%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Bug Reporting</div>
+              <div class="skill-level">
+                <div class="skill-level-fill" style="width: 70%"></div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="section">
-          <h3 class="section-title">KINH NGHIỆM GAME</h3>
-          <div class="content-box">
-            <div class="game-experience">
-              <div class="game-title">Game Đã Chơi & Hiểu Biết</div>
+        <div class="content">
+          <div class="section">
+            <h2 class="section-title">Giới thiệu</h2>
+            <p>
+              Tốt nghiệp ngành CNTT với đam mê mãnh liệt về game. Có kinh nghiệm
+              phát triển game với Unity và Roblox Studio. Tìm kiếm vị trí Game
+              Tester để áp dụng kiến thức về phát triển game vào việc kiểm thử
+              và đảm bảo chất lượng game.
+            </p>
+          </div>
+
+          <div class="section">
+            <h2 class="section-title">Kinh nghiệm Dự án</h2>
+            <div class="content-item">
+              <div class="content-title">Unity Game Projects</div>
               <ul>
                 <li>
-                  Minecraft:
-                  <ul style="margin-left: 20px">
-                    <li>
-                      Hiểu biết sâu về cơ chế chơi và các tính năng của game
-                    </li>
-                    <li>Trải nghiệm với nhiều chế độ chơi khác nhau</li>
-                    <li>Kinh nghiệm chơi các server và maps khác nhau</li>
-                  </ul>
+                  Phát triển game 2D platform đơn giản sử dụng Unity Engine
                 </li>
                 <li>
-                  Roblox:
-                  <ul style="margin-left: 20px">
-                    <li>Trải nghiệm đa dạng các thể loại game trên nền tảng</li>
-                    <li>
-                      Hiểu biết về cách game hoạt động và tương tác người chơi
-                    </li>
-                    <li>Quan tâm đến cập nhật và tính năng mới của platform</li>
-                  </ul>
+                  Làm việc với các component Unity cơ bản: Animation, Collider,
+                  Rigidbody
                 </li>
+                <li>Lập trình gameplay mechanics sử dụng C#</li>
+              </ul>
+            </div>
+            <div class="content-item">
+              <div class="content-title">Roblox Studio Projects</div>
+              <ul>
+                <li>Tạo mini-game đơn giản trên nền tảng Roblox</li>
+                <li>Sử dụng Lua để lập trình game mechanics</li>
+                <li>Thiết kế level và môi trường game cơ bản</li>
               </ul>
             </div>
           </div>
-        </div>
 
-        <div class="section">
-          <h3 class="section-title">ĐIỂM MẠNH</h3>
-          <div class="content-box">
+          <div class="section">
+            <h2 class="section-title">Kiến thức & Kỹ năng</h2>
             <ul>
-              <li>Có đam mê và dành nhiều thời gian để chơi game</li>
-              <li>Khả năng quan sát và phát hiện chi tiết tốt</li>
-              <li>Sẵn sàng học hỏi và tiếp thu kiến thức mới</li>
-              <li>Kiên nhẫn và tỉ mỉ trong công việc</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3 class="section-title">HỌC VẤN</h3>
-          <div class="content-box">
-            <strong>Đại học FPT Hà Nội</strong>
-            <ul>
-              <li>Chuyên ngành: Công nghệ Thông tin</li>
-              <li>Tốt nghiệp: 12/2024</li>
-              <li>
-                Các môn học liên quan: Lập trình game, Thiết kế phần mềm, Kiểm
-                thử phần mềm
-              </li>
+              <li>Game Development: Unity (C#), Roblox Studio (Lua)</li>
+              <li>Khả năng phát hiện và tái tạo bugs</li>
+              <li>Hiểu biết về game mechanics và gameplay testing</li>
+              <li>Kỹ năng viết báo cáo và tài liệu kỹ thuật</li>
             </ul>
           </div>
         </div>
@@ -255,8 +308,8 @@
       function downloadPDF() {
         const element = document.getElementById("cv-content");
         const opt = {
-          margin: 1,
-          filename: "GameTester_Fresher_CV.pdf",
+          margin: 0.5,
+          filename: "GameTester_LeHoang_CV.pdf",
           image: { type: "jpeg", quality: 0.98 },
           html2canvas: { scale: 2 },
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
