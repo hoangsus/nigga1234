@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CV - C/C++ Developer (Fresher)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -15,6 +16,27 @@
       body {
         background: #f0f2f5;
         padding: 20px;
+      }
+
+      .download-btn {
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 12px 25px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .download-btn:hover {
+        background: #2980b9;
+        transform: translateY(-2px);
       }
 
       .cv-container {
@@ -114,36 +136,6 @@
         font-size: 0.9em;
       }
 
-      .download-options {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        z-index: 1000;
-      }
-
-      .download-btn {
-        background: #3498db;
-        color: white;
-        padding: 12px 24px;
-        border-radius: 25px;
-        text-decoration: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-        text-align: center;
-        cursor: pointer;
-        border: none;
-        font-size: 16px;
-        font-family: inherit;
-      }
-
-      .download-btn:hover {
-        background: #2980b9;
-        transform: translateY(-2px);
-      }
-
       ul {
         list-style-position: inside;
         margin-left: 0;
@@ -160,6 +152,12 @@
 
         .cv-container {
           padding: 20px;
+          border-radius: 0;
+        }
+
+        .download-btn {
+          width: 90%;
+          max-width: 300px;
         }
 
         .header {
@@ -174,17 +172,6 @@
 
         .header-content {
           text-align: center;
-        }
-
-        .download-options {
-          position: static;
-          margin-top: 20px;
-          padding: 0 20px;
-        }
-
-        .download-btn {
-          width: 100%;
-          margin-bottom: 10px;
         }
 
         .strength-list {
@@ -205,14 +192,18 @@
           box-shadow: none;
           padding: 20px;
         }
-        .download-options {
+        .download-btn {
           display: none;
         }
       }
     </style>
   </head>
   <body>
-    <div class="cv-container">
+    <button class="download-btn" onclick="downloadPDF()">
+      📥 Tải xuống CV (PDF)
+    </button>
+
+    <div class="cv-container" id="cv-content">
       <div class="header">
         <img src="/avatar.jpg" alt="Avatar" class="avatar" />
         <div class="header-content">
@@ -320,66 +311,18 @@
       </div>
     </div>
 
-    <div class="download-options">
-      <button onclick="downloadAsPDF()" class="download-btn">
-        Tải CV (PDF)
-      </button>
-    </div>
-
-    <!-- Add html2pdf.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <script>
-      function downloadAsPDF() {
-        const element = document.querySelector(".cv-container");
-        const options = {
-          margin: [0, 0, 0, 0],
+      function downloadPDF() {
+        const element = document.getElementById("cv-content");
+        const opt = {
+          margin: [10, 10, 10, 10],
           filename: "CV-C-CPP-Developer.pdf",
-          image: { type: "jpeg", quality: 1 },
-          html2canvas: {
-            scale: 2,
-            useCORS: true,
-            logging: true,
-            letterRendering: true,
-          },
-          jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait",
-            compress: false,
-          },
-          pagebreak: { mode: "avoid-all" },
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
         };
 
-        // Temporarily hide download button
-        const downloadOptions = document.querySelector(".download-options");
-        downloadOptions.style.display = "none";
-
-        // Add print-specific styles temporarily
-        const style = document.createElement("style");
-        style.textContent = `
-          .cv-container {
-            padding: 20px !important;
-            box-shadow: none !important;
-            max-width: none !important;
-          }
-          body {
-            background: white !important;
-            padding: 0 !important;
-          }
-        `;
-        document.head.appendChild(style);
-
-        // Generate PDF
-        html2pdf()
-          .set(options)
-          .from(element)
-          .save()
-          .then(() => {
-            // Cleanup
-            document.head.removeChild(style);
-            downloadOptions.style.display = "flex";
-          });
+        html2pdf().set(opt).from(element).save();
       }
     </script>
   </body>
