@@ -28,9 +28,10 @@
 
       .header {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 30px;
-        gap: 30px;
+        gap: 20px;
+        flex-wrap: wrap;
       }
 
       .avatar {
@@ -42,7 +43,8 @@
       }
 
       .header-content {
-        flex-grow: 1;
+        flex: 1;
+        min-width: 250px;
       }
 
       .header h1 {
@@ -63,14 +65,6 @@
 
       .section {
         margin-bottom: 25px;
-        page-break-inside: avoid;
-      }
-
-      .education-item {
-        page-break-inside: avoid;
-      }
-
-      .experience-item {
         page-break-inside: avoid;
       }
 
@@ -109,10 +103,28 @@
         border-left: 4px solid #3498db;
       }
 
-      .download-btn {
+      .education-item,
+      .experience-item {
+        margin-bottom: 15px;
+        page-break-inside: avoid;
+      }
+
+      .date {
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      .download-options {
         position: fixed;
-        bottom: 30px;
-        right: 30px;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+      }
+
+      .download-btn {
         background: #3498db;
         color: white;
         padding: 12px 24px;
@@ -120,6 +132,11 @@
         text-decoration: none;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        font-size: 16px;
+        font-family: inherit;
       }
 
       .download-btn:hover {
@@ -127,14 +144,56 @@
         transform: translateY(-2px);
       }
 
-      .education-item,
-      .experience-item {
-        margin-bottom: 15px;
+      ul {
+        list-style-position: inside;
+        margin-left: 0;
       }
 
-      .date {
-        color: #666;
-        font-size: 0.9em;
+      ul li {
+        margin-bottom: 5px;
+      }
+
+      @media screen and (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .cv-container {
+          padding: 20px;
+        }
+
+        .header {
+          justify-content: center;
+          text-align: center;
+        }
+
+        .avatar {
+          width: 120px;
+          height: 120px;
+        }
+
+        .header-content {
+          text-align: center;
+        }
+
+        .download-options {
+          position: static;
+          margin-top: 20px;
+          padding: 0 20px;
+        }
+
+        .download-btn {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+
+        .strength-list {
+          grid-template-columns: 1fr;
+        }
+
+        .skill-list {
+          justify-content: center;
+        }
       }
 
       @media print {
@@ -146,7 +205,7 @@
           box-shadow: none;
           padding: 20px;
         }
-        .download-btn {
+        .download-options {
           display: none;
         }
       }
@@ -155,13 +214,13 @@
   <body>
     <div class="cv-container">
       <div class="header">
-        <img src="/api/placeholder/150/150" alt="Avatar" class="avatar" />
+        <img src="/avatar.jpg" alt="Avatar" class="avatar" />
         <div class="header-content">
-          <h1>[Họ và tên của bạn]</h1>
+          <h1>Lê Minh Hoàng</h1>
           <div class="position">C/C++ Developer (Fresher)</div>
           <div class="contact-info">
-            Email: [email của bạn]<br />
-            Điện thoại: [số điện thoại của bạn]<br />
+            Email: minhhoang192002@gmail.com<br />
+            Điện thoại: 0384299606<br />
             Địa chỉ: Hà Nội
           </div>
         </div>
@@ -200,7 +259,7 @@
           Là một Fresher C/C++ Developer, tôi mong muốn được làm việc trong môi
           trường chuyên nghiệp tại Agribank, nơi tôi có thể:
         </p>
-        <ul style="margin-left: 20px; margin-top: 10px">
+        <ul style="margin-top: 10px">
           <li>
             Phát triển và ứng dụng chuyên sâu ngôn ngữ C/C++ trong các lĩnh vực
             như: phát triển hệ thống, tối ưu hiệu năng, xử lý dữ liệu thời gian
@@ -221,11 +280,11 @@
         <h2 class="section-title">HỌC VẤN</h2>
         <div class="education-item">
           <h3>Đại học FPT</h3>
-          <div class="date">20XX - 20XX</div>
+          <div class="date">12/2020 - 10/2024</div>
           <p>Cử nhân Kỹ thuật Phần mềm</p>
           <p>Chuyên ngành: Công nghệ phần mềm</p>
           <p>Các môn học liên quan:</p>
-          <ul style="margin-left: 20px; margin-top: 5px">
+          <ul style="margin-top: 5px">
             <li>Cấu trúc dữ liệu và giải thuật</li>
             <li>Lập trình C/C++</li>
             <li>Cơ sở dữ liệu</li>
@@ -250,10 +309,9 @@
       <div class="section">
         <h2 class="section-title">DỰ ÁN TRONG QUÁ TRÌNH HỌC</h2>
         <div class="experience-item">
-          <h3>[Tên đồ án tốt nghiệp/dự án học tập]</h3>
-          <div class="date">[Thời gian thực hiện]</div>
-          <ul style="margin-left: 20px">
-            <li>Phát triển ứng dụng sử dụng C++</li>
+          <h3>Agile Project Management with Kanban</h3>
+          <ul>
+            <li>Phát triển ứng dụng sử dụng Spring, reactjs</li>
             <li>Áp dụng kiến thức về cấu trúc dữ liệu và thuật toán</li>
             <li>Làm việc với cơ sở dữ liệu</li>
             <li>Thực hiện unit testing và debugging</li>
@@ -262,8 +320,67 @@
       </div>
     </div>
 
-    <div class="download-cv">
-      <a href="#" class="download-btn" onclick="window.print()">Tải CV (PDF)</a>
+    <div class="download-options">
+      <button onclick="downloadAsPDF()" class="download-btn">
+        Tải CV (PDF)
+      </button>
     </div>
+
+    <!-- Add html2pdf.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+      function downloadAsPDF() {
+        const element = document.querySelector(".cv-container");
+        const options = {
+          margin: [0, 0, 0, 0],
+          filename: "CV-C-CPP-Developer.pdf",
+          image: { type: "jpeg", quality: 1 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: true,
+            letterRendering: true,
+          },
+          jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait",
+            compress: false,
+          },
+          pagebreak: { mode: "avoid-all" },
+        };
+
+        // Temporarily hide download button
+        const downloadOptions = document.querySelector(".download-options");
+        downloadOptions.style.display = "none";
+
+        // Add print-specific styles temporarily
+        const style = document.createElement("style");
+        style.textContent = `
+          .cv-container {
+            padding: 20px !important;
+            box-shadow: none !important;
+            max-width: none !important;
+          }
+          body {
+            background: white !important;
+            padding: 0 !important;
+          }
+        `;
+        document.head.appendChild(style);
+
+        // Generate PDF
+        html2pdf()
+          .set(options)
+          .from(element)
+          .save()
+          .then(() => {
+            // Cleanup
+            document.head.removeChild(style);
+            downloadOptions.style.display = "flex";
+          });
+      }
+    </script>
   </body>
 </html>
