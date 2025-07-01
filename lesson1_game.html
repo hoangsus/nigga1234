@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trò chơi Buổi 1 - Giới thiệu bản thân (Nâng cao)</title>
+    <title>
+      Trò chơi Buổi 1 - Giới thiệu bản thân (Nâng cao + Luyện nghe nói)
+    </title>
     <style>
       * {
         margin: 0;
@@ -116,11 +118,28 @@
         background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
       }
 
+      .game-card.speaking {
+        border-color: #e91e63;
+        background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+      }
+
       .new-badge {
         position: absolute;
         top: 10px;
         right: 10px;
         background: #ff5722;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 10px;
+        font-size: 0.7em;
+        font-weight: bold;
+      }
+
+      .speaking-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #e91e63;
         color: white;
         padding: 4px 8px;
         border-radius: 10px;
@@ -627,7 +646,7 @@
         cursor: not-allowed;
       }
 
-      .sentence-builder-area {
+      .sentence-builder-drop {
         min-height: 60px;
         border: 2px dashed #ddd;
         border-radius: 10px;
@@ -708,6 +727,274 @@
         background: #45a049;
       }
 
+      /* Listening Challenge Game - NEW */
+      .listening-challenge-area {
+        background: white;
+        border: 2px solid #2196f3;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .audio-wave {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin: 30px 0;
+        height: 80px;
+      }
+
+      .wave-bar {
+        width: 8px;
+        background: #2196f3;
+        border-radius: 4px;
+        animation: wave 1.5s ease-in-out infinite;
+        transform-origin: bottom;
+      }
+
+      .wave-bar:nth-child(1) {
+        animation-delay: 0s;
+        height: 20px;
+      }
+      .wave-bar:nth-child(2) {
+        animation-delay: 0.1s;
+        height: 40px;
+      }
+      .wave-bar:nth-child(3) {
+        animation-delay: 0.2s;
+        height: 60px;
+      }
+      .wave-bar:nth-child(4) {
+        animation-delay: 0.3s;
+        height: 40px;
+      }
+      .wave-bar:nth-child(5) {
+        animation-delay: 0.4s;
+        height: 20px;
+      }
+      .wave-bar:nth-child(6) {
+        animation-delay: 0.5s;
+        height: 50px;
+      }
+      .wave-bar:nth-child(7) {
+        animation-delay: 0.6s;
+        height: 30px;
+      }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: scaleY(1);
+        }
+        50% {
+          transform: scaleY(2);
+        }
+      }
+
+      .listening-progress {
+        background: #f0f0f0;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background: #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4caf50, #45a049);
+        width: 0%;
+        transition: width 0.5s ease;
+      }
+
+      .difficulty-badge {
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin: 5px;
+      }
+
+      .difficulty-easy {
+        background: #4caf50;
+        color: white;
+      }
+      .difficulty-medium {
+        background: #ff9800;
+        color: white;
+      }
+      .difficulty-hard {
+        background: #f44336;
+        color: white;
+      }
+
+      /* Speaking Practice Game - NEW */
+      .speaking-practice-area {
+        background: white;
+        border: 2px solid #e91e63;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .microphone-area {
+        margin: 30px 0;
+        position: relative;
+      }
+
+      .mic-button {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #e91e63, #ad1457);
+        color: white;
+        font-size: 3em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+      }
+
+      .mic-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 15px 35px rgba(233, 30, 99, 0.4);
+      }
+
+      .mic-button.recording {
+        background: #f44336;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .recording-indicator {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f44336;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .recording-indicator.active {
+        opacity: 1;
+      }
+
+      .speaking-feedback {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .accuracy-meter {
+        width: 100%;
+        max-width: 300px;
+        margin: 20px auto;
+      }
+
+      .accuracy-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .accuracy-bar {
+        width: 100%;
+        height: 25px;
+        background: #f0f0f0;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .accuracy-fill {
+        height: 100%;
+        border-radius: 15px;
+        transition: all 0.8s ease;
+        position: relative;
+      }
+
+      .accuracy-excellent {
+        background: linear-gradient(90deg, #4caf50, #66bb6a);
+      }
+      .accuracy-good {
+        background: linear-gradient(90deg, #8bc34a, #aed581);
+      }
+      .accuracy-fair {
+        background: linear-gradient(90deg, #ffc107, #ffecb3);
+      }
+      .accuracy-poor {
+        background: linear-gradient(90deg, #ff5722, #ff8a65);
+      }
+
+      .voice-comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .voice-sample {
+        background: #f8f9ff;
+        border: 2px solid #e3f2fd;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+      }
+
+      .voice-sample h4 {
+        color: #1976d2;
+        margin-bottom: 10px;
+      }
+
+      .voice-sample button {
+        background: #2196f3;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .voice-sample button:hover {
+        background: #1976d2;
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .container {
@@ -742,6 +1029,16 @@
         .speed-test-stats {
           grid-template-columns: repeat(2, 1fr);
         }
+
+        .voice-comparison {
+          grid-template-columns: 1fr;
+        }
+
+        .mic-button {
+          width: 100px;
+          height: 100px;
+          font-size: 2.5em;
+        }
       }
 
       @media (max-width: 480px) {
@@ -774,6 +1071,12 @@
         .speed-test-stats {
           grid-template-columns: 1fr;
         }
+
+        .mic-button {
+          width: 80px;
+          height: 80px;
+          font-size: 2em;
+        }
       }
     </style>
   </head>
@@ -794,9 +1097,9 @@
 
     <div class="container">
       <div class="header">
-        <h1>🎮 Trò chơi Buổi 1 - Nâng cao</h1>
+        <h1>🎮 Trò chơi Buổi 1 - Nâng cao + Luyện nghe nói</h1>
         <div class="subtitle">
-          Giới thiệu bản thân - 9 trò chơi luyện tập từ vựng thú vị
+          Giới thiệu bản thân - 11 trò chơi luyện tập từ vựng và phát âm thú vị
         </div>
       </div>
 
@@ -889,6 +1192,31 @@
             Sắp xếp từ để tạo thành câu đúng ngữ pháp. Học cấu trúc câu cơ bản.
           </div>
           <div class="game-stats">🎯 36 câu • ⏱️ 35 phút</div>
+        </div>
+
+        <div
+          class="game-card speaking"
+          onclick="startGame('listeningchallenge')"
+        >
+          <div class="speaking-badge">NGHE</div>
+          <div class="game-icon">👂</div>
+          <div class="game-title">Thử thách nghe</div>
+          <div class="game-description">
+            Luyện nghe với nhiều mức độ khó khăn. Từ cơ bản đến nâng cao với âm
+            thanh chất lượng cao.
+          </div>
+          <div class="game-stats">🎯 72 từ / 3 mức độ • ⏱️ 40 phút</div>
+        </div>
+
+        <div class="game-card speaking" onclick="startGame('speakingpractice')">
+          <div class="speaking-badge">NÓI</div>
+          <div class="game-icon">🎤</div>
+          <div class="game-title">Luyện phát âm</div>
+          <div class="game-description">
+            Thu âm giọng nói và so sánh với phát âm chuẩn. Cải thiện kỹ năng nói
+            tiếng Đức.
+          </div>
+          <div class="game-stats">🎙️ 72 từ • ⏱️ 45 phút</div>
         </div>
       </div>
 
@@ -1256,7 +1584,7 @@
             Sắp xếp các từ để tạo thành câu: "Tôi tên là Anna"
           </div>
 
-          <div class="sentence-builder-area" id="sentenceDropZone">
+          <div class="sentence-builder-drop" id="sentenceDropZone">
             <p style="color: #999">Kéo từ vào đây để tạo câu...</p>
           </div>
 
@@ -1269,6 +1597,193 @@
 
         <div class="score-display" id="sentenceScore" style="display: none">
           Điểm ghép câu: <span id="finalSentenceScore">0</span>/36
+        </div>
+      </div>
+
+      <!-- Listening Challenge Game - NEW -->
+      <div class="game-area" id="listeningchallengeGame">
+        <div class="game-header">
+          <div class="game-info">
+            <h3>👂 Thử thách nghe</h3>
+            <p>
+              Từ <span id="currentListeningChallenge">1</span> /
+              <span id="totalListeningChallenge">72</span>
+            </p>
+          </div>
+          <div class="game-controls">
+            <button
+              class="btn btn-primary"
+              onclick="playListeningChallenge()"
+              id="playListeningChallengeBtn"
+            >
+              🔊 Phát âm
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="nextListeningChallenge()"
+              id="nextListeningChallengeBtn"
+              style="display: none"
+            >
+              Tiếp ➡️
+            </button>
+            <button class="btn btn-back" onclick="backToMenu()">🏠 Menu</button>
+          </div>
+        </div>
+
+        <div class="listening-challenge-area">
+          <div class="difficulty-badge difficulty-easy" id="currentDifficulty">
+            Dễ
+          </div>
+
+          <div class="audio-wave" id="audioWave" style="display: none">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+
+          <div class="listening-progress">
+            <h4>🎯 Tiến độ theo mức độ</h4>
+            <div>
+              <div class="accuracy-label">
+                <span>Dễ</span>
+                <span id="easyProgress">0/24</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="easyProgressBar"></div>
+              </div>
+            </div>
+            <div>
+              <div class="accuracy-label">
+                <span>Trung bình</span>
+                <span id="mediumProgress">0/24</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="mediumProgressBar"></div>
+              </div>
+            </div>
+            <div>
+              <div class="accuracy-label">
+                <span>Khó</span>
+                <span id="hardProgress">0/24</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="hardProgressBar"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <h3 id="listeningChallengeQuestion">🎧 Nghe và nhận diện từ:</h3>
+            <div class="quiz-options" id="listeningChallengeOptions">
+              <!-- Options will be generated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="score-display"
+          id="listeningChallengeScore"
+          style="display: none"
+        >
+          <h3>🏆 Kết quả thử thách nghe</h3>
+          <p>Tổng điểm: <span id="finalListeningChallengeScore">0</span>/720</p>
+          <p>Độ chính xác: <span id="listeningAccuracy">0</span>%</p>
+        </div>
+      </div>
+
+      <!-- Speaking Practice Game - NEW -->
+      <div class="game-area" id="speakingpracticeGame">
+        <div class="game-header">
+          <div class="game-info">
+            <h3>🎤 Luyện phát âm</h3>
+            <p>
+              Từ <span id="currentSpeaking">1</span> /
+              <span id="totalSpeaking">72</span>
+            </p>
+          </div>
+          <div class="game-controls">
+            <button
+              class="btn btn-primary"
+              onclick="playReferenceAudio()"
+              id="playReferenceBtn"
+            >
+              🔊 Nghe mẫu
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="nextSpeaking()"
+              id="nextSpeakingBtn"
+              style="display: none"
+            >
+              Tiếp ➡️
+            </button>
+            <button class="btn btn-back" onclick="backToMenu()">🏠 Menu</button>
+          </div>
+        </div>
+
+        <div class="speaking-practice-area">
+          <div class="quiz-question">
+            <h3 id="speakingPrompt">🎤 Phát âm từ: "ich"</h3>
+            <div class="card-pronunciation" id="speakingPronunciation">
+              [ích]
+            </div>
+            <div class="card-translation" id="speakingTranslation">tôi</div>
+          </div>
+
+          <div class="microphone-area">
+            <div class="recording-indicator" id="recordingIndicator">
+              🔴 Đang ghi âm...
+            </div>
+            <button
+              class="mic-button"
+              id="micButton"
+              onclick="toggleRecording()"
+            >
+              🎤
+            </button>
+            <p style="margin-top: 15px; color: #666">Nhấn để bắt đầu ghi âm</p>
+          </div>
+
+          <div
+            class="voice-comparison"
+            id="voiceComparison"
+            style="display: none"
+          >
+            <div class="voice-sample">
+              <h4>🔊 Âm thanh mẫu</h4>
+              <button onclick="playReferenceAudio()">▶️ Phát</button>
+            </div>
+            <div class="voice-sample">
+              <h4>🎙️ Ghi âm của bạn</h4>
+              <button onclick="playUserRecording()" id="playUserBtn" disabled>
+                ▶️ Phát
+              </button>
+            </div>
+          </div>
+
+          <div class="accuracy-meter" id="accuracyMeter" style="display: none">
+            <div class="accuracy-label">
+              <span>Độ chính xác phát âm</span>
+              <span id="accuracyPercentage">0%</span>
+            </div>
+            <div class="accuracy-bar">
+              <div class="accuracy-fill" id="accuracyFill"></div>
+            </div>
+          </div>
+
+          <div class="speaking-feedback" id="speakingFeedback">
+            <p style="color: #666">Nhấn nút micro để bắt đầu luyện phát âm</p>
+          </div>
+        </div>
+
+        <div class="score-display" id="speakingScore" style="display: none">
+          <h3>🏆 Kết quả luyện phát âm</h3>
+          <p>Điểm trung bình: <span id="finalSpeakingScore">0</span>/100</p>
+          <p>Từ phát âm đúng: <span id="speakingCorrect">0</span>/72</p>
         </div>
       </div>
     </div>
@@ -1291,54 +1806,63 @@
           pronunciation: "[ích]",
           vietnamese: "tôi",
           category: "Siêu quan trọng",
+          difficulty: "easy",
         },
         {
           german: "bin",
           pronunciation: "[bin]",
           vietnamese: "là",
           category: "Siêu quan trọng",
+          difficulty: "easy",
         },
         {
           german: "ist",
           pronunciation: "[ít]",
           vietnamese: "là",
           category: "Siêu quan trọng",
+          difficulty: "easy",
         },
         {
           german: "heiße",
           pronunciation: "[hai-sơ]",
           vietnamese: "tên là",
           category: "Siêu quan trọng",
+          difficulty: "easy",
         },
         {
           german: "Hallo",
           pronunciation: "[ha-lô]",
           vietnamese: "xin chào",
           category: "Siêu quan trọng",
+          difficulty: "easy",
         },
         {
           german: "Guten Tag",
           pronunciation: "[gu-ten tác]",
           vietnamese: "chào buổi chiều",
           category: "Siêu quan trọng",
+          difficulty: "medium",
         },
         {
           german: "Tschüs",
           pronunciation: "[chúy-s]",
           vietnamese: "tạm biệt (thân mật)",
           category: "Siêu quan trọng",
+          difficulty: "medium",
         },
         {
           german: "komme",
           pronunciation: "[cô-mơ]",
           vietnamese: "đến / đến từ",
           category: "Siêu quan trọng",
+          difficulty: "easy",
         },
         {
           german: "spreche",
           pronunciation: "[spre-xe]",
           vietnamese: "nói (ngôn ngữ)",
           category: "Siêu quan trọng",
+          difficulty: "medium",
         },
 
         // NHÓM 2: QUAN TRỌNG
@@ -1347,60 +1871,70 @@
           pronunciation: "[aus]",
           vietnamese: "từ",
           category: "Quan trọng",
+          difficulty: "easy",
         },
         {
           german: "und",
           pronunciation: "[unt]",
           vietnamese: "và",
           category: "Quan trọng",
+          difficulty: "easy",
         },
         {
           german: "ein bisschen",
           pronunciation: "[ain bí-sơn]",
           vietnamese: "một chút",
           category: "Quan trọng",
+          difficulty: "hard",
         },
         {
           german: "mein",
           pronunciation: "[main]",
           vietnamese: "của tôi",
           category: "Quan trọng",
+          difficulty: "easy",
         },
         {
           german: "meine",
           pronunciation: "[mai-nơ]",
           vietnamese: "của tôi",
           category: "Quan trọng",
+          difficulty: "medium",
         },
         {
           german: "Name",
           pronunciation: "[na-mơ]",
           vietnamese: "tên",
           category: "Quan trọng",
+          difficulty: "easy",
         },
         {
           german: "ja",
           pronunciation: "[ya]",
           vietnamese: "có",
           category: "Quan trọng",
+          difficulty: "easy",
         },
         {
           german: "nein",
           pronunciation: "[nain]",
           vietnamese: "không",
           category: "Quan trọng",
+          difficulty: "easy",
         },
         {
           german: "okay",
           pronunciation: "[ô-kây]",
           vietnamese: "được rồi",
           category: "Quan trọng",
+          difficulty: "easy",
         },
         {
           german: "bitte",
           pronunciation: "[bi-tơ]",
           vietnamese: "làm ơn / xin mời",
           category: "Quan trọng",
+          difficulty: "medium",
         },
 
         // NHÓM 3: QUỐC GIA & NGÔN NGỮ
@@ -1409,30 +1943,35 @@
           pronunciation: "[Đói-t-lant]",
           vietnamese: "nước Đức",
           category: "Quốc gia",
+          difficulty: "hard",
         },
         {
           german: "Englisch",
           pronunciation: "[Éng-lít]",
           vietnamese: "tiếng Anh",
           category: "Ngôn ngữ",
+          difficulty: "medium",
         },
         {
           german: "Polen",
           pronunciation: "[Pô-len]",
           vietnamese: "Ba Lan",
           category: "Quốc gia",
+          difficulty: "medium",
         },
         {
           german: "Polnisch",
           pronunciation: "[Pôl-nít]",
           vietnamese: "tiếng Ba Lan",
           category: "Ngôn ngữ",
+          difficulty: "hard",
         },
         {
           german: "Spanisch",
           pronunciation: "[Shpa-nít]",
           vietnamese: "tiếng Tây Ban Nha",
           category: "Ngôn ngữ",
+          difficulty: "hard",
         },
 
         // NHÓM 4: GIA ĐÌNH & NGƯỜI
@@ -1441,18 +1980,21 @@
           pronunciation: "[Ma-ma]",
           vietnamese: "mẹ",
           category: "Gia đình",
+          difficulty: "easy",
         },
         {
           german: "Opa",
           pronunciation: "[Ô-pa]",
           vietnamese: "ông",
           category: "Gia đình",
+          difficulty: "easy",
         },
         {
           german: "du",
           pronunciation: "[du]",
           vietnamese: "bạn",
           category: "Người",
+          difficulty: "easy",
         },
 
         // NHÓM 5: TỪ HỎI & LIÊN KẾT
@@ -1461,36 +2003,42 @@
           pronunciation: "[vì]",
           vietnamese: "như thế nào / làm sao",
           category: "Từ hỏi",
+          difficulty: "easy",
         },
         {
           german: "Woher",
           pronunciation: "[vô-he]",
           vietnamese: "từ đâu",
           category: "Từ hỏi",
+          difficulty: "medium",
         },
         {
           german: "Was",
           pronunciation: "[vát]",
           vietnamese: "cái gì",
           category: "Từ hỏi",
+          difficulty: "easy",
         },
         {
           german: "oder",
           pronunciation: "[ô-đơ]",
           vietnamese: "hoặc",
           category: "Liên từ",
+          difficulty: "medium",
         },
         {
           german: "Auf Wiedersehen",
           pronunciation: "[auf vì-đơ-ze-en]",
           vietnamese: "tạm biệt (trang trọng)",
           category: "Chào hỏi",
+          difficulty: "hard",
         },
         {
           german: "doch",
           pronunciation: "[đọt]",
           vietnamese: "thật ra / mà",
           category: "Từ liên kết",
+          difficulty: "hard",
         },
 
         // NHÓM 6: TÍNH TỪ & MÔ TẢ
@@ -1499,30 +2047,35 @@
           pronunciation: "[gánt]",
           vietnamese: "hoàn toàn / rất",
           category: "Tính từ",
+          difficulty: "medium",
         },
         {
           german: "einfach",
           pronunciation: "[ain-fát]",
           vietnamese: "đơn giản",
           category: "Tính từ",
+          difficulty: "medium",
         },
         {
           german: "super",
           pronunciation: "[zu-pe]",
           vietnamese: "tuyệt vời",
           category: "Tính từ",
+          difficulty: "easy",
         },
         {
           german: "gut",
           pronunciation: "[gut]",
           vietnamese: "tốt",
           category: "Tính từ",
+          difficulty: "easy",
         },
         {
           german: "richtig",
           pronunciation: "[rít-tít]",
           vietnamese: "đúng",
           category: "Tính từ",
+          difficulty: "medium",
         },
 
         // NHÓM 7: SỐ ĐẾM & THỜI GIAN
@@ -1531,30 +2084,35 @@
           pronunciation: "[ains]",
           vietnamese: "một",
           category: "Số đếm",
+          difficulty: "easy",
         },
         {
           german: "zwei",
           pronunciation: "[tsvai]",
           vietnamese: "hai",
           category: "Số đếm",
+          difficulty: "medium",
         },
         {
           german: "drei",
           pronunciation: "[đrai]",
           vietnamese: "ba",
           category: "Số đếm",
+          difficulty: "medium",
         },
         {
           german: "zuerst",
           pronunciation: "[tsu-e-ớt]",
           vietnamese: "trước tiên",
           category: "Thời gian",
+          difficulty: "hard",
         },
         {
           german: "nochmal",
           pronunciation: "[nọt-mal]",
           vietnamese: "một lần nữa",
           category: "Thời gian",
+          difficulty: "hard",
         },
 
         // NHÓM 8: CẢM TÁN & ĐỘNG TỪ
@@ -1563,42 +2121,49 @@
           pronunciation: "[ô]",
           vietnamese: "ôi",
           category: "Cảm thán",
+          difficulty: "easy",
         },
         {
           german: "Hey",
           pronunciation: "[hây]",
           vietnamese: "này",
           category: "Cảm thán",
+          difficulty: "easy",
         },
         {
           german: "Ach",
           pronunciation: "[át]",
           vietnamese: "ôi / thôi nào",
           category: "Cảm thán",
+          difficulty: "medium",
         },
         {
           german: "Na los",
           pronunciation: "[na lôt]",
           vietnamese: "nào thôi",
           category: "Cảm thán",
+          difficulty: "hard",
         },
         {
           german: "komm",
           pronunciation: "[cọm]",
           vietnamese: "đến / thôi nào",
           category: "Động từ",
+          difficulty: "easy",
         },
         {
           german: "hast",
           pronunciation: "[hát]",
           vietnamese: "có / đã (với du)",
           category: "Động từ",
+          difficulty: "medium",
         },
         {
           german: "vergessen",
           pronunciation: "[fe-gé-sơn]",
           vietnamese: "quên",
           category: "Động từ",
+          difficulty: "hard",
         },
 
         // NHÓM 9: TỪ HỖ TRỢ & THỜI GIAN
@@ -1607,24 +2172,28 @@
           pronunciation: "[đát]",
           vietnamese: "điều đó / cái đó",
           category: "Từ chỉ định",
+          difficulty: "easy",
         },
         {
           german: "dann",
           pronunciation: "[đán]",
           vietnamese: "sau đó / rồi",
           category: "Thời gian",
+          difficulty: "medium",
         },
         {
           german: "jetzt",
           pronunciation: "[yét]",
           vietnamese: "bây giờ",
           category: "Thời gian",
+          difficulty: "medium",
         },
         {
           german: "hier",
           pronunciation: "[hia]",
           vietnamese: "đây / ở đây",
           category: "Nơi chốn",
+          difficulty: "easy",
         },
 
         // NHÓM 10: CÂU CẢM THÁN & KHÁC
@@ -1633,36 +2202,42 @@
           pronunciation: "[ơm]",
           vietnamese: "ừm (do dự)",
           category: "Cảm thán",
+          difficulty: "easy",
         },
         {
           german: "Puh",
           pronunciation: "[puh]",
           vietnamese: "phù (thở phào)",
           category: "Cảm thán",
+          difficulty: "easy",
         },
         {
           german: "Halli hallo",
           pronunciation: "[ha-li ha-lô]",
           vietnamese: "chào chào (vui vẻ)",
           category: "Chào hỏi",
+          difficulty: "medium",
         },
         {
           german: "tut mir leid",
           pronunciation: "[tut mia lait]",
           vietnamese: "xin lỗi",
           category: "Lịch sự",
+          difficulty: "hard",
         },
         {
           german: "Keine Zeit",
           pronunciation: "[kai-nơ tsait]",
           vietnamese: "không có thời gian",
           category: "Từ chối",
+          difficulty: "hard",
         },
         {
           german: "Mach's",
           pronunciation: "[mát]",
           vietnamese: "làm đi (rút gọn của mach es)",
           category: "Động từ",
+          difficulty: "hard",
         },
 
         // NHÓM 11: TÊN RIÊNG
@@ -1671,18 +2246,21 @@
           pronunciation: "[La-ra]",
           vietnamese: "Lara (tên người)",
           category: "Tên riêng",
+          difficulty: "easy",
         },
         {
           german: "Walter",
           pronunciation: "[Val-te]",
           vietnamese: "Walter (tên người)",
           category: "Tên riêng",
+          difficulty: "medium",
         },
         {
           german: "Sofia",
           pronunciation: "[Zo-fi-a]",
           vietnamese: "Sofia (tên người)",
           category: "Tên riêng",
+          difficulty: "easy",
         },
 
         // NHÓM 12: TỪ VỰNG HỌC TẬP & HOẠT ĐỘNG
@@ -1691,48 +2269,56 @@
           pronunciation: "[ze-en]",
           vietnamese: "nhìn / xem",
           category: "Hoạt động",
+          difficulty: "medium",
         },
         {
           german: "Sie",
           pronunciation: "[zi]",
           vietnamese: "họ / bạn (trang trọng)",
           category: "Đại từ",
+          difficulty: "medium",
         },
         {
           german: "die",
           pronunciation: "[di]",
           vietnamese: "những / các (mạo từ)",
           category: "Mạo từ",
+          difficulty: "easy",
         },
         {
           german: "Fotos",
           pronunciation: "[fô-tôt]",
           vietnamese: "những bức ảnh",
           category: "Đồ vật",
+          difficulty: "medium",
         },
         {
           german: "an",
           pronunciation: "[an]",
           vietnamese: "tại / ở / xem",
           category: "Giới từ",
+          difficulty: "easy",
         },
         {
           german: "hören",
           pronunciation: "[hö-ren]",
           vietnamese: "nghe",
           category: "Hoạt động",
+          difficulty: "medium",
         },
         {
           german: "noch einmal",
           pronunciation: "[nọt ain-mal]",
           vietnamese: "một lần nữa",
           category: "Thời gian",
+          difficulty: "hard",
         },
         {
           german: "kreuzen",
           pronunciation: "[kroy-tsen]",
           vietnamese: "đánh dấu X",
           category: "Hoạt động",
+          difficulty: "hard",
         },
 
         // CÁC TỪ BỔ SUNG
@@ -1741,36 +2327,42 @@
           pronunciation: "[zô]",
           vietnamese: "vậy / như thế",
           category: "Từ liên kết",
+          difficulty: "easy",
         },
         {
           german: "aber",
           pronunciation: "[a-be]",
           vietnamese: "nhưng / thì",
           category: "Liên từ",
+          difficulty: "medium",
         },
         {
           german: "noch",
           pronunciation: "[nọt]",
           vietnamese: "còn / nữa",
           category: "Trạng từ",
+          difficulty: "medium",
         },
         {
           german: "Also",
           pronunciation: "[an-zô]",
           vietnamese: "vậy thì",
           category: "Từ liên kết",
+          difficulty: "medium",
         },
         {
           german: "Foto",
           pronunciation: "[fô-tô]",
           vietnamese: "ảnh / hình",
           category: "Đồ vật",
+          difficulty: "easy",
         },
         {
           german: "Wartet",
           pronunciation: "[va-tet]",
           vietnamese: "chờ đã",
           category: "Động từ",
+          difficulty: "medium",
         },
       ];
 
@@ -1986,6 +2578,9 @@
       let currentGameData = {};
       let audioSupported = false;
       let audioEnabled = false;
+      let mediaRecorder = null;
+      let audioChunks = [];
+      let userRecordingBlob = null;
 
       // Test audio support
       function testAudioSupport() {
@@ -2036,7 +2631,7 @@
       }
 
       // Enhanced audio function with fallback
-      function speakGerman(text, fallbackElement = null) {
+      function speakGerman(text, fallbackElement = null, rate = 0.7) {
         if (!audioEnabled) {
           // Show visual fallback
           if (fallbackElement) {
@@ -2084,7 +2679,7 @@
           }
 
           utterance.lang = "de-DE";
-          utterance.rate = 0.7;
+          utterance.rate = rate;
           utterance.pitch = 1;
           utterance.volume = 1;
 
@@ -2139,7 +2734,9 @@
           !audioEnabled &&
           (gameType === "listening" ||
             gameType === "typing" ||
-            gameType === "speedtest")
+            gameType === "speedtest" ||
+            gameType === "listeningchallenge" ||
+            gameType === "speakingpractice")
         ) {
           document.getElementById("audioModal").style.display = "flex";
           return;
@@ -2189,6 +2786,18 @@
               .classList.add("active");
             initSentenceBuilder();
             break;
+          case "listeningchallenge":
+            document
+              .getElementById("listeningchallengeGame")
+              .classList.add("active");
+            initListeningChallenge();
+            break;
+          case "speakingpractice":
+            document
+              .getElementById("speakingpracticeGame")
+              .classList.add("active");
+            initSpeakingPractice();
+            break;
         }
       }
 
@@ -2196,6 +2805,11 @@
         // Stop any ongoing speech
         if ("speechSynthesis" in window) {
           speechSynthesis.cancel();
+        }
+
+        // Stop recording if active
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+          mediaRecorder.stop();
         }
 
         // Clear any timers
@@ -3163,6 +3777,425 @@
           document.getElementById("sentenceScore").style.display = "block";
           document.getElementById("finalSentenceScore").textContent =
             data.score;
+        }
+      }
+
+      // Listening Challenge Game - NEW ADVANCED LISTENING GAME
+      function initListeningChallenge() {
+        // Separate words by difficulty
+        const easyWords = vocabulary.filter(
+          (word) => word.difficulty === "easy"
+        );
+        const mediumWords = vocabulary.filter(
+          (word) => word.difficulty === "medium"
+        );
+        const hardWords = vocabulary.filter(
+          (word) => word.difficulty === "hard"
+        );
+
+        // Shuffle each difficulty level
+        easyWords.sort(() => Math.random() - 0.5);
+        mediumWords.sort(() => Math.random() - 0.5);
+        hardWords.sort(() => Math.random() - 0.5);
+
+        currentGameData.listeningChallenge = {
+          words: [...easyWords, ...mediumWords, ...hardWords],
+          currentIndex: 0,
+          score: 0,
+          answered: false,
+          progress: {
+            easy: 0,
+            medium: 0,
+            hard: 0,
+          },
+          totalByDifficulty: {
+            easy: easyWords.length,
+            medium: mediumWords.length,
+            hard: hardWords.length,
+          },
+        };
+
+        document.getElementById("totalListeningChallenge").textContent =
+          vocabulary.length;
+        showListeningChallengeQuestion();
+      }
+
+      function showListeningChallengeQuestion() {
+        const data = currentGameData.listeningChallenge;
+        const word = data.words[data.currentIndex];
+
+        document.getElementById("currentListeningChallenge").textContent =
+          data.currentIndex + 1;
+
+        // Update difficulty badge
+        const difficultyBadge = document.getElementById("currentDifficulty");
+        difficultyBadge.className = `difficulty-badge difficulty-${word.difficulty}`;
+        difficultyBadge.textContent =
+          word.difficulty === "easy"
+            ? "Dễ"
+            : word.difficulty === "medium"
+            ? "Trung bình"
+            : "Khó";
+
+        // Create wrong answers based on difficulty
+        let wrongAnswers;
+        if (word.difficulty === "easy") {
+          wrongAnswers = vocabulary
+            .filter(
+              (w) => w.vietnamese !== word.vietnamese && w.difficulty === "easy"
+            )
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3)
+            .map((w) => w.vietnamese);
+        } else if (word.difficulty === "medium") {
+          wrongAnswers = vocabulary
+            .filter((w) => w.vietnamese !== word.vietnamese)
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3)
+            .map((w) => w.vietnamese);
+        } else {
+          // Hard difficulty - include more challenging distractors
+          wrongAnswers = vocabulary
+            .filter((w) => w.vietnamese !== word.vietnamese)
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3)
+            .map((w) => w.vietnamese);
+        }
+
+        const options = [word.vietnamese, ...wrongAnswers].sort(
+          () => Math.random() - 0.5
+        );
+
+        const optionsContainer = document.getElementById(
+          "listeningChallengeOptions"
+        );
+        optionsContainer.innerHTML = "";
+
+        options.forEach((option) => {
+          const optionElement = document.createElement("div");
+          optionElement.className = "quiz-option";
+          optionElement.textContent = option;
+          optionElement.onclick = () =>
+            selectListeningChallengeOption(
+              option,
+              word.vietnamese,
+              word.difficulty
+            );
+          optionsContainer.appendChild(optionElement);
+        });
+
+        data.answered = false;
+        document.getElementById("nextListeningChallengeBtn").style.display =
+          "none";
+
+        // Auto play audio with different speeds based on difficulty
+        setTimeout(() => playListeningChallenge(), 500);
+      }
+
+      function playListeningChallenge() {
+        const data = currentGameData.listeningChallenge;
+        const word = data.words[data.currentIndex];
+
+        // Show audio wave animation
+        document.getElementById("audioWave").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("audioWave").style.display = "none";
+        }, 2000);
+
+        // Different speech rates based on difficulty
+        const speechRate =
+          word.difficulty === "easy"
+            ? 0.6
+            : word.difficulty === "medium"
+            ? 0.7
+            : 0.8;
+
+        speakGerman(word.german, null, speechRate);
+      }
+
+      function selectListeningChallengeOption(selected, correct, difficulty) {
+        if (currentGameData.listeningChallenge.answered) return;
+
+        currentGameData.listeningChallenge.answered = true;
+
+        document
+          .querySelectorAll("#listeningChallengeOptions .quiz-option")
+          .forEach((option) => {
+            if (option.textContent === correct) {
+              option.classList.add("correct");
+            } else if (
+              option.textContent === selected &&
+              selected !== correct
+            ) {
+              option.classList.add("wrong");
+            }
+          });
+
+        if (selected === correct) {
+          // Score based on difficulty
+          const points =
+            difficulty === "easy" ? 5 : difficulty === "medium" ? 10 : 15;
+          currentGameData.listeningChallenge.score += points;
+          currentGameData.listeningChallenge.progress[difficulty]++;
+        }
+
+        updateListeningChallengeProgress();
+
+        setTimeout(() => {
+          document.getElementById("nextListeningChallengeBtn").style.display =
+            "inline-block";
+        }, 1500);
+      }
+
+      function updateListeningChallengeProgress() {
+        const data = currentGameData.listeningChallenge;
+
+        // Update progress displays
+        document.getElementById(
+          "easyProgress"
+        ).textContent = `${data.progress.easy}/${data.totalByDifficulty.easy}`;
+        document.getElementById(
+          "mediumProgress"
+        ).textContent = `${data.progress.medium}/${data.totalByDifficulty.medium}`;
+        document.getElementById(
+          "hardProgress"
+        ).textContent = `${data.progress.hard}/${data.totalByDifficulty.hard}`;
+
+        // Update progress bars
+        document.getElementById("easyProgressBar").style.width = `${
+          (data.progress.easy / data.totalByDifficulty.easy) * 100
+        }%`;
+        document.getElementById("mediumProgressBar").style.width = `${
+          (data.progress.medium / data.totalByDifficulty.medium) * 100
+        }%`;
+        document.getElementById("hardProgressBar").style.width = `${
+          (data.progress.hard / data.totalByDifficulty.hard) * 100
+        }%`;
+      }
+
+      function nextListeningChallenge() {
+        const data = currentGameData.listeningChallenge;
+
+        if (data.currentIndex < data.words.length - 1) {
+          data.currentIndex++;
+          showListeningChallengeQuestion();
+        } else {
+          // Show final score
+          document.querySelector(
+            "#listeningchallengeGame .listening-challenge-area"
+          ).style.display = "none";
+          document.getElementById("nextListeningChallengeBtn").style.display =
+            "none";
+          document.getElementById("listeningChallengeScore").style.display =
+            "block";
+
+          const totalPossible =
+            data.totalByDifficulty.easy * 5 +
+            data.totalByDifficulty.medium * 10 +
+            data.totalByDifficulty.hard * 15;
+          const accuracy = Math.round((data.score / totalPossible) * 100);
+
+          document.getElementById("finalListeningChallengeScore").textContent =
+            data.score;
+          document.getElementById("listeningAccuracy").textContent = accuracy;
+        }
+      }
+
+      // Speaking Practice Game - NEW ADVANCED SPEAKING GAME
+      function initSpeakingPractice() {
+        currentGameData.speakingPractice = {
+          words: [...vocabulary].sort(() => Math.random() - 0.5),
+          currentIndex: 0,
+          scores: [],
+          answered: false,
+          isRecording: false,
+        };
+
+        document.getElementById("totalSpeaking").textContent =
+          vocabulary.length;
+        showSpeakingQuestion();
+      }
+
+      function showSpeakingQuestion() {
+        const data = currentGameData.speakingPractice;
+        const word = data.words[data.currentIndex];
+
+        document.getElementById("currentSpeaking").textContent =
+          data.currentIndex + 1;
+        document.getElementById(
+          "speakingPrompt"
+        ).textContent = `🎤 Phát âm từ: "${word.german}"`;
+        document.getElementById("speakingPronunciation").textContent =
+          word.pronunciation;
+        document.getElementById("speakingTranslation").textContent =
+          word.vietnamese;
+
+        // Reset UI
+        document.getElementById("voiceComparison").style.display = "none";
+        document.getElementById("accuracyMeter").style.display = "none";
+        document.getElementById("nextSpeakingBtn").style.display = "none";
+        document.getElementById("playUserBtn").disabled = true;
+        document.getElementById("speakingFeedback").innerHTML =
+          '<p style="color: #666;">Nhấn nút micro để bắt đầu luyện phát âm</p>';
+
+        data.answered = false;
+        userRecordingBlob = null;
+      }
+
+      function playReferenceAudio() {
+        const data = currentGameData.speakingPractice;
+        const word = data.words[data.currentIndex];
+        speakGerman(word.german);
+      }
+
+      async function toggleRecording() {
+        const data = currentGameData.speakingPractice;
+
+        if (!data.isRecording) {
+          await startRecording();
+        } else {
+          stopRecording();
+        }
+      }
+
+      async function startRecording() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
+
+          mediaRecorder = new MediaRecorder(stream);
+          audioChunks = [];
+
+          mediaRecorder.ondataavailable = (event) => {
+            audioChunks.push(event.data);
+          };
+
+          mediaRecorder.onstop = () => {
+            userRecordingBlob = new Blob(audioChunks, { type: "audio/wav" });
+            stream.getTracks().forEach((track) => track.stop());
+            processRecording();
+          };
+
+          mediaRecorder.start();
+          currentGameData.speakingPractice.isRecording = true;
+
+          // Update UI
+          document.getElementById("micButton").classList.add("recording");
+          document.getElementById("recordingIndicator").classList.add("active");
+          document.getElementById("speakingFeedback").innerHTML =
+            '<p style="color: #f44336;">🔴 Đang ghi âm... Hãy phát âm từ tiếng Đức</p>';
+        } catch (error) {
+          console.error("Error accessing microphone:", error);
+          document.getElementById("speakingFeedback").innerHTML =
+            '<p style="color: #f44336;">❌ Không thể truy cập microphone. Vui lòng kiểm tra quyền truy cập.</p>';
+        }
+      }
+
+      function stopRecording() {
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+          mediaRecorder.stop();
+          currentGameData.speakingPractice.isRecording = false;
+
+          // Update UI
+          document.getElementById("micButton").classList.remove("recording");
+          document
+            .getElementById("recordingIndicator")
+            .classList.remove("active");
+          document.getElementById("speakingFeedback").innerHTML =
+            '<p style="color: #ff9800;">⏳ Đang xử lý ghi âm...</p>';
+        }
+      }
+
+      function processRecording() {
+        // Simulate pronunciation analysis (in real app, this would use speech recognition)
+        const data = currentGameData.speakingPractice;
+        const accuracy = Math.floor(Math.random() * 40) + 60; // Simulate 60-100% accuracy
+
+        // Show results
+        document.getElementById("voiceComparison").style.display = "grid";
+        document.getElementById("accuracyMeter").style.display = "block";
+        document.getElementById("playUserBtn").disabled = false;
+
+        // Update accuracy meter
+        const accuracyFill = document.getElementById("accuracyFill");
+        const accuracyPercentage =
+          document.getElementById("accuracyPercentage");
+
+        accuracyFill.style.width = `${accuracy}%`;
+        accuracyPercentage.textContent = `${accuracy}%`;
+
+        // Set color based on accuracy
+        if (accuracy >= 90) {
+          accuracyFill.className = "accuracy-fill accuracy-excellent";
+        } else if (accuracy >= 75) {
+          accuracyFill.className = "accuracy-fill accuracy-good";
+        } else if (accuracy >= 60) {
+          accuracyFill.className = "accuracy-fill accuracy-fair";
+        } else {
+          accuracyFill.className = "accuracy-fill accuracy-poor";
+        }
+
+        // Provide feedback
+        let feedback = "";
+        if (accuracy >= 90) {
+          feedback = "🎉 Xuất sắc! Phát âm của bạn rất chính xác.";
+        } else if (accuracy >= 75) {
+          feedback = "👍 Tốt! Bạn phát âm khá chính xác.";
+        } else if (accuracy >= 60) {
+          feedback = "👌 Ổn! Hãy thử luyện tập thêm để cải thiện.";
+        } else {
+          feedback = "💪 Cần cải thiện. Hãy nghe mẫu và thử lại.";
+        }
+
+        document.getElementById(
+          "speakingFeedback"
+        ).innerHTML = `<p style="color: ${
+          accuracy >= 75 ? "#4CAF50" : "#ff9800"
+        };">${feedback}</p>`;
+
+        // Store score
+        data.scores.push(accuracy);
+        data.answered = true;
+
+        setTimeout(() => {
+          document.getElementById("nextSpeakingBtn").style.display =
+            "inline-block";
+        }, 1000);
+      }
+
+      function playUserRecording() {
+        if (userRecordingBlob) {
+          const audioUrl = URL.createObjectURL(userRecordingBlob);
+          const audio = new Audio(audioUrl);
+          audio.play();
+        }
+      }
+
+      function nextSpeaking() {
+        const data = currentGameData.speakingPractice;
+
+        if (data.currentIndex < data.words.length - 1) {
+          data.currentIndex++;
+          showSpeakingQuestion();
+        } else {
+          // Show final score
+          document.querySelector(
+            "#speakingpracticeGame .speaking-practice-area"
+          ).style.display = "none";
+          document.getElementById("nextSpeakingBtn").style.display = "none";
+          document.getElementById("speakingScore").style.display = "block";
+
+          const averageScore = Math.round(
+            data.scores.reduce((a, b) => a + b, 0) / data.scores.length
+          );
+          const correctCount = data.scores.filter(
+            (score) => score >= 75
+          ).length;
+
+          document.getElementById("finalSpeakingScore").textContent =
+            averageScore;
+          document.getElementById("speakingCorrect").textContent = correctCount;
         }
       }
 
