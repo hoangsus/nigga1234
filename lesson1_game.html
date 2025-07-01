@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trò chơi Buổi 1 - Giới thiệu bản thân</title>
+    <!-- Howler.js for reliable audio across all devices -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -1364,132 +1366,257 @@
 
       let currentGameData = {};
       let audioInitialized = false;
-      let availableVoices = [];
-      let germanVoice = null;
+      let audioSupported = true;
 
-      // Initialize audio system for mobile compatibility
-      function initializeAudio() {
-        return new Promise((resolve) => {
-          if (!("speechSynthesis" in window)) {
-            console.log("Speech synthesis not supported");
-            resolve(false);
-            return;
+      // Audio system using both Web Speech API and Web Audio API
+      class AudioManager {
+        constructor() {
+          this.speechSupported = "speechSynthesis" in window;
+          this.webAudioSupported =
+            "AudioContext" in window || "webkitAudioContext" in window;
+          this.germanVoice = null;
+          this.initialized = false;
+          this.fallbackAudio = new Map(); // Store audio elements for fallback
+        }
+
+        async initialize() {
+          console.log("Initializing audio...");
+
+          // Try Web Speech API first
+          if (this.speechSupported) {
+            await this.initializeSpeechSynthesis();
           }
 
-          // Function to load and check voices
-          function loadVoices() {
-            availableVoices = speechSynthesis.getVoices();
+          // Initialize Web Audio as fallback
+          if (this.webAudioSupported) {
+            this.initializeWebAudio();
+          }
 
-            // Find best German voice
-            germanVoice =
-              availableVoices.find(
-                (voice) => voice.lang === "de-DE" || voice.lang === "de"
-              ) ||
-              availableVoices.find((voice) => voice.lang.startsWith("de")) ||
-              availableVoices.find((voice) =>
-                voice.name.toLowerCase().includes("german")
+          this.initialized = true;
+          console.log("Audio initialized:", {
+            speech: !!this.germanVoice,
+            webAudio: this.webAudioSupported,
+          });
+        }
+
+        async initializeSpeechSynthesis() {
+          return new Promise((resolve) => {
+            const loadVoices = () => {
+              const voices = speechSynthesis.getVoices();
+
+              // Find German voice with priority order
+              this.germanVoice =
+                voices.find((v) => v.lang === "de-DE") ||
+                voices.find((v) => v.lang === "de") ||
+                voices.find((v) => v.lang.startsWith("de")) ||
+                voices.find((v) => v.name.toLowerCase().includes("german"));
+
+              console.log(
+                `Found ${voices.length} voices, German voice:`,
+                !!this.germanVoice
               );
+              resolve();
+            };
 
-            console.log("Available voices:", availableVoices.length);
-            console.log("German voice found:", !!germanVoice);
+            if (speechSynthesis.getVoices().length > 0) {
+              loadVoices();
+            } else {
+              speechSynthesis.addEventListener("voiceschanged", loadVoices, {
+                once: true,
+              });
+              setTimeout(loadVoices, 1000); // Fallback timeout
+            }
+          });
+        }
 
-            if (availableVoices.length > 0) {
-              audioInitialized = true;
-              resolve(true);
+        initializeWebAudio() {
+          // Create audio context for mobile unlock
+          try {
+            this.audioContext = new (window.AudioContext ||
+              window.webkitAudioContext)();
+          } catch (e) {
+            console.log("Web Audio not supported");
+            this.webAudioSupported = false;
+          }
+        }
+
+        // Generate audio using Web Speech API with mobile optimizations
+        async speakText(text) {
+          if (!this.initialized) {
+            await this.initialize();
+          }
+
+          return new Promise((resolve, reject) => {
+            if (!this.speechSupported) {
+              reject("Speech synthesis not supported");
+              return;
+            }
+
+            // Cancel any ongoing speech
+            speechSynthesis.cancel();
+
+            // Wait for cancel to complete (iOS requirement)
+            setTimeout(() => {
+              const utterance = new SpeechSynthesisUtterance(text);
+
+              if (this.germanVoice) {
+                utterance.voice = this.germanVoice;
+              }
+
+              // Mobile-optimized settings
+              utterance.lang = "de-DE";
+              utterance.rate = 0.8;
+              utterance.pitch = 1.0;
+              utterance.volume = 0.9;
+
+              utterance.onstart = () => {
+                console.log("Speech started");
+                resolve(true);
+              };
+
+              utterance.onerror = (event) => {
+                console.log("Speech error:", event.error);
+                reject(event.error);
+              };
+
+              utterance.onend = () => {
+                console.log("Speech ended");
+              };
+
+              // Mobile compatibility - ensure user gesture
+              if (
+                this.audioContext &&
+                this.audioContext.state === "suspended"
+              ) {
+                this.audioContext.resume().then(() => {
+                  speechSynthesis.speak(utterance);
+                });
+              } else {
+                speechSynthesis.speak(utterance);
+              }
+            }, 100);
+          });
+        }
+
+        // Fallback to online TTS service (ResponsiveVoice alternative)
+        async speakWithFallback(text) {
+          try {
+            // Try Web Speech API first
+            await this.speakText(text);
+            return true;
+          } catch (error) {
+            console.log("Web Speech failed, trying fallback:", error);
+
+            // Fallback: Use ResponsiveVoice CDN if available
+            if (window.responsiveVoice) {
+              window.responsiveVoice.speak(text, "Deutsch Female");
+              return true;
+            }
+
+            // Ultimate fallback: Use browser's native audio with base64 encoded TTS
+            return this.useNativeTTS(text);
+          }
+        }
+
+        // Use browser's native audio capabilities
+        useNativeTTS(text) {
+          // This would require pre-recorded audio files or TTS service
+          // For now, we'll focus on making Web Speech API work better
+          console.log("Using visual fallback for:", text);
+          return false;
+        }
+
+        // Unlock audio on mobile (must be called from user interaction)
+        async unlockAudio() {
+          if (this.audioContext && this.audioContext.state === "suspended") {
+            try {
+              await this.audioContext.resume();
+              console.log("Audio context resumed");
+            } catch (e) {
+              console.log("Failed to resume audio context:", e);
             }
           }
 
-          // Load voices immediately if available
-          if (speechSynthesis.getVoices().length > 0) {
-            loadVoices();
-          } else {
-            // Wait for voices to load (important for mobile)
-            speechSynthesis.addEventListener("voiceschanged", loadVoices, {
-              once: true,
-            });
-
-            // Fallback timeout
-            setTimeout(() => {
-              if (!audioInitialized) {
-                loadVoices();
-              }
-            }, 1000);
+          // Test speech synthesis
+          if (this.speechSupported) {
+            const testUtterance = new SpeechSynthesisUtterance("");
+            testUtterance.volume = 0;
+            speechSynthesis.speak(testUtterance);
           }
-        });
+        }
       }
 
-      // Enhanced audio function optimized for mobile
-      function speakGerman(text, fallbackElement = null, callback = null) {
-        // Always show fallback first for immediate feedback
+      // Create global audio manager
+      const audioManager = new AudioManager();
+
+      // Enhanced audio function for games
+      async function speakGerman(text, fallbackElement = null) {
+        // Always show visual feedback first
         if (fallbackElement) {
           const word = vocabulary.find((w) => w.german === text);
           if (word) {
             fallbackElement.style.display = "block";
-            fallbackElement.querySelector(
+            const display = fallbackElement.querySelector(
               ".pronunciation-display"
-            ).textContent = `${word.german} ${word.pronunciation}`;
+            );
+            if (display) {
+              display.textContent = `${word.german} ${word.pronunciation}`;
+            }
           }
         }
 
-        if (!audioInitialized || !("speechSynthesis" in window)) {
-          if (callback) callback(false);
-          return;
-        }
-
         try {
-          // Cancel any ongoing speech
-          speechSynthesis.cancel();
+          // Update button state
+          updateAudioButtonState("loading");
 
-          // Wait a brief moment after cancel (iOS requirement)
-          setTimeout(() => {
-            const utterance = new SpeechSynthesisUtterance(text);
+          const success = await audioManager.speakWithFallback(text);
 
-            // Use the best available German voice
-            if (germanVoice) {
-              utterance.voice = germanVoice;
+          if (success) {
+            updateAudioButtonState("playing");
+            // Hide fallback if audio works
+            if (fallbackElement) {
+              setTimeout(() => {
+                fallbackElement.style.display = "none";
+              }, 500);
             }
-
-            // Optimized settings for mobile
-            utterance.lang = "de-DE";
-            utterance.rate = 0.8; // Slightly faster for mobile
-            utterance.pitch = 1;
-            utterance.volume = 0.9;
-
-            // Event handlers
-            utterance.onstart = () => {
-              console.log("Audio started");
-              if (callback) callback(true);
-            };
-
-            utterance.onerror = (event) => {
-              console.log("Audio error:", event.error);
-              if (callback) callback(false);
-            };
-
-            utterance.onend = () => {
-              console.log("Audio ended");
-            };
-
-            // Speak the text
-            speechSynthesis.speak(utterance);
-          }, 100);
+          } else {
+            updateAudioButtonState("ready");
+          }
         } catch (error) {
-          console.log("Audio error:", error);
-          if (callback) callback(false);
+          console.log("Audio failed:", error);
+          updateAudioButtonState("error");
         }
       }
 
-      // Mobile-friendly audio trigger that requires user interaction
-      function triggerAudioWithUserInteraction(text, fallbackElement = null) {
-        // This function should be called from user interaction events
-        if (!audioInitialized) {
-          // Try to initialize audio on first user interaction
-          initializeAudio().then(() => {
-            speakGerman(text, fallbackElement);
-          });
-        } else {
-          speakGerman(text, fallbackElement);
-        }
+      // Update audio button states
+      function updateAudioButtonState(state) {
+        const buttons = document.querySelectorAll(".btn-audio");
+        const statuses = document.querySelectorAll(".audio-status");
+
+        buttons.forEach((btn) => {
+          btn.disabled = state === "loading";
+        });
+
+        statuses.forEach((status) => {
+          switch (state) {
+            case "loading":
+              status.className = "audio-status loading";
+              status.textContent = "🔄 Đang phát...";
+              break;
+            case "playing":
+              status.className = "audio-status ready";
+              status.textContent = "🔊 Đang phát";
+              break;
+            case "ready":
+              status.className = "audio-status ready";
+              status.textContent = "🎵 Sẵn sàng";
+              break;
+            case "error":
+              status.className = "audio-status error";
+              status.textContent = "❌ Lỗi audio";
+              break;
+          }
+        });
       }
 
       // Back to index button visibility
@@ -1888,7 +2015,7 @@
         const word = data.words[data.currentIndex];
         const fallbackElement = document.getElementById("audioFallback");
 
-        // Always show the word first
+        // Always show the word first for immediate feedback
         if (fallbackElement) {
           fallbackElement.style.display = "block";
           const wordDisplay = fallbackElement.querySelector(
@@ -1899,8 +2026,8 @@
           }
         }
 
-        // Then try to play audio
-        triggerAudioWithUserInteraction(word.german, fallbackElement);
+        // Try to play audio
+        speakGerman(word.german, fallbackElement);
       }
 
       function selectListeningOption(selected, correct) {
@@ -2116,7 +2243,7 @@
         const word = data.words[data.currentIndex];
         const fallbackElement = document.getElementById("typingAudioFallback");
 
-        // Always show the word first
+        // Always show the word first for immediate feedback
         if (fallbackElement) {
           fallbackElement.style.display = "block";
           const wordDisplay = fallbackElement.querySelector(
@@ -2127,8 +2254,8 @@
           }
         }
 
-        // Then try to play audio
-        triggerAudioWithUserInteraction(word.german, fallbackElement);
+        // Try to play audio
+        speakGerman(word.german, fallbackElement);
       }
 
       function checkTyping() {
@@ -2192,42 +2319,40 @@
       });
 
       // Remove the old audio enabler and replace with better mobile handling
-      // Initialize back to index button
+      // Initialize back to index button and audio status
       setTimeout(() => {
         backToIndexBtn.classList.add("visible");
-
-        // Update audio status indicators
-        updateAudioStatus();
       }, 1000);
 
       // Function to update audio status display
       function updateAudioStatus() {
-        const statusElements = document.querySelectorAll(".audio-status");
-
-        if (audioInitialized && germanVoice) {
-          statusElements.forEach((el) => {
-            el.className = "audio-status ready";
-            el.textContent = "🎵 Sẵn sàng";
-          });
-        } else if (audioInitialized) {
-          statusElements.forEach((el) => {
-            el.className = "audio-status ready";
-            el.textContent = "🔊 Có thể phát";
-          });
-        } else {
-          statusElements.forEach((el) => {
-            el.className = "audio-status loading";
-            el.textContent = "⏳ Đang tải...";
-          });
-        }
+        updateAudioButtonState("ready");
       }
 
-      // Update status when audio initializes
-      window.addEventListener("load", () => {
-        initializeAudio().then(() => {
-          updateAudioStatus();
-        });
-      });
+      // Debug function to test audio on different devices
+      window.testAudio = async function () {
+        console.log("Testing audio system...");
+        console.log("User agent:", navigator.userAgent);
+        console.log("Speech synthesis supported:", "speechSynthesis" in window);
+
+        if ("speechSynthesis" in window) {
+          const voices = speechSynthesis.getVoices();
+          console.log("Available voices:", voices.length);
+          voices.forEach((voice, i) => {
+            if (voice.lang.startsWith("de")) {
+              console.log(`German voice ${i}:`, voice.name, voice.lang);
+            }
+          });
+        }
+
+        try {
+          await audioManager.initialize();
+          await speakGerman("Hallo");
+          console.log("Audio test completed successfully");
+        } catch (error) {
+          console.log("Audio test failed:", error);
+        }
+      };
     </script>
   </body>
 </html>
