@@ -202,31 +202,58 @@
         background: #e68900;
       }
 
-      .btn:disabled {
-        background: #ccc;
-        cursor: not-allowed;
+      // Add better mobile audio button styles
+      .btn-audio {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 24px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
       }
 
-      /* Audio status indicator */
+      .btn-audio:hover {
+        background: linear-gradient(135deg, #ff5252 0%, #ff7979 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+      }
+
+      .btn-audio:active {
+        transform: translateY(0);
+      }
+
+      /* Audio status indicators */
       .audio-status {
         display: inline-flex;
         align-items: center;
-        gap: 5px;
+        gap: 8px;
         margin-left: 10px;
-        font-size: 0.9em;
-        color: #666;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.85em;
+        font-weight: 500;
       }
 
-      .audio-loading {
-        color: #ff9800;
+      .audio-status.loading {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
       }
 
-      .audio-ready {
-        color: #4caf50;
+      .audio-status.ready {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
       }
 
-      .audio-error {
-        color: #f44336;
+      .audio-status.error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
       }
 
       /* Game 1: Flash Cards */
@@ -711,9 +738,12 @@
             </p>
           </div>
           <div class="game-controls">
-            <button class="btn btn-primary" onclick="playAudio()" id="playBtn">
-              🔊 Nghe lại
+            <button class="btn btn-audio" onclick="playAudio()" id="playBtn">
+              🔊 Phát âm
             </button>
+            <span class="audio-status ready" id="audioStatus">
+              🎵 Sẵn sàng
+            </span>
             <button
               class="btn btn-primary"
               onclick="nextListening()"
@@ -778,12 +808,15 @@
           </div>
           <div class="game-controls">
             <button
-              class="btn btn-primary"
+              class="btn btn-audio"
               onclick="playTypingAudio()"
               id="playTypingBtn"
             >
-              🔊 Nghe lại
+              🔊 Phát âm
             </button>
+            <span class="audio-status ready" id="typingAudioStatus">
+              🎵 Sẵn sàng
+            </span>
             <button
               class="btn btn-primary"
               onclick="nextTyping()"
@@ -1330,37 +1363,76 @@
       ];
 
       let currentGameData = {};
-      let audioSupported = false;
+      let audioInitialized = false;
+      let availableVoices = [];
+      let germanVoice = null;
 
-      // Test audio support
-      function testAudioSupport() {
-        try {
-          if ("speechSynthesis" in window) {
-            // Test if voices are available
-            const voices = speechSynthesis.getVoices();
-            const germanVoice = voices.find((voice) =>
-              voice.lang.startsWith("de")
-            );
-            audioSupported = germanVoice ? true : false;
+      // Initialize audio system for mobile compatibility
+      function initializeAudio() {
+        return new Promise((resolve) => {
+          if (!("speechSynthesis" in window)) {
+            console.log("Speech synthesis not supported");
+            resolve(false);
+            return;
           }
-        } catch (error) {
-          audioSupported = false;
-        }
-      }
 
-      // Enhanced audio function with fallback
-      function speakGerman(text, fallbackElement = null) {
-        if (!audioSupported || !("speechSynthesis" in window)) {
-          // Show visual fallback
-          if (fallbackElement) {
-            const word = vocabulary.find((w) => w.german === text);
-            if (word) {
-              fallbackElement.style.display = "block";
-              fallbackElement.querySelector(
-                ".pronunciation-display"
-              ).textContent = `${word.german} ${word.pronunciation}`;
+          // Function to load and check voices
+          function loadVoices() {
+            availableVoices = speechSynthesis.getVoices();
+
+            // Find best German voice
+            germanVoice =
+              availableVoices.find(
+                (voice) => voice.lang === "de-DE" || voice.lang === "de"
+              ) ||
+              availableVoices.find((voice) => voice.lang.startsWith("de")) ||
+              availableVoices.find((voice) =>
+                voice.name.toLowerCase().includes("german")
+              );
+
+            console.log("Available voices:", availableVoices.length);
+            console.log("German voice found:", !!germanVoice);
+
+            if (availableVoices.length > 0) {
+              audioInitialized = true;
+              resolve(true);
             }
           }
+
+          // Load voices immediately if available
+          if (speechSynthesis.getVoices().length > 0) {
+            loadVoices();
+          } else {
+            // Wait for voices to load (important for mobile)
+            speechSynthesis.addEventListener("voiceschanged", loadVoices, {
+              once: true,
+            });
+
+            // Fallback timeout
+            setTimeout(() => {
+              if (!audioInitialized) {
+                loadVoices();
+              }
+            }, 1000);
+          }
+        });
+      }
+
+      // Enhanced audio function optimized for mobile
+      function speakGerman(text, fallbackElement = null, callback = null) {
+        // Always show fallback first for immediate feedback
+        if (fallbackElement) {
+          const word = vocabulary.find((w) => w.german === text);
+          if (word) {
+            fallbackElement.style.display = "block";
+            fallbackElement.querySelector(
+              ".pronunciation-display"
+            ).textContent = `${word.german} ${word.pronunciation}`;
+          }
+        }
+
+        if (!audioInitialized || !("speechSynthesis" in window)) {
+          if (callback) callback(false);
           return;
         }
 
@@ -1368,57 +1440,57 @@
           // Cancel any ongoing speech
           speechSynthesis.cancel();
 
-          const utterance = new SpeechSynthesisUtterance(text);
-          const voices = speechSynthesis.getVoices();
+          // Wait a brief moment after cancel (iOS requirement)
+          setTimeout(() => {
+            const utterance = new SpeechSynthesisUtterance(text);
 
-          // Try to find German voice
-          const germanVoice = voices.find(
-            (voice) =>
-              voice.lang.startsWith("de") ||
-              voice.name.toLowerCase().includes("german")
-          );
+            // Use the best available German voice
+            if (germanVoice) {
+              utterance.voice = germanVoice;
+            }
 
-          if (germanVoice) {
-            utterance.voice = germanVoice;
-          }
+            // Optimized settings for mobile
+            utterance.lang = "de-DE";
+            utterance.rate = 0.8; // Slightly faster for mobile
+            utterance.pitch = 1;
+            utterance.volume = 0.9;
 
-          utterance.lang = "de-DE";
-          utterance.rate = 0.7;
-          utterance.pitch = 1;
-          utterance.volume = 1;
+            // Event handlers
+            utterance.onstart = () => {
+              console.log("Audio started");
+              if (callback) callback(true);
+            };
 
-          // Hide fallback if audio works
-          if (fallbackElement) {
-            fallbackElement.style.display = "none";
-          }
+            utterance.onerror = (event) => {
+              console.log("Audio error:", event.error);
+              if (callback) callback(false);
+            };
 
-          speechSynthesis.speak(utterance);
+            utterance.onend = () => {
+              console.log("Audio ended");
+            };
+
+            // Speak the text
+            speechSynthesis.speak(utterance);
+          }, 100);
         } catch (error) {
           console.log("Audio error:", error);
-          // Show fallback on error
-          if (fallbackElement) {
-            const word = vocabulary.find((w) => w.german === text);
-            if (word) {
-              fallbackElement.style.display = "block";
-              fallbackElement.querySelector(
-                ".pronunciation-display"
-              ).textContent = `${word.german} ${word.pronunciation}`;
-            }
-          }
+          if (callback) callback(false);
         }
       }
 
-      // Initialize audio on page load
-      window.addEventListener("load", () => {
-        testAudioSupport();
-
-        // Re-test after voices are loaded
-        if ("speechSynthesis" in window) {
-          speechSynthesis.addEventListener("voiceschanged", () => {
-            testAudioSupport();
+      // Mobile-friendly audio trigger that requires user interaction
+      function triggerAudioWithUserInteraction(text, fallbackElement = null) {
+        // This function should be called from user interaction events
+        if (!audioInitialized) {
+          // Try to initialize audio on first user interaction
+          initializeAudio().then(() => {
+            speakGerman(text, fallbackElement);
           });
+        } else {
+          speakGerman(text, fallbackElement);
         }
-      });
+      }
 
       // Back to index button visibility
       const backToIndexBtn = document.getElementById("backToIndex");
@@ -1806,7 +1878,9 @@
         document.getElementById("nextListeningBtn").style.display = "none";
 
         // Auto play audio with fallback
-        setTimeout(() => playAudio(), 500);
+        setTimeout(() => {
+          playAudio();
+        }, 500);
       }
 
       function playAudio() {
@@ -1814,7 +1888,19 @@
         const word = data.words[data.currentIndex];
         const fallbackElement = document.getElementById("audioFallback");
 
-        speakGerman(word.german, fallbackElement);
+        // Always show the word first
+        if (fallbackElement) {
+          fallbackElement.style.display = "block";
+          const wordDisplay = fallbackElement.querySelector(
+            ".pronunciation-display"
+          );
+          if (wordDisplay) {
+            wordDisplay.textContent = `${word.german} ${word.pronunciation}`;
+          }
+        }
+
+        // Then try to play audio
+        triggerAudioWithUserInteraction(word.german, fallbackElement);
       }
 
       function selectListeningOption(selected, correct) {
@@ -2020,7 +2106,9 @@
         data.answered = false;
 
         // Auto play audio with fallback
-        setTimeout(() => playTypingAudio(), 500);
+        setTimeout(() => {
+          playTypingAudio();
+        }, 500);
       }
 
       function playTypingAudio() {
@@ -2028,7 +2116,19 @@
         const word = data.words[data.currentIndex];
         const fallbackElement = document.getElementById("typingAudioFallback");
 
-        speakGerman(word.german, fallbackElement);
+        // Always show the word first
+        if (fallbackElement) {
+          fallbackElement.style.display = "block";
+          const wordDisplay = fallbackElement.querySelector(
+            ".pronunciation-display"
+          );
+          if (wordDisplay) {
+            wordDisplay.textContent = `${word.german} ${word.pronunciation}`;
+          }
+        }
+
+        // Then try to play audio
+        triggerAudioWithUserInteraction(word.german, fallbackElement);
       }
 
       function checkTyping() {
@@ -2091,25 +2191,43 @@
         }, 100);
       });
 
+      // Remove the old audio enabler and replace with better mobile handling
       // Initialize back to index button
       setTimeout(() => {
         backToIndexBtn.classList.add("visible");
+
+        // Update audio status indicators
+        updateAudioStatus();
       }, 1000);
 
-      // Add user interaction to enable audio (required by browsers)
-      document.addEventListener(
-        "click",
-        function enableAudio() {
-          if ("speechSynthesis" in window) {
-            // Create a short test utterance
-            const test = new SpeechSynthesisUtterance("");
-            test.volume = 0;
-            speechSynthesis.speak(test);
-          }
-          document.removeEventListener("click", enableAudio);
-        },
-        { once: true }
-      );
+      // Function to update audio status display
+      function updateAudioStatus() {
+        const statusElements = document.querySelectorAll(".audio-status");
+
+        if (audioInitialized && germanVoice) {
+          statusElements.forEach((el) => {
+            el.className = "audio-status ready";
+            el.textContent = "🎵 Sẵn sàng";
+          });
+        } else if (audioInitialized) {
+          statusElements.forEach((el) => {
+            el.className = "audio-status ready";
+            el.textContent = "🔊 Có thể phát";
+          });
+        } else {
+          statusElements.forEach((el) => {
+            el.className = "audio-status loading";
+            el.textContent = "⏳ Đang tải...";
+          });
+        }
+      }
+
+      // Update status when audio initializes
+      window.addEventListener("load", () => {
+        initializeAudio().then(() => {
+          updateAudioStatus();
+        });
+      });
     </script>
   </body>
 </html>
