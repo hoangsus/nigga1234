@@ -260,16 +260,16 @@
       /* Game 2: Memory Game */
       .memory-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-        max-width: 600px;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 10px;
+        max-width: 800px;
         margin: 0 auto;
       }
 
       .memory-card {
         aspect-ratio: 1;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -279,6 +279,7 @@
         font-weight: bold;
         position: relative;
         overflow: hidden;
+        font-size: 0.8em;
       }
 
       .memory-card:hover {
@@ -297,9 +298,9 @@
       }
 
       .memory-card-content {
-        font-size: 1.1em;
         text-align: center;
-        padding: 10px;
+        padding: 5px;
+        word-break: break-word;
       }
 
       /* Game 3: Quiz */
@@ -361,6 +362,76 @@
         border-radius: 10px;
       }
 
+      /* Category Game */
+      .category-box {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        min-height: 120px;
+        border-radius: 10px;
+        background: #f9f9f9;
+        transition: all 0.3s ease;
+      }
+
+      .category-box h4 {
+        text-align: center;
+        color: #666;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+      }
+
+      .draggable-word {
+        background: #667eea;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 20px;
+        cursor: move;
+        display: inline-block;
+        margin: 5px;
+        font-size: 0.9em;
+        user-select: none;
+        transition: all 0.3s ease;
+      }
+
+      .draggable-word:hover {
+        background: #5a6fd8;
+        transform: scale(1.05);
+      }
+
+      .category-word {
+        background: #4caf50;
+        color: white;
+        padding: 5px 10px;
+        margin: 2px;
+        border-radius: 15px;
+        display: inline-block;
+        font-size: 0.8em;
+      }
+
+      /* Typing Game */
+      .typing-input {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2em;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .typing-input:focus {
+        outline: none;
+        border-color: #2196f3;
+      }
+
+      .typing-feedback {
+        margin-top: 15px;
+        font-size: 1.1em;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .container {
@@ -373,8 +444,8 @@
         }
 
         .memory-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 10px;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 8px;
         }
 
         .quiz-options {
@@ -387,11 +458,15 @@
           padding: 12px 20px;
           font-size: 0.9em;
         }
+
+        .game-menu {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
       }
 
       @media (max-width: 480px) {
         .memory-grid {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(4, 1fr);
         }
 
         .flashcard {
@@ -406,6 +481,10 @@
         .back-to-index {
           padding: 10px 15px;
           font-size: 0.8em;
+        }
+
+        .memory-card {
+          font-size: 0.7em;
         }
       }
     </style>
@@ -427,7 +506,7 @@
             Lật thẻ để xem nghĩa tiếng Việt. Học từ vựng một cách trực quan và
             hiệu quả.
           </div>
-          <div class="game-stats">📚 20 từ • ⏱️ 10 phút</div>
+          <div class="game-stats">📚 72 từ • ⏱️ 20-25 phút</div>
         </div>
 
         <div class="game-card" onclick="startGame('memory')">
@@ -437,7 +516,7 @@
             Tìm cặp từ tiếng Đức và nghĩa tiếng Việt. Rèn luyện trí nhớ và từ
             vựng.
           </div>
-          <div class="game-stats">🎯 8 cặp • ⏱️ 15 phút</div>
+          <div class="game-stats">🎯 16 cặp • ⏱️ 20 phút</div>
         </div>
 
         <div class="game-card" onclick="startGame('quiz')">
@@ -447,7 +526,7 @@
             Trả lời câu hỏi về từ vựng và ngữ pháp cơ bản. Kiểm tra kiến thức đã
             học.
           </div>
-          <div class="game-stats">📝 15 câu • ⏱️ 12 phút</div>
+          <div class="game-stats">📝 30 câu • ⏱️ 25 phút</div>
         </div>
 
         <div class="game-card" onclick="startGame('listening')">
@@ -457,7 +536,25 @@
             Nghe từ tiếng Đức và chọn nghĩa đúng. Rèn luyện khả năng nhận biết
             âm thanh.
           </div>
-          <div class="game-stats">🔊 12 từ • ⏱️ 8 phút</div>
+          <div class="game-stats">🔊 25 từ • ⏱️ 15 phút</div>
+        </div>
+
+        <div class="game-card" onclick="startGame('category')">
+          <div class="game-icon">🏷️</div>
+          <div class="game-title">Phân loại từ vựng</div>
+          <div class="game-description">
+            Kéo thả từ vào đúng nhóm. Học cách phân loại và ghi nhớ theo chủ đề.
+          </div>
+          <div class="game-stats">🎯 12 nhóm • ⏱️ 15 phút</div>
+        </div>
+
+        <div class="game-card" onclick="startGame('typing')">
+          <div class="game-icon">⌨️</div>
+          <div class="game-title">Gõ từ vựng</div>
+          <div class="game-description">
+            Nghe từ tiếng Đức và gõ chính xác. Rèn luyện chính tả và phát âm.
+          </div>
+          <div class="game-stats">✍️ 20 từ • ⏱️ 18 phút</div>
         </div>
       </div>
 
@@ -468,7 +565,7 @@
             <h3>🃏 Thẻ ghi nhớ</h3>
             <p>
               Thẻ <span id="currentCard">1</span> /
-              <span id="totalCards">20</span>
+              <span id="totalCards">72</span>
             </p>
           </div>
           <div class="game-controls">
@@ -526,7 +623,7 @@
             <h3>❓ Câu hỏi trắc nghiệm</h3>
             <p>
               Câu <span id="currentQuestion">1</span> /
-              <span id="totalQuestions">15</span>
+              <span id="totalQuestions">30</span>
             </p>
           </div>
           <div class="game-controls">
@@ -550,7 +647,7 @@
         </div>
 
         <div class="score-display" id="quizScore" style="display: none">
-          Điểm của bạn: <span id="finalScore">0</span>/15
+          Điểm của bạn: <span id="finalScore">0</span>/30
         </div>
       </div>
 
@@ -561,7 +658,7 @@
             <h3>🎧 Luyện nghe</h3>
             <p>
               Từ <span id="currentListening">1</span> /
-              <span id="totalListening">12</span>
+              <span id="totalListening">25</span>
             </p>
           </div>
           <div class="game-controls">
@@ -588,7 +685,83 @@
         </div>
 
         <div class="score-display" id="listeningScore" style="display: none">
-          Điểm nghe: <span id="finalListeningScore">0</span>/12
+          Điểm nghe: <span id="finalListeningScore">0</span>/25
+        </div>
+      </div>
+
+      <!-- Category Game -->
+      <div class="game-area" id="categoryGame">
+        <div class="game-header">
+          <div class="game-info">
+            <h3>🏷️ Phân loại từ vựng</h3>
+            <p>
+              Điểm: <span id="categoryScore">0</span> • Còn lại:
+              <span id="remainingWords">0</span>
+            </p>
+          </div>
+          <div class="game-controls">
+            <button class="btn btn-primary" onclick="resetCategory()">
+              🔄 Chơi lại
+            </button>
+            <button class="btn btn-back" onclick="backToMenu()">🏠 Menu</button>
+          </div>
+        </div>
+
+        <div id="categoryContainer">
+          <!-- Category game will be rendered here -->
+        </div>
+      </div>
+
+      <!-- Typing Game -->
+      <div class="game-area" id="typingGame">
+        <div class="game-header">
+          <div class="game-info">
+            <h3>⌨️ Gõ từ vựng</h3>
+            <p>
+              Từ <span id="currentTyping">1</span> /
+              <span id="totalTyping">20</span>
+            </p>
+          </div>
+          <div class="game-controls">
+            <button
+              class="btn btn-primary"
+              onclick="playTypingAudio()"
+              id="playTypingBtn"
+            >
+              🔊 Nghe lại
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="nextTyping()"
+              id="nextTypingBtn"
+              style="display: none"
+            >
+              Tiếp ➡️
+            </button>
+            <button class="btn btn-back" onclick="backToMenu()">🏠 Menu</button>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <h3>⌨️ Nghe và gõ từ tiếng Đức:</h3>
+          <input
+            type="text"
+            id="typingInput"
+            class="typing-input"
+            placeholder="Gõ từ bạn nghe được..."
+          />
+          <button
+            class="btn btn-primary"
+            onclick="checkTyping()"
+            id="checkTypingBtn"
+          >
+            ✅ Kiểm tra
+          </button>
+          <div id="typingFeedback" class="typing-feedback"></div>
+        </div>
+
+        <div class="score-display" id="typingScore" style="display: none">
+          Điểm gõ từ: <span id="finalTypingScore">0</span>/20
         </div>
       </div>
     </div>
@@ -599,36 +772,495 @@
     </a>
 
     <script>
-      // Vocabulary data for games
+      // Vocabulary data for games - ĐẦY ĐỦ 72 TỪ VỰNG BUỔI 1
       const vocabulary = [
-        { german: "ich", pronunciation: "[ích]", vietnamese: "tôi" },
-        { german: "bin", pronunciation: "[bin]", vietnamese: "là" },
-        { german: "heiße", pronunciation: "[hai-sơ]", vietnamese: "tên là" },
-        { german: "Hallo", pronunciation: "[ha-lô]", vietnamese: "xin chào" },
-        { german: "Tschüs", pronunciation: "[chúy-s]", vietnamese: "tạm biệt" },
-        { german: "komme", pronunciation: "[cô-mơ]", vietnamese: "đến từ" },
-        { german: "spreche", pronunciation: "[spre-xe]", vietnamese: "nói" },
-        { german: "aus", pronunciation: "[aus]", vietnamese: "từ" },
-        { german: "und", pronunciation: "[unt]", vietnamese: "và" },
-        { german: "mein", pronunciation: "[main]", vietnamese: "của tôi" },
-        { german: "Name", pronunciation: "[na-mơ]", vietnamese: "tên" },
-        { german: "ja", pronunciation: "[ya]", vietnamese: "có" },
-        { german: "nein", pronunciation: "[nain]", vietnamese: "không" },
-        { german: "okay", pronunciation: "[ô-kây]", vietnamese: "được rồi" },
-        { german: "bitte", pronunciation: "[bi-tơ]", vietnamese: "làm ơn" },
+        // NHÓM 1: CỰC KỲ QUAN TRỌNG
+        {
+          german: "ich",
+          pronunciation: "[ích]",
+          vietnamese: "tôi",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "bin",
+          pronunciation: "[bin]",
+          vietnamese: "là",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "ist",
+          pronunciation: "[ít]",
+          vietnamese: "là",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "heiße",
+          pronunciation: "[hai-sơ]",
+          vietnamese: "tên là",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "Hallo",
+          pronunciation: "[ha-lô]",
+          vietnamese: "xin chào",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "Guten Tag",
+          pronunciation: "[gu-ten tác]",
+          vietnamese: "chào buổi chiều",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "Tschüs",
+          pronunciation: "[chúy-s]",
+          vietnamese: "tạm biệt (thân mật)",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "komme",
+          pronunciation: "[cô-mơ]",
+          vietnamese: "đến / đến từ",
+          category: "Siêu quan trọng",
+        },
+        {
+          german: "spreche",
+          pronunciation: "[spre-xe]",
+          vietnamese: "nói (ngôn ngữ)",
+          category: "Siêu quan trọng",
+        },
+
+        // NHÓM 2: QUAN TRỌNG
+        {
+          german: "aus",
+          pronunciation: "[aus]",
+          vietnamese: "từ",
+          category: "Quan trọng",
+        },
+        {
+          german: "und",
+          pronunciation: "[unt]",
+          vietnamese: "và",
+          category: "Quan trọng",
+        },
+        {
+          german: "ein bisschen",
+          pronunciation: "[ain bí-sơn]",
+          vietnamese: "một chút",
+          category: "Quan trọng",
+        },
+        {
+          german: "mein",
+          pronunciation: "[main]",
+          vietnamese: "của tôi",
+          category: "Quan trọng",
+        },
+        {
+          german: "meine",
+          pronunciation: "[mai-nơ]",
+          vietnamese: "của tôi",
+          category: "Quan trọng",
+        },
+        {
+          german: "Name",
+          pronunciation: "[na-mơ]",
+          vietnamese: "tên",
+          category: "Quan trọng",
+        },
+        {
+          german: "ja",
+          pronunciation: "[ya]",
+          vietnamese: "có",
+          category: "Quan trọng",
+        },
+        {
+          german: "nein",
+          pronunciation: "[nain]",
+          vietnamese: "không",
+          category: "Quan trọng",
+        },
+        {
+          german: "okay",
+          pronunciation: "[ô-kây]",
+          vietnamese: "được rồi",
+          category: "Quan trọng",
+        },
+        {
+          german: "bitte",
+          pronunciation: "[bi-tơ]",
+          vietnamese: "làm ơn / xin mời",
+          category: "Quan trọng",
+        },
+
+        // NHÓM 3: QUỐC GIA & NGÔN NGỮ
         {
           german: "Deutschland",
           pronunciation: "[Đói-t-lant]",
           vietnamese: "nước Đức",
+          category: "Quốc gia",
         },
         {
           german: "Englisch",
           pronunciation: "[Éng-lít]",
           vietnamese: "tiếng Anh",
+          category: "Ngôn ngữ",
         },
-        { german: "Mama", pronunciation: "[Ma-ma]", vietnamese: "mẹ" },
-        { german: "Wie", pronunciation: "[vì]", vietnamese: "như thế nào" },
-        { german: "Was", pronunciation: "[vát]", vietnamese: "cái gì" },
+        {
+          german: "Polen",
+          pronunciation: "[Pô-len]",
+          vietnamese: "Ba Lan",
+          category: "Quốc gia",
+        },
+        {
+          german: "Polnisch",
+          pronunciation: "[Pôl-nít]",
+          vietnamese: "tiếng Ba Lan",
+          category: "Ngôn ngữ",
+        },
+        {
+          german: "Spanisch",
+          pronunciation: "[Shpa-nít]",
+          vietnamese: "tiếng Tây Ban Nha",
+          category: "Ngôn ngữ",
+        },
+
+        // NHÓM 4: GIA ĐÌNH & NGƯỜI
+        {
+          german: "Mama",
+          pronunciation: "[Ma-ma]",
+          vietnamese: "mẹ",
+          category: "Gia đình",
+        },
+        {
+          german: "Opa",
+          pronunciation: "[Ô-pa]",
+          vietnamese: "ông",
+          category: "Gia đình",
+        },
+        {
+          german: "du",
+          pronunciation: "[du]",
+          vietnamese: "bạn",
+          category: "Người",
+        },
+
+        // NHÓM 5: TỪ HỎI & LIÊN KẾT
+        {
+          german: "Wie",
+          pronunciation: "[vì]",
+          vietnamese: "như thế nào / làm sao",
+          category: "Từ hỏi",
+        },
+        {
+          german: "Woher",
+          pronunciation: "[vô-he]",
+          vietnamese: "từ đâu",
+          category: "Từ hỏi",
+        },
+        {
+          german: "Was",
+          pronunciation: "[vát]",
+          vietnamese: "cái gì",
+          category: "Từ hỏi",
+        },
+        {
+          german: "oder",
+          pronunciation: "[ô-đơ]",
+          vietnamese: "hoặc",
+          category: "Liên từ",
+        },
+        {
+          german: "Auf Wiedersehen",
+          pronunciation: "[auf vì-đơ-ze-en]",
+          vietnamese: "tạm biệt (trang trọng)",
+          category: "Chào hỏi",
+        },
+        {
+          german: "doch",
+          pronunciation: "[đọt]",
+          vietnamese: "thật ra / mà",
+          category: "Từ liên kết",
+        },
+
+        // NHÓM 6: TÍNH TỪ & MÔ TẢ
+        {
+          german: "ganz",
+          pronunciation: "[gánt]",
+          vietnamese: "hoàn toàn / rất",
+          category: "Tính từ",
+        },
+        {
+          german: "einfach",
+          pronunciation: "[ain-fát]",
+          vietnamese: "đơn giản",
+          category: "Tính từ",
+        },
+        {
+          german: "super",
+          pronunciation: "[zu-pe]",
+          vietnamese: "tuyệt vời",
+          category: "Tính từ",
+        },
+        {
+          german: "gut",
+          pronunciation: "[gut]",
+          vietnamese: "tốt",
+          category: "Tính từ",
+        },
+        {
+          german: "richtig",
+          pronunciation: "[rít-tít]",
+          vietnamese: "đúng",
+          category: "Tính từ",
+        },
+
+        // NHÓM 7: SỐ ĐẾM & THỜI GIAN
+        {
+          german: "eins",
+          pronunciation: "[ains]",
+          vietnamese: "một",
+          category: "Số đếm",
+        },
+        {
+          german: "zwei",
+          pronunciation: "[tsvai]",
+          vietnamese: "hai",
+          category: "Số đếm",
+        },
+        {
+          german: "drei",
+          pronunciation: "[đrai]",
+          vietnamese: "ba",
+          category: "Số đếm",
+        },
+        {
+          german: "zuerst",
+          pronunciation: "[tsu-e-ớt]",
+          vietnamese: "trước tiên",
+          category: "Thời gian",
+        },
+        {
+          german: "nochmal",
+          pronunciation: "[nọt-mal]",
+          vietnamese: "một lần nữa",
+          category: "Thời gian",
+        },
+
+        // NHÓM 8: CẢM TÁN & ĐỘNG TỪ
+        {
+          german: "Oh",
+          pronunciation: "[ô]",
+          vietnamese: "ôi",
+          category: "Cảm thán",
+        },
+        {
+          german: "Hey",
+          pronunciation: "[hây]",
+          vietnamese: "này",
+          category: "Cảm thán",
+        },
+        {
+          german: "Ach",
+          pronunciation: "[át]",
+          vietnamese: "ôi / thôi nào",
+          category: "Cảm thán",
+        },
+        {
+          german: "Na los",
+          pronunciation: "[na lôt]",
+          vietnamese: "nào thôi",
+          category: "Cảm thán",
+        },
+        {
+          german: "komm",
+          pronunciation: "[cọm]",
+          vietnamese: "đến / thôi nào",
+          category: "Động từ",
+        },
+        {
+          german: "hast",
+          pronunciation: "[hát]",
+          vietnamese: "có / đã (với du)",
+          category: "Động từ",
+        },
+        {
+          german: "vergessen",
+          pronunciation: "[fe-gé-sơn]",
+          vietnamese: "quên",
+          category: "Động từ",
+        },
+
+        // NHÓM 9: TỪ HỖ TRỢ & THỜI GIAN
+        {
+          german: "das",
+          pronunciation: "[đát]",
+          vietnamese: "điều đó / cái đó",
+          category: "Từ chỉ định",
+        },
+        {
+          german: "dann",
+          pronunciation: "[đán]",
+          vietnamese: "sau đó / rồi",
+          category: "Thời gian",
+        },
+        {
+          german: "jetzt",
+          pronunciation: "[yét]",
+          vietnamese: "bây giờ",
+          category: "Thời gian",
+        },
+        {
+          german: "hier",
+          pronunciation: "[hia]",
+          vietnamese: "đây / ở đây",
+          category: "Nơi chốn",
+        },
+
+        // NHÓM 10: CÂU CẢM THÁN & KHÁC
+        {
+          german: "Ähm",
+          pronunciation: "[ơm]",
+          vietnamese: "ừm (do dự)",
+          category: "Cảm thán",
+        },
+        {
+          german: "Puh",
+          pronunciation: "[puh]",
+          vietnamese: "phù (thở phào)",
+          category: "Cảm thán",
+        },
+        {
+          german: "Halli hallo",
+          pronunciation: "[ha-li ha-lô]",
+          vietnamese: "chào chào (vui vẻ)",
+          category: "Chào hỏi",
+        },
+        {
+          german: "tut mir leid",
+          pronunciation: "[tut mia lait]",
+          vietnamese: "xin lỗi",
+          category: "Lịch sự",
+        },
+        {
+          german: "Keine Zeit",
+          pronunciation: "[kai-nơ tsait]",
+          vietnamese: "không có thời gian",
+          category: "Từ chối",
+        },
+        {
+          german: "Mach's",
+          pronunciation: "[mát]",
+          vietnamese: "làm đi (rút gọn của mach es)",
+          category: "Động từ",
+        },
+
+        // NHÓM 11: TÊN RIÊNG
+        {
+          german: "Lara",
+          pronunciation: "[La-ra]",
+          vietnamese: "Lara (tên người)",
+          category: "Tên riêng",
+        },
+        {
+          german: "Walter",
+          pronunciation: "[Val-te]",
+          vietnamese: "Walter (tên người)",
+          category: "Tên riêng",
+        },
+        {
+          german: "Sofia",
+          pronunciation: "[Zo-fi-a]",
+          vietnamese: "Sofia (tên người)",
+          category: "Tên riêng",
+        },
+
+        // NHÓM 12: TỪ VỰNG HỌC TẬP & HOẠT ĐỘNG
+        {
+          german: "sehen",
+          pronunciation: "[ze-en]",
+          vietnamese: "nhìn / xem",
+          category: "Hoạt động",
+        },
+        {
+          german: "Sie",
+          pronunciation: "[zi]",
+          vietnamese: "họ / bạn (trang trọng)",
+          category: "Đại từ",
+        },
+        {
+          german: "die",
+          pronunciation: "[di]",
+          vietnamese: "những / các (mạo từ)",
+          category: "Mạo từ",
+        },
+        {
+          german: "Fotos",
+          pronunciation: "[fô-tôt]",
+          vietnamese: "những bức ảnh",
+          category: "Đồ vật",
+        },
+        {
+          german: "an",
+          pronunciation: "[an]",
+          vietnamese: "tại / ở / xem",
+          category: "Giới từ",
+        },
+        {
+          german: "hören",
+          pronunciation: "[hö-ren]",
+          vietnamese: "nghe",
+          category: "Hoạt động",
+        },
+        {
+          german: "noch einmal",
+          pronunciation: "[nọt ain-mal]",
+          vietnamese: "một lần nữa",
+          category: "Thời gian",
+        },
+        {
+          german: "kreuzen",
+          pronunciation: "[kroy-tsen]",
+          vietnamese: "đánh dấu X",
+          category: "Hoạt động",
+        },
+
+        // CÁC TỪ BỔ SUNG
+        {
+          german: "So",
+          pronunciation: "[zô]",
+          vietnamese: "vậy / như thế",
+          category: "Từ liên kết",
+        },
+        {
+          german: "aber",
+          pronunciation: "[a-be]",
+          vietnamese: "nhưng / thì",
+          category: "Liên từ",
+        },
+        {
+          german: "noch",
+          pronunciation: "[nọt]",
+          vietnamese: "còn / nữa",
+          category: "Trạng từ",
+        },
+        {
+          german: "Also",
+          pronunciation: "[an-zô]",
+          vietnamese: "vậy thì",
+          category: "Từ liên kết",
+        },
+        {
+          german: "Foto",
+          pronunciation: "[fô-tô]",
+          vietnamese: "ảnh / hình",
+          category: "Đồ vật",
+        },
+        {
+          german: "Wartet",
+          pronunciation: "[va-tet]",
+          vietnamese: "chờ đã",
+          category: "Động từ",
+        },
       ];
 
       let currentGameData = {};
@@ -668,6 +1300,14 @@
             document.getElementById("listeningGame").classList.add("active");
             initListeningGame();
             break;
+          case "category":
+            document.getElementById("categoryGame").classList.add("active");
+            initCategoryGame();
+            break;
+          case "typing":
+            document.getElementById("typingGame").classList.add("active");
+            initTypingGame();
+            break;
         }
       }
 
@@ -682,7 +1322,7 @@
       function initFlashcards() {
         currentGameData.flashcards = {
           currentIndex: 0,
-          cards: vocabulary.slice(0, 20),
+          cards: vocabulary,
           isFlipped: false,
         };
 
@@ -739,11 +1379,18 @@
 
       // Memory Game
       function initMemoryGame() {
-        const cards = vocabulary.slice(0, 8);
+        const importantWords = vocabulary
+          .filter(
+            (word) =>
+              word.category === "Siêu quan trọng" ||
+              word.category === "Quan trọng"
+          )
+          .slice(0, 16);
+
         const memoryCards = [];
 
         // Create pairs (German word + Vietnamese meaning)
-        cards.forEach((word) => {
+        importantWords.forEach((word) => {
           memoryCards.push({
             type: "german",
             content: word.german,
@@ -825,7 +1472,7 @@
           data.matchedPairs++;
           data.score += 10;
 
-          if (data.matchedPairs === 8) {
+          if (data.matchedPairs === 16) {
             setTimeout(
               () => alert("🎉 Chúc mừng! Bạn đã hoàn thành trò chơi!"),
               500
@@ -855,9 +1502,10 @@
 
       // Quiz Game
       function initQuizGame() {
+        const quizWords = vocabulary.slice(0, 30);
         const questions = [];
 
-        vocabulary.slice(0, 15).forEach((word) => {
+        quizWords.forEach((word) => {
           const wrongAnswers = vocabulary
             .filter((w) => w.vietnamese !== word.vietnamese)
             .sort(() => Math.random() - 0.5)
@@ -950,7 +1598,7 @@
 
       // Listening Game
       function initListeningGame() {
-        const listeningWords = vocabulary.slice(0, 12);
+        const listeningWords = vocabulary.slice(0, 25);
 
         currentGameData.listening = {
           words: listeningWords,
@@ -1056,6 +1704,236 @@
             data.score;
         }
       }
+
+      // Category Game
+      function initCategoryGame() {
+        const categories = [
+          "Siêu quan trọng",
+          "Quan trọng",
+          "Gia đình",
+          "Số đếm",
+          "Cảm thán",
+        ];
+        const wordsToUse = vocabulary.filter((word) =>
+          categories.includes(word.category)
+        );
+
+        currentGameData.category = {
+          categories: categories,
+          words: wordsToUse.sort(() => Math.random() - 0.5),
+          score: 0,
+          completed: [],
+        };
+
+        document.getElementById("remainingWords").textContent =
+          wordsToUse.length;
+        renderCategoryGame();
+      }
+
+      function renderCategoryGame() {
+        const container = document.getElementById("categoryContainer");
+        container.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    ${currentGameData.category.categories
+                      .map(
+                        (cat) => `
+                        <div class="category-box" data-category="${cat}">
+                            <h4>${cat}</h4>
+                            <div class="category-content"></div>
+                        </div>
+                    `
+                      )
+                      .join("")}
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                    ${currentGameData.category.words
+                      .map(
+                        (word) => `
+                        <div class="draggable-word" draggable="true" data-category="${word.category}">
+                            ${word.german}
+                        </div>
+                    `
+                      )
+                      .join("")}
+                </div>
+            `;
+
+        // Add drag and drop functionality
+        addDragDropListeners();
+      }
+
+      function addDragDropListeners() {
+        const draggableWords = document.querySelectorAll(".draggable-word");
+        const categoryBoxes = document.querySelectorAll(".category-box");
+
+        draggableWords.forEach((word) => {
+          word.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", word.textContent);
+            e.dataTransfer.setData("category", word.dataset.category);
+          });
+        });
+
+        categoryBoxes.forEach((box) => {
+          box.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            box.style.background = "#e3f2fd";
+          });
+
+          box.addEventListener("dragleave", () => {
+            box.style.background = "#f9f9f9";
+          });
+
+          box.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const word = e.dataTransfer.getData("text/plain");
+            const wordCategory = e.dataTransfer.getData("category");
+            const boxCategory = box.dataset.category;
+
+            if (wordCategory === boxCategory) {
+              // Correct!
+              box.querySelector(
+                ".category-content"
+              ).innerHTML += `<span class="category-word">${word}</span>`;
+              const wordElement = Array.from(
+                document.querySelectorAll(".draggable-word")
+              ).find((el) => el.textContent === word);
+              if (wordElement) wordElement.remove();
+
+              currentGameData.category.score += 10;
+              document.getElementById("categoryScore").textContent =
+                currentGameData.category.score;
+              document.getElementById("remainingWords").textContent =
+                document.querySelectorAll(".draggable-word").length;
+
+              if (document.querySelectorAll(".draggable-word").length === 0) {
+                setTimeout(
+                  () =>
+                    alert(
+                      "🎉 Chúc mừng! Bạn đã phân loại đúng tất cả từ vựng!"
+                    ),
+                  500
+                );
+              }
+            } else {
+              // Wrong!
+              box.style.background = "#ffebee";
+              setTimeout(() => {
+                box.style.background = "#f9f9f9";
+              }, 1000);
+            }
+          });
+        });
+      }
+
+      function resetCategory() {
+        initCategoryGame();
+        document.getElementById("categoryScore").textContent = "0";
+      }
+
+      // Typing Game
+      function initTypingGame() {
+        const typingWords = vocabulary
+          .filter(
+            (word) => word.german.length <= 15 && !word.german.includes(" ")
+          )
+          .slice(0, 20);
+
+        currentGameData.typing = {
+          words: typingWords,
+          currentIndex: 0,
+          score: 0,
+          answered: false,
+        };
+
+        document.getElementById("totalTyping").textContent = typingWords.length;
+        showTypingQuestion();
+      }
+
+      function showTypingQuestion() {
+        const data = currentGameData.typing;
+        const word = data.words[data.currentIndex];
+
+        document.getElementById("currentTyping").textContent =
+          data.currentIndex + 1;
+        document.getElementById("typingInput").value = "";
+        document.getElementById("typingFeedback").innerHTML = "";
+        document.getElementById("nextTypingBtn").style.display = "none";
+
+        data.answered = false;
+
+        // Auto play audio
+        setTimeout(() => playTypingAudio(), 500);
+      }
+
+      function playTypingAudio() {
+        const data = currentGameData.typing;
+        const word = data.words[data.currentIndex];
+
+        const utterance = new SpeechSynthesisUtterance(word.german);
+        utterance.lang = "de-DE";
+        utterance.rate = 0.7;
+        speechSynthesis.speak(utterance);
+      }
+
+      function checkTyping() {
+        if (currentGameData.typing.answered) return;
+
+        const data = currentGameData.typing;
+        const word = data.words[data.currentIndex];
+        const userInput = document
+          .getElementById("typingInput")
+          .value.trim()
+          .toLowerCase();
+        const correctAnswer = word.german.toLowerCase();
+
+        data.answered = true;
+
+        const feedback = document.getElementById("typingFeedback");
+
+        if (userInput === correctAnswer) {
+          feedback.innerHTML = `<span style="color: #4CAF50;">✅ Đúng rồi! "${word.german}" = ${word.vietnamese}</span>`;
+          feedback.style.background = "#e8f5e8";
+          data.score++;
+        } else {
+          feedback.innerHTML = `<span style="color: #f44336;">❌ Sai rồi! Đáp án đúng: "${word.german}" = ${word.vietnamese}</span>`;
+          feedback.style.background = "#ffebee";
+        }
+
+        setTimeout(() => {
+          document.getElementById("nextTypingBtn").style.display =
+            "inline-block";
+        }, 2000);
+      }
+
+      function nextTyping() {
+        const data = currentGameData.typing;
+
+        if (data.currentIndex < data.words.length - 1) {
+          data.currentIndex++;
+          showTypingQuestion();
+        } else {
+          // Show final score
+          document.querySelector("#typingGame .quiz-question").style.display =
+            "none";
+          document.getElementById("nextTypingBtn").style.display = "none";
+          document.getElementById("typingScore").style.display = "block";
+          document.getElementById("finalTypingScore").textContent = data.score;
+        }
+      }
+
+      // Allow Enter key for typing game
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(() => {
+          const typingInput = document.getElementById("typingInput");
+          if (typingInput) {
+            typingInput.addEventListener("keypress", function (e) {
+              if (e.key === "Enter") {
+                checkTyping();
+              }
+            });
+          }
+        }, 100);
+      });
 
       // Initialize back to index button
       setTimeout(() => {
