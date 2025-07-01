@@ -306,7 +306,7 @@
         font-weight: bold;
         position: relative;
         overflow: hidden;
-        font-size: 0.8em;
+        font-size: 0.7em;
       }
 
       .memory-card:hover {
@@ -580,7 +580,7 @@
         }
 
         .memory-card {
-          font-size: 0.7em;
+          font-size: 0.6em;
         }
       }
     </style>
@@ -626,7 +626,7 @@
             Tìm cặp từ tiếng Đức và nghĩa tiếng Việt. Rèn luyện trí nhớ và từ
             vựng.
           </div>
-          <div class="game-stats">🎯 16 cặp • ⏱️ 20 phút</div>
+          <div class="game-stats">🎯 36 cặp • ⏱️ 30 phút</div>
         </div>
 
         <div class="game-card" onclick="startGame('quiz')">
@@ -636,7 +636,7 @@
             Trả lời câu hỏi về từ vựng và ngữ pháp cơ bản. Kiểm tra kiến thức đã
             học.
           </div>
-          <div class="game-stats">📝 30 câu • ⏱️ 25 phút</div>
+          <div class="game-stats">📝 72 câu • ⏱️ 45 phút</div>
         </div>
 
         <div class="game-card" onclick="startGame('listening')">
@@ -646,7 +646,7 @@
             Nghe từ tiếng Đức và chọn nghĩa đúng. Rèn luyện khả năng nhận biết
             âm thanh.
           </div>
-          <div class="game-stats">🔊 25 từ • ⏱️ 15 phút</div>
+          <div class="game-stats">🔊 72 từ • ⏱️ 35 phút</div>
         </div>
 
         <div class="game-card" onclick="startGame('category')">
@@ -655,7 +655,7 @@
           <div class="game-description">
             Kéo thả từ vào đúng nhóm. Học cách phân loại và ghi nhớ theo chủ đề.
           </div>
-          <div class="game-stats">🎯 12 nhóm • ⏱️ 15 phút</div>
+          <div class="game-stats">🎯 72 từ / 12 nhóm • ⏱️ 25 phút</div>
         </div>
 
         <div class="game-card" onclick="startGame('typing')">
@@ -664,7 +664,7 @@
           <div class="game-description">
             Nghe từ tiếng Đức và gõ chính xác. Rèn luyện chính tả và phát âm.
           </div>
-          <div class="game-stats">✍️ 20 từ • ⏱️ 18 phút</div>
+          <div class="game-stats">✍️ 72 từ • ⏱️ 40 phút</div>
         </div>
       </div>
 
@@ -710,7 +710,8 @@
             <h3>🧠 Trò chơi ghi nhớ</h3>
             <p>
               Điểm: <span id="memoryScore">0</span> • Lượt:
-              <span id="memoryMoves">0</span>
+              <span id="memoryMoves">0</span> • Cặp:
+              <span id="memoryPairs">0</span>/36
             </p>
           </div>
           <div class="game-controls">
@@ -733,7 +734,7 @@
             <h3>❓ Câu hỏi trắc nghiệm</h3>
             <p>
               Câu <span id="currentQuestion">1</span> /
-              <span id="totalQuestions">30</span>
+              <span id="totalQuestions">72</span>
             </p>
           </div>
           <div class="game-controls">
@@ -757,7 +758,7 @@
         </div>
 
         <div class="score-display" id="quizScore" style="display: none">
-          Điểm của bạn: <span id="finalScore">0</span>/30
+          Điểm của bạn: <span id="finalScore">0</span>/72
         </div>
       </div>
 
@@ -768,7 +769,7 @@
             <h3>🎧 Luyện nghe</h3>
             <p>
               Từ <span id="currentListening">1</span> /
-              <span id="totalListening">25</span>
+              <span id="totalListening">72</span>
             </p>
           </div>
           <div class="game-controls">
@@ -796,7 +797,7 @@
         </div>
 
         <div class="score-display" id="listeningScore" style="display: none">
-          Điểm nghe: <span id="finalListeningScore">0</span>/25
+          Điểm nghe: <span id="finalListeningScore">0</span>/72
         </div>
       </div>
 
@@ -807,7 +808,7 @@
             <h3>🏷️ Phân loại từ vựng</h3>
             <p>
               Điểm: <span id="categoryScore">0</span> • Còn lại:
-              <span id="remainingWords">0</span>
+              <span id="remainingWords">72</span>
             </p>
           </div>
           <div class="game-controls">
@@ -830,7 +831,7 @@
             <h3>⌨️ Gõ từ vựng</h3>
             <p>
               Từ <span id="currentTyping">1</span> /
-              <span id="totalTyping">20</span>
+              <span id="totalTyping">72</span>
             </p>
           </div>
           <div class="game-controls">
@@ -872,7 +873,7 @@
         </div>
 
         <div class="score-display" id="typingScore" style="display: none">
-          Điểm gõ từ: <span id="finalTypingScore">0</span>/20
+          Điểm gõ từ: <span id="finalTypingScore">0</span>/72
         </div>
       </div>
     </div>
@@ -1642,20 +1643,15 @@
         }
       }
 
-      // Memory Game
+      // Memory Game - Updated to handle 72 words
       function initMemoryGame() {
-        const importantWords = vocabulary
-          .filter(
-            (word) =>
-              word.category === "Siêu quan trọng" ||
-              word.category === "Quan trọng"
-          )
-          .slice(0, 16);
+        // Take 36 words for 36 pairs (72 cards total)
+        const selectedWords = vocabulary.slice(0, 36);
 
         const memoryCards = [];
 
         // Create pairs (German word + Vietnamese meaning)
-        importantWords.forEach((word) => {
+        selectedWords.forEach((word) => {
           memoryCards.push({
             type: "german",
             content: word.german,
@@ -1737,7 +1733,10 @@
           data.matchedPairs++;
           data.score += 10;
 
-          if (data.matchedPairs === 16) {
+          document.getElementById("memoryPairs").textContent =
+            data.matchedPairs;
+
+          if (data.matchedPairs === 36) {
             setTimeout(
               () => alert("🎉 Chúc mừng! Bạn đã hoàn thành trò chơi!"),
               500
@@ -1763,14 +1762,14 @@
         initMemoryGame();
         document.getElementById("memoryScore").textContent = "0";
         document.getElementById("memoryMoves").textContent = "0";
+        document.getElementById("memoryPairs").textContent = "0";
       }
 
-      // Quiz Game
+      // Quiz Game - Updated to use all 72 words
       function initQuizGame() {
-        const quizWords = vocabulary.slice(0, 30);
         const questions = [];
 
-        quizWords.forEach((word) => {
+        vocabulary.forEach((word) => {
           const wrongAnswers = vocabulary
             .filter((w) => w.vietnamese !== word.vietnamese)
             .sort(() => Math.random() - 0.5)
@@ -1787,6 +1786,9 @@
             correct: word.vietnamese,
           });
         });
+
+        // Shuffle questions
+        questions.sort(() => Math.random() - 0.5);
 
         currentGameData.quiz = {
           questions: questions,
@@ -1861,19 +1863,20 @@
         }
       }
 
-      // Listening Game
+      // Listening Game - Updated to use all 72 words
       function initListeningGame() {
-        const listeningWords = vocabulary.slice(0, 25);
+        // Shuffle all vocabulary words
+        const shuffledWords = [...vocabulary].sort(() => Math.random() - 0.5);
 
         currentGameData.listening = {
-          words: listeningWords,
+          words: shuffledWords,
           currentIndex: 0,
           score: 0,
           answered: false,
         };
 
         document.getElementById("totalListening").textContent =
-          listeningWords.length;
+          shuffledWords.length;
         showListeningQuestion();
       }
 
@@ -1968,28 +1971,22 @@
         }
       }
 
-      // Category Game
+      // Category Game - Updated to use all 72 words
       function initCategoryGame() {
-        const categories = [
-          "Siêu quan trọng",
-          "Quan trọng",
-          "Gia đình",
-          "Số đếm",
-          "Cảm thán",
+        // Get all unique categories
+        const allCategories = [
+          ...new Set(vocabulary.map((word) => word.category)),
         ];
-        const wordsToUse = vocabulary.filter((word) =>
-          categories.includes(word.category)
-        );
 
         currentGameData.category = {
-          categories: categories,
-          words: wordsToUse.sort(() => Math.random() - 0.5),
+          categories: allCategories,
+          words: [...vocabulary].sort(() => Math.random() - 0.5),
           score: 0,
           completed: [],
         };
 
         document.getElementById("remainingWords").textContent =
-          wordsToUse.length;
+          vocabulary.length;
         renderCategoryGame();
       }
 
@@ -2093,22 +2090,19 @@
         document.getElementById("categoryScore").textContent = "0";
       }
 
-      // Typing Game
+      // Typing Game - Updated to use all 72 words
       function initTypingGame() {
-        const typingWords = vocabulary
-          .filter(
-            (word) => word.german.length <= 15 && !word.german.includes(" ")
-          )
-          .slice(0, 20);
+        // Use all words, shuffle them
+        const allWords = [...vocabulary].sort(() => Math.random() - 0.5);
 
         currentGameData.typing = {
-          words: typingWords,
+          words: allWords,
           currentIndex: 0,
           score: 0,
           answered: false,
         };
 
-        document.getElementById("totalTyping").textContent = typingWords.length;
+        document.getElementById("totalTyping").textContent = allWords.length;
         showTypingQuestion();
       }
 
