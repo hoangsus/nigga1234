@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trò chơi Buổi 1 - Giới thiệu bản thân</title>
+    <title>Trò chơi Buổi 1 - Giới thiệu bản thân (Nâng cao)</title>
     <style>
       * {
         margin: 0;
@@ -20,7 +20,7 @@
       }
 
       .container {
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
         background: white;
         border-radius: 20px;
@@ -109,6 +109,23 @@
       .game-card.active {
         border-color: #4caf50;
         background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+      }
+
+      .game-card.new {
+        border-color: #ff9800;
+        background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      }
+
+      .new-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff5722;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 10px;
+        font-size: 0.7em;
+        font-weight: bold;
       }
 
       .game-icon {
@@ -459,6 +476,169 @@
         border-radius: 8px;
       }
 
+      /* Speed Test Game */
+      .speed-test-area {
+        background: white;
+        border: 2px solid #2196f3;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+      }
+
+      .speed-test-word {
+        font-size: 3em;
+        text-align: center;
+        margin: 30px 0;
+        font-weight: bold;
+        color: #1976d2;
+      }
+
+      .speed-test-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .stat-box {
+        background: #f8f9ff;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid #e3f2fd;
+      }
+
+      .stat-number {
+        font-size: 2em;
+        font-weight: bold;
+        color: #1976d2;
+      }
+
+      .stat-label {
+        color: #666;
+        margin-top: 5px;
+      }
+
+      /* Word Builder Game */
+      .word-builder-area {
+        background: white;
+        border: 2px solid #2196f3;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+      }
+
+      .scrambled-letters {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .letter-tile {
+        background: #667eea;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.5em;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        user-select: none;
+      }
+
+      .letter-tile:hover {
+        background: #5a6fd8;
+        transform: scale(1.1);
+      }
+
+      .letter-tile.used {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: scale(0.9);
+      }
+
+      .word-builder-input {
+        width: 100%;
+        padding: 20px;
+        font-size: 1.5em;
+        text-align: center;
+        border: 3px solid #ddd;
+        border-radius: 10px;
+        margin: 20px 0;
+        letter-spacing: 3px;
+        text-transform: lowercase;
+      }
+
+      .word-builder-input:focus {
+        outline: none;
+        border-color: #2196f3;
+      }
+
+      /* Sentence Builder Game */
+      .sentence-builder-area {
+        background: white;
+        border: 2px solid #2196f3;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+      }
+
+      .sentence-prompt {
+        background: #f8f9ff;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.2em;
+        color: #1976d2;
+      }
+
+      .word-bank {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+        padding: 20px;
+        background: #f0f0f0;
+        border-radius: 10px;
+      }
+
+      .word-chip {
+        background: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        user-select: none;
+      }
+
+      .word-chip:hover {
+        background: #45a049;
+        transform: scale(1.05);
+      }
+
+      .word-chip.used {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      .sentence-builder-area {
+        min-height: 60px;
+        border: 2px dashed #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        align-items: center;
+      }
+
       /* Audio fallback display */
       .audio-fallback {
         background: #f0f8ff;
@@ -558,6 +738,10 @@
         .game-menu {
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
+
+        .speed-test-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       @media (max-width: 480px) {
@@ -582,6 +766,14 @@
         .memory-card {
           font-size: 0.6em;
         }
+
+        .speed-test-word {
+          font-size: 2em;
+        }
+
+        .speed-test-stats {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -602,9 +794,9 @@
 
     <div class="container">
       <div class="header">
-        <h1>🎮 Trò chơi Buổi 1</h1>
+        <h1>🎮 Trò chơi Buổi 1 - Nâng cao</h1>
         <div class="subtitle">
-          Giới thiệu bản thân - Luyện tập từ vựng thú vị
+          Giới thiệu bản thân - 9 trò chơi luyện tập từ vựng thú vị
         </div>
       </div>
 
@@ -665,6 +857,38 @@
             Nghe từ tiếng Đức và gõ chính xác. Rèn luyện chính tả và phát âm.
           </div>
           <div class="game-stats">✍️ 72 từ • ⏱️ 40 phút</div>
+        </div>
+
+        <div class="game-card new" onclick="startGame('speedtest')">
+          <div class="new-badge">MỚI</div>
+          <div class="game-icon">⚡</div>
+          <div class="game-title">Kiểm tra tốc độ</div>
+          <div class="game-description">
+            Trả lời nhanh nghĩa của từ tiếng Đức. Rèn luyện phản xạ và tốc độ
+            nhận biết.
+          </div>
+          <div class="game-stats">🚀 60 giây • ⏱️ 10 phút</div>
+        </div>
+
+        <div class="game-card new" onclick="startGame('wordbuilder')">
+          <div class="new-badge">MỚI</div>
+          <div class="game-icon">🧩</div>
+          <div class="game-title">Xếp chữ cái</div>
+          <div class="game-description">
+            Sắp xếp các chữ cái để tạo thành từ tiếng Đức. Rèn luyện chính tả và
+            cấu trúc từ.
+          </div>
+          <div class="game-stats">🔤 72 từ • ⏱️ 30 phút</div>
+        </div>
+
+        <div class="game-card new" onclick="startGame('sentencebuilder')">
+          <div class="new-badge">MỚI</div>
+          <div class="game-icon">📝</div>
+          <div class="game-title">Ghép câu</div>
+          <div class="game-description">
+            Sắp xếp từ để tạo thành câu đúng ngữ pháp. Học cấu trúc câu cơ bản.
+          </div>
+          <div class="game-stats">🎯 36 câu • ⏱️ 35 phút</div>
         </div>
       </div>
 
@@ -874,6 +1098,177 @@
 
         <div class="score-display" id="typingScore" style="display: none">
           Điểm gõ từ: <span id="finalTypingScore">0</span>/72
+        </div>
+      </div>
+
+      <!-- Speed Test Game -->
+      <div class="game-area" id="speedtestGame">
+        <div class="game-header">
+          <div class="game-info">
+            <h3>⚡ Kiểm tra tốc độ</h3>
+            <p id="speedTestStatus">Sẵn sàng bắt đầu?</p>
+          </div>
+          <div class="game-controls">
+            <button
+              class="btn btn-primary"
+              onclick="startSpeedTest()"
+              id="speedStartBtn"
+            >
+              🚀 Bắt đầu
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="resetSpeedTest()"
+              id="speedResetBtn"
+              style="display: none"
+            >
+              🔄 Chơi lại
+            </button>
+            <button class="btn btn-back" onclick="backToMenu()">🏠 Menu</button>
+          </div>
+        </div>
+
+        <div class="speed-test-area" id="speedTestArea">
+          <div class="speed-test-word" id="speedTestWord">
+            Nhấn "Bắt đầu" để chơi!
+          </div>
+
+          <div class="quiz-options" id="speedTestOptions" style="display: none">
+            <!-- Options will be generated by JavaScript -->
+          </div>
+
+          <div class="speed-test-stats">
+            <div class="stat-box">
+              <div class="stat-number" id="speedScore">0</div>
+              <div class="stat-label">Điểm</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="speedTime">60</div>
+              <div class="stat-label">Thời gian</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="speedCorrect">0</div>
+              <div class="stat-label">Đúng</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="speedWrong">0</div>
+              <div class="stat-label">Sai</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Word Builder Game -->
+      <div class="game-area" id="wordbuilderGame">
+        <div class="game-header">
+          <div class="game-info">
+            <h3>🧩 Xếp chữ cái</h3>
+            <p>
+              Từ <span id="currentWordBuilder">1</span> /
+              <span id="totalWordBuilder">72</span>
+            </p>
+          </div>
+          <div class="game-controls">
+            <button
+              class="btn btn-primary"
+              onclick="checkWordBuilder()"
+              id="checkWordBtn"
+            >
+              ✅ Kiểm tra
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="nextWordBuilder()"
+              id="nextWordBtn"
+              style="display: none"
+            >
+              Tiếp ➡️
+            </button>
+            <button class="btn btn-secondary" onclick="clearWordBuilder()">
+              🗑️ Xóa
+            </button>
+            <button class="btn btn-back" onclick="backToMenu()">🏠 Menu</button>
+          </div>
+        </div>
+
+        <div class="word-builder-area">
+          <div class="quiz-question">
+            <h3 id="wordBuilderPrompt">
+              Sắp xếp chữ cái để tạo thành từ có nghĩa: "tôi"
+            </h3>
+
+            <input
+              type="text"
+              id="wordBuilderInput"
+              class="word-builder-input"
+              placeholder="Nhấp vào chữ cái để xếp từ..."
+              readonly
+            />
+
+            <div class="scrambled-letters" id="scrambledLetters">
+              <!-- Letters will be generated by JavaScript -->
+            </div>
+
+            <div id="wordBuilderFeedback" class="typing-feedback"></div>
+          </div>
+        </div>
+
+        <div class="score-display" id="wordBuilderScore" style="display: none">
+          Điểm xếp chữ: <span id="finalWordBuilderScore">0</span>/72
+        </div>
+      </div>
+
+      <!-- Sentence Builder Game -->
+      <div class="game-area" id="sentencebuilderGame">
+        <div class="game-header">
+          <div class="game-info">
+            <h3>📝 Ghép câu</h3>
+            <p>
+              Câu <span id="currentSentence">1</span> /
+              <span id="totalSentences">36</span>
+            </p>
+          </div>
+          <div class="game-controls">
+            <button
+              class="btn btn-primary"
+              onclick="checkSentence()"
+              id="checkSentenceBtn"
+            >
+              ✅ Kiểm tra
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="nextSentence()"
+              id="nextSentenceBtn"
+              style="display: none"
+            >
+              Tiếp ➡️
+            </button>
+            <button class="btn btn-secondary" onclick="clearSentence()">
+              🗑️ Xóa
+            </button>
+            <button class="btn btn-back" onclick="backToMenu()">🏠 Menu</button>
+          </div>
+        </div>
+
+        <div class="sentence-builder-area">
+          <div class="sentence-prompt" id="sentencePrompt">
+            Sắp xếp các từ để tạo thành câu: "Tôi tên là Anna"
+          </div>
+
+          <div class="sentence-builder-area" id="sentenceDropZone">
+            <p style="color: #999">Kéo từ vào đây để tạo câu...</p>
+          </div>
+
+          <div class="word-bank" id="wordBank">
+            <!-- Words will be generated by JavaScript -->
+          </div>
+
+          <div id="sentenceFeedback" class="typing-feedback"></div>
+        </div>
+
+        <div class="score-display" id="sentenceScore" style="display: none">
+          Điểm ghép câu: <span id="finalSentenceScore">0</span>/36
         </div>
       </div>
     </div>
@@ -1379,6 +1774,215 @@
         },
       ];
 
+      // Sample sentences for sentence builder game
+      const sampleSentences = [
+        {
+          german: ["ich", "heiße", "Anna"],
+          vietnamese: "Tôi tên là Anna",
+          words: ["ich", "heiße", "Anna", "bin", "ist", "Name"],
+        },
+        {
+          german: ["ich", "bin", "Student"],
+          vietnamese: "Tôi là sinh viên",
+          words: ["ich", "bin", "Student", "ist", "heiße", "Name"],
+        },
+        {
+          german: ["ich", "komme", "aus", "Deutschland"],
+          vietnamese: "Tôi đến từ Đức",
+          words: ["ich", "komme", "aus", "Deutschland", "Polen", "spreche"],
+        },
+        {
+          german: ["ich", "spreche", "Deutsch"],
+          vietnamese: "Tôi nói tiếng Đức",
+          words: ["ich", "spreche", "Deutsch", "Englisch", "komme", "aus"],
+        },
+        {
+          german: ["Hallo", "wie", "heißt", "du"],
+          vietnamese: "Xin chào, bạn tên gì?",
+          words: ["Hallo", "wie", "heißt", "du", "ich", "bin"],
+        },
+        {
+          german: ["Guten", "Tag", "mein", "Name", "ist", "Peter"],
+          vietnamese: "Chào buổi chiều, tên tôi là Peter",
+          words: [
+            "Guten",
+            "Tag",
+            "mein",
+            "Name",
+            "ist",
+            "Peter",
+            "heiße",
+            "ich",
+          ],
+        },
+        {
+          german: ["ich", "spreche", "ein", "bisschen", "Deutsch"],
+          vietnamese: "Tôi nói một chút tiếng Đức",
+          words: [
+            "ich",
+            "spreche",
+            "ein",
+            "bisschen",
+            "Deutsch",
+            "gut",
+            "super",
+          ],
+        },
+        {
+          german: ["woher", "kommst", "du"],
+          vietnamese: "Bạn đến từ đâu?",
+          words: ["woher", "kommst", "du", "ich", "komme", "aus"],
+        },
+        {
+          german: ["das", "ist", "super"],
+          vietnamese: "Điều đó thật tuyệt",
+          words: ["das", "ist", "super", "gut", "einfach", "richtig"],
+        },
+        {
+          german: ["ja", "das", "ist", "richtig"],
+          vietnamese: "Vâng, điều đó đúng",
+          words: ["ja", "das", "ist", "richtig", "nein", "okay"],
+        },
+        {
+          german: ["nein", "das", "ist", "falsch"],
+          vietnamese: "Không, điều đó sai",
+          words: ["nein", "das", "ist", "falsch", "richtig", "ja"],
+        },
+        {
+          german: ["ich", "bin", "aus", "Vietnam"],
+          vietnamese: "Tôi đến từ Việt Nam",
+          words: ["ich", "bin", "aus", "Vietnam", "Deutschland", "komme"],
+        },
+        {
+          german: ["mein", "Name", "ist", "Maria"],
+          vietnamese: "Tên tôi là Maria",
+          words: ["mein", "Name", "ist", "Maria", "ich", "heiße"],
+        },
+        {
+          german: ["ich", "spreche", "Englisch", "und", "Deutsch"],
+          vietnamese: "Tôi nói tiếng Anh và tiếng Đức",
+          words: [
+            "ich",
+            "spreche",
+            "Englisch",
+            "und",
+            "Deutsch",
+            "oder",
+            "Spanisch",
+          ],
+        },
+        {
+          german: ["bitte", "sprechen", "Sie", "langsam"],
+          vietnamese: "Xin hãy nói chậm",
+          words: ["bitte", "sprechen", "Sie", "langsam", "schnell", "gut"],
+        },
+        {
+          german: ["Auf", "Wiedersehen", "bis", "morgen"],
+          vietnamese: "Tạm biệt, hẹn gặp lại ngày mai",
+          words: ["Auf", "Wiedersehen", "bis", "morgen", "heute", "Tschüs"],
+        },
+        {
+          german: ["das", "ist", "sehr", "gut"],
+          vietnamese: "Điều đó rất tốt",
+          words: ["das", "ist", "sehr", "gut", "super", "einfach"],
+        },
+        {
+          german: ["ich", "verstehe", "das", "nicht"],
+          vietnamese: "Tôi không hiểu điều đó",
+          words: ["ich", "verstehe", "das", "nicht", "gut", "spreche"],
+        },
+        {
+          german: ["wie", "alt", "bist", "du"],
+          vietnamese: "Bạn bao nhiêu tuổi?",
+          words: ["wie", "alt", "bist", "du", "ich", "bin"],
+        },
+        {
+          german: ["ich", "bin", "zwanzig", "Jahre", "alt"],
+          vietnamese: "Tôi hai mươi tuổi",
+          words: ["ich", "bin", "zwanzig", "Jahre", "alt", "jung"],
+        },
+        {
+          german: ["wo", "wohnst", "du"],
+          vietnamese: "Bạn sống ở đâu?",
+          words: ["wo", "wohnst", "du", "ich", "wohne", "hier"],
+        },
+        {
+          german: ["ich", "wohne", "in", "Berlin"],
+          vietnamese: "Tôi sống ở Berlin",
+          words: ["ich", "wohne", "in", "Berlin", "München", "Hamburg"],
+        },
+        {
+          german: ["was", "machst", "du"],
+          vietnamese: "Bạn làm gì?",
+          words: ["was", "machst", "du", "ich", "arbeite", "studiere"],
+        },
+        {
+          german: ["ich", "bin", "Lehrer"],
+          vietnamese: "Tôi là giáo viên",
+          words: ["ich", "bin", "Lehrer", "Student", "Arzt", "Koch"],
+        },
+        {
+          german: ["es", "freut", "mich"],
+          vietnamese: "Tôi rất vui",
+          words: ["es", "freut", "mich", "dich", "sehr", "gut"],
+        },
+        {
+          german: ["haben", "Sie", "Zeit"],
+          vietnamese: "Bạn có thời gian không?",
+          words: ["haben", "Sie", "Zeit", "ich", "habe", "keine"],
+        },
+        {
+          german: ["ja", "ich", "habe", "Zeit"],
+          vietnamese: "Vâng, tôi có thời gian",
+          words: ["ja", "ich", "habe", "Zeit", "keine", "nein"],
+        },
+        {
+          german: ["entschuldigung", "wo", "ist", "das"],
+          vietnamese: "Xin lỗi, cái đó ở đâu?",
+          words: ["entschuldigung", "wo", "ist", "das", "hier", "dort"],
+        },
+        {
+          german: ["vielen", "Dank", "für", "alles"],
+          vietnamese: "Cảm ơn nhiều vì tất cả",
+          words: ["vielen", "Dank", "für", "alles", "nichts", "bitte"],
+        },
+        {
+          german: ["gern", "geschehen", "bitte", "schön"],
+          vietnamese: "Không có gì, xin mời",
+          words: ["gern", "geschehen", "bitte", "schön", "Dank", "sehr"],
+        },
+        {
+          german: ["heute", "ist", "ein", "schöner", "Tag"],
+          vietnamese: "Hôm nay là một ngày đẹp",
+          words: ["heute", "ist", "ein", "schöner", "Tag", "morgen"],
+        },
+        {
+          german: ["ich", "lerne", "Deutsch", "gern"],
+          vietnamese: "Tôi thích học tiếng Đức",
+          words: ["ich", "lerne", "Deutsch", "gern", "nicht", "spreche"],
+        },
+        {
+          german: ["können", "Sie", "mir", "helfen"],
+          vietnamese: "Bạn có thể giúp tôi không?",
+          words: ["können", "Sie", "mir", "helfen", "ich", "kann"],
+        },
+        {
+          german: ["natürlich", "kann", "ich", "helfen"],
+          vietnamese: "Tất nhiên tôi có thể giúp",
+          words: ["natürlich", "kann", "ich", "helfen", "nicht", "gern"],
+        },
+        {
+          german: ["das", "macht", "nichts"],
+          vietnamese: "Không sao cả",
+          words: ["das", "macht", "nichts", "alles", "gut", "okay"],
+        },
+        {
+          german: ["bis", "bald", "auf", "Wiedersehen"],
+          vietnamese: "Hẹn gặp lại sớm, tạm biệt",
+          words: ["bis", "bald", "auf", "Wiedersehen", "morgen", "heute"],
+        },
+      ];
+
       let currentGameData = {};
       let audioSupported = false;
       let audioEnabled = false;
@@ -1533,7 +2137,9 @@
       function startGame(gameType) {
         if (
           !audioEnabled &&
-          (gameType === "listening" || gameType === "typing")
+          (gameType === "listening" ||
+            gameType === "typing" ||
+            gameType === "speedtest")
         ) {
           document.getElementById("audioModal").style.display = "flex";
           return;
@@ -1569,6 +2175,20 @@
             document.getElementById("typingGame").classList.add("active");
             initTypingGame();
             break;
+          case "speedtest":
+            document.getElementById("speedtestGame").classList.add("active");
+            initSpeedTest();
+            break;
+          case "wordbuilder":
+            document.getElementById("wordbuilderGame").classList.add("active");
+            initWordBuilder();
+            break;
+          case "sentencebuilder":
+            document
+              .getElementById("sentencebuilderGame")
+              .classList.add("active");
+            initSentenceBuilder();
+            break;
         }
       }
 
@@ -1576,6 +2196,11 @@
         // Stop any ongoing speech
         if ("speechSynthesis" in window) {
           speechSynthesis.cancel();
+        }
+
+        // Clear any timers
+        if (currentGameData.speedTest && currentGameData.speedTest.timer) {
+          clearInterval(currentGameData.speedTest.timer);
         }
 
         document
@@ -2176,7 +2801,372 @@
         }
       }
 
-      // Allow Enter key for typing game
+      // Speed Test Game - NEW GAME
+      function initSpeedTest() {
+        currentGameData.speedTest = {
+          words: [...vocabulary].sort(() => Math.random() - 0.5),
+          currentIndex: 0,
+          score: 0,
+          correct: 0,
+          wrong: 0,
+          timeLeft: 60,
+          timer: null,
+          gameActive: false,
+        };
+
+        document.getElementById("speedTestWord").textContent =
+          "Nhấn 'Bắt đầu' để chơi!";
+        document.getElementById("speedTestOptions").style.display = "none";
+        document.getElementById("speedStartBtn").style.display = "inline-block";
+        document.getElementById("speedResetBtn").style.display = "none";
+        document.getElementById("speedTestStatus").textContent =
+          "Sẵn sàng bắt đầu?";
+
+        updateSpeedTestStats();
+      }
+
+      function startSpeedTest() {
+        const data = currentGameData.speedTest;
+        data.gameActive = true;
+        data.timeLeft = 60;
+        data.currentIndex = 0;
+
+        document.getElementById("speedStartBtn").style.display = "none";
+        document.getElementById("speedTestStatus").textContent =
+          "Trả lời nhanh nhất có thể!";
+
+        // Start timer
+        data.timer = setInterval(() => {
+          data.timeLeft--;
+          document.getElementById("speedTime").textContent = data.timeLeft;
+
+          if (data.timeLeft <= 0) {
+            endSpeedTest();
+          }
+        }, 1000);
+
+        showSpeedTestWord();
+      }
+
+      function showSpeedTestWord() {
+        const data = currentGameData.speedTest;
+        if (!data.gameActive || data.currentIndex >= data.words.length) return;
+
+        const word = data.words[data.currentIndex];
+
+        document.getElementById("speedTestWord").textContent = word.german;
+        document.getElementById("speedTestOptions").style.display = "grid";
+
+        // Create options
+        const wrongAnswers = vocabulary
+          .filter((w) => w.vietnamese !== word.vietnamese)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3)
+          .map((w) => w.vietnamese);
+
+        const options = [word.vietnamese, ...wrongAnswers].sort(
+          () => Math.random() - 0.5
+        );
+
+        const optionsContainer = document.getElementById("speedTestOptions");
+        optionsContainer.innerHTML = "";
+
+        options.forEach((option) => {
+          const optionElement = document.createElement("div");
+          optionElement.className = "quiz-option";
+          optionElement.textContent = option;
+          optionElement.onclick = () =>
+            selectSpeedOption(option, word.vietnamese);
+          optionsContainer.appendChild(optionElement);
+        });
+      }
+
+      function selectSpeedOption(selected, correct) {
+        const data = currentGameData.speedTest;
+        if (!data.gameActive) return;
+
+        if (selected === correct) {
+          data.score += 10;
+          data.correct++;
+        } else {
+          data.wrong++;
+        }
+
+        data.currentIndex++;
+        updateSpeedTestStats();
+
+        // Show next word immediately
+        setTimeout(() => showSpeedTestWord(), 100);
+      }
+
+      function updateSpeedTestStats() {
+        const data = currentGameData.speedTest;
+        document.getElementById("speedScore").textContent = data.score;
+        document.getElementById("speedTime").textContent = data.timeLeft;
+        document.getElementById("speedCorrect").textContent = data.correct;
+        document.getElementById("speedWrong").textContent = data.wrong;
+      }
+
+      function endSpeedTest() {
+        const data = currentGameData.speedTest;
+        data.gameActive = false;
+        clearInterval(data.timer);
+
+        document.getElementById("speedTestOptions").style.display = "none";
+        document.getElementById(
+          "speedTestWord"
+        ).textContent = `🎉 Kết thúc! Điểm: ${data.score} | Đúng: ${data.correct} | Sai: ${data.wrong}`;
+        document.getElementById("speedTestStatus").textContent = `Tốc độ: ${
+          data.correct + data.wrong
+        } từ/phút`;
+        document.getElementById("speedResetBtn").style.display = "inline-block";
+      }
+
+      function resetSpeedTest() {
+        if (currentGameData.speedTest && currentGameData.speedTest.timer) {
+          clearInterval(currentGameData.speedTest.timer);
+        }
+        initSpeedTest();
+      }
+
+      // Word Builder Game - NEW GAME
+      function initWordBuilder() {
+        currentGameData.wordBuilder = {
+          words: [...vocabulary].sort(() => Math.random() - 0.5),
+          currentIndex: 0,
+          score: 0,
+          answered: false,
+        };
+
+        document.getElementById("totalWordBuilder").textContent =
+          vocabulary.length;
+        showWordBuilderQuestion();
+      }
+
+      function showWordBuilderQuestion() {
+        const data = currentGameData.wordBuilder;
+        const word = data.words[data.currentIndex];
+
+        document.getElementById("currentWordBuilder").textContent =
+          data.currentIndex + 1;
+        document.getElementById(
+          "wordBuilderPrompt"
+        ).textContent = `Sắp xếp chữ cái để tạo thành từ có nghĩa: "${word.vietnamese}"`;
+
+        document.getElementById("wordBuilderInput").value = "";
+        document.getElementById("wordBuilderFeedback").innerHTML = "";
+        document.getElementById("nextWordBtn").style.display = "none";
+
+        // Scramble the letters
+        const letters = word.german
+          .toLowerCase()
+          .split("")
+          .sort(() => Math.random() - 0.5);
+
+        const scrambledContainer = document.getElementById("scrambledLetters");
+        scrambledContainer.innerHTML = "";
+
+        letters.forEach((letter, index) => {
+          const letterTile = document.createElement("div");
+          letterTile.className = "letter-tile";
+          letterTile.textContent = letter;
+          letterTile.onclick = () => addLetter(letter, index);
+          letterTile.dataset.index = index;
+          scrambledContainer.appendChild(letterTile);
+        });
+
+        data.answered = false;
+      }
+
+      function addLetter(letter, index) {
+        const input = document.getElementById("wordBuilderInput");
+        const tile = document.querySelector(`[data-index="${index}"]`);
+
+        if (tile.classList.contains("used")) return;
+
+        input.value += letter;
+        tile.classList.add("used");
+      }
+
+      function clearWordBuilder() {
+        document.getElementById("wordBuilderInput").value = "";
+        document.querySelectorAll(".letter-tile").forEach((tile) => {
+          tile.classList.remove("used");
+        });
+      }
+
+      function checkWordBuilder() {
+        if (currentGameData.wordBuilder.answered) return;
+
+        const data = currentGameData.wordBuilder;
+        const word = data.words[data.currentIndex];
+        const userInput = document
+          .getElementById("wordBuilderInput")
+          .value.trim()
+          .toLowerCase();
+        const correctAnswer = word.german.toLowerCase();
+
+        data.answered = true;
+
+        const feedback = document.getElementById("wordBuilderFeedback");
+
+        if (userInput === correctAnswer) {
+          feedback.innerHTML = `<span style="color: #4CAF50;">✅ Đúng rồi! "${word.german}" = ${word.vietnamese}</span>`;
+          feedback.style.background = "#e8f5e8";
+          data.score++;
+        } else {
+          feedback.innerHTML = `<span style="color: #f44336;">❌ Sai rồi! Đáp án đúng: "${word.german}" = ${word.vietnamese}</span>`;
+          feedback.style.background = "#ffebee";
+        }
+
+        setTimeout(() => {
+          document.getElementById("nextWordBtn").style.display = "inline-block";
+        }, 2000);
+      }
+
+      function nextWordBuilder() {
+        const data = currentGameData.wordBuilder;
+
+        if (data.currentIndex < data.words.length - 1) {
+          data.currentIndex++;
+          showWordBuilderQuestion();
+        } else {
+          // Show final score
+          document.querySelector(
+            "#wordbuilderGame .word-builder-area"
+          ).style.display = "none";
+          document.getElementById("nextWordBtn").style.display = "none";
+          document.getElementById("wordBuilderScore").style.display = "block";
+          document.getElementById("finalWordBuilderScore").textContent =
+            data.score;
+        }
+      }
+
+      // Sentence Builder Game - NEW GAME
+      function initSentenceBuilder() {
+        currentGameData.sentenceBuilder = {
+          sentences: [...sampleSentences].sort(() => Math.random() - 0.5),
+          currentIndex: 0,
+          score: 0,
+          answered: false,
+          selectedWords: [],
+        };
+
+        document.getElementById("totalSentences").textContent =
+          sampleSentences.length;
+        showSentenceBuilderQuestion();
+      }
+
+      function showSentenceBuilderQuestion() {
+        const data = currentGameData.sentenceBuilder;
+        const sentence = data.sentences[data.currentIndex];
+
+        document.getElementById("currentSentence").textContent =
+          data.currentIndex + 1;
+        document.getElementById(
+          "sentencePrompt"
+        ).textContent = `Sắp xếp các từ để tạo thành câu: "${sentence.vietnamese}"`;
+
+        document.getElementById("sentenceDropZone").innerHTML =
+          '<p style="color: #999;">Kéo từ vào đây để tạo câu...</p>';
+        document.getElementById("sentenceFeedback").innerHTML = "";
+        document.getElementById("nextSentenceBtn").style.display = "none";
+
+        // Create word bank
+        const wordBank = document.getElementById("wordBank");
+        wordBank.innerHTML = "";
+
+        sentence.words.forEach((word, index) => {
+          const wordChip = document.createElement("div");
+          wordChip.className = "word-chip";
+          wordChip.textContent = word;
+          wordChip.onclick = () => selectSentenceWord(word, index);
+          wordChip.dataset.index = index;
+          wordBank.appendChild(wordChip);
+        });
+
+        data.answered = false;
+        data.selectedWords = [];
+      }
+
+      function selectSentenceWord(word, index) {
+        const data = currentGameData.sentenceBuilder;
+        const chip = document.querySelector(`[data-index="${index}"]`);
+
+        if (chip.classList.contains("used")) return;
+
+        data.selectedWords.push(word);
+        chip.classList.add("used");
+
+        // Update drop zone
+        const dropZone = document.getElementById("sentenceDropZone");
+        dropZone.innerHTML = data.selectedWords
+          .map((w) => `<span class="word-chip">${w}</span>`)
+          .join(" ");
+      }
+
+      function clearSentence() {
+        const data = currentGameData.sentenceBuilder;
+        data.selectedWords = [];
+
+        document.getElementById("sentenceDropZone").innerHTML =
+          '<p style="color: #999;">Kéo từ vào đây để tạo câu...</p>';
+
+        document.querySelectorAll(".word-chip").forEach((chip) => {
+          chip.classList.remove("used");
+        });
+      }
+
+      function checkSentence() {
+        if (currentGameData.sentenceBuilder.answered) return;
+
+        const data = currentGameData.sentenceBuilder;
+        const sentence = data.sentences[data.currentIndex];
+        const userSentence = data.selectedWords.join(" ").toLowerCase();
+        const correctSentence = sentence.german.join(" ").toLowerCase();
+
+        data.answered = true;
+
+        const feedback = document.getElementById("sentenceFeedback");
+
+        if (userSentence === correctSentence) {
+          feedback.innerHTML = `<span style="color: #4CAF50;">✅ Đúng rồi! "${sentence.german.join(
+            " "
+          )}" = ${sentence.vietnamese}</span>`;
+          feedback.style.background = "#e8f5e8";
+          data.score++;
+        } else {
+          feedback.innerHTML = `<span style="color: #f44336;">❌ Sai rồi! Đáp án đúng: "${sentence.german.join(
+            " "
+          )}" = ${sentence.vietnamese}</span>`;
+          feedback.style.background = "#ffebee";
+        }
+
+        setTimeout(() => {
+          document.getElementById("nextSentenceBtn").style.display =
+            "inline-block";
+        }, 2000);
+      }
+
+      function nextSentence() {
+        const data = currentGameData.sentenceBuilder;
+
+        if (data.currentIndex < data.sentences.length - 1) {
+          data.currentIndex++;
+          showSentenceBuilderQuestion();
+        } else {
+          // Show final score
+          document.querySelector(
+            "#sentencebuilderGame .sentence-builder-area"
+          ).style.display = "none";
+          document.getElementById("nextSentenceBtn").style.display = "none";
+          document.getElementById("sentenceScore").style.display = "block";
+          document.getElementById("finalSentenceScore").textContent =
+            data.score;
+        }
+      }
+
+      // Allow Enter key for typing and word builder games
       document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           const typingInput = document.getElementById("typingInput");
@@ -2184,6 +3174,15 @@
             typingInput.addEventListener("keypress", function (e) {
               if (e.key === "Enter") {
                 checkTyping();
+              }
+            });
+          }
+
+          const wordBuilderInput = document.getElementById("wordBuilderInput");
+          if (wordBuilderInput) {
+            wordBuilderInput.addEventListener("keypress", function (e) {
+              if (e.key === "Enter") {
+                checkWordBuilder();
               }
             });
           }
