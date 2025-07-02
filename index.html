@@ -67,6 +67,70 @@
         margin-bottom: 10px;
       }
 
+      /* Phần mẹo phát âm mới */
+      .pronunciation-tips {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        border: 2px solid #ffc107;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+      }
+
+      .pronunciation-tips h3 {
+        color: #856404;
+        margin-bottom: 20px;
+        font-size: 1.4em;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .pronunciation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+      }
+
+      .pronunciation-rule {
+        background: white;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .pronunciation-rule:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .pronunciation-rule .rule-title {
+        font-weight: bold;
+        color: #856404;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+      }
+
+      .pronunciation-rule .rule-example {
+        color: #495057;
+        font-size: 0.95em;
+        line-height: 1.4;
+      }
+
+      .pronunciation-rule .rule-example .german {
+        font-weight: bold;
+        color: #dc3545;
+      }
+
+      .pronunciation-rule .rule-example .vietnamese {
+        font-weight: bold;
+        color: #28a745;
+      }
+
       .lessons-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -279,6 +343,10 @@
         .filter-buttons {
           justify-content: center;
         }
+
+        .pronunciation-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       @media (max-width: 480px) {
@@ -298,8 +366,7 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>🇩🇪 Học Tiếng Đức Online</h1>
-        <p>30 buổi ôn tập từ vựng và trò chơi miễn phí</p>
+        <h1>🇩🇪 Học Tiếng Đức</h1>
       </div>
 
       <div class="intro-section">
@@ -308,10 +375,91 @@
           <strong>Mỗi buổi học bao gồm:</strong> Học từ vựng có phát âm + Trò
           chơi ôn tập thú vị
         </p>
-        <p>
-          <strong>Luyện tập hàng ngày</strong> •
-          <strong>Học mọi lúc mọi nơi</strong>
-        </p>
+      </div>
+
+      <div class="pronunciation-tips">
+        <h3>🗣️ Mẹo phát âm tiếng Đức</h3>
+        <div class="pronunciation-grid">
+          <div class="pronunciation-rule">
+            <div class="rule-title">📝 Chữ S và Z</div>
+            <div class="rule-example">
+              <span class="german">s</span> đọc là
+              <span class="vietnamese">z</span><br />
+              <span class="german">z</span> đọc là
+              <span class="vietnamese">s</span><br />
+              VD: <span class="german">sie</span> →
+              <span class="vietnamese">zi</span>,
+              <span class="german">zwei</span> →
+              <span class="vietnamese">tsvai</span>
+            </div>
+          </div>
+
+          <div class="pronunciation-rule">
+            <div class="rule-title">📝 Chữ CH</div>
+            <div class="rule-example">
+              Sau <span class="german">o, a, u, au</span>:
+              <span class="vietnamese">ch = kh</span><br />
+              Sau <span class="german">ss</span> và các từ khác:
+              <span class="vietnamese">ch = x</span><br />
+              VD: <span class="german">ach</span> →
+              <span class="vietnamese">akh</span>,
+              <span class="german">ich</span> →
+              <span class="vietnamese">ix</span>
+            </div>
+          </div>
+
+          <div class="pronunciation-rule">
+            <div class="rule-title">📝 Chữ IR và UR</div>
+            <div class="rule-example">
+              <span class="german">ir</span> đọc là
+              <span class="vietnamese">ia</span><br />
+              <span class="german">ur</span> đọc là
+              <span class="vietnamese">ua</span><br />
+              VD: <span class="german">wir</span> →
+              <span class="vietnamese">via</span>,
+              <span class="german">nur</span> →
+              <span class="vietnamese">nua</span>
+            </div>
+          </div>
+
+          <div class="pronunciation-rule">
+            <div class="rule-title">📝 Chữ EU và ÄU</div>
+            <div class="rule-example">
+              <span class="german">eu</span> đọc là
+              <span class="vietnamese">oi</span><br />
+              <span class="german">äu</span> đọc là
+              <span class="vietnamese">oi</span><br />
+              VD: <span class="german">heute</span> →
+              <span class="vietnamese">hoi-tə</span>,
+              <span class="german">träumen</span> →
+              <span class="vietnamese">troi-mən</span>
+            </div>
+          </div>
+
+          <div class="pronunciation-rule">
+            <div class="rule-title">📝 Chữ EI, AY, AI</div>
+            <div class="rule-example">
+              <span class="german">ei, ay, ai</span> đều đọc là
+              <span class="vietnamese">ai</span><br />
+              VD: <span class="german">ein</span> →
+              <span class="vietnamese">ain</span>,
+              <span class="german">Bayern</span> →
+              <span class="vietnamese">bai-ern</span>
+            </div>
+          </div>
+
+          <div class="pronunciation-rule">
+            <div class="rule-title">📝 Lưu ý khác</div>
+            <div class="rule-example">
+              <span class="german">ß</span> (Eszett) đọc như
+              <span class="vietnamese">ss</span><br />
+              <span class="german">w</span> đọc như
+              <span class="vietnamese">v</span><br />
+              <span class="german">v</span> đọc như
+              <span class="vietnamese">f</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="search-filter">
@@ -340,10 +488,19 @@
       const lessons = [
         {
           day: 1,
-          title: "Giới thiệu bản thân",
+          title: "Giới thiệu bản thân(30/4 - 1/7)",
           description:
             "Học cách chào hỏi, giới thiệu tên, quốc tịch và ngôn ngữ. 72 từ vựng cơ bản nhất để bắt đầu.",
           words: 72,
+          difficulty: "basic",
+          difficultyText: "Cơ bản",
+        },
+        {
+          day: 2,
+          title: "Giao tiếp hàng ngày (2/7)",
+          description:
+            "Học cách chào hỏi theo thời gian, cảm ơn, xin lỗi, và các hoạt động học tập cơ bản. 38 từ vựng thiết yếu.",
+          words: 38,
           difficulty: "basic",
           difficultyText: "Cơ bản",
         },

@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng tiếng Đức - Buổi 2: Giao tiếp hàng ngày</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+      }
+      .container {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #4a47a3;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .subtitle {
+        text-align: center;
+        color: #666;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        font-style: italic;
+      }
+      .category {
+        margin-bottom: 35px;
+        border: 2px solid #667eea;
+        border-radius: 15px;
+        padding: 25px;
+        background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+      }
+      .category-title {
+        font-size: 1.6em;
+        font-weight: bold;
+        color: #4a47a3;
+        margin-bottom: 20px;
+        text-align: center;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 10px;
+      }
+      .vocabulary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .vocab-card {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #667eea;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .vocab-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      .german-word {
+        font-size: 1.4em;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+      }
+      .german-word:hover {
+        background-color: #e3f2fd;
+      }
+      .pronunciation {
+        color: #8e44ad;
+        font-size: 1.1em;
+        margin-bottom: 8px;
+        font-style: italic;
+      }
+      .vietnamese {
+        color: #27ae60;
+        font-size: 1.1em;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+      .examples {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 0 8px 8px 0;
+      }
+      .example {
+        margin: 8px 0;
+        font-size: 0.95em;
+        color: #856404;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .example:hover {
+        background-color: #fff3cd;
+      }
+      .example-german {
+        font-weight: bold;
+        color: #2c3e50;
+      }
+      .example-vietnamese {
+        color: #27ae60;
+        font-style: italic;
+      }
+      .priority {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .high-priority {
+        background: #e74c3c;
+        color: white;
+      }
+      .medium-priority {
+        background: #f39c12;
+        color: white;
+      }
+      .basic-priority {
+        background: #27ae60;
+        color: white;
+      }
+      .study-tips {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        border: 2px solid #28a745;
+        border-radius: 15px;
+        padding: 20px;
+        margin-top: 30px;
+      }
+      .study-tips h3 {
+        color: #155724;
+        margin-bottom: 15px;
+        font-size: 1.4em;
+      }
+      .tip {
+        margin: 10px 0;
+        padding: 8px 0;
+        color: #155724;
+        font-weight: 500;
+      }
+      .counter {
+        text-align: center;
+        background: #6f42c1;
+        color: white;
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+      }
+      .speaker-icon {
+        color: #2196f3;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+      .speaker-icon:hover {
+        color: #1976d2;
+      }
+      .audio-controls {
+        background: #f0f8ff;
+        border: 1px solid #2196f3;
+        border-radius: 8px;
+        padding: 10px;
+        margin-top: 10px;
+        text-align: center;
+      }
+      .control-note {
+        font-size: 0.9em;
+        color: #666;
+        font-style: italic;
+        margin-top: 15px;
+        text-align: center;
+        padding: 8px;
+        background: #f8f9fa;
+        border-radius: 5px;
+      }
+      .playing {
+        background-color: #e8f5e8 !important;
+        animation: pulse 1s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Back to Top Button */
+      .back-to-index {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 25px;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(100px);
+        z-index: 1000;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .back-to-index.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .back-to-index:hover {
+        background: linear-gradient(135deg, #5a6fd8 0%, #6a42a0 100%);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Responsive styles for mobile */
+      @media only screen and (max-width: 768px) {
+        body {
+          padding: 10px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+          padding: 15px;
+          border-radius: 15px;
+        }
+
+        h1 {
+          font-size: 1.8em;
+          margin-bottom: 5px;
+        }
+
+        .subtitle {
+          font-size: 1em;
+          margin-bottom: 20px;
+        }
+
+        .category {
+          padding: 15px;
+          margin-bottom: 25px;
+        }
+
+        .category-title {
+          font-size: 1.3em;
+          padding-bottom: 8px;
+        }
+
+        .vocabulary-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .vocab-card {
+          padding: 12px;
+        }
+
+        .german-word {
+          font-size: 1.2em;
+        }
+
+        .pronunciation,
+        .vietnamese {
+          font-size: 1em;
+        }
+
+        .examples {
+          padding: 10px;
+        }
+
+        .example {
+          font-size: 0.9em;
+        }
+
+        .counter {
+          padding: 12px;
+          font-size: 1em;
+        }
+
+        .study-tips {
+          padding: 15px;
+        }
+
+        .study-tips h3 {
+          font-size: 1.2em;
+        }
+
+        .tip {
+          font-size: 0.9em;
+        }
+
+        .audio-controls {
+          padding: 8px;
+          font-size: 0.9em;
+        }
+
+        .control-note {
+          font-size: 0.8em;
+        }
+
+        .back-to-index {
+          bottom: 20px;
+          right: 20px;
+          padding: 12px 20px;
+          font-size: 0.9em;
+        }
+      }
+
+      /* Responsive styles for very small screens */
+      @media only screen and (max-width: 480px) {
+        h1 {
+          font-size: 1.5em;
+        }
+
+        .category-title {
+          font-size: 1.1em;
+        }
+
+        .german-word {
+          font-size: 1.1em;
+        }
+
+        .counter {
+          padding: 10px;
+          font-size: 0.9em;
+        }
+
+        .back-to-index {
+          padding: 10px 15px;
+          font-size: 0.8em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 Từ vựng tiếng Đức hôm nay</h1>
+      <div class="subtitle">
+        Tổng cộng **38 từ vựng hoàn chỉnh** - Giao tiếp hàng ngày và hoạt động
+        học tập
+      </div>
+
+      <div class="counter">
+        🎯 Mục tiêu: Học thuộc 15-20 từ cơ bản đầu tiên từ tổng số **38 từ vựng
+        hoàn chỉnh**
+      </div>
+
+      <div class="audio-controls">
+        <strong>🔊 Tính năng phát âm:</strong> Bấm vào 🔊 để nghe phát âm tiếng
+        Đức
+      </div>
+
+      <div class="category">
+        <div class="category-title">
+          🔴 NHÓM 1: CỰC KỲ QUAN TRỌNG (Học trước)
+        </div>
+        <div class="vocabulary-grid">
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('danke')">
+              danke <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[dan-kə]</div>
+            <div class="vietnamese">cảm ơn</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Danke schön')">
+                🔊 <span class="example-german">Danke schön</span> =
+                <span class="example-vietnamese">Cảm ơn rất nhiều</span>
+              </div>
+              <div class="example" onclick="speak('Vielen Dank')">
+                🔊 <span class="example-german">Vielen Dank</span> =
+                <span class="example-vietnamese">Cảm ơn nhiều</span>
+              </div>
+              <div class="example" onclick="speak('Danke für Ihre Hilfe')">
+                🔊 <span class="example-german">Danke für Ihre Hilfe</span> =
+                <span class="example-vietnamese"
+                  >Cảm ơn sự giúp đỡ của bạn</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('entschuldigung')">
+              Entschuldigung <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[ent-shul-di-gung]</div>
+            <div class="vietnamese">xin lỗi / tôi có thể hỏi không</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Entschuldigung, wo ist der Bahnhof?')"
+              >
+                🔊
+                <span class="example-german"
+                  >Entschuldigung, wo ist der Bahnhof?</span
+                >
+                = <span class="example-vietnamese">Xin lỗi, nhà ga ở đâu?</span>
+              </div>
+              <div
+                class="example"
+                onclick="speak('Entschuldigung, können Sie mir helfen?')"
+              >
+                🔊
+                <span class="example-german"
+                  >Entschuldigung, können Sie mir helfen?</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Xin lỗi, bạn có thể giúp tôi không?</span
+                >
+              </div>
+              <div class="example" onclick="speak('Entschuldigen Sie bitte')">
+                🔊 <span class="example-german">Entschuldigen Sie bitte</span> =
+                <span class="example-vietnamese">Xin lỗi (trang trọng)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('guten morgen')">
+              Guten Morgen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[gu-tən mor-gən]</div>
+            <div class="vietnamese">chào buổi sáng</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Guten Morgen, wie geht es Ihnen?')"
+              >
+                🔊
+                <span class="example-german"
+                  >Guten Morgen, wie geht es Ihnen?</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Chào buổi sáng, bạn khỏe không?</span
+                >
+              </div>
+              <div class="example" onclick="speak('Guten Morgen zusammen!')">
+                🔊 <span class="example-german">Guten Morgen zusammen!</span> =
+                <span class="example-vietnamese"
+                  >Chào buổi sáng mọi người!</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('guten abend')">
+              Guten Abend <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[gu-tən a-bənt]</div>
+            <div class="vietnamese">chào buổi tối</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Guten Abend, schöner Tag heute')"
+              >
+                🔊
+                <span class="example-german"
+                  >Guten Abend, schöner Tag heute</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Chào buổi tối, hôm nay thời tiết đẹp</span
+                >
+              </div>
+              <div class="example" onclick="speak('Guten Abend allerseits!')">
+                🔊 <span class="example-german">Guten Abend allerseits!</span> =
+                <span class="example-vietnamese"
+                  >Chào buổi tối tất cả mọi người!</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('gute nacht')">
+              Gute Nacht <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[gu-tə naχt]</div>
+            <div class="vietnamese">chúc ngủ ngon</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Gute Nacht und schöne Träume')"
+              >
+                🔊
+                <span class="example-german">Gute Nacht und schöne Träume</span>
+                =
+                <span class="example-vietnamese"
+                  >Chúc ngủ ngon và có những giấc mơ đẹp</span
+                >
+              </div>
+              <div class="example" onclick="speak('Gute Nacht, bis morgen!')">
+                🔊 <span class="example-german">Gute Nacht, bis morgen!</span> =
+                <span class="example-vietnamese"
+                  >Chúc ngủ ngon, hẹn gặp ngày mai!</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('ich weiß es nicht')">
+              Ich weiß es nicht <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[iχ vais es niχt]</div>
+            <div class="vietnamese">tôi không biết</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Entschuldigung, ich weiß es nicht')"
+              >
+                🔊
+                <span class="example-german"
+                  >Entschuldigung, ich weiß es nicht</span
+                >
+                =
+                <span class="example-vietnamese">Xin lỗi, tôi không biết</span>
+              </div>
+              <div class="example" onclick="speak('Ich weiß es leider nicht')">
+                🔊
+                <span class="example-german">Ich weiß es leider nicht</span> =
+                <span class="example-vietnamese">Rất tiếc tôi không biết</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('willkommen')">
+              Willkommen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[vil-ko-mən]</div>
+            <div class="vietnamese">chào mừng</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Herzlich willkommen!')">
+                🔊 <span class="example-german">Herzlich willkommen!</span> =
+                <span class="example-vietnamese">Chào mừng nhiệt liệt!</span>
+              </div>
+              <div class="example" onclick="speak('Willkommen in Deutschland')">
+                🔊
+                <span class="example-german">Willkommen in Deutschland</span> =
+                <span class="example-vietnamese">Chào mừng đến Đức</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority high-priority">SIÊU QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('sprechen')">
+              sprechen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[shpreχ-ən]</div>
+            <div class="vietnamese">nói</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Können Sie Deutsch sprechen?')"
+              >
+                🔊
+                <span class="example-german">Können Sie Deutsch sprechen?</span>
+                =
+                <span class="example-vietnamese"
+                  >Bạn có thể nói tiếng Đức không?</span
+                >
+              </div>
+              <div
+                class="example"
+                onclick="speak('Ich möchte mit Ihnen sprechen')"
+              >
+                🔊
+                <span class="example-german"
+                  >Ich möchte mit Ihnen sprechen</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Tôi muốn nói chuyện với bạn</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-title">🟡 NHÓM 2: QUAN TRỌNG (Học tiếp theo)</div>
+        <div class="vocabulary-grid">
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('herr')">
+              Herr <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[hɛr]</div>
+            <div class="vietnamese">ông / ngài</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Herr Schmidt ist hier')">
+                🔊 <span class="example-german">Herr Schmidt ist hier</span> =
+                <span class="example-vietnamese">Ông Schmidt có mặt ở đây</span>
+              </div>
+              <div class="example" onclick="speak('Guten Tag, Herr Müller!')">
+                🔊 <span class="example-german">Guten Tag, Herr Müller!</span> =
+                <span class="example-vietnamese"
+                  >Chào buổi chiều, ông Müller!</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('frau')">
+              Frau <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[frau]</div>
+            <div class="vietnamese">bà / chị</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Frau Weber arbeitet hier')">
+                🔊
+                <span class="example-german">Frau Weber arbeitet hier</span> =
+                <span class="example-vietnamese">Bà Weber làm việc ở đây</span>
+              </div>
+              <div class="example" onclick="speak('Das ist Frau Nguyen')">
+                🔊 <span class="example-german">Das ist Frau Nguyen</span> =
+                <span class="example-vietnamese">Đây là bà Nguyen</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('damen und herren')">
+              Damen und Herren <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[da-mən unt hɛ-rən]</div>
+            <div class="vietnamese">quý bà và quý ông</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Sehr geehrte Damen und Herren')"
+              >
+                🔊
+                <span class="example-german"
+                  >Sehr geehrte Damen und Herren</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Kính thưa quý bà và quý ông</span
+                >
+              </div>
+              <div
+                class="example"
+                onclick="speak('Guten Abend, meine Damen und Herren')"
+              >
+                🔊
+                <span class="example-german"
+                  >Guten Abend, meine Damen und Herren</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Chào buổi tối, quý bà và quý ông</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('kinder')">
+              Kinder <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[kin-dər]</div>
+            <div class="vietnamese">trẻ em</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Die Kinder spielen im Park')"
+              >
+                🔊
+                <span class="example-german">Die Kinder spielen im Park</span> =
+                <span class="example-vietnamese"
+                  >Trẻ em chơi trong công viên</span
+                >
+              </div>
+              <div class="example" onclick="speak('Haben Sie Kinder?')">
+                🔊 <span class="example-german">Haben Sie Kinder?</span> =
+                <span class="example-vietnamese">Bạn có con không?</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('bei')">
+              bei <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[bai]</div>
+            <div class="vietnamese">ở / tại / bên</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Ich arbeite bei BMW')">
+                🔊 <span class="example-german">Ich arbeite bei BMW</span> =
+                <span class="example-vietnamese">Tôi làm việc tại BMW</span>
+              </div>
+              <div class="example" onclick="speak('Bei uns zu Hause')">
+                🔊 <span class="example-german">Bei uns zu Hause</span> =
+                <span class="example-vietnamese">Ở nhà chúng tôi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('freut')">
+              freut (mich) <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[frɔyt]</div>
+            <div class="vietnamese">vui mừng / hân hạnh</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Freut mich, Sie kennenzulernen')"
+              >
+                🔊
+                <span class="example-german"
+                  >Freut mich, Sie kennenzulernen</span
+                >
+                =
+                <span class="example-vietnamese">Tôi rất vui được gặp bạn</span>
+              </div>
+              <div class="example" onclick="speak('Es freut mich sehr')">
+                🔊 <span class="example-german">Es freut mich sehr</span> =
+                <span class="example-vietnamese">Tôi rất vui mừng</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('herzlich')">
+              herzlich <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[hɛrts-liχ]</div>
+            <div class="vietnamese">chân thành / nhiệt tình</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Herzlich willkommen!')">
+                🔊 <span class="example-german">Herzlich willkommen!</span> =
+                <span class="example-vietnamese">Chào mừng nhiệt liệt!</span>
+              </div>
+              <div class="example" onclick="speak('Herzlichen Glückwunsch')">
+                🔊 <span class="example-german">Herzlichen Glückwunsch</span> =
+                <span class="example-vietnamese">Chúc mừng chân thành</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('suchen')">
+              suchen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[zu-χən]</div>
+            <div class="vietnamese">tìm kiếm</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Ich suche den Bahnhof')">
+                🔊 <span class="example-german">Ich suche den Bahnhof</span> =
+                <span class="example-vietnamese">Tôi đang tìm nhà ga</span>
+              </div>
+              <div class="example" onclick="speak('Was suchen Sie?')">
+                🔊 <span class="example-german">Was suchen Sie?</span> =
+                <span class="example-vietnamese">Bạn đang tìm gì?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-title">🕒 NHÓM 3: THỜI GIAN TRONG NGÀY</div>
+        <div class="vocabulary-grid">
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('morgen')">
+              morgen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[mor-gən]</div>
+            <div class="vietnamese">ngày mai / buổi sáng</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Bis morgen!')">
+                🔊 <span class="example-german">Bis morgen!</span> =
+                <span class="example-vietnamese">Hẹn gặp ngày mai!</span>
+              </div>
+              <div class="example" onclick="speak('Morgen früh')">
+                🔊 <span class="example-german">Morgen früh</span> =
+                <span class="example-vietnamese">Sáng mai</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('vormittag')">
+              Vormittag <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[for-mi-tak]</div>
+            <div class="vietnamese">buổi sáng muộn</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Am Vormittag arbeite ich')">
+                🔊
+                <span class="example-german">Am Vormittag arbeite ich</span> =
+                <span class="example-vietnamese"
+                  >Buổi sáng muộn tôi làm việc</span
+                >
+              </div>
+              <div class="example" onclick="speak('Heute Vormittag')">
+                🔊 <span class="example-german">Heute Vormittag</span> =
+                <span class="example-vietnamese">Sáng nay</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('mittag')">
+              Mittag <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[mi-tak]</div>
+            <div class="vietnamese">buổi trưa</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Zu Mittag essen')">
+                🔊 <span class="example-german">Zu Mittag essen</span> =
+                <span class="example-vietnamese">Ăn trưa</span>
+              </div>
+              <div class="example" onclick="speak('Am Mittag')">
+                🔊 <span class="example-german">Am Mittag</span> =
+                <span class="example-vietnamese">Vào buổi trưa</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('nachmittag')">
+              Nachmittag <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[naχ-mi-tak]</div>
+            <div class="vietnamese">buổi chiều</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Am Nachmittag gehe ich spazieren')"
+              >
+                🔊
+                <span class="example-german"
+                  >Am Nachmittag gehe ich spazieren</span
+                >
+                = <span class="example-vietnamese">Buổi chiều tôi đi dạo</span>
+              </div>
+              <div class="example" onclick="speak('Heute Nachmittag')">
+                🔊 <span class="example-german">Heute Nachmittag</span> =
+                <span class="example-vietnamese">Chiều nay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-title">🎓 NHÓM 4: HỌC TẬP & HOẠT ĐỘNG</div>
+        <div class="vocabulary-grid">
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('ordnen sie zu')">
+              Ordnen Sie zu <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[ord-nən zi tsu]</div>
+            <div class="vietnamese">hãy sắp xếp / ghép nối</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Ordnen Sie die Wörter zu')">
+                🔊
+                <span class="example-german">Ordnen Sie die Wörter zu</span> =
+                <span class="example-vietnamese">Hãy sắp xếp các từ</span>
+              </div>
+              <div class="example" onclick="speak('Ordnen Sie zu: Was passt?')">
+                🔊
+                <span class="example-german">Ordnen Sie zu: Was passt?</span> =
+                <span class="example-vietnamese"
+                  >Hãy ghép nối: Cái gì phù hợp?</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('ergänzen')">
+              Ergänzen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[ɛr-gɛn-tsən]</div>
+            <div class="vietnamese">bổ sung / điền vào</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Ergänzen Sie die Sätze')">
+                🔊 <span class="example-german">Ergänzen Sie die Sätze</span> =
+                <span class="example-vietnamese">Hãy bổ sung các câu</span>
+              </div>
+              <div class="example" onclick="speak('Ergänzen Sie bitte')">
+                🔊 <span class="example-german">Ergänzen Sie bitte</span> =
+                <span class="example-vietnamese">Xin hãy điền vào</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('lesen')">
+              lesen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[le-zən]</div>
+            <div class="vietnamese">đọc</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Lesen Sie den Text')">
+                🔊 <span class="example-german">Lesen Sie den Text</span> =
+                <span class="example-vietnamese">Hãy đọc văn bản</span>
+              </div>
+              <div class="example" onclick="speak('Ich lese gern Bücher')">
+                🔊 <span class="example-german">Ich lese gern Bücher</span> =
+                <span class="example-vietnamese">Tôi thích đọc sách</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('kärtchen')">
+              Kärtchen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[kɛrt-χən]</div>
+            <div class="vietnamese">thẻ nhỏ / flashcard</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Lernen Sie mit Kärtchen')">
+                🔊 <span class="example-german">Lernen Sie mit Kärtchen</span> =
+                <span class="example-vietnamese">Hãy học bằng thẻ nhỏ</span>
+              </div>
+              <div
+                class="example"
+                onclick="speak('Die Kärtchen helfen beim Lernen')"
+              >
+                🔊
+                <span class="example-german"
+                  >Die Kärtchen helfen beim Lernen</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Các thẻ nhỏ giúp ích cho việc học</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('kurs')">
+              Kurs <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[kurs]</div>
+            <div class="vietnamese">khóa học</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Ich besuche einen Deutschkurs')"
+              >
+                🔊
+                <span class="example-german"
+                  >Ich besuche einen Deutschkurs</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Tôi tham gia khóa học tiếng Đức</span
+                >
+              </div>
+              <div
+                class="example"
+                onclick="speak('Im Kurs lernen wir zusammen')"
+              >
+                🔊
+                <span class="example-german">Im Kurs lernen wir zusammen</span>
+                =
+                <span class="example-vietnamese"
+                  >Trong khóa học chúng ta cùng học</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('im')">
+              im <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[ɪm]</div>
+            <div class="vietnamese">trong / ở trong</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Im Kurs sprechen wir Deutsch')"
+              >
+                🔊
+                <span class="example-german">Im Kurs sprechen wir Deutsch</span>
+                =
+                <span class="example-vietnamese"
+                  >Trong khóa học chúng ta nói tiếng Đức</span
+                >
+              </div>
+              <div class="example" onclick="speak('Im Winter ist es kalt')">
+                🔊 <span class="example-german">Im Winter ist es kalt</span> =
+                <span class="example-vietnamese">Mùa đông trời lạnh</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-title">🌟 NHÓM 5: TỪNG TRƯỜNG & ĐỊA ĐIỂM</div>
+        <div class="vocabulary-grid">
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('international')">
+              international <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[ɪn-tər-na-tsio-nal]</div>
+            <div class="vietnamese">quốc tế</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Das ist eine internationale Schule')"
+              >
+                🔊
+                <span class="example-german"
+                  >Das ist eine internationale Schule</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Đây là một trường quốc tế</span
+                >
+              </div>
+              <div class="example" onclick="speak('Internationale Musik')">
+                🔊 <span class="example-german">Internationale Musik</span> =
+                <span class="example-vietnamese">Âm nhạc quốc tế</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('musik')">
+              Musik <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[mu-zik]</div>
+            <div class="vietnamese">âm nhạc</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Ich höre gern Musik')">
+                🔊 <span class="example-german">Ich höre gern Musik</span> =
+                <span class="example-vietnamese">Tôi thích nghe nhạc</span>
+              </div>
+              <div
+                class="example"
+                onclick="speak('Klassische Musik ist schön')"
+              >
+                🔊
+                <span class="example-german">Klassische Musik ist schön</span> =
+                <span class="example-vietnamese">Nhạc cổ điển đẹp</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('klinikum')">
+              Klinikum <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[kli-ni-kum]</div>
+            <div class="vietnamese">bệnh viện / phòng khám</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Das Klinikum ist groß')">
+                🔊 <span class="example-german">Das Klinikum ist groß</span> =
+                <span class="example-vietnamese">Bệnh viện lớn</span>
+              </div>
+              <div class="example" onclick="speak('Wo ist das Klinikum?')">
+                🔊 <span class="example-german">Wo ist das Klinikum?</span> =
+                <span class="example-vietnamese">Bệnh viện ở đâu?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-title">👥 NHÓM 6: NGƯỜI & TỰ GIỚI THIỆU</div>
+        <div class="vocabulary-grid">
+          <div class="vocab-card">
+            <div class="priority medium-priority">QUAN TRỌNG</div>
+            <div class="german-word" onclick="speak('namen')">
+              Namen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[na-mən]</div>
+            <div class="vietnamese">những cái tên</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Wie sind Ihre Namen?')">
+                🔊 <span class="example-german">Wie sind Ihre Namen?</span> =
+                <span class="example-vietnamese">Tên của các bạn là gì?</span>
+              </div>
+              <div class="example" onclick="speak('Die Namen sind schwer')">
+                🔊 <span class="example-german">Die Namen sind schwer</span> =
+                <span class="example-vietnamese">Những cái tên khó</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('bekannte')">
+              Bekannte <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[bə-kan-tə]</div>
+            <div class="vietnamese">người quen</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Das sind meine Bekannten')">
+                🔊
+                <span class="example-german">Das sind meine Bekannten</span> =
+                <span class="example-vietnamese"
+                  >Đây là những người quen của tôi</span
+                >
+              </div>
+              <div class="example" onclick="speak('Ich treffe Bekannte')">
+                🔊 <span class="example-german">Ich treffe Bekannte</span> =
+                <span class="example-vietnamese">Tôi gặp người quen</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('personen')">
+              Personen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[pər-zo-nən]</div>
+            <div class="vietnamese">những người</div>
+            <div class="examples">
+              <div class="example" onclick="speak('Hier sind drei Personen')">
+                🔊 <span class="example-german">Hier sind drei Personen</span> =
+                <span class="example-vietnamese">Ở đây có ba người</span>
+              </div>
+              <div
+                class="example"
+                onclick="speak('Viele Personen sprechen Deutsch')"
+              >
+                🔊
+                <span class="example-german"
+                  >Viele Personen sprechen Deutsch</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Nhiều người nói tiếng Đức</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="category-title">📝 NHÓM 7: ĐỘNG TỪ HOẠT ĐỘNG</div>
+        <div class="vocabulary-grid">
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('zeigen')">
+              zeigen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[tsai-gən]</div>
+            <div class="vietnamese">chỉ / trình bày</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Können Sie mir den Weg zeigen?')"
+              >
+                🔊
+                <span class="example-german"
+                  >Können Sie mir den Weg zeigen?</span
+                >
+                =
+                <span class="example-vietnamese"
+                  >Bạn có thể chỉ đường cho tôi không?</span
+                >
+              </div>
+              <div class="example" onclick="speak('Ich zeige Ihnen das Buch')">
+                🔊
+                <span class="example-german">Ich zeige Ihnen das Buch</span> =
+                <span class="example-vietnamese"
+                  >Tôi chỉ cho bạn xem cuốn sách</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="vocab-card">
+            <div class="priority basic-priority">BỔ SUNG</div>
+            <div class="german-word" onclick="speak('fragen')">
+              fragen <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="pronunciation">[fra-gən]</div>
+            <div class="vietnamese">hỏi</div>
+            <div class="examples">
+              <div
+                class="example"
+                onclick="speak('Darf ich Sie etwas fragen?')"
+              >
+                🔊
+                <span class="example-german">Darf ich Sie etwas fragen?</span> =
+                <span class="example-vietnamese"
+                  >Tôi có thể hỏi bạn một chút không?</span
+                >
+              </div>
+              <div class="example" onclick="speak('Fragen Sie bitte')">
+                🔊 <span class="example-german">Fragen Sie bitte</span> =
+                <span class="example-vietnamese">Xin hãy hỏi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="study-tips">
+        <h3>💡 Mẹo học hiệu quả hôm nay:</h3>
+        <div class="tip">
+          🎯 <strong>Ưu tiên NHÓM 1</strong> - Học thuộc 8 cụm từ giao tiếp cơ
+          bản nhất trước
+        </div>
+        <div class="tip">
+          🔊 <strong>Nghe và lặp lại</strong> - Bấm vào biểu tượng 🔊 để nghe và
+          lặp lại 3-5 lần
+        </div>
+        <div class="tip">
+          🗣️ <strong>Thực hành giao tiếp</strong> - Luyện tập: "Guten Morgen",
+          "Danke schön", "Entschuldigung"
+        </div>
+        <div class="tip">
+          🕒 <strong>Học thời gian</strong> - Ghi nhớ các buổi trong ngày:
+          Morgen, Vormittag, Mittag, Nachmittag, Abend
+        </div>
+        <div class="tip">
+          🎓 <strong>Từ vựng học tập</strong> - Làm quen với: "Ordnen Sie zu",
+          "Ergänzen", "Lesen"
+        </div>
+        <div class="tip">
+          ⏰ <strong>Thời gian</strong> - Học 15-20 phút mỗi lần, nghỉ 5 phút
+        </div>
+        <div class="tip">
+          🔁 <strong>Ôn tập</strong> - Xem lại 3 lần trong ngày: sáng-trưa-tối
+        </div>
+      </div>
+
+      <div class="control-note">
+        💡 <strong>Lưu ý:</strong> Tính năng phát âm sử dụng công nghệ
+        text-to-speech của trình duyệt. Đảm bảo bạn đã bật âm thanh và chọn
+        giọng đọc tiếng Đức trong cài đặt trình duyệt để có trải nghiệm tốt
+        nhất.
+      </div>
+    </div>
+
+    <!-- Back to Index Button -->
+    <a href="index.html" class="back-to-index" id="backToIndex">
+      🏠 Về trang chủ
+    </a>
+
+    <script>
+      // Text-to-Speech function
+      function speak(text) {
+        // Stop any current speech
+        speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Try to set German voice
+        const voices = speechSynthesis.getVoices();
+        const germanVoice = voices.find(
+          (voice) =>
+            voice.lang.includes("de") ||
+            voice.name.toLowerCase().includes("german") ||
+            voice.name.toLowerCase().includes("deutsch")
+        );
+
+        if (germanVoice) {
+          utterance.voice = germanVoice;
+        }
+
+        utterance.lang = "de-DE";
+        utterance.rate = 0.8; // Slower speech for learning
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        // Visual feedback
+        const clickedElement = event.target.closest(".german-word, .example");
+        if (clickedElement) {
+          clickedElement.classList.add("playing");
+
+          utterance.onend = function () {
+            clickedElement.classList.remove("playing");
+          };
+
+          utterance.onerror = function () {
+            clickedElement.classList.remove("playing");
+          };
+        }
+
+        speechSynthesis.speak(utterance);
+      }
+
+      // Back to index button visibility
+      const backToIndexBtn = document.getElementById("backToIndex");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToIndexBtn.classList.add("visible");
+        } else {
+          backToIndexBtn.classList.remove("visible");
+        }
+      });
+
+      // Load voices when page loads
+      window.addEventListener("load", function () {
+        // Some browsers need a delay to load voices
+        setTimeout(() => {
+          if (speechSynthesis.getVoices().length === 0) {
+            speechSynthesis.addEventListener("voiceschanged", function () {
+              console.log("Voices loaded:", speechSynthesis.getVoices().length);
+            });
+          }
+        }, 100);
+      });
+
+      // Add keyboard shortcut for accessibility
+      document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && e.key === " ") {
+          e.preventDefault();
+          const focusedElement = document.activeElement;
+          if (focusedElement.onclick) {
+            focusedElement.click();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+chen
