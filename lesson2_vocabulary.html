@@ -18,6 +18,7 @@
         border-radius: 20px;
         padding: 30px;
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        margin-top: 20px; /* Thêm dòng này */
       }
       h1 {
         text-align: center;
@@ -215,6 +216,88 @@
         }
       }
 
+      .search-container {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        padding: 15px 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        max-width: 90vw;
+        width: auto;
+      }
+
+      .search-container.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .search-input {
+        border: 2px solid #667eea;
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.3s ease;
+        min-width: 200px;
+        background: white;
+      }
+
+      .search-input:focus {
+        border-color: #4a47a3;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+      }
+
+      .category-filter {
+        border: 2px solid #667eea;
+        border-radius: 20px;
+        padding: 8px 12px;
+        font-size: 14px;
+        outline: none;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+
+      .category-filter:focus {
+        border-color: #4a47a3;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+      }
+
+      .clear-search {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        padding: 8px 12px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .clear-search:hover {
+        background: #c0392b;
+      }
+
+      .vocab-card.hidden {
+        display: none;
+      }
+
+      .category.hidden {
+        display: none;
+      }
+
       /* Back to Top Button */
       .back-to-index {
         position: fixed;
@@ -342,6 +425,33 @@
           padding: 12px 20px;
           font-size: 0.9em;
         }
+
+        .search-container {
+          top: 10px;
+          padding: 10px 15px;
+          flex-direction: column;
+          gap: 8px;
+          width: 95vw;
+          max-width: none;
+        }
+
+        .search-input {
+          min-width: 100%;
+          font-size: 13px;
+          padding: 6px 12px;
+        }
+
+        .category-filter {
+          min-width: 100%;
+          font-size: 13px;
+          padding: 6px 10px;
+        }
+
+        .clear-search {
+          align-self: center;
+          padding: 6px 10px;
+          font-size: 11px;
+        }
       }
 
       /* Responsive styles for very small screens */
@@ -367,6 +477,11 @@
           padding: 10px 15px;
           font-size: 0.8em;
         }
+
+        .search-container {
+          top: 5px;
+          padding: 8px 10px;
+        }
       }
     </style>
   </head>
@@ -386,6 +501,26 @@
       <div class="audio-controls">
         <strong>🔊 Tính năng phát âm:</strong> Bấm vào 🔊 để nghe phát âm tiếng
         Đức
+      </div>
+
+      <div class="search-container" id="searchContainer">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="🔍 Tìm từ vựng..."
+        />
+        <select class="category-filter" id="categoryFilter">
+          <option value="">📂 Tất cả nhóm</option>
+          <option value="CỰC KỲ QUAN TRỌNG">🔴 Cực kỳ quan trọng</option>
+          <option value="QUAN TRỌNG">🟡 Quan trọng</option>
+          <option value="THỜI GIAN">🕒 Thời gian</option>
+          <option value="HỌC TẬP">🎓 Học tập</option>
+          <option value="ĐỊA ĐIỂM">🌟 Địa điểm</option>
+          <option value="NGƯỜI">👥 Người</option>
+          <option value="ĐỘNG TỪ">📝 Động từ</option>
+        </select>
+        <button class="clear-search" id="clearSearch">🗑️ Xóa</button>
       </div>
 
       <div class="category">
@@ -1383,6 +1518,99 @@
         }, 100);
       });
 
+      // Search functionality
+      const searchContainer = document.getElementById("searchContainer");
+      const searchInput = document.getElementById("searchInput");
+      const categoryFilter = document.getElementById("categoryFilter");
+      const clearSearchBtn = document.getElementById("clearSearch");
+
+      // Show search bar when scrolling
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+          searchContainer.classList.add("visible");
+        } else {
+          searchContainer.classList.remove("visible");
+        }
+      });
+
+      // Search function
+      function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const selectedCategory = categoryFilter.value;
+
+        const vocabCards = document.querySelectorAll(".vocab-card");
+        const categories = document.querySelectorAll(".category");
+
+        // Reset visibility
+        vocabCards.forEach((card) => card.classList.remove("hidden"));
+        categories.forEach((cat) => cat.classList.remove("hidden"));
+
+        if (!searchTerm && !selectedCategory) return;
+
+        categories.forEach((category) => {
+          const categoryTitle =
+            category.querySelector(".category-title").textContent;
+          const cards = category.querySelectorAll(".vocab-card");
+          let hasVisibleCards = false;
+
+          // Filter by category
+          if (selectedCategory && !categoryTitle.includes(selectedCategory)) {
+            category.classList.add("hidden");
+            return;
+          }
+
+          // Filter cards in this category
+          cards.forEach((card) => {
+            const germanWord = card
+              .querySelector(".german-word")
+              .textContent.toLowerCase();
+            const vietnamese = card
+              .querySelector(".vietnamese")
+              .textContent.toLowerCase();
+            const examples = Array.from(card.querySelectorAll(".example"))
+              .map((ex) => ex.textContent.toLowerCase())
+              .join(" ");
+
+            const matchesSearch =
+              !searchTerm ||
+              germanWord.includes(searchTerm) ||
+              vietnamese.includes(searchTerm) ||
+              examples.includes(searchTerm);
+
+            if (!matchesSearch) {
+              card.classList.add("hidden");
+            } else {
+              hasVisibleCards = true;
+            }
+          });
+
+          // Hide category if no visible cards
+          if (!hasVisibleCards) {
+            category.classList.add("hidden");
+          }
+        });
+      }
+
+      // Event listeners for search
+      searchInput.addEventListener("input", performSearch);
+      categoryFilter.addEventListener("change", performSearch);
+
+      // Clear search
+      clearSearchBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        categoryFilter.value = "";
+        performSearch();
+        searchInput.focus();
+      });
+
+      // Search shortcut (Ctrl + F)
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "f") {
+          e.preventDefault();
+          searchInput.focus();
+          searchContainer.classList.add("visible");
+        }
+      });
       // Add keyboard shortcut for accessibility
       document.addEventListener("keydown", function (e) {
         if (e.ctrlKey && e.key === " ") {
