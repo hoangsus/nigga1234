@@ -67,6 +67,214 @@
         margin-bottom: 10px;
       }
 
+      /* Phần banner chạy */
+      .banner-container {
+        width: 100%;
+        overflow: hidden;
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        border: 2px solid #007bff;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        padding: 15px 0;
+        position: relative;
+        box-shadow: 0 8px 25px rgba(0, 123, 255, 0.2);
+      }
+
+      .banner-content {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        animation: scrollBanner 20s linear infinite;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .banner-link {
+        color: white;
+        text-decoration: none;
+        padding: 8px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        margin: 0 20px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .banner-link:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+      }
+
+      @keyframes scrollBanner {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .banner-container:hover .banner-content {
+        animation-play-state: paused;
+      }
+
+      /* Alphabet Section Styles */
+      .alphabet-section {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 2px solid #2196f3;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+      }
+
+      .alphabet-section h3 {
+        color: #0d47a1;
+        margin-bottom: 20px;
+        font-size: 1.4em;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .alphabet-note {
+        background: rgba(255, 255, 255, 0.8);
+        border-left: 4px solid #2196f3;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .alphabet-note p {
+        margin: 0;
+        color: #0d47a1;
+        font-size: 0.95em;
+      }
+
+      .alphabet-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+        margin-bottom: 25px;
+      }
+
+      .alphabet-card {
+        background: white;
+        border: 2px solid #2196f3;
+        border-radius: 10px;
+        padding: 15px 10px;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        user-select: none;
+      }
+
+      .alphabet-card:active {
+        transform: translateY(-3px) scale(0.98);
+        box-shadow: 0 12px 25px rgba(33, 150, 243, 0.3);
+      }
+
+      .alphabet-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(33, 150, 243, 0.2);
+        border-color: #1976d2;
+      }
+
+      .alphabet-card .letter {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #0d47a1;
+        margin-bottom: 5px;
+      }
+
+      .alphabet-card .pronunciation {
+        font-size: 1em;
+        color: #d32f2f;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .alphabet-card .example {
+        font-size: 0.85em;
+        color: #616161;
+        font-style: italic;
+      }
+
+      .special-chars {
+        margin-top: 25px;
+      }
+
+      .special-chars h4 {
+        color: #0d47a1;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      .special-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+      }
+
+      .alphabet-card.special {
+        background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        border-color: #ff9800;
+      }
+
+      .alphabet-card.special:hover {
+        border-color: #f57c00;
+        box-shadow: 0 8px 20px rgba(255, 152, 0, 0.2);
+      }
+
+      .alphabet-card.special:active {
+        transform: translateY(-3px) scale(0.98);
+        box-shadow: 0 12px 25px rgba(255, 152, 0, 0.3);
+      }
+
+      .alphabet-card.special .letter {
+        color: #e65100;
+      }
+
+      /* Sound indicator */
+      .sound-indicator {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 12px;
+        color: #2196f3;
+        opacity: 0.7;
+      }
+
+      .alphabet-card.special .sound-indicator {
+        color: #ff9800;
+      }
+
+      .alphabet-card.playing {
+        animation: pulse 0.6s ease-in-out;
+        border-color: #4caf50;
+        background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
       /* Phần mẹo phát âm mới */
       .pronunciation-tips {
         background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
@@ -347,6 +555,19 @@
         .pronunciation-grid {
           grid-template-columns: 1fr;
         }
+
+        .alphabet-grid {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          gap: 10px;
+        }
+
+        .alphabet-card .letter {
+          font-size: 1.5em;
+        }
+
+        .special-grid {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
       }
 
       @media (max-width: 480px) {
@@ -375,6 +596,245 @@
           <strong>Mỗi buổi học bao gồm:</strong> Học từ vựng có phát âm + Trò
           chơi ôn tập thú vị
         </p>
+      </div>
+
+      <div class="banner-container">
+        <div class="banner-content">
+          <span>🌍 TÀI LIỆU BỔ SUNG:</span>
+          <a
+            href="https://www.dichthuatso1.com/ten-cac-nuoc-tren-the-gioi-bang-tieng-duc/"
+            target="_blank"
+            class="banner-link"
+          >
+            📚 Tên các nước trên thế giới bằng tiếng Đức - Tài liệu chi tiết
+          </a>
+          <span
+            >📖 Mở rộng vốn từ vựng địa lý và quốc gia để giao tiếp tốt
+            hơn!</span
+          >
+          <a
+            href="https://www.dichthuatso1.com/ten-cac-nuoc-tren-the-gioi-bang-tieng-duc/"
+            target="_blank"
+            class="banner-link"
+          >
+            🗺️ Học ngay tại đây
+          </a>
+          <span>✨ Hỗ trợ học tiếng Đức hiệu quả!</span>
+        </div>
+      </div>
+
+      <div class="banner-container">
+        <div class="banner-content">
+          <span>🔤 BẢNG CHỮ CÁI TIẾNG ĐỨC:</span>
+          <a href="#alphabet" class="banner-link" onclick="toggleAlphabet()">
+            📚 Xem bảng chữ cái với cách phát âm tiếng Việt
+          </a>
+          <span>🗣️ Học cách đọc đúng từng chữ cái trong tiếng Đức!</span>
+          <a href="#alphabet" class="banner-link" onclick="toggleAlphabet()">
+            🎯 Mở bảng chữ cái
+          </a>
+          <span>✨ Nền tảng quan trọng để phát âm chuẩn!</span>
+        </div>
+      </div>
+
+      <div class="alphabet-section" id="alphabetSection" style="display: none">
+        <h3>🔤 Bảng chữ cái tiếng Đức (Das Alphabet)</h3>
+        <div class="alphabet-note">
+          <p>
+            <strong>Lưu ý:</strong> Cách phát âm bên dưới được viết theo tiếng
+            Việt để dễ học.
+            <strong>Click vào từng chữ cái để nghe phát âm tiếng Đức!</strong>
+            🔊
+          </p>
+        </div>
+        <div class="alphabet-grid">
+          <div class="alphabet-card" onclick="speakLetter('A', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">A a</div>
+            <div class="pronunciation">ah</div>
+            <div class="example">Apfel</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('B', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">B b</div>
+            <div class="pronunciation">beh</div>
+            <div class="example">Banane</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('C', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">C c</div>
+            <div class="pronunciation">tseh</div>
+            <div class="example">Couch</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('D', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">D d</div>
+            <div class="pronunciation">deh</div>
+            <div class="example">Deutschland</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('E', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">E e</div>
+            <div class="pronunciation">eh</div>
+            <div class="example">Elefant</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('F', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">F f</div>
+            <div class="pronunciation">eff</div>
+            <div class="example">Fisch</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('G', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">G g</div>
+            <div class="pronunciation">geh</div>
+            <div class="example">Gitarre</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('H', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">H h</div>
+            <div class="pronunciation">hah</div>
+            <div class="example">Haus</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('I', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">I i</div>
+            <div class="pronunciation">ee</div>
+            <div class="example">Igel</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('J', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">J j</div>
+            <div class="pronunciation">yot</div>
+            <div class="example">Joghurt</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('K', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">K k</div>
+            <div class="pronunciation">kah</div>
+            <div class="example">Kaffee</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('L', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">L l</div>
+            <div class="pronunciation">ell</div>
+            <div class="example">Liebe</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('M', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">M m</div>
+            <div class="pronunciation">em</div>
+            <div class="example">Mann</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('N', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">N n</div>
+            <div class="pronunciation">en</div>
+            <div class="example">Nagel</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('O', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">O o</div>
+            <div class="pronunciation">oh</div>
+            <div class="example">Orange</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('P', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">P p</div>
+            <div class="pronunciation">peh</div>
+            <div class="example">Pinguin</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('Q', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">Q q</div>
+            <div class="pronunciation">ku</div>
+            <div class="example">Quiz</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('R', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">R r</div>
+            <div class="pronunciation">err</div>
+            <div class="example">Rot</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('S', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">S s</div>
+            <div class="pronunciation">ess</div>
+            <div class="example">Sonne</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('T', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">T t</div>
+            <div class="pronunciation">teh</div>
+            <div class="example">Tee</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('U', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">U u</div>
+            <div class="pronunciation">oo</div>
+            <div class="example">Uhr</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('V', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">V v</div>
+            <div class="pronunciation">fau</div>
+            <div class="example">Vogel</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('W', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">W w</div>
+            <div class="pronunciation">veh</div>
+            <div class="example">Wolke</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('X', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">X x</div>
+            <div class="pronunciation">iks</div>
+            <div class="example">Xylofon</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('Y', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">Y y</div>
+            <div class="pronunciation">üpsilon</div>
+            <div class="example">Yak</div>
+          </div>
+          <div class="alphabet-card" onclick="speakLetter('Z', this)">
+            <div class="sound-indicator">🔊</div>
+            <div class="letter">Z z</div>
+            <div class="pronunciation">tsett</div>
+            <div class="example">Zebra</div>
+          </div>
+        </div>
+
+        <div class="special-chars">
+          <h4>🔸 Ký tự đặc biệt trong tiếng Đức</h4>
+          <div class="special-grid">
+            <div class="alphabet-card special" onclick="speakLetter('Ä', this)">
+              <div class="sound-indicator">🔊</div>
+              <div class="letter">Ä ä</div>
+              <div class="pronunciation">ae (ây)</div>
+              <div class="example">Bär</div>
+            </div>
+            <div class="alphabet-card special" onclick="speakLetter('Ö', this)">
+              <div class="sound-indicator">🔊</div>
+              <div class="letter">Ö ö</div>
+              <div class="pronunciation">oe (êy)</div>
+              <div class="example">Öl</div>
+            </div>
+            <div class="alphabet-card special" onclick="speakLetter('Ü', this)">
+              <div class="sound-indicator">🔊</div>
+              <div class="letter">Ü ü</div>
+              <div class="pronunciation">ue (êyu)</div>
+              <div class="example">Fünf</div>
+            </div>
+            <div class="alphabet-card special" onclick="speakLetter('ß', this)">
+              <div class="sound-indicator">🔊</div>
+              <div class="letter">ß</div>
+              <div class="pronunciation">ess-tset</div>
+              <div class="example">Fuß</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="pronunciation-tips">
@@ -488,7 +948,7 @@
       const lessons = [
         {
           day: 1,
-          title: "Giới thiệu bản thân(30/4 - 1/7)",
+          title: "Giới thiệu bản thân (30/4 - 1/7)",
           description:
             "Học cách chào hỏi, giới thiệu tên, quốc tịch và ngôn ngữ. 72 từ vựng cơ bản nhất để bắt đầu.",
           words: 72,
@@ -503,6 +963,25 @@
           words: 38,
           difficulty: "basic",
           difficultyText: "Cơ bản",
+        },
+        {
+          day: 3,
+          title: "Hoạt động học tập & giao tiếp nâng cao (3/7)",
+          description:
+            "Học từ vựng về bài học, lớp học, động từ cơ bản và cách diễn đạt ý kiến. Tập trung vào giao tiếp thực tế trong lớp học.",
+          words: 35,
+          difficulty: "medium",
+          difficultyText: "Trung bình",
+        },
+        {
+          day: 5,
+          title: "Ôn tập tuần 1 - Tổng kết 4 buổi đầu (5/7)",
+          description:
+            "Ôn tập và củng cố toàn bộ 145 từ vựng đã học từ buổi 1-3. Trò chơi tương tác thú vị để kiểm tra và ghi nhớ lâu dài.",
+          words: 0,
+          difficulty: "review",
+          difficultyText: "Ôn tập",
+          isReviewOnly: true,
         },
       ];
 
@@ -545,16 +1024,18 @@
                         }</span>
                     </div>
                     <div class="lesson-buttons">
-                        <a href="lesson${
-                          lesson.day
-                        }_vocabulary.html" class="btn btn-study">
+                        ${
+                          lesson.isReviewOnly
+                            ? `<a href="lesson${lesson.day}_game.html" class="btn btn-game" style="width: 100%;">
+                            🎮 Trò chơi ôn tập
+                          </a>`
+                            : `<a href="lesson${lesson.day}_vocabulary.html" class="btn btn-study">
                             📚 Học từ vựng
-                        </a>
-                        <a href="lesson${
-                          lesson.day
-                        }_game.html" class="btn btn-game">
+                          </a>
+                          <a href="lesson${lesson.day}_game.html" class="btn btn-game">
                             🎮 Trò chơi
-                        </a>
+                          </a>`
+                        }
                     </div>
                 `;
 
@@ -603,6 +1084,99 @@
 
       // Initialize the page
       renderLessons();
+
+      // Toggle alphabet section
+      function toggleAlphabet() {
+        const section = document.getElementById("alphabetSection");
+        if (section.style.display === "none") {
+          section.style.display = "block";
+          section.scrollIntoView({ behavior: "smooth" });
+        } else {
+          section.style.display = "none";
+        }
+      }
+
+      // Text-to-Speech functionality
+      let currentSpeech = null;
+
+      function speakLetter(letter, element) {
+        // Stop any currently playing speech
+        if (currentSpeech) {
+          speechSynthesis.cancel();
+        }
+
+        // Check if Speech Synthesis is supported
+        if (!("speechSynthesis" in window)) {
+          alert(
+            "Trình duyệt của bạn không hỗ trợ Text-to-Speech. Vui lòng thử trên Chrome, Firefox hoặc Safari."
+          );
+          return;
+        }
+
+        // Add visual feedback
+        element.classList.add("playing");
+
+        // Create speech utterance
+        currentSpeech = new SpeechSynthesisUtterance(letter);
+
+        // Set German voice
+        const voices = speechSynthesis.getVoices();
+        const germanVoice = voices.find(
+          (voice) => voice.lang.includes("de") || voice.name.includes("German")
+        );
+
+        if (germanVoice) {
+          currentSpeech.voice = germanVoice;
+        }
+
+        // Speech settings
+        currentSpeech.lang = "de-DE";
+        currentSpeech.rate = 0.7;
+        currentSpeech.pitch = 1;
+        currentSpeech.volume = 1;
+
+        // Remove visual feedback when speech ends
+        currentSpeech.onend = function () {
+          element.classList.remove("playing");
+          currentSpeech = null;
+        };
+
+        currentSpeech.onerror = function (event) {
+          console.log("Speech error:", event.error);
+          element.classList.remove("playing");
+          currentSpeech = null;
+        };
+
+        // Speak the letter
+        speechSynthesis.speak(currentSpeech);
+
+        // Add haptic feedback for mobile devices
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
+      }
+
+      // Load voices when they become available
+      speechSynthesis.onvoiceschanged = function () {
+        // Voices are now loaded
+      };
+
+      // For mobile touch events
+      document.addEventListener("DOMContentLoaded", function () {
+        const alphabetCards = document.querySelectorAll(".alphabet-card");
+
+        alphabetCards.forEach((card) => {
+          // Add touch event listener for better mobile responsiveness
+          card.addEventListener(
+            "touchstart",
+            function (e) {
+              e.preventDefault();
+              this.click();
+            },
+            { passive: false }
+          );
+        });
+      });
     </script>
   </body>
 </html>
