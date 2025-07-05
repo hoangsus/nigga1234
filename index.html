@@ -109,6 +109,167 @@
         box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
       }
 
+      /* Banner cầu vồng cho bảng chữ cái */
+      .banner-container.rainbow {
+        background: linear-gradient(
+          135deg,
+          #ff0000 0%,
+          #ff7f00 14.28%,
+          #ffff00 28.56%,
+          #00ff00 42.84%,
+          #0000ff 57.12%,
+          #4b0082 71.4%,
+          #9400d3 85.68%,
+          #ff0000 100%
+        );
+        border: 3px solid transparent;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        animation: rainbowShimmer 3s ease-in-out infinite;
+      }
+
+      .banner-container.rainbow::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+          45deg,
+          #ff0000,
+          #ff7f00,
+          #ffff00,
+          #00ff00,
+          #0000ff,
+          #4b0082,
+          #9400d3,
+          #ff0000,
+          #ff7f00,
+          #ffff00,
+          #00ff00,
+          #0000ff,
+          #4b0082,
+          #9400d3
+        );
+        background-size: 400% 400%;
+        animation: rainbowBorder 4s ease infinite;
+        z-index: -1;
+        border-radius: 18px;
+      }
+
+      @keyframes rainbowShimmer {
+        0% {
+          background: linear-gradient(
+            135deg,
+            #ff0000 0%,
+            #ff7f00 14.28%,
+            #ffff00 28.56%,
+            #00ff00 42.84%,
+            #0000ff 57.12%,
+            #4b0082 71.4%,
+            #9400d3 85.68%,
+            #ff0000 100%
+          );
+        }
+        16.66% {
+          background: linear-gradient(
+            135deg,
+            #ff7f00 0%,
+            #ffff00 14.28%,
+            #00ff00 28.56%,
+            #0000ff 42.84%,
+            #4b0082 57.12%,
+            #9400d3 71.4%,
+            #ff0000 85.68%,
+            #ff7f00 100%
+          );
+        }
+        33.33% {
+          background: linear-gradient(
+            135deg,
+            #ffff00 0%,
+            #00ff00 14.28%,
+            #0000ff 28.56%,
+            #4b0082 42.84%,
+            #9400d3 57.12%,
+            #ff0000 71.4%,
+            #ff7f00 85.68%,
+            #ffff00 100%
+          );
+        }
+        50% {
+          background: linear-gradient(
+            135deg,
+            #00ff00 0%,
+            #0000ff 14.28%,
+            #4b0082 28.56%,
+            #9400d3 42.84%,
+            #ff0000 57.12%,
+            #ff7f00 71.4%,
+            #ffff00 85.68%,
+            #00ff00 100%
+          );
+        }
+        66.66% {
+          background: linear-gradient(
+            135deg,
+            #0000ff 0%,
+            #4b0082 14.28%,
+            #9400d3 28.56%,
+            #ff0000 42.84%,
+            #ff7f00 57.12%,
+            #ffff00 71.4%,
+            #00ff00 85.68%,
+            #0000ff 100%
+          );
+        }
+        83.33% {
+          background: linear-gradient(
+            135deg,
+            #4b0082 0%,
+            #9400d3 14.28%,
+            #ff0000 28.56%,
+            #ff7f00 42.84%,
+            #ffff00 57.12%,
+            #00ff00 71.4%,
+            #0000ff 85.68%,
+            #4b0082 100%
+          );
+        }
+        100% {
+          background: linear-gradient(
+            135deg,
+            #9400d3 0%,
+            #ff0000 14.28%,
+            #ff7f00 28.56%,
+            #ffff00 42.84%,
+            #00ff00 57.12%,
+            #0000ff 71.4%,
+            #4b0082 85.68%,
+            #9400d3 100%
+          );
+        }
+      }
+
+      .banner-container.rainbow .banner-content {
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .banner-container.rainbow .banner-link {
+        background: rgba(255, 255, 255, 0.25);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+      }
+
+      .banner-container.rainbow .banner-link:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
       @keyframes scrollBanner {
         0% {
           transform: translateX(100%);
@@ -124,16 +285,69 @@
 
       /* Alphabet Section Styles */
       .alphabet-section {
-        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-        border: 2px solid #2196f3;
+        background: linear-gradient(
+          135deg,
+          #ff6b6b 0%,
+          #ffa726 15%,
+          #ffee58 30%,
+          #66bb6a 45%,
+          #42a5f5 60%,
+          #ab47bc 75%,
+          #ef5350 100%
+        );
+        border: 3px solid transparent;
         border-radius: 15px;
         padding: 25px;
         margin-bottom: 30px;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .alphabet-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          #ff0000,
+          #ff7f00,
+          #ffff00,
+          #00ff00,
+          #0000ff,
+          #4b0082,
+          #9400d3,
+          #ff0000,
+          #ff7f00,
+          #ffff00,
+          #00ff00,
+          #0000ff,
+          #4b0082,
+          #9400d3
+        );
+        background-size: 400% 400%;
+        animation: rainbowBorder 3s ease infinite;
+        z-index: -1;
+        border-radius: 15px;
+      }
+
+      @keyframes rainbowBorder {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       .alphabet-section h3 {
-        color: #0d47a1;
+        color: #ffffff;
         margin-bottom: 20px;
         font-size: 1.4em;
         text-align: center;
@@ -141,36 +355,74 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
       }
 
       .alphabet-note {
-        background: rgba(255, 255, 255, 0.8);
-        border-left: 4px solid #2196f3;
+        background: rgba(255, 255, 255, 0.95);
+        border-left: 4px solid #ff6b6b;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
       .alphabet-note p {
         margin: 0;
-        color: #0d47a1;
+        color: #333;
         font-size: 0.95em;
+        font-weight: 600;
       }
 
       /* Game Controls */
       .game-controls {
-        background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-        border: 2px solid #ff9800;
+        background: linear-gradient(
+          135deg,
+          #ff9800 0%,
+          #ff5722 25%,
+          #e91e63 50%,
+          #9c27b0 75%,
+          #673ab7 100%
+        );
+        border: 3px solid transparent;
         border-radius: 15px;
         padding: 20px;
         margin-bottom: 20px;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .game-controls::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          #ff0000,
+          #ff7f00,
+          #ffff00,
+          #00ff00,
+          #0000ff,
+          #4b0082,
+          #9400d3
+        );
+        background-size: 400% 400%;
+        animation: rainbowBorder 4s ease infinite;
+        z-index: -1;
+        border-radius: 15px;
       }
 
       .game-controls h4 {
-        color: #e65100;
+        color: #ffffff;
         margin-bottom: 15px;
         font-size: 1.2em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
       }
 
       .game-mode-buttons {
@@ -183,23 +435,28 @@
 
       .game-mode-btn {
         padding: 10px 20px;
-        border: 2px solid #ff9800;
+        border: 2px solid #ffffff;
         border-radius: 25px;
-        background: white;
-        color: #e65100;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
         cursor: pointer;
         transition: all 0.3s ease;
         font-weight: bold;
+        text-shadow: none;
       }
 
       .game-mode-btn.active {
-        background: #ff9800;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
         color: white;
+        border-color: #ffffff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
       }
 
       .game-mode-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+        color: white;
       }
 
       .pronunciation-game {
@@ -430,53 +687,106 @@
       }
 
       .alphabet-card {
-        background: white;
-        border: 2px solid #2196f3;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border: 3px solid #ff6b6b;
+        border-radius: 15px;
         padding: 15px 10px;
         text-align: center;
         transition: all 0.3s ease;
         cursor: pointer;
         position: relative;
         user-select: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .alphabet-card:nth-child(7n + 1) {
+        border-color: #ff0000;
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+      }
+
+      .alphabet-card:nth-child(7n + 2) {
+        border-color: #ff7f00;
+        box-shadow: 0 4px 15px rgba(255, 127, 0, 0.3);
+      }
+
+      .alphabet-card:nth-child(7n + 3) {
+        border-color: #ffff00;
+        box-shadow: 0 4px 15px rgba(255, 255, 0, 0.3);
+      }
+
+      .alphabet-card:nth-child(7n + 4) {
+        border-color: #00ff00;
+        box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+      }
+
+      .alphabet-card:nth-child(7n + 5) {
+        border-color: #0000ff;
+        box-shadow: 0 4px 15px rgba(0, 0, 255, 0.3);
+      }
+
+      .alphabet-card:nth-child(7n + 6) {
+        border-color: #4b0082;
+        box-shadow: 0 4px 15px rgba(75, 0, 130, 0.3);
+      }
+
+      .alphabet-card:nth-child(7n + 7) {
+        border-color: #9400d3;
+        box-shadow: 0 4px 15px rgba(148, 0, 211, 0.3);
       }
 
       .alphabet-card:active {
         transform: translateY(-3px) scale(0.98);
-        box-shadow: 0 12px 25px rgba(33, 150, 243, 0.3);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
       }
 
       .alphabet-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(33, 150, 243, 0.2);
-        border-color: #1976d2;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
       }
 
       .alphabet-card.practiced {
-        border-color: #4caf50;
         background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+        border-color: #4caf50 !important;
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4) !important;
       }
 
       .alphabet-card.current-challenge {
-        border-color: #9c27b0;
         background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-        animation: glow 2s ease-in-out infinite alternate;
+        border-color: #9c27b0 !important;
+        animation: rainbowGlow 2s ease-in-out infinite alternate;
+        box-shadow: 0 0 20px rgba(156, 39, 176, 0.5) !important;
       }
 
-      @keyframes glow {
-        from {
-          box-shadow: 0 0 20px rgba(156, 39, 176, 0.5);
+      @keyframes rainbowGlow {
+        0% {
+          box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
         }
-        to {
-          box-shadow: 0 0 30px rgba(156, 39, 176, 0.8);
+        16.66% {
+          box-shadow: 0 0 20px rgba(255, 127, 0, 0.5);
+        }
+        33.33% {
+          box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        66.66% {
+          box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+        }
+        83.33% {
+          box-shadow: 0 0 20px rgba(75, 0, 130, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 20px rgba(148, 0, 211, 0.5);
         }
       }
 
       .alphabet-card .letter {
         font-size: 1.8em;
         font-weight: bold;
-        color: #0d47a1;
+        color: #333;
         margin-bottom: 5px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
       }
 
       .alphabet-card.practiced .letter {
@@ -505,10 +815,12 @@
       }
 
       .special-chars h4 {
-        color: #0d47a1;
+        color: #ffffff;
         margin-bottom: 15px;
         font-size: 1.2em;
         text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
       }
 
       .special-grid {
@@ -519,17 +831,38 @@
 
       .alphabet-card.special {
         background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-        border-color: #ff9800;
+        border: 3px solid #ff9800;
+        box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+      }
+
+      .alphabet-card.special:nth-child(4n + 1) {
+        border-color: #ff0000;
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+      }
+
+      .alphabet-card.special:nth-child(4n + 2) {
+        border-color: #ff7f00;
+        box-shadow: 0 4px 15px rgba(255, 127, 0, 0.3);
+      }
+
+      .alphabet-card.special:nth-child(4n + 3) {
+        border-color: #00ff00;
+        box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+      }
+
+      .alphabet-card.special:nth-child(4n + 4) {
+        border-color: #0000ff;
+        box-shadow: 0 4px 15px rgba(0, 0, 255, 0.3);
       }
 
       .alphabet-card.special:hover {
-        border-color: #f57c00;
-        box-shadow: 0 8px 20px rgba(255, 152, 0, 0.2);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
       }
 
       .alphabet-card.special:active {
         transform: translateY(-3px) scale(0.98);
-        box-shadow: 0 12px 25px rgba(255, 152, 0, 0.3);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
       }
 
       .alphabet-card.special .letter {
@@ -537,8 +870,9 @@
       }
 
       .alphabet-card.special.practiced {
-        border-color: #4caf50;
+        border-color: #4caf50 !important;
         background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4) !important;
       }
 
       .alphabet-card.special.practiced .letter {
@@ -551,8 +885,9 @@
         top: 5px;
         right: 5px;
         font-size: 12px;
-        color: #2196f3;
-        opacity: 0.7;
+        color: #ff6b6b;
+        opacity: 0.8;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
       }
 
       .alphabet-card.special .sound-indicator {
@@ -560,20 +895,38 @@
       }
 
       .alphabet-card.playing {
-        animation: pulse 0.6s ease-in-out;
-        border-color: #4caf50;
+        animation: rainbowPulse 0.6s ease-in-out;
         background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
       }
 
-      @keyframes pulse {
+      @keyframes rainbowPulse {
         0% {
           transform: scale(1);
+          box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        16.66% {
+          transform: scale(1.02);
+          box-shadow: 0 0 20px rgba(255, 127, 0, 0.5);
+        }
+        33.33% {
+          transform: scale(1.04);
+          box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
         }
         50% {
           transform: scale(1.05);
+          box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        66.66% {
+          transform: scale(1.04);
+          box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+        }
+        83.33% {
+          transform: scale(1.02);
+          box-shadow: 0 0 20px rgba(75, 0, 130, 0.5);
         }
         100% {
           transform: scale(1);
+          box-shadow: 0 0 20px rgba(148, 0, 211, 0.5);
         }
       }
 
@@ -1106,7 +1459,7 @@
         </div>
       </div>
 
-      <div class="banner-container">
+      <div class="banner-container rainbow">
         <div class="banner-content">
           <a href="#alphabet" class="banner-link" onclick="toggleAlphabet()">
             📚 Xem bảng chữ cái với cách phát âm tiếng Việt
