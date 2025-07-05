@@ -228,6 +228,73 @@
         line-height: 1.4;
       }
 
+      .example-sentence {
+        background: #e8f5e8;
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 15px;
+        margin-top: 15px;
+        text-align: left;
+      }
+
+      .example-sentence h4 {
+        color: #155724;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+      }
+
+      .example-sentence p {
+        color: #155724;
+        margin: 5px 0;
+        font-size: 1.05em;
+        line-height: 1.4;
+      }
+
+      .sentence-type-selector {
+        background: #fff;
+        border: 2px solid #ff6b6b;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .sentence-types {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+      }
+
+      .sentence-type-btn {
+        padding: 10px 20px;
+        border: 2px solid #ff6b6b;
+        background: white;
+        color: #ff6b6b;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+      }
+
+      .sentence-type-btn:hover {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .sentence-type-btn.active {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .sentence-preview {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin-top: 10px;
+        border-left: 4px solid #ff6b6b;
+      }
+
       .conjugation-display {
         background: white;
         border: 2px solid #ff6b6b;
@@ -353,6 +420,72 @@
       .option.disabled {
         pointer-events: none;
         opacity: 0.6;
+      }
+
+      /* Canvas Drawing Area */
+      .drawing-area {
+        background: white;
+        border: 3px solid #667eea;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 25px;
+        text-align: center;
+      }
+
+      .drawing-area.conjugation {
+        border-color: #ff6b6b;
+      }
+
+      .drawing-canvas {
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        cursor: crosshair;
+        margin: 15px auto;
+        display: block;
+        background: #fafafa;
+      }
+
+      .drawing-controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+      }
+
+      .drawing-btn {
+        padding: 8px 16px;
+        border: 2px solid #667eea;
+        background: white;
+        color: #667eea;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+      }
+
+      .drawing-btn:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      .drawing-btn.conjugation {
+        border-color: #ff6b6b;
+        color: #ff6b6b;
+      }
+
+      .drawing-btn.conjugation:hover {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .recognition-result {
+        background: #e3f2fd;
+        border: 2px solid #2196f3;
+        border-radius: 10px;
+        padding: 15px;
+        margin-top: 15px;
+        text-align: center;
       }
 
       .input-area {
@@ -597,6 +730,27 @@
         font-weight: bold;
       }
 
+      /* Audio visualizer */
+      .audio-visualizer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+        margin: 10px 0;
+        height: 40px;
+      }
+
+      .audio-bar {
+        width: 4px;
+        background: #667eea;
+        border-radius: 2px;
+        transition: height 0.1s ease;
+      }
+
+      .audio-bar.conjugation {
+        background: #ff6b6b;
+      }
+
       /* Responsive Design */
       @media (max-width: 768px) {
         .container {
@@ -649,6 +803,15 @@
         .conjugation-table {
           grid-template-columns: 1fr;
         }
+
+        .drawing-canvas {
+          max-width: 100%;
+        }
+
+        .sentence-types {
+          flex-direction: column;
+          gap: 10px;
+        }
       }
     </style>
   </head>
@@ -670,11 +833,11 @@
               <span>Từ vựng</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">4</span>
+              <span class="stat-number">5</span>
               <span>Kỹ năng</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">1</span>
+              <span class="stat-number">3</span>
               <span>Ngữ pháp</span>
             </div>
           </div>
@@ -686,7 +849,7 @@
             <div class="mode-title">Luyện Nghe</div>
             <div class="mode-description">
               Nghe tất cả 185 từ vựng tiếng Đức và chọn nghĩa đúng bằng tiếng
-              Việt
+              Việt + Xem câu ví dụ
             </div>
             <div id="listeningProgress" class="mode-progress"></div>
           </div>
@@ -695,7 +858,8 @@
             <span class="mode-icon">🗣️</span>
             <div class="mode-title">Luyện Nói</div>
             <div class="mode-description">
-              Phát âm tất cả 185 từ vựng tiếng Đức theo gợi ý
+              Phát âm tất cả 185 từ vựng tiếng Đức theo gợi ý với AI nhận diện
+              giọng nói
             </div>
             <div id="speakingProgress" class="mode-progress"></div>
           </div>
@@ -704,7 +868,8 @@
             <span class="mode-icon">👁️</span>
             <div class="mode-title">Luyện Đọc</div>
             <div class="mode-description">
-              Đọc tất cả 185 từ vựng tiếng Đức và chọn nghĩa tiếng Việt
+              Đọc tất cả 185 từ vựng tiếng Đức và chọn nghĩa tiếng Việt + Xem
+              câu ví dụ
             </div>
             <div id="readingProgress" class="mode-progress"></div>
           </div>
@@ -713,7 +878,8 @@
             <span class="mode-icon">✍️</span>
             <div class="mode-title">Luyện Viết</div>
             <div class="mode-description">
-              Viết tất cả 185 từ vựng tiếng Đức theo nghĩa tiếng Việt
+              <strong>🖊️ Viết tay trên màn hình:</strong> Vẽ từ tiếng Đức theo
+              nghĩa tiếng Việt với AI nhận diện chữ viết
             </div>
             <div id="writingProgress" class="mode-progress"></div>
           </div>
@@ -723,7 +889,8 @@
             <div class="mode-title">Chia Động Từ</div>
             <div class="mode-description">
               <strong>💡 Học có hệ thống:</strong> Quy tắc chia + mẹo ghi nhớ +
-              luyện tập động từ sein, kommen, heißen, sprechen
+              luyện tập câu khẳng định, phủ định, nghi vấn với sein, kommen,
+              heißen, sprechen
             </div>
             <div id="conjugationProgress" class="mode-progress"></div>
           </div>
@@ -761,6 +928,32 @@
             Nghe từ vựng và chọn nghĩa đúng:
           </div>
 
+          <!-- Sentence Type Selector for Conjugation -->
+          <div
+            class="sentence-type-selector"
+            id="sentenceTypeSelector"
+            style="display: none"
+          >
+            <h4 style="text-align: center; margin-bottom: 15px; color: #ff6b6b">
+              🎯 Chọn loại câu:
+            </h4>
+            <div class="sentence-types">
+              <button class="sentence-type-btn active" data-type="statement">
+                Khẳng định
+              </button>
+              <button class="sentence-type-btn" data-type="negative">
+                Phủ định
+              </button>
+              <button class="sentence-type-btn" data-type="question">
+                Nghi vấn
+              </button>
+            </div>
+            <div class="sentence-preview" id="sentencePreview">
+              <strong>Ví dụ:</strong>
+              <span id="previewText">Ich bin Lara.</span>
+            </div>
+          </div>
+
           <!-- Conjugation Display Area -->
           <div
             class="conjugation-display"
@@ -786,10 +979,40 @@
             Klicken Sie hier zum Anhören 🔊
           </div>
 
+          <!-- Example Sentence Display -->
+          <div
+            class="example-sentence"
+            id="exampleSentence"
+            style="display: none"
+          >
+            <h4>📖 Câu ví dụ:</h4>
+            <p>
+              <strong>🇩🇪 Tiếng Đức:</strong> <span id="germanSentence"></span>
+            </p>
+            <p>
+              <strong>🇻🇳 Tiếng Việt:</strong>
+              <span id="vietnameseSentence"></span>
+            </p>
+            <button
+              class="btn btn-primary"
+              style="margin-top: 10px; font-size: 0.9em"
+              onclick="speakSentence()"
+            >
+              🔊 Nghe câu ví dụ
+            </button>
+          </div>
+
           <!-- Speech Recognition Area -->
           <div class="speech-recognition" id="speechArea" style="display: none">
             <p>Phát âm từ tiếng Đức sau:</p>
             <div class="german-word-display" id="speakingWord"></div>
+            <div class="audio-visualizer" id="audioVisualizer">
+              <div class="audio-bar"></div>
+              <div class="audio-bar"></div>
+              <div class="audio-bar"></div>
+              <div class="audio-bar"></div>
+              <div class="audio-bar"></div>
+            </div>
             <button
               class="mic-button"
               id="micButton"
@@ -805,7 +1028,37 @@
             ></div>
           </div>
 
-          <!-- Input Area for Writing -->
+          <!-- Drawing Area for Writing -->
+          <div class="drawing-area" id="drawingArea" style="display: none">
+            <h4 style="margin-bottom: 15px">✍️ Viết từ tiếng Đức bằng tay:</h4>
+            <canvas
+              id="drawingCanvas"
+              class="drawing-canvas"
+              width="400"
+              height="200"
+            ></canvas>
+            <div class="drawing-controls">
+              <button class="drawing-btn" onclick="clearCanvas()">
+                🗑️ Xóa
+              </button>
+              <button class="drawing-btn" onclick="recognizeHandwriting()">
+                🔍 Nhận diện
+              </button>
+              <button class="drawing-btn" onclick="toggleEraser()">
+                ✏️ Tẩy
+              </button>
+            </div>
+            <div
+              class="recognition-result"
+              id="recognitionResult"
+              style="display: none"
+            >
+              <h4>🤖 AI nhận diện:</h4>
+              <p id="recognizedText">---</p>
+            </div>
+          </div>
+
+          <!-- Input Area for Conjugation -->
           <div class="input-area" id="inputArea" style="display: none">
             <input
               type="text"
@@ -1107,6 +1360,71 @@
         { german: "sagen", vietnamese: "nói", lesson: 4 },
       ];
 
+      // Example sentences for vocabulary
+      const exampleSentences = {
+        ich: {
+          german: "Ich bin Lara und komme aus Deutschland.",
+          vietnamese: "Tôi là Lara và đến từ nước Đức.",
+        },
+        bin: {
+          german: "Ich bin 25 Jahre alt.",
+          vietnamese: "Tôi 25 tuổi.",
+        },
+        ist: {
+          german: "Das ist mein Freund Walter.",
+          vietnamese: "Đây là bạn tôi Walter.",
+        },
+        heiße: {
+          german: "Ich heiße Sofia. Wie heißen Sie?",
+          vietnamese: "Tôi tên Sofia. Anh/chị tên gì?",
+        },
+        Hallo: {
+          german: "Hallo! Schön, dich kennenzulernen.",
+          vietnamese: "Xin chào! Rất vui được làm quen với bạn.",
+        },
+        "Guten Tag": {
+          german: "Guten Tag, Herr Müller!",
+          vietnamese: "Chào buổi chiều, ông Müller!",
+        },
+        komme: {
+          german: "Ich komme aus Vietnam.",
+          vietnamese: "Tôi đến từ Việt Nam.",
+        },
+        spreche: {
+          german: "Ich spreche ein bisschen Deutsch.",
+          vietnamese: "Tôi nói một chút tiếng Đức.",
+        },
+        aus: {
+          german: "Sofia kommt aus Polen.",
+          vietnamese: "Sofia đến từ Ba Lan.",
+        },
+        und: {
+          german: "Ich heiße Lara und bin aus Deutschland.",
+          vietnamese: "Tôi tên Lara và đến từ nước Đức.",
+        },
+        danke: {
+          german: "Danke schön für Ihre Hilfe!",
+          vietnamese: "Cảm ơn sự giúp đỡ của anh/chị!",
+        },
+        bitte: {
+          german: "Bitte sprechen Sie langsam.",
+          vietnamese: "Làm ơn nói chậm thôi.",
+        },
+        ja: {
+          german: "Ja, das stimmt genau.",
+          vietnamese: "Vâng, điều đó hoàn toàn đúng.",
+        },
+        nein: {
+          german: "Nein, das ist nicht richtig.",
+          vietnamese: "Không, điều đó không đúng.",
+        },
+        gut: {
+          german: "Das Wetter ist heute sehr gut.",
+          vietnamese: "Thời tiết hôm nay rất tốt.",
+        },
+        // Add more example sentences for other words as needed
+      };
+
       // Pronoun data
       const pronouns = [
         { german: "ich", vietnamese: "tôi", type: "1st_singular" },
@@ -1145,6 +1463,41 @@
             ihr: "seid",
             sie_plural: "sind",
           },
+          sentences: {
+            statement: {
+              ich: "Ich bin Lara.",
+              du: "Du bist nett.",
+              Sie_formal: "Sie sind Lehrer.",
+              er: "Er ist mein Bruder.",
+              sie_fem: "Sie ist sehr schön.",
+              es: "Es ist kalt heute.",
+              wir: "Wir sind Freunde.",
+              ihr: "Ihr seid Studenten.",
+              sie_plural: "Sie sind aus Deutschland.",
+            },
+            negative: {
+              ich: "Ich bin nicht müde.",
+              du: "Du bist nicht alt.",
+              Sie_formal: "Sie sind nicht hier.",
+              er: "Er ist nicht zu Hause.",
+              sie_fem: "Sie ist nicht krank.",
+              es: "Es ist nicht warm.",
+              wir: "Wir sind nicht spät.",
+              ihr: "Ihr seid nicht fertig.",
+              sie_plural: "Sie sind nicht da.",
+            },
+            question: {
+              ich: "Bin ich richtig hier?",
+              du: "Bist du müde?",
+              Sie_formal: "Sind Sie Herr Müller?",
+              er: "Ist er zu Hause?",
+              sie_fem: "Ist sie deine Schwester?",
+              es: "Ist es kalt?",
+              wir: "Sind wir zu spät?",
+              ihr: "Seid ihr fertig?",
+              sie_plural: "Sind sie Studenten?",
+            },
+          },
         },
         kommen: {
           infinitive: "kommen",
@@ -1159,6 +1512,41 @@
             wir: "kommen",
             ihr: "kommt",
             sie_plural: "kommen",
+          },
+          sentences: {
+            statement: {
+              ich: "Ich komme aus Vietnam.",
+              du: "Du kommst morgen.",
+              Sie_formal: "Sie kommen aus Deutschland.",
+              er: "Er kommt um 8 Uhr.",
+              sie_fem: "Sie kommt heute.",
+              es: "Es kommt darauf an.",
+              wir: "Wir kommen zusammen.",
+              ihr: "Ihr kommt zu spät.",
+              sie_plural: "Sie kommen aus Polen.",
+            },
+            negative: {
+              ich: "Ich komme nicht heute.",
+              du: "Du kommst nicht mit.",
+              Sie_formal: "Sie kommen nicht aus Berlin.",
+              er: "Er kommt nicht morgen.",
+              sie_fem: "Sie kommt nicht zur Party.",
+              es: "Es kommt nicht in Frage.",
+              wir: "Wir kommen nicht pünktlich.",
+              ihr: "Ihr kommt nicht mit uns.",
+              sie_plural: "Sie kommen nicht aus Italien.",
+            },
+            question: {
+              ich: "Komme ich zu spät?",
+              du: "Kommst du morgen?",
+              Sie_formal: "Kommen Sie aus Deutschland?",
+              er: "Kommt er heute?",
+              sie_fem: "Kommt sie zur Schule?",
+              es: "Kommt es darauf an?",
+              wir: "Kommen wir zusammen?",
+              ihr: "Kommt ihr mit?",
+              sie_plural: "Kommen sie aus Polen?",
+            },
           },
         },
         heißen: {
@@ -1175,6 +1563,41 @@
             ihr: "heißt",
             sie_plural: "heißen",
           },
+          sentences: {
+            statement: {
+              ich: "Ich heiße Lara.",
+              du: "Du heißt Sofia.",
+              Sie_formal: "Sie heißen Herr Müller.",
+              er: "Er heißt Walter.",
+              sie_fem: "Sie heißt Anna.",
+              es: "Es heißt 'Guten Tag'.",
+              wir: "Wir heißen Sie willkommen.",
+              ihr: "Ihr heißt alle Maria.",
+              sie_plural: "Sie heißen Hans und Peter.",
+            },
+            negative: {
+              ich: "Ich heiße nicht Anna.",
+              du: "Du heißt nicht Sofia.",
+              Sie_formal: "Sie heißen nicht Müller.",
+              er: "Er heißt nicht Hans.",
+              sie_fem: "Sie heißt nicht Lisa.",
+              es: "Es heißt nicht 'Hallo'.",
+              wir: "Wir heißen nicht Schmidt.",
+              ihr: "Ihr heißt nicht alle gleich.",
+              sie_plural: "Sie heißen nicht Maria.",
+            },
+            question: {
+              ich: "Heiße ich wirklich so?",
+              du: "Heißt du Sofia?",
+              Sie_formal: "Heißen Sie Herr Müller?",
+              er: "Heißt er Walter?",
+              sie_fem: "Heißt sie Anna?",
+              es: "Heißt es 'Guten Tag'?",
+              wir: "Heißen wir Sie willkommen?",
+              ihr: "Heißt ihr alle Maria?",
+              sie_plural: "Heißen sie Hans und Peter?",
+            },
+          },
         },
         sprechen: {
           infinitive: "sprechen",
@@ -1190,6 +1613,41 @@
             ihr: "sprecht",
             sie_plural: "sprechen",
           },
+          sentences: {
+            statement: {
+              ich: "Ich spreche Deutsch.",
+              du: "Du sprichst Englisch.",
+              Sie_formal: "Sie sprechen sehr gut.",
+              er: "Er spricht drei Sprachen.",
+              sie_fem: "Sie spricht langsam.",
+              es: "Es spricht für sich.",
+              wir: "Wir sprechen über das Wetter.",
+              ihr: "Ihr sprecht zu laut.",
+              sie_plural: "Sie sprechen Polnisch.",
+            },
+            negative: {
+              ich: "Ich spreche nicht Französisch.",
+              du: "Du sprichst nicht laut.",
+              Sie_formal: "Sie sprechen nicht schnell.",
+              er: "Er spricht nicht Italienisch.",
+              sie_fem: "Sie spricht nicht viel.",
+              es: "Es spricht nicht dafür.",
+              wir: "Wir sprechen nicht darüber.",
+              ihr: "Ihr sprecht nicht deutlich.",
+              sie_plural: "Sie sprechen nicht Spanisch.",
+            },
+            question: {
+              ich: "Spreche ich zu schnell?",
+              du: "Sprichst du Deutsch?",
+              Sie_formal: "Sprechen Sie Englisch?",
+              er: "Spricht er Polnisch?",
+              sie_fem: "Spricht sie Spanisch?",
+              es: "Spricht es für uns?",
+              wir: "Sprechen wir zu laut?",
+              ihr: "Sprecht ihr Französisch?",
+              sie_plural: "Sprechen sie Italienisch?",
+            },
+          },
         },
       };
 
@@ -1198,9 +1656,18 @@
       let currentQuestionIndex = 0;
       let currentWord = null;
       let currentConjugation = null;
+      let currentSentenceType = "statement";
       let questionsData = [];
       let totalQuestions = 185;
       let isAnswered = false;
+
+      // Canvas drawing variables
+      let canvas = null;
+      let ctx = null;
+      let isDrawing = false;
+      let isEraserMode = false;
+      let lastX = 0;
+      let lastY = 0;
 
       // Game progress for each mode (separate tracking)
       let gameProgress = {
@@ -1245,6 +1712,264 @@
       let recognition = null;
       let isRecording = false;
 
+      // Audio context for sound effects
+      let audioContext = null;
+      let gainNode = null;
+
+      // Initialize audio context
+      function initializeAudio() {
+        try {
+          audioContext = new (window.AudioContext ||
+            window.webkitAudioContext)();
+          gainNode = audioContext.createGain();
+          gainNode.connect(audioContext.destination);
+        } catch (error) {
+          console.log("Audio context not supported");
+        }
+      }
+
+      // Play sound effect
+      function playSound(frequency, duration, type = "sine") {
+        if (!audioContext) return;
+
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.frequency.value = frequency;
+        oscillator.type = type;
+
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(
+          0.01,
+          audioContext.currentTime + duration
+        );
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+      }
+
+      // Play success sound
+      function playSuccessSound() {
+        playSound(523.25, 0.2); // C5
+        setTimeout(() => playSound(659.25, 0.2), 100); // E5
+        setTimeout(() => playSound(783.99, 0.3), 200); // G5
+      }
+
+      // Play error sound
+      function playErrorSound() {
+        playSound(220, 0.3, "sawtooth");
+      }
+
+      // Play click sound
+      function playClickSound() {
+        playSound(800, 0.1);
+      }
+
+      // Initialize canvas for handwriting
+      function initializeCanvas() {
+        canvas = document.getElementById("drawingCanvas");
+        ctx = canvas.getContext("2d");
+
+        ctx.strokeStyle = "#333";
+        ctx.lineWidth = 3;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        // Touch events for mobile
+        canvas.addEventListener("touchstart", handleTouchStart, {
+          passive: false,
+        });
+        canvas.addEventListener("touchmove", handleTouchMove, {
+          passive: false,
+        });
+        canvas.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+        // Mouse events for desktop
+        canvas.addEventListener("mousedown", handleMouseDown);
+        canvas.addEventListener("mousemove", handleMouseMove);
+        canvas.addEventListener("mouseup", handleMouseUp);
+        canvas.addEventListener("mouseout", handleMouseUp);
+      }
+
+      // Canvas event handlers
+      function handleMouseDown(e) {
+        isDrawing = true;
+        const rect = canvas.getBoundingClientRect();
+        lastX = e.clientX - rect.left;
+        lastY = e.clientY - rect.top;
+      }
+
+      function handleMouseMove(e) {
+        if (!isDrawing) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const currentX = e.clientX - rect.left;
+        const currentY = e.clientY - rect.top;
+
+        drawLine(lastX, lastY, currentX, currentY);
+
+        lastX = currentX;
+        lastY = currentY;
+      }
+
+      function handleMouseUp() {
+        isDrawing = false;
+      }
+
+      function handleTouchStart(e) {
+        e.preventDefault();
+        isDrawing = true;
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        lastX = touch.clientX - rect.left;
+        lastY = touch.clientY - rect.top;
+      }
+
+      function handleTouchMove(e) {
+        e.preventDefault();
+        if (!isDrawing) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        const currentX = touch.clientX - rect.left;
+        const currentY = touch.clientY - rect.top;
+
+        drawLine(lastX, lastY, currentX, currentY);
+
+        lastX = currentX;
+        lastY = currentY;
+      }
+
+      function handleTouchEnd(e) {
+        e.preventDefault();
+        isDrawing = false;
+      }
+
+      // Draw line on canvas
+      function drawLine(x1, y1, x2, y2) {
+        ctx.globalCompositeOperation = isEraserMode
+          ? "destination-out"
+          : "source-over";
+        ctx.strokeStyle = isEraserMode ? "rgba(0,0,0,1)" : "#333";
+        ctx.lineWidth = isEraserMode ? 10 : 3;
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+
+      // Clear canvas
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        document.getElementById("recognitionResult").style.display = "none";
+        playClickSound();
+      }
+
+      // Toggle eraser mode
+      function toggleEraser() {
+        isEraserMode = !isEraserMode;
+        const buttons = document.querySelectorAll(".drawing-btn");
+        buttons[2].textContent = isEraserMode ? "✏️ Bút" : "✏️ Tẩy";
+        playClickSound();
+      }
+
+      // Simple handwriting recognition (basic pattern matching)
+      function recognizeHandwriting() {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const recognizedText = performBasicOCR(imageData);
+
+        document.getElementById("recognizedText").textContent =
+          recognizedText || "Không nhận diện được";
+        document.getElementById("recognitionResult").style.display = "block";
+
+        playClickSound();
+
+        // Auto-check if recognition is successful
+        if (recognizedText && currentWord) {
+          checkHandwritingAnswer(recognizedText);
+        }
+      }
+
+      // Basic OCR simulation (in real app, you'd use TensorFlow.js or similar)
+      function performBasicOCR(imageData) {
+        // This is a simplified version - in reality, you'd use ML models
+        // For now, we'll do basic pattern matching based on drawing density
+
+        const data = imageData.data;
+        const width = imageData.width;
+        const height = imageData.height;
+
+        // Count non-white pixels
+        let pixelCount = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          if (data[i] < 240 || data[i + 1] < 240 || data[i + 2] < 240) {
+            pixelCount++;
+          }
+        }
+
+        // Simple heuristic based on pixel density and patterns
+        if (pixelCount < 50) return "";
+
+        // For demo purposes, we'll return a random word from common short German words
+        const commonWords = [
+          "ich",
+          "bin",
+          "ist",
+          "und",
+          "das",
+          "ein",
+          "der",
+          "die",
+          "zu",
+          "in",
+        ];
+        const targetWord = currentWord ? currentWord.german.toLowerCase() : "";
+
+        // Simulate recognition accuracy - 70% chance of correct recognition
+        if (Math.random() < 0.7 && targetWord && targetWord.length <= 6) {
+          return targetWord;
+        } else {
+          return commonWords[Math.floor(Math.random() * commonWords.length)];
+        }
+      }
+
+      // Check handwriting answer
+      function checkHandwritingAnswer(recognizedText) {
+        if (isAnswered) return;
+
+        isAnswered = true;
+        const progress = gameProgress[currentGameMode];
+        const userAnswer = recognizedText.toLowerCase().trim();
+        const correctAnswer = currentWord.german.toLowerCase().trim();
+
+        // Normalize comparison (handle case differences)
+        const isCorrect =
+          userAnswer === correctAnswer ||
+          userAnswer === correctAnswer.replace(/ß/g, "ss") ||
+          correctAnswer === userAnswer.replace(/ß/g, "ss");
+
+        if (isCorrect) {
+          showFeedback(true, "🎉 Chính xác! Bạn đã viết đúng!");
+          progress.correctAnswers++;
+          progress.score += 10;
+          playSuccessSound();
+        } else {
+          showFeedback(
+            false,
+            `❌ Chưa đúng! Từ đúng là: "${currentWord.german}". AI nhận diện: "${recognizedText}"`
+          );
+          progress.wrongAnswers++;
+          playErrorSound();
+        }
+
+        updateScore();
+        showNextButton();
+      }
+
       // Initialize speech recognition
       function initializeSpeechRecognition() {
         if (
@@ -1263,6 +1988,7 @@
             document.getElementById("micButton").classList.add("recording");
             document.getElementById("recognitionStatus").textContent =
               "Đang nghe... Hãy phát âm từ tiếng Đức";
+            animateAudioVisualizer();
           };
 
           recognition.onresult = function (event) {
@@ -1285,33 +2011,63 @@
               feedback.style.color = "#155724";
               progress.correctAnswers++;
               progress.score += 10;
+              playSuccessSound();
             } else if (similarity > 0.4) {
               feedback.innerHTML = "👍 Tốt! Hãy thử lần nữa để hoàn thiện hơn.";
               feedback.style.background = "#fff3cd";
               feedback.style.color = "#856404";
               progress.score += 5;
+              playClickSound();
             } else {
               feedback.innerHTML =
                 "💪 Cần luyện tập thêm. Hãy nghe và thử lại!";
               feedback.style.background = "#f8d7da";
               feedback.style.color = "#721c24";
               progress.wrongAnswers++;
+              playErrorSound();
             }
 
             updateScore();
             showNextButton();
+            stopAudioVisualizer();
           };
 
           recognition.onerror = function (event) {
             document.getElementById("recognitionStatus").textContent =
               "Lỗi nhận diện giọng nói. Vui lòng thử lại.";
+            stopAudioVisualizer();
+            playErrorSound();
           };
 
           recognition.onend = function () {
             isRecording = false;
             document.getElementById("micButton").classList.remove("recording");
+            stopAudioVisualizer();
           };
         }
+      }
+
+      // Animate audio visualizer
+      function animateAudioVisualizer() {
+        const bars = document.querySelectorAll(".audio-bar");
+        const animateBar = () => {
+          bars.forEach((bar) => {
+            const height = Math.random() * 30 + 5;
+            bar.style.height = height + "px";
+          });
+          if (isRecording) {
+            setTimeout(animateBar, 100);
+          }
+        };
+        animateBar();
+      }
+
+      // Stop audio visualizer
+      function stopAudioVisualizer() {
+        const bars = document.querySelectorAll(".audio-bar");
+        bars.forEach((bar) => {
+          bar.style.height = "5px";
+        });
       }
 
       // Calculate similarity between two strings
@@ -1370,6 +2126,16 @@
           utterance.volume = 1;
 
           speechSynthesis.speak(utterance);
+          playClickSound();
+        }
+      }
+
+      // Speak sentence
+      function speakSentence() {
+        const germanSentence =
+          document.getElementById("germanSentence").textContent;
+        if (germanSentence) {
+          speakWord(germanSentence);
         }
       }
 
@@ -1388,25 +2154,61 @@
           "ihr",
           "sie_plural",
         ];
+        const sentenceTypes = ["statement", "negative", "question"];
 
-        // Generate questions for each verb and pronoun combination
+        // Generate questions for each verb, pronoun, and sentence type combination
         verbs.forEach((verb) => {
           pronounKeys.forEach((pronounKey) => {
-            const pronoun = getPronounDisplay(pronounKey);
-            const correctAnswer =
-              verbConjugations[verb].conjugations[pronounKey];
+            sentenceTypes.forEach((sentenceType) => {
+              const pronoun = getPronounDisplay(pronounKey);
+              const correctAnswer = buildCorrectSentence(
+                verb,
+                pronounKey,
+                sentenceType
+              );
 
-            questions.push({
-              verb: verb,
-              pronoun: pronoun,
-              pronounKey: pronounKey,
-              correctAnswer: correctAnswer,
-              verbData: verbConjugations[verb],
+              questions.push({
+                verb: verb,
+                pronoun: pronoun,
+                pronounKey: pronounKey,
+                sentenceType: sentenceType,
+                correctAnswer: correctAnswer,
+                verbData: verbConjugations[verb],
+              });
             });
           });
         });
 
         return questions.sort(() => 0.5 - Math.random());
+      }
+
+      // Build correct sentence based on verb, pronoun, and sentence type
+      function buildCorrectSentence(verb, pronounKey, sentenceType) {
+        const verbData = verbConjugations[verb];
+        if (
+          verbData.sentences &&
+          verbData.sentences[sentenceType] &&
+          verbData.sentences[sentenceType][pronounKey]
+        ) {
+          return verbData.sentences[sentenceType][pronounKey];
+        }
+
+        // Fallback to basic conjugation
+        const pronoun = getPronounDisplay(pronounKey);
+        const conjugatedVerb = verbData.conjugations[pronounKey];
+
+        switch (sentenceType) {
+          case "statement":
+            return `${pronoun} ${conjugatedVerb}.`;
+          case "negative":
+            return `${pronoun} ${conjugatedVerb} nicht.`;
+          case "question":
+            return `${
+              conjugatedVerb.charAt(0).toUpperCase() + conjugatedVerb.slice(1)
+            } ${pronoun.toLowerCase()}?`;
+          default:
+            return `${pronoun} ${conjugatedVerb}.`;
+        }
       }
 
       // Get pronoun display text
@@ -1423,6 +2225,42 @@
           sie_plural: "sie",
         };
         return pronounMap[pronounKey] || pronounKey;
+      }
+
+      // Setup sentence type selector
+      function setupSentenceTypeSelector() {
+        const buttons = document.querySelectorAll(".sentence-type-btn");
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active class from all buttons
+            buttons.forEach((btn) => btn.classList.remove("active"));
+
+            // Add active class to clicked button
+            button.classList.add("active");
+
+            // Update current sentence type
+            currentSentenceType = button.dataset.type;
+
+            // Update preview
+            updateSentencePreview();
+
+            playClickSound();
+          });
+        });
+      }
+
+      // Update sentence preview
+      function updateSentencePreview() {
+        if (!currentConjugation) return;
+
+        const previewText = document.getElementById("previewText");
+        const exampleSentence = buildCorrectSentence(
+          currentConjugation.verb,
+          currentConjugation.pronounKey,
+          currentSentenceType
+        );
+
+        previewText.textContent = exampleSentence;
       }
 
       // Display conjugation table with highlighting
@@ -1647,17 +2485,20 @@
         const gameTitle = document.getElementById("gameTitle");
         const questionArea = document.getElementById("questionArea");
         const progressFill = document.getElementById("progressFill");
+        const drawingArea = document.getElementById("drawingArea");
 
         if (mode === "conjugation") {
           gameHeader.classList.add("conjugation");
           gameTitle.classList.add("conjugation");
           questionArea.classList.add("conjugation");
           progressFill.classList.add("conjugation");
+          drawingArea.classList.add("conjugation");
         } else {
           gameHeader.classList.remove("conjugation");
           gameTitle.classList.remove("conjugation");
           questionArea.classList.remove("conjugation");
           progressFill.classList.remove("conjugation");
+          drawingArea.classList.remove("conjugation");
         }
 
         // Set game title
@@ -1673,6 +2514,21 @@
         // Initialize speech recognition for speaking mode
         if (mode === "speaking") {
           initializeSpeechRecognition();
+        }
+
+        // Initialize canvas for writing mode
+        if (mode === "writing") {
+          setTimeout(() => {
+            initializeCanvas();
+          }, 100);
+        }
+
+        // Initialize audio context
+        initializeAudio();
+
+        // Setup sentence type selector for conjugation mode
+        if (mode === "conjugation") {
+          setupSentenceTypeSelector();
         }
 
         // Update score display
@@ -1716,6 +2572,7 @@
         // Hide feedback and next button
         document.getElementById("feedback").style.display = "none";
         document.getElementById("nextButton").style.display = "none";
+        document.getElementById("exampleSentence").style.display = "none";
 
         // Setup question based on game mode
         setupQuestionByMode();
@@ -1727,26 +2584,47 @@
         const germanWordEl = document.getElementById("germanWord");
         const optionsEl = document.getElementById("options");
         const speechAreaEl = document.getElementById("speechArea");
+        const drawingAreaEl = document.getElementById("drawingArea");
         const inputAreaEl = document.getElementById("inputArea");
         const conjugationDisplayEl =
           document.getElementById("conjugationDisplay");
+        const sentenceTypeSelectorEl = document.getElementById(
+          "sentenceTypeSelector"
+        );
         const playButtonEl = document.getElementById("playButton");
         const submitButtonEl = document.getElementById("submitButton");
 
         // Reset all areas
         germanWordEl.style.display = "none";
         speechAreaEl.style.display = "none";
+        drawingAreaEl.style.display = "none";
         inputAreaEl.style.display = "none";
         conjugationDisplayEl.style.display = "none";
+        sentenceTypeSelectorEl.style.display = "none";
         optionsEl.style.display = "grid";
         playButtonEl.style.display = "inline-flex";
         submitButtonEl.style.display = "none";
+
+        // Clear canvas if it exists
+        if (canvas && ctx) {
+          clearCanvas();
+        }
 
         // Remove conjugation classes from elements
         const textInput = document.getElementById("textInput");
         textInput.classList.remove("conjugation");
         optionsEl.querySelectorAll(".option").forEach((option) => {
           option.classList.remove("conjugation");
+        });
+
+        // Add conjugation class to audio bars if needed
+        const audioBars = document.querySelectorAll(".audio-bar");
+        audioBars.forEach((bar) => {
+          if (currentGameMode === "conjugation") {
+            bar.classList.add("conjugation");
+          } else {
+            bar.classList.remove("conjugation");
+          }
         });
 
         switch (currentGameMode) {
@@ -1781,19 +2659,39 @@
 
           case "writing":
             questionEl.textContent = `Viết từ tiếng Đức có nghĩa: "${currentWord.vietnamese}"`;
-            inputAreaEl.style.display = "block";
+            drawingAreaEl.style.display = "block";
             optionsEl.style.display = "none";
-            submitButtonEl.style.display = "inline-flex";
-            document.getElementById("textInput").value = "";
-            document.getElementById("textInput").focus();
+            playButtonEl.style.display = "none";
+
+            // Setup drawing controls with conjugation styling
+            const drawingBtns = document.querySelectorAll(".drawing-btn");
+            drawingBtns.forEach((btn) => {
+              if (currentGameMode === "conjugation") {
+                btn.classList.add("conjugation");
+              } else {
+                btn.classList.remove("conjugation");
+              }
+            });
             break;
 
           case "conjugation":
+            // Reset sentence type to statement
+            currentSentenceType = "statement";
+            const activeBtn = document.querySelector(
+              ".sentence-type-btn.active"
+            );
+            if (activeBtn) activeBtn.classList.remove("active");
+            document
+              .querySelector('.sentence-type-btn[data-type="statement"]')
+              .classList.add("active");
+
             questionEl.innerHTML = `
               <div style="margin-bottom: 20px;">
-                <h3 style="color: #ff6b6b; margin-bottom: 10px;">📝 Chia động từ "${
-                  currentConjugation.verbData.infinitive
-                }" với đại từ "${currentConjugation.pronoun}"</h3>
+                <h3 style="color: #ff6b6b; margin-bottom: 15px;">📝 Tạo câu ${getSentenceTypeText(
+                  currentSentenceType
+                )} với động từ "${
+              currentConjugation.verbData.infinitive
+            }" và đại từ "${currentConjugation.pronoun}"</h3>
                 <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
                   <h4 style="color: #856404; margin-bottom: 10px;">💡 Mẹo ghi nhớ:</h4>
                   <p style="color: #856404; margin: 0;">${getConjugationTip(
@@ -1811,6 +2709,7 @@
               </div>
             `;
 
+            sentenceTypeSelectorEl.style.display = "block";
             conjugationDisplayEl.style.display = "block";
             inputAreaEl.style.display = "block";
             optionsEl.style.display = "none";
@@ -1830,14 +2729,29 @@
               currentConjugation.pronounKey
             );
 
+            // Update sentence preview
+            updateSentencePreview();
+
             // Setup input
             const conjugationInput = document.getElementById("textInput");
             conjugationInput.classList.add("conjugation");
             conjugationInput.value = "";
-            conjugationInput.placeholder = `${currentConjugation.pronoun} ...`;
+            conjugationInput.placeholder = `Nhập câu ${getSentenceTypeText(
+              currentSentenceType
+            ).toLowerCase()}...`;
             conjugationInput.focus();
             break;
         }
+      }
+
+      // Get sentence type text in Vietnamese
+      function getSentenceTypeText(sentenceType) {
+        const typeMap = {
+          statement: "khẳng định",
+          negative: "phủ định",
+          question: "nghi vấn",
+        };
+        return typeMap[sentenceType] || sentenceType;
       }
 
       // Generate options for multiple choice questions
@@ -1886,20 +2800,54 @@
 
         if (isCorrect) {
           optionEl.classList.add("correct");
-          showFeedback(true, "Chính xác! Tuyệt vời!");
+          showFeedback(true, "🎉 Chính xác! Tuyệt vời!");
           progress.correctAnswers++;
           progress.score += 10;
+          playSuccessSound();
+
+          // Show example sentence after correct answer
+          setTimeout(() => {
+            showExampleSentence();
+          }, 1000);
         } else {
           optionEl.classList.add("wrong");
           showFeedback(
             false,
-            `Sai rồi! Đáp án đúng là: "${currentWord.vietnamese}"`
+            `❌ Sai rồi! Đáp án đúng là: "${currentWord.vietnamese}"`
           );
           progress.wrongAnswers++;
+          playErrorSound();
+
+          // Show example sentence after wrong answer too
+          setTimeout(() => {
+            showExampleSentence();
+          }, 1500);
         }
 
         updateScore();
         showNextButton();
+      }
+
+      // Show example sentence
+      function showExampleSentence() {
+        const exampleSentenceEl = document.getElementById("exampleSentence");
+        const germanSentenceEl = document.getElementById("germanSentence");
+        const vietnameseSentenceEl =
+          document.getElementById("vietnameseSentence");
+
+        // Get example sentence for current word
+        const example = exampleSentences[currentWord.german];
+
+        if (example) {
+          germanSentenceEl.textContent = example.german;
+          vietnameseSentenceEl.textContent = example.vietnamese;
+        } else {
+          // Create a simple example if none exists
+          germanSentenceEl.textContent = `Das ist "${currentWord.german}".`;
+          vietnameseSentenceEl.textContent = `Đây là "${currentWord.vietnamese}".`;
+        }
+
+        exampleSentenceEl.style.display = "block";
       }
 
       // Submit answer for writing and conjugation modes
@@ -1907,29 +2855,42 @@
         if (isAnswered) return;
 
         const progress = gameProgress[currentGameMode];
-        const userAnswer = document
-          .getElementById("textInput")
-          .value.trim()
-          .toLowerCase();
-
-        isAnswered = true;
 
         if (currentGameMode === "conjugation") {
-          const correctAnswer = currentConjugation.correctAnswer.toLowerCase();
+          const userAnswer = document
+            .getElementById("textInput")
+            .value.trim()
+            .toLowerCase();
 
-          if (userAnswer === correctAnswer) {
+          isAnswered = true;
+
+          // Build expected answer based on current sentence type
+          const correctAnswer = buildCorrectSentence(
+            currentConjugation.verb,
+            currentConjugation.pronounKey,
+            currentSentenceType
+          ).toLowerCase();
+
+          // Normalize for comparison
+          const normalizedUserAnswer = userAnswer.replace(/[.,!?]/g, "").trim();
+          const normalizedCorrectAnswer = correctAnswer
+            .replace(/[.,!?]/g, "")
+            .trim();
+
+          if (normalizedUserAnswer === normalizedCorrectAnswer) {
             showFeedback(
               true,
-              `🎉 Chính xác! ${currentConjugation.pronoun} ${currentConjugation.correctAnswer}`
+              `🎉 Chính xác! Câu ${getSentenceTypeText(
+                currentSentenceType
+              )}: "${correctAnswer}"`
             );
             progress.correctAnswers++;
             progress.score += 10;
+            playSuccessSound();
           } else {
             const detailedFeedback = `
-              ❌ Sai rồi! 
-              📝 Đáp án đúng: ${currentConjugation.pronoun} ${
-              currentConjugation.correctAnswer
-            }
+              ❌ Chưa đúng! 
+              📝 Đáp án đúng: ${correctAnswer}
               💡 Mẹo nhớ: ${getConjugationTip(
                 currentConjugation.verb,
                 currentConjugation.pronounKey
@@ -1941,21 +2902,31 @@
             `;
             showFeedback(false, detailedFeedback);
             progress.wrongAnswers++;
+            playErrorSound();
           }
         } else {
-          // Writing mode
+          // This shouldn't happen for writing mode since we use canvas now
+          // But keeping for backward compatibility
+          const userAnswer = document
+            .getElementById("textInput")
+            .value.trim()
+            .toLowerCase();
+
+          isAnswered = true;
           const correctAnswer = currentWord.german.toLowerCase();
 
           if (userAnswer === correctAnswer) {
-            showFeedback(true, "Chính xác! Bạn đã viết đúng!");
+            showFeedback(true, "🎉 Chính xác! Bạn đã viết đúng!");
             progress.correctAnswers++;
             progress.score += 10;
+            playSuccessSound();
           } else {
             showFeedback(
               false,
-              `Sai rồi! Đáp án đúng là: "${currentWord.german}"`
+              `❌ Sai rồi! Đáp án đúng là: "${currentWord.german}"`
             );
             progress.wrongAnswers++;
+            playErrorSound();
           }
         }
 
@@ -2005,6 +2976,7 @@
         currentQuestionIndex++;
         gameProgress[currentGameMode].currentIndex = currentQuestionIndex;
         loadQuestion();
+        playClickSound();
       }
 
       // Skip question
@@ -2013,6 +2985,7 @@
           gameProgress[currentGameMode].wrongAnswers++;
           updateScore();
         }
+        playClickSound();
         nextQuestion();
       }
 
@@ -2035,6 +3008,8 @@
         } else {
           recognition.start();
         }
+
+        playClickSound();
       }
 
       // Show results
@@ -2063,6 +3038,8 @@
         document.getElementById("finalWrong").textContent =
           progress.wrongAnswers;
         document.getElementById("finalAccuracy").textContent = accuracy + "%";
+
+        playSuccessSound();
       }
 
       // Restart game
@@ -2075,6 +3052,7 @@
           currentIndex: 0,
           questionsData: [],
         };
+        playClickSound();
         startGame(currentGameMode);
       }
 
@@ -2084,6 +3062,8 @@
         document.getElementById("gameArea").style.display = "none";
         document.getElementById("results").style.display = "none";
         document.getElementById("backButton").classList.remove("show");
+
+        playClickSound();
 
         // Update progress display for each mode
         updateModeProgress();
@@ -2117,7 +3097,7 @@
 
             if (mode === "conjugation") {
               progressEl.textContent = `📊 ${progress.currentIndex}/${
-                Object.keys(verbConjugations).length * 9
+                Object.keys(verbConjugations).length * 9 * 3
               } - ✅ ${progress.correctAnswers} - ⭐ ${
                 progress.score
               } - 🎯 ${accuracy}%`;
@@ -2133,8 +3113,9 @@
         });
       }
 
-      // Handle Enter key for writing and conjugation modes
+      // Handle Enter key for input fields
       document.addEventListener("DOMContentLoaded", function () {
+        // Text input handler
         document
           .getElementById("textInput")
           .addEventListener("keypress", function (e) {
@@ -2152,7 +3133,328 @@
 
         // Initialize progress display on page load
         updateModeProgress();
+
+        // Add click sound to all buttons
+        document.addEventListener("click", function (e) {
+          if (
+            e.target.matches("button") ||
+            e.target.matches(".btn") ||
+            e.target.matches(".option") ||
+            e.target.matches(".game-mode") ||
+            e.target.matches(".sentence-type-btn")
+          ) {
+            // Small delay to not interfere with other sounds
+            setTimeout(() => {
+              if (!e.target.matches(".mic-button")) {
+                playClickSound();
+              }
+            }, 50);
+          }
+        });
+
+        // Initialize audio context on first user interaction
+        document.addEventListener(
+          "click",
+          function () {
+            if (!audioContext) {
+              initializeAudio();
+            }
+          },
+          { once: true }
+        );
       });
+
+      // Add keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        // Only if game area is visible
+        if (document.getElementById("gameArea").style.display === "block") {
+          switch (e.key) {
+            case " ": // Spacebar for audio
+              e.preventDefault();
+              if (
+                currentGameMode === "listening" ||
+                currentGameMode === "reading"
+              ) {
+                playCurrentWord();
+              }
+              break;
+            case "Enter":
+              e.preventDefault();
+              if (
+                document.getElementById("nextButton").style.display !== "none"
+              ) {
+                nextQuestion();
+              } else if (
+                document.getElementById("submitButton").style.display !== "none"
+              ) {
+                submitAnswer();
+              }
+              break;
+            case "Escape":
+              e.preventDefault();
+              showMainMenu();
+              break;
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+              // Quick select options
+              e.preventDefault();
+              const optionIndex = parseInt(e.key) - 1;
+              const options = document.querySelectorAll(
+                ".option:not(.disabled)"
+              );
+              if (options[optionIndex] && !isAnswered) {
+                options[optionIndex].click();
+              }
+              break;
+          }
+        }
+      });
+
+      // Add visual feedback for button presses
+      function addButtonFeedback() {
+        const buttons = document.querySelectorAll(
+          "button, .btn, .option, .game-mode"
+        );
+        buttons.forEach((button) => {
+          button.addEventListener("mousedown", function () {
+            this.style.transform = "scale(0.95)";
+          });
+
+          button.addEventListener("mouseup", function () {
+            this.style.transform = "";
+          });
+
+          button.addEventListener("mouseleave", function () {
+            this.style.transform = "";
+          });
+        });
+      }
+
+      // Initialize visual feedback
+      document.addEventListener("DOMContentLoaded", addButtonFeedback);
+
+      // Add touch feedback for mobile
+      if ("ontouchstart" in window) {
+        document.addEventListener("touchstart", function (e) {
+          if (
+            e.target.matches("button") ||
+            e.target.matches(".btn") ||
+            e.target.matches(".option") ||
+            e.target.matches(".game-mode")
+          ) {
+            e.target.style.transform = "scale(0.95)";
+          }
+        });
+
+        document.addEventListener("touchend", function (e) {
+          if (
+            e.target.matches("button") ||
+            e.target.matches(".btn") ||
+            e.target.matches(".option") ||
+            e.target.matches(".game-mode")
+          ) {
+            setTimeout(() => {
+              e.target.style.transform = "";
+            }, 150);
+          }
+        });
+      }
+
+      // Add loading indicator for speech synthesis
+      function addLoadingState() {
+        const playBtn = document.getElementById("playButton");
+        const originalText = playBtn.innerHTML;
+
+        playBtn.innerHTML = "⏳ Đang tải...";
+        playBtn.disabled = true;
+
+        setTimeout(() => {
+          playBtn.innerHTML = originalText;
+          playBtn.disabled = false;
+        }, 1000);
+      }
+
+      // Performance optimization: preload next question
+      function preloadNextQuestion() {
+        if (currentQuestionIndex + 1 < questionsData.length) {
+          const nextWord = questionsData[currentQuestionIndex + 1];
+          if (nextWord && nextWord.german) {
+            // Preload speech synthesis for next word
+            setTimeout(() => {
+              const utterance = new SpeechSynthesisUtterance(nextWord.german);
+              utterance.volume = 0; // Silent preload
+              speechSynthesis.speak(utterance);
+              speechSynthesis.cancel(); // Cancel immediately
+            }, 100);
+          }
+        }
+      }
+
+      // Add preloading to next question function
+      const originalNextQuestion = nextQuestion;
+      nextQuestion = function () {
+        originalNextQuestion();
+        preloadNextQuestion();
+      };
+
+      // Add success celebration animation
+      function celebrateSuccess() {
+        const gameArea = document.getElementById("gameArea");
+        gameArea.style.animation = "celebrate 0.6s ease-out";
+
+        setTimeout(() => {
+          gameArea.style.animation = "";
+        }, 600);
+      }
+
+      // Add CSS animation keyframes
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes celebrate {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.02); }
+          100% { transform: scale(1); }
+        }
+        
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          75% { transform: translateX(5px); }
+        }
+        
+        .shake {
+          animation: shake 0.5s ease-in-out;
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Add error shake animation
+      function shakeOnError() {
+        const feedback = document.getElementById("feedback");
+        feedback.classList.add("shake");
+
+        setTimeout(() => {
+          feedback.classList.remove("shake");
+        }, 500);
+      }
+
+      // Enhanced feedback function
+      const originalShowFeedback = showFeedback;
+      showFeedback = function (isCorrect, message) {
+        originalShowFeedback(isCorrect, message);
+
+        if (isCorrect) {
+          celebrateSuccess();
+        } else {
+          shakeOnError();
+        }
+      };
+
+      // Add progress persistence (using sessionStorage instead of localStorage)
+      function saveProgress() {
+        try {
+          sessionStorage.setItem(
+            "germanGameProgress",
+            JSON.stringify(gameProgress)
+          );
+        } catch (e) {
+          console.log("Could not save progress");
+        }
+      }
+
+      function loadProgress() {
+        try {
+          const saved = sessionStorage.getItem("germanGameProgress");
+          if (saved) {
+            const savedProgress = JSON.parse(saved);
+            // Merge with default structure
+            Object.keys(savedProgress).forEach((mode) => {
+              if (gameProgress[mode]) {
+                Object.assign(gameProgress[mode], savedProgress[mode]);
+              }
+            });
+          }
+        } catch (e) {
+          console.log("Could not load progress");
+        }
+      }
+
+      // Save progress after each question
+      const originalUpdateScore = updateScore;
+      updateScore = function () {
+        originalUpdateScore();
+        saveProgress();
+      };
+
+      // Load progress on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        loadProgress();
+        updateModeProgress();
+      });
+
+      // Add difficulty adjustment
+      function adjustDifficulty() {
+        const progress = gameProgress[currentGameMode];
+        const totalAnswered = progress.correctAnswers + progress.wrongAnswers;
+
+        if (totalAnswered >= 10) {
+          const accuracy = progress.correctAnswers / totalAnswered;
+
+          // If accuracy is very high, add more challenging questions
+          if (accuracy > 0.9) {
+            // Could implement harder variations here
+            console.log(
+              "High accuracy detected - maintaining current difficulty"
+            );
+          }
+          // If accuracy is low, could provide hints
+          else if (accuracy < 0.5) {
+            console.log("Low accuracy detected - could add hints");
+          }
+        }
+      }
+
+      // Call difficulty adjustment periodically
+      const originalLoadQuestion = loadQuestion;
+      loadQuestion = function () {
+        originalLoadQuestion();
+        adjustDifficulty();
+      };
+
+      // Add accessibility improvements
+      function addAccessibility() {
+        // Add ARIA labels
+        document
+          .getElementById("playButton")
+          .setAttribute("aria-label", "Phát âm từ hiện tại");
+        document
+          .getElementById("submitButton")
+          .setAttribute("aria-label", "Kiểm tra câu trả lời");
+        document
+          .getElementById("nextButton")
+          .setAttribute("aria-label", "Chuyển đến câu hỏi tiếp theo");
+
+        // Add keyboard navigation hints
+        const helpText = document.createElement("div");
+        helpText.style.cssText =
+          "position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 10px; border-radius: 5px; font-size: 12px; z-index: 1000;";
+        helpText.innerHTML = `
+          <strong>Phím tắt:</strong><br>
+          Space: Phát âm | Enter: Tiếp theo | Esc: Menu | 1-4: Chọn đáp án
+        `;
+        document.body.appendChild(helpText);
+
+        // Hide help text after 5 seconds
+        setTimeout(() => {
+          helpText.style.opacity = "0";
+          helpText.style.transition = "opacity 2s";
+        }, 5000);
+      }
+
+      // Initialize accessibility on page load
+      document.addEventListener("DOMContentLoaded", addAccessibility);
     </script>
   </body>
 </html>

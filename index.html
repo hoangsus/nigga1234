@@ -362,6 +362,100 @@
         border-color: #4a47a3;
       }
 
+      /* Hiệu ứng nhấp nháy đặc biệt cho ôn tập */
+      .lesson-card.review-card {
+        background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+        border: 3px solid #28a745;
+        position: relative;
+        overflow: hidden;
+        animation: reviewGlow 2s ease-in-out infinite alternate;
+      }
+
+      .lesson-card.review-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(40, 167, 69, 0.3),
+          transparent
+        );
+        animation: reviewShine 3s ease-in-out infinite;
+        z-index: 1;
+      }
+
+      .lesson-card.review-card .lesson-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .lesson-card.review-card .lesson-number {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        animation: reviewNumberPulse 1.5s ease-in-out infinite;
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+      }
+
+      .lesson-card.review-card .difficulty-badge {
+        animation: reviewBadgeFlash 2s ease-in-out infinite;
+        box-shadow: 0 0 15px rgba(111, 66, 193, 0.5);
+      }
+
+      .lesson-card.review-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(40, 167, 69, 0.3);
+        border-color: #20c997;
+      }
+
+      @keyframes reviewGlow {
+        from {
+          box-shadow: 0 15px 35px rgba(40, 167, 69, 0.2);
+        }
+        to {
+          box-shadow: 0 20px 45px rgba(40, 167, 69, 0.4),
+            0 0 30px rgba(40, 167, 69, 0.3);
+        }
+      }
+
+      @keyframes reviewShine {
+        0% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        }
+        50% {
+          transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+        100% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        }
+      }
+
+      @keyframes reviewNumberPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+        }
+        50% {
+          transform: scale(1.1);
+          box-shadow: 0 0 30px rgba(40, 167, 69, 0.8);
+        }
+      }
+
+      @keyframes reviewBadgeFlash {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.05);
+        }
+      }
+
       .lesson-number {
         position: absolute;
         top: -10px;
@@ -387,10 +481,20 @@
         margin-right: 50px;
       }
 
+      .lesson-card.review-card .lesson-title {
+        color: #155724;
+        text-shadow: 1px 1px 2px rgba(40, 167, 69, 0.2);
+      }
+
       .lesson-description {
         color: #666;
         margin-bottom: 20px;
         line-height: 1.6;
+      }
+
+      .lesson-card.review-card .lesson-description {
+        color: #155724;
+        font-weight: 500;
       }
 
       .lesson-stats {
@@ -399,6 +503,11 @@
         margin-bottom: 20px;
         font-size: 0.9em;
         color: #888;
+      }
+
+      .lesson-card.review-card .lesson-stats {
+        color: #155724;
+        font-weight: 600;
       }
 
       .lesson-buttons {
@@ -443,6 +552,55 @@
         background: linear-gradient(135deg, #e55353 0%, #d63384 100%);
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+      }
+
+      /* Hiệu ứng đặc biệt cho nút ôn tập */
+      .lesson-card.review-card .btn-game {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        animation: reviewButtonGlow 2.5s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lesson-card.review-card .btn-game::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        animation: reviewButtonShimmer 2s ease-in-out infinite;
+      }
+
+      .lesson-card.review-card .btn-game:hover {
+        background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+      }
+
+      @keyframes reviewButtonGlow {
+        0%,
+        100% {
+          box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        50% {
+          box-shadow: 0 8px 25px rgba(40, 167, 69, 0.5);
+        }
+      }
+
+      @keyframes reviewButtonShimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
       }
 
       .difficulty-badge {
@@ -1013,36 +1171,45 @@
           card.className = "lesson-card";
           card.setAttribute("data-difficulty", lesson.difficulty);
 
+          // Thêm class đặc biệt cho card ôn tập
+          if (lesson.difficulty === "review") {
+            card.classList.add("review-card");
+          }
+
           card.innerHTML = `
-                    <div class="lesson-number">${lesson.day}</div>
-                    <div class="difficulty-badge ${getDifficultyClass(
-                      lesson.difficulty
-                    )}">${lesson.difficultyText}</div>
-                    <div class="lesson-title">${lesson.title}</div>
-                    <div class="lesson-description">${lesson.description}</div>
-                    <div class="lesson-stats">
-                        <span>📝 ${
-                          lesson.words > 0
-                            ? lesson.words + " từ vựng"
-                            : "Ôn tập & Luyện tập"
-                        }</span>
-                        <span>⏱️ ${
-                          lesson.words > 0 ? "20-30 phút" : "30-45 phút"
-                        }</span>
-                    </div>
-                    <div class="lesson-buttons">
-                        ${
-                          lesson.isReviewOnly
-                            ? `<a href="lesson${lesson.day}_game.html" class="btn btn-game" style="width: 100%;">
-                            🎮 Trò chơi ôn tập
-                          </a>`
-                            : `<a href="lesson${lesson.day}_vocabulary.html" class="btn btn-study">
-                            📚 Học từ vựng
-                          </a>
-                          <a href="lesson${lesson.day}_game.html" class="btn btn-game">
-                            🎮 Trò chơi
-                          </a>`
-                        }
+                    <div class="lesson-content">
+                        <div class="lesson-number">${lesson.day}</div>
+                        <div class="difficulty-badge ${getDifficultyClass(
+                          lesson.difficulty
+                        )}">${lesson.difficultyText}</div>
+                        <div class="lesson-title">${lesson.title}</div>
+                        <div class="lesson-description">${
+                          lesson.description
+                        }</div>
+                        <div class="lesson-stats">
+                            <span>📝 ${
+                              lesson.words > 0
+                                ? lesson.words + " từ vựng"
+                                : "Ôn tập & Luyện tập"
+                            }</span>
+                            <span>⏱️ ${
+                              lesson.words > 0 ? "20-30 phút" : "30-45 phút"
+                            }</span>
+                        </div>
+                        <div class="lesson-buttons">
+                            ${
+                              lesson.isReviewOnly
+                                ? `<a href="lesson${lesson.day}_game.html" class="btn btn-game" style="width: 100%;">
+                                🎮 Trò chơi ôn tập
+                              </a>`
+                                : `<a href="lesson${lesson.day}_vocabulary.html" class="btn btn-study">
+                                📚 Học từ vựng
+                              </a>
+                              <a href="lesson${lesson.day}_game.html" class="btn btn-game">
+                                🎮 Trò chơi
+                              </a>`
+                            }
+                        </div>
                     </div>
                 `;
 
