@@ -1022,7 +1022,7 @@
                 // Update address
                 this.conversationSequence[20].expectedResponse = `Die ist einfach. Also, ich wohne in der ${this.studentAddress}.`;
                 this.conversationSequence[21].text = `Die ist einfach. Also, ich wohne in der ${this.studentAddress}.`;
-                this.conversationSequence[21].expectedResponse = `${this.studentAddress}. Gut, danke. Das war's.`;
+                this.conversationSequence[22].text = `${this.studentAddress}. Gut, danke. Das war's.`;
                 
                 // Update keywords for all steps
                 this.updateKeywords();
@@ -1040,6 +1040,7 @@
                 this.conversationSequence[18].keywords = ['ja', this.studentCity.toLowerCase(), this.studentCountry.toLowerCase(), 'buchstabiere'];
                 this.conversationSequence[20].keywords = ['einfach', 'also', 'wohne', this.studentAddress.toLowerCase()];
                 this.conversationSequence[21].keywords = [this.studentAddress.toLowerCase(), 'gut', 'danke', 'das wars'];
+                this.conversationSequence[22].keywords = [this.studentAddress.toLowerCase(), 'gut', 'danke', 'das wars'];
             }
             
             isUserTurn() {
@@ -1158,8 +1159,15 @@
                     this.updateExpectedResponse();
                     this.updateDebugInfo();
                     
+                    // Check if conversation is completed
+                    if (this.currentStep >= this.conversationSequence.length) {
+                        this.addMessage('🎉 Cuộc hội thoại đã hoàn thành! Chúc mừng bạn!', 'success');
+                        this.showStatus('Cuộc hội thoại đã hoàn thành!', 'success');
+                        return;
+                    }
+                    
                     // If next step is AI's turn, play AI response
-                    if (this.currentStep < this.conversationSequence.length && !this.isUserTurn()) {
+                    if (!this.isUserTurn()) {
                         setTimeout(() => {
                             this.playAIResponse();
                         }, 1500);
