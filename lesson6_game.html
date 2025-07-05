@@ -823,15 +823,64 @@
             }
             
             loadSavedData() {
-                // Since we can't use localStorage in artifacts, we'll use variables
-                // In a real environment, you would use localStorage here
+                try {
+                    const savedData = localStorage.getItem('germanConversationData');
+                    if (savedData) {
+                        const data = JSON.parse(savedData);
+                        this.teacherName = data.teacherName || 'Frau Schwarz';
+                        this.studentFirstName = data.studentFirstName || 'Marie';
+                        this.studentLastName = data.studentLastName || 'Platini';
+                        this.studentCity = data.studentCity || 'Fribourg';
+                        this.studentCountry = data.studentCountry || 'Schweiz';
+                        this.studentAddress = data.studentAddress || 'Hauptstraße 15';
+                        this.courseLevel = data.courseLevel || 'A 1.1';
+                        this.schoolName = data.schoolName || 'LinguaTreff';
+                        this.userRole = data.userRole || 'student';
+                        
+                        // Update form inputs
+                        this.teacherNameInput.value = this.teacherName;
+                        this.studentFirstNameInput.value = this.studentFirstName;
+                        this.studentLastNameInput.value = this.studentLastName;
+                        this.studentCityInput.value = this.studentCity;
+                        this.studentCountryInput.value = this.studentCountry;
+                        this.studentAddressInput.value = this.studentAddress;
+                        this.courseLevelInput.value = this.courseLevel;
+                        this.schoolNameInput.value = this.schoolName;
+                        
+                        // Update role selection
+                        if (this.userRole === 'teacher') {
+                            this.roleTeacherInput.checked = true;
+                        } else {
+                            this.roleStudentInput.checked = true;
+                        }
+                        
+                        console.log('Data loaded from localStorage');
+                    }
+                } catch (e) {
+                    console.error('Error loading saved data:', e);
+                }
                 this.updateConversationSequence();
             }
             
             saveData() {
-                // Since we can't use localStorage in artifacts, this is a placeholder
-                // In a real environment, you would save to localStorage here
-                console.log('Data saved (placeholder)');
+                try {
+                    const data = {
+                        teacherName: this.teacherName,
+                        studentFirstName: this.studentFirstName,
+                        studentLastName: this.studentLastName,
+                        studentCity: this.studentCity,
+                        studentCountry: this.studentCountry,
+                        studentAddress: this.studentAddress,
+                        courseLevel: this.courseLevel,
+                        schoolName: this.schoolName,
+                        userRole: this.userRole
+                    };
+                    
+                    localStorage.setItem('germanConversationData', JSON.stringify(data));
+                    console.log('Data saved to localStorage');
+                } catch (e) {
+                    console.error('Error saving data:', e);
+                }
             }
             
             saveNamesAndStart() {
@@ -999,7 +1048,18 @@
                 }
                 
                 const currentSequence = this.conversationSequence[this.currentStep];
-                return currentSequence.speaker === this.userRole;
+                // Logic: User nói khi sequence yêu cầu user nói (khi cần expectedResponse)
+                // Nếu đang ở step mà AI cần nói thì không phải lượt user
+                
+                if (this.userRole === 'student') {
+                    // User là student, AI là teacher
+                    // User nói khi speaker là 'student' 
+                    return currentSequence.speaker === 'student';
+                } else {
+                    // User là teacher, AI là student  
+                    // User nói khi speaker là 'teacher'
+                    return currentSequence.speaker === 'teacher';
+                }
             }
             
             playAIResponse() {
@@ -1009,10 +1069,15 @@
                 
                 const currentSequence = this.conversationSequence[this.currentStep];
                 
-                if (currentSequence.speaker !== this.userRole) {
+                // AI nói khi không phải lượt user
+                if (!this.isUserTurn()) {
                     this.waitingForAI = true;
                     this.addMessage(currentSequence.text, 'ai');
-                    this.speakText(currentSequence.text);
+                    
+                    // Delay để người dùng đọc được tin nhắn trước khi phát âm
+                    setTimeout(() => {
+                        this.speakText(currentSequence.text);
+                    }, 500);
                     
                     setTimeout(() => {
                         this.currentStep++;
@@ -1020,7 +1085,12 @@
                         this.updateProgress();
                         this.updateExpectedResponse();
                         this.updateDebugInfo();
-                    }, 1000);
+                        
+                        // Nếu step tiếp theo vẫn là AI thì tiếp tục
+                        if (this.currentStep < this.conversationSequence.length && !this.isUserTurn()) {
+                            this.playAIResponse();
+                        }
+                    }, 2000);
                 }
             }
             
@@ -1077,7 +1147,7 @@
                 }
                 
                 const currentSequence = this.conversationSequence[this.currentStep];
-                const expectedText = currentSequence.expectedResponse;
+                const expectedText = currentSequence.text; // User cần nói chính xác text này
                 
                 // Check if response matches
                 if (this.isTextMatch(transcript, expectedText, currentSequence.keywords)) {
@@ -1096,7 +1166,7 @@
                     }
                 } else {
                     // Incorrect response
-                    this.addMessage(`❌ Không chính xác. Vui lòng nói: "${expectedText}"`, 'error');
+                    this.addMessage(`❌ Không chính xác. Vui lòng nói:<br>"${expectedText}"`, 'error');
                     setTimeout(() => {
                         this.speakText(expectedText);
                     }, 1000);
@@ -1193,17 +1263,19 @@
                 const currentSequence = this.conversationSequence[this.currentStep];
                 
                 if (this.isUserTurn()) {
-                    // User's turn - show expected response
-                    this.expectedResponse.innerHTML = `<strong>Đến lượt bạn nói:</strong> ${currentSequence.expectedResponse}`;
+                    // User's turn - show what user should say
+                    const roleText = this.userRole === 'teacher' ? 'Giáo viên' : 'Học viên';
+                    this.expectedResponse.innerHTML = `<strong>🎯 Đến lượt bạn (${roleText}) nói:</strong><br>"${currentSequence.text}"`;
                     this.expectedResponse.style.display = 'block';
                     this.micBtn.disabled = false;
                     this.micBtn.textContent = '🎤 Nói';
                 } else {
                     // AI's turn - show what AI will say
-                    this.expectedResponse.innerHTML = `<strong>AI sẽ nói:</strong> ${currentSequence.text}`;
+                    const aiRole = this.userRole === 'teacher' ? 'Học viên' : 'Giáo viên';
+                    this.expectedResponse.innerHTML = `<strong>🤖 ${aiRole} (AI) sẽ nói:</strong><br>"${currentSequence.text}"`;
                     this.expectedResponse.style.display = 'block';
                     this.micBtn.disabled = true;
-                    this.micBtn.textContent = '🎤 Chờ lượt AI';
+                    this.micBtn.textContent = '🎤 Chờ AI';
                 }
             }
             
