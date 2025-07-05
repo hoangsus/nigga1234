@@ -728,6 +728,13 @@
                         speaker: 'student',
                         text: 'Die ist einfach. Also, ich wohne in der Hauptstraße 15.',
                         expectedResponse: 'Hauptstraße 15. Gut, danke. Das war\'s.',
+                        keywords: ['einfach', 'also', 'wohne', 'hauptstraße 15']
+                    },
+                    // Step 22: Teacher confirms address and ends
+                    {
+                        speaker: 'teacher',
+                        text: 'Hauptstraße 15. Gut, danke. Das war\'s.',
+                        expectedResponse: 'Conversation completed!',
                         keywords: ['hauptstraße 15', 'gut', 'danke', 'das wars']
                     }
                 ];
@@ -905,7 +912,7 @@
                     this.schoolName = newSchoolName;
                     this.userRole = selectedRole;
                     
-                    // Save to localStorage (placeholder)
+                    // Save to localStorage
                     this.saveData();
                     
                     // Update conversation sequence
