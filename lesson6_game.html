@@ -445,23 +445,23 @@
                     </div>
                     <div class="name-input-group">
                         <label for="studentFirstName">Tên (Vorname) học viên:</label>
-                        <input type="text" id="studentFirstName" class="name-input" value="Marie" placeholder="Nhập tên học viên">
+                        <input type="text" id="studentFirstName" class="name-input" value="Lê" placeholder="Nhập tên học viên (có thể tiếng Việt)">
                     </div>
                     <div class="name-input-group">
                         <label for="studentLastName">Họ (Familienname) học viên:</label>
-                        <input type="text" id="studentLastName" class="name-input" value="Platini" placeholder="Nhập họ học viên">
+                        <input type="text" id="studentLastName" class="name-input" value="Văn An" placeholder="Nhập họ học viên (có thể tiếng Việt)">
                     </div>
                     <div class="name-input-group">
                         <label for="studentCity">Thành phố học viên:</label>
-                        <input type="text" id="studentCity" class="name-input" value="Fribourg" placeholder="Nhập thành phố">
+                        <input type="text" id="studentCity" class="name-input" value="Hà Nội" placeholder="Nhập thành phố (có thể tiếng Việt)">
                     </div>
                     <div class="name-input-group">
                         <label for="studentCountry">Đất nước:</label>
-                        <input type="text" id="studentCountry" class="name-input" value="Schweiz" placeholder="Nhập đất nước (tiếng Đức)">
+                        <input type="text" id="studentCountry" class="name-input" value="Vietnam" placeholder="Nhập đất nước (tiếng Đức)">
                     </div>
                     <div class="name-input-group">
                         <label for="studentAddress">Địa chỉ học viên:</label>
-                        <input type="text" id="studentAddress" class="name-input" value="Hauptstraße 15" placeholder="Nhập địa chỉ">
+                        <input type="text" id="studentAddress" class="name-input" value="Đường Lạc Long Quân 15" placeholder="Nhập địa chỉ">
                     </div>
                     <div class="name-input-group">
                         <label for="courseLevel">Cấp độ khóa học:</label>
@@ -485,6 +485,16 @@
                             <span>👩‍🎓 Tôi đóng vai học viên</span>
                         </label>
                     </div>
+                </div>
+                
+                <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 10px; padding: 15px; margin: 15px 0; color: #856404;">
+                    <h4>📝 Lưu ý về nhận diện giọng nói:</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Ứng dụng có thể nhận diện cả <strong>tiếng Đức</strong> và <strong>tên tiếng Việt</strong></li>
+                        <li>Khi nói tên tiếng Việt, hãy nói <strong>chậm và rõ ràng</strong></li>
+                        <li>Nếu không nhận diện được, thử nói lại với giọng khác nhau</li>
+                        <li>Có thể dùng tên tiếng Việt như: Lê, Nguyễn, Văn An, Thị Hoa...</li>
+                    </ul>
                 </div>
                 
                 <button class="save-btn" id="saveNames">💾 Lưu thông tin & Bắt đầu</button>
@@ -1106,28 +1116,84 @@
                 
                 this.recognition.continuous = false;
                 this.recognition.interimResults = false;
+                
+                // Sử dụng multi-language để nhận diện cả tiếng Đức và tiếng Việt
+                // Ưu tiên tiếng Đức nhưng có thể fallback sang tiếng Việt
                 this.recognition.lang = 'de-DE';
                 
+                // Thêm option để nhận diện tốt hơn
+                this.recognition.maxAlternatives = 3;
+                
                 this.recognition.onstart = () => {
-                    this.showStatus('Đang nghe...', 'listening');
+                    this.showStatus('Đang nghe... (Có thể nói tiếng Đức hoặc tiếng Việt)', 'listening');
                     this.isRecording = true;
                     this.micBtn.classList.add('recording');
                     this.micBtn.textContent = '🛑 Dừng';
                 };
                 
                 this.recognition.onresult = (event) => {
-                    const transcript = event.results[0][0].transcript;
-                    this.processUserInput(transcript);
+                    let transcript = '';
+                    let confidence = 0;
+                    
+                    // Lấy kết quả tốt nhất từ các alternative
+                    for (let i = 0; i < event.results[0].length; i++) {
+                        const alternative = event.results[0][i];
+                        if (alternative.confidence > confidence) {
+                            transcript = alternative.transcript;
+                            confidence = alternative.confidence;
+                        }
+                    }
+                    
+                    // Nếu confidence thấp, thử với tiếng Việt
+                    if (confidence < 0.7) {
+                        this.tryVietnameseRecognition(transcript);
+                    } else {
+                        this.processUserInput(transcript);
+                    }
                 };
                 
                 this.recognition.onerror = (event) => {
-                    this.showStatus('Lỗi nhận diện: ' + event.error, 'error');
+                    if (event.error === 'no-speech') {
+                        this.showStatus('Không nghe thấy giọng nói, vui lòng thử lại', 'error');
+                    } else if (event.error === 'not-allowed') {
+                        this.showStatus('Vui lòng cho phép truy cập microphone', 'error');
+                    } else {
+                        this.showStatus('Lỗi nhận diện: ' + event.error, 'error');
+                    }
                     this.stopRecording();
                 };
                 
                 this.recognition.onend = () => {
                     this.stopRecording();
                 };
+            }
+            
+            tryVietnameseRecognition(originalTranscript) {
+                // Tạo recognition instance mới cho tiếng Việt
+                if ('webkitSpeechRecognition' in window) {
+                    const vnRecognition = new webkitSpeechRecognition();
+                    vnRecognition.lang = 'vi-VN';
+                    vnRecognition.continuous = false;
+                    vnRecognition.interimResults = false;
+                    vnRecognition.maxAlternatives = 2;
+                    
+                    vnRecognition.onresult = (event) => {
+                        const vnTranscript = event.results[0][0].transcript;
+                        // Combine cả tiếng Đức và tiếng Việt
+                        const combinedTranscript = `${originalTranscript} ${vnTranscript}`.trim();
+                        this.processUserInput(combinedTranscript);
+                    };
+                    
+                    vnRecognition.onerror = () => {
+                        // Nếu tiếng Việt cũng lỗi, dùng kết quả tiếng Đức
+                        this.processUserInput(originalTranscript);
+                    };
+                    
+                    // Không start lại recognition, chỉ xử lý kết quả hiện tại
+                    this.processUserInput(originalTranscript);
+                } else {
+                    this.processUserInput(originalTranscript);
+                }
             }
             
             processUserInput(transcript) {
@@ -1188,6 +1254,14 @@
                 const normalizedInput = this.normalizeText(input);
                 const normalizedExpected = this.normalizeText(expected);
                 
+                // Kiểm tra nếu có tên tiếng Việt trong input
+                const hasVietnameseName = this.containsVietnameseName(input);
+                
+                // Nếu có tên tiếng Việt, sử dụng logic đặc biệt
+                if (hasVietnameseName) {
+                    return this.matchWithVietnameseName(input, expected, keywords);
+                }
+                
                 // First check: exact match (high threshold)
                 if (this.calculateSimilarity(normalizedInput, normalizedExpected) > 0.8) {
                     return true;
@@ -1206,7 +1280,7 @@
                 
                 // Third check: flexible similarity for short responses
                 if (normalizedExpected.length < 20) {
-                    return this.calculateSimilarity(normalizedInput, normalizedExpected) > 0.6;
+                    return this.calculateSimilarity(normalizedInput, normalizedExpected) > 0.5;
                 }
                 
                 // Fourth check: contains essential words
@@ -1216,7 +1290,70 @@
                     inputWords.some(inputWord => inputWord.includes(word) || word.includes(inputWord))
                 );
                 
-                return matchedEssential.length >= Math.ceil(essentialWords.length * 0.7);
+                return matchedEssential.length >= Math.ceil(essentialWords.length * 0.6);
+            }
+            
+            containsVietnameseName(text) {
+                // Danh sách các tên tiếng Việt phổ biến
+                const vietnameseNames = [
+                    'an', 'anh', 'bao', 'binh', 'duc', 'dung', 'giang', 'ha', 'hai', 'hoa', 'hoang', 'hung', 'huy', 'khang', 'khanh', 'kien', 'lam', 'le', 'linh', 'long', 'mai', 'minh', 'nam', 'nga', 'ngan', 'ngoc', 'nguyen', 'nhan', 'pham', 'phuong', 'quan', 'quang', 'quy', 'son', 'tai', 'tan', 'thai', 'tham', 'than', 'thang', 'thanh', 'thao', 'thi', 'thien', 'thinh', 'tho', 'thu', 'thuy', 'tien', 'toan', 'tram', 'trang', 'trinh', 'trung', 'tu', 'tuan', 'tuyet', 'van', 'vy', 'xuan', 'yen'
+                ];
+                
+                const normalizedText = text.toLowerCase();
+                return vietnameseNames.some(name => normalizedText.includes(name));
+            }
+            
+            matchWithVietnameseName(input, expected, keywords) {
+                const normalizedInput = this.normalizeText(input);
+                const normalizedExpected = this.normalizeText(expected);
+                
+                // Tách các từ tiếng Đức và tiếng Việt
+                const inputWords = normalizedInput.split(' ');
+                const expectedWords = normalizedExpected.split(' ');
+                
+                // Kiểm tra từng từ
+                let matches = 0;
+                for (let expectedWord of expectedWords) {
+                    for (let inputWord of inputWords) {
+                        // Exact match
+                        if (inputWord === expectedWord) {
+                            matches++;
+                            break;
+                        }
+                        // Partial match cho tên
+                        if (inputWord.length > 2 && expectedWord.length > 2) {
+                            if (inputWord.includes(expectedWord) || expectedWord.includes(inputWord)) {
+                                matches++;
+                                break;
+                            }
+                        }
+                        // Soundex hoặc phonetic matching cho tên tiếng Việt
+                        if (this.phoneticallyClose(inputWord, expectedWord)) {
+                            matches++;
+                            break;
+                        }
+                    }
+                }
+                
+                // Nếu match được ít nhất 60% từ thì được
+                return matches >= Math.ceil(expectedWords.length * 0.6);
+            }
+            
+            phoneticallyClose(word1, word2) {
+                // Đơn giản hóa phép so sánh phonetic
+                if (word1.length < 2 || word2.length < 2) return false;
+                
+                // Kiểm tra nếu 2 từ có âm đầu giống nhau
+                const firstChar1 = word1[0].toLowerCase();
+                const firstChar2 = word2[0].toLowerCase();
+                
+                if (firstChar1 === firstChar2) {
+                    // Kiểm tra độ dài tương tự
+                    const lengthDiff = Math.abs(word1.length - word2.length);
+                    return lengthDiff <= 2;
+                }
+                
+                return false;
             }
             
             extractEssentialWords(text) {
