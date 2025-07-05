@@ -2185,7 +2185,7 @@
         }
       }
 
-      // Start recording
+      // Start recording with speech recognition integration
       async function startRecording() {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({
@@ -2200,11 +2200,32 @@
 
           mediaRecorder.onstop = () => {
             const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-            processPronunciation(audioBlob);
+            // Instead of analyzing the blob, we'll use speech recognition
+            // which runs in parallel with recording
+            if (
+              !(
+                "webkitSpeechRecognition" in window ||
+                "SpeechRecognition" in window
+              )
+            ) {
+              processPronunciation(audioBlob);
+            }
           };
 
           mediaRecorder.start();
           isRecording = true;
+
+          // Start speech recognition immediately if available
+          if (
+            "webkitSpeechRecognition" in window ||
+            "SpeechRecognition" in window
+          ) {
+            setTimeout(() => {
+              if (isRecording) {
+                startSpeechRecognitionLive();
+              }
+            }, 500); // Small delay to let recording settle
+          }
 
           // Update UI
           document.getElementById("recordBtn").textContent = "⏹️ Dừng ghi âm";
@@ -2227,6 +2248,84 @@
         }
       }
 
+      // Live speech recognition during recording
+      function startSpeechRecognitionLive() {
+        const SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+
+        recognition.lang = "de-DE";
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 3;
+        recognition.continuous = false;
+
+        recognition.onstart = function () {
+          console.log("Speech recognition started");
+        };
+
+        recognition.onresult = function (event) {
+          let finalTranscript = "";
+
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+              finalTranscript += event.results[i][0].transcript;
+            }
+          }
+
+          if (finalTranscript) {
+            const confidence =
+              event.results[event.results.length - 1][0].confidence;
+            console.log(
+              "Final transcript:",
+              finalTranscript,
+              "Confidence:",
+              confidence
+            );
+            analyzeSpeechResult(
+              finalTranscript.toLowerCase().trim(),
+              confidence
+            );
+            recognition.stop();
+          }
+        };
+
+        recognition.onerror = function (event) {
+          console.log("Speech recognition error:", event.error);
+          if (event.error === "no-speech") {
+            showFeedback(
+              "warning",
+              "🔇 Không nghe thấy âm thanh. Hãy thử phát âm to và rõ hơn!"
+            );
+          } else if (event.error === "audio-capture") {
+            showFeedback(
+              "error",
+              "Lỗi microphone. Vui lòng kiểm tra lại thiết bị âm thanh."
+            );
+          } else {
+            // Fallback to simulation
+            simulatePronunciationCheck();
+          }
+        };
+
+        recognition.onnomatch = function () {
+          showFeedback(
+            "warning",
+            "❓ Không nhận diện được âm thanh rõ ràng. Hãy thử phát âm chữ cái một cách rõ ràng!"
+          );
+        };
+
+        recognition.onend = function () {
+          console.log("Speech recognition ended");
+        };
+
+        try {
+          recognition.start();
+        } catch (error) {
+          console.log("Recognition start error:", error);
+          simulatePronunciationCheck();
+        }
+      }
+
       // Stop recording
       function stopRecording() {
         if (mediaRecorder && mediaRecorder.state !== "inactive") {
@@ -2245,43 +2344,254 @@
           .classList.remove("active");
       }
 
-      // Process pronunciation (simplified version)
+      // Process pronunciation (improved with real speech recognition)
       function processPronunciation(audioBlob) {
-        // Since we can't do real speech recognition in this environment,
-        // we'll simulate the process with a random result weighted toward success
-        // In a real implementation, this would use Web Speech API or server-side processing
+        // Try to use Web Speech API for better accuracy
+        if (
+          "webkitSpeechRecognition" in window ||
+          "SpeechRecognition" in window
+        ) {
+          startSpeechRecognition();
+        } else {
+          // Fallback to audio analysis simulation
+          analyzeAudioBlob(audioBlob);
+        }
+      }
 
+      // Real speech recognition
+      function startSpeechRecognition() {
+        const SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+
+        recognition.lang = "de-DE";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.continuous = false;
+
+        recognition.onresult = function (event) {
+          const transcript = event.results[0][0].transcript
+            .toLowerCase()
+            .trim();
+          const confidence = event.results[0][0].confidence;
+
+          console.log("Recognized:", transcript, "Confidence:", confidence);
+
+          // Analyze the result
+          analyzeSpeechResult(transcript, confidence);
+        };
+
+        recognition.onerror = function (event) {
+          console.log("Speech recognition error:", event.error);
+          showFeedback(
+            "error",
+            "Không thể nhận diện giọng nói. Vui lòng thử lại hoặc kiểm tra microphone."
+          );
+        };
+
+        recognition.onnomatch = function () {
+          showFeedback(
+            "warning",
+            "Không nhận diện được âm thanh rõ ràng. Hãy thử phát âm to và rõ hơn!"
+          );
+        };
+
+        // Start recognition (this will use the already recorded audio context)
+        try {
+          recognition.start();
+        } catch (error) {
+          console.log("Recognition start error:", error);
+          // Fallback to simulation
+          simulatePronunciationCheck();
+        }
+      }
+
+      // Analyze speech recognition result
+      function analyzeSpeechResult(transcript, confidence) {
         gameStats.total++;
 
-        // Simulate pronunciation analysis with 70% success rate
-        const isCorrect = Math.random() < 0.7;
+        const expectedLetter = currentChallengeLetter.toLowerCase();
+        const words = transcript.split(" ").filter((word) => word.length > 0);
+
+        // Check if user said more than one word
+        if (words.length > 1) {
+          showFeedback(
+            "warning",
+            `⚠️ Vui lòng chỉ phát âm một chữ cái "${currentChallengeLetter}". Bạn đã nói: "${transcript}". Thử lại với chỉ một âm!`
+          );
+          updateStats();
+          return;
+        }
+
+        // Check if no clear speech detected
+        if (words.length === 0 || transcript.length === 0) {
+          showFeedback(
+            "warning",
+            "🤔 Không nghe thấy âm thanh rõ ràng. Hãy thử phát âm to và rõ hơn!"
+          );
+          updateStats();
+          return;
+        }
+
+        const spokenWord = words[0];
+
+        // Check confidence level
+        if (confidence < 0.3) {
+          showFeedback(
+            "warning",
+            "🔊 Âm thanh không đủ rõ. Hãy thử phát âm to và rõ ràng hơn!"
+          );
+          updateStats();
+          return;
+        }
+
+        // Define expected pronunciations for each letter
+        const expectedPronunciations = {
+          a: ["a", "ah", "aha"],
+          b: ["b", "be", "beh", "bee"],
+          c: ["c", "ce", "tse", "tseh"],
+          d: ["d", "de", "deh", "dee"],
+          e: ["e", "eh"],
+          f: ["f", "ef", "eff"],
+          g: ["g", "ge", "geh"],
+          h: ["h", "ha", "hah"],
+          i: ["i", "ih", "ee"],
+          j: ["j", "jot", "yot"],
+          k: ["k", "ka", "kah"],
+          l: ["l", "el", "ell"],
+          m: ["m", "em"],
+          n: ["n", "en"],
+          o: ["o", "oh"],
+          p: ["p", "pe", "peh"],
+          q: ["q", "qu", "ku"],
+          r: ["r", "er", "err", "ar"],
+          s: ["s", "es", "ess"],
+          t: ["t", "te", "teh"],
+          u: ["u", "uh", "oo"],
+          v: ["v", "ve", "fau", "fow"],
+          w: ["w", "ve", "veh", "way"],
+          x: ["x", "iks", "ex"],
+          y: ["y", "ypsilon", "üpsilon"],
+          z: ["z", "zet", "tset", "tsett"],
+          ä: ["ä", "ae", "a"],
+          ö: ["ö", "oe", "o"],
+          ü: ["ü", "ue", "u"],
+          ß: ["ß", "ss", "eszett", "esszett"],
+        };
+
+        const acceptedPronunciations = expectedPronunciations[
+          expectedLetter
+        ] || [expectedLetter];
+
+        // Check if the spoken word matches any accepted pronunciation
+        const isCorrect = acceptedPronunciations.some((pronunciation) => {
+          return (
+            spokenWord.includes(pronunciation) ||
+            pronunciation.includes(spokenWord) ||
+            levenshteinDistance(spokenWord, pronunciation) <= 1
+          );
+        });
+
+        if (isCorrect && confidence > 0.5) {
+          gameStats.correct++;
+          showFeedback(
+            "success",
+            `🎉 Xuất sắc! Bạn đã phát âm chữ "${currentChallengeLetter}" rất chính xác! (Đã nhận diện: "${transcript}")`
+          );
+
+          // Add to practiced letters
+          if (!practicedLetters.includes(currentChallengeLetter)) {
+            practicedLetters.push(currentChallengeLetter);
+          }
+
+          document.getElementById("nextChallengeBtn").disabled = false;
+        } else if (isCorrect && confidence > 0.3) {
+          gameStats.correct++;
+          showFeedback(
+            "success",
+            `✅ Tốt! Phát âm khá chính xác! (Đã nhận diện: "${transcript}") Hãy thử luyện tập thêm để hoàn thiện!`
+          );
+
+          if (!practicedLetters.includes(currentChallengeLetter)) {
+            practicedLetters.push(currentChallengeLetter);
+          }
+
+          document.getElementById("nextChallengeBtn").disabled = false;
+        } else {
+          showFeedback(
+            "warning",
+            `🤔 Bạn đã nói: "${transcript}". Hãy thử phát âm chữ "${currentChallengeLetter}" theo cách: "${alphabetData[currentChallengeLetter].pronunciation}". Nghe lại âm mẫu và thử lại!`
+          );
+        }
+
+        updateStats();
+        updateAlphabetCardHighlight();
+      }
+
+      // Calculate Levenshtein distance for fuzzy matching
+      function levenshteinDistance(str1, str2) {
+        const matrix = [];
+
+        for (let i = 0; i <= str2.length; i++) {
+          matrix[i] = [i];
+        }
+
+        for (let j = 0; j <= str1.length; j++) {
+          matrix[0][j] = j;
+        }
+
+        for (let i = 1; i <= str2.length; i++) {
+          for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+              matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+              matrix[i][j] = Math.min(
+                matrix[i - 1][j - 1] + 1,
+                matrix[i][j - 1] + 1,
+                matrix[i - 1][j] + 1
+              );
+            }
+          }
+        }
+
+        return matrix[str2.length][str1.length];
+      }
+
+      // Fallback simulation for browsers without speech recognition
+      function simulatePronunciationCheck() {
+        gameStats.total++;
+
+        // More realistic simulation with higher accuracy for single syllables
+        const isCorrect = Math.random() < 0.6; // 60% success rate for simulation
 
         if (isCorrect) {
           gameStats.correct++;
           showFeedback(
             "success",
-            "🎉 Xuất sắc! Phát âm của bạn rất chính xác!"
+            `🎉 Tốt! Phát âm của bạn nghe có vẻ đúng! (Lưu ý: Đây là chế độ mô phỏng vì trình duyệt không hỗ trợ nhận diện giọng nói)`
           );
 
-          // Add to practiced letters if not already there
           if (!practicedLetters.includes(currentChallengeLetter)) {
             practicedLetters.push(currentChallengeLetter);
           }
 
-          // Enable next challenge button
           document.getElementById("nextChallengeBtn").disabled = false;
         } else {
           showFeedback(
             "warning",
-            '🤔 Gần đúng rồi! Thử nghe lại âm thanh mẫu và luyện tập thêm. Nhấn "Bắt đầu ghi âm" để thử lại!'
+            `🤔 Hãy thử phát âm rõ hơn! Nghe lại âm mẫu và luyện tập thêm. (Lưu ý: Đây là chế độ mô phỏng)`
           );
-
-          // Allow retry
-          document.getElementById("recordBtn").disabled = false;
         }
 
         updateStats();
         updateAlphabetCardHighlight();
+      }
+
+      // Analyze audio blob (fallback method)
+      function analyzeAudioBlob(audioBlob) {
+        // This is a simplified analysis - in a real app you'd send to a server
+        // or use more sophisticated audio analysis
+        simulatePronunciationCheck();
       }
 
       // Show feedback
