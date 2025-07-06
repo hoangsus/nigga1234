@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German Conversation AI - LinguaTreff (Complete Fixed)</title>
+    <title>German Conversation AI - LinguaTreff (With Skip Feature)</title>
     <style>
       * {
         margin: 0;
@@ -358,6 +358,16 @@
         box-shadow: 0 10px 20px rgba(99, 110, 114, 0.3);
       }
 
+      .skip-btn {
+        background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+        color: white;
+      }
+
+      .skip-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(253, 121, 168, 0.3);
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -467,7 +477,7 @@
     <div class="container">
       <div class="header">
         <h1>🎯 LinguaTreff AI</h1>
-        <p>Luyện tập hội thoại tiếng Đức với AI - Phiên bản hoàn chỉnh</p>
+        <p>Luyện tập hội thoại tiếng Đức với AI - Có tính năng bỏ qua</p>
       </div>
 
       <div class="main-content">
@@ -624,6 +634,7 @@
         >
           <div class="strict-mode-notice">
             ⚠️ CHẾ ĐỘ NGHIÊM NGẶT: Phải nói chính xác theo độ khắt khe đã chọn!
+            Nếu thử 3 lần không được, có thể bỏ qua.
           </div>
 
           <div class="progress-text">Tiến độ hội thoại</div>
@@ -665,6 +676,13 @@
             </button>
             <button class="control-btn clear-btn" id="newConversationBtn">
               ⚙️ Cài đặt mới
+            </button>
+            <button
+              class="control-btn skip-btn"
+              id="skipBtn"
+              style="display: none"
+            >
+              ⏭️ Bỏ qua
             </button>
           </div>
 
@@ -716,6 +734,8 @@
           this.userRole = "student";
           this.conversationStarted = false;
           this.waitingForAI = false;
+          this.failedAttempts = 0; // Đếm số lần thử thất bại
+          this.maxFailedAttempts = 3; // Số lần thử tối đa trước khi hiện nút bỏ qua
 
           // Enhanced conversation sequence - sẽ được cập nhật trong buildConversationSequence()
           this.conversationSequence = [];
@@ -960,6 +980,7 @@
           this.aiRoleDisplay = document.getElementById("aiRoleDisplay");
           this.newConversationBtn =
             document.getElementById("newConversationBtn");
+          this.skipBtn = document.getElementById("skipBtn");
         }
 
         setupEventListeners() {
@@ -979,6 +1000,7 @@
           this.saveNamesBtn.addEventListener("click", () =>
             this.saveNamesAndStart()
           );
+          this.skipBtn.addEventListener("click", () => this.skipCurrentStep());
 
           this.voiceSelect.addEventListener("change", (e) =>
             this.selectVoice(e.target.value)
@@ -1056,6 +1078,8 @@
           this.currentStep = 0;
           this.conversationHistory = [];
           this.waitingForAI = false;
+          this.failedAttempts = 0; // Reset số lần thử thất bại
+          this.hideSkipButton(); // Ẩn nút bỏ qua
 
           this.nameSettings.style.display = "none";
           this.conversationContainer.style.display = "block";
@@ -1086,6 +1110,8 @@
           this.currentStep = 0;
           this.conversationHistory = [];
           this.waitingForAI = false;
+          this.failedAttempts = 0; // Reset số lần thử thất bại
+          this.hideSkipButton(); // Ẩn nút bỏ qua
 
           this.nameSettings.style.display = "block";
           this.conversationContainer.style.display = "none";
@@ -1203,38 +1229,79 @@
               `✅ Chính xác! (${Math.round(accuracy * 100)}%)`,
               "success"
             );
-            this.currentStep++;
-            this.updateProgress();
-            this.updateExpectedResponse();
-
-            if (this.currentStep >= this.conversationSequence.length) {
-              this.addMessage(
-                "🎉 Cuộc hội thoại đã hoàn thành! Chúc mừng bạn!",
-                "success"
-              );
-              this.showStatus("Cuộc hội thoại đã hoàn thành!", "success");
-              return;
-            }
-
-            if (!this.isUserTurn()) {
-              setTimeout(() => {
-                this.playAIResponse();
-              }, 1500);
-            }
+            this.failedAttempts = 0; // Reset số lần thử thất bại
+            this.hideSkipButton(); // Ẩn nút bỏ qua
+            this.proceedToNextStep();
           } else {
+            this.failedAttempts++; // Tăng số lần thử thất bại
             const accuracy = this.calculateAccuracy(transcript, expectedText);
             this.addMessage(
               `❌ Chưa đạt yêu cầu! (${Math.round(
                 accuracy * 100
-              )}% - cần ${Math.round(this.tolerance * 100)}%)<br>
+              )}% - cần ${Math.round(this.tolerance * 100)}%) - Lần thử: ${
+                this.failedAttempts
+              }/${this.maxFailedAttempts}<br>
               <strong>Cần nói:</strong> "${expectedText}"<br>
               <strong>Bạn đã nói:</strong> "${transcript}"`,
               "error"
             );
+
+            // Hiển thị nút bỏ qua nếu thử quá nhiều lần
+            if (this.failedAttempts >= this.maxFailedAttempts) {
+              this.showSkipButton();
+            }
+
             setTimeout(() => {
               this.speakText(expectedText);
             }, 1000);
           }
+        }
+
+        // Hàm xử lý chuyển sang bước tiếp theo
+        proceedToNextStep() {
+          this.currentStep++;
+          this.updateProgress();
+          this.updateExpectedResponse();
+
+          if (this.currentStep >= this.conversationSequence.length) {
+            this.addMessage(
+              "🎉 Cuộc hội thoại đã hoàn thành! Chúc mừng bạn!",
+              "success"
+            );
+            this.showStatus("Cuộc hội thoại đã hoàn thành!", "success");
+            this.hideSkipButton();
+            return;
+          }
+
+          if (!this.isUserTurn()) {
+            setTimeout(() => {
+              this.playAIResponse();
+            }, 1500);
+          }
+        }
+
+        // Hàm bỏ qua bước hiện tại
+        skipCurrentStep() {
+          const currentSequence = this.conversationSequence[this.currentStep];
+          this.addMessage(`⏭️ Đã bỏ qua: "${currentSequence.text}"`, "error");
+          this.failedAttempts = 0; // Reset số lần thử thất bại
+          this.hideSkipButton(); // Ẩn nút bỏ qua
+          this.proceedToNextStep();
+          this.showStatus("Đã bỏ qua câu khó!", "success");
+        }
+
+        // Hiển thị nút bỏ qua
+        showSkipButton() {
+          this.skipBtn.style.display = "block";
+          this.addMessage(
+            `💡 Tip: Bạn đã thử ${this.failedAttempts} lần. Có thể bỏ qua câu này bằng nút "Bỏ qua" bên dưới.`,
+            "error"
+          );
+        }
+
+        // Ẩn nút bỏ qua
+        hideSkipButton() {
+          this.skipBtn.style.display = "none";
         }
 
         isMatchWithTolerance(input, expected) {
@@ -1501,6 +1568,8 @@
           this.currentStep = 0;
           this.conversationHistory = [];
           this.waitingForAI = false;
+          this.failedAttempts = 0; // Reset số lần thử thất bại
+          this.hideSkipButton(); // Ẩn nút bỏ qua
           this.conversationArea.innerHTML = "";
 
           this.updateProgress();
@@ -1596,6 +1665,8 @@
           this.conversationHistory = [];
           this.currentStep = 0;
           this.waitingForAI = false;
+          this.failedAttempts = 0; // Reset số lần thử thất bại
+          this.hideSkipButton(); // Ẩn nút bỏ qua
           this.updateProgress();
           this.updateExpectedResponse();
           this.showStatus("Cuộc hội thoại đã được xóa", "success");
