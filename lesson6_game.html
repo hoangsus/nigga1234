@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German Conversation AI - LinguaTreff (Fixed)</title>
+    <title>German Conversation AI - LinguaTreff (Complete Fixed)</title>
     <style>
       * {
         margin: 0;
@@ -467,7 +467,7 @@
     <div class="container">
       <div class="header">
         <h1>🎯 LinguaTreff AI</h1>
-        <p>Luyện tập hội thoại tiếng Đức với AI - Phiên bản cải tiến</p>
+        <p>Luyện tập hội thoại tiếng Đức với AI - Phiên bản hoàn chỉnh</p>
       </div>
 
       <div class="main-content">
@@ -731,6 +731,11 @@
 
         buildConversationSequence() {
           // Template conversation sequence được tạo tự động dựa trên thông tin nhập vào
+          const lastNameWrongLetter = this.getWrongLetter(this.studentLastName);
+          const firstNameWrongLetter = this.getWrongLetter(
+            this.studentFirstName
+          );
+
           this.conversationSequence = [
             {
               speaker: "teacher",
@@ -774,17 +779,17 @@
             },
             {
               speaker: "teacher",
-              text: `Mit „${this.studentLastName.slice(-1)}" am Ende?`,
-              vietnamese: `Có chữ "${this.studentLastName.slice(
-                -1
-              )}" ở cuối không?`,
+              text: `Mit „${lastNameWrongLetter}" am Ende?`,
+              vietnamese: `Có chữ "${lastNameWrongLetter}" ở cuối không?`,
             },
             {
               speaker: "student",
-              text: `Nein, nur mit „${this.studentLastName.slice(-1)}".`,
-              vietnamese: `Không, chỉ có chữ "${this.studentLastName.slice(
-                -1
-              )}".`,
+              text: `Nein, nur mit „${this.studentLastName
+                .slice(-1)
+                .toLowerCase()}".`,
+              vietnamese: `Không, chỉ có chữ "${this.studentLastName
+                .slice(-1)
+                .toLowerCase()}".`,
             },
             {
               speaker: "teacher",
@@ -819,14 +824,18 @@
               speaker: "student",
               text: `Äh, nein. ${
                 this.studentFirstName
-              }. Mit „${this.studentFirstName.slice(
-                -1
-              )}" am Ende. ... ${this.studentFirstName.split("").join("-")}.`,
+              }. Mit „${this.studentFirstName
+                .slice(-1)
+                .toLowerCase()}" am Ende. ... ${this.studentFirstName
+                .split("")
+                .join("-")}.`,
               vietnamese: `Ờ, không. ${
                 this.studentFirstName
-              }. Có chữ "${this.studentFirstName.slice(
-                -1
-              )}" ở cuối. ... ${this.studentFirstName.split("").join("-")}.`,
+              }. Có chữ "${this.studentFirstName
+                .slice(-1)
+                .toLowerCase()}" ở cuối. ... ${this.studentFirstName
+                .split("")
+                .join("-")}.`,
             },
             {
               speaker: "teacher",
@@ -882,6 +891,22 @@
               vietnamese: `${this.studentAddress}. Tốt, cảm ơn. Xong rồi.`,
             },
           ];
+        }
+
+        // Hàm tạo chữ cái sai để hỏi (không phải chữ cái cuối thật)
+        getWrongLetter(name) {
+          const actualLastLetter = name.slice(-1).toLowerCase();
+          const commonLetters = ["n", "e", "s", "t", "r", "a", "i", "o", "u"];
+
+          // Tìm chữ cái khác với chữ cái cuối thật
+          for (let letter of commonLetters) {
+            if (letter !== actualLastLetter) {
+              return letter;
+            }
+          }
+
+          // Nếu không tìm được, dùng 'n' làm mặc định (trừ khi tên kết thúc bằng 'n')
+          return actualLastLetter === "n" ? "e" : "n";
         }
 
         // Hàm helper để lấy tên thành phố bằng tiếng Đức
@@ -1349,8 +1374,9 @@
           return (
             text
               .toLowerCase()
-              // Loại bỏ tất cả dấu câu và ký tự đặc biệt
-              .replace(/[.,!?;:„"„"…\-\(\)\[\]]/g, "")
+              // Loại bỏ hoàn toàn tất cả dấu câu, ký tự đặc biệt và số
+              .replace(/[.,!?;:„"„"…\-\(\)\[\]'"*]+/g, "")
+              .replace(/[0-9]+/g, "")
               // Thay thế nhiều khoảng trắng bằng 1 khoảng trắng
               .replace(/\s+/g, " ")
               // Chuẩn hóa các ký tự đặc biệt tiếng Đức
