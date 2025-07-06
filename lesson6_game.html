@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German Conversation AI - LinguaTreff (Improved)</title>
+    <title>German Conversation AI - LinguaTreff (Fixed)</title>
     <style>
       * {
         margin: 0;
@@ -495,6 +495,16 @@
               />
             </div>
             <div class="name-input-group">
+              <label for="wrongFirstName">Tên sai (để giáo viên hỏi):</label>
+              <input
+                type="text"
+                id="wrongFirstName"
+                class="name-input"
+                value="Maria"
+                placeholder="Tên mà giáo viên sẽ đoán sai"
+              />
+            </div>
+            <div class="name-input-group">
               <label for="studentLastName">Họ (Familienname) học viên:</label>
               <input
                 type="text"
@@ -696,6 +706,7 @@
           this.currentStep = 0;
           this.teacherName = "Frau Schwarz";
           this.studentFirstName = "Marie";
+          this.wrongFirstName = "Maria";
           this.studentLastName = "Platini";
           this.studentCity = "Fribourg";
           this.studentCountry = "Schweiz";
@@ -706,201 +717,186 @@
           this.conversationStarted = false;
           this.waitingForAI = false;
 
-          // Enhanced conversation sequence with Vietnamese translations
-          this.conversationSequence = [
-            {
-              speaker: "teacher",
-              text: "Sprachschule LinguaTreff. Sie sprechen mit Frau Schwarz. Guten Tag.",
-              vietnamese:
-                "Trường ngoại ngữ LinguaTreff. Chị đang nói chuyện với bà Schwarz. Chào chị.",
-              expectedResponse: "Guten Tag, ich möchte mich anmelden.",
-              expectedVietnamese: "Chào bà, tôi muốn đăng ký học.",
-            },
-            {
-              speaker: "student",
-              text: "Guten Tag, ich möchte mich anmelden.",
-              vietnamese: "Chào bà, tôi muốn đăng ký học.",
-              expectedResponse: "Gern. Für welchen Kurs denn, bitte?",
-              expectedVietnamese: "Được chứ. Chị muốn đăng ký khóa học nào?",
-            },
-            {
-              speaker: "teacher",
-              text: "Gern. Für welchen Kurs denn, bitte?",
-              vietnamese: "Được chứ. Chị muốn đăng ký khóa học nào?",
-              expectedResponse: "Anfänger, also A 1.1.",
-              expectedVietnamese: "Người mới bắt đầu, tức là A 1.1.",
-            },
-            {
-              speaker: "student",
-              text: "Anfänger, also A 1.1.",
-              vietnamese: "Người mới bắt đầu, tức là A 1.1.",
-              expectedResponse: "Gut, ja. Wie heißen Sie, bitte?",
-              expectedVietnamese: "Tốt. Chị tên gì?",
-            },
-            {
-              speaker: "teacher",
-              text: "Gut, ja. Wie heißen Sie, bitte?",
-              vietnamese: "Tốt. Chị tên gì?",
-              expectedResponse: "Platini.",
-              expectedVietnamese: "Platini.",
-            },
-            {
-              speaker: "student",
-              text: "Platini.",
-              vietnamese: "Platini.",
-              expectedResponse: "Wiederholen Sie das bitte.",
-              expectedVietnamese: "Xin chị lặp lại.",
-            },
-            {
-              speaker: "teacher",
-              text: "Wiederholen Sie das bitte.",
-              vietnamese: "Xin chị lặp lại.",
-              expectedResponse: "Ich heiße Platini.",
-              expectedVietnamese: "Tôi tên là Platini.",
-            },
-            {
-              speaker: "student",
-              text: "Ich heiße Platini.",
-              vietnamese: "Tôi tên là Platini.",
-              expectedResponse: 'Mit „e" am Ende?',
-              expectedVietnamese: 'Có chữ "e" ở cuối không?',
-            },
-            {
-              speaker: "teacher",
-              text: 'Mit „e" am Ende?',
-              vietnamese: 'Có chữ "e" ở cuối không?',
-              expectedResponse: 'Nein, nur mit „i".',
-              expectedVietnamese: 'Không, chỉ có chữ "i".',
-            },
-            {
-              speaker: "student",
-              text: 'Nein, nur mit „i".',
-              vietnamese: 'Không, chỉ có chữ "i".',
-              expectedResponse: "Okay. Ich buchstabiere: P-L-A-T-I-N-I.",
-              expectedVietnamese: "Được. Tôi đánh vần: P-L-A-T-I-N-I.",
-            },
-            {
-              speaker: "teacher",
-              text: "Okay. Ich buchstabiere: P-L-A-T-I-N-I.",
-              vietnamese: "Được. Tôi đánh vần: P-L-A-T-I-N-I.",
-              expectedResponse: "Richtig.",
-              expectedVietnamese: "Đúng rồi.",
-            },
-            {
-              speaker: "student",
-              text: "Richtig.",
-              vietnamese: "Đúng rồi.",
-              expectedResponse: "Und Ihr Vorname, bitte?",
-              expectedVietnamese: "Và tên của chị?",
-            },
-            {
-              speaker: "teacher",
-              text: "Und Ihr Vorname, bitte?",
-              vietnamese: "Và tên của chị?",
-              expectedResponse: "Marie.",
-              expectedVietnamese: "Marie.",
-            },
-            {
-              speaker: "student",
-              text: "Marie.",
-              vietnamese: "Marie.",
-              expectedResponse: "Maria?",
-              expectedVietnamese: "Maria?",
-            },
-            {
-              speaker: "teacher",
-              text: "Maria?",
-              vietnamese: "Maria?",
-              expectedResponse:
-                'Äh, nein. Marie. Mit „e" am Ende. ... M-A-R-I-E.',
-              expectedVietnamese:
-                'Ờ, không. Marie. Có chữ "e" ở cuối. ... M-A-R-I-E.',
-            },
-            {
-              speaker: "student",
-              text: 'Äh, nein. Marie. Mit „e" am Ende. ... M-A-R-I-E.',
-              vietnamese: 'Ờ, không. Marie. Có chữ "e" ở cuối. ... M-A-R-I-E.',
-              expectedResponse: "Also Marie Platini.",
-              expectedVietnamese: "Vậy là Marie Platini.",
-            },
-            {
-              speaker: "teacher",
-              text: "Also Marie Platini.",
-              vietnamese: "Vậy là Marie Platini.",
-              expectedResponse: "Richtig.",
-              expectedVietnamese: "Đúng rồi.",
-            },
-            {
-              speaker: "student",
-              text: "Richtig.",
-              vietnamese: "Đúng rồi.",
-              expectedResponse: "Und woher kommen Sie Frau Platini?",
-              expectedVietnamese: "Và bà Platini đến từ đâu?",
-            },
-            {
-              speaker: "teacher",
-              text: "Und woher kommen Sie Frau Platini?",
-              vietnamese: "Và bà Platini đến từ đâu?",
-              expectedResponse: "Ich bin aus Fribourg.",
-              expectedVietnamese: "Tôi đến từ Fribourg.",
-            },
-            {
-              speaker: "student",
-              text: "Ich bin aus Fribourg.",
-              vietnamese: "Tôi đến từ Fribourg.",
-              expectedResponse: "Aus Freiburg?",
-              expectedVietnamese: "Từ Freiburg?",
-            },
-            {
-              speaker: "teacher",
-              text: "Aus Freiburg?",
-              vietnamese: "Từ Freiburg?",
-              expectedResponse:
-                "Ja, Freiburg in der Schweiz. Das heißt Fribourg. Ich buchstabiere: F-R-I-B-O-U-R-G.",
-              expectedVietnamese:
-                "Vâng, Freiburg ở Thụy Sĩ. Tức là Fribourg. Tôi đánh vần: F-R-I-B-O-U-R-G.",
-            },
-            {
-              speaker: "student",
-              text: "Ja, Freiburg in der Schweiz. Das heißt Fribourg. Ich buchstabiere: F-R-I-B-O-U-R-G.",
-              vietnamese:
-                "Vâng, Freiburg ở Thụy Sĩ. Tức là Fribourg. Tôi đánh vần: F-R-I-B-O-U-R-G.",
-              expectedResponse:
-                "Aha. Danke. Das hab ich. Nun noch die Adresse.",
-              expectedVietnamese:
-                "À ha. Cảm ơn. Tôi đã ghi được. Bây giờ là địa chỉ.",
-            },
-            {
-              speaker: "teacher",
-              text: "Aha. Danke. Das hab ich. Nun noch die Adresse.",
-              vietnamese: "À ha. Cảm ơn. Tôi đã ghi được. Bây giờ là địa chỉ.",
-              expectedResponse:
-                "Die ist einfach. Also, ich wohne in der Hauptstraße 15.",
-              expectedVietnamese:
-                "Địa chỉ thì đơn giản. Tôi sống ở Hauptstraße số 15.",
-            },
-            {
-              speaker: "student",
-              text: "Die ist einfach. Also, ich wohne in der Hauptstraße 15.",
-              vietnamese: "Địa chỉ thì đơn giản. Tôi sống ở Hauptstraße số 15.",
-              expectedResponse: "Hauptstraße 15. Gut, danke. Das war's.",
-              expectedVietnamese: "Hauptstraße 15. Tốt, cảm ơn. Xong rồi.",
-            },
-            {
-              speaker: "teacher",
-              text: "Hauptstraße 15. Gut, danke. Das war's.",
-              vietnamese: "Hauptstraße 15. Tốt, cảm ơn. Xong rồi.",
-              expectedResponse: "Conversation completed!",
-              expectedVietnamese: "Cuộc hội thoại hoàn thành!",
-            },
-          ];
+          // Enhanced conversation sequence - sẽ được cập nhật trong buildConversationSequence()
+          this.conversationSequence = [];
 
           this.initializeElements();
           this.setupEventListeners();
           this.initializeSpeechRecognition();
           this.loadVoices();
+          this.buildConversationSequence();
           this.updateProgress();
           this.updateExpectedResponse();
+        }
+
+        buildConversationSequence() {
+          // Template conversation sequence được tạo tự động dựa trên thông tin nhập vào
+          this.conversationSequence = [
+            {
+              speaker: "teacher",
+              text: `Sprachschule ${this.schoolName}. Sie sprechen mit ${this.teacherName}. Guten Tag.`,
+              vietnamese: `Trường ngoại ngữ ${this.schoolName}. Chị đang nói chuyện với ${this.teacherName}. Chào chị.`,
+            },
+            {
+              speaker: "student",
+              text: "Guten Tag, ich möchte mich anmelden.",
+              vietnamese: "Chào bà, tôi muốn đăng ký học.",
+            },
+            {
+              speaker: "teacher",
+              text: "Gern. Für welchen Kurs denn, bitte?",
+              vietnamese: "Được chứ. Chị muốn đăng ký khóa học nào?",
+            },
+            {
+              speaker: "student",
+              text: `Anfänger, also ${this.courseLevel}.`,
+              vietnamese: `Người mới bắt đầu, tức là ${this.courseLevel}.`,
+            },
+            {
+              speaker: "teacher",
+              text: "Gut, ja. Wie heißen Sie, bitte?",
+              vietnamese: "Tốt. Chị tên gì?",
+            },
+            {
+              speaker: "student",
+              text: `${this.studentLastName}.`,
+              vietnamese: `${this.studentLastName}.`,
+            },
+            {
+              speaker: "teacher",
+              text: "Wiederholen Sie das bitte.",
+              vietnamese: "Xin chị lặp lại.",
+            },
+            {
+              speaker: "student",
+              text: `Ich heiße ${this.studentLastName}.`,
+              vietnamese: `Tôi tên là ${this.studentLastName}.`,
+            },
+            {
+              speaker: "teacher",
+              text: `Mit „${this.studentLastName.slice(-1)}" am Ende?`,
+              vietnamese: `Có chữ "${this.studentLastName.slice(
+                -1
+              )}" ở cuối không?`,
+            },
+            {
+              speaker: "student",
+              text: `Nein, nur mit „${this.studentLastName.slice(-1)}".`,
+              vietnamese: `Không, chỉ có chữ "${this.studentLastName.slice(
+                -1
+              )}".`,
+            },
+            {
+              speaker: "teacher",
+              text: `Okay. Ich buchstabiere: ${this.studentLastName
+                .split("")
+                .join("-")}.`,
+              vietnamese: `Được. Tôi đánh vần: ${this.studentLastName
+                .split("")
+                .join("-")}.`,
+            },
+            {
+              speaker: "student",
+              text: "Richtig.",
+              vietnamese: "Đúng rồi.",
+            },
+            {
+              speaker: "teacher",
+              text: "Und Ihr Vorname, bitte?",
+              vietnamese: "Và tên của chị?",
+            },
+            {
+              speaker: "student",
+              text: `${this.studentFirstName}.`,
+              vietnamese: `${this.studentFirstName}.`,
+            },
+            {
+              speaker: "teacher",
+              text: `${this.wrongFirstName}?`,
+              vietnamese: `${this.wrongFirstName}?`,
+            },
+            {
+              speaker: "student",
+              text: `Äh, nein. ${
+                this.studentFirstName
+              }. Mit „${this.studentFirstName.slice(
+                -1
+              )}" am Ende. ... ${this.studentFirstName.split("").join("-")}.`,
+              vietnamese: `Ờ, không. ${
+                this.studentFirstName
+              }. Có chữ "${this.studentFirstName.slice(
+                -1
+              )}" ở cuối. ... ${this.studentFirstName.split("").join("-")}.`,
+            },
+            {
+              speaker: "teacher",
+              text: `Also ${this.studentFirstName} ${this.studentLastName}.`,
+              vietnamese: `Vậy là ${this.studentFirstName} ${this.studentLastName}.`,
+            },
+            {
+              speaker: "student",
+              text: "Richtig.",
+              vietnamese: "Đúng rồi.",
+            },
+            {
+              speaker: "teacher",
+              text: `Und woher kommen Sie Frau ${this.studentLastName}?`,
+              vietnamese: `Và bà ${this.studentLastName} đến từ đâu?`,
+            },
+            {
+              speaker: "student",
+              text: `Ich bin aus ${this.studentCity}.`,
+              vietnamese: `Tôi đến từ ${this.studentCity}.`,
+            },
+            {
+              speaker: "teacher",
+              text: `Aus ${this.getCityGermanName()}?`,
+              vietnamese: `Từ ${this.getCityGermanName()}?`,
+            },
+            {
+              speaker: "student",
+              text: `Ja, ${this.getCityGermanName()} in der ${
+                this.studentCountry
+              }. Das heißt ${
+                this.studentCity
+              }. Ich buchstabiere: ${this.studentCity.split("").join("-")}.`,
+              vietnamese: `Vâng, ${this.getCityGermanName()} ở ${
+                this.studentCountry
+              }. Tức là ${this.studentCity}. Tôi đánh vần: ${this.studentCity
+                .split("")
+                .join("-")}.`,
+            },
+            {
+              speaker: "teacher",
+              text: "Aha. Danke. Das hab ich. Nun noch die Adresse.",
+              vietnamese: "À ha. Cảm ơn. Tôi đã ghi được. Bây giờ là địa chỉ.",
+            },
+            {
+              speaker: "student",
+              text: `Die ist einfach. Also, ich wohne in der ${this.studentAddress}.`,
+              vietnamese: `Địa chỉ thì đơn giản. Tôi sống ở ${this.studentAddress}.`,
+            },
+            {
+              speaker: "teacher",
+              text: `${this.studentAddress}. Gut, danke. Das war's.`,
+              vietnamese: `${this.studentAddress}. Tốt, cảm ơn. Xong rồi.`,
+            },
+          ];
+        }
+
+        // Hàm helper để lấy tên thành phố bằng tiếng Đức
+        getCityGermanName() {
+          // Một số thành phố có tên khác trong tiếng Đức
+          const cityMapping = {
+            Fribourg: "Freiburg",
+            Genève: "Genf",
+            Bâle: "Basel",
+            Zürich: "Zürich",
+            Bern: "Bern",
+            Lausanne: "Lausanne",
+          };
+
+          return cityMapping[this.studentCity] || this.studentCity;
         }
 
         initializeElements() {
@@ -920,6 +916,7 @@
           this.teacherNameInput = document.getElementById("teacherName");
           this.studentFirstNameInput =
             document.getElementById("studentFirstName");
+          this.wrongFirstNameInput = document.getElementById("wrongFirstName");
           this.studentLastNameInput =
             document.getElementById("studentLastName");
           this.studentCityInput = document.getElementById("studentCity");
@@ -981,6 +978,7 @@
         saveNamesAndStart() {
           const newTeacherName = this.teacherNameInput.value.trim();
           const newStudentFirstName = this.studentFirstNameInput.value.trim();
+          const newWrongFirstName = this.wrongFirstNameInput.value.trim();
           const newStudentLastName = this.studentLastNameInput.value.trim();
           const newStudentCity = this.studentCityInput.value.trim();
           const newStudentCountry = this.studentCountryInput.value.trim();
@@ -994,6 +992,7 @@
           if (
             newTeacherName &&
             newStudentFirstName &&
+            newWrongFirstName &&
             newStudentLastName &&
             newStudentCity &&
             newStudentCountry &&
@@ -1001,8 +1000,10 @@
             newCourseLevel &&
             newSchoolName
           ) {
+            // Cập nhật thông tin mới
             this.teacherName = newTeacherName;
             this.studentFirstName = newStudentFirstName;
+            this.wrongFirstName = newWrongFirstName;
             this.studentLastName = newStudentLastName;
             this.studentCity = newStudentCity;
             this.studentCountry = newStudentCountry;
@@ -1011,7 +1012,8 @@
             this.schoolName = newSchoolName;
             this.userRole = selectedRole;
 
-            this.updateConversationSequence();
+            // Xây dựng lại hội thoại với thông tin mới
+            this.buildConversationSequence();
             this.startConversation();
             this.showStatus(
               "Cuộc hội thoại bắt đầu! (Độ khắt khe: " +
@@ -1033,6 +1035,7 @@
           this.nameSettings.style.display = "none";
           this.conversationContainer.style.display = "block";
 
+          // Cập nhật hiển thị vai trò
           if (this.userRole === "teacher") {
             this.userRoleDisplay.textContent = this.teacherName;
             this.aiRoleDisplay.textContent = `${this.studentFirstName} ${this.studentLastName}`;
@@ -1045,6 +1048,7 @@
           this.updateProgress();
           this.updateExpectedResponse();
 
+          // Bắt đầu hội thoại nếu không phải lượt user
           if (!this.isUserTurn()) {
             setTimeout(() => {
               this.playAIResponse();
@@ -1064,66 +1068,6 @@
           this.conversationArea.innerHTML = "";
           this.updateProgress();
           this.showStatus("Có thể cài đặt thông tin mới", "success");
-        }
-
-        updateConversationSequence() {
-          // Update the first message with school name and teacher name
-          this.conversationSequence[0].text = `Sprachschule ${this.schoolName}. Sie sprechen mit ${this.teacherName}. Guten Tag.`;
-          this.conversationSequence[0].vietnamese = `Trường ngoại ngữ ${this.schoolName}. Chị đang nói chuyện với ${this.teacherName}. Chào chị.`;
-
-          // Update course level
-          this.conversationSequence[2].expectedResponse = `Anfänger, also ${this.courseLevel}.`;
-          this.conversationSequence[3].text = `Anfänger, also ${this.courseLevel}.`;
-
-          // Update student last name
-          this.conversationSequence[4].expectedResponse = `${this.studentLastName}.`;
-          this.conversationSequence[5].text = `${this.studentLastName}.`;
-
-          // Update spelling of last name
-          const lastNameSpelling = this.studentLastName.split("").join("-");
-          this.conversationSequence[9].expectedResponse = `Okay. Ich buchstabiere: ${lastNameSpelling}.`;
-          this.conversationSequence[10].text = `Okay. Ich buchstabiere: ${lastNameSpelling}.`;
-
-          // Update first name
-          this.conversationSequence[12].expectedResponse = `${this.studentFirstName}.`;
-          this.conversationSequence[13].text = `${this.studentFirstName}.`;
-
-          // Update first name spelling
-          const firstNameSpelling = this.studentFirstName.split("").join("-");
-          this.conversationSequence[14].expectedResponse = `Äh, nein. ${
-            this.studentFirstName
-          }. Mit „${this.studentFirstName.slice(
-            -1
-          )}" am Ende. ... ${firstNameSpelling}.`;
-          this.conversationSequence[15].text = `Äh, nein. ${
-            this.studentFirstName
-          }. Mit „${this.studentFirstName.slice(
-            -1
-          )}" am Ende. ... ${firstNameSpelling}.`;
-
-          // Update full name confirmation
-          this.conversationSequence[16].text = `Also ${this.studentFirstName} ${this.studentLastName}.`;
-          this.conversationSequence[17].expectedResponse = `Und woher kommen Sie Frau ${this.studentLastName}?`;
-          this.conversationSequence[18].text = `Und woher kommen Sie Frau ${this.studentLastName}?`;
-
-          // Update city
-          this.conversationSequence[18].expectedResponse = `Ich bin aus ${this.studentCity}.`;
-          this.conversationSequence[19].text = `Ich bin aus ${this.studentCity}.`;
-
-          // Update city clarification
-          const cityGermanName =
-            this.studentCity === "Fribourg" ? "Freiburg" : this.studentCity;
-          this.conversationSequence[20].text = `Aus ${cityGermanName}?`;
-
-          // Update city and country explanation
-          const citySpelling = this.studentCity.split("").join("-");
-          this.conversationSequence[20].expectedResponse = `Ja, ${cityGermanName} in der ${this.studentCountry}. Das heißt ${this.studentCity}. Ich buchstabiere: ${citySpelling}.`;
-          this.conversationSequence[21].text = `Ja, ${cityGermanName} in der ${this.studentCountry}. Das heißt ${this.studentCity}. Ich buchstabiere: ${citySpelling}.`;
-
-          // Update address
-          this.conversationSequence[22].expectedResponse = `Die ist einfach. Also, ich wohne in der ${this.studentAddress}.`;
-          this.conversationSequence[23].text = `Die ist einfach. Also, ich wohne in der ${this.studentAddress}.`;
-          this.conversationSequence[24].text = `${this.studentAddress}. Gut, danke. Das war's.`;
         }
 
         isUserTurn() {
@@ -1227,7 +1171,7 @@
           const currentSequence = this.conversationSequence[this.currentStep];
           const expectedText = currentSequence.text;
 
-          // Enhanced matching with adjustable tolerance
+          // Kiểm tra độ chính xác với tolerance có thể điều chỉnh
           if (this.isMatchWithTolerance(transcript, expectedText)) {
             const accuracy = this.calculateAccuracy(transcript, expectedText);
             this.addMessage(
@@ -1281,7 +1225,7 @@
             return 1.0;
           }
 
-          // Word-based similarity
+          // So sánh theo từ
           const words1 = normalizedInput.split(" ").filter((w) => w.length > 0);
           const words2 = normalizedExpected
             .split(" ")
@@ -1294,10 +1238,13 @@
           let partialMatches = 0;
           let usedIndices = new Set();
 
-          // Count exact matches
+          // Đếm từ khớp chính xác
           for (let i = 0; i < words1.length; i++) {
             for (let j = 0; j < words2.length; j++) {
-              if (!usedIndices.has(j) && words1[i] === words2[j]) {
+              if (
+                !usedIndices.has(j) &&
+                this.isWordMatch(words1[i], words2[j])
+              ) {
                 exactMatches++;
                 usedIndices.add(j);
                 break;
@@ -1305,11 +1252,15 @@
             }
           }
 
-          // Count partial matches for remaining words
+          // Đếm từ khớp một phần cho những từ chưa được match
           for (let i = 0; i < words1.length; i++) {
             let matched = false;
+            // Kiểm tra xem đã được match chưa
             for (let j = 0; j < words2.length; j++) {
-              if (!usedIndices.has(j) && words1[i] === words2[j]) {
+              if (
+                !usedIndices.has(j) &&
+                this.isWordMatch(words1[i], words2[j])
+              ) {
                 matched = true;
                 break;
               }
@@ -1317,13 +1268,16 @@
 
             if (!matched) {
               for (let j = 0; j < words2.length; j++) {
-                if (
-                  !usedIndices.has(j) &&
-                  this.getLevenshteinSimilarity(words1[i], words2[j]) > 0.7
-                ) {
-                  partialMatches += 0.5;
-                  usedIndices.add(j);
-                  break;
+                if (!usedIndices.has(j)) {
+                  const similarity = this.getWordSimilarity(
+                    words1[i],
+                    words2[j]
+                  );
+                  if (similarity > 0.6) {
+                    partialMatches += similarity * 0.8; // Giảm trọng số cho partial match
+                    usedIndices.add(j);
+                    break;
+                  }
                 }
               }
             }
@@ -1332,13 +1286,33 @@
           return (exactMatches + partialMatches) / maxLength;
         }
 
-        getLevenshteinSimilarity(str1, str2) {
-          const distance = this.levenshteinDistance(str1, str2);
-          const maxLen = Math.max(str1.length, str2.length);
-          return maxLen === 0 ? 1 : 1 - distance / maxLen;
+        // Hàm kiểm tra xem 2 từ có match không (linh hoạt hơn cho từ ngắn)
+        isWordMatch(word1, word2) {
+          if (word1 === word2) return true;
+
+          // Đặc biệt linh hoạt cho từ ngắn (1-2 ký tự)
+          if (word1.length <= 2 || word2.length <= 2) {
+            // Cho phép sai khác 1 ký tự cho từ ngắn
+            return this.getLevenshteinDistance(word1, word2) <= 1;
+          }
+
+          // Cho từ dài hơn, yêu cầu độ tương tự cao hơn
+          return this.getWordSimilarity(word1, word2) > 0.85;
         }
 
-        levenshteinDistance(str1, str2) {
+        // Cải thiện hàm tính độ tương tự của từ
+        getWordSimilarity(str1, str2) {
+          if (str1 === str2) return 1.0;
+
+          const maxLen = Math.max(str1.length, str2.length);
+          if (maxLen === 0) return 1.0;
+
+          const distance = this.getLevenshteinDistance(str1, str2);
+          return 1 - distance / maxLen;
+        }
+
+        // Đổi tên để rõ ràng hơn
+        getLevenshteinDistance(str1, str2) {
           const matrix = [];
           for (let i = 0; i <= str2.length; i++) {
             matrix[i] = [i];
@@ -1362,21 +1336,40 @@
           return matrix[str2.length][str1.length];
         }
 
+        // Xóa hàm cũ và thay thế
+        getLevenshteinSimilarity(str1, str2) {
+          return this.getWordSimilarity(str1, str2);
+        }
+
+        levenshteinDistance(str1, str2) {
+          return this.getLevenshteinDistance(str1, str2);
+        }
+
         normalizeForComparison(text) {
-          return text
-            .toLowerCase()
-            .replace(/[.,!?;:„"„"…]/g, "")
-            .replace(/\s+/g, " ")
-            .replace(/ä/g, "ae")
-            .replace(/ö/g, "oe")
-            .replace(/ü/g, "ue")
-            .replace(/ß/g, "ss")
-            .trim();
+          return (
+            text
+              .toLowerCase()
+              // Loại bỏ tất cả dấu câu và ký tự đặc biệt
+              .replace(/[.,!?;:„"„"…\-\(\)\[\]]/g, "")
+              // Thay thế nhiều khoảng trắng bằng 1 khoảng trắng
+              .replace(/\s+/g, " ")
+              // Chuẩn hóa các ký tự đặc biệt tiếng Đức
+              .replace(/ä/g, "ae")
+              .replace(/ö/g, "oe")
+              .replace(/ü/g, "ue")
+              .replace(/ß/g, "ss")
+              // Loại bỏ các ký tự accent khác
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .trim()
+          );
         }
 
         updateProgress() {
           const progress =
-            (this.currentStep / this.conversationSequence.length) * 100;
+            this.conversationSequence.length > 0
+              ? (this.currentStep / this.conversationSequence.length) * 100
+              : 0;
           this.progressFill.style.width = `${progress}%`;
         }
 
@@ -1602,7 +1595,7 @@
         }
       }
 
-      // Initialize the app when the page loads
+      // Khởi tạo ứng dụng khi trang web được tải
       document.addEventListener("DOMContentLoaded", () => {
         new ImprovedGermanConversationAI();
       });
