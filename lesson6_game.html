@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German Conversation AI - LinguaTreff (With Auto-Save)</title>
+    <title>German Conversation AI - LinguaTreff (With Skip Feature)</title>
     <style>
       * {
         margin: 0;
@@ -66,17 +66,6 @@
         text-align: center;
       }
 
-      .saved-info-notice {
-        background: #d4edda;
-        border: 2px solid #c3e6cb;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 15px;
-        color: #155724;
-        text-align: center;
-        font-weight: bold;
-      }
-
       .name-inputs {
         display: flex;
         gap: 15px;
@@ -110,11 +99,6 @@
         border-color: #667eea;
       }
 
-      .name-input.loaded {
-        background-color: #e8f5e8;
-        border-color: #28a745;
-      }
-
       .save-btn {
         background: linear-gradient(135deg, #00b894, #00cec9);
         color: white;
@@ -134,22 +118,35 @@
         box-shadow: 0 10px 20px rgba(0, 206, 201, 0.3);
       }
 
-      .clear-saved-btn {
-        background: linear-gradient(135deg, #636e72, #2d3436);
+      .storage-controls {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      .storage-btn {
+        background: #6c757d;
         color: white;
         padding: 8px 15px;
         border: none;
         border-radius: 15px;
         font-size: 0.9em;
         cursor: pointer;
-        font-weight: bold;
         transition: all 0.3s ease;
-        margin-left: 10px;
       }
 
-      .clear-saved-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(99, 110, 114, 0.3);
+      .storage-btn:hover {
+        background: #495057;
+        transform: translateY(-1px);
+      }
+
+      .storage-btn.reset {
+        background: #dc3545;
+      }
+
+      .storage-btn.reset:hover {
+        background: #c82333;
       }
 
       .role-selector {
@@ -504,6 +501,10 @@
         .voice-controls {
           flex-direction: column;
         }
+
+        .storage-controls {
+          flex-direction: column;
+        }
       }
     </style>
   </head>
@@ -511,24 +512,12 @@
     <div class="container">
       <div class="header">
         <h1>🎯 LinguaTreff AI</h1>
-        <p>Luyện tập hội thoại tiếng Đức với AI - Tự động lưu thông tin</p>
+        <p>Luyện tập hội thoại tiếng Đức với AI - Có tính năng bỏ qua</p>
       </div>
 
       <div class="main-content">
         <div class="name-settings" id="nameSettings">
           <h3>⚙️ Cài đặt thông tin nhân vật</h3>
-
-          <div
-            class="saved-info-notice"
-            id="savedInfoNotice"
-            style="display: none"
-          >
-            💾 Đã tải thông tin đã lưu! Có thể chỉnh sửa nếu cần.
-            <button class="clear-saved-btn" id="clearSavedBtn">
-              🗑️ Xóa thông tin đã lưu
-            </button>
-          </div>
-
           <div class="name-inputs">
             <div class="name-input-group">
               <label for="teacherName">Tên giáo viên:</label>
@@ -671,6 +660,15 @@
           <button class="save-btn" id="saveNames">
             💾 Lưu thông tin & Bắt đầu
           </button>
+
+          <div class="storage-controls">
+            <button class="storage-btn" id="loadDefaults">
+              📥 Tải cài đặt đã lưu
+            </button>
+            <button class="storage-btn reset" id="resetDefaults">
+              🗑️ Xóa dữ liệu đã lưu
+            </button>
+          </div>
         </div>
 
         <div
@@ -783,24 +781,21 @@
           this.failedAttempts = 0;
           this.maxFailedAttempts = 3;
 
-          // Storage để lưu thông tin (sử dụng biến JavaScript thay vì localStorage)
-          this.savedCharacterInfo = null;
-
           this.conversationSequence = [];
 
           this.initializeElements();
           this.setupEventListeners();
           this.initializeSpeechRecognition();
           this.loadVoices();
-          this.loadSavedCharacterInfo(); // Load thông tin đã lưu
+          this.loadSettingsFromLocalStorage(); // Load saved settings
           this.buildConversationSequence();
           this.updateProgress();
           this.updateExpectedResponse();
         }
 
-        // Lưu thông tin nhân vật
-        saveCharacterInfo() {
-          const characterInfo = {
+        // LocalStorage methods
+        saveSettingsToLocalStorage() {
+          const settings = {
             teacherName: this.teacherName,
             studentFirstName: this.studentFirstName,
             wrongFirstName: this.wrongFirstName,
@@ -812,100 +807,137 @@
             schoolName: this.schoolName,
             userRole: this.userRole,
             tolerance: this.tolerance,
-            savedAt: new Date().toLocaleString(),
+            speed: this.speed,
           };
 
-          this.savedCharacterInfo = characterInfo;
-          this.showStatus("✅ Thông tin đã được lưu tự động!", "success");
-        }
-
-        // Tải thông tin nhân vật đã lưu
-        loadSavedCharacterInfo() {
-          if (this.savedCharacterInfo) {
-            // Điền thông tin vào form
-            this.teacherNameInput.value =
-              this.savedCharacterInfo.teacherName || "Frau Schwarz";
-            this.studentFirstNameInput.value =
-              this.savedCharacterInfo.studentFirstName || "Marie";
-            this.wrongFirstNameInput.value =
-              this.savedCharacterInfo.wrongFirstName || "Maria";
-            this.studentLastNameInput.value =
-              this.savedCharacterInfo.studentLastName || "Platini";
-            this.studentCityInput.value =
-              this.savedCharacterInfo.studentCity || "Fribourg";
-            this.studentCountryInput.value =
-              this.savedCharacterInfo.studentCountry || "Schweiz";
-            this.studentAddressInput.value =
-              this.savedCharacterInfo.studentAddress || "Hauptstraße 15";
-            this.courseLevelInput.value =
-              this.savedCharacterInfo.courseLevel || "A 1.1";
-            this.schoolNameInput.value =
-              this.savedCharacterInfo.schoolName || "LinguaTreff";
-
-            // Chọn vai trò
-            if (this.savedCharacterInfo.userRole === "teacher") {
-              this.roleTeacherInput.checked = true;
-            } else {
-              this.roleStudentInput.checked = true;
-            }
-
-            // Cài đặt tolerance
-            if (this.savedCharacterInfo.tolerance) {
-              this.toleranceSlider.value = this.savedCharacterInfo.tolerance;
-              this.updateTolerance(this.savedCharacterInfo.tolerance);
-            }
-
-            // Thêm class để thể hiện là đã load
-            document.querySelectorAll(".name-input").forEach((input) => {
-              input.classList.add("loaded");
-            });
-
-            // Hiển thị thông báo
-            this.savedInfoNotice.style.display = "block";
-            this.savedInfoNotice.innerHTML = `
-              💾 Đã tải thông tin đã lưu từ lần trước! (${this.savedCharacterInfo.savedAt}) 
-              <button class="clear-saved-btn" id="clearSavedBtn">🗑️ Xóa thông tin đã lưu</button>
-            `;
-
-            // Thêm event listener cho nút xóa
-            document
-              .getElementById("clearSavedBtn")
-              .addEventListener("click", () => {
-                this.clearSavedCharacterInfo();
-              });
+          try {
+            localStorage.setItem(
+              "germanConversationSettings",
+              JSON.stringify(settings)
+            );
+            this.showStatus(
+              "✅ Đã lưu cài đặt vào bộ nhớ trình duyệt!",
+              "success"
+            );
+          } catch (error) {
+            console.error("Error saving settings:", error);
+            this.showStatus("❌ Không thể lưu cài đặt!", "error");
           }
         }
 
-        // Xóa thông tin đã lưu
-        clearSavedCharacterInfo() {
-          this.savedCharacterInfo = null;
+        loadSettingsFromLocalStorage() {
+          try {
+            const savedSettings = localStorage.getItem(
+              "germanConversationSettings"
+            );
+            if (savedSettings) {
+              const settings = JSON.parse(savedSettings);
 
-          // Reset form về giá trị mặc định
-          this.teacherNameInput.value = "Frau Schwarz";
-          this.studentFirstNameInput.value = "Marie";
-          this.wrongFirstNameInput.value = "Maria";
-          this.studentLastNameInput.value = "Platini";
-          this.studentCityInput.value = "Fribourg";
-          this.studentCountryInput.value = "Schweiz";
-          this.studentAddressInput.value = "Hauptstraße 15";
-          this.courseLevelInput.value = "A 1.1";
-          this.schoolNameInput.value = "LinguaTreff";
-          this.roleStudentInput.checked = true;
-          this.toleranceSlider.value = 0.95;
-          this.updateTolerance(0.95);
+              // Update class properties
+              this.teacherName = settings.teacherName || this.teacherName;
+              this.studentFirstName =
+                settings.studentFirstName || this.studentFirstName;
+              this.wrongFirstName =
+                settings.wrongFirstName || this.wrongFirstName;
+              this.studentLastName =
+                settings.studentLastName || this.studentLastName;
+              this.studentCity = settings.studentCity || this.studentCity;
+              this.studentCountry =
+                settings.studentCountry || this.studentCountry;
+              this.studentAddress =
+                settings.studentAddress || this.studentAddress;
+              this.courseLevel = settings.courseLevel || this.courseLevel;
+              this.schoolName = settings.schoolName || this.schoolName;
+              this.userRole = settings.userRole || this.userRole;
+              this.tolerance = settings.tolerance || this.tolerance;
+              this.speed = settings.speed || this.speed;
 
-          // Xóa class loaded
-          document.querySelectorAll(".name-input").forEach((input) => {
-            input.classList.remove("loaded");
-          });
+              // Update input fields
+              this.updateInputFields();
 
-          // Ẩn thông báo
-          this.savedInfoNotice.style.display = "none";
+              console.log("Settings loaded from localStorage");
+            }
+          } catch (error) {
+            console.error("Error loading settings:", error);
+          }
+        }
 
-          this.showStatus(
-            "🗑️ Đã xóa thông tin đã lưu và reset về mặc định!",
-            "success"
-          );
+        updateInputFields() {
+          // Update all input fields with loaded values
+          document.getElementById("teacherName").value = this.teacherName;
+          document.getElementById("studentFirstName").value =
+            this.studentFirstName;
+          document.getElementById("wrongFirstName").value = this.wrongFirstName;
+          document.getElementById("studentLastName").value =
+            this.studentLastName;
+          document.getElementById("studentCity").value = this.studentCity;
+          document.getElementById("studentCountry").value = this.studentCountry;
+          document.getElementById("studentAddress").value = this.studentAddress;
+          document.getElementById("courseLevel").value = this.courseLevel;
+          document.getElementById("schoolName").value = this.schoolName;
+
+          // Update role selection
+          if (this.userRole === "teacher") {
+            document.getElementById("roleTeacher").checked = true;
+          } else {
+            document.getElementById("roleStudent").checked = true;
+          }
+
+          // Update tolerance slider
+          document.getElementById("toleranceSlider").value = this.tolerance;
+          document.getElementById("toleranceValue").textContent =
+            Math.round(this.tolerance * 100) + "%";
+
+          // Update speed slider
+          document.getElementById("speedSlider").value = this.speed;
+          document.getElementById("speedValue").textContent = this.speed + "x";
+        }
+
+        loadDefaultSettings() {
+          try {
+            const savedSettings = localStorage.getItem(
+              "germanConversationSettings"
+            );
+            if (savedSettings) {
+              this.loadSettingsFromLocalStorage();
+              this.showStatus("📥 Đã tải cài đặt đã lưu!", "success");
+            } else {
+              this.showStatus("⚠️ Chưa có cài đặt nào được lưu!", "error");
+            }
+          } catch (error) {
+            console.error("Error loading default settings:", error);
+            this.showStatus("❌ Không thể tải cài đặt!", "error");
+          }
+        }
+
+        resetDefaultSettings() {
+          if (confirm("🗑️ Bạn có chắc muốn xóa tất cả cài đặt đã lưu không?")) {
+            try {
+              localStorage.removeItem("germanConversationSettings");
+
+              // Reset to default values
+              this.teacherName = "Frau Schwarz";
+              this.studentFirstName = "Marie";
+              this.wrongFirstName = "Maria";
+              this.studentLastName = "Platini";
+              this.studentCity = "Fribourg";
+              this.studentCountry = "Schweiz";
+              this.studentAddress = "Hauptstraße 15";
+              this.courseLevel = "A 1.1";
+              this.schoolName = "LinguaTreff";
+              this.userRole = "student";
+              this.tolerance = 0.95;
+              this.speed = 1.0;
+
+              // Update input fields
+              this.updateInputFields();
+
+              this.showStatus("🗑️ Đã xóa tất cả cài đặt đã lưu!", "success");
+            } catch (error) {
+              console.error("Error resetting settings:", error);
+              this.showStatus("❌ Không thể xóa cài đặt!", "error");
+            }
+          }
         }
 
         buildConversationSequence() {
@@ -1134,7 +1166,8 @@
           this.newConversationBtn =
             document.getElementById("newConversationBtn");
           this.skipBtn = document.getElementById("skipBtn");
-          this.savedInfoNotice = document.getElementById("savedInfoNotice");
+          this.loadDefaultsBtn = document.getElementById("loadDefaults");
+          this.resetDefaultsBtn = document.getElementById("resetDefaults");
         }
 
         setupEventListeners() {
@@ -1155,6 +1188,12 @@
             this.saveNamesAndStart()
           );
           this.skipBtn.addEventListener("click", () => this.skipCurrentStep());
+          this.loadDefaultsBtn.addEventListener("click", () =>
+            this.loadDefaultSettings()
+          );
+          this.resetDefaultsBtn.addEventListener("click", () =>
+            this.resetDefaultSettings()
+          );
 
           this.voiceSelect.addEventListener("change", (e) =>
             this.selectVoice(e.target.value)
@@ -1169,6 +1208,50 @@
           this.synthesis.addEventListener("voiceschanged", () =>
             this.loadVoices()
           );
+
+          // Auto-save when input values change
+          const inputs = [
+            this.teacherNameInput,
+            this.studentFirstNameInput,
+            this.wrongFirstNameInput,
+            this.studentLastNameInput,
+            this.studentCityInput,
+            this.studentCountryInput,
+            this.studentAddressInput,
+            this.courseLevelInput,
+            this.schoolNameInput,
+          ];
+
+          inputs.forEach((input) => {
+            input.addEventListener("input", () => {
+              this.updatePropertiesFromInputs();
+            });
+          });
+
+          // Auto-save when role changes
+          this.roleTeacherInput.addEventListener("change", () => {
+            if (this.roleTeacherInput.checked) {
+              this.userRole = "teacher";
+            }
+          });
+
+          this.roleStudentInput.addEventListener("change", () => {
+            if (this.roleStudentInput.checked) {
+              this.userRole = "student";
+            }
+          });
+        }
+
+        updatePropertiesFromInputs() {
+          this.teacherName = this.teacherNameInput.value.trim();
+          this.studentFirstName = this.studentFirstNameInput.value.trim();
+          this.wrongFirstName = this.wrongFirstNameInput.value.trim();
+          this.studentLastName = this.studentLastNameInput.value.trim();
+          this.studentCity = this.studentCityInput.value.trim();
+          this.studentCountry = this.studentCountryInput.value.trim();
+          this.studentAddress = this.studentAddressInput.value.trim();
+          this.courseLevel = this.courseLevelInput.value.trim();
+          this.schoolName = this.schoolNameInput.value.trim();
         }
 
         updateTolerance(tolerance) {
@@ -1176,47 +1259,34 @@
           this.toleranceValue.textContent = Math.round(tolerance * 100) + "%";
         }
 
+        updateSpeed(speed) {
+          this.speed = parseFloat(speed);
+          this.speedValue.textContent = speed + "x";
+        }
+
         saveNamesAndStart() {
-          const newTeacherName = this.teacherNameInput.value.trim();
-          const newStudentFirstName = this.studentFirstNameInput.value.trim();
-          const newWrongFirstName = this.wrongFirstNameInput.value.trim();
-          const newStudentLastName = this.studentLastNameInput.value.trim();
-          const newStudentCity = this.studentCityInput.value.trim();
-          const newStudentCountry = this.studentCountryInput.value.trim();
-          const newStudentAddress = this.studentAddressInput.value.trim();
-          const newCourseLevel = this.courseLevelInput.value.trim();
-          const newSchoolName = this.schoolNameInput.value.trim();
+          this.updatePropertiesFromInputs();
+
           const selectedRole = this.roleTeacherInput.checked
             ? "teacher"
             : "student";
+          this.userRole = selectedRole;
 
           if (
-            newTeacherName &&
-            newStudentFirstName &&
-            newWrongFirstName &&
-            newStudentLastName &&
-            newStudentCity &&
-            newStudentCountry &&
-            newStudentAddress &&
-            newCourseLevel &&
-            newSchoolName
+            this.teacherName &&
+            this.studentFirstName &&
+            this.wrongFirstName &&
+            this.studentLastName &&
+            this.studentCity &&
+            this.studentCountry &&
+            this.studentAddress &&
+            this.courseLevel &&
+            this.schoolName
           ) {
-            // Cập nhật thông tin mới
-            this.teacherName = newTeacherName;
-            this.studentFirstName = newStudentFirstName;
-            this.wrongFirstName = newWrongFirstName;
-            this.studentLastName = newStudentLastName;
-            this.studentCity = newStudentCity;
-            this.studentCountry = newStudentCountry;
-            this.studentAddress = newStudentAddress;
-            this.courseLevel = newCourseLevel;
-            this.schoolName = newSchoolName;
-            this.userRole = selectedRole;
+            // Save settings to localStorage
+            this.saveSettingsToLocalStorage();
 
-            // Lưu thông tin vào storage
-            this.saveCharacterInfo();
-
-            // Xây dựng lại hội thoại với thông tin mới
+            // Build conversation with new info
             this.buildConversationSequence();
             this.startConversation();
             this.showStatus(
@@ -1656,11 +1726,6 @@
           if (voiceIndex !== "") {
             this.currentVoice = this.voices[voiceIndex];
           }
-        }
-
-        updateSpeed(speed) {
-          this.speed = parseFloat(speed);
-          this.speedValue.textContent = speed + "x";
         }
 
         toggleRecording() {
