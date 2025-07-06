@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German Conversation AI - LinguaTreff (With Skip Feature)</title>
+    <title>German Conversation AI - LinguaTreff (With Auto-Save)</title>
     <style>
       * {
         margin: 0;
@@ -66,6 +66,17 @@
         text-align: center;
       }
 
+      .saved-info-notice {
+        background: #d4edda;
+        border: 2px solid #c3e6cb;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        color: #155724;
+        text-align: center;
+        font-weight: bold;
+      }
+
       .name-inputs {
         display: flex;
         gap: 15px;
@@ -99,6 +110,11 @@
         border-color: #667eea;
       }
 
+      .name-input.loaded {
+        background-color: #e8f5e8;
+        border-color: #28a745;
+      }
+
       .save-btn {
         background: linear-gradient(135deg, #00b894, #00cec9);
         color: white;
@@ -116,6 +132,24 @@
       .save-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 20px rgba(0, 206, 201, 0.3);
+      }
+
+      .clear-saved-btn {
+        background: linear-gradient(135deg, #636e72, #2d3436);
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 15px;
+        font-size: 0.9em;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+      }
+
+      .clear-saved-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(99, 110, 114, 0.3);
       }
 
       .role-selector {
@@ -477,12 +511,24 @@
     <div class="container">
       <div class="header">
         <h1>🎯 LinguaTreff AI</h1>
-        <p>Luyện tập hội thoại tiếng Đức với AI - Có tính năng bỏ qua</p>
+        <p>Luyện tập hội thoại tiếng Đức với AI - Tự động lưu thông tin</p>
       </div>
 
       <div class="main-content">
         <div class="name-settings" id="nameSettings">
           <h3>⚙️ Cài đặt thông tin nhân vật</h3>
+
+          <div
+            class="saved-info-notice"
+            id="savedInfoNotice"
+            style="display: none"
+          >
+            💾 Đã tải thông tin đã lưu! Có thể chỉnh sửa nếu cần.
+            <button class="clear-saved-btn" id="clearSavedBtn">
+              🗑️ Xóa thông tin đã lưu
+            </button>
+          </div>
+
           <div class="name-inputs">
             <div class="name-input-group">
               <label for="teacherName">Tên giáo viên:</label>
@@ -734,23 +780,135 @@
           this.userRole = "student";
           this.conversationStarted = false;
           this.waitingForAI = false;
-          this.failedAttempts = 0; // Đếm số lần thử thất bại
-          this.maxFailedAttempts = 3; // Số lần thử tối đa trước khi hiện nút bỏ qua
+          this.failedAttempts = 0;
+          this.maxFailedAttempts = 3;
 
-          // Enhanced conversation sequence - sẽ được cập nhật trong buildConversationSequence()
+          // Storage để lưu thông tin (sử dụng biến JavaScript thay vì localStorage)
+          this.savedCharacterInfo = null;
+
           this.conversationSequence = [];
 
           this.initializeElements();
           this.setupEventListeners();
           this.initializeSpeechRecognition();
           this.loadVoices();
+          this.loadSavedCharacterInfo(); // Load thông tin đã lưu
           this.buildConversationSequence();
           this.updateProgress();
           this.updateExpectedResponse();
         }
 
+        // Lưu thông tin nhân vật
+        saveCharacterInfo() {
+          const characterInfo = {
+            teacherName: this.teacherName,
+            studentFirstName: this.studentFirstName,
+            wrongFirstName: this.wrongFirstName,
+            studentLastName: this.studentLastName,
+            studentCity: this.studentCity,
+            studentCountry: this.studentCountry,
+            studentAddress: this.studentAddress,
+            courseLevel: this.courseLevel,
+            schoolName: this.schoolName,
+            userRole: this.userRole,
+            tolerance: this.tolerance,
+            savedAt: new Date().toLocaleString(),
+          };
+
+          this.savedCharacterInfo = characterInfo;
+          this.showStatus("✅ Thông tin đã được lưu tự động!", "success");
+        }
+
+        // Tải thông tin nhân vật đã lưu
+        loadSavedCharacterInfo() {
+          if (this.savedCharacterInfo) {
+            // Điền thông tin vào form
+            this.teacherNameInput.value =
+              this.savedCharacterInfo.teacherName || "Frau Schwarz";
+            this.studentFirstNameInput.value =
+              this.savedCharacterInfo.studentFirstName || "Marie";
+            this.wrongFirstNameInput.value =
+              this.savedCharacterInfo.wrongFirstName || "Maria";
+            this.studentLastNameInput.value =
+              this.savedCharacterInfo.studentLastName || "Platini";
+            this.studentCityInput.value =
+              this.savedCharacterInfo.studentCity || "Fribourg";
+            this.studentCountryInput.value =
+              this.savedCharacterInfo.studentCountry || "Schweiz";
+            this.studentAddressInput.value =
+              this.savedCharacterInfo.studentAddress || "Hauptstraße 15";
+            this.courseLevelInput.value =
+              this.savedCharacterInfo.courseLevel || "A 1.1";
+            this.schoolNameInput.value =
+              this.savedCharacterInfo.schoolName || "LinguaTreff";
+
+            // Chọn vai trò
+            if (this.savedCharacterInfo.userRole === "teacher") {
+              this.roleTeacherInput.checked = true;
+            } else {
+              this.roleStudentInput.checked = true;
+            }
+
+            // Cài đặt tolerance
+            if (this.savedCharacterInfo.tolerance) {
+              this.toleranceSlider.value = this.savedCharacterInfo.tolerance;
+              this.updateTolerance(this.savedCharacterInfo.tolerance);
+            }
+
+            // Thêm class để thể hiện là đã load
+            document.querySelectorAll(".name-input").forEach((input) => {
+              input.classList.add("loaded");
+            });
+
+            // Hiển thị thông báo
+            this.savedInfoNotice.style.display = "block";
+            this.savedInfoNotice.innerHTML = `
+              💾 Đã tải thông tin đã lưu từ lần trước! (${this.savedCharacterInfo.savedAt}) 
+              <button class="clear-saved-btn" id="clearSavedBtn">🗑️ Xóa thông tin đã lưu</button>
+            `;
+
+            // Thêm event listener cho nút xóa
+            document
+              .getElementById("clearSavedBtn")
+              .addEventListener("click", () => {
+                this.clearSavedCharacterInfo();
+              });
+          }
+        }
+
+        // Xóa thông tin đã lưu
+        clearSavedCharacterInfo() {
+          this.savedCharacterInfo = null;
+
+          // Reset form về giá trị mặc định
+          this.teacherNameInput.value = "Frau Schwarz";
+          this.studentFirstNameInput.value = "Marie";
+          this.wrongFirstNameInput.value = "Maria";
+          this.studentLastNameInput.value = "Platini";
+          this.studentCityInput.value = "Fribourg";
+          this.studentCountryInput.value = "Schweiz";
+          this.studentAddressInput.value = "Hauptstraße 15";
+          this.courseLevelInput.value = "A 1.1";
+          this.schoolNameInput.value = "LinguaTreff";
+          this.roleStudentInput.checked = true;
+          this.toleranceSlider.value = 0.95;
+          this.updateTolerance(0.95);
+
+          // Xóa class loaded
+          document.querySelectorAll(".name-input").forEach((input) => {
+            input.classList.remove("loaded");
+          });
+
+          // Ẩn thông báo
+          this.savedInfoNotice.style.display = "none";
+
+          this.showStatus(
+            "🗑️ Đã xóa thông tin đã lưu và reset về mặc định!",
+            "success"
+          );
+        }
+
         buildConversationSequence() {
-          // Template conversation sequence được tạo tự động dựa trên thông tin nhập vào
           const lastNameWrongLetter = this.getWrongLetter(this.studentLastName);
           const firstNameWrongLetter = this.getWrongLetter(
             this.studentFirstName
@@ -913,25 +1071,20 @@
           ];
         }
 
-        // Hàm tạo chữ cái sai để hỏi (không phải chữ cái cuối thật)
         getWrongLetter(name) {
           const actualLastLetter = name.slice(-1).toLowerCase();
           const commonLetters = ["n", "e", "s", "t", "r", "a", "i", "o", "u"];
 
-          // Tìm chữ cái khác với chữ cái cuối thật
           for (let letter of commonLetters) {
             if (letter !== actualLastLetter) {
               return letter;
             }
           }
 
-          // Nếu không tìm được, dùng 'n' làm mặc định (trừ khi tên kết thúc bằng 'n')
           return actualLastLetter === "n" ? "e" : "n";
         }
 
-        // Hàm helper để lấy tên thành phố bằng tiếng Đức
         getCityGermanName() {
-          // Một số thành phố có tên khác trong tiếng Đức
           const cityMapping = {
             Fribourg: "Freiburg",
             Genève: "Genf",
@@ -981,6 +1134,7 @@
           this.newConversationBtn =
             document.getElementById("newConversationBtn");
           this.skipBtn = document.getElementById("skipBtn");
+          this.savedInfoNotice = document.getElementById("savedInfoNotice");
         }
 
         setupEventListeners() {
@@ -1059,6 +1213,9 @@
             this.schoolName = newSchoolName;
             this.userRole = selectedRole;
 
+            // Lưu thông tin vào storage
+            this.saveCharacterInfo();
+
             // Xây dựng lại hội thoại với thông tin mới
             this.buildConversationSequence();
             this.startConversation();
@@ -1078,13 +1235,12 @@
           this.currentStep = 0;
           this.conversationHistory = [];
           this.waitingForAI = false;
-          this.failedAttempts = 0; // Reset số lần thử thất bại
-          this.hideSkipButton(); // Ẩn nút bỏ qua
+          this.failedAttempts = 0;
+          this.hideSkipButton();
 
           this.nameSettings.style.display = "none";
           this.conversationContainer.style.display = "block";
 
-          // Cập nhật hiển thị vai trò
           if (this.userRole === "teacher") {
             this.userRoleDisplay.textContent = this.teacherName;
             this.aiRoleDisplay.textContent = `${this.studentFirstName} ${this.studentLastName}`;
@@ -1097,7 +1253,6 @@
           this.updateProgress();
           this.updateExpectedResponse();
 
-          // Bắt đầu hội thoại nếu không phải lượt user
           if (!this.isUserTurn()) {
             setTimeout(() => {
               this.playAIResponse();
@@ -1110,8 +1265,8 @@
           this.currentStep = 0;
           this.conversationHistory = [];
           this.waitingForAI = false;
-          this.failedAttempts = 0; // Reset số lần thử thất bại
-          this.hideSkipButton(); // Ẩn nút bỏ qua
+          this.failedAttempts = 0;
+          this.hideSkipButton();
 
           this.nameSettings.style.display = "block";
           this.conversationContainer.style.display = "none";
@@ -1222,18 +1377,17 @@
           const currentSequence = this.conversationSequence[this.currentStep];
           const expectedText = currentSequence.text;
 
-          // Kiểm tra độ chính xác với tolerance có thể điều chỉnh
           if (this.isMatchWithTolerance(transcript, expectedText)) {
             const accuracy = this.calculateAccuracy(transcript, expectedText);
             this.addMessage(
               `✅ Chính xác! (${Math.round(accuracy * 100)}%)`,
               "success"
             );
-            this.failedAttempts = 0; // Reset số lần thử thất bại
-            this.hideSkipButton(); // Ẩn nút bỏ qua
+            this.failedAttempts = 0;
+            this.hideSkipButton();
             this.proceedToNextStep();
           } else {
-            this.failedAttempts++; // Tăng số lần thử thất bại
+            this.failedAttempts++;
             const accuracy = this.calculateAccuracy(transcript, expectedText);
             this.addMessage(
               `❌ Chưa đạt yêu cầu! (${Math.round(
@@ -1246,7 +1400,6 @@
               "error"
             );
 
-            // Hiển thị nút bỏ qua nếu thử quá nhiều lần
             if (this.failedAttempts >= this.maxFailedAttempts) {
               this.showSkipButton();
             }
@@ -1257,7 +1410,6 @@
           }
         }
 
-        // Hàm xử lý chuyển sang bước tiếp theo
         proceedToNextStep() {
           this.currentStep++;
           this.updateProgress();
@@ -1280,17 +1432,15 @@
           }
         }
 
-        // Hàm bỏ qua bước hiện tại
         skipCurrentStep() {
           const currentSequence = this.conversationSequence[this.currentStep];
           this.addMessage(`⏭️ Đã bỏ qua: "${currentSequence.text}"`, "error");
-          this.failedAttempts = 0; // Reset số lần thử thất bại
-          this.hideSkipButton(); // Ẩn nút bỏ qua
+          this.failedAttempts = 0;
+          this.hideSkipButton();
           this.proceedToNextStep();
           this.showStatus("Đã bỏ qua câu khó!", "success");
         }
 
-        // Hiển thị nút bỏ qua
         showSkipButton() {
           this.skipBtn.style.display = "block";
           this.addMessage(
@@ -1299,7 +1449,6 @@
           );
         }
 
-        // Ẩn nút bỏ qua
         hideSkipButton() {
           this.skipBtn.style.display = "none";
         }
@@ -1317,7 +1466,6 @@
             return 1.0;
           }
 
-          // So sánh theo từ
           const words1 = normalizedInput.split(" ").filter((w) => w.length > 0);
           const words2 = normalizedExpected
             .split(" ")
@@ -1330,7 +1478,6 @@
           let partialMatches = 0;
           let usedIndices = new Set();
 
-          // Đếm từ khớp chính xác
           for (let i = 0; i < words1.length; i++) {
             for (let j = 0; j < words2.length; j++) {
               if (
@@ -1344,10 +1491,8 @@
             }
           }
 
-          // Đếm từ khớp một phần cho những từ chưa được match
           for (let i = 0; i < words1.length; i++) {
             let matched = false;
-            // Kiểm tra xem đã được match chưa
             for (let j = 0; j < words2.length; j++) {
               if (
                 !usedIndices.has(j) &&
@@ -1366,7 +1511,7 @@
                     words2[j]
                   );
                   if (similarity > 0.6) {
-                    partialMatches += similarity * 0.8; // Giảm trọng số cho partial match
+                    partialMatches += similarity * 0.8;
                     usedIndices.add(j);
                     break;
                   }
@@ -1378,21 +1523,16 @@
           return (exactMatches + partialMatches) / maxLength;
         }
 
-        // Hàm kiểm tra xem 2 từ có match không (linh hoạt hơn cho từ ngắn)
         isWordMatch(word1, word2) {
           if (word1 === word2) return true;
 
-          // Đặc biệt linh hoạt cho từ ngắn (1-2 ký tự)
           if (word1.length <= 2 || word2.length <= 2) {
-            // Cho phép sai khác 1 ký tự cho từ ngắn
             return this.getLevenshteinDistance(word1, word2) <= 1;
           }
 
-          // Cho từ dài hơn, yêu cầu độ tương tự cao hơn
           return this.getWordSimilarity(word1, word2) > 0.85;
         }
 
-        // Cải thiện hàm tính độ tương tự của từ
         getWordSimilarity(str1, str2) {
           if (str1 === str2) return 1.0;
 
@@ -1403,7 +1543,6 @@
           return 1 - distance / maxLen;
         }
 
-        // Đổi tên để rõ ràng hơn
         getLevenshteinDistance(str1, str2) {
           const matrix = [];
           for (let i = 0; i <= str2.length; i++) {
@@ -1428,34 +1567,19 @@
           return matrix[str2.length][str1.length];
         }
 
-        // Xóa hàm cũ và thay thế
-        getLevenshteinSimilarity(str1, str2) {
-          return this.getWordSimilarity(str1, str2);
-        }
-
-        levenshteinDistance(str1, str2) {
-          return this.getLevenshteinDistance(str1, str2);
-        }
-
         normalizeForComparison(text) {
-          return (
-            text
-              .toLowerCase()
-              // Loại bỏ hoàn toàn tất cả dấu câu, ký tự đặc biệt và số
-              .replace(/[.,!?;:„"„"…\-\(\)\[\]'"*]+/g, "")
-              .replace(/[0-9]+/g, "")
-              // Thay thế nhiều khoảng trắng bằng 1 khoảng trắng
-              .replace(/\s+/g, " ")
-              // Chuẩn hóa các ký tự đặc biệt tiếng Đức
-              .replace(/ä/g, "ae")
-              .replace(/ö/g, "oe")
-              .replace(/ü/g, "ue")
-              .replace(/ß/g, "ss")
-              // Loại bỏ các ký tự accent khác
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
-              .trim()
-          );
+          return text
+            .toLowerCase()
+            .replace(/[.,!?;:„"„"…\-\(\)\[\]'"*]+/g, "")
+            .replace(/[0-9]+/g, "")
+            .replace(/\s+/g, " ")
+            .replace(/ä/g, "ae")
+            .replace(/ö/g, "oe")
+            .replace(/ü/g, "ue")
+            .replace(/ß/g, "ss")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .trim();
         }
 
         updateProgress() {
@@ -1568,8 +1692,8 @@
           this.currentStep = 0;
           this.conversationHistory = [];
           this.waitingForAI = false;
-          this.failedAttempts = 0; // Reset số lần thử thất bại
-          this.hideSkipButton(); // Ẩn nút bỏ qua
+          this.failedAttempts = 0;
+          this.hideSkipButton();
           this.conversationArea.innerHTML = "";
 
           this.updateProgress();
@@ -1665,8 +1789,8 @@
           this.conversationHistory = [];
           this.currentStep = 0;
           this.waitingForAI = false;
-          this.failedAttempts = 0; // Reset số lần thử thất bại
-          this.hideSkipButton(); // Ẩn nút bỏ qua
+          this.failedAttempts = 0;
+          this.hideSkipButton();
           this.updateProgress();
           this.updateExpectedResponse();
           this.showStatus("Cuộc hội thoại đã được xóa", "success");
