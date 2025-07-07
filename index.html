@@ -46,6 +46,188 @@
         margin-bottom: 20px;
       }
 
+      /* Video Section Styles */
+      .video-section {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 3px solid #2196f3;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 40px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(33, 150, 243, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .video-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(33, 150, 243, 0.1),
+          transparent
+        );
+        animation: videoShine 4s ease-in-out infinite;
+        z-index: 1;
+      }
+
+      @keyframes videoShine {
+        0% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        }
+        50% {
+          transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+        100% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        }
+      }
+
+      .video-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .video-title {
+        font-size: 2em;
+        color: #1976d2;
+        margin-bottom: 15px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .video-description {
+        font-size: 1.2em;
+        color: #1565c0;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      .video-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        border: 4px solid #ffffff;
+        background: #000;
+      }
+
+      .video-player {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
+      }
+
+      .video-controls-note {
+        margin-top: 20px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        color: #1565c0;
+        font-size: 1em;
+        border-left: 4px solid #2196f3;
+      }
+
+      .video-controls-note .controls-list {
+        list-style: none;
+        margin-top: 10px;
+        text-align: left;
+        display: inline-block;
+      }
+
+      .video-controls-note .controls-list li {
+        margin: 5px 0;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .video-controls-note .controls-list li::before {
+        content: "▶️";
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      /* Alternative: Auto-play Video Modal */
+      .video-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .video-modal.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .video-modal-content {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .video-modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 2em;
+        cursor: pointer;
+        color: #666;
+        transition: color 0.3s ease;
+      }
+
+      .video-modal-close:hover {
+        color: #f44336;
+      }
+
+      .modal-video-container {
+        text-align: center;
+      }
+
+      .modal-video-title {
+        font-size: 1.8em;
+        color: #1976d2;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .modal-video-player {
+        width: 100%;
+        max-width: 700px;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
       .intro-section {
         background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
         border: 2px solid #28a745;
@@ -109,6 +291,19 @@
         box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
       }
 
+      @keyframes scrollBanner {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .banner-container:hover .banner-content {
+        animation-play-state: paused;
+      }
+
       /* Banner cầu vồng cho bảng chữ cái */
       .banner-container.rainbow {
         background: linear-gradient(
@@ -125,36 +320,6 @@
         border: 3px solid transparent;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         animation: rainbowShimmer 3s ease-in-out infinite;
-      }
-
-      .banner-container.rainbow::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(
-          45deg,
-          #ff0000,
-          #ff7f00,
-          #ffff00,
-          #00ff00,
-          #0000ff,
-          #4b0082,
-          #9400d3,
-          #ff0000,
-          #ff7f00,
-          #ffff00,
-          #00ff00,
-          #0000ff,
-          #4b0082,
-          #9400d3
-        );
-        background-size: 400% 400%;
-        animation: rainbowBorder 4s ease infinite;
-        z-index: -1;
-        border-radius: 18px;
       }
 
       @keyframes rainbowShimmer {
@@ -268,19 +433,6 @@
         transform: scale(1.05);
         box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
         border-color: rgba(255, 255, 255, 0.6);
-      }
-
-      @keyframes scrollBanner {
-        0% {
-          transform: translateX(100%);
-        }
-        100% {
-          transform: translateX(-100%);
-        }
-      }
-
-      .banner-container:hover .banner-content {
-        animation-play-state: paused;
       }
 
       /* Alphabet Section Styles */
@@ -1462,6 +1614,14 @@
           font-size: 2em;
         }
 
+        .video-title {
+          font-size: 1.5em;
+        }
+
+        .video-description {
+          font-size: 1.1em;
+        }
+
         .lessons-grid {
           grid-template-columns: 1fr;
         }
@@ -1505,6 +1665,14 @@
           flex-direction: column;
           gap: 10px;
         }
+
+        .video-modal-content {
+          padding: 20px;
+        }
+
+        .modal-video-title {
+          font-size: 1.4em;
+        }
       }
 
       @media (max-width: 480px) {
@@ -1527,6 +1695,12 @@
           padding: 12px 20px;
           font-size: 1em;
         }
+
+        .video-title {
+          font-size: 1.3em;
+          flex-direction: column;
+          gap: 10px;
+        }
       }
     </style>
   </head>
@@ -1534,6 +1708,71 @@
     <div class="container">
       <div class="header">
         <h1>🇩🇪 Học Tiếng Đức</h1>
+      </div>
+
+      <!-- Video Section -->
+      <div class="video-section">
+        <div class="video-content">
+          <h2 class="video-title">
+            🎬 Video Giới Thiệu Khóa Học
+            <span>📚</span>
+          </h2>
+          <p class="video-description">
+            Xem video hướng dẫn chi tiết về cách sử dụng khóa học và phương pháp
+            học tiếng Đức hiệu quả!
+          </p>
+
+          <div class="video-container">
+            <!-- Thay đổi src thành đường dẫn đến video của bạn -->
+            <video
+              class="video-player"
+              controls
+              preload="metadata"
+              poster="https://via.placeholder.com/800x450/2196f3/ffffff?text=Video+Gi%E1%BB%9Bi+Thi%E1%BB%87u"
+            >
+              <!-- Thay đổi đường dẫn này thành video của bạn -->
+              <source src="video/intro-video.mp4" type="video/mp4" />
+              <source src="video/intro-video.webm" type="video/webm" />
+              <!-- Fallback cho trình duyệt không hỗ trợ HTML5 video -->
+              Trình duyệt của bạn không hỗ trợ video HTML5.
+            </video>
+          </div>
+
+          <div class="video-controls-note">
+            <strong>💡 Hướng dẫn sử dụng video:</strong>
+            <ul class="controls-list">
+              <li>Nhấn nút Play để bắt đầu xem</li>
+              <li>Sử dụng thanh thời gian để tua nhanh/chậm</li>
+              <li>Nhấn vào biểu tượng 🔊 để điều chỉnh âm lượng</li>
+              <li>Nhấn biểu tượng ⛶ để xem toàn màn hình</li>
+              <li>Video sẽ tự động dừng khi kết thúc</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Modal (Tùy chọn: Auto-play khi vào trang) -->
+      <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+          <button class="video-modal-close" onclick="closeVideoModal()">
+            &times;
+          </button>
+          <div class="modal-video-container">
+            <h3 class="modal-video-title">
+              🎬 Chào mừng bạn đến với khóa học tiếng Đức!
+            </h3>
+            <video
+              class="modal-video-player"
+              id="modalVideo"
+              controls
+              preload="metadata"
+            >
+              <!-- Cùng video với phần trên -->
+              <source src="abc.mp4" type="video/mp4" />
+              Trình duyệt của bạn không hỗ trợ video HTML5.
+            </video>
+          </div>
+        </div>
       </div>
 
       <div class="intro-section">
@@ -2313,6 +2552,105 @@
       const allLetters = Object.keys(alphabetData);
       let practicedLetters = [];
 
+      // Lesson data
+      const lessons = [
+        {
+          day: 1,
+          title: "Giới thiệu bản thân (30/4 - 1/7)",
+          description:
+            "Học cách chào hỏi, giới thiệu tên, quốc tịch và ngôn ngữ. 72 từ vựng cơ bản nhất để bắt đầu.",
+          words: 73,
+          difficulty: "basic",
+          difficultyText: "Cơ bản",
+        },
+        {
+          day: 2,
+          title: "Giao tiếp hàng ngày (2/7)",
+          description:
+            "Học cách chào hỏi theo thời gian, cảm ơn, xin lỗi, và các hoạt động học tập cơ bản. 38 từ vựng thiết yếu.",
+          words: 34,
+          difficulty: "basic",
+          difficultyText: "Cơ bản",
+        },
+        {
+          day: 3,
+          title: "Hoạt động học tập & giao tiếp nâng cao (3/7)",
+          description:
+            "Học từ vựng về bài học, lớp học, động từ cơ bản và cách diễn đạt ý kiến. Tập trung vào giao tiếp thực tế trong lớp học.",
+          words: 35,
+          difficulty: "medium",
+          difficultyText: "Trung bình",
+        },
+        {
+          day: 4,
+          title: "Thông tin cá nhân & Đăng ký (4/7)",
+          description:
+            "Học từ vựng về thông tin cá nhân, địa chỉ, đăng ký học. Bao gồm cách điền form, giới thiệu bản thân chi tiết và giao tiếp với trường học.",
+          words: 43,
+          difficulty: "medium",
+          difficultyText: "Trung bình",
+        },
+        {
+          day: 5,
+          title: "Ôn tập tuần 1 - Tổng kết 4 buổi đầu (5/7)",
+          description:
+            "Ôn tập và củng cố toàn bộ 185 từ vựng đã học từ buổi 1-4. Trò chơi tương tác thú vị để kiểm tra và ghi nhớ lâu dài.",
+          words: 0,
+          difficulty: "review",
+          difficultyText: "Ôn tập",
+          isReviewOnly: true,
+        },
+        {
+          day: 6,
+          title: "Luyện tập cho thứ 3 (8/7)",
+          description:
+            "Dành cho ai cô đơn không có ai để hội thoại nên sẽ hội thoại với AI",
+          words: 0,
+          difficulty: "basic",
+          difficultyText: "Cơ bản",
+          isReviewOnly: true,
+        },
+        {
+          day: 7,
+          title: "Luyện tập cho thứ 3 (8/7)",
+          description: "lazy god",
+          words: 0,
+          difficulty: "basic",
+          difficultyText: "Cơ bản",
+          isReviewOnly: true,
+        },
+      ];
+
+      // Video Modal Functions
+      function showVideoModal() {
+        const modal = document.getElementById("videoModal");
+        modal.classList.add("show");
+
+        // Optional: Auto-play video when modal opens
+        const modalVideo = document.getElementById("modalVideo");
+        modalVideo.play().catch((e) => {
+          console.log("Auto-play prevented by browser:", e);
+        });
+      }
+
+      function closeVideoModal() {
+        const modal = document.getElementById("videoModal");
+        modal.classList.remove("show");
+
+        // Pause video when modal closes
+        const modalVideo = document.getElementById("modalVideo");
+        modalVideo.pause();
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("videoModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeVideoModal();
+          }
+        });
+
       // Initialize speech recognition
       function initializeSpeechRecognition() {
         if (
@@ -2538,75 +2876,6 @@
           bar.style.height = "5px";
         });
       }
-
-      // Lesson data
-      const lessons = [
-        {
-          day: 1,
-          title: "Giới thiệu bản thân (30/4 - 1/7)",
-          description:
-            "Học cách chào hỏi, giới thiệu tên, quốc tịch và ngôn ngữ. 72 từ vựng cơ bản nhất để bắt đầu.",
-          words: 73,
-          difficulty: "basic",
-          difficultyText: "Cơ bản",
-        },
-        {
-          day: 2,
-          title: "Giao tiếp hàng ngày (2/7)",
-          description:
-            "Học cách chào hỏi theo thời gian, cảm ơn, xin lỗi, và các hoạt động học tập cơ bản. 38 từ vựng thiết yếu.",
-          words: 34,
-          difficulty: "basic",
-          difficultyText: "Cơ bản",
-        },
-        {
-          day: 3,
-          title: "Hoạt động học tập & giao tiếp nâng cao (3/7)",
-          description:
-            "Học từ vựng về bài học, lớp học, động từ cơ bản và cách diễn đạt ý kiến. Tập trung vào giao tiếp thực tế trong lớp học.",
-          words: 35,
-          difficulty: "medium",
-          difficultyText: "Trung bình",
-        },
-        {
-          day: 4,
-          title: "Thông tin cá nhân & Đăng ký (4/7)",
-          description:
-            "Học từ vựng về thông tin cá nhân, địa chỉ, đăng ký học. Bao gồm cách điền form, giới thiệu bản thân chi tiết và giao tiếp với trường học.",
-          words: 43,
-          difficulty: "medium",
-          difficultyText: "Trung bình",
-        },
-        {
-          day: 5,
-          title: "Ôn tập tuần 1 - Tổng kết 4 buổi đầu (5/7)",
-          description:
-            "Ôn tập và củng cố toàn bộ 185 từ vựng đã học từ buổi 1-4. Trò chơi tương tác thú vị để kiểm tra và ghi nhớ lâu dài.",
-          words: 0,
-          difficulty: "review",
-          difficultyText: "Ôn tập",
-          isReviewOnly: true,
-        },
-        {
-          day: 6,
-          title: "Luyện tập cho thứ 3 (8/7)",
-          description:
-            "Dành cho ai cô đơn không có ai để  hội thoại nên sẽ hội thoại với AI",
-          words: 0,
-          difficulty: "basic",
-          difficultyText: "Cơ bản",
-          isReviewOnly: true,
-        },
-        {
-          day: 7,
-          title: "Luyện tập cho thứ 3 (8/7)",
-          description: "lazy god",
-          words: 0,
-          difficulty: "basic",
-          difficultyText: "Cơ bản",
-          isReviewOnly: true,
-        },
-      ];
 
       // Game mode functions
       function setGameMode(mode) {
@@ -2983,6 +3252,10 @@
       document.addEventListener("DOMContentLoaded", function () {
         renderLessons();
 
+        // Optional: Show video modal automatically when page loads
+        // Uncomment the line below if you want auto-popup
+        // setTimeout(showVideoModal, 1000); // Show after 1 second
+
         // Load voices when they become available
         speechSynthesis.onvoiceschanged = function () {
           // Voices are now loaded
@@ -3000,6 +3273,19 @@
             },
             { passive: false }
           );
+        });
+
+        // Add video error handling
+        const mainVideo = document.querySelector(".video-player");
+        const modalVideo = document.getElementById("modalVideo");
+
+        [mainVideo, modalVideo].forEach((video) => {
+          if (video) {
+            video.addEventListener("error", function (e) {
+              console.log("Video error:", e);
+              // You can add fallback content here
+            });
+          }
         });
       });
     </script>
