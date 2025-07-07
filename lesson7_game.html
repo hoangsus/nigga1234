@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>German Dialogue Practice</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4a5568;
+        margin-bottom: 30px;
+        font-size: 2.2em;
+      }
+
+      .dialogue-section {
+        margin-bottom: 30px;
+      }
+
+      .dialogue-line {
+        margin: 15px 0;
+        padding: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+      }
+
+      .frau-schwarz {
+        background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+        border-left-color: #e17055;
+      }
+
+      .frau-platini {
+        background: linear-gradient(135deg, #a8e6cf, #88d8c0);
+        border-left-color: #00b894;
+      }
+
+      .dialogue-line:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .speaker {
+        font-weight: bold;
+        color: #2d3748;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .text {
+        font-size: 1.1em;
+        line-height: 1.6;
+        color: #4a5568;
+      }
+
+      .hidden-text {
+        display: none;
+        margin-top: 10px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 5px;
+        font-style: italic;
+      }
+
+      .controls {
+        text-align: center;
+        margin: 30px 0;
+      }
+
+      button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .practice-mode {
+        background: linear-gradient(135deg, #00b894, #55a3ff);
+      }
+
+      .info-box {
+        background: linear-gradient(135deg, #ffeaa7, #ffd89b);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border-left: 4px solid #fdcb6e;
+      }
+
+      .info-title {
+        font-weight: bold;
+        color: #2d3748;
+        margin-bottom: 10px;
+      }
+
+      .spelling-highlight {
+        background: #fff3cd;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-weight: bold;
+      }
+
+      .audio-btn {
+        background: linear-gradient(135deg, #ff7675, #fd79a8);
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .audio-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .audio-controls {
+        text-align: center;
+        margin: 20px 0;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      .speed-control {
+        margin: 10px;
+      }
+
+      .speed-control label {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .speed-control select {
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎓 Đăng ký khóa học tiếng Đức</h1>
+
+      <div class="info-box">
+        <div class="info-title">📋 Tình huống:</div>
+        Bà Platini muốn đăng ký khóa học tiếng Đức tại trường ngôn ngữ
+        LinguaTreff. Bà Schwarz là nhân viên lễ tân giúp cô ấy thực hiện thủ tục
+        đăng ký.
+      </div>
+
+      <div class="controls">
+        <button onclick="showAll()">Hiện tất cả bản dịch</button>
+        <button onclick="hideAll()">Ẩn tất cả bản dịch</button>
+        <button onclick="practiceMode()" class="practice-mode">
+          Chế độ luyện tập
+        </button>
+      </div>
+
+      <div class="audio-controls">
+        <div class="speed-control">
+          <label for="speechRate">🎵 Tốc độ đọc:</label>
+          <select id="speechRate">
+            <option value="0.7">Chậm</option>
+            <option value="0.9" selected>Bình thường</option>
+            <option value="1.1">Nhanh</option>
+          </select>
+        </div>
+        <button
+          onclick="playFullDialogue()"
+          style="
+            background: linear-gradient(135deg, #00b894, #55a3ff);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+          "
+        >
+          🔊 Phát toàn bộ hội thoại
+        </button>
+      </div>
+
+      <div class="dialogue-section" id="dialogue">
+        <!-- 1. Frau Schwarz mở đầu -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Sprachschule LinguaTreff. Sie sprechen mit Frau Schwarz. Guten Tag.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">
+            Sprachschule LinguaTreff. Sie sprechen mit Frau Schwarz. Guten Tag.
+          </div>
+          <div class="hidden-text">
+            Trường ngôn ngữ LinguaTreff. Bạn đang nói chuyện với bà Schwarz.
+            Chào bạn.
+          </div>
+        </div>
+
+        <!-- 2. Frau Platini muốn đăng ký -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Guten Tag, ich möchte mich anmelden.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Guten Tag, ich möchte mich anmelden.</div>
+          <div class="hidden-text">Chào bạn, tôi muốn đăng ký học.</div>
+        </div>
+
+        <!-- 3. Hỏi khóa học -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Gern. Für welchen Kurs denn, bitte?')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Gern. Für welchen Kurs denn, bitte?</div>
+          <div class="hidden-text">
+            Được thôi. Bạn muốn đăng ký khóa học nào?
+          </div>
+        </div>
+
+        <!-- 4. Khóa A1.1 -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Anfänger, also A eins punkt eins.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Anfänger, also A 1.1.</div>
+          <div class="hidden-text">Người mới bắt đầu, tức là A 1.1.</div>
+        </div>
+
+        <!-- 5. Hỏi tên -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Gut, ja. Wie heißen Sie, bitte?')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Gut, ja. Wie heißen Sie, bitte?</div>
+          <div class="hidden-text">Tốt. Tên của bạn là gì?</div>
+        </div>
+
+        <!-- 6. Trả lời tên họ -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Platini.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Platini.</div>
+          <div class="hidden-text">Platini.</div>
+        </div>
+
+        <!-- 7. Yêu cầu lặp lại -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Wiederholen Sie das bitte.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Wiederholen Sie das bitte.</div>
+          <div class="hidden-text">Xin hãy lặp lại.</div>
+        </div>
+
+        <!-- 8. Nói đầy đủ tên họ -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Ich heiße Platini.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Ich heiße Platini.</div>
+          <div class="hidden-text">Tên tôi là Platini.</div>
+        </div>
+
+        <!-- 9. Hỏi cách viết với 'e' -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Mit e am Ende?')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">
+            Mit „<span class="spelling-highlight">e</span>" am Ende?
+          </div>
+          <div class="hidden-text">Có chữ "e" ở cuối không?</div>
+        </div>
+
+        <!-- 10. Không, chỉ với 'i' -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Nein, nur mit i.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">
+            Nein, nur mit „<span class="spelling-highlight">i</span>".
+          </div>
+          <div class="hidden-text">Không, chỉ có chữ "i" thôi.</div>
+        </div>
+
+        <!-- 11. Đánh vần họ -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Okay. Ich buchstabiere: P-L-A-T-I-N-I.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Okay. Ich buchstabiere: P-L-A-T-I-N-I.</div>
+          <div class="hidden-text">Được rồi. Tôi đánh vần: P-L-A-T-I-N-I.</div>
+        </div>
+
+        <!-- 12. Xác nhận đúng -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Richtig.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Richtig.</div>
+          <div class="hidden-text">Đúng rồi.</div>
+        </div>
+
+        <!-- 13. Hỏi tên -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Und Ihr Vorname, bitte?')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Und Ihr Vorname, bitte?</div>
+          <div class="hidden-text">Và tên của bạn là gì?</div>
+        </div>
+
+        <!-- 14. Trả lời tên -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Marie.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Marie.</div>
+          <div class="hidden-text">Marie.</div>
+        </div>
+
+        <!-- 15. Nhầm thành Maria -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Maria?')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Maria?</div>
+          <div class="hidden-text">Maria?</div>
+        </div>
+
+        <!-- 16. Sửa lại và đánh vần -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Äh, nein. Marie. Mit e am Ende. M-A-R-I-E.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">
+            Äh, nein. Marie. Mit „<span class="spelling-highlight">e</span>" am
+            Ende. ... M-A-R-I-E.
+          </div>
+          <div class="hidden-text">
+            Ừ, không. Marie. Có chữ "e" ở cuối. ... M-A-R-I-E.
+          </div>
+        </div>
+
+        <!-- 17. Xác nhận tên đầy đủ -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Also Marie Platini.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Also Marie Platini.</div>
+          <div class="hidden-text">Vậy là Marie Platini.</div>
+        </div>
+
+        <!-- 18. Xác nhận đúng -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Richtig.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Richtig.</div>
+          <div class="hidden-text">Đúng rồi.</div>
+        </div>
+
+        <!-- 19. Hỏi quê quán -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Und woher kommen Sie Frau Platini?')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Und woher kommen Sie Frau Platini?</div>
+          <div class="hidden-text">Và bà Platini đến từ đâu?</div>
+        </div>
+
+        <!-- 20. Trả lời từ Fribourg -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Ich bin aus Fribourg.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Ich bin aus Fribourg.</div>
+          <div class="hidden-text">Tôi đến từ Fribourg.</div>
+        </div>
+
+        <!-- 21. Nhầm Freiburg -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Aus Freiburg?')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Aus Freiburg?</div>
+          <div class="hidden-text">Từ Freiburg?</div>
+        </div>
+
+        <!-- 22. Giải thích Fribourg ở Thụy Sĩ -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Ja, Freiburg in der Schweiz. Das heißt Fribourg. Ich buchstabiere: F-R-I-B-O-U-R-G.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">
+            Ja, Freiburg in der Schweiz. Das heißt Fribourg.<br />Ich
+            buchstabiere: F-R-I-B-O-U-R-G.
+          </div>
+          <div class="hidden-text">
+            Vâng, Freiburg ở Thụy Sĩ. Nó được gọi là Fribourg.<br />Tôi đánh
+            vần: F-R-I-B-O-U-R-G.
+          </div>
+        </div>
+
+        <!-- 23. Ghi nhận và hỏi địa chỉ -->
+        <div class="dialogue-line frau-schwarz" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍💼 Frau Schwarz:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Aha. Danke. Das hab ich. Nun noch die Adresse.')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Aha. Danke. Das hab ich. Nun noch die Adresse.</div>
+          <div class="hidden-text">
+            À, cảm ơn. Tôi đã ghi lại rồi. Bây giờ cần địa chỉ nữa.
+          </div>
+        </div>
+
+        <!-- 24. Bắt đầu nói địa chỉ -->
+        <div class="dialogue-line frau-platini" onclick="toggleText(this)">
+          <div class="speaker">
+            <span>👩‍🎓 Frau Platini:</span>
+            <button
+              class="audio-btn"
+              onclick="event.stopPropagation(); speakText('Die ist einfach. Also, ich wohne in der...')"
+            >
+              🔊
+            </button>
+          </div>
+          <div class="text">Die ist einfach. Also, ich wohne in der ...</div>
+          <div class="hidden-text">Điều đó đơn giản. Tôi sống ở...</div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-title">💡 Mẹo học tập:</div>
+        • Nhấp vào mỗi dòng để xem bản dịch tiếng Việt<br />
+        • Nhấp nút 🔊 để nghe phát âm tiếng Đức từng câu<br />
+        • Sử dụng nút "Phát toàn bộ hội thoại" để nghe liên tục<br />
+        • Chú ý đến việc làm rõ cách đánh vần (được tô sáng màu vàng)<br />
+        • Nhận biết các hình thức lịch sự được sử dụng trong ngữ cảnh đăng ký
+        chính thức<br />
+        • Luyện tập phát âm tên địa danh và danh từ riêng
+      </div>
+
+      <div class="info-box">
+        <div class="info-title">📖 Từ vựng quan trọng:</div>
+        <strong>anmelden</strong> = đăng ký | <strong>Anfänger</strong> = người
+        mới bắt đầu | <strong>buchstabieren</strong> = đánh vần<br />
+        <strong>wiederholen</strong> = lặp lại | <strong>Vorname</strong> = tên
+        | <strong>woher kommen Sie</strong> = bạn đến từ đâu<br />
+        <strong>richtig</strong> = đúng rồi | <strong>einfach</strong> = đơn
+        giản | <strong>wohnen</strong> = sống, ở
+      </div>
+    </div>
+
+    <script>
+      let speechSynthesis = window.speechSynthesis;
+      let isPlaying = false;
+
+      function speakText(text) {
+        if (speechSynthesis.speaking) {
+          speechSynthesis.cancel();
+        }
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "de-DE";
+        utterance.rate = parseFloat(
+          document.getElementById("speechRate").value
+        );
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        speechSynthesis.speak(utterance);
+      }
+
+      function playFullDialogue() {
+        if (isPlaying) {
+          speechSynthesis.cancel();
+          isPlaying = false;
+          document.querySelector(
+            'button[onclick="playFullDialogue()"]'
+          ).innerHTML = "🔊 Phát toàn bộ hội thoại";
+          return;
+        }
+
+        const texts = [
+          "Sprachschule LinguaTreff. Sie sprechen mit Frau Schwarz. Guten Tag.",
+          "Guten Tag, ich möchte mich anmelden.",
+          "Gern. Für welchen Kurs denn, bitte?",
+          "Anfänger, also A eins punkt eins.",
+          "Gut, ja. Wie heißen Sie, bitte?",
+          "Platini.",
+          "Wiederholen Sie das bitte.",
+          "Ich heiße Platini.",
+          "Mit e am Ende?",
+          "Nein, nur mit i.",
+          "Okay. Ich buchstabiere: P-L-A-T-I-N-I.",
+          "Richtig.",
+          "Und Ihr Vorname, bitte?",
+          "Marie.",
+          "Maria?",
+          "Äh, nein. Marie. Mit e am Ende. M-A-R-I-E.",
+          "Also Marie Platini.",
+          "Richtig.",
+          "Und woher kommen Sie Frau Platini?",
+          "Ich bin aus Fribourg.",
+          "Aus Freiburg?",
+          "Ja, Freiburg in der Schweiz. Das heißt Fribourg. Ich buchstabiere: F-R-I-B-O-U-R-G.",
+          "Aha. Danke. Das hab ich. Nun noch die Adresse.",
+          "Die ist einfach. Also, ich wohne in der...",
+        ];
+
+        isPlaying = true;
+        let currentIndex = 0;
+        document.querySelector(
+          'button[onclick="playFullDialogue()"]'
+        ).innerHTML = "⏹️ Dừng phát";
+
+        function playNext() {
+          if (currentIndex < texts.length && isPlaying) {
+            const utterance = new SpeechSynthesisUtterance(texts[currentIndex]);
+            utterance.lang = "de-DE";
+            utterance.rate = parseFloat(
+              document.getElementById("speechRate").value
+            );
+            utterance.pitch = 1;
+            utterance.volume = 1;
+
+            utterance.onend = function () {
+              currentIndex++;
+              setTimeout(playNext, 1000); // Pause 1 second between sentences
+            };
+
+            speechSynthesis.speak(utterance);
+          } else {
+            isPlaying = false;
+            document.querySelector(
+              'button[onclick="playFullDialogue()"]'
+            ).innerHTML = "🔊 Phát toàn bộ hội thoại";
+          }
+        }
+
+        playNext();
+      }
+
+      function toggleText(element) {
+        const hiddenText = element.querySelector(".hidden-text");
+        if (
+          hiddenText.style.display === "none" ||
+          hiddenText.style.display === ""
+        ) {
+          hiddenText.style.display = "block";
+        } else {
+          hiddenText.style.display = "none";
+        }
+      }
+
+      function showAll() {
+        const hiddenTexts = document.querySelectorAll(".hidden-text");
+        hiddenTexts.forEach((text) => {
+          text.style.display = "block";
+        });
+      }
+
+      function hideAll() {
+        const hiddenTexts = document.querySelectorAll(".hidden-text");
+        hiddenTexts.forEach((text) => {
+          text.style.display = "none";
+        });
+      }
+
+      function practiceMode() {
+        hideAll();
+        const dialogueLines = document.querySelectorAll(".dialogue-line");
+        let currentIndex = 0;
+
+        function showNextLine() {
+          if (currentIndex < dialogueLines.length) {
+            dialogueLines[currentIndex].style.opacity = "0.3";
+            setTimeout(() => {
+              dialogueLines[currentIndex].style.opacity = "1";
+              dialogueLines[currentIndex].scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+              currentIndex++;
+              setTimeout(showNextLine, 2000);
+            }, 500);
+          }
+        }
+
+        // Reset all lines
+        dialogueLines.forEach((line) => {
+          line.style.opacity = "1";
+        });
+
+        showNextLine();
+      }
+
+      // Initialize with all translations hidden
+      hideAll();
+    </script>
+  </body>
+</html>
