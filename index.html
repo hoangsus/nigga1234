@@ -1278,13 +1278,180 @@
         border-color: #4a47a3;
       }
 
-      /* Hiệu ứng nhấp nháy đặc biệt cho ôn tập */
-      .lesson-card.review-card {
-        background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
-        border: 3px solid #28a745;
+      /* Hiệu ứng đặc biệt cho "Khó" - Màu đỏ */
+      .lesson-card.hard-card {
+        background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        border: 3px solid #dc3545;
         position: relative;
         overflow: hidden;
-        animation: reviewGlow 2s ease-in-out infinite alternate;
+        animation: hardGlow 2s ease-in-out infinite alternate;
+      }
+
+      .lesson-card.hard-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(220, 53, 69, 0.3),
+          transparent
+        );
+        animation: hardShine 3s ease-in-out infinite;
+        z-index: 1;
+      }
+
+      .lesson-card.hard-card .lesson-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .lesson-card.hard-card .lesson-number {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        animation: hardNumberPulse 1.5s ease-in-out infinite;
+        box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+      }
+
+      .lesson-card.hard-card .difficulty-badge {
+        animation: hardBadgeFlash 2s ease-in-out infinite;
+        box-shadow: 0 0 15px rgba(220, 53, 69, 0.5);
+      }
+
+      .lesson-card.hard-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(220, 53, 69, 0.3);
+        border-color: #c82333;
+      }
+
+      .lesson-card.hard-card .lesson-title {
+        color: #721c24;
+        text-shadow: 1px 1px 2px rgba(220, 53, 69, 0.2);
+      }
+
+      .lesson-card.hard-card .lesson-description {
+        color: #721c24;
+        font-weight: 500;
+      }
+
+      .lesson-card.hard-card .lesson-stats {
+        color: #721c24;
+        font-weight: 600;
+      }
+
+      .lesson-card.hard-card .btn-game {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        animation: hardButtonGlow 2.5s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lesson-card.hard-card .btn-game::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        animation: hardButtonShimmer 2s ease-in-out infinite;
+      }
+
+      .lesson-card.hard-card .btn-game:hover {
+        background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+      }
+
+      @keyframes hardGlow {
+        from {
+          box-shadow: 0 15px 35px rgba(220, 53, 69, 0.2);
+        }
+        to {
+          box-shadow: 0 20px 45px rgba(220, 53, 69, 0.4),
+            0 0 30px rgba(220, 53, 69, 0.3);
+        }
+      }
+
+      @keyframes hardShine {
+        0% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        }
+        50% {
+          transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+        100% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        }
+      }
+
+      @keyframes hardNumberPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+        }
+        50% {
+          transform: scale(1.1);
+          box-shadow: 0 0 30px rgba(220, 53, 69, 0.8);
+        }
+      }
+
+      @keyframes hardBadgeFlash {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes hardButtonGlow {
+        0%,
+        100% {
+          box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+        50% {
+          box-shadow: 0 8px 25px rgba(220, 53, 69, 0.5);
+        }
+      }
+
+      @keyframes hardButtonShimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      /* Hiệu ứng đặc biệt cho "Ôn tập" - 7 sắc cầu vồng */
+      .lesson-card.review-card {
+        background: linear-gradient(
+          135deg,
+          #ff0000 0%,
+          #ff7f00 14.28%,
+          #ffff00 28.56%,
+          #00ff00 42.84%,
+          #0000ff 57.12%,
+          #4b0082 71.4%,
+          #9400d3 85.68%,
+          #ff0000 100%
+        );
+        border: 3px solid transparent;
+        position: relative;
+        overflow: hidden;
+        animation: reviewRainbowGlow 3s ease-in-out infinite;
       }
 
       .lesson-card.review-card::before {
@@ -1297,46 +1464,158 @@
         background: linear-gradient(
           45deg,
           transparent,
-          rgba(40, 167, 69, 0.3),
+          rgba(255, 255, 255, 0.3),
           transparent
         );
-        animation: reviewShine 3s ease-in-out infinite;
+        animation: reviewRainbowShine 4s ease-in-out infinite;
         z-index: 1;
       }
 
       .lesson-card.review-card .lesson-content {
         position: relative;
         z-index: 2;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        padding: 20px;
+        margin: -5px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       }
 
       .lesson-card.review-card .lesson-number {
-        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-        animation: reviewNumberPulse 1.5s ease-in-out infinite;
-        box-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+        background: linear-gradient(
+          135deg,
+          #ff0000 0%,
+          #ff7f00 14.28%,
+          #ffff00 28.56%,
+          #00ff00 42.84%,
+          #0000ff 57.12%,
+          #4b0082 71.4%,
+          #9400d3 85.68%,
+          #ff0000 100%
+        );
+        background-size: 200% 200%;
+        animation: reviewRainbowNumberPulse 2s ease-in-out infinite;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
       }
 
       .lesson-card.review-card .difficulty-badge {
-        animation: reviewBadgeFlash 2s ease-in-out infinite;
-        box-shadow: 0 0 15px rgba(111, 66, 193, 0.5);
+        background: linear-gradient(
+          135deg,
+          #ff0000 0%,
+          #ff7f00 14.28%,
+          #ffff00 28.56%,
+          #00ff00 42.84%,
+          #0000ff 57.12%,
+          #4b0082 71.4%,
+          #9400d3 85.68%,
+          #ff0000 100%
+        );
+        background-size: 200% 200%;
+        animation: reviewRainbowBadgeFlash 2.5s ease-in-out infinite;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
       }
 
       .lesson-card.review-card:hover {
         transform: translateY(-15px) scale(1.02);
-        box-shadow: 0 25px 50px rgba(40, 167, 69, 0.3);
-        border-color: #20c997;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        animation: reviewRainbowGlow 1.5s ease-in-out infinite;
       }
 
-      @keyframes reviewGlow {
-        from {
-          box-shadow: 0 15px 35px rgba(40, 167, 69, 0.2);
+      .lesson-card.review-card .lesson-title {
+        color: #333;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+      }
+
+      .lesson-card.review-card .lesson-description {
+        color: #444;
+        font-weight: 500;
+      }
+
+      .lesson-card.review-card .lesson-stats {
+        color: #555;
+        font-weight: 600;
+      }
+
+      .lesson-card.review-card .btn-game {
+        background: linear-gradient(
+          135deg,
+          #ff0000 0%,
+          #ff7f00 14.28%,
+          #ffff00 28.56%,
+          #00ff00 42.84%,
+          #0000ff 57.12%,
+          #4b0082 71.4%,
+          #9400d3 85.68%,
+          #ff0000 100%
+        );
+        background-size: 200% 200%;
+        animation: reviewRainbowButtonGlow 3s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+      }
+
+      .lesson-card.review-card .btn-game::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: reviewRainbowButtonShimmer 2s ease-in-out infinite;
+      }
+
+      .lesson-card.review-card .btn-game:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        animation: reviewRainbowButtonGlow 1.5s ease-in-out infinite;
+      }
+
+      @keyframes reviewRainbowGlow {
+        0% {
+          background-position: 0% 50%;
+          box-shadow: 0 15px 35px rgba(255, 0, 0, 0.3);
         }
-        to {
-          box-shadow: 0 20px 45px rgba(40, 167, 69, 0.4),
-            0 0 30px rgba(40, 167, 69, 0.3);
+        16.66% {
+          background-position: 16.66% 50%;
+          box-shadow: 0 17px 37px rgba(255, 127, 0, 0.3);
+        }
+        33.33% {
+          background-position: 33.33% 50%;
+          box-shadow: 0 19px 39px rgba(255, 255, 0, 0.3);
+        }
+        50% {
+          background-position: 50% 50%;
+          box-shadow: 0 21px 41px rgba(0, 255, 0, 0.3);
+        }
+        66.66% {
+          background-position: 66.66% 50%;
+          box-shadow: 0 19px 39px rgba(0, 0, 255, 0.3);
+        }
+        83.33% {
+          background-position: 83.33% 50%;
+          box-shadow: 0 17px 37px rgba(75, 0, 130, 0.3);
+        }
+        100% {
+          background-position: 100% 50%;
+          box-shadow: 0 15px 35px rgba(148, 0, 211, 0.3);
         }
       }
 
-      @keyframes reviewShine {
+      @keyframes reviewRainbowShine {
         0% {
           transform: translateX(-100%) translateY(-100%) rotate(45deg);
         }
@@ -1348,27 +1627,52 @@
         }
       }
 
-      @keyframes reviewNumberPulse {
+      @keyframes reviewRainbowNumberPulse {
         0%,
         100% {
           transform: scale(1);
-          box-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+          background-position: 0% 50%;
+          box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
         }
         50% {
           transform: scale(1.1);
-          box-shadow: 0 0 30px rgba(40, 167, 69, 0.8);
+          background-position: 100% 50%;
+          box-shadow: 0 0 35px rgba(0, 255, 0, 0.8);
         }
       }
 
-      @keyframes reviewBadgeFlash {
+      @keyframes reviewRainbowBadgeFlash {
         0%,
         100% {
           opacity: 1;
           transform: scale(1);
+          background-position: 0% 50%;
         }
         50% {
-          opacity: 0.8;
+          opacity: 0.9;
           transform: scale(1.05);
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes reviewRainbowButtonGlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+          box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+        50% {
+          background-position: 100% 50%;
+          box-shadow: 0 8px 25px rgba(0, 255, 0, 0.6);
+        }
+      }
+
+      @keyframes reviewRainbowButtonShimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
         }
       }
 
@@ -1397,20 +1701,10 @@
         margin-right: 50px;
       }
 
-      .lesson-card.review-card .lesson-title {
-        color: #155724;
-        text-shadow: 1px 1px 2px rgba(40, 167, 69, 0.2);
-      }
-
       .lesson-description {
         color: #666;
         margin-bottom: 20px;
         line-height: 1.6;
-      }
-
-      .lesson-card.review-card .lesson-description {
-        color: #155724;
-        font-weight: 500;
       }
 
       .lesson-stats {
@@ -1419,11 +1713,6 @@
         margin-bottom: 20px;
         font-size: 0.9em;
         color: #888;
-      }
-
-      .lesson-card.review-card .lesson-stats {
-        color: #155724;
-        font-weight: 600;
       }
 
       .lesson-buttons {
@@ -1468,55 +1757,6 @@
         background: linear-gradient(135deg, #e55353 0%, #d63384 100%);
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-      }
-
-      /* Hiệu ứng đặc biệt cho nút ôn tập */
-      .lesson-card.review-card .btn-game {
-        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-        animation: reviewButtonGlow 2.5s ease-in-out infinite;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .lesson-card.review-card .btn-game::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.4),
-          transparent
-        );
-        animation: reviewButtonShimmer 2s ease-in-out infinite;
-      }
-
-      .lesson-card.review-card .btn-game:hover {
-        background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
-      }
-
-      @keyframes reviewButtonGlow {
-        0%,
-        100% {
-          box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-        }
-        50% {
-          box-shadow: 0 8px 25px rgba(40, 167, 69, 0.5);
-        }
-      }
-
-      @keyframes reviewButtonShimmer {
-        0% {
-          left: -100%;
-        }
-        100% {
-          left: 100%;
-        }
       }
 
       .difficulty-badge {
@@ -2630,6 +2870,14 @@
           difficulty: "medium",
           difficultyText: "Trung bình",
         },
+        {
+          day: 10,
+          title: "Ngữ pháp (10/7)",
+          description: "Học ngữ pháp.",
+          difficulty: "hard",
+          difficultyText: "Khó",
+          isReviewOnly: true,
+        },
       ];
 
       // Video Modal Functions
@@ -3163,9 +3411,11 @@
           card.className = "lesson-card";
           card.setAttribute("data-difficulty", lesson.difficulty);
 
-          // Add special class for review cards
+          // Add special class for review and hard cards
           if (lesson.difficulty === "review") {
             card.classList.add("review-card");
+          } else if (lesson.difficulty === "hard") {
+            card.classList.add("hard-card");
           }
 
           card.innerHTML = `
