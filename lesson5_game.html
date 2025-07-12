@@ -106,6 +106,14 @@
         border-color: #ff5252;
       }
 
+      .game-mode.vocabulary {
+        border-color: #28a745;
+      }
+
+      .game-mode.vocabulary:hover {
+        border-color: #218838;
+      }
+
       .mode-icon {
         font-size: 3em;
         margin-bottom: 15px;
@@ -121,6 +129,10 @@
 
       .game-mode.conjugation .mode-title {
         color: #ff6b6b;
+      }
+
+      .game-mode.vocabulary .mode-title {
+        color: #28a745;
       }
 
       .mode-description {
@@ -142,6 +154,10 @@
 
       .game-mode.conjugation .mode-progress.has-progress {
         color: #ff6b6b;
+      }
+
+      .game-mode.vocabulary .mode-progress.has-progress {
+        color: #28a745;
       }
 
       .game-area {
@@ -167,6 +183,10 @@
         border-bottom-color: #ff6b6b;
       }
 
+      .game-header.vocabulary {
+        border-bottom-color: #28a745;
+      }
+
       .game-title {
         font-size: 2em;
         color: #4a47a3;
@@ -175,6 +195,10 @@
 
       .game-title.conjugation {
         color: #ff6b6b;
+      }
+
+      .game-title.vocabulary {
+        color: #28a745;
       }
 
       .game-progress {
@@ -207,6 +231,10 @@
         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
       }
 
+      .progress-fill.vocabulary {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      }
+
       .question-area {
         background: #fff8e1;
         border: 3px solid #ffc107;
@@ -219,6 +247,11 @@
       .question-area.conjugation {
         background: #ffebee;
         border-color: #ff6b6b;
+      }
+
+      .question-area.vocabulary {
+        background: #e8f5e8;
+        border-color: #28a745;
       }
 
       .question {
@@ -491,6 +524,16 @@
         box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
       }
 
+      .btn-vocabulary {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+      }
+
+      .btn-vocabulary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+      }
+
       .btn-secondary {
         background: #6c757d;
         color: white;
@@ -571,6 +614,10 @@
 
       .result-number.conjugation {
         color: #ff6b6b;
+      }
+
+      .result-number.vocabulary {
+        color: #28a745;
       }
 
       .result-label {
@@ -685,6 +732,10 @@
         background: #ff6b6b;
       }
 
+      .audio-bar.vocabulary {
+        background: #28a745;
+      }
+
       /* Translation help for conjugation */
       .translation-help {
         background: #e8f5e8;
@@ -722,6 +773,281 @@
         font-style: italic;
       }
 
+      /* Vocabulary Summary Styles */
+      .vocabulary-summary {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        display: none;
+      }
+
+      .vocabulary-summary.active {
+        display: block;
+      }
+
+      .vocabulary-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #28a745;
+      }
+
+      .vocabulary-header h1 {
+        color: #28a745;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .vocabulary-header .subtitle {
+        color: #666;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      .alphabet-nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+        border-radius: 15px;
+        border: 2px solid #28a745;
+      }
+
+      .alphabet-btn {
+        padding: 8px 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .alphabet-btn:hover {
+        background: #218838;
+        transform: translateY(-2px);
+      }
+
+      .alphabet-btn.active {
+        background: #e74c3c;
+      }
+
+      .search-container {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .search-box {
+        padding: 12px 20px;
+        font-size: 16px;
+        border: 2px solid #28a745;
+        border-radius: 25px;
+        width: 100%;
+        max-width: 500px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .search-box:focus {
+        border-color: #218838;
+      }
+
+      .category {
+        margin-bottom: 35px;
+        border: 2px solid #28a745;
+        border-radius: 15px;
+        padding: 25px;
+        background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+      }
+
+      .category-title {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #28a745;
+        margin-bottom: 20px;
+        text-align: center;
+        border-bottom: 3px solid #28a745;
+        padding-bottom: 10px;
+      }
+
+      .vocabulary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #28a745;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .vocab-german-word {
+        font-size: 1.4em;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+      }
+
+      .vocab-german-word:hover {
+        background-color: #e3f2fd;
+      }
+
+      .vocab-pronunciation {
+        color: #8e44ad;
+        font-size: 1.1em;
+        margin-bottom: 8px;
+        font-style: italic;
+      }
+
+      .vocab-vietnamese {
+        color: #27ae60;
+        font-size: 1.1em;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+
+      .vocab-examples {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .vocab-example {
+        margin: 8px 0;
+        font-size: 0.95em;
+        color: #856404;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .vocab-example:hover {
+        background-color: #fff3cd;
+      }
+
+      .vocab-example-german {
+        font-weight: bold;
+        color: #2c3e50;
+      }
+
+      .vocab-example-vietnamese {
+        color: #27ae60;
+        font-style: italic;
+      }
+
+      .vocab-priority {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .vocab-high-priority {
+        background: #e74c3c;
+        color: white;
+      }
+
+      .vocab-medium-priority {
+        background: #f39c12;
+        color: white;
+      }
+
+      .vocab-basic-priority {
+        background: #27ae60;
+        color: white;
+      }
+
+      .vocab-lesson-tag {
+        background: #28a745;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.7em;
+        font-weight: bold;
+        margin-top: 10px;
+        display: inline-block;
+      }
+
+      .speaker-icon {
+        color: #2196f3;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .speaker-icon:hover {
+        color: #1976d2;
+      }
+
+      .playing {
+        background-color: #e8f5e8 !important;
+        animation: pulse 1s infinite;
+      }
+
+      .stats-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-card-number {
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .stat-card-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+      }
+
+      .hidden {
+        display: none;
+      }
+
       /* Responsive Design */
       @media (max-width: 768px) {
         .container {
@@ -729,7 +1055,7 @@
         }
 
         .header h1 {
-          font-size: 2em;
+          font-size: 1.8em;
         }
 
         .header p {
@@ -780,15 +1106,39 @@
           align-items: flex-start;
           gap: 5px;
         }
+
+        .vocabulary-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .vocab-card {
+          padding: 12px;
+        }
+
+        .vocab-german-word {
+          font-size: 1.2em;
+        }
+
+        .alphabet-nav {
+          gap: 5px;
+        }
+
+        .alphabet-btn {
+          padding: 6px 10px;
+          font-size: 0.9em;
+        }
+
+        .search-box {
+          font-size: 14px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
       <!-- Back Button -->
-      <a href="index.html" class="back-btn" id="backButton">
-        ← Về Menu Chính
-      </a>
+      <a href="index.html" class="back-btn" id="backButton"> ← Về trang chủ </a>
 
       <!-- Main Menu -->
       <div id="mainMenu">
@@ -801,7 +1151,7 @@
               <span>Từ vựng</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">5</span>
+              <span class="stat-number">6</span>
               <span>Kỹ năng</span>
             </div>
             <div class="stat-item">
@@ -862,6 +1212,85 @@
             </div>
             <div id="conjugationProgress" class="mode-progress"></div>
           </div>
+
+          <div class="game-mode vocabulary" onclick="showVocabularySummary()">
+            <span class="mode-icon">📚</span>
+            <div class="mode-title">Tổng Hợp Từ Vựng</div>
+            <div class="mode-description">
+              <strong>📖 Tra cứu và ôn tập:</strong> Xem tất cả 185 từ vựng theo
+              alphabet + Tìm kiếm nhanh + Phát âm + Câu ví dụ thực tế cho từng
+              từ + Phân loại theo độ quan trọng
+            </div>
+            <div id="vocabularyProgress" class="mode-progress">
+              📖 Sẵn sàng tra cứu 185 từ vựng!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vocabulary Summary Area -->
+      <div id="vocabularySummary" class="vocabulary-summary">
+        <div class="vocabulary-header">
+          <h1>📚 Tổng hợp từ vựng tiếng Đức</h1>
+          <div class="subtitle">
+            **185 từ vựng** từ 4 buổi học - Có phát âm và ví dụ
+          </div>
+
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-card-number">185</div>
+              <div class="stat-card-label">Từ vựng</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-number">4</div>
+              <div class="stat-card-label">Buổi học</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-number">26</div>
+              <div class="stat-card-label">Chữ cái alphabet</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-number">100%</div>
+              <div class="stat-card-label">Có phát âm</div>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: #f0f8ff;
+              border: 1px solid #2196f3;
+              border-radius: 8px;
+              padding: 10px;
+              margin-bottom: 20px;
+              text-align: center;
+            "
+          >
+            <strong>🔊 Tính năng phát âm:</strong> Bấm vào 🔊 để nghe phát âm
+            tiếng Đức
+          </div>
+        </div>
+
+        <div class="search-container">
+          <input
+            type="text"
+            class="search-box"
+            id="vocabularySearchBox"
+            placeholder="🔍 Tìm kiếm từ vựng (tiếng Đức hoặc tiếng Việt)..."
+          />
+        </div>
+
+        <div class="alphabet-nav" id="vocabularyAlphabetNav">
+          <!-- Alphabet navigation will be generated by JavaScript -->
+        </div>
+
+        <div id="vocabularyContainer">
+          <!-- Vocabulary sections will be generated by JavaScript -->
+        </div>
+
+        <div class="controls">
+          <button class="btn btn-vocabulary" onclick="showMainMenu()">
+            🏠 Về menu chính
+          </button>
         </div>
       </div>
 
@@ -1393,61 +1822,9 @@
           german: "Wo wohnst du? Ich wohne in der Stadtmitte.",
           vietnamese: "Bạn sống ở đâu? Tôi sống ở trung tâm thành phố.",
         },
-        hier: {
-          german: "Hier ist mein Lieblingsrestaurant in der Stadt.",
-          vietnamese: "Đây là nhà hàng yêu thích của tôi trong thành phố.",
-        },
-        morgen: {
-          german: "Morgen fahre ich mit dem Zug nach Hamburg.",
-          vietnamese: "Ngày mai tôi đi tàu đến Hamburg.",
-        },
-        Zeit: {
-          german: "Ich habe leider keine Zeit für ein langes Gespräch.",
-          vietnamese: "Tôi không có thời gian để trò chuyện lâu.",
-        },
-        Arbeit: {
-          german: "Nach der Arbeit gehe ich oft ins Fitnessstudio.",
-          vietnamese: "Sau khi làm việc tôi thường đi phòng gym.",
-        },
-        Haus: {
-          german: "Unser Haus steht in einer ruhigen Straße.",
-          vietnamese: "Nhà của chúng tôi ở trên một con đường yên tĩnh.",
-        },
-        Wasser: {
-          german: "Können Sie mir bitte ein Glas Wasser bringen?",
-          vietnamese: "Bạn có thể mang cho tôi một ly nước được không?",
-        },
-        Geld: {
-          german: "Für diese Reise brauche ich noch mehr Geld.",
-          vietnamese: "Để đi du lịch này tôi cần thêm tiền.",
-        },
-        Familie: {
-          german: "Am Wochenende besuche ich immer meine Familie.",
-          vietnamese: "Cuối tuần tôi luôn thăm gia đình.",
-        },
-        Freund: {
-          german: "Mein bester Freund wohnt in einer anderen Stadt.",
-          vietnamese: "Bạn thân nhất của tôi sống ở thành phố khác.",
-        },
-        Schule: {
-          german: "Die Schule beginnt jeden Tag um acht Uhr.",
-          vietnamese: "Trường học bắt đầu mỗi ngày lúc tám giờ.",
-        },
-        Auto: {
-          german: "Mein Auto steht vor dem Supermarkt.",
-          vietnamese: "Xe của tôi đậu trước siêu thị.",
-        },
-        Stadt: {
-          german: "Diese Stadt hat viele interessante Museen.",
-          vietnamese: "Thành phố này có nhiều bảo tàng thú vị.",
-        },
-        Land: {
-          german: "Deutschland ist ein schönes Land in Europa.",
-          vietnamese: "Đức là một đất nước đẹp ở châu Âu.",
-        },
       };
 
-      // Pronoun data
+      // Pronoun data (same as before)
       const pronouns = [
         { german: "ich", vietnamese: "tôi", type: "1st_singular" },
         { german: "du", vietnamese: "bạn", type: "2nd_singular_informal" },
@@ -1469,7 +1846,7 @@
         { german: "sie", vietnamese: "họ", type: "3rd_plural" },
       ];
 
-      // Verb conjugation data
+      // Verb conjugation data (same as before)
       const verbConjugations = {
         sein: {
           infinitive: "sein",
@@ -1656,76 +2033,6 @@
             ihr: "heißt",
             sie_plural: "heißen",
           },
-          sentences: {
-            statement: {
-              ich: "Ich heiße Maria und studiere Medizin.",
-              du: "Du heißt Thomas, richtig?",
-              Sie_formal: "Sie heißen Herr Schmidt, freut mich.",
-              er: "Er heißt Peter und arbeitet als Ingenieur.",
-              sie_fem: "Sie heißt Anna und kommt aus Österreich.",
-              es: "Es heißt, dass morgen schönes Wetter wird.",
-              wir: "Wir heißen alle neuen Studenten willkommen.",
-              ihr: "Ihr heißt beide Michael, das ist verwirrend.",
-              sie_plural: "Sie heißen Müller und wohnen nebenan.",
-            },
-            negative: {
-              ich: "Ich heiße nicht Anna, ich heiße Elena.",
-              du: "Du heißt nicht Klaus, sondern Thomas.",
-              Sie_formal: "Sie heißen nicht Schmidt, oder?",
-              er: "Er heißt nicht Hans, er heißt Heinrich.",
-              sie_fem: "Sie heißt nicht Lisa, sie heißt Lena.",
-              es: "Es heißt nicht, dass wir aufgeben sollen.",
-              wir: "Wir heißen nicht alle gleich in der Familie.",
-              ihr: "Ihr heißt nicht beide Peter, das wäre seltsam.",
-              sie_plural: "Sie heißen nicht Wagner, sie heißen Weber.",
-            },
-            question: {
-              ich: "Heiße ich Sie herzlich willkommen?",
-              du: "Heißt du wirklich Sebastian?",
-              Sie_formal: "Heißen Sie Frau Müller?",
-              er: "Heißt er nicht eigentlich Andreas?",
-              sie_fem: "Heißt sie nicht Sabine?",
-              es: "Heißt es nicht, dass wir um zehn Uhr anfangen?",
-              wir: "Heißen wir die Gäste richtig willkommen?",
-              ihr: "Heißt ihr wirklich beide Alexander?",
-              sie_plural: "Heißen sie Brown oder Braun?",
-            },
-          },
-          translations: {
-            statement: {
-              ich: "Tôi tên là Maria và học ngành y.",
-              du: "Bạn tên là Thomas, đúng không?",
-              Sie_formal: "Anh tên là ông Schmidt, rất vui được gặp.",
-              er: "Anh ấy tên là Peter và làm kỹ sư.",
-              sie_fem: "Cô ấy tên là Anna và đến từ Áo.",
-              es: "Người ta nói rằng ngày mai thời tiết sẽ đẹp.",
-              wir: "Chúng tôi chào mừng tất cả sinh viên mới.",
-              ihr: "Các bạn đều tên là Michael, thật khó hiểu.",
-              sie_plural: "Họ tên là Müller và sống bên cạnh.",
-            },
-            negative: {
-              ich: "Tôi không tên là Anna, tôi tên là Elena.",
-              du: "Bạn không tên là Klaus, mà là Thomas.",
-              Sie_formal: "Anh không tên là Schmidt, phải không?",
-              er: "Anh ấy không tên là Hans, anh ấy tên là Heinrich.",
-              sie_fem: "Cô ấy không tên là Lisa, cô ấy tên là Lena.",
-              es: "Không có nghĩa là chúng ta phải từ bỏ.",
-              wir: "Chúng tôi không phải đều cùng tên trong gia đình.",
-              ihr: "Các bạn không cùng tên là Peter, điều đó sẽ lạ.",
-              sie_plural: "Họ không tên là Wagner, họ tên là Weber.",
-            },
-            question: {
-              ich: "Tôi có chào mừng anh/chị nồng nhiệt không?",
-              du: "Bạn có thật sự tên là Sebastian không?",
-              Sie_formal: "Chị có phải là bà Müller không?",
-              er: "Anh ấy có thật sự tên là Andreas không?",
-              sie_fem: "Cô ấy có tên là Sabine không?",
-              es: "Có phải chúng ta bắt đầu lúc mười giờ không?",
-              wir: "Chúng ta có chào mừng khách đúng cách không?",
-              ihr: "Các bạn có thật sự đều tên là Alexander không?",
-              sie_plural: "Họ tên là Brown hay Braun?",
-            },
-          },
         },
         sprechen: {
           infinitive: "sprechen",
@@ -1741,80 +2048,10 @@
             ihr: "sprecht",
             sie_plural: "sprechen",
           },
-          sentences: {
-            statement: {
-              ich: "Ich spreche fließend Deutsch und Englisch.",
-              du: "Du sprichst sehr gut Französisch.",
-              Sie_formal: "Sie sprechen mit einem schönen Akzent.",
-              er: "Er spricht gerade mit seinem Chef.",
-              sie_fem: "Sie spricht drei Sprachen perfekt.",
-              es: "Es spricht für seine Qualität, dass es so lange hält.",
-              wir: "Wir sprechen über unsere Zukunftspläne.",
-              ihr: "Ihr sprecht immer so schnell miteinander.",
-              sie_plural: "Sie sprechen alle sehr leise im Theater.",
-            },
-            negative: {
-              ich: "Ich spreche nicht gerne vor vielen Menschen.",
-              du: "Du sprichst nicht deutlich genug.",
-              Sie_formal: "Sie sprechen nicht zu schnell, das ist perfekt.",
-              er: "Er spricht nicht über seine Probleme.",
-              sie_fem: "Sie spricht nicht viel, aber sie hört gut zu.",
-              es: "Es spricht nicht gegen ihn, dass er Fehler macht.",
-              wir: "Wir sprechen nicht über private Dinge.",
-              ihr: "Ihr sprecht nicht laut genug für alle.",
-              sie_plural: "Sie sprechen nicht dieselbe Sprache wie wir.",
-            },
-            question: {
-              ich: "Spreche ich zu schnell für Sie?",
-              du: "Sprichst du auch Italienisch?",
-              Sie_formal: "Sprechen Sie regelmäßig mit Ihren Eltern?",
-              er: "Spricht er immer noch mit seiner Ex-Freundin?",
-              sie_fem: "Spricht sie auch Spanisch?",
-              es: "Spricht es gegen uns, dass wir zu spät sind?",
-              wir: "Sprechen wir über das richtige Thema?",
-              ihr: "Sprecht ihr oft über eure Träume?",
-              sie_plural: "Sprechen sie miteinander oder mit uns?",
-            },
-          },
-          translations: {
-            statement: {
-              ich: "Tôi nói tiếng Đức và tiếng Anh lưu loát.",
-              du: "Bạn nói tiếng Pháp rất tốt.",
-              Sie_formal: "Anh/chị nói với giọng điệu rất hay.",
-              er: "Anh ấy đang nói chuyện với sếp.",
-              sie_fem: "Cô ấy nói ba thứ tiếng hoàn hảo.",
-              es: "Điều đó chứng tỏ chất lượng khi nó bền lâu như vậy.",
-              wir: "Chúng tôi nói về kế hoạch tương lai.",
-              ihr: "Các bạn luôn nói chuyện nhanh với nhau.",
-              sie_plural: "Họ đều nói rất nhỏ trong rạp hát.",
-            },
-            negative: {
-              ich: "Tôi không thích nói trước đám đông.",
-              du: "Bạn nói không đủ rõ ràng.",
-              Sie_formal: "Anh/chị không nói quá nhanh, điều đó hoàn hảo.",
-              er: "Anh ấy không nói về vấn đề của mình.",
-              sie_fem: "Cô ấy không nói nhiều, nhưng cô ấy nghe tốt.",
-              es: "Điều đó không có gì bất lợi cho anh ấy khi mắc lỗi.",
-              wir: "Chúng tôi không nói về chuyện riêng tư.",
-              ihr: "Các bạn nói không đủ to cho mọi người nghe.",
-              sie_plural: "Họ không nói cùng ngôn ngữ với chúng ta.",
-            },
-            question: {
-              ich: "Tôi có nói quá nhanh cho anh/chị không?",
-              du: "Bạn có nói tiếng Ý không?",
-              Sie_formal: "Anh/chị có thường xuyên nói chuyện với bố mẹ không?",
-              er: "Anh ấy có còn nói chuyện với bạn gái cũ không?",
-              sie_fem: "Cô ấy có nói tiếng Tây Ban Nha không?",
-              es: "Có bất lợi cho chúng ta khi đến muộn không?",
-              wir: "Chúng ta có đang nói đúng chủ đề không?",
-              ihr: "Các bạn có thường nói về ước mơ không?",
-              sie_plural: "Họ nói chuyện với nhau hay với chúng ta?",
-            },
-          },
         },
       };
 
-      // Game state
+      // Game state variables
       let currentGameMode = "";
       let currentQuestionIndex = 0;
       let currentWord = null;
@@ -1871,191 +2108,6 @@
       let audioContext = null;
       let gainNode = null;
 
-      // Initialize audio context
-      function initializeAudio() {
-        try {
-          audioContext = new (window.AudioContext ||
-            window.webkitAudioContext)();
-          gainNode = audioContext.createGain();
-          gainNode.connect(audioContext.destination);
-        } catch (error) {
-          console.log("Audio context not supported");
-        }
-      }
-
-      // Play sound effect
-      function playSound(frequency, duration, type = "sine") {
-        if (!audioContext) return;
-
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        oscillator.frequency.value = frequency;
-        oscillator.type = type;
-
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(
-          0.01,
-          audioContext.currentTime + duration
-        );
-
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + duration);
-      }
-
-      // Play success sound
-      function playSuccessSound() {
-        playSound(523.25, 0.2); // C5
-        setTimeout(() => playSound(659.25, 0.2), 100); // E5
-        setTimeout(() => playSound(783.99, 0.3), 200); // G5
-      }
-
-      // Play error sound
-      function playErrorSound() {
-        playSound(220, 0.3, "sawtooth");
-      }
-
-      // Play click sound
-      function playClickSound() {
-        playSound(800, 0.1);
-      }
-
-      // Initialize speech recognition
-      function initializeSpeechRecognition() {
-        if (
-          "webkitSpeechRecognition" in window ||
-          "SpeechRecognition" in window
-        ) {
-          const SpeechRecognition =
-            window.SpeechRecognition || window.webkitSpeechRecognition;
-          recognition = new SpeechRecognition();
-          recognition.lang = "de-DE";
-          recognition.continuous = false;
-          recognition.interimResults = false;
-
-          recognition.onstart = function () {
-            isRecording = true;
-            document.getElementById("micButton").classList.add("recording");
-            document.getElementById("recognitionStatus").textContent =
-              "Đang nghe... Hãy phát âm từ tiếng Đức";
-            animateAudioVisualizer();
-          };
-
-          recognition.onresult = function (event) {
-            const transcript = event.results[0][0].transcript.toLowerCase();
-            const targetWord = currentWord.german.toLowerCase();
-            const progress = gameProgress[currentGameMode];
-
-            document.getElementById(
-              "recognitionStatus"
-            ).textContent = `Bạn đã nói: "${transcript}"`;
-
-            // Simple pronunciation check
-            const similarity = calculateSimilarity(transcript, targetWord);
-            const feedback = document.getElementById("pronunciationFeedback");
-            feedback.style.display = "block";
-
-            if (similarity > 0.7) {
-              feedback.innerHTML = "🎉 Xuất sắc! Phát âm rất tốt!";
-              feedback.style.background = "#d4edda";
-              feedback.style.color = "#155724";
-              progress.correctAnswers++;
-              progress.score += 10;
-              playSuccessSound();
-            } else if (similarity > 0.4) {
-              feedback.innerHTML = "👍 Tốt! Hãy thử lần nữa để hoàn thiện hơn.";
-              feedback.style.background = "#fff3cd";
-              feedback.style.color = "#856404";
-              progress.score += 5;
-              playClickSound();
-            } else {
-              feedback.innerHTML =
-                "💪 Cần luyện tập thêm. Hãy nghe và thử lại!";
-              feedback.style.background = "#f8d7da";
-              feedback.style.color = "#721c24";
-              progress.wrongAnswers++;
-              playErrorSound();
-            }
-
-            updateScore();
-            showNextButton();
-            stopAudioVisualizer();
-          };
-
-          recognition.onerror = function (event) {
-            document.getElementById("recognitionStatus").textContent =
-              "Lỗi nhận diện giọng nói. Vui lòng thử lại.";
-            stopAudioVisualizer();
-            playErrorSound();
-          };
-
-          recognition.onend = function () {
-            isRecording = false;
-            document.getElementById("micButton").classList.remove("recording");
-            stopAudioVisualizer();
-          };
-        }
-      }
-
-      // Animate audio visualizer
-      function animateAudioVisualizer() {
-        const bars = document.querySelectorAll(".audio-bar");
-        const animateBar = () => {
-          bars.forEach((bar) => {
-            const height = Math.random() * 30 + 5;
-            bar.style.height = height + "px";
-          });
-          if (isRecording) {
-            setTimeout(animateBar, 100);
-          }
-        };
-        animateBar();
-      }
-
-      // Stop audio visualizer
-      function stopAudioVisualizer() {
-        const bars = document.querySelectorAll(".audio-bar");
-        bars.forEach((bar) => {
-          bar.style.height = "5px";
-        });
-      }
-
-      // Calculate similarity between two strings
-      function calculateSimilarity(str1, str2) {
-        const longer = str1.length > str2.length ? str1 : str2;
-        const shorter = str1.length > str2.length ? str2 : str1;
-        const editDistance = getEditDistance(longer, shorter);
-        return (longer.length - editDistance) / longer.length;
-      }
-
-      // Calculate edit distance
-      function getEditDistance(str1, str2) {
-        const matrix = [];
-        for (let i = 0; i <= str2.length; i++) {
-          matrix[i] = [i];
-        }
-        for (let j = 0; j <= str1.length; j++) {
-          matrix[0][j] = j;
-        }
-        for (let i = 1; i <= str2.length; i++) {
-          for (let j = 1; j <= str1.length; j++) {
-            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-              matrix[i][j] = matrix[i - 1][j - 1];
-            } else {
-              matrix[i][j] = Math.min(
-                matrix[i - 1][j - 1] + 1,
-                matrix[i][j - 1] + 1,
-                matrix[i - 1][j] + 1
-              );
-            }
-          }
-        }
-        return matrix[str2.length][str1.length];
-      }
-
       // Text-to-Speech function
       function speakWord(text) {
         if ("speechSynthesis" in window) {
@@ -2079,29 +2131,311 @@
           utterance.volume = 1;
 
           speechSynthesis.speak(utterance);
-          playClickSound();
         }
       }
 
-      // Speak sentence
-      function speakSentence() {
-        const germanSentence =
-          document.getElementById("germanSentence").textContent;
-        if (germanSentence) {
-          speakWord(germanSentence);
-        }
+      // Show vocabulary summary
+      function showVocabularySummary() {
+        document.getElementById("mainMenu").style.display = "none";
+        document.getElementById("gameArea").style.display = "none";
+        document.getElementById("results").style.display = "none";
+        document.getElementById("vocabularySummary").style.display = "block";
+        document.getElementById("backButton").classList.add("show");
+
+        // Initialize vocabulary display
+        initializeVocabularyDisplay();
       }
 
-      // Speak conjugation sentence for conjugation mode
-      function speakConjugationSentence() {
-        if (currentConjugation) {
-          const sentence = buildCorrectSentence(
-            currentConjugation.verb,
-            currentConjugation.pronounKey,
-            currentSentenceType
+      // Initialize vocabulary display
+      function initializeVocabularyDisplay() {
+        const groups = groupVocabularyByAlphabet(vocabulary);
+        const alphabetNav = document.getElementById("vocabularyAlphabetNav");
+        const vocabularyContainer = document.getElementById(
+          "vocabularyContainer"
+        );
+
+        // Generate alphabet navigation
+        const letters = Object.keys(groups).sort();
+        alphabetNav.innerHTML = letters
+          .map(
+            (letter) =>
+              `<a href="#vocab-section-${letter}" class="alphabet-btn">${letter}</a>`
+          )
+          .join("");
+
+        // Generate vocabulary sections
+        vocabularyContainer.innerHTML = letters
+          .map(
+            (letter) => `
+          <div class="category" id="vocab-section-${letter}">
+            <div class="category-title">📖 CHỮ ${letter} (${
+              groups[letter].length
+            } từ)</div>
+            <div class="vocabulary-grid">
+              ${groups[letter]
+                .map((word) => generateVocabularyCard(word))
+                .join("")}
+            </div>
+          </div>
+        `
+          )
+          .join("");
+
+        // Add search event listener
+        document
+          .getElementById("vocabularySearchBox")
+          .addEventListener("input", searchVocabulary);
+      }
+
+      // Group vocabulary by first letter
+      function groupVocabularyByAlphabet(vocab) {
+        const groups = {};
+        vocab.forEach((word) => {
+          const firstLetter = word.german.charAt(0).toUpperCase();
+          if (!groups[firstLetter]) {
+            groups[firstLetter] = [];
+          }
+          groups[firstLetter].push(word);
+        });
+
+        // Sort within each group
+        Object.keys(groups).forEach((letter) => {
+          groups[letter].sort((a, b) => a.german.localeCompare(b.german));
+        });
+
+        return groups;
+      }
+
+      // Generate vocabulary card
+      function generateVocabularyCard(word) {
+        const example =
+          exampleSentences[word.german] || createContextualExample(word);
+        const priority = getPriorityLevel(word);
+
+        return `
+          <div class="vocab-card">
+            <div class="vocab-priority vocab-${priority}-priority">${getPriorityText(
+          priority
+        )}</div>
+            <div class="vocab-german-word" onclick="speakWord('${
+              word.german
+            }')">
+              ${word.german} <span class="speaker-icon">🔊</span>
+            </div>
+            <div class="vocab-pronunciation">[${getPhonetic(word.german)}]</div>
+            <div class="vocab-vietnamese">${word.vietnamese}</div>
+            <div class="vocab-examples">
+              <div class="vocab-example" onclick="speakWord('${
+                example.german.split(" = ")[0]
+              }')">
+                🔊 <span class="vocab-example-german">${
+                  example.german
+                }</span><br>
+                <span class="vocab-example-vietnamese">${
+                  example.vietnamese
+                }</span>
+              </div>
+            </div>
+            <div class="vocab-lesson-tag">Buổi ${word.lesson}</div>
+          </div>
+        `;
+      }
+
+      // Get priority level for word
+      function getPriorityLevel(word) {
+        const highPriority = [
+          "ich",
+          "bin",
+          "ist",
+          "heiße",
+          "Hallo",
+          "danke",
+          "bitte",
+          "ja",
+          "nein",
+          "gut",
+          "du",
+          "komme",
+          "spreche",
+        ];
+        const mediumPriority = [
+          "Deutschland",
+          "Englisch",
+          "Name",
+          "aus",
+          "und",
+          "mein",
+          "sprechen",
+          "Mama",
+        ];
+
+        if (highPriority.includes(word.german)) return "high";
+        if (mediumPriority.includes(word.german)) return "medium";
+        return "basic";
+      }
+
+      // Get priority text
+      function getPriorityText(priority) {
+        const texts = {
+          high: "SIÊU QUAN TRỌNG",
+          medium: "QUAN TRỌNG",
+          basic: "CƠ BẢN",
+        };
+        return texts[priority];
+      }
+
+      // Get phonetic pronunciation
+      function getPhonetic(german) {
+        const phonetics = {
+          ich: "ikh",
+          bin: "bin",
+          ist: "ist",
+          heiße: "hai-sə",
+          Hallo: "ha-lo",
+          danke: "dan-kə",
+          bitte: "bi-tə",
+          ja: "ya",
+          nein: "nain",
+          gut: "gut",
+          Deutschland: "doych-lant",
+          Englisch: "eng-lish",
+        };
+        return phonetics[german] || german.toLowerCase();
+      }
+
+      // Create contextual examples for words
+      function createContextualExample(word) {
+        return {
+          german: `Ich lerne das Wort "${word.german}".`,
+          vietnamese: `Tôi học từ "${word.german}" nghĩa là ${word.vietnamese}.`,
+        };
+      }
+
+      // Search vocabulary function
+      function searchVocabulary() {
+        const searchTerm = document
+          .getElementById("vocabularySearchBox")
+          .value.toLowerCase();
+        const allCards = document.querySelectorAll(".vocab-card");
+
+        allCards.forEach((card) => {
+          const germanWord = card
+            .querySelector(".vocab-german-word")
+            .textContent.toLowerCase();
+          const vietnamese = card
+            .querySelector(".vocab-vietnamese")
+            .textContent.toLowerCase();
+          const examples = Array.from(card.querySelectorAll(".vocab-example"))
+            .map((ex) => ex.textContent.toLowerCase())
+            .join(" ");
+
+          if (
+            germanWord.includes(searchTerm) ||
+            vietnamese.includes(searchTerm) ||
+            examples.includes(searchTerm)
+          ) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        // Hide empty categories
+        document.querySelectorAll(".category").forEach((category) => {
+          const visibleCards = category.querySelectorAll(
+            '.vocab-card[style="display: block"], .vocab-card:not([style*="display: none"])'
           );
-          speakWord(sentence);
+          category.style.display = visibleCards.length > 0 ? "block" : "none";
+        });
+      }
+
+      // Initialize game functions (same as before but modified for new structure)
+      function startGame(mode) {
+        currentGameMode = mode;
+
+        // Get current progress for this mode
+        const progress = gameProgress[mode];
+        currentQuestionIndex = progress.currentIndex;
+
+        // Generate questions based on mode
+        if (mode === "conjugation") {
+          if (
+            progress.questionsData.length === 0 ||
+            currentQuestionIndex >= progress.questionsData.length
+          ) {
+            progress.questionsData = generateConjugationQuestions();
+            progress.currentIndex = 0;
+            currentQuestionIndex = 0;
+          }
+          questionsData = progress.questionsData;
+          totalQuestions = questionsData.length;
+        } else {
+          // Regular vocabulary questions
+          if (
+            progress.questionsData.length === 0 ||
+            currentQuestionIndex >= progress.questionsData.length
+          ) {
+            progress.questionsData = generateQuestions();
+            progress.currentIndex = 0;
+            currentQuestionIndex = 0;
+          }
+          questionsData = progress.questionsData;
+          totalQuestions = questionsData.length;
         }
+
+        isAnswered = false;
+
+        // Show game area
+        document.getElementById("mainMenu").style.display = "none";
+        document.getElementById("vocabularySummary").style.display = "none";
+        document.getElementById("gameArea").style.display = "block";
+        document.getElementById("results").style.display = "none";
+        document.getElementById("backButton").classList.add("show");
+
+        // Set game styles for different modes
+        const gameHeader = document.getElementById("gameHeader");
+        const gameTitle = document.getElementById("gameTitle");
+        const questionArea = document.getElementById("questionArea");
+        const progressFill = document.getElementById("progressFill");
+
+        // Reset all mode classes
+        gameHeader.classList.remove("conjugation", "vocabulary");
+        gameTitle.classList.remove("conjugation", "vocabulary");
+        questionArea.classList.remove("conjugation", "vocabulary");
+        progressFill.classList.remove("conjugation", "vocabulary");
+
+        if (mode === "conjugation") {
+          gameHeader.classList.add("conjugation");
+          gameTitle.classList.add("conjugation");
+          questionArea.classList.add("conjugation");
+          progressFill.classList.add("conjugation");
+        }
+
+        // Set game title
+        const titles = {
+          listening: "👂 Luyện Nghe",
+          speaking: "🗣️ Luyện Nói",
+          reading: "👁️ Luyện Đọc",
+          writing: "✍️ Luyện Viết",
+          conjugation: "📝 Chia Động Từ",
+        };
+        gameTitle.textContent = titles[mode];
+
+        // Initialize speech recognition for speaking mode
+        if (mode === "speaking") {
+          initializeSpeechRecognition();
+        }
+
+        // Setup sentence type selector for conjugation mode
+        if (mode === "conjugation") {
+          setupSentenceTypeSelector();
+        }
+
+        // Update score display
+        updateScore();
+
+        // Load current question
+        loadQuestion();
       }
 
       // Generate conjugation questions
@@ -2192,353 +2526,112 @@
         return pronounMap[pronounKey] || pronounKey;
       }
 
-      // Get Vietnamese translation for sentence
-      function getVietnameseTranslation(verb, pronounKey, sentenceType) {
-        const verbData = verbConjugations[verb];
-        if (
-          verbData.translations &&
-          verbData.translations[sentenceType] &&
-          verbData.translations[sentenceType][pronounKey]
-        ) {
-          return verbData.translations[sentenceType][pronounKey];
-        }
-        return "Chưa có bản dịch";
-      }
-
-      // Setup sentence type selector
-      function setupSentenceTypeSelector() {
-        const buttons = document.querySelectorAll(".sentence-type-btn");
-        buttons.forEach((button) => {
-          button.addEventListener("click", () => {
-            // Remove active class from all buttons
-            buttons.forEach((btn) => btn.classList.remove("active"));
-
-            // Add active class to clicked button
-            button.classList.add("active");
-
-            // Update current sentence type
-            currentSentenceType = button.dataset.type;
-
-            // Update preview and translation
-            updateSentencePreview();
-            updateTranslationHelp();
-
-            playClickSound();
-          });
-        });
-      }
-
-      // Update sentence preview
-      function updateSentencePreview() {
-        if (!currentConjugation) return;
-
-        const previewText = document.getElementById("previewText");
-        const exampleSentence = buildCorrectSentence(
-          currentConjugation.verb,
-          currentConjugation.pronounKey,
-          currentSentenceType
-        );
-
-        previewText.textContent = exampleSentence;
-      }
-
-      // Update translation help
-      function updateTranslationHelp() {
-        if (!currentConjugation) return;
-
-        const translationContent =
-          document.getElementById("translationContent");
-        const germanSentence = buildCorrectSentence(
-          currentConjugation.verb,
-          currentConjugation.pronounKey,
-          currentSentenceType
-        );
-        const vietnameseSentence = getVietnameseTranslation(
-          currentConjugation.verb,
-          currentConjugation.pronounKey,
-          currentSentenceType
-        );
-
-        translationContent.innerHTML = `
-          <div class="translation-item">
-            <span class="german-text">${germanSentence}</span>
-            <span class="vietnamese-text">${vietnameseSentence}</span>
-          </div>
-          <button class="btn btn-conjugation" style="margin-top: 10px; font-size: 0.9em" onclick="speakConjugationSentence()">
-            🔊 Nghe câu ví dụ
-          </button>
-        `;
-      }
-
-      // Display conjugation table with highlighting
-      function displayConjugationTableWithHighlight(
-        verbData,
-        currentPronounKey
-      ) {
-        const table = document.getElementById("conjugationTable");
-        table.innerHTML = "";
-
-        const pronounKeys = [
-          "ich",
-          "du",
-          "Sie_formal",
-          "er",
-          "sie_fem",
-          "es",
-          "wir",
-          "ihr",
-          "sie_plural",
-        ];
-        const pronounDisplays = [
-          "ich",
-          "du",
-          "Sie",
-          "er",
-          "sie",
-          "es",
-          "wir",
-          "ihr",
-          "sie",
-        ];
-
-        pronounKeys.forEach((key, index) => {
-          const row = document.createElement("div");
-          row.className = "conjugation-row";
-
-          // Highlight current pronoun
-          if (key === currentPronounKey) {
-            row.style.background = "#ffebee";
-            row.style.border = "2px solid #ff6b6b";
-            row.style.fontWeight = "bold";
-          }
-
-          const pronounSpan = document.createElement("span");
-          pronounSpan.className = "pronoun-small";
-          pronounSpan.textContent = pronounDisplays[index];
-
-          const verbSpan = document.createElement("span");
-          verbSpan.className = "verb-form";
-          verbSpan.textContent = verbData.conjugations[key];
-
-          row.appendChild(pronounSpan);
-          row.appendChild(verbSpan);
-          table.appendChild(row);
-        });
-      }
-
-      // Get conjugation tips for memorization
-      function getConjugationTip(verb, pronounKey) {
-        const tips = {
-          sein: {
-            ich: "👤 'ich bin' - Tôi là. Nhớ: 'ich BIN' (bin = thùng rác tiếng Anh)",
-            du: "👥 'du bist' - Bạn là. Nhớ: 'du BIST' (bist giống 'best')",
-            Sie_formal:
-              "🤝 'Sie sind' - Anh/chị là. Nhớ: 'Sie SIND' (lịch sự = số nhiều)",
-            er: "👨 'er ist' - Anh ấy là. Nhớ: 'er IST' (ist = is trong tiếng Anh)",
-            sie_fem: "👩 'sie ist' - Cô ấy là. Nhớ: 'sie IST' (giống 'er ist')",
-            es: "📦 'es ist' - Nó là. Nhớ: 'es IST' (vật = 'ist')",
-            wir: "👫 'wir sind' - Chúng tôi là. Nhớ: 'wir SIND' (we = sind)",
-            ihr: "👥 'ihr seid' - Các bạn là. Nhớ: 'ihr SEID' (duy nhất có 'seid')",
-            sie_plural: "👥 'sie sind' - Họ là. Nhớ: 'sie SIND' (they = sind)",
-          },
-          kommen: {
-            ich: "👤 'ich komme' - Tôi đến. Nhớ: 'ich KOMME' (thêm 'e' vào cuối)",
-            du: "👥 'du kommst' - Bạn đến. Nhớ: 'du KOMMST' (thêm 'st')",
-            Sie_formal:
-              "🤝 'Sie kommen' - Anh/chị đến. Nhớ: 'Sie KOMMEN' (giống nguyên thể)",
-            er: "👨 'er kommt' - Anh ấy đến. Nhớ: 'er KOMMT' (thêm 't')",
-            sie_fem:
-              "👩 'sie kommt' - Cô ấy đến. Nhớ: 'sie KOMMT' (giống 'er')",
-            es: "📦 'es kommt' - Nó đến. Nhớ: 'es KOMMT' (vật = 't')",
-            wir: "👫 'wir kommen' - Chúng tôi đến. Nhớ: 'wir KOMMEN' (giống nguyên thể)",
-            ihr: "👥 'ihr kommt' - Các bạn đến. Nhớ: 'ihr KOMMT' (giống ngôi 3 số ít)",
-            sie_plural:
-              "👥 'sie kommen' - Họ đến. Nhớ: 'sie KOMMEN' (giống nguyên thể)",
-          },
-          heißen: {
-            ich: "👤 'ich heiße' - Tôi tên là. Nhớ: 'ich HEIßE' (ß = ss, thêm 'e')",
-            du: "👥 'du heißt' - Bạn tên là. Nhớ: 'du HEIßT' (ß = ss, thêm 't')",
-            Sie_formal:
-              "🤝 'Sie heißen' - Anh/chị tên là. Nhớ: 'Sie HEIßEN' (giống nguyên thể)",
-            er: "👨 'er heißt' - Anh ấy tên là. Nhớ: 'er HEIßT' (ß = ss, thêm 't')",
-            sie_fem:
-              "👩 'sie heißt' - Cô ấy tên là. Nhớ: 'sie HEIßT' (giống 'er')",
-            es: "📦 'es heißt' - Nó tên là. Nhớ: 'es HEIßT' (vật = 't')",
-            wir: "👫 'wir heißen' - Chúng tôi tên là. Nhớ: 'wir HEIßEN' (giống nguyên thể)",
-            ihr: "👥 'ihr heißt' - Các bạn tên là. Nhớ: 'ihr HEIßT' (giống ngôi 3 số ít)",
-            sie_plural:
-              "👥 'sie heißen' - Họ tên là. Nhớ: 'sie HEIßEN' (giống nguyên thể)",
-          },
-          sprechen: {
-            ich: "👤 'ich spreche' - Tôi nói. Nhớ: 'ich SPRECHE' (thêm 'e' vào cuối)",
-            du: "👥 'du sprichst' - Bạn nói. Nhớ: 'du SPRICHST' (e→i, thêm 'st')",
-            Sie_formal:
-              "🤝 'Sie sprechen' - Anh/chị nói. Nhớ: 'Sie SPRECHEN' (giống nguyên thể)",
-            er: "👨 'er spricht' - Anh ấy nói. Nhớ: 'er SPRICHT' (e→i, thêm 't')",
-            sie_fem:
-              "👩 'sie spricht' - Cô ấy nói. Nhớ: 'sie SPRICHT' (giống 'er')",
-            es: "📦 'es spricht' - Nó nói. Nhớ: 'es SPRICHT' (vật = 't')",
-            wir: "👫 'wir sprechen' - Chúng tôi nói. Nhớ: 'wir SPRECHEN' (giống nguyên thể)",
-            ihr: "👥 'ihr sprecht' - Các bạn nói. Nhớ: 'ihr SPRECHT' (bỏ 'en', thêm 't')",
-            sie_plural:
-              "👥 'sie sprechen' - Họ nói. Nhớ: 'sie SPRECHEN' (giống nguyên thể)",
-          },
-        };
-
-        return (
-          tips[verb]?.[pronounKey] ||
-          "Hãy quan sát bảng chia động từ để học thuộc!"
-        );
-      }
-
-      // Get conjugation rules
-      function getConjugationRule(verb, pronounKey) {
-        const rules = {
-          sein: {
-            ich: "🔹 Ngôi 1 số ít: 'ich' + 'bin' (bất quy tắc - phải học thuộc)",
-            du: "🔹 Ngôi 2 số ít: 'du' + 'bist' (bất quy tắc - phải học thuộc)",
-            Sie_formal: "🔹 Ngôi 2 lịch sự: 'Sie' + 'sind' (giống số nhiều)",
-            er: "🔹 Ngôi 3 số ít nam: 'er' + 'ist' (bất quy tắc - phải học thuộc)",
-            sie_fem: "🔹 Ngôi 3 số ít nữ: 'sie' + 'ist' (giống 'er ist')",
-            es: "🔹 Ngôi 3 số ít trung: 'es' + 'ist' (giống 'er ist')",
-            wir: "🔹 Ngôi 1 số nhiều: 'wir' + 'sind' (giống Sie)",
-            ihr: "🔹 Ngôi 2 số nhiều: 'ihr' + 'seid' (duy nhất có 'seid')",
-            sie_plural: "🔹 Ngôi 3 số nhiều: 'sie' + 'sind' (giống wir, Sie)",
-          },
-          kommen: {
-            ich: "🔹 Ngôi 1 số ít: Gốc 'komm' + 'e' = 'komme'",
-            du: "🔹 Ngôi 2 số ít: Gốc 'komm' + 'st' = 'kommst'",
-            Sie_formal: "🔹 Ngôi 2 lịch sự: Giống nguyên thể 'kommen'",
-            er: "🔹 Ngôi 3 số ít nam: Gốc 'komm' + 't' = 'kommt'",
-            sie_fem: "🔹 Ngôi 3 số ít nữ: Giống 'er kommt'",
-            es: "🔹 Ngôi 3 số ít trung: Giống 'er kommt'",
-            wir: "🔹 Ngôi 1 số nhiều: Giống nguyên thể 'kommen'",
-            ihr: "🔹 Ngôi 2 số nhiều: Gốc 'komm' + 't' = 'kommt'",
-            sie_plural: "🔹 Ngôi 3 số nhiều: Giống nguyên thể 'kommen'",
-          },
-          heißen: {
-            ich: "🔹 Ngôi 1 số ít: Gốc 'heiß' + 'e' = 'heiße'",
-            du: "🔹 Ngôi 2 số ít: Gốc 'heiß' + 't' = 'heißt'",
-            Sie_formal: "🔹 Ngôi 2 lịch sự: Giống nguyên thể 'heißen'",
-            er: "🔹 Ngôi 3 số ít nam: Gốc 'heiß' + 't' = 'heißt'",
-            sie_fem: "🔹 Ngôi 3 số ít nữ: Giống 'er heißt'",
-            es: "🔹 Ngôi 3 số ít trung: Giống 'er heißt'",
-            wir: "🔹 Ngôi 1 số nhiều: Giống nguyên thể 'heißen'",
-            ihr: "🔹 Ngôi 2 số nhiều: Gốc 'heiß' + 't' = 'heißt'",
-            sie_plural: "🔹 Ngôi 3 số nhiều: Giống nguyên thể 'heißen'",
-          },
-          sprechen: {
-            ich: "🔹 Ngôi 1 số ít: Gốc 'sprech' + 'e' = 'spreche'",
-            du: "🔹 Ngôi 2 số ít: 'sprech' → 'sprich' + 'st' = 'sprichst' (e→i)",
-            Sie_formal: "🔹 Ngôi 2 lịch sự: Giống nguyên thể 'sprechen'",
-            er: "🔹 Ngôi 3 số ít nam: 'sprech' → 'sprich' + 't' = 'spricht' (e→i)",
-            sie_fem: "🔹 Ngôi 3 số ít nữ: Giống 'er spricht'",
-            es: "🔹 Ngôi 3 số ít trung: Giống 'er spricht'",
-            wir: "🔹 Ngôi 1 số nhiều: Giống nguyên thể 'sprechen'",
-            ihr: "🔹 Ngôi 2 số nhiều: Gốc 'sprech' + 't' = 'sprecht'",
-            sie_plural: "🔹 Ngôi 3 số nhiều: Giống nguyên thể 'sprechen'",
-          },
-        };
-
-        return (
-          rules[verb]?.[pronounKey] || "Áp dụng quy tắc chia động từ cơ bản."
-        );
-      }
-
-      // Initialize game
-      function startGame(mode) {
-        currentGameMode = mode;
-
-        // Get current progress for this mode
-        const progress = gameProgress[mode];
-        currentQuestionIndex = progress.currentIndex;
-
-        // Generate questions based on mode
-        if (mode === "conjugation") {
-          if (
-            progress.questionsData.length === 0 ||
-            currentQuestionIndex >= progress.questionsData.length
-          ) {
-            progress.questionsData = generateConjugationQuestions();
-            progress.currentIndex = 0;
-            currentQuestionIndex = 0;
-          }
-          questionsData = progress.questionsData;
-          totalQuestions = questionsData.length;
-        } else {
-          // Regular vocabulary questions
-          if (
-            progress.questionsData.length === 0 ||
-            currentQuestionIndex >= progress.questionsData.length
-          ) {
-            progress.questionsData = generateQuestions();
-            progress.currentIndex = 0;
-            currentQuestionIndex = 0;
-          }
-          questionsData = progress.questionsData;
-          totalQuestions = questionsData.length;
-        }
-
-        isAnswered = false;
-
-        // Show game area
-        document.getElementById("mainMenu").style.display = "none";
-        document.getElementById("gameArea").style.display = "block";
-        document.getElementById("results").style.display = "none";
-        document.getElementById("backButton").classList.add("show");
-
-        // Set game styles for conjugation mode
-        const gameHeader = document.getElementById("gameHeader");
-        const gameTitle = document.getElementById("gameTitle");
-        const questionArea = document.getElementById("questionArea");
-        const progressFill = document.getElementById("progressFill");
-
-        if (mode === "conjugation") {
-          gameHeader.classList.add("conjugation");
-          gameTitle.classList.add("conjugation");
-          questionArea.classList.add("conjugation");
-          progressFill.classList.add("conjugation");
-        } else {
-          gameHeader.classList.remove("conjugation");
-          gameTitle.classList.remove("conjugation");
-          questionArea.classList.remove("conjugation");
-          progressFill.classList.remove("conjugation");
-        }
-
-        // Set game title
-        const titles = {
-          listening: "👂 Luyện Nghe",
-          speaking: "🗣️ Luyện Nói",
-          reading: "👁️ Luyện Đọc",
-          writing: "✍️ Luyện Viết",
-          conjugation: "📝 Chia Động Từ",
-        };
-        gameTitle.textContent = titles[mode];
-
-        // Initialize speech recognition for speaking mode
-        if (mode === "speaking") {
-          initializeSpeechRecognition();
-        }
-
-        // Initialize audio context
-        initializeAudio();
-
-        // Setup sentence type selector for conjugation mode
-        if (mode === "conjugation") {
-          setupSentenceTypeSelector();
-        }
-
-        // Update score display
-        updateScore();
-
-        // Load current question
-        loadQuestion();
-      }
-
       // Generate random questions for vocabulary modes
       function generateQuestions() {
         const shuffled = [...vocabulary].sort(() => 0.5 - Math.random());
         return shuffled;
+      }
+
+      // Initialize speech recognition
+      function initializeSpeechRecognition() {
+        if (
+          "webkitSpeechRecognition" in window ||
+          "SpeechRecognition" in window
+        ) {
+          const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+          recognition = new SpeechRecognition();
+          recognition.lang = "de-DE";
+          recognition.continuous = false;
+          recognition.interimResults = false;
+
+          recognition.onstart = function () {
+            isRecording = true;
+            document.getElementById("micButton").classList.add("recording");
+            document.getElementById("recognitionStatus").textContent =
+              "Đang nghe... Hãy phát âm từ tiếng Đức";
+          };
+
+          recognition.onresult = function (event) {
+            const transcript = event.results[0][0].transcript.toLowerCase();
+            const targetWord = currentWord.german.toLowerCase();
+            const progress = gameProgress[currentGameMode];
+
+            document.getElementById(
+              "recognitionStatus"
+            ).textContent = `Bạn đã nói: "${transcript}"`;
+
+            // Simple pronunciation check
+            const similarity = calculateSimilarity(transcript, targetWord);
+            const feedback = document.getElementById("pronunciationFeedback");
+            feedback.style.display = "block";
+
+            if (similarity > 0.7) {
+              feedback.innerHTML = "🎉 Xuất sắc! Phát âm rất tốt!";
+              feedback.style.background = "#d4edda";
+              feedback.style.color = "#155724";
+              progress.correctAnswers++;
+              progress.score += 10;
+            } else if (similarity > 0.4) {
+              feedback.innerHTML = "👍 Tốt! Hãy thử lần nữa để hoàn thiện hơn.";
+              feedback.style.background = "#fff3cd";
+              feedback.style.color = "#856404";
+              progress.score += 5;
+            } else {
+              feedback.innerHTML =
+                "💪 Cần luyện tập thêm. Hãy nghe và thử lại!";
+              feedback.style.background = "#f8d7da";
+              feedback.style.color = "#721c24";
+              progress.wrongAnswers++;
+            }
+
+            updateScore();
+            showNextButton();
+          };
+
+          recognition.onerror = function (event) {
+            document.getElementById("recognitionStatus").textContent =
+              "Lỗi nhận diện giọng nói. Vui lòng thử lại.";
+          };
+
+          recognition.onend = function () {
+            isRecording = false;
+            document.getElementById("micButton").classList.remove("recording");
+          };
+        }
+      }
+
+      // Calculate similarity between two strings
+      function calculateSimilarity(str1, str2) {
+        const longer = str1.length > str2.length ? str1 : str2;
+        const shorter = str1.length > str2.length ? str2 : str1;
+        const editDistance = getEditDistance(longer, shorter);
+        return (longer.length - editDistance) / longer.length;
+      }
+
+      // Calculate edit distance
+      function getEditDistance(str1, str2) {
+        const matrix = [];
+        for (let i = 0; i <= str2.length; i++) {
+          matrix[i] = [i];
+        }
+        for (let j = 0; j <= str1.length; j++) {
+          matrix[0][j] = j;
+        }
+        for (let i = 1; i <= str2.length; i++) {
+          for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+              matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+              matrix[i][j] = Math.min(
+                matrix[i - 1][j - 1] + 1,
+                matrix[i][j - 1] + 1,
+                matrix[i - 1][j] + 1
+              );
+            }
+          }
+        }
+        return matrix[str2.length][str1.length];
       }
 
       // Load current question
@@ -2609,16 +2702,6 @@
           option.classList.remove("conjugation");
         });
 
-        // Add conjugation class to audio bars if needed
-        const audioBars = document.querySelectorAll(".audio-bar");
-        audioBars.forEach((bar) => {
-          if (currentGameMode === "conjugation") {
-            bar.classList.add("conjugation");
-          } else {
-            bar.classList.remove("conjugation");
-          }
-        });
-
         switch (currentGameMode) {
           case "listening":
             questionEl.textContent = "Nghe từ vựng và chọn nghĩa đúng:";
@@ -2676,25 +2759,7 @@
 
             questionEl.innerHTML = `
               <div style="margin-bottom: 20px;">
-                <h3 style="color: #ff6b6b; margin-bottom: 15px;">📝 Tạo câu ${getSentenceTypeText(
-                  currentSentenceType
-                )} với động từ "${
-              currentConjugation.verbData.infinitive
-            }" và đại từ "${currentConjugation.pronoun}"</h3>
-                <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                  <h4 style="color: #856404; margin-bottom: 10px;">💡 Mẹo ghi nhớ:</h4>
-                  <p style="color: #856404; margin: 0;">${getConjugationTip(
-                    currentConjugation.verb,
-                    currentConjugation.pronounKey
-                  )}</p>
-                </div>
-                <div style="background: #e8f5e8; border: 2px solid #28a745; border-radius: 10px; padding: 15px;">
-                  <h4 style="color: #155724; margin-bottom: 10px;">🎯 Quy tắc:</h4>
-                  <p style="color: #155724; margin: 0;">${getConjugationRule(
-                    currentConjugation.verb,
-                    currentConjugation.pronounKey
-                  )}</p>
-                </div>
+                <h3 style="color: #ff6b6b; margin-bottom: 15px;">📝 Tạo câu khẳng định với động từ "${currentConjugation.verbData.infinitive}" và đại từ "${currentConjugation.pronoun}"</h3>
               </div>
             `;
 
@@ -2713,36 +2778,48 @@
               "verbInfinitive"
             ).textContent = `${currentConjugation.verbData.infinitive} (${currentConjugation.verbData.vietnamese})`;
 
-            // Display conjugation table with highlighting
-            displayConjugationTableWithHighlight(
-              currentConjugation.verbData,
-              currentConjugation.pronounKey
-            );
-
-            // Update sentence preview and translation
-            updateSentencePreview();
-            updateTranslationHelp();
-
             // Setup input
             const conjugationInput = document.getElementById("textInput");
             conjugationInput.classList.add("conjugation");
             conjugationInput.value = "";
-            conjugationInput.placeholder = `Nhập câu ${getSentenceTypeText(
-              currentSentenceType
-            ).toLowerCase()}...`;
+            conjugationInput.placeholder = `Nhập câu khẳng định...`;
             conjugationInput.focus();
             break;
         }
       }
 
-      // Get sentence type text in Vietnamese
-      function getSentenceTypeText(sentenceType) {
-        const typeMap = {
-          statement: "khẳng định",
-          negative: "phủ định",
-          question: "nghi vấn",
-        };
-        return typeMap[sentenceType] || sentenceType;
+      // Setup sentence type selector
+      function setupSentenceTypeSelector() {
+        const buttons = document.querySelectorAll(".sentence-type-btn");
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active class from all buttons
+            buttons.forEach((btn) => btn.classList.remove("active"));
+
+            // Add active class to clicked button
+            button.classList.add("active");
+
+            // Update current sentence type
+            currentSentenceType = button.dataset.type;
+
+            // Update preview
+            updateSentencePreview();
+          });
+        });
+      }
+
+      // Update sentence preview
+      function updateSentencePreview() {
+        if (!currentConjugation) return;
+
+        const previewText = document.getElementById("previewText");
+        const exampleSentence = buildCorrectSentence(
+          currentConjugation.verb,
+          currentConjugation.pronounKey,
+          currentSentenceType
+        );
+
+        previewText.textContent = exampleSentence;
       }
 
       // Generate options for multiple choice questions
@@ -2794,7 +2871,6 @@
           showFeedback(true, "🎉 Chính xác! Tuyệt vời!");
           progress.correctAnswers++;
           progress.score += 10;
-          playSuccessSound();
 
           // Show example sentence after correct answer
           setTimeout(() => {
@@ -2807,7 +2883,6 @@
             `❌ Sai rồi! Đáp án đúng là: "${currentWord.vietnamese}"`
           );
           progress.wrongAnswers++;
-          playErrorSound();
 
           // Show example sentence after wrong answer too
           setTimeout(() => {
@@ -2819,7 +2894,7 @@
         showNextButton();
       }
 
-      // Show example sentence with improved content
+      // Show example sentence
       function showExampleSentence() {
         const exampleSentenceEl = document.getElementById("exampleSentence");
         const germanSentenceEl = document.getElementById("germanSentence");
@@ -2827,198 +2902,14 @@
           document.getElementById("vietnameseSentence");
 
         // Get example sentence for current word
-        const example = exampleSentences[currentWord.german];
+        const example =
+          exampleSentences[currentWord.german] ||
+          createContextualExample(currentWord);
 
-        if (example) {
-          germanSentenceEl.textContent = example.german;
-          vietnameseSentenceEl.textContent = example.vietnamese;
-        } else {
-          // Create a more meaningful example based on word type and context
-          const { german, vietnamese } = createContextualExample(currentWord);
-          germanSentenceEl.textContent = german;
-          vietnameseSentenceEl.textContent = vietnamese;
-        }
+        germanSentenceEl.textContent = example.german;
+        vietnameseSentenceEl.textContent = example.vietnamese;
 
         exampleSentenceEl.style.display = "block";
-      }
-
-      // Create contextual examples for words without predefined examples
-      function createContextualExample(word) {
-        const { german, vietnamese } = word;
-
-        // Patterns for different types of words
-        const patterns = {
-          // Greetings and polite expressions
-          greeting: [
-            {
-              de: `${german}! Wie geht es Ihnen?`,
-              vi: `${vietnamese}! Anh/chị có khỏe không?`,
-            },
-            {
-              de: `${german}, freut mich Sie zu sehen.`,
-              vi: `${vietnamese}, rất vui được gặp anh/chị.`,
-            },
-          ],
-
-          // Verbs
-          verb: [
-            { de: `Ich möchte ${german}.`, vi: `Tôi muốn ${vietnamese}.` },
-            {
-              de: `Können Sie ${german}?`,
-              vi: `Anh/chị có thể ${vietnamese} không?`,
-            },
-            { de: `Wir müssen ${german}.`, vi: `Chúng ta phải ${vietnamese}.` },
-          ],
-
-          // Nouns
-          noun: [
-            {
-              de: `Das ist mein ${german}.`,
-              vi: `Đây là ${vietnamese} của tôi.`,
-            },
-            { de: `Wo ist der ${german}?`, vi: `${vietnamese} ở đâu?` },
-            {
-              de: `Ich brauche einen ${german}.`,
-              vi: `Tôi cần một ${vietnamese}.`,
-            },
-          ],
-
-          // Adjectives
-          adjective: [
-            {
-              de: `Das Wetter ist heute ${german}.`,
-              vi: `Thời tiết hôm nay ${vietnamese}.`,
-            },
-            {
-              de: `Mein Freund ist sehr ${german}.`,
-              vi: `Bạn tôi rất ${vietnamese}.`,
-            },
-          ],
-
-          // Countries and places
-          place: [
-            { de: `Ich komme aus ${german}.`, vi: `Tôi đến từ ${vietnamese}.` },
-            {
-              de: `${german} ist ein schönes Land.`,
-              vi: `${vietnamese} là một đất nước đẹp.`,
-            },
-            {
-              de: `Ich möchte nach ${german} reisen.`,
-              vi: `Tôi muốn đi du lịch ${vietnamese}.`,
-            },
-          ],
-
-          // Languages
-          language: [
-            { de: `Ich lerne ${german}.`, vi: `Tôi học ${vietnamese}.` },
-            {
-              de: `Können Sie ${german} sprechen?`,
-              vi: `Anh/chị có nói được ${vietnamese} không?`,
-            },
-            {
-              de: `${german} ist eine interessante Sprache.`,
-              vi: `${vietnamese} là một ngôn ngữ thú vị.`,
-            },
-          ],
-
-          // Time expressions
-          time: [
-            {
-              de: `${german} gehe ich zur Arbeit.`,
-              vi: `${vietnamese} tôi đi làm.`,
-            },
-            {
-              de: `${german} ist meine Lieblingszeit.`,
-              vi: `${vietnamese} là thời gian yêu thích của tôi.`,
-            },
-          ],
-
-          // Question words
-          question: [
-            { de: `${german} wohnen Sie?`, vi: `Anh/chị sống ${vietnamese}?` },
-            { de: `${german} heißen Sie?`, vi: `Anh/chị tên ${vietnamese}?` },
-          ],
-        };
-
-        // Determine word type and select appropriate pattern
-        let selectedPattern;
-
-        if (
-          [
-            "Hallo",
-            "Guten Tag",
-            "Guten Morgen",
-            "Guten Abend",
-            "Tschüs",
-            "danke",
-            "bitte",
-          ].includes(german)
-        ) {
-          selectedPattern =
-            patterns.greeting[
-              Math.floor(Math.random() * patterns.greeting.length)
-            ];
-        } else if (["Deutschland", "Polen", "Vietnam"].includes(german)) {
-          selectedPattern =
-            patterns.place[Math.floor(Math.random() * patterns.place.length)];
-        } else if (
-          ["Englisch", "Deutsch", "Polnisch", "Spanisch"].includes(german)
-        ) {
-          selectedPattern =
-            patterns.language[
-              Math.floor(Math.random() * patterns.language.length)
-            ];
-        } else if (
-          ["morgen", "heute", "Vormittag", "Nachmittag", "Abend"].includes(
-            german
-          )
-        ) {
-          selectedPattern =
-            patterns.time[Math.floor(Math.random() * patterns.time.length)];
-        } else if (["Wie", "Wo", "Was", "Woher"].includes(german)) {
-          selectedPattern =
-            patterns.question[
-              Math.floor(Math.random() * patterns.question.length)
-            ];
-        } else if (
-          [
-            "spreche",
-            "komme",
-            "heiße",
-            "bin",
-            "ist",
-            "sehen",
-            "hören",
-            "lesen",
-            "schreiben",
-            "machen",
-          ].includes(german)
-        ) {
-          selectedPattern =
-            patterns.verb[Math.floor(Math.random() * patterns.verb.length)];
-        } else if (
-          [
-            "gut",
-            "super",
-            "toll",
-            "interessant",
-            "einfach",
-            "richtig",
-          ].includes(german)
-        ) {
-          selectedPattern =
-            patterns.adjective[
-              Math.floor(Math.random() * patterns.adjective.length)
-            ];
-        } else {
-          selectedPattern =
-            patterns.noun[Math.floor(Math.random() * patterns.noun.length)];
-        }
-
-        return {
-          german: selectedPattern.de,
-          vietnamese: selectedPattern.vi,
-        };
       }
 
       // Submit answer for writing and conjugation modes
@@ -3049,42 +2940,15 @@
             .trim();
 
           if (normalizedUserAnswer === normalizedCorrectAnswer) {
-            const translation = getVietnameseTranslation(
-              currentConjugation.verb,
-              currentConjugation.pronounKey,
-              currentSentenceType
-            );
-            showFeedback(
-              true,
-              `🎉 Chính xác! Câu ${getSentenceTypeText(
-                currentSentenceType
-              )}: "${correctAnswer}"<br>🌍 Nghĩa: ${translation}`
-            );
+            showFeedback(true, `🎉 Chính xác! Câu đúng: "${correctAnswer}"`);
             progress.correctAnswers++;
             progress.score += 10;
-            playSuccessSound();
           } else {
-            const translation = getVietnameseTranslation(
-              currentConjugation.verb,
-              currentConjugation.pronounKey,
-              currentSentenceType
+            showFeedback(
+              false,
+              `❌ Chưa đúng! Đáp án đúng: "${correctAnswer}"`
             );
-            const detailedFeedback = `
-              ❌ Chưa đúng! 
-              📝 Đáp án đúng: ${correctAnswer}
-              🌍 Nghĩa: ${translation}
-              💡 Mẹo nhớ: ${getConjugationTip(
-                currentConjugation.verb,
-                currentConjugation.pronounKey
-              )}
-              📚 Quy tắc: ${getConjugationRule(
-                currentConjugation.verb,
-                currentConjugation.pronounKey
-              )}
-            `;
-            showFeedback(false, detailedFeedback);
             progress.wrongAnswers++;
-            playErrorSound();
           }
         } else if (currentGameMode === "writing") {
           const userAnswer = document
@@ -3095,26 +2959,10 @@
           isAnswered = true;
           const correctAnswer = currentWord.german.toLowerCase();
 
-          // Normalize for comparison (handle special German characters)
-          const normalizedUserAnswer = userAnswer
-            .replace(/ß/g, "ss")
-            .replace(/ä/g, "ae")
-            .replace(/ö/g, "oe")
-            .replace(/ü/g, "ue");
-          const normalizedCorrectAnswer = correctAnswer
-            .replace(/ß/g, "ss")
-            .replace(/ä/g, "ae")
-            .replace(/ö/g, "oe")
-            .replace(/ü/g, "ue");
-
-          if (
-            userAnswer === correctAnswer ||
-            normalizedUserAnswer === normalizedCorrectAnswer
-          ) {
+          if (userAnswer === correctAnswer) {
             showFeedback(true, "🎉 Chính xác! Bạn đã viết đúng!");
             progress.correctAnswers++;
             progress.score += 10;
-            playSuccessSound();
 
             // Show example sentence after correct answer
             setTimeout(() => {
@@ -3126,7 +2974,6 @@
               `❌ Sai rồi! Đáp án đúng là: "${currentWord.german}"`
             );
             progress.wrongAnswers++;
-            playErrorSound();
 
             // Show example sentence after wrong answer too
             setTimeout(() => {
@@ -3144,21 +2991,8 @@
       function showFeedback(isCorrect, message) {
         const feedbackEl = document.getElementById("feedback");
         feedbackEl.style.display = "block";
-        feedbackEl.innerHTML = message; // Changed from textContent to innerHTML
+        feedbackEl.textContent = message;
         feedbackEl.className = `feedback ${isCorrect ? "correct" : "wrong"}`;
-
-        // For wrong answers in conjugation mode, make the feedback box larger
-        if (!isCorrect && currentGameMode === "conjugation") {
-          feedbackEl.style.fontSize = "1em";
-          feedbackEl.style.lineHeight = "1.5";
-          feedbackEl.style.textAlign = "left";
-          feedbackEl.style.whiteSpace = "pre-line";
-        } else {
-          feedbackEl.style.fontSize = "1.1em";
-          feedbackEl.style.lineHeight = "1.2";
-          feedbackEl.style.textAlign = "center";
-          feedbackEl.style.whiteSpace = "normal";
-        }
       }
 
       // Show next button
@@ -3181,7 +3015,6 @@
         currentQuestionIndex++;
         gameProgress[currentGameMode].currentIndex = currentQuestionIndex;
         loadQuestion();
-        playClickSound();
       }
 
       // Skip question
@@ -3190,7 +3023,6 @@
           gameProgress[currentGameMode].wrongAnswers++;
           updateScore();
         }
-        playClickSound();
         nextQuestion();
       }
 
@@ -3198,6 +3030,15 @@
       function playCurrentWord() {
         if (currentWord) {
           speakWord(currentWord.german);
+        }
+      }
+
+      // Speak sentence
+      function speakSentence() {
+        const germanSentence =
+          document.getElementById("germanSentence").textContent;
+        if (germanSentence) {
+          speakWord(germanSentence);
         }
       }
 
@@ -3213,8 +3054,6 @@
         } else {
           recognition.start();
         }
-
-        playClickSound();
       }
 
       // Show results
@@ -3229,12 +3068,14 @@
             ? Math.round((progress.correctAnswers / totalAnswered) * 100)
             : 0;
 
-        // Add conjugation styling to results if needed
+        // Add styling to results if needed
         const finalScore = document.getElementById("finalScore");
         if (currentGameMode === "conjugation") {
           finalScore.classList.add("conjugation");
+        } else if (currentGameMode === "vocabulary") {
+          finalScore.classList.add("vocabulary");
         } else {
-          finalScore.classList.remove("conjugation");
+          finalScore.classList.remove("conjugation", "vocabulary");
         }
 
         document.getElementById("finalScore").textContent = progress.score;
@@ -3243,8 +3084,6 @@
         document.getElementById("finalWrong").textContent =
           progress.wrongAnswers;
         document.getElementById("finalAccuracy").textContent = accuracy + "%";
-
-        playSuccessSound();
       }
 
       // Restart game
@@ -3257,7 +3096,6 @@
           currentIndex: 0,
           questionsData: [],
         };
-        playClickSound();
         startGame(currentGameMode);
       }
 
@@ -3265,10 +3103,9 @@
       function showMainMenu() {
         document.getElementById("mainMenu").style.display = "block";
         document.getElementById("gameArea").style.display = "none";
+        document.getElementById("vocabularySummary").style.display = "none";
         document.getElementById("results").style.display = "none";
         document.getElementById("backButton").classList.remove("show");
-
-        playClickSound();
 
         // Update progress display for each mode
         updateModeProgress();
@@ -3318,7 +3155,7 @@
         });
       }
 
-      // Handle Enter key for input fields
+      // Initialize page
       document.addEventListener("DOMContentLoaded", function () {
         // Text input handler
         document
@@ -3338,41 +3175,15 @@
 
         // Initialize progress display on page load
         updateModeProgress();
-
-        // Add click sound to all buttons
-        document.addEventListener("click", function (e) {
-          if (
-            e.target.matches("button") ||
-            e.target.matches(".btn") ||
-            e.target.matches(".option") ||
-            e.target.matches(".game-mode") ||
-            e.target.matches(".sentence-type-btn")
-          ) {
-            // Small delay to not interfere with other sounds
-            setTimeout(() => {
-              if (!e.target.matches(".mic-button")) {
-                playClickSound();
-              }
-            }, 50);
-          }
-        });
-
-        // Initialize audio context on first user interaction
-        document.addEventListener(
-          "click",
-          function () {
-            if (!audioContext) {
-              initializeAudio();
-            }
-          },
-          { once: true }
-        );
       });
 
-      // Add keyboard shortcuts
+      // Keyboard shortcuts
       document.addEventListener("keydown", function (e) {
-        // Only if game area is visible
-        if (document.getElementById("gameArea").style.display === "block") {
+        // Only if game area or vocabulary summary is visible
+        if (
+          document.getElementById("gameArea").style.display === "block" ||
+          document.getElementById("vocabularySummary").style.display === "block"
+        ) {
           switch (e.key) {
             case " ": // Spacebar for audio
               e.preventDefault();
@@ -3381,8 +3192,6 @@
                 currentGameMode === "reading"
               ) {
                 playCurrentWord();
-              } else if (currentGameMode === "conjugation") {
-                speakConjugationSentence();
               }
               break;
             case "Enter":
@@ -3401,201 +3210,9 @@
               e.preventDefault();
               showMainMenu();
               break;
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-              // Quick select options
-              e.preventDefault();
-              const optionIndex = parseInt(e.key) - 1;
-              const options = document.querySelectorAll(
-                ".option:not(.disabled)"
-              );
-              if (options[optionIndex] && !isAnswered) {
-                options[optionIndex].click();
-              }
-              break;
           }
         }
       });
-
-      // Add visual feedback for button presses
-      function addButtonFeedback() {
-        const buttons = document.querySelectorAll(
-          "button, .btn, .option, .game-mode"
-        );
-        buttons.forEach((button) => {
-          button.addEventListener("mousedown", function () {
-            this.style.transform = "scale(0.95)";
-          });
-
-          button.addEventListener("mouseup", function () {
-            this.style.transform = "";
-          });
-
-          button.addEventListener("mouseleave", function () {
-            this.style.transform = "";
-          });
-        });
-      }
-
-      // Initialize visual feedback
-      document.addEventListener("DOMContentLoaded", addButtonFeedback);
-
-      // Add touch feedback for mobile
-      if ("ontouchstart" in window) {
-        document.addEventListener("touchstart", function (e) {
-          if (
-            e.target.matches("button") ||
-            e.target.matches(".btn") ||
-            e.target.matches(".option") ||
-            e.target.matches(".game-mode")
-          ) {
-            e.target.style.transform = "scale(0.95)";
-          }
-        });
-
-        document.addEventListener("touchend", function (e) {
-          if (
-            e.target.matches("button") ||
-            e.target.matches(".btn") ||
-            e.target.matches(".option") ||
-            e.target.matches(".game-mode")
-          ) {
-            setTimeout(() => {
-              e.target.style.transform = "";
-            }, 150);
-          }
-        });
-      }
-
-      // Add progress persistence (using sessionStorage instead of localStorage)
-      function saveProgress() {
-        try {
-          sessionStorage.setItem(
-            "germanGameProgress",
-            JSON.stringify(gameProgress)
-          );
-        } catch (e) {
-          console.log("Could not save progress");
-        }
-      }
-
-      function loadProgress() {
-        try {
-          const saved = sessionStorage.getItem("germanGameProgress");
-          if (saved) {
-            const savedProgress = JSON.parse(saved);
-            // Merge with default structure
-            Object.keys(savedProgress).forEach((mode) => {
-              if (gameProgress[mode]) {
-                Object.assign(gameProgress[mode], savedProgress[mode]);
-              }
-            });
-          }
-        } catch (e) {
-          console.log("Could not load progress");
-        }
-      }
-
-      // Save progress after each question
-      const originalUpdateScore = updateScore;
-      updateScore = function () {
-        originalUpdateScore();
-        saveProgress();
-      };
-
-      // Load progress on page load
-      document.addEventListener("DOMContentLoaded", function () {
-        loadProgress();
-        updateModeProgress();
-      });
-
-      // Add success celebration animation
-      function celebrateSuccess() {
-        const gameArea = document.getElementById("gameArea");
-        gameArea.style.animation = "celebrate 0.6s ease-out";
-
-        setTimeout(() => {
-          gameArea.style.animation = "";
-        }, 600);
-      }
-
-      // Add CSS animation keyframes
-      const style = document.createElement("style");
-      style.textContent = `
-        @keyframes celebrate {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.02); }
-          100% { transform: scale(1); }
-        }
-        
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-5px); }
-          75% { transform: translateX(5px); }
-        }
-        
-        .shake {
-          animation: shake 0.5s ease-in-out;
-        }
-      `;
-      document.head.appendChild(style);
-
-      // Add error shake animation
-      function shakeOnError() {
-        const feedback = document.getElementById("feedback");
-        feedback.classList.add("shake");
-
-        setTimeout(() => {
-          feedback.classList.remove("shake");
-        }, 500);
-      }
-
-      // Enhanced feedback function
-      const originalShowFeedback = showFeedback;
-      showFeedback = function (isCorrect, message) {
-        originalShowFeedback(isCorrect, message);
-
-        if (isCorrect) {
-          celebrateSuccess();
-        } else {
-          shakeOnError();
-        }
-      };
-
-      // Add accessibility improvements
-      function addAccessibility() {
-        // Add ARIA labels
-        document
-          .getElementById("playButton")
-          .setAttribute("aria-label", "Phát âm từ hiện tại");
-        document
-          .getElementById("submitButton")
-          .setAttribute("aria-label", "Kiểm tra câu trả lời");
-        document
-          .getElementById("nextButton")
-          .setAttribute("aria-label", "Chuyển đến câu hỏi tiếp theo");
-
-        // Add keyboard navigation hints
-        const helpText = document.createElement("div");
-        helpText.style.cssText =
-          "position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 10px; border-radius: 5px; font-size: 12px; z-index: 1000;";
-        helpText.innerHTML = `
-          <strong>Phím tắt:</strong><br>
-          Space: Phát âm | Enter: Tiếp theo | Esc: Menu | 1-4: Chọn đáp án
-        `;
-        document.body.appendChild(helpText);
-
-        // Hide help text after 5 seconds
-        setTimeout(() => {
-          helpText.style.opacity = "0";
-          helpText.style.transition = "opacity 2s";
-        }, 5000);
-      }
-
-      // Initialize accessibility on page load
-      document.addEventListener("DOMContentLoaded", addAccessibility);
     </script>
   </body>
 </html>
