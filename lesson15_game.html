@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game luyện tập từ vựng tiếng Đức - Thời gian & Đồ vật</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .header h1 {
+        color: #4a69bd;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header p {
+        color: #666;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+      }
+
+      .game-selector {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .game-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .game-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .game-card.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        transform: translateY(-5px);
+      }
+
+      .game-icon {
+        font-size: 3em;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .game-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .game-description {
+        font-size: 1em;
+        opacity: 0.8;
+      }
+
+      .game-area {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        min-height: 500px;
+        display: none;
+      }
+
+      .game-area.active {
+        display: block;
+      }
+
+      .game-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .game-header h2 {
+        color: #4a69bd;
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+
+      .score-board {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .score-item {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2em;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .question-area {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .question {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        border-left: 5px solid #667eea;
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .option {
+        background: #f8f9fa;
+        border: 3px solid #e9ecef;
+        border-radius: 15px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .option:hover {
+        background: #e3f2fd;
+        border-color: #2196f3;
+        transform: translateY(-5px);
+      }
+
+      .option.correct {
+        background: #d4edda;
+        border-color: #28a745;
+        color: #155724;
+      }
+
+      .option.incorrect {
+        background: #f8d7da;
+        border-color: #dc3545;
+        color: #721c24;
+      }
+
+      .option.disabled {
+        pointer-events: none;
+        opacity: 0.6;
+      }
+
+      .game-controls {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn.success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      }
+
+      .btn.danger {
+        background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+      }
+
+      .feedback {
+        text-align: center;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        display: none;
+      }
+
+      .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 2px solid #28a745;
+      }
+
+      .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 2px solid #dc3545;
+      }
+
+      .feedback.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .memory-card {
+        aspect-ratio: 1;
+        background: #f8f9fa;
+        border: 3px solid #e9ecef;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .memory-card:hover {
+        transform: scale(1.05);
+        border-color: #667eea;
+      }
+
+      .memory-card.flipped {
+        background: #e3f2fd;
+        border-color: #2196f3;
+      }
+
+      .memory-card.matched {
+        background: #d4edda;
+        border-color: #28a745;
+        pointer-events: none;
+      }
+
+      .typing-input {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+        font-size: 1.5em;
+        border: 3px solid #e9ecef;
+        border-radius: 15px;
+        text-align: center;
+        margin: 20px auto;
+        display: block;
+        background: #f8f9fa;
+      }
+
+      .typing-input:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      .game-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .stat-item {
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 2em;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      .stat-label {
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      .speaker-btn {
+        background: linear-gradient(135deg, #17a2b8 0%, #6610f2 100%);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.2em;
+        margin-left: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .speaker-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .timer {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #dc3545;
+        margin-bottom: 20px;
+      }
+
+      .word-card {
+        background: #f8f9fa;
+        border: 3px solid #e9ecef;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .word-card:hover {
+        background: #e3f2fd;
+        border-color: #2196f3;
+        transform: translateY(-5px);
+      }
+
+      .word-german {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .word-pronunciation {
+        color: #8e44ad;
+        font-style: italic;
+        margin-bottom: 15px;
+      }
+
+      .word-vietnamese {
+        color: #27ae60;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .game-complete {
+        text-align: center;
+        padding: 40px;
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        border-radius: 20px;
+        margin-top: 30px;
+      }
+
+      .game-complete h3 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+
+      .game-complete p {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .game-selector {
+          grid-template-columns: 1fr;
+        }
+
+        .memory-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .score-board {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .game-controls {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎮 Game luyện tập từ vựng tiếng Đức</h1>
+        <p>Thời gian & Đồ vật - 48 từ vựng với 5 trò chơi thú vị</p>
+      </div>
+
+      <div class="game-selector">
+        <div class="game-card active" onclick="selectGame('quiz')">
+          <div class="game-icon">🧠</div>
+          <div class="game-title">Quiz Trắc nghiệm</div>
+          <div class="game-description">Chọn đáp án đúng cho từng câu hỏi</div>
+        </div>
+
+        <div class="game-card" onclick="selectGame('memory')">
+          <div class="game-icon">🧩</div>
+          <div class="game-title">Memory Game</div>
+          <div class="game-description">
+            Lật thẻ tìm cặp từ tiếng Đức - tiếng Việt
+          </div>
+        </div>
+
+        <div class="game-card" onclick="selectGame('typing')">
+          <div class="game-icon">⌨️</div>
+          <div class="game-title">Typing Game</div>
+          <div class="game-description">
+            Gõ từ tiếng Đức theo nghĩa tiếng Việt
+          </div>
+        </div>
+
+        <div class="game-card" onclick="selectGame('listening')">
+          <div class="game-icon">🎧</div>
+          <div class="game-title">Listening Game</div>
+          <div class="game-description">Nghe phát âm và chọn từ đúng</div>
+        </div>
+
+        <div class="game-card" onclick="selectGame('flashcard')">
+          <div class="game-icon">📚</div>
+          <div class="game-title">Flashcard</div>
+          <div class="game-description">Học từ vựng với thẻ ghi nhớ</div>
+        </div>
+      </div>
+
+      <!-- Quiz Game -->
+      <div id="quiz-game" class="game-area active">
+        <div class="game-header">
+          <h2>🧠 Quiz Trắc nghiệm</h2>
+          <div class="score-board">
+            <div class="score-item">
+              <div>
+                Câu hỏi: <span id="quiz-current">1</span>/<span id="quiz-total"
+                  >20</span
+                >
+              </div>
+            </div>
+            <div class="score-item">
+              <div>Điểm: <span id="quiz-score">0</span></div>
+            </div>
+            <div class="score-item">
+              <div>Đúng: <span id="quiz-correct">0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="quiz-progress"></div>
+        </div>
+
+        <div class="question-area">
+          <div class="question" id="quiz-question">
+            Từ tiếng Đức của "đồng hồ" là gì?
+          </div>
+          <button class="speaker-btn" onclick="speakQuizWord()">🔊</button>
+        </div>
+
+        <div class="feedback" id="quiz-feedback"></div>
+
+        <div class="options" id="quiz-options">
+          <!-- Options will be generated by JavaScript -->
+        </div>
+
+        <div class="game-controls">
+          <button
+            class="btn"
+            id="quiz-next"
+            onclick="nextQuizQuestion()"
+            disabled
+          >
+            Câu tiếp theo
+          </button>
+          <button class="btn" onclick="restartQuiz()">Chơi lại</button>
+        </div>
+      </div>
+
+      <!-- Memory Game -->
+      <div id="memory-game" class="game-area">
+        <div class="game-header">
+          <h2>🧩 Memory Game</h2>
+          <div class="score-board">
+            <div class="score-item">
+              <div>
+                Cặp tìm được: <span id="memory-matches">0</span>/<span
+                  id="memory-total"
+                  >12</span
+                >
+              </div>
+            </div>
+            <div class="score-item">
+              <div>Lượt chơi: <span id="memory-moves">0</span></div>
+            </div>
+            <div class="score-item timer">
+              <div>Thời gian: <span id="memory-time">0</span>s</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-grid" id="memory-grid">
+          <!-- Memory cards will be generated by JavaScript -->
+        </div>
+
+        <div class="game-controls">
+          <button class="btn" onclick="restartMemory()">Chơi lại</button>
+        </div>
+      </div>
+
+      <!-- Typing Game -->
+      <div id="typing-game" class="game-area">
+        <div class="game-header">
+          <h2>⌨️ Typing Game</h2>
+          <div class="score-board">
+            <div class="score-item">
+              <div>
+                Từ: <span id="typing-current">1</span>/<span id="typing-total"
+                  >20</span
+                >
+              </div>
+            </div>
+            <div class="score-item">
+              <div>Đúng: <span id="typing-score">0</span></div>
+            </div>
+            <div class="score-item timer">
+              <div>Thời gian: <span id="typing-time">60</span>s</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="typing-progress"></div>
+        </div>
+
+        <div class="question-area">
+          <div class="question" id="typing-question">
+            Gõ từ tiếng Đức có nghĩa là: "đồng hồ"
+          </div>
+          <button class="speaker-btn" onclick="speakTypingWord()">🔊</button>
+        </div>
+
+        <input
+          type="text"
+          class="typing-input"
+          id="typing-input"
+          placeholder="Gõ từ tiếng Đức..."
+          autocomplete="off"
+        />
+
+        <div class="feedback" id="typing-feedback"></div>
+
+        <div class="game-controls">
+          <button
+            class="btn"
+            id="typing-next"
+            onclick="nextTypingQuestion()"
+            disabled
+          >
+            Từ tiếp theo
+          </button>
+          <button class="btn" onclick="restartTyping()">Chơi lại</button>
+        </div>
+      </div>
+
+      <!-- Listening Game -->
+      <div id="listening-game" class="game-area">
+        <div class="game-header">
+          <h2>🎧 Listening Game</h2>
+          <div class="score-board">
+            <div class="score-item">
+              <div>
+                Câu hỏi: <span id="listening-current">1</span>/<span
+                  id="listening-total"
+                  >20</span
+                >
+              </div>
+            </div>
+            <div class="score-item">
+              <div>Điểm: <span id="listening-score">0</span></div>
+            </div>
+            <div class="score-item">
+              <div>Đúng: <span id="listening-correct">0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="listening-progress"></div>
+        </div>
+
+        <div class="question-area">
+          <div class="question">Nghe phát âm và chọn nghĩa đúng:</div>
+          <button class="speaker-btn" onclick="playListeningWord()">
+            🔊 Nghe từ
+          </button>
+        </div>
+
+        <div class="feedback" id="listening-feedback"></div>
+
+        <div class="options" id="listening-options">
+          <!-- Options will be generated by JavaScript -->
+        </div>
+
+        <div class="game-controls">
+          <button
+            class="btn"
+            id="listening-next"
+            onclick="nextListeningQuestion()"
+            disabled
+          >
+            Câu tiếp theo
+          </button>
+          <button class="btn" onclick="restartListening()">Chơi lại</button>
+        </div>
+      </div>
+
+      <!-- Flashcard Game -->
+      <div id="flashcard-game" class="game-area">
+        <div class="game-header">
+          <h2>📚 Flashcard</h2>
+          <div class="score-board">
+            <div class="score-item">
+              <div>
+                Thẻ: <span id="flashcard-current">1</span>/<span
+                  id="flashcard-total"
+                  >48</span
+                >
+              </div>
+            </div>
+            <div class="score-item">
+              <div>Đã học: <span id="flashcard-learned">0</span></div>
+            </div>
+            <div class="score-item">
+              <div>Khó: <span id="flashcard-difficult">0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="flashcard-progress"></div>
+        </div>
+
+        <div class="word-card" id="flashcard-card" onclick="flipFlashcard()">
+          <div class="word-german" id="flashcard-german">die Uhr</div>
+          <div class="word-pronunciation hidden" id="flashcard-pronunciation">
+            [di ur]
+          </div>
+          <div class="word-vietnamese hidden" id="flashcard-vietnamese">
+            đồng hồ
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <button class="btn danger" onclick="markDifficult()">😅 Khó</button>
+          <button class="btn" onclick="flipFlashcard()">🔄 Lật thẻ</button>
+          <button class="btn success" onclick="markLearned()">
+            ✅ Đã biết
+          </button>
+        </div>
+
+        <div class="game-controls">
+          <button class="btn" onclick="previousFlashcard()">← Trước</button>
+          <button class="btn" onclick="nextFlashcard()">Tiếp theo →</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Vocabulary data
+      const vocabulary = [
+        {
+          german: "die Uhr",
+          pronunciation: "[di ur]",
+          vietnamese: "đồng hồ",
+          category: "time",
+        },
+        {
+          german: "die Zeit",
+          pronunciation: "[di tsait]",
+          vietnamese: "thời gian",
+          category: "time",
+        },
+        {
+          german: "die Sekunde",
+          pronunciation: "[di ze-kun-de]",
+          vietnamese: "giây",
+          category: "time",
+        },
+        {
+          german: "die Minute",
+          pronunciation: "[di mi-nu-te]",
+          vietnamese: "phút",
+          category: "time",
+        },
+        {
+          german: "die Stunde",
+          pronunciation: "[di shun-de]",
+          vietnamese: "giờ",
+          category: "time",
+        },
+        {
+          german: "der Tag",
+          pronunciation: "[der tak]",
+          vietnamese: "ngày",
+          category: "time",
+        },
+        {
+          german: "die Woche",
+          pronunciation: "[di vo-khe]",
+          vietnamese: "tuần",
+          category: "time",
+        },
+        {
+          german: "der Monat",
+          pronunciation: "[der mo-nat]",
+          vietnamese: "tháng",
+          category: "time",
+        },
+        {
+          german: "das Jahr",
+          pronunciation: "[das yar]",
+          vietnamese: "năm",
+          category: "time",
+        },
+        {
+          german: "am Morgen",
+          pronunciation: "[am mor-gen]",
+          vietnamese: "buổi sáng",
+          category: "time",
+        },
+        {
+          german: "am Mittag",
+          pronunciation: "[am mi-tak]",
+          vietnamese: "buổi trưa",
+          category: "time",
+        },
+        {
+          german: "am Abend",
+          pronunciation: "[am a-bent]",
+          vietnamese: "buổi tối",
+          category: "time",
+        },
+        {
+          german: "in der Nacht",
+          pronunciation: "[in der nakht]",
+          vietnamese: "ban đêm",
+          category: "time",
+        },
+        {
+          german: "Montag",
+          pronunciation: "[mon-tak]",
+          vietnamese: "Thứ hai",
+          category: "days",
+        },
+        {
+          german: "Dienstag",
+          pronunciation: "[dins-tak]",
+          vietnamese: "Thứ ba",
+          category: "days",
+        },
+        {
+          german: "Mittwoch",
+          pronunciation: "[mit-vokh]",
+          vietnamese: "Thứ tư",
+          category: "days",
+        },
+        {
+          german: "Donnerstag",
+          pronunciation: "[do-ners-tak]",
+          vietnamese: "Thứ năm",
+          category: "days",
+        },
+        {
+          german: "Freitag",
+          pronunciation: "[frai-tak]",
+          vietnamese: "Thứ sáu",
+          category: "days",
+        },
+        {
+          german: "Samstag",
+          pronunciation: "[zams-tak]",
+          vietnamese: "Thứ bảy",
+          category: "days",
+        },
+        {
+          german: "Sonntag",
+          pronunciation: "[zon-tak]",
+          vietnamese: "Chủ nhật",
+          category: "days",
+        },
+        {
+          german: "der Frühling",
+          pronunciation: "[der früh-ling]",
+          vietnamese: "mùa xuân",
+          category: "seasons",
+        },
+        {
+          german: "der Sommer",
+          pronunciation: "[der zo-mer]",
+          vietnamese: "mùa hè",
+          category: "seasons",
+        },
+        {
+          german: "der Herbst",
+          pronunciation: "[der herpst]",
+          vietnamese: "mùa thu",
+          category: "seasons",
+        },
+        {
+          german: "der Winter",
+          pronunciation: "[der vin-ter]",
+          vietnamese: "mùa đông",
+          category: "seasons",
+        },
+        {
+          german: "das Auto",
+          pronunciation: "[das au-to]",
+          vietnamese: "xe hơi",
+          category: "objects",
+        },
+        {
+          german: "das Bild",
+          pronunciation: "[das bilt]",
+          vietnamese: "hình ảnh",
+          category: "objects",
+        },
+        {
+          german: "der Bleistift",
+          pronunciation: "[der blai-shtift]",
+          vietnamese: "bút chì",
+          category: "objects",
+        },
+        {
+          german: "die Brille",
+          pronunciation: "[di bri-le]",
+          vietnamese: "kính mắt",
+          category: "objects",
+        },
+        {
+          german: "das Buch",
+          pronunciation: "[das bukh]",
+          vietnamese: "sách",
+          category: "objects",
+        },
+        {
+          german: "die CD",
+          pronunciation: "[di tse-de]",
+          vietnamese: "đĩa CD",
+          category: "objects",
+        },
+        {
+          german: "der Computer",
+          pronunciation: "[der kom-pyu-ter]",
+          vietnamese: "máy tính",
+          category: "objects",
+        },
+        {
+          german: "das Fahrrad",
+          pronunciation: "[das far-rat]",
+          vietnamese: "xe đạp",
+          category: "objects",
+        },
+        {
+          german: "der Fernseher",
+          pronunciation: "[der fern-ze-her]",
+          vietnamese: "tivi",
+          category: "objects",
+        },
+        {
+          german: "der Fußball",
+          pronunciation: "[der fus-bal]",
+          vietnamese: "bóng đá",
+          category: "objects",
+        },
+        {
+          german: "das Handy",
+          pronunciation: "[das hen-di]",
+          vietnamese: "điện thoại di động",
+          category: "objects",
+        },
+        {
+          german: "das Heft",
+          pronunciation: "[das heft]",
+          vietnamese: "vở",
+          category: "objects",
+        },
+        {
+          german: "der Herd",
+          pronunciation: "[der hert]",
+          vietnamese: "bếp",
+          category: "objects",
+        },
+        {
+          german: "die Kaffeemaschine",
+          pronunciation: "[di ka-fe-ma-shi-ne]",
+          vietnamese: "máy pha cà phê",
+          category: "objects",
+        },
+        {
+          german: "der Kühlschrank",
+          pronunciation: "[der kühl-shrank]",
+          vietnamese: "tủ lạnh",
+          category: "objects",
+        },
+        {
+          german: "die Lampe",
+          pronunciation: "[di lam-pe]",
+          vietnamese: "đèn",
+          category: "objects",
+        },
+        {
+          german: "das Radio",
+          pronunciation: "[das ra-di-o]",
+          vietnamese: "đài radio",
+          category: "objects",
+        },
+        {
+          german: "die Schere",
+          pronunciation: "[di she-re]",
+          vietnamese: "kéo",
+          category: "objects",
+        },
+        {
+          german: "der Stuhl",
+          pronunciation: "[der shtul]",
+          vietnamese: "ghế",
+          category: "objects",
+        },
+        {
+          german: "die Tasche",
+          pronunciation: "[di ta-she]",
+          vietnamese: "túi xách",
+          category: "objects",
+        },
+        {
+          german: "die Tasse",
+          pronunciation: "[di ta-se]",
+          vietnamese: "tách",
+          category: "objects",
+        },
+        {
+          german: "der Tisch",
+          pronunciation: "[der tish]",
+          vietnamese: "bàn",
+          category: "objects",
+        },
+        {
+          german: "die Waschmaschine",
+          pronunciation: "[di vash-ma-shi-ne]",
+          vietnamese: "máy giặt",
+          category: "objects",
+        },
+        {
+          german: "das Wörterbuch",
+          pronunciation: "[das vör-ter-bukh]",
+          vietnamese: "từ điển",
+          category: "objects",
+        },
+      ];
+
+      // Game state variables
+      let currentGame = "quiz";
+      let quizState = {
+        currentQuestion: 0,
+        score: 0,
+        correct: 0,
+        questions: [],
+        isAnswered: false,
+      };
+
+      let memoryState = {
+        cards: [],
+        flippedCards: [],
+        matches: 0,
+        moves: 0,
+        startTime: null,
+        timer: null,
+      };
+
+      let typingState = {
+        currentWord: 0,
+        score: 0,
+        words: [],
+        timer: null,
+        timeLeft: 60,
+      };
+
+      let listeningState = {
+        currentQuestion: 0,
+        score: 0,
+        correct: 0,
+        questions: [],
+        isAnswered: false,
+      };
+
+      let flashcardState = {
+        currentCard: 0,
+        learned: 0,
+        difficult: 0,
+        isFlipped: false,
+      };
+
+      // Speech synthesis function
+      function speak(text) {
+        speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = speechSynthesis.getVoices();
+        const germanVoice = voices.find(
+          (voice) =>
+            voice.lang.includes("de") ||
+            voice.name.toLowerCase().includes("german") ||
+            voice.name.toLowerCase().includes("deutsch")
+        );
+
+        if (germanVoice) {
+          utterance.voice = germanVoice;
+        }
+        utterance.lang = "de-DE";
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+
+      // Game selection
+      function selectGame(gameType) {
+        currentGame = gameType;
+
+        // Update game cards
+        document.querySelectorAll(".game-card").forEach((card) => {
+          card.classList.remove("active");
+        });
+        event.target.closest(".game-card").classList.add("active");
+
+        // Hide all game areas
+        document.querySelectorAll(".game-area").forEach((area) => {
+          area.classList.remove("active");
+        });
+
+        // Show selected game
+        document.getElementById(gameType + "-game").classList.add("active");
+
+        // Initialize the selected game
+        switch (gameType) {
+          case "quiz":
+            initQuiz();
+            break;
+          case "memory":
+            initMemory();
+            break;
+          case "typing":
+            initTyping();
+            break;
+          case "listening":
+            initListening();
+            break;
+          case "flashcard":
+            initFlashcard();
+            break;
+        }
+      }
+
+      // Utility functions
+      function shuffleArray(array) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+      }
+
+      function getRandomWords(exclude = [], count = 3) {
+        const filtered = vocabulary.filter((word) => !exclude.includes(word));
+        return shuffleArray(filtered).slice(0, count);
+      }
+
+      // QUIZ GAME
+      function initQuiz() {
+        quizState = {
+          currentQuestion: 0,
+          score: 0,
+          correct: 0,
+          questions: shuffleArray(vocabulary).slice(0, 20),
+          isAnswered: false,
+        };
+
+        updateQuizUI();
+        showQuizQuestion();
+      }
+
+      function updateQuizUI() {
+        document.getElementById("quiz-current").textContent =
+          quizState.currentQuestion + 1;
+        document.getElementById("quiz-total").textContent =
+          quizState.questions.length;
+        document.getElementById("quiz-score").textContent = quizState.score;
+        document.getElementById("quiz-correct").textContent = quizState.correct;
+
+        const progress =
+          (quizState.currentQuestion / quizState.questions.length) * 100;
+        document.getElementById("quiz-progress").style.width = progress + "%";
+      }
+
+      function showQuizQuestion() {
+        if (quizState.currentQuestion >= quizState.questions.length) {
+          showQuizComplete();
+          return;
+        }
+
+        const currentWord = quizState.questions[quizState.currentQuestion];
+        const questionType =
+          Math.random() > 0.5 ? "germanToVietnamese" : "vietnameseToGerman";
+
+        let questionText, correctAnswer;
+
+        if (questionType === "germanToVietnamese") {
+          questionText = `Nghĩa của "${currentWord.german}" là gì?`;
+          correctAnswer = currentWord.vietnamese;
+        } else {
+          questionText = `Từ tiếng Đức của "${currentWord.vietnamese}" là gì?`;
+          correctAnswer = currentWord.german;
+        }
+
+        document.getElementById("quiz-question").textContent = questionText;
+
+        // Generate options
+        const wrongOptions = getRandomWords([currentWord], 3);
+        const options = shuffleArray([
+          correctAnswer,
+          ...wrongOptions.map((w) =>
+            questionType === "germanToVietnamese" ? w.vietnamese : w.german
+          ),
+        ]);
+
+        const optionsContainer = document.getElementById("quiz-options");
+        optionsContainer.innerHTML = "";
+
+        options.forEach((option) => {
+          const optionElement = document.createElement("div");
+          optionElement.className = "option";
+          optionElement.textContent = option;
+          optionElement.onclick = () => selectQuizOption(option, correctAnswer);
+          optionsContainer.appendChild(optionElement);
+        });
+
+        quizState.isAnswered = false;
+        document.getElementById("quiz-next").disabled = true;
+        document.getElementById("quiz-feedback").classList.remove("show");
+      }
+
+      function selectQuizOption(selected, correct) {
+        if (quizState.isAnswered) return;
+
+        quizState.isAnswered = true;
+        const isCorrect = selected === correct;
+
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.add("disabled");
+          if (option.textContent === correct) {
+            option.classList.add("correct");
+          } else if (option.textContent === selected && !isCorrect) {
+            option.classList.add("incorrect");
+          }
+        });
+
+        const feedback = document.getElementById("quiz-feedback");
+        if (isCorrect) {
+          quizState.score += 10;
+          quizState.correct++;
+          feedback.textContent = "✅ Chính xác! Tuyệt vời!";
+          feedback.className = "feedback correct show";
+        } else {
+          feedback.textContent = `❌ Sai rồi! Đáp án đúng là: ${correct}`;
+          feedback.className = "feedback incorrect show";
+        }
+
+        updateQuizUI();
+        document.getElementById("quiz-next").disabled = false;
+      }
+
+      function nextQuizQuestion() {
+        quizState.currentQuestion++;
+        updateQuizUI();
+        showQuizQuestion();
+      }
+
+      function restartQuiz() {
+        initQuiz();
+      }
+
+      function speakQuizWord() {
+        const currentWord = quizState.questions[quizState.currentQuestion];
+        if (currentWord) {
+          speak(currentWord.german);
+        }
+      }
+
+      function showQuizComplete() {
+        const accuracy = Math.round(
+          (quizState.correct / quizState.questions.length) * 100
+        );
+        document.getElementById("quiz-options").innerHTML = `
+                <div class="game-complete">
+                    <h3>🎉 Hoàn thành Quiz!</h3>
+                    <p>Điểm số: ${quizState.score}</p>
+                    <p>Đúng: ${quizState.correct}/${quizState.questions.length}</p>
+                    <p>Độ chính xác: ${accuracy}%</p>
+                </div>
+            `;
+      }
+
+      // MEMORY GAME
+      function initMemory() {
+        const selectedWords = shuffleArray(vocabulary).slice(0, 12);
+        const cards = [];
+
+        selectedWords.forEach((word) => {
+          cards.push({ type: "german", word: word, text: word.german });
+          cards.push({ type: "vietnamese", word: word, text: word.vietnamese });
+        });
+
+        memoryState = {
+          cards: shuffleArray(cards),
+          flippedCards: [],
+          matches: 0,
+          moves: 0,
+          startTime: Date.now(),
+          timer: setInterval(updateMemoryTimer, 1000),
+        };
+
+        updateMemoryUI();
+        renderMemoryGrid();
+      }
+
+      function updateMemoryUI() {
+        document.getElementById("memory-matches").textContent =
+          memoryState.matches;
+        document.getElementById("memory-total").textContent = "12";
+        document.getElementById("memory-moves").textContent = memoryState.moves;
+      }
+
+      function updateMemoryTimer() {
+        const elapsed = Math.floor((Date.now() - memoryState.startTime) / 1000);
+        document.getElementById("memory-time").textContent = elapsed;
+      }
+
+      function renderMemoryGrid() {
+        const grid = document.getElementById("memory-grid");
+        grid.innerHTML = "";
+
+        memoryState.cards.forEach((card, index) => {
+          const cardElement = document.createElement("div");
+          cardElement.className = "memory-card";
+          cardElement.innerHTML = "?";
+          cardElement.onclick = () => flipMemoryCard(index);
+          cardElement.dataset.index = index;
+          grid.appendChild(cardElement);
+        });
+      }
+
+      function flipMemoryCard(index) {
+        const cardElement = document.querySelector(`[data-index="${index}"]`);
+        const card = memoryState.cards[index];
+
+        if (
+          cardElement.classList.contains("flipped") ||
+          cardElement.classList.contains("matched") ||
+          memoryState.flippedCards.length >= 2
+        ) {
+          return;
+        }
+
+        cardElement.classList.add("flipped");
+        cardElement.innerHTML = card.text;
+        memoryState.flippedCards.push({ index, card });
+
+        if (memoryState.flippedCards.length === 2) {
+          memoryState.moves++;
+          updateMemoryUI();
+
+          setTimeout(() => {
+            checkMemoryMatch();
+          }, 1000);
+        }
+      }
+
+      function checkMemoryMatch() {
+        const [first, second] = memoryState.flippedCards;
+        const firstElement = document.querySelector(
+          `[data-index="${first.index}"]`
+        );
+        const secondElement = document.querySelector(
+          `[data-index="${second.index}"]`
+        );
+
+        if (first.card.word.german === second.card.word.german) {
+          // Match found
+          firstElement.classList.add("matched");
+          secondElement.classList.add("matched");
+          memoryState.matches++;
+
+          if (memoryState.matches === 12) {
+            clearInterval(memoryState.timer);
+            showMemoryComplete();
+          }
+        } else {
+          // No match
+          firstElement.classList.remove("flipped");
+          secondElement.classList.remove("flipped");
+          firstElement.innerHTML = "?";
+          secondElement.innerHTML = "?";
+        }
+
+        memoryState.flippedCards = [];
+        updateMemoryUI();
+      }
+
+      function showMemoryComplete() {
+        const elapsed = Math.floor((Date.now() - memoryState.startTime) / 1000);
+        document.getElementById("memory-grid").innerHTML = `
+                <div class="game-complete" style="grid-column: 1 / -1;">
+                    <h3>🎉 Hoàn thành Memory Game!</h3>
+                    <p>Thời gian: ${elapsed} giây</p>
+                    <p>Số lượt: ${memoryState.moves}</p>
+                    <p>Hiệu suất: ${Math.round(
+                      (24 / memoryState.moves) * 100
+                    )}%</p>
+                </div>
+            `;
+      }
+
+      function restartMemory() {
+        if (memoryState.timer) {
+          clearInterval(memoryState.timer);
+        }
+        initMemory();
+      }
+
+      // TYPING GAME
+      function initTyping() {
+        typingState = {
+          currentWord: 0,
+          score: 0,
+          words: shuffleArray(vocabulary).slice(0, 20),
+          timer: null,
+          timeLeft: 60,
+        };
+
+        updateTypingUI();
+        showTypingQuestion();
+        startTypingTimer();
+
+        const input = document.getElementById("typing-input");
+        input.value = "";
+        input.focus();
+        input.onkeypress = handleTypingKeypress;
+      }
+
+      function updateTypingUI() {
+        document.getElementById("typing-current").textContent =
+          typingState.currentWord + 1;
+        document.getElementById("typing-total").textContent =
+          typingState.words.length;
+        document.getElementById("typing-score").textContent = typingState.score;
+        document.getElementById("typing-time").textContent =
+          typingState.timeLeft;
+
+        const progress =
+          (typingState.currentWord / typingState.words.length) * 100;
+        document.getElementById("typing-progress").style.width = progress + "%";
+      }
+
+      function showTypingQuestion() {
+        if (
+          typingState.currentWord >= typingState.words.length ||
+          typingState.timeLeft <= 0
+        ) {
+          showTypingComplete();
+          return;
+        }
+
+        const currentWord = typingState.words[typingState.currentWord];
+        document.getElementById(
+          "typing-question"
+        ).textContent = `Gõ từ tiếng Đức có nghĩa là: "${currentWord.vietnamese}"`;
+
+        document.getElementById("typing-input").value = "";
+        document.getElementById("typing-input").focus();
+        document.getElementById("typing-next").disabled = true;
+        document.getElementById("typing-feedback").classList.remove("show");
+      }
+
+      function handleTypingKeypress(event) {
+        if (event.key === "Enter") {
+          checkTypingAnswer();
+        }
+      }
+
+      function checkTypingAnswer() {
+        const input = document.getElementById("typing-input");
+        const userAnswer = input.value.trim().toLowerCase();
+        const correctAnswer =
+          typingState.words[typingState.currentWord].german.toLowerCase();
+
+        const feedback = document.getElementById("typing-feedback");
+        if (userAnswer === correctAnswer) {
+          typingState.score++;
+          feedback.textContent = "✅ Chính xác! Tuyệt vời!";
+          feedback.className = "feedback correct show";
+        } else {
+          feedback.textContent = `❌ Sai rồi! Đáp án đúng là: ${
+            typingState.words[typingState.currentWord].german
+          }`;
+          feedback.className = "feedback incorrect show";
+        }
+
+        updateTypingUI();
+        document.getElementById("typing-next").disabled = false;
+      }
+
+      function nextTypingQuestion() {
+        typingState.currentWord++;
+        updateTypingUI();
+        showTypingQuestion();
+      }
+
+      function startTypingTimer() {
+        typingState.timer = setInterval(() => {
+          typingState.timeLeft--;
+          updateTypingUI();
+
+          if (typingState.timeLeft <= 0) {
+            clearInterval(typingState.timer);
+            showTypingComplete();
+          }
+        }, 1000);
+      }
+
+      function restartTyping() {
+        if (typingState.timer) {
+          clearInterval(typingState.timer);
+        }
+        initTyping();
+      }
+
+      function speakTypingWord() {
+        const currentWord = typingState.words[typingState.currentWord];
+        if (currentWord) {
+          speak(currentWord.german);
+        }
+      }
+
+      function showTypingComplete() {
+        if (typingState.timer) {
+          clearInterval(typingState.timer);
+        }
+
+        const accuracy =
+          Math.round((typingState.score / typingState.currentWord) * 100) || 0;
+        document.getElementById("typing-input").style.display = "none";
+        document.getElementById("typing-feedback").innerHTML = `
+                <div class="game-complete">
+                    <h3>⏰ Hết thời gian!</h3>
+                    <p>Từ đúng: ${typingState.score}/${typingState.currentWord}</p>
+                    <p>Độ chính xác: ${accuracy}%</p>
+                </div>
+            `;
+        document.getElementById("typing-feedback").className = "feedback show";
+      }
+
+      // LISTENING GAME
+      function initListening() {
+        listeningState = {
+          currentQuestion: 0,
+          score: 0,
+          correct: 0,
+          questions: shuffleArray(vocabulary).slice(0, 20),
+          isAnswered: false,
+        };
+
+        updateListeningUI();
+        showListeningQuestion();
+      }
+
+      function updateListeningUI() {
+        document.getElementById("listening-current").textContent =
+          listeningState.currentQuestion + 1;
+        document.getElementById("listening-total").textContent =
+          listeningState.questions.length;
+        document.getElementById("listening-score").textContent =
+          listeningState.score;
+        document.getElementById("listening-correct").textContent =
+          listeningState.correct;
+
+        const progress =
+          (listeningState.currentQuestion / listeningState.questions.length) *
+          100;
+        document.getElementById("listening-progress").style.width =
+          progress + "%";
+      }
+
+      function showListeningQuestion() {
+        if (listeningState.currentQuestion >= listeningState.questions.length) {
+          showListeningComplete();
+          return;
+        }
+
+        const currentWord =
+          listeningState.questions[listeningState.currentQuestion];
+        const correctAnswer = currentWord.vietnamese;
+
+        // Generate options
+        const wrongOptions = getRandomWords([currentWord], 3);
+        const options = shuffleArray([
+          correctAnswer,
+          ...wrongOptions.map((w) => w.vietnamese),
+        ]);
+
+        const optionsContainer = document.getElementById("listening-options");
+        optionsContainer.innerHTML = "";
+
+        options.forEach((option) => {
+          const optionElement = document.createElement("div");
+          optionElement.className = "option";
+          optionElement.textContent = option;
+          optionElement.onclick = () =>
+            selectListeningOption(option, correctAnswer);
+          optionsContainer.appendChild(optionElement);
+        });
+
+        listeningState.isAnswered = false;
+        document.getElementById("listening-next").disabled = true;
+        document.getElementById("listening-feedback").classList.remove("show");
+
+        // Auto play the word
+        setTimeout(() => {
+          playListeningWord();
+        }, 500);
+      }
+
+      function playListeningWord() {
+        const currentWord =
+          listeningState.questions[listeningState.currentQuestion];
+        if (currentWord) {
+          speak(currentWord.german);
+        }
+      }
+
+      function selectListeningOption(selected, correct) {
+        if (listeningState.isAnswered) return;
+
+        listeningState.isAnswered = true;
+        const isCorrect = selected === correct;
+
+        document
+          .querySelectorAll("#listening-options .option")
+          .forEach((option) => {
+            option.classList.add("disabled");
+            if (option.textContent === correct) {
+              option.classList.add("correct");
+            } else if (option.textContent === selected && !isCorrect) {
+              option.classList.add("incorrect");
+            }
+          });
+
+        const feedback = document.getElementById("listening-feedback");
+        if (isCorrect) {
+          listeningState.score += 10;
+          listeningState.correct++;
+          feedback.textContent = "✅ Chính xác! Tuyệt vời!";
+          feedback.className = "feedback correct show";
+        } else {
+          feedback.textContent = `❌ Sai rồi! Đáp án đúng là: ${correct}`;
+          feedback.className = "feedback incorrect show";
+        }
+
+        updateListeningUI();
+        document.getElementById("listening-next").disabled = false;
+      }
+
+      function nextListeningQuestion() {
+        listeningState.currentQuestion++;
+        updateListeningUI();
+        showListeningQuestion();
+      }
+
+      function restartListening() {
+        initListening();
+      }
+
+      function showListeningComplete() {
+        const accuracy = Math.round(
+          (listeningState.correct / listeningState.questions.length) * 100
+        );
+        document.getElementById("listening-options").innerHTML = `
+                <div class="game-complete">
+                    <h3>🎉 Hoàn thành Listening Game!</h3>
+                    <p>Điểm số: ${listeningState.score}</p>
+                    <p>Đúng: ${listeningState.correct}/${listeningState.questions.length}</p>
+                    <p>Độ chính xác: ${accuracy}%</p>
+                </div>
+            `;
+      }
+
+      // FLASHCARD GAME
+      function initFlashcard() {
+        flashcardState = {
+          currentCard: 0,
+          learned: 0,
+          difficult: 0,
+          isFlipped: false,
+        };
+
+        updateFlashcardUI();
+        showFlashcard();
+      }
+
+      function updateFlashcardUI() {
+        document.getElementById("flashcard-current").textContent =
+          flashcardState.currentCard + 1;
+        document.getElementById("flashcard-total").textContent =
+          vocabulary.length;
+        document.getElementById("flashcard-learned").textContent =
+          flashcardState.learned;
+        document.getElementById("flashcard-difficult").textContent =
+          flashcardState.difficult;
+
+        const progress = (flashcardState.currentCard / vocabulary.length) * 100;
+        document.getElementById("flashcard-progress").style.width =
+          progress + "%";
+      }
+
+      function showFlashcard() {
+        if (flashcardState.currentCard >= vocabulary.length) {
+          showFlashcardComplete();
+          return;
+        }
+
+        const currentWord = vocabulary[flashcardState.currentCard];
+        document.getElementById("flashcard-german").textContent =
+          currentWord.german;
+        document.getElementById("flashcard-pronunciation").textContent =
+          currentWord.pronunciation;
+        document.getElementById("flashcard-vietnamese").textContent =
+          currentWord.vietnamese;
+
+        // Reset flip state
+        flashcardState.isFlipped = false;
+        document
+          .getElementById("flashcard-pronunciation")
+          .classList.add("hidden");
+        document.getElementById("flashcard-vietnamese").classList.add("hidden");
+      }
+
+      function flipFlashcard() {
+        flashcardState.isFlipped = !flashcardState.isFlipped;
+
+        const pronunciation = document.getElementById(
+          "flashcard-pronunciation"
+        );
+        const vietnamese = document.getElementById("flashcard-vietnamese");
+
+        if (flashcardState.isFlipped) {
+          pronunciation.classList.remove("hidden");
+          vietnamese.classList.remove("hidden");
+
+          // Speak the word when flipped
+          const currentWord = vocabulary[flashcardState.currentCard];
+          speak(currentWord.german);
+        } else {
+          pronunciation.classList.add("hidden");
+          vietnamese.classList.add("hidden");
+        }
+      }
+
+      function markLearned() {
+        flashcardState.learned++;
+        nextFlashcard();
+      }
+
+      function markDifficult() {
+        flashcardState.difficult++;
+        nextFlashcard();
+      }
+
+      function nextFlashcard() {
+        flashcardState.currentCard++;
+        updateFlashcardUI();
+        showFlashcard();
+      }
+
+      function previousFlashcard() {
+        if (flashcardState.currentCard > 0) {
+          flashcardState.currentCard--;
+          updateFlashcardUI();
+          showFlashcard();
+        }
+      }
+
+      function showFlashcardComplete() {
+        const accuracy = Math.round(
+          (flashcardState.learned / vocabulary.length) * 100
+        );
+        document.getElementById("flashcard-card").innerHTML = `
+                <div class="game-complete">
+                    <h3>📚 Hoàn thành tất cả Flashcard!</h3>
+                    <p>Đã học: ${flashcardState.learned}</p>
+                    <p>Khó: ${flashcardState.difficult}</p>
+                    <p>Tỷ lệ thành thạo: ${accuracy}%</p>
+                </div>
+            `;
+      }
+
+      // Initialize the first game
+      window.onload = function () {
+        initQuiz();
+      };
+    </script>
+  </body>
+</html>
