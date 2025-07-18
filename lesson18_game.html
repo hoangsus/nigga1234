@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Luyện Từ Vựng Tiếng Đức</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .game-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .score-board {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .score {
+        color: #4caf50;
+      }
+
+      .mistakes {
+        color: #f44336;
+      }
+
+      .card {
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 40px;
+        margin: 20px 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        border-color: #667eea;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .card.flipped {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-color: #667eea;
+      }
+
+      .german-word {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .card.flipped .german-word {
+        color: white;
+      }
+
+      .vietnamese-word {
+        font-size: 1.8em;
+        color: #666;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .card.flipped .vietnamese-word {
+        opacity: 1;
+        transform: translateY(0);
+        color: #fff;
+      }
+
+      .controls {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .dictionary-view {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 30px;
+        margin-top: 30px;
+        max-height: 500px;
+        overflow-y: auto;
+        display: none;
+      }
+
+      .dictionary-view.show {
+        display: block;
+      }
+
+      .dictionary-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #4a69bd;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .dictionary-category {
+        margin-bottom: 25px;
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .dictionary-category-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 5px;
+      }
+
+      .dictionary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .dictionary-item:hover {
+        background-color: #f0f4ff;
+      }
+
+      .dictionary-item:last-child {
+        border-bottom: none;
+      }
+
+      .dictionary-german {
+        font-weight: bold;
+        color: #2c3e50;
+        flex: 1;
+      }
+
+      .dictionary-vietnamese {
+        color: #27ae60;
+        flex: 1;
+        text-align: right;
+      }
+
+      .dictionary-speaker {
+        color: #2196f3;
+        font-size: 1.1em;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      .dictionary-speaker:hover {
+        color: #1976d2;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-success {
+        background: linear-gradient(135deg, #4caf50, #45a049);
+        color: white;
+      }
+
+      .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+      }
+
+      .btn-danger {
+        background: linear-gradient(135deg, #f44336, #d32f2f);
+        color: white;
+      }
+
+      .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+      }
+
+      .btn-info {
+        background: linear-gradient(135deg, #2196f3, #1976d2);
+        color: white;
+      }
+
+      .btn-info:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+      }
+
+      .category-selector {
+        margin-bottom: 30px;
+      }
+
+      .category-selector select {
+        padding: 12px 20px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 1.1em;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .category-selector select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e9ecef;
+        border-radius: 4px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(135deg, #4caf50, #45a049);
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      .feedback {
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px 0;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+      }
+
+      .feedback.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .completion-message {
+        background: linear-gradient(135deg, #4caf50, #45a049);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin: 20px 0;
+        font-size: 1.3em;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.5s ease;
+      }
+
+      .completion-message.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      @media (max-width: 600px) {
+        .game-container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        .german-word {
+          font-size: 2em;
+        }
+
+        .vietnamese-word {
+          font-size: 1.5em;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>🇩🇪 Game Luyện Từ Vựng Tiếng Đức</h1>
+
+      <div class="score-board">
+        <div class="score">Điểm: <span id="score">0</span></div>
+        <div class="mistakes">Sai: <span id="mistakes">0</span></div>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="category-selector">
+        <select id="categorySelect">
+          <option value="all">Tất cả từ vựng</option>
+          <option value="time">Thời gian</option>
+          <option value="family">Gia đình</option>
+          <option value="personal">Thông tin cá nhân</option>
+          <option value="documents">Giấy tờ</option>
+        </select>
+      </div>
+
+      <div class="card" id="flashcard">
+        <div class="german-word" id="germanWord">Bấm "Từ mới" để bắt đầu!</div>
+        <div class="vietnamese-word" id="vietnameseWord"></div>
+      </div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="controls">
+        <button class="btn btn-primary" onclick="nextWord()">📚 Từ mới</button>
+        <button class="btn btn-info" onclick="playAudio()">🔊 Phát âm</button>
+        <button class="btn btn-primary" onclick="flipCard()">🔄 Lật thẻ</button>
+        <button class="btn btn-success" onclick="markCorrect()">
+          ✅ Biết rồi
+        </button>
+        <button class="btn btn-danger" onclick="markIncorrect()">
+          ❌ Chưa biết
+        </button>
+        <button class="btn btn-info" onclick="toggleDictionary()">
+          📖 Từ điển
+        </button>
+      </div>
+
+      <div class="dictionary-view" id="dictionaryView">
+        <div class="dictionary-title">📖 Từ điển tiếng Đức</div>
+        <div id="dictionaryContent"></div>
+      </div>
+
+      <div class="completion-message" id="completionMessage">
+        🎉 Chúc mừng! Bạn đã hoàn thành tất cả từ vựng! 🎉
+      </div>
+    </div>
+
+    <script>
+      const vocabulary = {
+        time: [
+          { german: "die Woche", vietnamese: "tuần", category: "time" },
+          { german: "Montag", vietnamese: "thứ hai", category: "time" },
+          { german: "Dienstag", vietnamese: "thứ ba", category: "time" },
+          { german: "Mittwoch", vietnamese: "thứ tư", category: "time" },
+          { german: "Donnerstag", vietnamese: "thứ năm", category: "time" },
+          { german: "Freitag", vietnamese: "thứ sáu", category: "time" },
+          { german: "Samstag", vietnamese: "thứ bảy", category: "time" },
+          { german: "Sonntag", vietnamese: "chủ nhật", category: "time" },
+          { german: "der Tag", vietnamese: "ngày", category: "time" },
+          { german: "der Morgen", vietnamese: "buổi sáng", category: "time" },
+          { german: "der Mittag", vietnamese: "buổi trưa", category: "time" },
+          { german: "der Abend", vietnamese: "buổi tối", category: "time" },
+          { german: "die Nacht", vietnamese: "ban đêm", category: "time" },
+          { german: "das Jahr", vietnamese: "năm", category: "time" },
+          { german: "der Monat", vietnamese: "tháng", category: "time" },
+          { german: "Januar", vietnamese: "tháng một", category: "time" },
+          { german: "Februar", vietnamese: "tháng hai", category: "time" },
+          { german: "März", vietnamese: "tháng ba", category: "time" },
+          { german: "April", vietnamese: "tháng tư", category: "time" },
+          { german: "Mai", vietnamese: "tháng năm", category: "time" },
+          { german: "Juni", vietnamese: "tháng sáu", category: "time" },
+          { german: "Juli", vietnamese: "tháng bảy", category: "time" },
+          { german: "August", vietnamese: "tháng tám", category: "time" },
+          { german: "September", vietnamese: "tháng chín", category: "time" },
+          { german: "Oktober", vietnamese: "tháng mười", category: "time" },
+          {
+            german: "November",
+            vietnamese: "tháng mười một",
+            category: "time",
+          },
+          {
+            german: "Dezember",
+            vietnamese: "tháng mười hai",
+            category: "time",
+          },
+          { german: "der Frühling", vietnamese: "mùa xuân", category: "time" },
+          { german: "der Sommer", vietnamese: "mùa hè", category: "time" },
+          { german: "der Herbst", vietnamese: "mùa thu", category: "time" },
+          { german: "der Winter", vietnamese: "mùa đông", category: "time" },
+          { german: "die Uhrzeit", vietnamese: "giờ", category: "time" },
+          {
+            german: "das Wochenende",
+            vietnamese: "cuối tuần",
+            category: "time",
+          },
+        ],
+        family: [
+          { german: "die Familie", vietnamese: "gia đình", category: "family" },
+          { german: "der Vater", vietnamese: "bố", category: "family" },
+          { german: "die Mutter", vietnamese: "mẹ", category: "family" },
+          { german: "die Eltern", vietnamese: "bố mẹ", category: "family" },
+          { german: "das Kind", vietnamese: "con", category: "family" },
+          { german: "der Sohn", vietnamese: "con trai", category: "family" },
+          { german: "die Tochter", vietnamese: "con gái", category: "family" },
+          {
+            german: "der Bruder",
+            vietnamese: "anh/em trai",
+            category: "family",
+          },
+          {
+            german: "die Schwester",
+            vietnamese: "chị/em gái",
+            category: "family",
+          },
+          {
+            german: "die Geschwister",
+            vietnamese: "anh chị em",
+            category: "family",
+          },
+          { german: "die Großmutter", vietnamese: "bà", category: "family" },
+          { german: "der Großvater", vietnamese: "ông", category: "family" },
+          {
+            german: "die Großeltern",
+            vietnamese: "ông bà",
+            category: "family",
+          },
+          {
+            german: "die Verwandten",
+            vietnamese: "họ hàng",
+            category: "family",
+          },
+          { german: "der Freund", vietnamese: "bạn trai", category: "family" },
+          { german: "die Freundin", vietnamese: "bạn gái", category: "family" },
+          { german: "das Baby", vietnamese: "em bé", category: "family" },
+          { german: "die Ehefrau", vietnamese: "vợ", category: "family" },
+          { german: "der Ehemann", vietnamese: "chồng", category: "family" },
+          {
+            german: "die Hochzeit",
+            vietnamese: "đám cưới",
+            category: "family",
+          },
+          {
+            german: "verheiratet",
+            vietnamese: "đã kết hôn",
+            category: "family",
+          },
+          { german: "ledig", vietnamese: "độc thân", category: "family" },
+          { german: "heiraten", vietnamese: "kết hôn", category: "family" },
+        ],
+        personal: [
+          { german: "der Vorname", vietnamese: "tên", category: "personal" },
+          { german: "der Nachname", vietnamese: "họ", category: "personal" },
+          {
+            german: "der Familienname",
+            vietnamese: "họ gia đình",
+            category: "personal",
+          },
+          {
+            german: "das Geburtsdatum",
+            vietnamese: "ngày sinh",
+            category: "personal",
+          },
+          {
+            german: "der Geburtstag",
+            vietnamese: "sinh nhật",
+            category: "personal",
+          },
+          {
+            german: "die Adresse",
+            vietnamese: "địa chỉ",
+            category: "personal",
+          },
+          { german: "der Wohnort", vietnamese: "nơi ở", category: "personal" },
+          { german: "die Straße", vietnamese: "đường", category: "personal" },
+          {
+            german: "die Stadt",
+            vietnamese: "thành phố",
+            category: "personal",
+          },
+          { german: "das Land", vietnamese: "đất nước", category: "personal" },
+          {
+            german: "das Telefon",
+            vietnamese: "điện thoại",
+            category: "personal",
+          },
+          { german: "die E-Mail", vietnamese: "email", category: "personal" },
+          { german: "wohnen", vietnamese: "ở", category: "personal" },
+          { german: "leben", vietnamese: "sống", category: "personal" },
+          { german: "heißen", vietnamese: "tên là", category: "personal" },
+          { german: "geboren", vietnamese: "sinh ra", category: "personal" },
+          { german: "männlich", vietnamese: "nam", category: "personal" },
+          { german: "weiblich", vietnamese: "nữ", category: "personal" },
+          {
+            german: "der Mann",
+            vietnamese: "người đàn ông",
+            category: "personal",
+          },
+          {
+            german: "die Frau",
+            vietnamese: "người phụ nữ",
+            category: "personal",
+          },
+          { german: "das Mädchen", vietnamese: "cô gái", category: "personal" },
+          { german: "der Junge", vietnamese: "cậu bé", category: "personal" },
+        ],
+        documents: [
+          { german: "der Pass", vietnamese: "hộ chiếu", category: "documents" },
+          {
+            german: "der Reisepass",
+            vietnamese: "hộ chiếu du lịch",
+            category: "documents",
+          },
+          {
+            german: "der Ausweis",
+            vietnamese: "chứng minh thư",
+            category: "documents",
+          },
+          {
+            german: "die Papiere",
+            vietnamese: "giấy tờ",
+            category: "documents",
+          },
+          {
+            german: "das Formular",
+            vietnamese: "mẫu đơn",
+            category: "documents",
+          },
+          {
+            german: "die Staatsangehörigkeit",
+            vietnamese: "quốc tịch",
+            category: "documents",
+          },
+          {
+            german: "der Führerschein",
+            vietnamese: "bằng lái xe",
+            category: "documents",
+          },
+          {
+            german: "die Unterschrift",
+            vietnamese: "chữ ký",
+            category: "documents",
+          },
+          {
+            german: "unterschreiben",
+            vietnamese: "ký tên",
+            category: "documents",
+          },
+          {
+            german: "buchstabieren",
+            vietnamese: "đánh vần",
+            category: "documents",
+          },
+          {
+            german: "ausfüllen",
+            vietnamese: "điền vào",
+            category: "documents",
+          },
+          {
+            german: "der Kindergarten",
+            vietnamese: "mẫu giáo",
+            category: "documents",
+          },
+          {
+            german: "der/die Bekannte",
+            vietnamese: "người quen",
+            category: "documents",
+          },
+          {
+            german: "der/die Erwachsene",
+            vietnamese: "người lớn",
+            category: "documents",
+          },
+          {
+            german: "der Jugendliche",
+            vietnamese: "thanh niên",
+            category: "documents",
+          },
+        ],
+      };
+
+      let currentWords = [];
+      let currentIndex = 0;
+      let score = 0;
+      let mistakes = 0;
+      let isFlipped = false;
+      let completedWords = new Set();
+      let isDictionaryVisible = false;
+
+      const categoryNames = {
+        time: "⏰ Thời gian",
+        family: "👨‍👩‍👧‍👦 Gia đình",
+        personal: "👤 Thông tin cá nhân",
+        documents: "📄 Giấy tờ",
+      };
+
+      function getAllWords() {
+        return [
+          ...vocabulary.time,
+          ...vocabulary.family,
+          ...vocabulary.personal,
+          ...vocabulary.documents,
+        ];
+      }
+
+      function initializeGame() {
+        currentWords = getAllWords();
+        shuffleArray(currentWords);
+        currentIndex = 0;
+        score = 0;
+        mistakes = 0;
+        completedWords.clear();
+        updateScore();
+        updateProgress();
+        document.getElementById("completionMessage").classList.remove("show");
+      }
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function filterByCategory() {
+        const category = document.getElementById("categorySelect").value;
+
+        if (category === "all") {
+          currentWords = getAllWords();
+        } else {
+          currentWords = vocabulary[category] || [];
+        }
+
+        shuffleArray(currentWords);
+        currentIndex = 0;
+        completedWords.clear();
+        updateProgress();
+
+        if (currentWords.length > 0) {
+          nextWord();
+        }
+      }
+
+      function nextWord() {
+        if (currentWords.length === 0) {
+          filterByCategory();
+          return;
+        }
+
+        // Tìm từ tiếp theo chưa hoàn thành
+        let attempts = 0;
+        while (attempts < currentWords.length) {
+          if (!completedWords.has(currentIndex)) {
+            break;
+          }
+          currentIndex = (currentIndex + 1) % currentWords.length;
+          attempts++;
+        }
+
+        // Nếu tất cả từ đã hoàn thành
+        if (attempts === currentWords.length) {
+          showCompletionMessage();
+          return;
+        }
+
+        const word = currentWords[currentIndex];
+        document.getElementById("germanWord").textContent = word.german;
+        document.getElementById("vietnameseWord").textContent = word.vietnamese;
+
+        // Reset card state
+        const card = document.getElementById("flashcard");
+        card.classList.remove("flipped");
+        isFlipped = false;
+
+        hideFeedback();
+        updateProgress();
+      }
+
+      function flipCard() {
+        const card = document.getElementById("flashcard");
+        card.classList.toggle("flipped");
+        isFlipped = !isFlipped;
+      }
+
+      function playAudio() {
+        const word = currentWords[currentIndex];
+        if (word) {
+          // Sử dụng Web Speech API để phát âm
+          const utterance = new SpeechSynthesisUtterance(word.german);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.8;
+          utterance.pitch = 1;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      function markCorrect() {
+        if (currentWords.length === 0) return;
+
+        score++;
+        completedWords.add(currentIndex);
+        updateScore();
+        showFeedback("Tuyệt vời! 🎉", "correct");
+
+        setTimeout(() => {
+          nextWord();
+        }, 1000);
+      }
+
+      function markIncorrect() {
+        if (currentWords.length === 0) return;
+
+        mistakes++;
+        updateScore();
+        showFeedback("Hãy cố gắng thêm! 💪", "incorrect");
+
+        setTimeout(() => {
+          nextWord();
+        }, 1000);
+      }
+
+      function updateScore() {
+        document.getElementById("score").textContent = score;
+        document.getElementById("mistakes").textContent = mistakes;
+      }
+
+      function updateProgress() {
+        if (currentWords.length === 0) return;
+
+        const progress = (completedWords.size / currentWords.length) * 100;
+        document.getElementById("progressFill").style.width = progress + "%";
+      }
+
+      function showFeedback(message, type) {
+        const feedback = document.getElementById("feedback");
+        feedback.textContent = message;
+        feedback.className = `feedback ${type} show`;
+      }
+
+      function hideFeedback() {
+        const feedback = document.getElementById("feedback");
+        feedback.classList.remove("show");
+      }
+
+      function showCompletionMessage() {
+        document.getElementById("completionMessage").classList.add("show");
+
+        // Tự động reset game sau 3 giây
+        setTimeout(() => {
+          initializeGame();
+          nextWord();
+        }, 3000);
+      }
+
+      function toggleDictionary() {
+        isDictionaryVisible = !isDictionaryVisible;
+        const dictionaryView = document.getElementById("dictionaryView");
+
+        if (isDictionaryVisible) {
+          dictionaryView.classList.add("show");
+          generateDictionaryContent();
+        } else {
+          dictionaryView.classList.remove("show");
+        }
+      }
+
+      function generateDictionaryContent() {
+        const dictionaryContent = document.getElementById("dictionaryContent");
+        const category = document.getElementById("categorySelect").value;
+
+        let wordsToShow = [];
+        if (category === "all") {
+          wordsToShow = getAllWords();
+        } else {
+          wordsToShow = vocabulary[category] || [];
+        }
+
+        // Nhóm từ theo category
+        const groupedWords = {};
+        wordsToShow.forEach((word) => {
+          if (!groupedWords[word.category]) {
+            groupedWords[word.category] = [];
+          }
+          groupedWords[word.category].push(word);
+        });
+
+        // Tạo HTML
+        let html = "";
+        Object.keys(groupedWords).forEach((cat) => {
+          html += `
+                    <div class="dictionary-category">
+                        <div class="dictionary-category-title">${
+                          categoryNames[cat]
+                        }</div>
+                        ${groupedWords[cat]
+                          .map(
+                            (word) => `
+                            <div class="dictionary-item" onclick="playDictionaryAudio('${word.german}')">
+                                <div class="dictionary-german">${word.german}</div>
+                                <div class="dictionary-vietnamese">${word.vietnamese}</div>
+                                <div class="dictionary-speaker">🔊</div>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                `;
+        });
+
+        dictionaryContent.innerHTML = html;
+      }
+
+      function playDictionaryAudio(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "de-DE";
+        utterance.rate = 0.8;
+        utterance.pitch = 1;
+        speechSynthesis.speak(utterance);
+      }
+
+      // Event listeners
+      document
+        .getElementById("categorySelect")
+        .addEventListener("change", function () {
+          filterByCategory();
+          // Cập nhật từ điển nếu đang hiển thị
+          if (isDictionaryVisible) {
+            generateDictionaryContent();
+          }
+        });
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (event) {
+        switch (event.key) {
+          case " ":
+            event.preventDefault();
+            flipCard();
+            break;
+          case "Enter":
+            event.preventDefault();
+            nextWord();
+            break;
+          case "ArrowRight":
+            event.preventDefault();
+            markCorrect();
+            break;
+          case "ArrowLeft":
+            event.preventDefault();
+            markIncorrect();
+            break;
+          case "p":
+          case "P":
+            event.preventDefault();
+            playAudio();
+            break;
+          case "d":
+          case "D":
+            event.preventDefault();
+            toggleDictionary();
+            break;
+        }
+      });
+
+      // Click to flip card
+      document.getElementById("flashcard").addEventListener("click", flipCard);
+
+      // Initialize game
+      initializeGame();
+    </script>
+  </body>
+</html>
