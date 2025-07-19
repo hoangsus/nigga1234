@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện tập tiếng Đức - Kapitel 1</title>
+    <title>Ôn luyện tiếng Đức - Chương 1: Jenny</title>
     <style>
       * {
         margin: 0;
@@ -12,30 +12,29 @@
       }
 
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Arial", sans-serif;
         line-height: 1.6;
         color: #333;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
-        padding: 20px;
       }
 
       .container {
-        max-width: 1200px;
+        max-width: 1000px;
         margin: 0 auto;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        padding: 30px;
+        padding: 20px;
       }
 
-      h1 {
+      .header {
         text-align: center;
-        color: #4a5568;
+        color: white;
         margin-bottom: 30px;
+      }
+
+      .header h1 {
         font-size: 2.5em;
-        font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
 
       .controls {
@@ -47,387 +46,182 @@
       }
 
       .btn {
-        padding: 12px 24px;
+        background: #4caf50;
+        color: white;
         border: none;
+        padding: 12px 24px;
         border-radius: 25px;
         cursor: pointer;
         font-size: 16px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .btn-primary {
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        color: white;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-      }
-
-      .btn-secondary {
-        background: linear-gradient(45deg, #ffeaa7, #fdcb6e);
-        color: #333;
-        box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
-      }
-
-      .btn-secondary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(253, 203, 110, 0.6);
-      }
-
-      .text-container {
-        background: white;
-        border-radius: 15px;
-        padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        border-left: 5px solid #667eea;
-      }
-
-      .sentence {
-        margin-bottom: 20px;
-        padding: 20px;
-        border-radius: 10px;
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
-        transition: all 0.3s ease;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        align-items: center;
-      }
-
-      .sentence:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      .text-section {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .visual-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
-
-      .scene-illustration {
-        width: 100%;
-        height: 200px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 4em;
-        background: linear-gradient(135deg, #667eea20, #764ba220);
-        border: 2px dashed #667eea;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .scene-illustration::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          45deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.1) 50%,
-          transparent 70%
-        );
-        animation: shimmer 3s infinite;
-      }
-
-      @keyframes shimmer {
-        0% {
-          transform: translateX(-100%);
-        }
-        100% {
-          transform: translateX(100%);
-        }
-      }
-
-      .video-frame {
-        width: 100%;
-        height: 200px;
-        border-radius: 8px;
-        border: none;
+        transition: all 0.3s;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
       }
 
-      .video-frame:hover {
-        transform: scale(1.02);
+      .btn:hover {
+        background: #45a049;
+        transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       }
 
-      .video-placeholder {
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.1em;
-        font-weight: 600;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
+      .btn.active {
+        background: #ff6b6b;
       }
 
-      .video-placeholder:hover {
-        transform: scale(1.02);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-      }
-
-      .video-placeholder::before {
-        content: "▶️";
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 1.5em;
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.8;
-        }
-        50% {
-          transform: scale(1.2);
-          opacity: 1;
-        }
-      }
-
-      .german-text {
-        font-size: 18px;
-        font-weight: 600;
-        color: #2d3748;
-        margin-bottom: 8px;
-        cursor: pointer;
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .german-text:hover {
-        color: #667eea;
-      }
-
-      .audio-controls {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-
-      .play-btn {
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        border: none;
-        border-radius: 50%;
-        width: 35px;
-        height: 35px;
-        color: white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-      }
-
-      .play-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
-      }
-
-      .play-btn.playing {
-        background: linear-gradient(45deg, #fd79a8, #e84393);
-        animation: pulse 1.5s infinite;
-      }
-
-      .speed-control {
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
+      .story-container {
+        background: white;
         border-radius: 15px;
-        padding: 4px 8px;
-        font-size: 12px;
-        color: #6c757d;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
       }
 
-      .speed-control:hover {
-        background: #667eea;
-        color: white;
-      }
-
-      .vietnamese-text {
-        font-size: 16px;
-        color: #718096;
-        font-style: italic;
-        display: none;
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px solid #e2e8f0;
-      }
-
-      .vietnamese-text.show {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .practice-mode {
-        background: linear-gradient(135deg, #ff9a9e, #fecfef);
-        margin-top: 20px;
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-      }
-
-      .practice-mode h3 {
-        color: #2d3748;
-        margin-bottom: 15px;
-      }
-
-      .practice-controls {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-      }
-
-      .vocabulary {
-        background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-        border-radius: 15px;
-        padding: 20px;
-        margin-top: 20px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      }
-
-      .vocabulary h3 {
-        color: #2d3748;
-        margin-bottom: 15px;
-        font-size: 1.3em;
-      }
-
-      .vocab-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-      }
-
-      .vocab-item {
-        background: rgba(255, 255, 255, 0.9);
-        padding: 12px;
-        border-radius: 8px;
+      .sentence {
+        margin: 15px 0;
+        padding: 15px;
+        border-radius: 10px;
         border-left: 4px solid #667eea;
-        transition: transform 0.3s ease;
+        background: #f8f9ff;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 15px;
       }
 
-      .vocab-item:hover {
-        transform: scale(1.05);
+      .sentence:hover {
+        background: #e8ebff;
+        transform: translateX(5px);
       }
 
-      .vocab-german {
-        font-weight: 600;
-        color: #2d3748;
+      .sentence-content {
+        flex: 1;
       }
 
-      .vocab-vietnamese {
-        color: #718096;
-        font-size: 14px;
+      .sentence-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #667eea;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
       }
 
-      .chapter-title {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 20px;
+      .sentence-image:hover {
+        transform: scale(1.1);
+      }
+
+      .german {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 8px;
+      }
+
+      .vietnamese {
+        font-size: 16px;
+        color: #7f8c8d;
+        font-style: italic;
+      }
+
+      .hidden {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        margin: 0;
+      }
+
+      .quiz-container {
+        background: white;
         border-radius: 15px;
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 1.5em;
-        font-weight: 700;
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+        display: none;
+      }
+
+      .quiz-question {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 15px;
+      }
+
+      .quiz-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+
+      .quiz-feedback {
+        padding: 15px;
+        border-radius: 10px;
+        margin: 15px 0;
+        font-weight: bold;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .progress {
+        width: 100%;
+        height: 20px;
+        background: #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px 0;
       }
 
       .progress-bar {
-        background: #e2e8f0;
-        height: 8px;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        overflow: hidden;
-      }
-
-      .progress-fill {
-        background: linear-gradient(45deg, #667eea, #764ba2);
         height: 100%;
+        background: linear-gradient(90deg, #4caf50, #45a049);
         width: 0%;
-        transition: width 0.5s ease;
+        transition: width 0.3s;
       }
 
-      .video-info {
-        background: linear-gradient(135deg, #a8edea, #fed6e3);
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #333;
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat {
         text-align: center;
       }
 
-      .video-info strong {
-        color: #2d3748;
+      .stat-number {
+        font-size: 2em;
+        font-weight: bold;
+        color: #667eea;
       }
 
-      .dialogue {
-        background: linear-gradient(135deg, #a8edea, #fed6e3);
-        border-left: 4px solid #ff6b6b;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 8px;
+      .stat-label {
+        color: #7f8c8d;
+        font-size: 14px;
       }
 
       @media (max-width: 768px) {
         .container {
-          padding: 20px;
+          padding: 10px;
         }
 
-        h1 {
+        .header h1 {
           font-size: 2em;
-        }
-
-        .sentence {
-          grid-template-columns: 1fr;
-          gap: 15px;
         }
 
         .controls {
@@ -436,1435 +230,795 @@
         }
 
         .btn {
-          width: 100%;
-          max-width: 300px;
+          width: 200px;
         }
 
-        .video-frame {
-          height: 150px;
+        .sentence {
+          flex-direction: column;
+          text-align: center;
         }
 
-        .video-placeholder {
-          height: 150px;
-          font-size: 1em;
+        .sentence-image {
+          width: 120px;
+          height: 120px;
+          margin-top: 10px;
         }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>📚 Luyện tập tiếng Đức với Video - Kapitel 1</h1>
-
-      <div class="chapter-title">
-        Kapitel 1: Giới thiệu (Eine Liebesgeschichte)
-      </div>
-
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
+      <div class="header">
+        <h1>📚 Ôn luyện tiếng Đức</h1>
+        <p>Chương 1: Jenny - Nữ diễn viên và chiếc tủ lạnh hỏng</p>
       </div>
 
       <div class="controls">
-        <button class="btn btn-primary" onclick="toggleAllTranslations()">
-          Hiện/Ẩn tất cả bản dịch
-        </button>
-        <button class="btn btn-secondary" onclick="showVocabulary()">
-          Từ vựng quan trọng
-        </button>
-        <button class="btn btn-primary" onclick="playAllSentences()">
-          🔊 Phát tất cả
-        </button>
-        <button class="btn btn-secondary" onclick="togglePracticeMode()">
-          🎯 Chế độ luyện tập
-        </button>
+        <button class="btn" onclick="showGerman()">Chỉ tiếng Đức</button>
+        <button class="btn" onclick="showVietnamese()">Chỉ tiếng Việt</button>
+        <button class="btn" onclick="showBoth()">Hiện cả hai</button>
+        <button class="btn" onclick="toggleImages()">Ẩn/Hiện ảnh</button>
+        <button class="btn" onclick="startQuiz()">Bài kiểm tra</button>
+        <button class="btn" onclick="resetProgress()">Reset tiến độ</button>
       </div>
 
-      <div class="video-info">
-        <strong>🎬 Video học tập:</strong> Mỗi phần có video minh họa được tạo
-        riêng cho bài học, giúp bạn hiểu ngữ cảnh và cách phát âm tốt hơn!
-      </div>
-
-      <div class="text-container">
-        <!-- Phần 1: Giới thiệu Jenny -->
+      <div class="story-container" id="storyContainer">
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich bin Auszubildende.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich bin Auszubildende'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Tôi là học viên thực tập.</div>
+          <div class="sentence-content">
+            <div class="german">Jenny ist Schauspielerin.</div>
+            <div class="vietnamese">Jenny là một nữ diễn viên.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🎓👩‍🎓</div>
-            <iframe
-              class="video-frame"
-              src="https://ai.invideo.io/ai-mcp-video?video=german-language-learning-personal-introduction-gvenxp"
-              title="German Introduction Video"
-            >
-            </iframe>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1594736797933-d0d62181d4d3?w=150&h=150&fit=crop"
+            alt="Actress"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich bin 30 Jahre alt und wohne in Hanoi.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich bin 30 Jahre alt und wohne in Hanoi'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Tôi 30 tuổi và sống ở Hà Nội.</div>
+          <div class="sentence-content">
+            <div class="german">Sie ist 30 Jahre alt und wohnt in München.</div>
+            <div class="vietnamese">Cô ấy 30 tuổi và sống ở Munich.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🏙️🇻🇳</div>
-            <div class="video-placeholder" onclick="showVideo('intro')">
-              Nhấn để xem video giới thiệu đầy đủ
-            </div>
-          </div>
-        </div>
-
-        <!-- Phần 2: Sáng nay -->
-        <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Heute Morgen bin ich in großer Eile.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Heute Morgen bin ich in großer Eile'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Sáng nay tôi đang rất vội vàng.</div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🏃‍♀️💨</div>
-            <iframe
-              class="video-frame"
-              src="https://ai.invideo.io/ai-mcp-video?video=german-language-learning-morning-routine-and-time-expressions-rrxogd"
-              title="Morning Routine Video"
-            >
-            </iframe>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1595435742656-5272d0b3fa2e?w=150&h=150&fit=crop"
+            alt="Munich city"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Um neun Uhr muss ich im Studio sein.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Um neun Uhr muss ich im Studio sein'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              Lúc 9 giờ tôi phải có mặt ở studio.
-            </div>
+          <div class="sentence-content">
+            <div class="german">Heute Morgen ist sie in großer Eile.</div>
+            <div class="vietnamese">Sáng nay cô ấy rất vội vàng.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🎙️🕘</div>
-            <div class="video-placeholder" onclick="showVideo('morning')">
-              Nhấn để xem video buổi sáng vội vàng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=150&h=150&fit=crop"
+            alt="Rushing woman"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Gerade noch Zeit für ein schnelles Frühstück.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Gerade noch Zeit für ein schnelles Frühstück'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              Vừa đủ thời gian cho một bữa sáng nhanh.
-            </div>
+          <div class="sentence-content">
+            <div class="german">Um neun Uhr muss sie im Studio sein.</div>
+            <div class="vietnamese">Lúc 9 giờ cô ấy phải có mặt ở studio.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🍳⏰</div>
-            <div class="video-placeholder" onclick="showVideo('morning')">
-              Nhấn để xem video buổi sáng vội vàng
-            </div>
-          </div>
-        </div>
-
-        <!-- Phần 3: Trong bếp -->
-        <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich gehe in die Küche.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich gehe in die Küche'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Tôi đi vào bếp.</div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🚪🍽️</div>
-            <iframe
-              class="video-frame"
-              src="https://ai.invideo.io/ai-mcp-video?video=german-language-learning-household-problems-and-expressing-frustration-fukrjg"
-              title="Kitchen Problems Video"
-            >
-            </iframe>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=150&h=150&fit=crop"
+            alt="TV Studio"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Was ist das?</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Was ist das'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              Gerade noch Zeit für ein schnelles Frühstück.
             </div>
-            <div class="vietnamese-text">Cái gì vậy?</div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">❓😧</div>
-            <div class="video-placeholder" onclick="showVideo('kitchen')">
-              Nhấn để xem video vấn đề tủ lạnh
+            <div class="vietnamese">
+              Chỉ còn thời gian cho một bữa sáng nhanh.
             </div>
           </div>
+          <img
+            src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=150&h=150&fit=crop"
+            alt="Quick breakfast"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Vor dem Kühlschrank ist der Boden nass!</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Vor dem Kühlschrank ist der Boden nass'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Trước tủ lạnh sàn nhà bị ướt!</div>
+          <div class="sentence-content">
+            <div class="german">Sie geht in die Küche.</div>
+            <div class="vietnamese">Cô ấy đi vào bếp.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🧊💧</div>
-            <div class="video-placeholder" onclick="showVideo('kitchen')">
-              Nhấn để xem video vấn đề tủ lạnh
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=150&h=150&fit=crop"
+            alt="Kitchen"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich öffne den Kühlschrank — dunkel.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich öffne den Kühlschrank dunkel'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Tôi mở tủ lạnh — tối om.</div>
+          <div class="sentence-content">
+            <div class="german">Was ist das?</div>
+            <div class="vietnamese">Cái gì thế này?</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🚪🌑</div>
-            <div class="video-placeholder" onclick="showVideo('kitchen')">
-              Nhấn để xem video vấn đề tủ lạnh
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop"
+            alt="Confused woman"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Drinnen ist es nicht kalt.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Drinnen ist es nicht kalt'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Bên trong không lạnh.</div>
+          <div class="sentence-content">
+            <div class="german">Vor dem Kühlschrank ist der Boden nass!</div>
+            <div class="vietnamese">Trước tủ lạnh, sàn nhà ướt!</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🌡️❌</div>
-            <div class="video-placeholder" onclick="showVideo('kitchen')">
-              Nhấn để xem video vấn đề tủ lạnh
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=150&h=150&fit=crop"
+            alt="Wet floor"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Die Butter ist weich, die Milch ist sauer...</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Die Butter ist weich, die Milch ist sauer'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Bơ bị mềm, sữa bị chua...</div>
+          <div class="sentence-content">
+            <div class="german">Sie öffnet den Kühlschrank - dunkel.</div>
+            <div class="vietnamese">Cô ấy mở tủ lạnh - tối.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🧈🥛😷</div>
-            <div class="video-placeholder" onclick="showVideo('kitchen')">
-              Nhấn để xem video vấn đề tủ lạnh
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150&h=150&fit=crop"
+            alt="Open dark refrigerator"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Der Kühlschrank ist kaputt.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Der Kühlschrank ist kaputt'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Tủ lạnh bị hỏng.</div>
+          <div class="sentence-content">
+            <div class="german">Drinnen ist es nicht kalt.</div>
+            <div class="vietnamese">Bên trong không lạnh.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">❌🧊</div>
-            <div class="video-placeholder" onclick="showVideo('kitchen')">
-              Nhấn để xem video vấn đề tủ lạnh
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=150&h=150&fit=crop"
+            alt="Warm temperature"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>„So ein Mist!"</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'So ein Mist'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              Die Butter ist weich, die Milch ist sauer...
             </div>
-            <div class="vietnamese-text">„Thật tệ quá!"</div>
+            <div class="vietnamese">Bơ đã mềm, sữa đã chua...</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">😤💢</div>
-            <div class="video-placeholder" onclick="showVideo('kitchen')">
-              Nhấn để xem video vấn đề tủ lạnh
-            </div>
-          </div>
-        </div>
-
-        <!-- Phần 4: Đi xe buýt -->
-        <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span
-                >Ich laufe zur Bushaltestelle und kaufe am Kiosk eine
-                Tageszeitung.</span
-              >
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich laufe zur Bushaltestelle und kaufe am Kiosk eine Tageszeitung'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              Tôi chạy đến trạm xe buýt và mua tờ báo hàng ngày ở ki-ốt.
-            </div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🏃‍♀️🚌📰</div>
-            <iframe
-              class="video-frame"
-              src="https://ai.invideo.io/ai-mcp-video?video=german-language-learning-daily-commute-and-planning-cgxgpr"
-              title="Bus and Newspaper Video"
-            >
-            </iframe>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=150&h=150&fit=crop"
+            alt="Spoiled food"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>„Vielleicht finde ich ja einen billigen Kühlschrank."</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Vielleicht finde ich ja einen billigen Kühlschrank'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              „Có lẽ tôi sẽ tìm được một tủ lạnh rẻ."
-            </div>
+          <div class="sentence-content">
+            <div class="german">Der Kühlschrank ist kaputt.</div>
+            <div class="vietnamese">Tủ lạnh bị hỏng.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">💭🧊💰</div>
-            <div class="video-placeholder" onclick="showVideo('commute')">
-              Nhấn để xem video đi làm và đọc báo
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=150&h=150&fit=crop"
+            alt="Broken refrigerator"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>In der Pause werde ich mal die Anzeigen lesen.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'In der Pause werde ich mal die Anzeigen lesen'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              Trong giờ nghỉ tôi sẽ đọc những mục rao vặt.
-            </div>
+          <div class="sentence-content">
+            <div class="german">"So ein Mist!"</div>
+            <div class="vietnamese">"Thật tệ!"</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">☕📖🕐</div>
-            <div class="video-placeholder" onclick="showVideo('commute')">
-              Nhấn để xem video đi làm và đọc báo
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=150&h=150&fit=crop"
+            alt="Frustrated woman"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span
-                >Der Bus kommt und eine halbe Stunde später bin ich im
-                Studio.</span
-              >
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Der Bus kommt und eine halbe Stunde später bin ich im Studio'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              Jenny läuft zur Bushaltestelle und kauft am Kiosk eine
+              Tageszeitung.
             </div>
-            <div class="vietnamese-text">
-              Xe buýt đến và nửa tiếng sau tôi có mặt ở studio.
+            <div class="vietnamese">
+              Jenny chạy đến trạm xe buýt và mua một tờ báo hàng ngày ở ki-ốt.
             </div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🚌⏰🎙️</div>
-            <div class="video-placeholder" onclick="showVideo('commute')">
-              Nhấn để xem video đi làm và đọc báo
-            </div>
-          </div>
-        </div>
-
-        <!-- Phần 5: Ở studio -->
-        <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Der Vormittag ist anstrengend.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Der Vormittag ist anstrengend'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">Buổi sáng thật căng thẳng.</div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">😰💪⏰</div>
-            <iframe
-              class="video-frame"
-              src="https://ai.invideo.io/ai-mcp-video?video=german-language-learning-office-dialogue-and-decision-making-czjxoe"
-              title="Office Dialogue Video"
-            >
-            </iframe>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=150&h=150&fit=crop"
+            alt="Bus stop and newspaper"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Um 12 Uhr ist Mittagspause.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Um 12 Uhr ist Mittagspause'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              "Vielleicht finde ich ja einen billigen Kühlschrank."
             </div>
-            <div class="vietnamese-text">Lúc 12 giờ là giờ nghỉ trưa.</div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🕐🍽️</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
+            <div class="vietnamese">
+              "Có thể tôi sẽ tìm được một cái tủ lạnh rẻ."
             </div>
           </div>
+          <img
+            src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=150&h=150&fit=crop"
+            alt="Cheap appliances"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich freue mich auf die Pause - ich habe Hunger.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich freue mich auf die Pause ich habe Hunger'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              "In der Pause werde ich mal die Anzeigen lesen."
             </div>
-            <div class="vietnamese-text">
-              Tôi mong chờ giờ nghỉ - tôi đói bụng.
+            <div class="vietnamese">
+              "Trong giờ nghỉ tôi sẽ đọc các quảng cáo."
             </div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">😊🍽️😋</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=150&h=150&fit=crop"
+            alt="Reading newspaper ads"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich habe den ganzen Tag noch nichts gegessen.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich habe den ganzen Tag noch nichts gegessen'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              Der Bus kommt und eine halbe Stunde später ist Jenny im Studio.
             </div>
-            <div class="vietnamese-text">Tôi chưa ăn gì cả ngày.</div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🚫🍽️📅</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
+            <div class="vietnamese">
+              Xe buýt đến và nửa tiếng sau Jenny đã có mặt ở studio.
             </div>
           </div>
+          <img
+            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=150&h=150&fit=crop"
+            alt="Bus arriving"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>„Aber zuerst suche ich einen Kühlschrank!"</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Aber zuerst suche ich einen Kühlschrank'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              „Nhưng trước tiên tôi tìm một cái tủ lạnh!"
-            </div>
+          <div class="sentence-content">
+            <div class="german">Der Vormittag ist anstrengend.</div>
+            <div class="vietnamese">Buổi sáng thật mệt mỏi.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🔍🧊❗</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=150&h=150&fit=crop"
+            alt="Tired working"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich setze mich ins Büro und lese die Anzeigen.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich setze mich ins Büro und lese die Anzeigen'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              Tôi ngồi vào văn phòng và đọc những mục rao vặt.
-            </div>
+          <div class="sentence-content">
+            <div class="german">Um 12 Uhr ist Mittagspause.</div>
+            <div class="vietnamese">Lúc 12 giờ là giờ nghỉ trưa.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🪑💼📖</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=150&h=150&fit=crop"
+            alt="Lunch break clock"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>In der Zeitung gibt es viele Angebote.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'In der Zeitung gibt es viele Angebote'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              Jenny freut sich auf die Pause - sie hat Hunger.
             </div>
-            <div class="vietnamese-text">
-              Trong tờ báo có nhiều lời chào hàng.
-            </div>
+            <div class="vietnamese">Jenny mong chờ giờ nghỉ - cô ấy đói.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">📰💰📋</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=150&h=150&fit=crop"
+            alt="Hungry woman"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ich markiere die interessanten Anzeigen.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich markiere die interessanten Anzeigen'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              Sie hat den ganzen Tag noch nichts gegessen.
             </div>
-            <div class="vietnamese-text">
-              Tôi đánh dấu những mục rao vặt thú vị.
-            </div>
+            <div class="vietnamese">Cô ấy chưa ăn gì cả ngày.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">✏️📰✅</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
-        </div>
-
-        <!-- Phần 6: Hội thoại với đồng nghiệp -->
-        <div class="sentence dialogue">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>„Hallo, Jenny! Warum isst du nicht mit uns?"</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Hallo, Jenny! Warum isst du nicht mit uns'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              „Chào, Jenny! Tại sao bạn không ăn cùng chúng tôi?"
-            </div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">👋👥🍽️</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence dialogue">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span
-                >„Ich komme gleich. Aber zuerst muss ich noch die Anzeigen
-                lesen."</span
-              >
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ich komme gleich. Aber zuerst muss ich noch die Anzeigen lesen'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              „Tôi đến ngay. Nhưng trước tiên tôi phải đọc những mục rao vặt
-              này."
-            </div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">⏰📖✋</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=150&h=150&fit=crop"
+            alt="Empty stomach"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>Ihr Kollege Dezsö ist neugierig:</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ihr Kollege Dezsö ist neugierig'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              Đồng nghiệp của cô ấy, Dezsö, tò mò:
+          <div class="sentence-content">
+            <div class="german">"Aber zuerst suche ich einen Kühlschrank!"</div>
+            <div class="vietnamese">
+              "Nhưng trước tiên tôi phải tìm một cái tủ lạnh!"
             </div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">👨‍💼🤔❓</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence dialogue">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>„Was suchst du denn?"</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Was suchst du denn'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">„Bạn đang tìm gì vậy?"</div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🤔🔍❓</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence dialogue">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span
-                >„Einen Kühlschrank", antworte ich kurz und lese schon wieder
-                weiter.</span
-              >
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Einen Kühlschrank, antworte ich kurz und lese schon wieder weiter'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              „Một cái tủ lạnh", tôi trả lời ngắn gọn và tiếp tục đọc.
-            </div>
-          </div>
-          <div class="visual-section">
-            <div class="scene-illustration">🧊💬📖</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150&h=150&fit=crop"
+            alt="Searching for refrigerator"
+            class="sentence-image"
+          />
         </div>
 
         <div class="sentence">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span
-                >„Hier, die ist interessant: 150 Euro. Da rufe ich gleich mal
-                an."</span
-              >
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Hier, die ist interessant: 150 Euro. Da rufe ich gleich mal an'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+          <div class="sentence-content">
+            <div class="german">
+              Sie setzt sich ins Büro und liest die Anzeigen.
             </div>
-            <div class="vietnamese-text">
-              „Đây, cái này thú vị: 150 Euro. Tôi sẽ gọi điện ngay."
+            <div class="vietnamese">
+              Cô ấy ngồi vào văn phòng và đọc các quảng cáo.
             </div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">👁️💰📞</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=150&h=150&fit=crop"
+            alt="Office reading"
+            class="sentence-image"
+          />
         </div>
 
-        <div class="sentence dialogue">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>„Jetzt?" fragt Dezsö erstaunt.</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Jetzt? fragt Dezsö erstaunt'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
-            </div>
-            <div class="vietnamese-text">
-              „Bây giờ á?" Dezsö hỏi một cách kinh ngạc.
-            </div>
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">In der Zeitung gibt es viele Angebote.</div>
+            <div class="vietnamese">Trong tờ báo có nhiều ưu đãi.</div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">😮⏰❓</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
-            </div>
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=150&h=150&fit=crop"
+            alt="Newspaper offers"
+            class="sentence-image"
+          />
         </div>
 
-        <div class="sentence dialogue">
-          <div class="text-section">
-            <div class="german-text" onclick="toggleTranslation(this)">
-              <span>„Ja, klar, sonst ist er weg."</span>
-              <div class="audio-controls">
-                <button
-                  class="play-btn"
-                  onclick="playAudio(this, 'Ja, klar, sonst ist er weg'); event.stopPropagation();"
-                >
-                  🔊
-                </button>
-                <span
-                  class="speed-control"
-                  onclick="toggleSpeed(this); event.stopPropagation();"
-                  >1x</span
-                >
-              </div>
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">Sie markiert die interessanten Anzeigen.</div>
+            <div class="vietnamese">Cô ấy đánh dấu những quảng cáo thú vị.</div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=150&h=150&fit=crop"
+            alt="Marking ads"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">
+              "Hallo, Jenny! Warum isst du nicht mit uns?"
             </div>
-            <div class="vietnamese-text">
-              „Vâng, đương nhiên, không thì nó sẽ hết."
+            <div class="vietnamese">
+              "Chào Jenny! Tại sao bạn không ăn với chúng tôi?"
             </div>
           </div>
-          <div class="visual-section">
-            <div class="scene-illustration">✅⚡💨</div>
-            <div class="video-placeholder" onclick="showVideo('office')">
-              Nhấn để xem video hội thoại văn phòng
+          <img
+            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=150&h=150&fit=crop"
+            alt="Colleagues talking"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">
+              "Ich komme gleich. Aber zuerst muss ich noch die Anzeigen lesen."
+            </div>
+            <div class="vietnamese">
+              "Tôi đến ngay. Nhưng trước tiên tôi phải đọc các quảng cáo."
             </div>
           </div>
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=150&h=150&fit=crop"
+            alt="Busy reading"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">Ihr Kollege Dezső ist neugierig:</div>
+            <div class="vietnamese">Đồng nghiệp của cô ấy, Dezső, tò mò:</div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop"
+            alt="Curious colleague"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">"Was suchst du denn?"</div>
+            <div class="vietnamese">"Bạn đang tìm gì thế?"</div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop"
+            alt="Asking question"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">
+              "Einen Kühlschrank", antwortet Jenny kurz und liest schon wieder
+              weiter.
+            </div>
+            <div class="vietnamese">
+              "Một cái tủ lạnh", Jenny trả lời ngắn gọn và lại tiếp tục đọc.
+            </div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150&h=150&fit=crop"
+            alt="Refrigerator answer"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">
+              "Hier, die ist interessant: 150 Euro. Da rufe ich gleich mal an."
+            </div>
+            <div class="vietnamese">
+              "Này, cái này thú vị: 150 Euro. Tôi sẽ gọi điện ngay."
+            </div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=150&h=150&fit=crop"
+            alt="Phone call"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">"Jetzt?" fragt Dezső erstaunt.</div>
+            <div class="vietnamese">
+              "Bây giờ à?" Dezső hỏi một cách ngạc nhiên.
+            </div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop"
+            alt="Surprised expression"
+            class="sentence-image"
+          />
+        </div>
+
+        <div class="sentence">
+          <div class="sentence-content">
+            <div class="german">"Ja, klar, sonst ist er weg."</div>
+            <div class="vietnamese">"Ừ, đúng rồi, không thì nó sẽ mất."</div>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=150&h=150&fit=crop"
+            alt="Urgent action"
+            class="sentence-image"
+          />
         </div>
       </div>
 
-      <div class="practice-mode" id="practiceMode" style="display: none">
-        <h3>🎯 Chế độ luyện tập</h3>
-        <div class="practice-controls">
-          <button class="btn btn-primary" onclick="startListeningPractice()">
-            👂 Luyện nghe
-          </button>
-          <button class="btn btn-secondary" onclick="startSpeakingPractice()">
-            🎤 Luyện nói
-          </button>
-          <button class="btn btn-primary" onclick="startQuizMode()">
-            📝 Trắc nghiệm
-          </button>
+      <div class="quiz-container" id="quizContainer">
+        <h3>🧠 Bài kiểm tra</h3>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div id="quizContent">
+          <div class="quiz-question" id="questionText"></div>
+          <input
+            type="text"
+            class="quiz-input"
+            id="answerInput"
+            placeholder="Nhập câu trả lời của bạn..."
+          />
+          <button class="btn" onclick="checkAnswer()">Kiểm tra</button>
+          <button class="btn" onclick="nextQuestion()">Câu tiếp theo</button>
+          <button class="btn" onclick="showHint()">Gợi ý</button>
+          <div id="feedback"></div>
         </div>
       </div>
 
-      <div class="vocabulary" id="vocabularySection" style="display: none">
-        <h3>📝 Từ vựng quan trọng</h3>
-        <div class="vocab-grid">
-          <div class="vocab-item">
-            <div class="vocab-german">die Auszubildende</div>
-            <div class="vocab-vietnamese">học viên thực tập</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">in großer Eile</div>
-            <div class="vocab-vietnamese">rất vội vàng</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">der Kühlschrank</div>
-            <div class="vocab-vietnamese">tủ lạnh</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">kaputt</div>
-            <div class="vocab-vietnamese">hỏng</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Bushaltestelle</div>
-            <div class="vocab-vietnamese">trạm xe buýt</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">schnelles Frühstück</div>
-            <div class="vocab-vietnamese">bữa sáng nhanh</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">der Boden</div>
-            <div class="vocab-vietnamese">sàn nhà</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">nass</div>
-            <div class="vocab-vietnamese">ướt</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">dunkel</div>
-            <div class="vocab-vietnamese">tối</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Küche</div>
-            <div class="vocab-vietnamese">bếp</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Butter</div>
-            <div class="vocab-vietnamese">bơ</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Milch</div>
-            <div class="vocab-vietnamese">sữa</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">weich</div>
-            <div class="vocab-vietnamese">mềm</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">sauer</div>
-            <div class="vocab-vietnamese">chua</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">der Kiosk</div>
-            <div class="vocab-vietnamese">ki-ốt</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Tageszeitung</div>
-            <div class="vocab-vietnamese">báo hàng ngày</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">billig</div>
-            <div class="vocab-vietnamese">rẻ</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Anzeigen</div>
-            <div class="vocab-vietnamese">mục rao vặt</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">der Vormittag</div>
-            <div class="vocab-vietnamese">buổi sáng</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">anstrengend</div>
-            <div class="vocab-vietnamese">căng thẳng</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Mittagspause</div>
-            <div class="vocab-vietnamese">giờ nghỉ trưa</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">der Hunger</div>
-            <div class="vocab-vietnamese">đói bụng</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">das Büro</div>
-            <div class="vocab-vietnamese">văn phòng</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">die Angebote</div>
-            <div class="vocab-vietnamese">lời chào hàng</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">markieren</div>
-            <div class="vocab-vietnamese">đánh dấu</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">interessant</div>
-            <div class="vocab-vietnamese">thú vị</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">der Kollege</div>
-            <div class="vocab-vietnamese">đồng nghiệp</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">neugierig</div>
-            <div class="vocab-vietnamese">tò mò</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">anrufen</div>
-            <div class="vocab-vietnamese">gọi điện</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">erstaunt</div>
-            <div class="vocab-vietnamese">kinh ngạc</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">sonst</div>
-            <div class="vocab-vietnamese">không thì</div>
-          </div>
-          <div class="vocab-item">
-            <div class="vocab-german">weg sein</div>
-            <div class="vocab-vietnamese">hết, biến mất</div>
-          </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number" id="correctAnswers">0</div>
+          <div class="stat-label">Đúng</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="totalAnswers">0</div>
+          <div class="stat-label">Tổng số</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="accuracy">0%</div>
+          <div class="stat-label">Độ chính xác</div>
         </div>
       </div>
     </div>
 
     <script>
-      let shownTranslations = 0;
-      const totalSentences = document.querySelectorAll(".sentence").length;
+      // Data for quiz
+      const sentences = [
+        {
+          german: "Jenny ist Schauspielerin.",
+          vietnamese: "Jenny là một nữ diễn viên.",
+        },
+        {
+          german: "Sie ist 30 Jahre alt und wohnt in München.",
+          vietnamese: "Cô ấy 30 tuổi và sống ở Munich.",
+        },
+        {
+          german: "Heute Morgen ist sie in großer Eile.",
+          vietnamese: "Sáng nay cô ấy rất vội vàng.",
+        },
+        {
+          german: "Um neun Uhr muss sie im Studio sein.",
+          vietnamese: "Lúc 9 giờ cô ấy phải có mặt ở studio.",
+        },
+        {
+          german: "Der Kühlschrank ist kaputt.",
+          vietnamese: "Tủ lạnh bị hỏng.",
+        },
+        { german: "Sie geht in die Küche.", vietnamese: "Cô ấy đi vào bếp." },
+        {
+          german: "Die Butter ist weich, die Milch ist sauer.",
+          vietnamese: "Bơ đã mềm, sữa đã chua.",
+        },
+        {
+          german: "Jenny freut sich auf die Pause.",
+          vietnamese: "Jenny mong chờ giờ nghỉ.",
+        },
+        { german: "Was suchst du denn?", vietnamese: "Bạn đang tìm gì thế?" },
+        { german: "Einen Kühlschrank", vietnamese: "Một cái tủ lạnh" },
+      ];
 
-      // Video URLs mapping
-      const videoUrls = {
-        intro:
-          "https://ai.invideo.io/ai-mcp-video?video=german-language-learning-personal-introduction-gvenxp",
-        morning:
-          "https://ai.invideo.io/ai-mcp-video?video=german-language-learning-morning-routine-and-time-expressions-rrxogd",
-        kitchen:
-          "https://ai.invideo.io/ai-mcp-video?video=german-language-learning-household-problems-and-expressing-frustration-fukrjg",
-        commute:
-          "https://ai.invideo.io/ai-mcp-video?video=german-language-learning-daily-commute-and-planning-cgxgpr",
-        office:
-          "https://ai.invideo.io/ai-mcp-video?video=german-language-learning-office-dialogue-and-decision-making-czjxoe",
-      };
+      let currentQuestion = 0;
+      let correctAnswers = 0;
+      let totalAnswers = 0;
+      let quizMode = "germanToVietnamese"; // or 'vietnameseToGerman'
+      let imagesVisible = true;
 
-      function toggleTranslation(element) {
-        const sentence = element.closest(".sentence");
-        const translation = sentence.querySelector(".vietnamese-text");
-
-        if (translation.classList.contains("show")) {
-          translation.classList.remove("show");
-          shownTranslations--;
-        } else {
-          translation.classList.add("show");
-          shownTranslations++;
-        }
-
-        updateProgress();
+      function toggleImages() {
+        imagesVisible = !imagesVisible;
+        document.querySelectorAll(".sentence-image").forEach((el) => {
+          el.style.display = imagesVisible ? "block" : "none";
+        });
       }
 
-      function toggleAllTranslations() {
-        const translations = document.querySelectorAll(".vietnamese-text");
-        const allShown =
-          document.querySelectorAll(".vietnamese-text.show").length ===
-          translations.length;
-
-        if (allShown) {
-          translations.forEach((translation) => {
-            translation.classList.remove("show");
-          });
-          shownTranslations = 0;
-        } else {
-          translations.forEach((translation) => {
-            translation.classList.add("show");
-          });
-          shownTranslations = translations.length;
-        }
-
-        updateProgress();
+      function showGerman() {
+        document
+          .querySelectorAll(".vietnamese")
+          .forEach((el) => el.classList.add("hidden"));
+        document
+          .querySelectorAll(".german")
+          .forEach((el) => el.classList.remove("hidden"));
+        document
+          .querySelectorAll(".sentence-image")
+          .forEach((el) => (el.style.display = "block"));
+        updateButtonStates("german");
       }
 
-      function showVocabulary() {
-        const vocabSection = document.getElementById("vocabularySection");
-        vocabSection.style.display =
-          vocabSection.style.display === "none" ? "block" : "none";
+      function showVietnamese() {
+        document
+          .querySelectorAll(".german")
+          .forEach((el) => el.classList.add("hidden"));
+        document
+          .querySelectorAll(".vietnamese")
+          .forEach((el) => el.classList.remove("hidden"));
+        document
+          .querySelectorAll(".sentence-image")
+          .forEach((el) => (el.style.display = "block"));
+        updateButtonStates("vietnamese");
       }
 
-      function togglePracticeMode() {
-        const practiceMode = document.getElementById("practiceMode");
-        practiceMode.style.display =
-          practiceMode.style.display === "none" ? "block" : "none";
+      function showBoth() {
+        document
+          .querySelectorAll(".german, .vietnamese")
+          .forEach((el) => el.classList.remove("hidden"));
+        document
+          .querySelectorAll(".sentence-image")
+          .forEach((el) => (el.style.display = "block"));
+        updateButtonStates("both");
       }
 
-      function updateProgress() {
-        const progressFill = document.getElementById("progressFill");
-        const percentage = (shownTranslations / totalSentences) * 100;
-        progressFill.style.width = percentage + "%";
+      function updateButtonStates(active) {
+        document
+          .querySelectorAll(".btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        // Add active class based on the mode if needed
       }
 
-      function showVideo(videoType) {
-        if (videoUrls[videoType]) {
-          window.open(videoUrls[videoType], "_blank");
-        } else {
-          alert("Video đang được cập nhật...");
-        }
+      function startQuiz() {
+        document.getElementById("storyContainer").style.display = "none";
+        document.getElementById("quizContainer").style.display = "block";
+        currentQuestion = 0;
+        showQuestion();
       }
 
-      // Speech synthesis variables
-      let currentSpeech = null;
-      let isPlayingAll = false;
-
-      function playAudio(button, text) {
-        // Stop any current speech
-        if (currentSpeech) {
-          speechSynthesis.cancel();
-        }
-
-        // Get speed from the speed control
-        const speedControl =
-          button.parentElement.querySelector(".speed-control");
-        const speed = parseFloat(speedControl.textContent.replace("x", ""));
-
-        // Create new speech
-        currentSpeech = new SpeechSynthesisUtterance(text);
-        currentSpeech.lang = "de-DE";
-        currentSpeech.rate = speed;
-        currentSpeech.pitch = 1;
-        currentSpeech.volume = 1;
-
-        // Add visual feedback
-        button.classList.add("playing");
-
-        // Handle speech events
-        currentSpeech.onstart = function () {
-          button.textContent = "⏸️";
-        };
-
-        currentSpeech.onend = function () {
-          button.classList.remove("playing");
-          button.textContent = "🔊";
-          currentSpeech = null;
-        };
-
-        currentSpeech.onerror = function () {
-          button.classList.remove("playing");
-          button.textContent = "🔊";
-          currentSpeech = null;
-        };
-
-        // Speak
-        speechSynthesis.speak(currentSpeech);
-      }
-
-      function toggleSpeed(speedControl) {
-        const speeds = ["0.5x", "0.75x", "1x", "1.25x", "1.5x"];
-        const currentIndex = speeds.indexOf(speedControl.textContent);
-        const nextIndex = (currentIndex + 1) % speeds.length;
-        speedControl.textContent = speeds[nextIndex];
-      }
-
-      async function playAllSentences() {
-        if (isPlayingAll) {
-          speechSynthesis.cancel();
-          isPlayingAll = false;
+      function showQuestion() {
+        if (currentQuestion >= sentences.length) {
+          showResults();
           return;
         }
 
-        isPlayingAll = true;
-        const sentences = document.querySelectorAll(".sentence");
+        const sentence = sentences[currentQuestion];
+        const questionText = document.getElementById("questionText");
 
-        for (let i = 0; i < sentences.length; i++) {
-          if (!isPlayingAll) break;
-
-          const sentence = sentences[i];
-          const germanText =
-            sentence.querySelector(".german-text span").textContent;
-          const playBtn = sentence.querySelector(".play-btn");
-
-          // Highlight current sentence
-          sentence.style.background =
-            "linear-gradient(135deg, #667eea20, #764ba220)";
-          sentence.style.transform = "scale(1.02)";
-
-          // Play audio
-          await new Promise((resolve) => {
-            const utterance = new SpeechSynthesisUtterance(germanText);
-            utterance.lang = "de-DE";
-            utterance.rate = 0.8;
-            utterance.pitch = 1;
-            utterance.volume = 1;
-
-            playBtn.classList.add("playing");
-            playBtn.textContent = "⏸️";
-
-            utterance.onend = function () {
-              playBtn.classList.remove("playing");
-              playBtn.textContent = "🔊";
-
-              // Remove highlight
-              sentence.style.background = "#f8f9fa";
-              sentence.style.transform = "translateY(0)";
-
-              setTimeout(resolve, 800);
-            };
-
-            utterance.onerror = function () {
-              playBtn.classList.remove("playing");
-              playBtn.textContent = "🔊";
-              sentence.style.background = "#f8f9fa";
-              sentence.style.transform = "translateY(0)";
-              resolve();
-            };
-
-            speechSynthesis.speak(utterance);
-          });
+        if (Math.random() > 0.5) {
+          questionText.innerHTML = `Dịch sang tiếng Việt: <br><strong>${sentence.german}</strong>`;
+          quizMode = "germanToVietnamese";
+        } else {
+          questionText.innerHTML = `Dịch sang tiếng Đức: <br><strong>${sentence.vietnamese}</strong>`;
+          quizMode = "vietnameseToGerman";
         }
 
-        isPlayingAll = false;
+        document.getElementById("answerInput").value = "";
+        document.getElementById("feedback").innerHTML = "";
+
+        updateProgress();
       }
 
-      // Practice mode functions
-      function startListeningPractice() {
-        alert(
-          "Chế độ luyện nghe:\n\n1. Nghe câu tiếng Đức\n2. Viết lại những gì bạn nghe được\n3. Kiểm tra đáp án\n\nTính năng này sẽ được phát triển thêm!"
-        );
+      function checkAnswer() {
+        const userAnswer = document
+          .getElementById("answerInput")
+          .value.trim()
+          .toLowerCase();
+        const sentence = sentences[currentQuestion];
+
+        let correctAnswer =
+          quizMode === "germanToVietnamese"
+            ? sentence.vietnamese
+            : sentence.german;
+        correctAnswer = correctAnswer.toLowerCase();
+
+        const feedback = document.getElementById("feedback");
+
+        // Simple similarity check (you can make this more sophisticated)
+        const similarity = calculateSimilarity(userAnswer, correctAnswer);
+
+        if (similarity > 0.7) {
+          feedback.innerHTML = `<div class="correct">✅ Chính xác! <br>Đáp án: ${
+            quizMode === "germanToVietnamese"
+              ? sentence.vietnamese
+              : sentence.german
+          }</div>`;
+          correctAnswers++;
+        } else {
+          feedback.innerHTML = `<div class="incorrect">❌ Chưa chính xác. <br>Đáp án đúng: ${
+            quizMode === "germanToVietnamese"
+              ? sentence.vietnamese
+              : sentence.german
+          }</div>`;
+        }
+
+        totalAnswers++;
+        updateStats();
       }
 
-      function startSpeakingPractice() {
-        alert(
-          "Chế độ luyện nói:\n\n1. Đọc câu tiếng Đức\n2. Ghi âm giọng nói của bạn\n3. So sánh với bản gốc\n\nTính năng này sẽ được phát triển thêm!"
-        );
+      function nextQuestion() {
+        currentQuestion++;
+        showQuestion();
       }
 
-      function startQuizMode() {
-        alert(
-          "Chế độ trắc nghiệm:\n\n1. Nghe câu tiếng Đức\n2. Chọn bản dịch đúng\n3. Xem kết quả\n\nTính năng này sẽ được phát triển thêm!"
-        );
+      function showHint() {
+        const sentence = sentences[currentQuestion];
+        const hint =
+          quizMode === "germanToVietnamese"
+            ? `Gợi ý: Câu này nói về ${sentence.vietnamese.substring(0, 10)}...`
+            : `Gợi ý: Bắt đầu bằng "${sentence.german.substring(0, 5)}..."`;
+
+        document.getElementById(
+          "feedback"
+        ).innerHTML = `<div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px;">${hint}</div>`;
       }
 
-      // Add keyboard shortcuts
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "a" || e.key === "A") {
-          toggleAllTranslations();
-        } else if (e.key === "v" || e.key === "V") {
-          showVocabulary();
-        } else if (e.key === "p" || e.key === "P") {
-          playAllSentences();
-        } else if (e.key === "t" || e.key === "T") {
-          togglePracticeMode();
-        } else if (e.key === " ") {
-          e.preventDefault();
-          if (currentSpeech || isPlayingAll) {
-            speechSynthesis.cancel();
-            isPlayingAll = false;
+      function calculateSimilarity(str1, str2) {
+        // Simple word matching algorithm
+        const words1 = str1.split(" ");
+        const words2 = str2.split(" ");
+        let matches = 0;
+
+        words1.forEach((word) => {
+          if (words2.some((w) => w.includes(word) || word.includes(w))) {
+            matches++;
+          }
+        });
+
+        return matches / Math.max(words1.length, words2.length);
+      }
+
+      function updateProgress() {
+        const progress = (currentQuestion / sentences.length) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+      }
+
+      function updateStats() {
+        document.getElementById("correctAnswers").textContent = correctAnswers;
+        document.getElementById("totalAnswers").textContent = totalAnswers;
+        const accuracy =
+          totalAnswers > 0
+            ? Math.round((correctAnswers / totalAnswers) * 100)
+            : 0;
+        document.getElementById("accuracy").textContent = accuracy + "%";
+      }
+
+      function showResults() {
+        const accuracy = Math.round((correctAnswers / totalAnswers) * 100);
+        document.getElementById("quizContainer").innerHTML = `
+                <h3>🎉 Kết quả bài kiểm tra</h3>
+                <div style="text-align: center; padding: 30px;">
+                    <div style="font-size: 3em; margin-bottom: 20px;">
+                        ${accuracy >= 80 ? "🌟" : accuracy >= 60 ? "👍" : "💪"}
+                    </div>
+                    <h2>Bạn đã trả lời đúng ${correctAnswers}/${totalAnswers} câu</h2>
+                    <p style="font-size: 1.5em; color: #667eea;">Độ chính xác: ${accuracy}%</p>
+                    <button class="btn" onclick="restartQuiz()">Làm lại</button>
+                    <button class="btn" onclick="backToStory()">Quay lại câu chuyện</button>
+                </div>
+            `;
+      }
+
+      function restartQuiz() {
+        currentQuestion = 0;
+        correctAnswers = 0;
+        totalAnswers = 0;
+        updateStats();
+        document.getElementById("quizContainer").innerHTML = `
+                <h3>🧠 Bài kiểm tra</h3>
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div id="quizContent">
+                    <div class="quiz-question" id="questionText"></div>
+                    <input type="text" class="quiz-input" id="answerInput" placeholder="Nhập câu trả lời của bạn...">
+                    <button class="btn" onclick="checkAnswer()">Kiểm tra</button>
+                    <button class="btn" onclick="nextQuestion()">Câu tiếp theo</button>
+                    <button class="btn" onclick="showHint()">Gợi ý</button>
+                    <div id="feedback"></div>
+                </div>
+            `;
+        showQuestion();
+      }
+
+      function backToStory() {
+        document.getElementById("storyContainer").style.display = "block";
+        document.getElementById("quizContainer").style.display = "none";
+      }
+
+      function resetProgress() {
+        correctAnswers = 0;
+        totalAnswers = 0;
+        updateStats();
+        alert("Đã reset tiến độ học tập!");
+      }
+
+      // Initialize
+      showBoth();
+      updateStats();
+
+      // Add Enter key support for quiz input
+      document.addEventListener("keypress", function (e) {
+        if (
+          e.key === "Enter" &&
+          document.getElementById("quizContainer").style.display !== "none"
+        ) {
+          if (document.getElementById("answerInput").value.trim() !== "") {
+            checkAnswer();
           }
         }
       });
-
-      // Initialize progress
-      updateProgress();
     </script>
   </body>
 </html>
