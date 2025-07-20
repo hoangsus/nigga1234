@@ -92,6 +92,34 @@
         color: white;
       }
 
+      .game-mode-selector {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .mode-btn {
+        padding: 10px 20px;
+        border: 2px solid #667eea;
+        border-radius: 25px;
+        background: white;
+        color: #667eea;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .mode-btn.active {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .mode-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      }
+
       .vietnamese-word {
         font-size: 1.8em;
         color: #666;
@@ -358,6 +386,19 @@
     <div class="game-container">
       <h1>🇩🇪 Game Luyện Từ Vựng Tiếng Đức</h1>
 
+      <div class="game-mode-selector">
+        <button
+          class="mode-btn active"
+          id="modeDeVi"
+          onclick="setGameMode('de-vi')"
+        >
+          🇩🇪 → 🇻🇳 Đức sang Việt
+        </button>
+        <button class="mode-btn" id="modeViDe" onclick="setGameMode('vi-de')">
+          🇻🇳 → 🇩🇪 Việt sang Đức
+        </button>
+      </div>
+
       <div class="score-board">
         <div class="score">Điểm: <span id="score">0</span></div>
         <div class="mistakes">Sai: <span id="mistakes">0</span></div>
@@ -378,7 +419,9 @@
       </div>
 
       <div class="card" id="flashcard">
-        <div class="german-word" id="germanWord">Bấm "Từ mới" để bắt đầu!</div>
+        <div class="german-word" id="germanWord">
+          Chọn chế độ và bấm "Từ mới" để bắt đầu!
+        </div>
         <div class="vietnamese-word" id="vietnameseWord"></div>
       </div>
 
@@ -649,6 +692,7 @@
       let isFlipped = false;
       let completedWords = new Set();
       let isDictionaryVisible = false;
+      let gameMode = "de-vi"; // 'de-vi' hoặc 'vi-de'
 
       const categoryNames = {
         time: "⏰ Thời gian",
@@ -657,13 +701,24 @@
         documents: "📄 Giấy tờ",
       };
 
-      function getAllWords() {
-        return [
-          ...vocabulary.time,
-          ...vocabulary.family,
-          ...vocabulary.personal,
-          ...vocabulary.documents,
-        ];
+      function setGameMode(mode) {
+        gameMode = mode;
+
+        // Cập nhật giao diện button
+        document.getElementById("modeDeVi").classList.remove("active");
+        document.getElementById("modeViDe").classList.remove("active");
+
+        if (mode === "de-vi") {
+          document.getElementById("modeDeVi").classList.add("active");
+        } else {
+          document.getElementById("modeViDe").classList.add("active");
+        }
+
+        // Reset game với chế độ mới
+        currentIndex = 0;
+        completedWords.clear();
+        updateProgress();
+        nextWord();
       }
 
       function initializeGame() {
@@ -676,6 +731,9 @@
         updateScore();
         updateProgress();
         document.getElementById("completionMessage").classList.remove("show");
+
+        // Đặt chế độ mặc định
+        setGameMode("de-vi");
       }
 
       function shuffleArray(array) {
@@ -704,6 +762,15 @@
         }
       }
 
+      function getAllWords() {
+        return [
+          ...vocabulary.time,
+          ...vocabulary.family,
+          ...vocabulary.personal,
+          ...vocabulary.documents,
+        ];
+      }
+
       function nextWord() {
         if (currentWords.length === 0) {
           filterByCategory();
@@ -727,8 +794,16 @@
         }
 
         const word = currentWords[currentIndex];
-        document.getElementById("germanWord").textContent = word.german;
-        document.getElementById("vietnameseWord").textContent = word.vietnamese;
+
+        // Hiển thị theo chế độ game
+        if (gameMode === "de-vi") {
+          document.getElementById("germanWord").textContent = word.german;
+          document.getElementById("vietnameseWord").textContent =
+            word.vietnamese;
+        } else {
+          document.getElementById("germanWord").textContent = word.vietnamese;
+          document.getElementById("vietnameseWord").textContent = word.german;
+        }
 
         // Reset card state
         const card = document.getElementById("flashcard");
@@ -748,7 +823,7 @@
       function playAudio() {
         const word = currentWords[currentIndex];
         if (word) {
-          // Sử dụng Web Speech API để phát âm
+          // Luôn phát âm tiếng Đức, bất kể chế độ nào
           const utterance = new SpeechSynthesisUtterance(word.german);
           utterance.lang = "de-DE";
           utterance.rate = 0.8;
@@ -920,6 +995,16 @@
           case "D":
             event.preventDefault();
             toggleDictionary();
+            break;
+          case "m":
+          case "M":
+            event.preventDefault();
+            // Toggle game mode
+            if (gameMode === "de-vi") {
+              setGameMode("vi-de");
+            } else {
+              setGameMode("de-vi");
+            }
             break;
         }
       });
