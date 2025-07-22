@@ -568,10 +568,151 @@
           <div class="game-description">Học từ vựng với thẻ ghi nhớ</div>
         </div>
 
+        <div class="game-card" onclick="selectGame('articles')">
+          <div class="game-icon">🎯</div>
+          <div class="game-title">Article Quiz</div>
+          <div class="game-description">Chọn mạo từ đúng: der, die, das</div>
+        </div>
+
         <div class="game-card" onclick="selectGame('vocabulary')">
           <div class="game-icon">📖</div>
           <div class="game-title">Từ điển</div>
           <div class="game-description">Xem toàn bộ từ vựng đồ vật</div>
+        </div>
+      </div>
+
+      <!-- Article Quiz Game -->
+      <div id="articles-game" class="game-area">
+        <div class="game-header">
+          <h2>🎯 Article Quiz - Mạo từ tiếng Đức</h2>
+          <div class="score-board">
+            <div class="score-item">
+              <div>
+                Câu: <span id="articles-current">1</span>/<span
+                  id="articles-total"
+                  >36</span
+                >
+              </div>
+            </div>
+            <div class="score-item">
+              <div>Điểm: <span id="articles-score">0</span></div>
+            </div>
+            <div class="score-item">
+              <div>Đúng: <span id="articles-correct">0</span></div>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 15px;
+              margin-bottom: 20px;
+            "
+          >
+            <h4 style="color: #2c3e50; margin-bottom: 15px">
+              📚 Quy tắc mạo từ tiếng Đức:
+            </h4>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div
+                style="
+                  background: #e74c3c;
+                  color: white;
+                  padding: 15px;
+                  border-radius: 10px;
+                  text-align: center;
+                "
+              >
+                <strong>der</strong> - Giống đực<br />
+                <small>Masculine</small>
+              </div>
+              <div
+                style="
+                  background: #e67e22;
+                  color: white;
+                  padding: 15px;
+                  border-radius: 10px;
+                  text-align: center;
+                "
+              >
+                <strong>die</strong> - Giống cái<br />
+                <small>Feminine</small>
+              </div>
+              <div
+                style="
+                  background: #3498db;
+                  color: white;
+                  padding: 15px;
+                  border-radius: 10px;
+                  text-align: center;
+                "
+              >
+                <strong>das</strong> - Giống trung<br />
+                <small>Neutral</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="articles-progress"></div>
+        </div>
+
+        <div class="question-area">
+          <div class="object-image" id="articles-emoji">🚗</div>
+          <div class="question" id="articles-question">
+            Chọn mạo từ đúng cho từ: <strong id="articles-word">Auto</strong>
+          </div>
+          <button class="speaker-btn" onclick="speakArticlesWord()">
+            🔊 Nghe phát âm
+          </button>
+        </div>
+
+        <div class="feedback" id="articles-feedback"></div>
+
+        <div class="options" id="articles-options">
+          <div
+            class="option"
+            onclick="selectArticleOption('der')"
+            style="background: #ffebee; border-color: #e74c3c"
+          >
+            <strong style="color: #e74c3c">der</strong>
+            <span id="articles-word-der">Auto</span>
+          </div>
+          <div
+            class="option"
+            onclick="selectArticleOption('die')"
+            style="background: #fff3e0; border-color: #e67e22"
+          >
+            <strong style="color: #e67e22">die</strong>
+            <span id="articles-word-die">Auto</span>
+          </div>
+          <div
+            class="option"
+            onclick="selectArticleOption('das')"
+            style="background: #e3f2fd; border-color: #3498db"
+          >
+            <strong style="color: #3498db">das</strong>
+            <span id="articles-word-das">Auto</span>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <button
+            class="btn"
+            id="articles-next"
+            onclick="nextArticlesQuestion()"
+            disabled
+          >
+            Câu tiếp theo
+          </button>
+          <button class="btn" onclick="restartArticles()">Chơi lại</button>
         </div>
       </div>
 
@@ -834,229 +975,345 @@
     </div>
 
     <script>
-      // Objects vocabulary with correct emojis
+      // Objects vocabulary with correct emojis and gender information
       const objectsVocabulary = [
         {
           german: "das Auto",
           pronunciation: "[das au-to]",
           vietnamese: "xe hơi",
           emoji: "🚗",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "das Bild",
           pronunciation: "[das bilt]",
           vietnamese: "hình ảnh",
           emoji: "🖼️",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "der Bleistift",
           pronunciation: "[der blai-shtift]",
           vietnamese: "bút chì",
           emoji: "✏️",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "die Brille",
           pronunciation: "[di bri-le]",
           vietnamese: "kính mắt",
           emoji: "👓",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "das Buch",
           pronunciation: "[das bukh]",
           vietnamese: "sách",
           emoji: "📖",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "das Bügeleisen",
           pronunciation: "[das bü-gel-ai-zen]",
           vietnamese: "bàn là",
           emoji: "🔥",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "die CD",
           pronunciation: "[di tse-de]",
           vietnamese: "đĩa CD",
           emoji: "💿",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "der Computer",
           pronunciation: "[der kom-pyu-ter]",
           vietnamese: "máy tính",
           emoji: "💻",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "die Digitalkamera",
           pronunciation: "[di di-gi-tal-ka-me-ra]",
           vietnamese: "máy ảnh số",
           emoji: "📷",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "der Drucker",
           pronunciation: "[der dru-ker]",
           vietnamese: "máy in",
           emoji: "🖨️",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "die DVD",
           pronunciation: "[di de-fau-de]",
           vietnamese: "đĩa DVD",
           emoji: "📀",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "das Fahrrad",
           pronunciation: "[das far-rat]",
           vietnamese: "xe đạp",
           emoji: "🚲",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "der Fernseher",
           pronunciation: "[der fern-ze-her]",
           vietnamese: "tivi",
           emoji: "📺",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "der Fußball",
           pronunciation: "[der fus-bal]",
           vietnamese: "bóng đá",
           emoji: "⚽",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "das Handy",
           pronunciation: "[das hen-di]",
           vietnamese: "điện thoại di động",
           emoji: "📱",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "das Heft",
           pronunciation: "[das heft]",
           vietnamese: "vở",
           emoji: "📓",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "der Herd",
           pronunciation: "[der hert]",
           vietnamese: "bếp",
           emoji: "🍳",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "die Kaffeemaschine",
           pronunciation: "[di ka-fe-ma-shi-ne]",
           vietnamese: "máy pha cà phê",
           emoji: "☕",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "der Kinderwagen",
           pronunciation: "[der kin-der-va-gen]",
           vietnamese: "xe đẩy em bé",
           emoji: "👶",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "der Kühlschrank",
           pronunciation: "[der kühl-shrank]",
           vietnamese: "tủ lạnh",
           emoji: "🧊",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "der Kuli",
           pronunciation: "[der ku-li]",
           vietnamese: "bút bi",
           emoji: "🖊️",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "die Lampe",
           pronunciation: "[di lam-pe]",
           vietnamese: "đèn",
           emoji: "💡",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "der MP3-Player",
           pronunciation: "[der em-pe-drai-ple-yer]",
           vietnamese: "máy nghe nhạc MP3",
           emoji: "🎵",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "der Papierkorb",
           pronunciation: "[der pa-pir-korp]",
           vietnamese: "sọt rác",
           emoji: "🗑️",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "das Radio",
           pronunciation: "[das ra-di-o]",
           vietnamese: "đài radio",
           emoji: "📻",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
         {
           german: "die Schere",
           pronunciation: "[di she-re]",
           vietnamese: "kéo",
           emoji: "✂️",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "die Spülmaschine",
           pronunciation: "[di shpül-ma-shi-ne]",
           vietnamese: "máy rửa bát",
           emoji: "🍽️",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "der Staubsauger",
           pronunciation: "[der shtaup-zau-ger]",
           vietnamese: "máy hút bụi",
           emoji: "🧹",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "der Stuhl",
           pronunciation: "[der shtul]",
           vietnamese: "ghế",
           emoji: "🪑",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "die Tasche",
           pronunciation: "[di ta-she]",
           vietnamese: "túi xách",
           emoji: "👜",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "die Tasse",
           pronunciation: "[di ta-se]",
           vietnamese: "tách",
           emoji: "🫖",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "der Tisch",
           pronunciation: "[der tish]",
           vietnamese: "bàn",
           emoji: "🗓️",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "die Uhr",
           pronunciation: "[di ur]",
           vietnamese: "đồng hồ",
           emoji: "🕐",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "die Waschmaschine",
           pronunciation: "[di vash-ma-shi-ne]",
           vietnamese: "máy giặt",
           emoji: "🧺",
+          article: "die",
+          gender: "feminine",
+          color: "#e67e22",
         },
         {
           german: "der Wasserkocher",
           pronunciation: "[der va-ser-ko-kher]",
           vietnamese: "ấm đun nước",
           emoji: "🫖",
+          article: "der",
+          gender: "masculine",
+          color: "#e74c3c",
         },
         {
           german: "das Wörterbuch",
           pronunciation: "[das vör-ter-bukh]",
           vietnamese: "từ điển",
           emoji: "📚",
+          article: "das",
+          gender: "neutral",
+          color: "#3498db",
         },
       ];
 
       // Game state variables
       let currentGame = "quiz";
       let quizState = {
+        currentQuestion: 0,
+        score: 0,
+        correct: 0,
+        questions: [],
+        isAnswered: false,
+      };
+
+      let articlesState = {
         currentQuestion: 0,
         score: 0,
         correct: 0,
@@ -1167,6 +1424,9 @@
             break;
           case "flashcard":
             initFlashcard();
+            break;
+          case "articles":
+            initArticles();
             break;
           case "vocabulary":
             initVocabulary();
@@ -1730,25 +1990,175 @@
         initListening();
       }
 
-      function showListeningComplete() {
-        const accuracy = Math.round(
-          (listeningState.correct / listeningState.questions.length) * 100
+      // ARTICLES GAME
+      function initArticles() {
+        articlesState = {
+          currentQuestion: 0,
+          score: 0,
+          correct: 0,
+          questions: shuffleArray([...objectsVocabulary]), // Use ALL 36 words
+          isAnswered: false,
+        };
+
+        updateArticlesUI();
+        showArticlesQuestion();
+      }
+
+      function updateArticlesUI() {
+        document.getElementById("articles-current").textContent =
+          articlesState.currentQuestion + 1;
+        document.getElementById("articles-total").textContent =
+          articlesState.questions.length;
+        document.getElementById("articles-score").textContent =
+          articlesState.score;
+        document.getElementById("articles-correct").textContent =
+          articlesState.correct;
+
+        const progress =
+          (articlesState.currentQuestion / articlesState.questions.length) *
+          100;
+        document.getElementById("articles-progress").style.width =
+          progress + "%";
+      }
+
+      function showArticlesQuestion() {
+        if (articlesState.currentQuestion >= articlesState.questions.length) {
+          showArticlesComplete();
+          return;
+        }
+
+        const currentWord =
+          articlesState.questions[articlesState.currentQuestion];
+        const wordWithoutArticle = currentWord.german.replace(
+          /^(der|die|das)\s/,
+          ""
         );
-        document.getElementById("listening-options").innerHTML = `
+
+        document.getElementById("articles-emoji").textContent =
+          currentWord.emoji;
+        document.getElementById("articles-word").textContent =
+          wordWithoutArticle;
+
+        // Update options with the word
+        document.getElementById("articles-word-der").textContent =
+          wordWithoutArticle;
+        document.getElementById("articles-word-die").textContent =
+          wordWithoutArticle;
+        document.getElementById("articles-word-das").textContent =
+          wordWithoutArticle;
+
+        // Reset options
+        document
+          .querySelectorAll("#articles-options .option")
+          .forEach((option) => {
+            option.classList.remove("disabled", "correct", "incorrect");
+          });
+
+        articlesState.isAnswered = false;
+        document.getElementById("articles-next").disabled = true;
+        document.getElementById("articles-feedback").classList.remove("show");
+      }
+
+      function selectArticleOption(selectedArticle) {
+        if (articlesState.isAnswered) return;
+
+        articlesState.isAnswered = true;
+        const currentWord =
+          articlesState.questions[articlesState.currentQuestion];
+        const correctArticle = currentWord.article;
+        const isCorrect = selectedArticle === correctArticle;
+
+        document
+          .querySelectorAll("#articles-options .option")
+          .forEach((option) => {
+            option.classList.add("disabled");
+            const optionArticle = option.textContent.trim().split(" ")[0];
+
+            if (optionArticle === correctArticle) {
+              option.classList.add("correct");
+            } else if (optionArticle === selectedArticle && !isCorrect) {
+              option.classList.add("incorrect");
+            }
+          });
+
+        const feedback = document.getElementById("articles-feedback");
+        const wordWithoutArticle = currentWord.german.replace(
+          /^(der|die|das)\s/,
+          ""
+        );
+
+        if (isCorrect) {
+          articlesState.score += 10;
+          articlesState.correct++;
+          feedback.textContent = `✅ Chính xác! "${currentWord.german}" (${currentWord.gender} - ${currentWord.vietnamese})`;
+          feedback.className = "feedback correct show";
+        } else {
+          feedback.textContent = `❌ Sai rồi! Đáp án đúng là: ${correctArticle} ${wordWithoutArticle} (${currentWord.gender} - ${currentWord.vietnamese})`;
+          feedback.className = "feedback incorrect show";
+        }
+
+        updateArticlesUI();
+        document.getElementById("articles-next").disabled = false;
+      }
+
+      function nextArticlesQuestion() {
+        articlesState.currentQuestion++;
+        updateArticlesUI();
+        showArticlesQuestion();
+      }
+
+      function restartArticles() {
+        initArticles();
+      }
+
+      function speakArticlesWord() {
+        const currentWord =
+          articlesState.questions[articlesState.currentQuestion];
+        if (currentWord) {
+          speak(currentWord.german);
+        }
+      }
+
+      function showArticlesComplete() {
+        const accuracy = Math.round(
+          (articlesState.correct / articlesState.questions.length) * 100
+        );
+        const derCount = objectsVocabulary.filter(
+          (w) => w.article === "der"
+        ).length;
+        const dieCount = objectsVocabulary.filter(
+          (w) => w.article === "die"
+        ).length;
+        const dasCount = objectsVocabulary.filter(
+          (w) => w.article === "das"
+        ).length;
+
+        document.getElementById("articles-options").innerHTML = `
                 <div class="game-complete">
-                    <h3>🎉 Hoàn thành Listening Game!</h3>
-                    <p>Điểm số: ${listeningState.score}</p>
-                    <p>Đúng: ${listeningState.correct}/${
-          listeningState.questions.length
+                    <h3>🎉 Hoàn thành Article Quiz!</h3>
+                    <p>Điểm số: ${articlesState.score}</p>
+                    <p>Đúng: ${articlesState.correct}/${
+          articlesState.questions.length
         }</p>
                     <p>Độ chính xác: ${accuracy}%</p>
                     ${
                       accuracy >= 80
-                        ? "<p>👂 Nghe rất tốt!</p>"
+                        ? "<p>🏆 Thành thạo mạo từ!</p>"
                         : accuracy >= 60
                         ? "<p>👍 Khá tốt!</p>"
-                        : "<p>💪 Cần luyện tập thêm!</p>"
+                        : "<p>💪 Cần học thêm quy tắc mạo từ!</p>"
                     }
+                    <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                        <div style="background: #e74c3c; color: white; padding: 10px; border-radius: 8px;">
+                            <strong>der:</strong> ${derCount} từ
+                        </div>
+                        <div style="background: #e67e22; color: white; padding: 10px; border-radius: 8px;">
+                            <strong>die:</strong> ${dieCount} từ
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 10px; border-radius: 8px;">
+                            <strong>das:</strong> ${dasCount} từ
+                        </div>
+                    </div>
                 </div>
             `;
       }
@@ -1877,19 +2287,104 @@
         const vocabularyContainer = document.getElementById("vocabulary-list");
         vocabularyContainer.innerHTML = "";
 
-        objectsVocabulary.forEach((word) => {
-          const vocabItem = document.createElement("div");
-          vocabItem.className = "vocab-item";
-          vocabItem.onclick = () => speak(word.german);
+        // Add gender statistics
+        const derCount = objectsVocabulary.filter(
+          (w) => w.article === "der"
+        ).length;
+        const dieCount = objectsVocabulary.filter(
+          (w) => w.article === "die"
+        ).length;
+        const dasCount = objectsVocabulary.filter(
+          (w) => w.article === "das"
+        ).length;
 
-          vocabItem.innerHTML = `
-                    <div class="vocab-emoji">${word.emoji}</div>
-                    <div class="word-german">${word.german}</div>
-                    <div class="word-pronunciation">${word.pronunciation}</div>
-                    <div class="word-vietnamese">${word.vietnamese}</div>
+        const statsDiv = document.createElement("div");
+        statsDiv.innerHTML = `
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;">📊 Thống kê mạo từ</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px;">
+                            <h4>der (masculine)</h4>
+                            <p style="font-size: 2em; margin: 10px 0;">${derCount}</p>
+                            <p>từ vựng</p>
+                        </div>
+                        <div style="background: #e67e22; color: white; padding: 20px; border-radius: 10px;">
+                            <h4>die (feminine)</h4>
+                            <p style="font-size: 2em; margin: 10px 0;">${dieCount}</p>
+                            <p>từ vựng</p>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 20px; border-radius: 10px;">
+                            <h4>das (neutral)</h4>
+                            <p style="font-size: 2em; margin: 10px 0;">${dasCount}</p>
+                            <p>từ vựng</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        vocabularyContainer.appendChild(statsDiv);
+
+        // Group words by article
+        const derWords = objectsVocabulary.filter((w) => w.article === "der");
+        const dieWords = objectsVocabulary.filter((w) => w.article === "die");
+        const dasWords = objectsVocabulary.filter((w) => w.article === "das");
+
+        [
+          {
+            title: "der (masculine) - Giống đực",
+            words: derWords,
+            color: "#e74c3c",
+          },
+          {
+            title: "die (feminine) - Giống cái",
+            words: dieWords,
+            color: "#e67e22",
+          },
+          {
+            title: "das (neutral) - Giống trung",
+            words: dasWords,
+            color: "#3498db",
+          },
+        ].forEach((group) => {
+          const groupDiv = document.createElement("div");
+          groupDiv.innerHTML = `
+                    <h3 style="color: ${group.color}; margin: 30px 0 20px 0; text-align: center; font-size: 1.5em;">
+                        ${group.title} (${group.words.length} từ)
+                    </h3>
                 `;
+          vocabularyContainer.appendChild(groupDiv);
 
-          vocabularyContainer.appendChild(vocabItem);
+          const groupGrid = document.createElement("div");
+          groupGrid.className = "vocabulary-list";
+          groupGrid.style.marginBottom = "30px";
+
+          group.words.forEach((word) => {
+            const vocabItem = document.createElement("div");
+            vocabItem.className = "vocab-item";
+            vocabItem.onclick = () => speak(word.german);
+            vocabItem.style.borderColor = word.color;
+
+            vocabItem.innerHTML = `
+                        <div class="vocab-emoji">${word.emoji}</div>
+                        <div class="word-german" style="color: ${word.color};">
+                            <strong style="color: ${word.color};">${
+              word.article
+            }</strong> ${word.german.replace(/^(der|die|das)\s/, "")}
+                        </div>
+                        <div class="word-pronunciation">${
+                          word.pronunciation
+                        }</div>
+                        <div class="word-vietnamese">${word.vietnamese}</div>
+                        <div style="background: ${
+                          word.color
+                        }; color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8em; margin-top: 10px;">
+                            ${word.gender}
+                        </div>
+                    `;
+
+            groupGrid.appendChild(vocabItem);
+          });
+
+          vocabularyContainer.appendChild(groupGrid);
         });
       }
 
