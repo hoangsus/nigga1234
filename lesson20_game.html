@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập tiếng Đức - Câu hỏi và trả lời với Mẹo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .controls {
+        padding: 20px;
+        background: #f8f9fa;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        background: #3742fa;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #2f3542;
+        transform: translateY(-2px);
+      }
+
+      .btn-success {
+        background: #2ed573;
+        color: white;
+      }
+
+      .btn-success:hover {
+        background: #1e824c;
+        transform: translateY(-2px);
+      }
+
+      .btn-warning {
+        background: #ffa502;
+        color: white;
+      }
+
+      .btn-warning:hover {
+        background: #ff6348;
+        transform: translateY(-2px);
+      }
+
+      .btn-info {
+        background: #5f27cd;
+        color: white;
+      }
+
+      .btn-info:hover {
+        background: #341f97;
+        transform: translateY(-2px);
+      }
+
+      .card {
+        margin: 20px;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .question {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .question-translation {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      .answer {
+        font-size: 1.4rem;
+        color: #27ae60;
+        margin: 15px 0;
+        padding: 15px;
+        background: #e8f5e8;
+        border-radius: 8px;
+        border-left: 4px solid #27ae60;
+      }
+
+      .translation {
+        font-size: 1.2rem;
+        color: #e74c3c;
+        margin: 10px 0;
+        font-style: italic;
+      }
+
+      .tip-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border: 2px solid #e17055;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+        position: relative;
+      }
+
+      .tip-box::before {
+        content: "💡";
+        font-size: 2rem;
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        background: white;
+        padding: 0 10px;
+        border-radius: 50%;
+      }
+
+      .tip-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #2d3436;
+        margin-bottom: 15px;
+        margin-top: 10px;
+      }
+
+      .tip-content {
+        color: #2d3436;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .tip-highlight {
+        background: #ff7675;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .progress {
+        background: #ecf0f1;
+        height: 10px;
+        border-radius: 5px;
+        margin: 20px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+        height: 100%;
+        transition: width 0.3s ease;
+        border-radius: 5px;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        padding: 15px;
+        background: #f1f2f6;
+        margin: 20px;
+        border-radius: 10px;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2f3542;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #747d8c;
+      }
+
+      .audio-btn {
+        background: #ff6b35;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 0 5px;
+        font-size: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .audio-btn:hover {
+        background: #ff5722;
+        transform: scale(1.05);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .category-info {
+        background: #ddd6fe;
+        padding: 15px;
+        margin: 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        color: #6b46c1;
+      }
+
+      .all-questions {
+        max-height: 70vh;
+        overflow-y: auto;
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .question-item {
+        background: white;
+        margin: 15px 0;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #3742fa;
+      }
+
+      .question-item h4 {
+        color: #2c3e50;
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+      }
+
+      .question-item .q-translation {
+        color: #7f8c8d;
+        font-style: italic;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+      }
+
+      .question-item .answer-text {
+        color: #27ae60;
+        margin: 10px 0;
+        font-weight: bold;
+      }
+
+      .question-item .a-translation {
+        color: #e74c3c;
+        font-style: italic;
+        font-size: 0.9rem;
+      }
+
+      .category-header {
+        background: #6c5ce7;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin: 20px 0 10px 0;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .back-btn {
+        background: #fd79a8;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        margin: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background: #e84393;
+        transform: translateY(-2px);
+      }
+
+      .tips-guide {
+        max-height: 70vh;
+        overflow-y: auto;
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .tip-section {
+        background: white;
+        margin: 15px 0;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .tip-section h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        border-bottom: 2px solid #3742fa;
+        padding-bottom: 5px;
+      }
+
+      .tip-example {
+        background: #e8f4f8;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+        border-left: 3px solid #3742fa;
+      }
+
+      .quick-tips {
+        background: linear-gradient(135deg, #a8e6cf, #88d8c0);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .quick-tips h4 {
+        color: #2d3436;
+        margin-bottom: 10px;
+      }
+
+      .quick-tips ul {
+        color: #2d3436;
+        padding-left: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .btn {
+          margin: 5px 0;
+        }
+
+        .question {
+          font-size: 1.4rem;
+        }
+
+        .answer {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🇩🇪 Luyện tập tiếng Đức</h1>
+        <p>Câu hỏi và trả lời hàng ngày - sắp xếp theo từ để hỏi</p>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-primary" onclick="nextQuestion()">
+          Câu tiếp theo
+        </button>
+        <button class="btn btn-success" onclick="toggleAnswer()">
+          Hiện/Ẩn đáp án
+        </button>
+        <button class="btn btn-warning" onclick="randomQuestion()">
+          Câu ngẫu nhiên
+        </button>
+        <button class="btn btn-info" onclick="showTips()">Mẹo phân biệt</button>
+        <button class="btn btn-primary" onclick="showAllQuestions()">
+          Xem tất cả
+        </button>
+        <button class="btn btn-primary" onclick="resetProgress()">
+          Làm lại
+        </button>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number" id="currentNum">1</div>
+          <div class="stat-label">Câu hiện tại</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24</div>
+          <div class="stat-label">Tổng số câu</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="completedNum">0</div>
+          <div class="stat-label">Đã hoàn thành</div>
+        </div>
+      </div>
+
+      <div class="category-info" id="categoryInfo">📝 Nhóm WAS (Cái gì/Gì)</div>
+
+      <!-- Tips box for current question -->
+      <div class="tip-box" id="tipBox">
+        <div class="tip-title" id="tipTitle">Mẹo nhớ từ để hỏi "WAS"</div>
+        <div class="tip-content" id="tipContent">
+          <span class="tip-highlight">WAS</span> = "Cái gì/Gì" - Hỏi về đồ vật,
+          hành động cụ thể<br />
+          🔹 Was öffnen Sie? = Bạn mở <strong>cái gì</strong>?<br />
+          🔹 Luôn đi với động từ và danh từ cụ thể<br />
+          🔹 Trả lời: Ich + động từ + danh từ (den/die/das...)
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="question" id="questionText">Was öffnen Sie?</div>
+        <div class="question-translation" id="questionTranslation">
+          (Bạn mở cái gì?)
+        </div>
+        <button
+          class="audio-btn"
+          onclick="speakText(getCurrentQuestion(), 'de')"
+        >
+          🔊 Nghe câu hỏi
+        </button>
+
+        <div class="answer hidden" id="answerSection">
+          <div id="answerText">
+            Ich öffne den Kühlschrank/die Tür/das Fenster...
+          </div>
+          <button
+            class="audio-btn"
+            onclick="speakText(getCurrentAnswer(), 'de')"
+          >
+            🔊 Nghe đáp án
+          </button>
+          <div class="translation" id="translationText">
+            (Tôi mở tủ lạnh/cửa/cửa sổ...)
+          </div>
+        </div>
+      </div>
+
+      <!-- Tips Guide View -->
+      <div class="tips-guide hidden" id="tipsGuideView">
+        <div style="text-align: center; margin-bottom: 20px">
+          <button class="back-btn" onclick="hideTips()">
+            ← Quay lại luyện tập
+          </button>
+          <h2 style="color: #2c3e50; margin: 10px 0">
+            💡 Mẹo phân biệt các từ để hỏi trong tiếng Đức
+          </h2>
+        </div>
+
+        <div class="tip-section">
+          <h3>📝 WAS (Cái gì/Gì) - 6 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Đồ vật, hành động cụ thể
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li><strong>WAS</strong> = <strong>W</strong>hat = Cái gì</li>
+              <li>Luôn hỏi về danh từ cụ thể (đồ vật, thứ gì đó)</li>
+              <li>Trả lời: Ich + động từ + danh từ (có mạo từ)</li>
+              <li>VD: Was öffnen Sie? → Ich öffne <em>den Kühlschrank</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>🤔 WIE (Như thế nào/Thế nào) - 6 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Tính chất, trạng thái, cách thức
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li>
+                <strong>WIE</strong> = <strong>W</strong>ay = Cách nào, như thế
+                nào
+              </li>
+              <li>Hỏi về tính chất: tốt/xấu, nóng/lạnh, mới/cũ</li>
+              <li>Trả lời: Sie/Es/Er ist + tính từ</li>
+              <li>VD: Wie ist der Kühlschrank? → Er ist <em>neu</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>⏰ WANN (Khi nào) - 4 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Thời gian cụ thể
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li><strong>WANN</strong> = <strong>W</strong>hen = Khi nào</li>
+              <li>Luôn về thời gian: giờ, ngày, khoảng thời gian</li>
+              <li>Trả lời: um ... Uhr / von ... bis ...</li>
+              <li>VD: Wann sind Sie da? → Ich bin <em>um 9 Uhr</em> da</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>🚶 WOHIN (Đi đâu) - 3 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Hướng di chuyển, điểm đến
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li>
+                <strong>WOHIN</strong> = <strong>W</strong>here to = Đi đâu
+              </li>
+              <li>Có động từ chuyển động: gehen, laufen, setzen</li>
+              <li>Trả lời: in/ins/zur/zum/nach + địa điểm</li>
+              <li>VD: Wohin gehen Sie? → Ich gehe <em>in die Küche</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>📍 WO (Ở đâu) - 1 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Vị trí, địa điểm cố định
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li><strong>WO</strong> = <strong>W</strong>here = Ở đâu</li>
+              <li>Hỏi vị trí tĩnh, không di chuyển</li>
+              <li>Trả lời: in/im/auf/bei + địa điểm</li>
+              <li>VD: Wo gibt es...? → <em>In der Zeitung</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>🎯 WOFÜR (Để làm gì) - 1 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Mục đích, để làm gì
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li>
+                <strong>WOFÜR</strong> = <strong>W</strong>hat for = Để gì
+              </li>
+              <li>Hỏi về mục đích, công dụng</li>
+              <li>Trả lời: für + danh từ</li>
+              <li>
+                VD: Wofür haben Sie Zeit? → Ich habe Zeit <em>für Kaffee</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>🌟 WORAUF (Mong đợi điều gì) - 1 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Điều mong đợi, hướng tới
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li><strong>WORAUF</strong> = What ... on = Mong đợi gì</li>
+              <li>Thường đi với động từ "sich freuen"</li>
+              <li>Trả lời: auf + danh từ</li>
+              <li>VD: Worauf freuen Sie sich? → <em>auf das Wochenende</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>❓ WARUM (Tại sao) - 1 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Lý do, nguyên nhân
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li><strong>WARUM</strong> = Why = Tại sao</li>
+              <li>Hỏi về lý do, nguyên nhân</li>
+              <li>Trả lời: Weil + câu (động từ cuối câu)</li>
+              <li>
+                VD: Warum haben Sie Hunger? →
+                <em>Weil ich nichts gegessen habe</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <h3>🔍 WELCHE (Cái nào/Những cái nào) - 1 câu</h3>
+          <div class="tip-example">
+            <strong>Dùng để hỏi:</strong> Lựa chọn trong nhiều thứ
+          </div>
+          <div class="quick-tips">
+            <h4>🎯 Mẹo nhớ:</h4>
+            <ul>
+              <li><strong>WELCHE</strong> = Which = Cái nào</li>
+              <li>Hỏi về sự lựa chọn, phân biệt</li>
+              <li>Trả lời: die + tính từ + danh từ</li>
+              <li>
+                VD: Welche Anzeigen? → <em>Die interessanten Anzeigen</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          style="
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+          "
+        >
+          <h3 style="color: #2c3e50; text-align: center; margin-bottom: 15px">
+            🚀 Bí quyết học nhanh
+          </h3>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 15px;
+            "
+          >
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.8);
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <strong>📚 Nhóm theo ý nghĩa:</strong><br />
+              • WAS, WELCHE → Về đồ vật<br />
+              • WO, WOHIN → Về địa điểm<br />
+              • WANN → Về thời gian<br />
+              • WIE → Về tính chất
+            </div>
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.8);
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <strong>🎯 Quan sát động từ:</strong><br />
+              • Động từ di chuyển → WOHIN<br />
+              • Động từ tĩnh → WO<br />
+              • Động từ + đồ vật → WAS<br />
+              • Động từ "sein" → WIE
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- All Questions View -->
+      <div class="all-questions hidden" id="allQuestionsView">
+        <div style="text-align: center; margin-bottom: 20px">
+          <button class="back-btn" onclick="hideAllQuestions()">
+            ← Quay lại luyện tập
+          </button>
+          <h2 style="color: #2c3e50; margin: 10px 0">
+            📚 Tất cả câu hỏi và trả lời
+          </h2>
+        </div>
+        <div id="allQuestionsList"></div>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        // Nhóm WAS (Cái gì/Gì) - 6 câu
+        {
+          question: "Was öffnen Sie?",
+          questionTranslation: "(Bạn mở cái gì?)",
+          answer: "Ich öffne den Kühlschrank/die Tür/das Fenster...",
+          translation: "(Tôi mở tủ lạnh/cửa/cửa sổ...)",
+          category: "📝 Nhóm WAS (Cái gì/Gì)",
+          tip: {
+            title: 'Mẹo nhớ từ để hỏi "WAS"',
+            content: `<span class="tip-highlight">WAS</span> = "Cái gì/Gì" - Hỏi về đồ vật, hành động cụ thể<br>
+                    🔹 Was öffnen Sie? = Bạn mở <strong>cái gì</strong>?<br>
+                    🔹 Luôn đi với động từ và danh từ cụ thể<br>
+                    🔹 Trả lời: Ich + động từ + danh từ (den/die/das...)`,
+          },
+        },
+        {
+          question: "Was kaufen Sie am Kiosk?",
+          questionTranslation: "(Bạn mua gì ở ki-ốt?)",
+          answer: "Ich kaufe eine Zeitung/Brot/Milch/Zigaretten...",
+          translation: "(Tôi mua báo/bánh mì/sữa/thuốc lá...)",
+          category: "📝 Nhóm WAS (Cái gì/Gì)",
+          tip: {
+            title: 'Mẹo nhớ từ để hỏi "WAS"',
+            content: `<span class="tip-highlight">WAS</span> + động từ mua bán = Hỏi về hàng hóa<br>
+                    🔹 "kaufen" (mua) → hỏi đồ vật cụ thể<br>
+                    🔹 Trả lời với mạo từ: eine/einen/ein<br>
+                    🔹 VD: Was kaufen? → Ich kaufe <strong>eine</strong> Zeitung`,
+          },
+        },
+        {
+          question: "Was für einen Kühlschrank finden Sie vielleicht?",
+          questionTranslation: "(Bạn có thể tìm thấy loại tủ lạnh nào?)",
+          answer: "Ich finde vielleicht einen billigen/großen/kleinen...",
+          translation: "(Tôi có thể tìm được cái rẻ/to/nhỏ...)",
+          category: "📝 Nhóm WAS (Cái gì/Gì)",
+          tip: {
+            title: 'Mẹo nhớ "WAS FÜR"',
+            content: `<span class="tip-highlight">WAS FÜR</span> = "Loại gì/Kiểu gì"<br>
+                    🔹 Was für + danh từ = Hỏi về loại, kiểu dáng<br>
+                    🔹 Trả lời với tính từ mô tả<br>
+                    🔹 VD: Was für einen? → einen <strong>billigen</strong> (rẻ)`,
+          },
+        },
+        {
+          question: "Was kommt?",
+          questionTranslation: "(Cái gì đến?)",
+          answer: "Der Bus/Zug/die Straßenbahn kommt.",
+          translation: "(Xe buýt/tàu/xe điện đến)",
+          category: "📝 Nhóm WAS (Cái gì/Gì)",
+          tip: {
+            title: 'Mẹo nhớ "WAS" với động từ',
+            content: `<span class="tip-highlight">WAS</span> + động từ = Chủ ngữ gì làm hành động đó<br>
+                    🔹 Was kommt? = Cái gì đang đến?<br>
+                    🔹 Trả lời: Danh từ + động từ<br>
+                    🔹 VD: <strong>Der Bus</strong> kommt (xe buýt đến)`,
+          },
+        },
+        {
+          question: "Was suchen Sie aber zuerst?",
+          questionTranslation: "(Nhưng trước tiên bạn tìm gì?)",
+          answer:
+            "Ich suche zuerst einen Kühlschrank/meine Brille/den Schlüssel...",
+          translation: "(Tôi tìm trước tiên tủ lạnh/kính của tôi/chìa khóa...)",
+          category: "📝 Nhóm WAS (Cái gì/Gì)",
+          tip: {
+            title: 'Mẹo nhớ "WAS" với "suchen"',
+            content: `<span class="tip-highlight">WAS suchen</span> = Tìm cái gì<br>
+                    🔹 "suchen" = tìm kiếm → hỏi về đồ vật<br>
+                    🔹 Trả lời: Ich suche + mạo từ + danh từ<br>
+                    🔹 Chú ý: einen/eine/ein (bất định) hoặc den/die/das (xác định)`,
+          },
+        },
+        {
+          question: "Was lesen Sie?",
+          questionTranslation: "(Bạn đọc gì?)",
+          answer: "Ich lese die Anzeigen/ein Buch/die Zeitung...",
+          translation: "(Tôi đọc quảng cáo/sách/báo...)",
+          category: "📝 Nhóm WAS (Cái gì/Gì)",
+          tip: {
+            title: 'Mẹo nhớ "WAS" với "lesen"',
+            content: `<span class="tip-highlight">WAS lesen</span> = Đọc cái gì<br>
+                    🔹 "lesen" = đọc → hỏi về tài liệu, sách báo<br>
+                    🔹 Trả lời: die/das/ein + tài liệu<br>
+                    🔹 VD: die Zeitung (báo), ein Buch (sách)`,
+          },
+        },
+        // Nhóm WIE (Như thế nào/Thế nào) - 6 câu
+        {
+          question: "Wie sind Sie heute Morgen?",
+          questionTranslation: "(Sáng nay bạn thế nào?)",
+          answer: "Ich bin müde/gut/schlecht/in Eile...",
+          translation: "(Tôi mệt/tốt/không tốt/vội vã...)",
+          category: "🤔 Nhóm WIE (Như thế nào/Thế nào)",
+          tip: {
+            title: 'Mẹo nhớ "WIE" với cảm xúc',
+            content: `<span class="tip-highlight">WIE sind Sie</span> = Bạn như thế nào (cảm xúc, trạng thái)<br>
+                    🔹 Hỏi về cảm giác, tâm trạng hiện tại<br>
+                    🔹 Trả lời: Ich bin + tính từ<br>
+                    🔹 VD: müde (mệt), gut (tốt), in Eile (vội)`,
+          },
+        },
+        {
+          question: "Wie ist der Boden vor dem Kühlschrank?",
+          questionTranslation: "(Sàn nhà trước tủ lạnh như thế nào?)",
+          answer: "Er ist nass/trocken/schmutzig/sauber...",
+          translation: "(Nó ướt/khô/bẩn/sạch...)",
+          category: "🤔 Nhóm WIE (Như thế nào/Thế nào)",
+          tip: {
+            title: 'Mẹo nhớ "WIE" với tính chất vật thể',
+            content: `<span class="tip-highlight">WIE ist</span> + danh từ = Tính chất, đặc điểm<br>
+                    🔹 Hỏi về trạng thái của đồ vật<br>
+                    🔹 Trả lời: Er/Sie/Es ist + tính từ<br>
+                    🔹 VD: der Boden (nam) → <strong>Er</strong> ist nass`,
+          },
+        },
+        {
+          question: "Wie ist es drinnen?",
+          questionTranslation: "(Bên trong như thế nào?)",
+          answer: "Es ist warm/kalt/hell/dunkel...",
+          translation: "(Trong đó nóng/lạnh/sáng/tối...)",
+          category: "🤔 Nhóm WIE (Như thế nào/Thế nào)",
+          tip: {
+            title: 'Mẹo nhớ "WIE" với môi trường',
+            content: `<span class="tip-highlight">WIE ist es</span> = Môi trường như thế nào<br>
+                    🔹 "es" = chỉ tình huống, môi trường chung<br>
+                    🔹 Trả lời về nhiệt độ, ánh sáng, không gian<br>
+                    🔹 VD: warm (nóng), hell (sáng), dunkel (tối)`,
+          },
+        },
+        {
+          question: "Wie sind die Butter und die Milch?",
+          questionTranslation: "(Bơ và sữa như thế nào?)",
+          answer: "Sie sind frisch/alt/gut/schlecht...",
+          translation: "(Chúng tươi/cũ/tốt/hỏng...)",
+          category: "🤔 Nhóm WIE (Như thế nào/Thế nào)",
+          tip: {
+            title: 'Mẹo nhớ "WIE" với thực phẩm',
+            content: `<span class="tip-highlight">WIE sind</span> + thực phẩm = Chất lượng, độ tươi<br>
+                    🔹 Hỏi về tình trạng thức ăn<br>
+                    🔹 Trả lời: Sie sind + tính từ (số nhiều)<br>
+                    🔹 VD: frisch (tươi), alt (cũ), schlecht (hỏng)`,
+          },
+        },
+        {
+          question: "Wie ist der Kühlschrank?",
+          questionTranslation: "(Tủ lạnh như thế nào?)",
+          answer: "Er ist neu/alt/groß/klein/kaputt...",
+          translation: "(Nó mới/cũ/to/nhỏ/hỏng...)",
+          category: "🤔 Nhóm WIE (Như thế nào/Thế nào)",
+          tip: {
+            title: 'Mẹo nhớ "WIE" với đồ gia dụng',
+            content: `<span class="tip-highlight">WIE ist</span> + đồ gia dụng = Tình trạng, kích cỡ<br>
+                    🔹 Hỏi về đặc điểm của thiết bị<br>
+                    🔹 Trả lời: Er/Sie/Es ist + tính từ<br>
+                    🔹 VD: neu (mới), groß (to), kaputt (hỏng)`,
+          },
+        },
+        {
+          question: "Wie ist der Vormittag?",
+          questionTranslation: "(Buổi sáng như thế nào?)",
+          answer: "Er ist lang/kurz/anstrengend/interessant...",
+          translation: "(Nó dài/ngắn/mệt mỏi/thú vị...)",
+          category: "🤔 Nhóm WIE (Như thế nào/Thế nào)",
+          tip: {
+            title: 'Mẹo nhớ "WIE" với thời gian',
+            content: `<span class="tip-highlight">WIE ist</span> + thời gian = Cảm nhận về khoảng thời gian<br>
+                    🔹 Hỏi về trải nghiệm thời gian<br>
+                    🔹 Trả lời: Er/Sie/Es ist + tính từ cảm xúc<br>
+                    🔹 VD: lang (dài), anstrengend (mệt mỏi)`,
+          },
+        },
+        // Nhóm WANN (Khi nào) - 4 câu
+        {
+          question: "Wann müssen Sie im Studio sein?",
+          questionTranslation: "(Khi nào bạn phải có mặt ở studio?)",
+          answer: "Ich muss um 8/9/10 Uhr da sein.",
+          translation: "(Tôi phải có mặt lúc 8/9/10 giờ)",
+          category: "⏰ Nhóm WANN (Khi nào)",
+          tip: {
+            title: 'Mẹo nhớ "WANN" với thời gian bắt buộc',
+            content: `<span class="tip-highlight">WANN müssen</span> = Khi nào phải làm<br>
+                    🔹 "müssen" = phải → hỏi thời gian bắt buộc<br>
+                    🔹 Trả lời: um + giờ + Uhr<br>
+                    🔹 VD: um 8 Uhr (lúc 8 giờ), um 10 Uhr (lúc 10 giờ)`,
+          },
+        },
+        {
+          question: "Wann werden Sie die Anzeigen lesen?",
+          questionTranslation: "(Khi nào bạn sẽ đọc quảng cáo?)",
+          answer: "Ich lese sie heute Abend/morgen/in der Pause...",
+          translation: "(Tôi đọc tối nay/ngày mai/trong giờ nghỉ...)",
+          category: "⏰ Nhóm WANN (Khi nào)",
+          tip: {
+            title: 'Mẹo nhớ "WANN" với tương lai',
+            content: `<span class="tip-highlight">WANN werden</span> = Khi nào sẽ làm (tương lai)<br>
+                    🔹 "werden" = sẽ → hỏi kế hoạch tương lai<br>
+                    🔹 Trả lời: heute/morgen/in der...<br>
+                    🔹 VD: heute Abend (tối nay), morgen (ngày mai)`,
+          },
+        },
+        {
+          question: "Wann sind Sie im Studio?",
+          questionTranslation: "(Khi nào bạn có mặt ở studio?)",
+          answer: "Ich bin um 9/10/11 Uhr da.",
+          translation: "(Tôi có mặt lúc 9/10/11 giờ)",
+          category: "⏰ Nhóm WANN (Khi nào)",
+          tip: {
+            title: 'Mẹo nhớ "WANN" với hiện tại',
+            content: `<span class="tip-highlight">WANN sind</span> = Khi nào có mặt (thời gian thường xuyên)<br>
+                    🔹 "sind" = thì hiện tại → hỏi lịch trình thường xuyên<br>
+                    🔹 Trả lời: um + giờ + Uhr<br>
+                    🔹 VD: um 9 Uhr da (có mặt lúc 9 giờ)`,
+          },
+        },
+        {
+          question: "Wann ist Mittagspause?",
+          questionTranslation: "(Khi nào là giờ nghỉ trưa?)",
+          answer: "Sie ist um 12/13 Uhr/von 12 bis 13 Uhr...",
+          translation: "(Lúc 12/13 giờ/từ 12 đến 13 giờ...)",
+          category: "⏰ Nhóm WANN (Khi nào)",
+          tip: {
+            title: 'Mẹo nhớ "WANN" với lịch trình',
+            content: `<span class="tip-highlight">WANN ist</span> + sự kiện = Khi nào diễn ra<br>
+                    🔹 Hỏi về thời gian của sự kiện, hoạt động<br>
+                    🔹 Trả lời: Sie ist um.../von...bis...<br>
+                    🔹 VD: von 12 bis 13 Uhr (từ 12 đến 13 giờ)`,
+          },
+        },
+        // Nhóm WOHIN (Đi đâu) - 3 câu
+        {
+          question: "Wohin gehen Sie?",
+          questionTranslation: "(Bạn đi đâu?)",
+          answer: "Ich gehe in die Küche/ins Bad/ins Wohnzimmer...",
+          translation: "(Tôi đi vào bếp/phòng tắm/phòng khách...)",
+          category: "🚶 Nhóm WOHIN (Đi đâu)",
+          tip: {
+            title: 'Mẹo nhớ "WOHIN" với "gehen"',
+            content: `<span class="tip-highlight">WOHIN gehen</span> = Đi đâu (hướng di chuyển)<br>
+                    🔹 "gehen" = đi → luôn có hướng di chuyển<br>
+                    🔹 Trả lời: in die/ins/zum/zur + địa điểm<br>
+                    🔹 VD: in die Küche (vào bếp), ins Bad (vào phòng tắm)`,
+          },
+        },
+        {
+          question: "Wohin laufen Sie?",
+          questionTranslation: "(Bạn chạy đi đâu?)",
+          answer: "Ich laufe zur Bushaltestelle/zum Supermarkt/nach Hause...",
+          translation: "(Tôi chạy đến trạm xe buýt/siêu thị/về nhà...)",
+          category: "🚶 Nhóm WOHIN (Đi đâu)",
+          tip: {
+            title: 'Mẹo nhớ "WOHIN" với "laufen"',
+            content: `<span class="tip-highlight">WOHIN laufen</span> = Chạy đi đâu (nhanh + hướng)<br>
+                    🔹 "laufen" = chạy → di chuyển nhanh có điểm đến<br>
+                    🔹 Trả lời: zur/zum/nach + điểm đến<br>
+                    🔹 VD: zur Bushaltestelle (đến trạm), nach Hause (về nhà)`,
+          },
+        },
+        {
+          question: "Wohin setzen Sie sich?",
+          questionTranslation: "(Bạn ngồi ở đâu?)",
+          answer: "Ich setze mich ins Büro/auf den Stuhl/an den Tisch...",
+          translation: "(Tôi ngồi vào văn phòng/lên ghế/vào bàn...)",
+          category: "🚶 Nhóm WOHIN (Đi đâu)",
+          tip: {
+            title: 'Mẹo nhớ "WOHIN" với "sich setzen"',
+            content: `<span class="tip-highlight">WOHIN sich setzen</span> = Ngồi vào đâu (vị trí mới)<br>
+                    🔹 "sich setzen" = ngồi xuống → chọn vị trí ngồi<br>
+                    🔹 Trả lời: ins/auf/an + vị trí cụ thể<br>
+                    🔹 VD: auf den Stuhl (lên ghế), an den Tisch (vào bàn)`,
+          },
+        },
+        // Nhóm WO (Ở đâu) - 1 câu
+        {
+          question: "Wo gibt es viele Angebote?",
+          questionTranslation: "(Ở đâu có nhiều ưu đãi?)",
+          answer: "In der Zeitung/im Supermarkt/im Internet...",
+          translation: "(Trong báo/ở siêu thị/trên mạng...)",
+          category: "📍 Nhóm WO (Ở đâu)",
+          tip: {
+            title: 'Mẹo nhớ "WO" - vị trí tĩnh',
+            content: `<span class="tip-highlight">WO gibt es</span> = Ở đâu có/tồn tại<br>
+                    🔹 "gibt es" = có → hỏi vị trí tồn tại<br>
+                    🔹 Khác WOHIN (di chuyển), WO là vị trí cố định<br>
+                    🔹 Trả lời: in der/im/auf/bei + vị trí<br>
+                    🔹 VD: in der Zeitung (trong báo), im Internet (trên mạng)`,
+          },
+        },
+        // Nhóm WOFÜR (Để làm gì) - 1 câu
+        {
+          question: "Wofür haben Sie gerade noch Zeit?",
+          questionTranslation: "(Bạn còn có thời gian để làm gì?)",
+          answer: "Ich habe Zeit für Kaffee/Frühstück/Duschen...",
+          translation: "(Tôi có thời gian uống cà phê/ăn sáng/tắm...)",
+          category: "🎯 Nhóm WOFÜR (Để làm gì)",
+          tip: {
+            title: 'Mẹo nhớ "WOFÜR" - mục đích',
+            content: `<span class="tip-highlight">WOFÜR haben Sie Zeit</span> = Có thời gian để làm gì<br>
+                    🔹 "für" = cho, để → hỏi về mục đích<br>
+                    🔹 Trả lời: für + danh từ/hoạt động<br>
+                    🔹 VD: für Kaffee (để uống cà phê), für Frühstück (để ăn sáng)`,
+          },
+        },
+        // Nhóm WORAUF (Mong đợi điều gì) - 1 câu
+        {
+          question: "Worauf freuen Sie sich?",
+          questionTranslation: "(Bạn mong đợi điều gì?)",
+          answer: "Ich freue mich auf die Pause/das Wochenende/den Urlaub...",
+          translation: "(Tôi mong đợi giờ nghỉ/cuối tuần/kỳ nghỉ...)",
+          category: "🌟 Nhóm WORAUF (Mong đợi điều gì)",
+          tip: {
+            title: 'Mẹo nhớ "WORAUF" với cảm xúc',
+            content: `<span class="tip-highlight">WORAUF freuen</span> = Mong đợi, háo hức về gì<br>
+                    🔹 "sich freuen auf" = mong đợi → cảm xúc tích cực<br>
+                    🔹 Trả lời: auf die/das/den + sự kiện tương lai<br>
+                    🔹 VD: auf das Wochenende (mong chờ cuối tuần)`,
+          },
+        },
+        // Nhóm WARUM (Tại sao) - 1 câu
+        {
+          question: "Warum haben Sie Hunger?",
+          questionTranslation: "(Tại sao bạn đói?)",
+          answer: "Weil ich nichts gegessen habe/es spät ist/ich müde bin...",
+          translation: "(Vì tôi chưa ăn gì/muộn rồi/tôi mệt...)",
+          category: "❓ Nhóm WARUM (Tại sao)",
+          tip: {
+            title: 'Mẹo nhớ "WARUM" - nguyên nhân',
+            content: `<span class="tip-highlight">WARUM haben Sie</span> = Tại sao bạn có (cảm giác)<br>
+                    🔹 Hỏi về nguyên nhân của trạng thái<br>
+                    🔹 Trả lời: Weil + câu (động từ ở cuối)<br>
+                    🔹 VD: Weil ich nichts gegessen <strong>habe</strong> (vì tôi chưa ăn)`,
+          },
+        },
+        // Nhóm WELCHE (Cái nào/Những cái nào) - 1 câu
+        {
+          question: "Welche Anzeigen markieren Sie?",
+          questionTranslation: "(Bạn đánh dấu những quảng cáo nào?)",
+          answer: "Ich markiere die interessanten/günstigen/neuen Anzeigen.",
+          translation: "(Tôi đánh dấu những quảng cáo thú vị/rẻ/mới)",
+          category: "🔍 Nhóm WELCHE (Cái nào/Những cái nào)",
+          tip: {
+            title: 'Mẹo nhớ "WELCHE" - lựa chọn',
+            content: `<span class="tip-highlight">WELCHE</span> + danh từ = Những cái nào (trong nhiều lựa chọn)<br>
+                    🔹 Hỏi về việc lựa chọn, phân biệt<br>
+                    🔹 Trả lời: die + tính từ + danh từ (số nhiều)<br>
+                    🔹 VD: die interessanten Anzeigen (những quảng cáo thú vị)`,
+          },
+        },
+      ];
+
+      let currentIndex = 0;
+      let completedQuestions = new Set();
+      let isAnswerVisible = false;
+
+      function updateDisplay() {
+        const current = questions[currentIndex];
+        document.getElementById("questionText").textContent = current.question;
+        document.getElementById("questionTranslation").textContent =
+          current.questionTranslation;
+        document.getElementById("answerText").textContent = current.answer;
+        document.getElementById("translationText").textContent =
+          current.translation;
+        document.getElementById("categoryInfo").textContent = current.category;
+        document.getElementById("currentNum").textContent = currentIndex + 1;
+
+        // Update tip box
+        document.getElementById("tipTitle").textContent = current.tip.title;
+        document.getElementById("tipContent").innerHTML = current.tip.content;
+
+        // Update progress
+        const progress = ((currentIndex + 1) / questions.length) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+
+        // Hide answer by default
+        document.getElementById("answerSection").classList.add("hidden");
+        isAnswerVisible = false;
+      }
+
+      function nextQuestion() {
+        completedQuestions.add(currentIndex);
+        currentIndex = (currentIndex + 1) % questions.length;
+        updateDisplay();
+        updateCompletedCount();
+      }
+
+      function toggleAnswer() {
+        const answerSection = document.getElementById("answerSection");
+        if (isAnswerVisible) {
+          answerSection.classList.add("hidden");
+          isAnswerVisible = false;
+        } else {
+          answerSection.classList.remove("hidden");
+          isAnswerVisible = true;
+        }
+      }
+
+      function randomQuestion() {
+        currentIndex = Math.floor(Math.random() * questions.length);
+        updateDisplay();
+      }
+
+      function resetProgress() {
+        currentIndex = 0;
+        completedQuestions.clear();
+        updateDisplay();
+        updateCompletedCount();
+      }
+
+      function updateCompletedCount() {
+        document.getElementById("completedNum").textContent =
+          completedQuestions.size;
+      }
+
+      function getCurrentQuestion() {
+        return questions[currentIndex].question;
+      }
+
+      function getCurrentAnswer() {
+        return questions[currentIndex].answer;
+      }
+
+      function speakText(text, lang) {
+        if ("speechSynthesis" in window) {
+          // Stop any current speech
+          speechSynthesis.cancel();
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = lang === "de" ? "de-DE" : "vi-VN";
+          utterance.rate = 0.8;
+          utterance.pitch = 1;
+
+          speechSynthesis.speak(utterance);
+        } else {
+          alert("Trình duyệt của bạn không hỗ trợ text-to-speech");
+        }
+      }
+
+      function showTips() {
+        // Hide practice view
+        document.querySelector(".card").classList.add("hidden");
+        document.getElementById("categoryInfo").classList.add("hidden");
+        document.getElementById("tipBox").classList.add("hidden");
+
+        // Show tips guide view
+        document.getElementById("tipsGuideView").classList.remove("hidden");
+      }
+
+      function hideTips() {
+        // Show practice view
+        document.querySelector(".card").classList.remove("hidden");
+        document.getElementById("categoryInfo").classList.remove("hidden");
+        document.getElementById("tipBox").classList.remove("hidden");
+
+        // Hide tips guide view
+        document.getElementById("tipsGuideView").classList.add("hidden");
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (event) {
+        switch (event.key) {
+          case "ArrowRight":
+          case " ":
+            event.preventDefault();
+            nextQuestion();
+            break;
+          case "ArrowDown":
+          case "Enter":
+            event.preventDefault();
+            toggleAnswer();
+            break;
+          case "r":
+          case "R":
+            event.preventDefault();
+            randomQuestion();
+            break;
+          case "t":
+          case "T":
+            event.preventDefault();
+            showTips();
+            break;
+        }
+      });
+
+      // Initialize
+      updateDisplay();
+
+      function showAllQuestions() {
+        // Hide practice view
+        document.querySelector(".card").classList.add("hidden");
+        document.getElementById("categoryInfo").classList.add("hidden");
+        document.getElementById("tipBox").classList.add("hidden");
+
+        // Show all questions view
+        document.getElementById("allQuestionsView").classList.remove("hidden");
+
+        // Generate all questions list
+        const allQuestionsList = document.getElementById("allQuestionsList");
+        let html = "";
+        let currentCategory = "";
+
+        questions.forEach((q, index) => {
+          // Add category header if it's a new category
+          if (q.category !== currentCategory) {
+            currentCategory = q.category;
+            html += `<div class="category-header">${currentCategory}</div>`;
+          }
+
+          html += `
+                    <div class="question-item">
+                        <h4>${index + 1}. ${q.question} 
+                            <button class="audio-btn" onclick="speakText('${
+                              q.question
+                            }', 'de')" style="font-size: 10px; padding: 4px 8px;">🔊</button>
+                        </h4>
+                        <div class="q-translation">${
+                          q.questionTranslation
+                        }</div>
+                        <div class="answer-text">${q.answer} 
+                            <button class="audio-btn" onclick="speakText('${
+                              q.answer
+                            }', 'de')" style="font-size: 10px; padding: 4px 8px;">🔊</button>
+                        </div>
+                        <div class="a-translation">${q.translation}</div>
+                    </div>
+                `;
+        });
+
+        allQuestionsList.innerHTML = html;
+      }
+
+      function hideAllQuestions() {
+        // Show practice view
+        document.querySelector(".card").classList.remove("hidden");
+        document.getElementById("categoryInfo").classList.remove("hidden");
+        document.getElementById("tipBox").classList.remove("hidden");
+
+        // Hide all questions view
+        document.getElementById("allQuestionsView").classList.add("hidden");
+      }
+    </script>
+  </body>
+</html>
