@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện tập câu tiếng Đức</title>
+    <title>Ôn luyện ngữ pháp tiếng Đức</title>
     <style>
       * {
         margin: 0;
@@ -19,7 +19,7 @@
       }
 
       .container {
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
         background: white;
         border-radius: 20px;
@@ -28,7 +28,7 @@
       }
 
       .header {
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
         color: white;
         padding: 30px;
         text-align: center;
@@ -40,196 +40,237 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
 
-      .nav-buttons {
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .nav-tabs {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        padding: 20px;
         background: #f8f9fa;
+        border-bottom: 3px solid #e9ecef;
       }
 
-      .nav-btn {
-        padding: 12px 20px;
+      .nav-tab {
+        flex: 1;
+        padding: 15px 10px;
+        text-align: center;
+        background: none;
         border: none;
-        border-radius: 25px;
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        color: white;
         cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
         font-size: 14px;
+        font-weight: 600;
+        color: #6c757d;
+        transition: all 0.3s ease;
+        position: relative;
       }
 
-      .nav-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      .nav-tab:hover {
+        background: #e9ecef;
+        color: #495057;
       }
 
-      .nav-btn.active {
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      .nav-tab.active {
+        color: #007bff;
+        background: white;
+      }
+
+      .nav-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #007bff;
       }
 
       .content {
         padding: 30px;
-        min-height: 500px;
+      }
+
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: block;
       }
 
       .sentence-card {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: white;
-        padding: 25px;
+        background: #f8f9fa;
         border-radius: 15px;
-        margin-bottom: 20px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        transform: translateY(0);
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 5px solid #007bff;
         transition: all 0.3s ease;
+        cursor: pointer;
       }
 
       .sentence-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       }
 
       .german-text {
-        font-size: 1.5em;
-        font-weight: bold;
+        font-size: 1.3em;
+        font-weight: 600;
+        color: #333;
         margin-bottom: 10px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
       }
 
       .vietnamese-text {
         font-size: 1.1em;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        color: #6c757d;
         font-style: italic;
       }
 
-      .sentence-card.revealed .vietnamese-text {
-        opacity: 1;
-      }
-
-      .reveal-btn {
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid white;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 20px;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: all 0.3s ease;
-      }
-
-      .reveal-btn:hover {
-        background: white;
-        color: #333;
-      }
-
-      .quiz-section {
-        display: none;
-      }
-
-      .quiz-section.active {
-        display: block;
+      .quiz-container {
+        text-align: center;
       }
 
       .quiz-card {
-        background: white;
-        border: 3px solid #4ecdc4;
-        border-radius: 15px;
-        padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin: 20px 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
       }
 
       .quiz-question {
-        font-size: 1.3em;
-        margin-bottom: 15px;
-        color: #333;
-        font-weight: bold;
+        font-size: 1.5em;
+        margin-bottom: 30px;
+        line-height: 1.6;
       }
 
-      .quiz-input {
-        width: 100%;
+      .quiz-answer {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
         padding: 15px;
-        border: 2px solid #ddd;
-        border-radius: 10px;
         font-size: 1.1em;
-        margin-bottom: 15px;
-        transition: border-color 0.3s ease;
+        color: white;
+        width: 100%;
+        margin: 10px 0;
+        backdrop-filter: blur(10px);
       }
 
-      .quiz-input:focus {
-        outline: none;
-        border-color: #4ecdc4;
+      .quiz-answer::placeholder {
+        color: rgba(255, 255, 255, 0.7);
       }
 
-      .check-btn {
-        background: linear-gradient(45deg, #4ecdc4, #44a08d);
+      .btn {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
         color: white;
         border: none;
-        padding: 12px 24px;
+        padding: 15px 30px;
         border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: 600;
         cursor: pointer;
-        font-weight: bold;
-        margin-right: 10px;
         transition: all 0.3s ease;
+        margin: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
 
-      .check-btn:hover {
+      .btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       }
 
-      .result {
-        margin-top: 15px;
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .score {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin: 20px 0;
         padding: 15px;
-        border-radius: 10px;
-        font-weight: bold;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
       }
 
       .correct {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
+        background: linear-gradient(135deg, #28a745, #20c997) !important;
+        animation: pulse 0.5s ease;
       }
 
       .incorrect {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
+        background: linear-gradient(135deg, #dc3545, #fd7e14) !important;
+        animation: shake 0.5s ease;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      .category-title {
+        font-size: 1.8em;
+        font-weight: 700;
+        color: #333;
+        margin: 30px 0 20px 0;
+        text-align: center;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
       .progress-bar {
         background: #e9ecef;
         border-radius: 10px;
-        height: 20px;
-        margin: 20px 0;
         overflow: hidden;
+        margin: 20px 0;
       }
 
       .progress-fill {
-        background: linear-gradient(90deg, #4ecdc4, #44a08d);
-        height: 100%;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        height: 20px;
         transition: width 0.3s ease;
         border-radius: 10px;
       }
 
-      @media (max-width: 600px) {
-        .header h1 {
-          font-size: 2em;
+      @media (max-width: 768px) {
+        .nav-tab {
+          font-size: 12px;
+          padding: 12px 5px;
         }
 
-        .nav-buttons {
-          flex-direction: column;
+        .header h1 {
+          font-size: 2em;
         }
 
         .content {
           padding: 20px;
         }
 
-        .german-text {
-          font-size: 1.3em;
+        .quiz-card {
+          padding: 25px;
         }
       }
     </style>
@@ -237,371 +278,473 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>🇩🇪 Luyện tập câu tiếng Đức</h1>
-        <p>Ôn tập ngữ pháp với 30 câu ví dụ</p>
+        <h1>🇩🇪 Ngữ pháp tiếng Đức</h1>
+        <p>Ôn luyện và thực hành các cấu trúc câu quan trọng</p>
       </div>
 
-      <div class="nav-buttons">
-        <button class="nav-btn active" onclick="showSection('all')">
-          Tất cả
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('review')">
+          📖 Ôn tập
         </button>
-        <button class="nav-btn" onclick="showSection('imperative')">
-          Câu cầu khiến
+        <button class="nav-tab" onclick="showSection('quiz-imperative')">
+          ⚡ Quiz Cầu khiến
         </button>
-        <button class="nav-btn" onclick="showSection('modal')">
-          Động từ khuyết thiếu
+        <button class="nav-tab" onclick="showSection('quiz-modal')">
+          🎯 Quiz Động từ khuyết thiếu
         </button>
-        <button class="nav-btn" onclick="showSection('separable')">
-          Động từ tách
+        <button class="nav-tab" onclick="showSection('quiz-separable')">
+          🔄 Quiz Động từ tách
         </button>
-        <button class="nav-btn" onclick="showSection('yesno')">
-          Câu hỏi nghi vấn
+        <button class="nav-tab" onclick="showSection('quiz-questions')">
+          ❓ Quiz Câu hỏi
         </button>
-        <button class="nav-btn" onclick="showSection('wh')">Từ để hỏi</button>
-        <button class="nav-btn" onclick="showSection('quiz')">Quiz</button>
+        <button class="nav-tab" onclick="showSection('quiz-all')">
+          🏆 Quiz tổng hợp
+        </button>
       </div>
 
       <div class="content">
-        <div id="all-section" class="quiz-section active">
-          <h2 style="color: #333; margin-bottom: 20px">📚 Tất cả câu ví dụ</h2>
-          <div id="all-sentences"></div>
+        <!-- Review Section -->
+        <div id="review" class="section active">
+          <div class="category-title">Câu cầu khiến (Imperativ)</div>
+          <div id="imperative-sentences"></div>
+
+          <div class="category-title">
+            Câu có động từ khuyết thiếu (Modalverben)
+          </div>
+          <div id="modal-sentences"></div>
+
+          <div class="category-title">
+            Câu có động từ tách (Trennbare Verben)
+          </div>
+          <div id="separable-sentences"></div>
+
+          <div class="category-title">Câu hỏi nghi vấn (Ja/Nein-Fragen)</div>
+          <div id="yes-no-questions"></div>
+
+          <div class="category-title">Câu hỏi có từ để hỏi (W-Fragen)</div>
+          <div id="w-questions"></div>
         </div>
 
-        <div id="quiz-section" class="quiz-section">
-          <h2 style="color: #333; margin-bottom: 20px">🎯 Quiz luyện tập</h2>
-          <div class="progress-bar">
-            <div
-              class="progress-fill"
-              id="progress-fill"
-              style="width: 0%"
-            ></div>
+        <!-- Quiz Sections -->
+        <div id="quiz-imperative" class="section">
+          <div class="quiz-container">
+            <h2 class="category-title">Quiz: Câu cầu khiến</h2>
+            <div id="quiz-imperative-content"></div>
           </div>
-          <div id="quiz-content"></div>
+        </div>
+
+        <div id="quiz-modal" class="section">
+          <div class="quiz-container">
+            <h2 class="category-title">Quiz: Động từ khuyết thiếu</h2>
+            <div id="quiz-modal-content"></div>
+          </div>
+        </div>
+
+        <div id="quiz-separable" class="section">
+          <div class="quiz-container">
+            <h2 class="category-title">Quiz: Động từ tách</h2>
+            <div id="quiz-separable-content"></div>
+          </div>
+        </div>
+
+        <div id="quiz-questions" class="section">
+          <div class="quiz-container">
+            <h2 class="category-title">Quiz: Câu hỏi</h2>
+            <div id="quiz-questions-content"></div>
+          </div>
+        </div>
+
+        <div id="quiz-all" class="section">
+          <div class="quiz-container">
+            <h2 class="category-title">Quiz tổng hợp</h2>
+            <div id="quiz-all-content"></div>
+          </div>
         </div>
       </div>
     </div>
 
     <script>
-      const sentences = {
+      // Data structure
+      const data = {
         imperative: [
           {
-            german: "Gehen Sie nach Hause bitte!",
-            vietnamese: "Xin hãy về nhà!",
-          },
-          { german: "Machen Sie die Tür zu!", vietnamese: "Hãy đóng cửa lại!" },
-          {
-            german: "Sprechen Sie lauter bitte jetzt!",
-            vietnamese: "Xin hãy nói to hơn!",
+            german: "Geh bitte sofort nach Hause!",
+            vietnamese: "Hãy đi về nhà ngay lập tức nhé!",
           },
           {
-            german: "Kommen Sie morgen früh hier!",
-            vietnamese: "Hãy đến đây sớm mai!",
+            german: "Sprechen Sie bitte etwas lauter!",
+            vietnamese: "Làm ơn nói to hơn một chút!",
           },
           {
-            german: "Essen Sie das Brot nicht!",
-            vietnamese: "Đừng ăn bánh mì đó!",
+            german: "Macht jetzt eure Hausaufgaben fertig!",
+            vietnamese: "Hãy hoàn thành bài tập về nhà của các em ngay!",
+          },
+          {
+            german: "Komm bitte schnell herüber!",
+            vietnamese: "Hãy đến đây nhanh lên!",
+          },
+          {
+            german: "Sei ruhig, wenn du nach Hause kommst!",
+            vietnamese: "Hãy im lặng khi con về đến nhà!",
           },
         ],
         modal: [
           {
-            german: "Können Sie Deutsch gut sprechen?",
-            vietnamese: "Bạn có thể nói tiếng Đức tốt không?",
+            german: "Darf ich hier rauchen oder nicht?",
+            vietnamese: "Tôi có được hút thuốc ở đây không?",
           },
           {
-            german: "Müssen wir heute zur Arbeit?",
-            vietnamese: "Chúng ta có phải đi làm hôm nay không?",
+            german: "Könntest du bitte etwas trinken?",
+            vietnamese: "Bạn có thể uống một chút không?",
           },
           {
-            german: "Dürfen Kinder hier heute spielen?",
-            vietnamese: "Trẻ em có được phép chơi ở đây hôm nay không?",
+            german: "Soll ich das Fenster jetzt öffnen?",
+            vietnamese: "Tôi có nên mở cửa sổ bây giờ không?",
           },
           {
-            german: "Wollen Sie mit mir gehen?",
-            vietnamese: "Bạn có muốn đi với tôi không?",
+            german: "Willst du heute nach Berlin fahren?",
+            vietnamese: "Bạn có muốn đi Berlin hôm nay không?",
           },
           {
-            german: "Sollen wir das Buch lesen?",
-            vietnamese: "Chúng ta có nên đọc quyển sách không?",
+            german: "Können Sie mir bitte helfen?",
+            vietnamese: "Ngài có thể giúp tôi không?",
           },
           {
-            german: "Möchten Sie einen Kaffee trinken?",
-            vietnamese: "Bạn có muốn uống cà phê không?",
-          },
-          {
-            german: "Können die Kinder gut schwimmen?",
-            vietnamese: "Những đứa trẻ có thể bơi tốt không?",
+            german: "Dürfen die Kinder draußen mitspielen?",
+            vietnamese: "Bọn trẻ có được chơi cùng bên ngoài không?",
           },
           {
             german: "Müssen Sie morgen früh aufstehen?",
-            vietnamese: "Bạn có phải dậy sớm mai không?",
+            vietnamese: "Ngài có phải dậy sớm vào ngày mai không?",
           },
           {
-            german: "Dürfen wir hier Musik hören?",
-            vietnamese: "Chúng ta có được phép nghe nhạc ở đây không?",
+            german: "Wollen Sie Pizza oder Pasta essen?",
+            vietnamese: "Ngài muốn ăn pizza hay mì Ý?",
           },
           {
-            german: "Wollen Ihre Freunde heute kommen?",
-            vietnamese: "Bạn bè của bạn có muốn đến hôm nay không?",
+            german: "Ich muss jeden Abend Deutsch lernen.",
+            vietnamese: "Tôi phải học tiếng Đức mỗi tối.",
+          },
+          {
+            german: "Wir dürfen im Klassenzimmer nicht essen.",
+            vietnamese: "Chúng tôi không được phép ăn trong lớp học.",
           },
         ],
         separable: [
           {
-            german: "Ich stehe morgen früh auf.",
-            vietnamese: "Tôi dậy sớm vào sáng mai.",
+            german: "Ich stehe jeden Tag um sieben Uhr auf.",
+            vietnamese: "Tôi dậy vào lúc bảy giờ mỗi ngày.",
           },
           {
-            german: "Der Zug kommt um acht an.",
-            vietnamese: "Tàu hỏa đến lúc tám giờ.",
+            german: "Er macht die Tür langsam zu.",
+            vietnamese: "Anh ấy đóng cửa lại một cách từ tốn.",
           },
           {
-            german: "Wir gehen heute Abend aus.",
-            vietnamese: "Chúng tôi đi chơi tối nay.",
+            german: "Ich ziehe jeden Morgen meine Jacke an.",
+            vietnamese: "Tôi mặc áo khoác mỗi sáng.",
           },
           {
-            german: "Sie macht das Fenster zu.",
-            vietnamese: "Cô ấy đóng cửa sổ lại.",
+            german: "Du rufst deine Mutter jeden Abend an.",
+            vietnamese: "Bạn gọi cho mẹ bạn mỗi buổi tối.",
           },
           {
-            german: "Er ruft seine Mutter an.",
-            vietnamese: "Anh ấy gọi điện cho mẹ.",
-          },
-        ],
-        yesno: [
-          {
-            german: "Ist das Ihr neues Auto?",
-            vietnamese: "Đó có phải xe mới của bạn không?",
-          },
-          {
-            german: "Haben Sie heute Zeit frei?",
-            vietnamese: "Bạn có rảnh thời gian hôm nay không?",
-          },
-          {
-            german: "Sind die Kinder zu Hause?",
-            vietnamese: "Những đứa trẻ có ở nhà không?",
-          },
-          {
-            german: "Ist der Laden heute offen?",
-            vietnamese: "Cửa hàng có mở cửa hôm nay không?",
-          },
-          {
-            german: "Haben wir noch genug Zeit?",
-            vietnamese: "Chúng ta còn đủ thời gian không?",
+            german: "Wir kaufen morgen im Supermarkt ein.",
+            vietnamese: "Chúng tôi sẽ đi mua sắm ở siêu thị vào ngày mai.",
           },
         ],
-        wh: [
+        yesNoQuestions: [
           {
-            german: "Wann kommen Sie nach Hause?",
-            vietnamese: "Khi nào bạn về nhà?",
+            german: "Sprichst du gut Deutsch inzwischen?",
+            vietnamese: "Bạn đã nói tiếng Đức tốt rồi phải không?",
           },
           {
-            german: "Wo wohnen Ihre Eltern jetzt?",
-            vietnamese: "Bố mẹ bạn sống ở đâu bây giờ?",
+            german: "Kommst du heute wirklich nach Hause?",
+            vietnamese: "Bạn hôm nay thật sự sẽ về nhà chứ?",
           },
           {
-            german: "Was essen Sie gern morgens?",
-            vietnamese: "Bạn thích ăn gì vào buổi sáng?",
+            german: "Ist das neue Auto von dir?",
+            vietnamese: "Đó có phải là chiếc xe mới của bạn không?",
           },
           {
-            german: "Wie alt ist Ihr Kind?",
-            vietnamese: "Con bạn bao nhiêu tuổi?",
+            german: "Hast du morgen um acht Zeit?",
+            vietnamese: "Bạn có thời gian lúc tám giờ sáng mai không?",
           },
           {
-            german: "Warum lernen Sie die Sprache?",
-            vietnamese: "Tại sao bạn học ngôn ngữ này?",
+            german: "Willst du mit uns ins Kino?",
+            vietnamese: "Bạn có muốn đi xem phim với chúng tôi không?",
+          },
+        ],
+        wQuestions: [
+          {
+            german: "Woher kommst du in Deutschland genau?",
+            vietnamese: "Bạn đến từ đâu ở Đức chính xác?",
+          },
+          {
+            german: "Wer ist der neue Lehrer unserer Klasse?",
+            vietnamese: "Ai là giáo viên mới của lớp chúng ta?",
+          },
+          {
+            german: "Wann beginnt heute der Unterricht?",
+            vietnamese: "Hôm nay tiết học bắt đầu khi nào?",
+          },
+          {
+            german: "Warum gehst du nicht zur Schule?",
+            vietnamese: "Tại sao bạn không đi học?",
+          },
+          {
+            german: "Was machst du an diesem Wochenende?",
+            vietnamese: "Bạn sẽ làm gì vào cuối tuần này?",
           },
         ],
       };
 
-      let currentQuiz = [];
-      let currentQuizIndex = 0;
-      let quizScore = 0;
+      // Quiz state
+      let currentQuiz = null;
+      let currentQuestionIndex = 0;
+      let score = 0;
+      let answered = false;
 
-      function createSentenceCard(sentence, index) {
-        return `
-                <div class="sentence-card" id="card-${index}">
+      // Initialize the app
+      function init() {
+        loadReviewContent();
+      }
+
+      // Load review content
+      function loadReviewContent() {
+        loadSentences("imperative-sentences", data.imperative);
+        loadSentences("modal-sentences", data.modal);
+        loadSentences("separable-sentences", data.separable);
+        loadSentences("yes-no-questions", data.yesNoQuestions);
+        loadSentences("w-questions", data.wQuestions);
+      }
+
+      function loadSentences(containerId, sentences) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = sentences
+          .map(
+            (sentence, index) => `
+                <div class="sentence-card" onclick="speakGerman('${sentence.german}')">
                     <div class="german-text">${sentence.german}</div>
                     <div class="vietnamese-text">${sentence.vietnamese}</div>
-                    <button class="reveal-btn" onclick="revealTranslation(${index})">Hiện nghĩa</button>
                 </div>
-            `;
+            `
+          )
+          .join("");
       }
 
-      function revealTranslation(index) {
-        const card = document.getElementById(`card-${index}`);
-        card.classList.add("revealed");
+      // Text-to-speech for German
+      function speakGerman(text) {
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.8;
+          speechSynthesis.speak(utterance);
+        }
       }
 
-      function showSection(section) {
-        // Update navigation
+      // Show different sections
+      function showSection(sectionId) {
+        // Update nav tabs
         document
-          .querySelectorAll(".nav-btn")
-          .forEach((btn) => btn.classList.remove("active"));
+          .querySelectorAll(".nav-tab")
+          .forEach((tab) => tab.classList.remove("active"));
         event.target.classList.add("active");
 
         // Hide all sections
         document
-          .querySelectorAll(".quiz-section")
-          .forEach((sec) => sec.classList.remove("active"));
+          .querySelectorAll(".section")
+          .forEach((section) => section.classList.remove("active"));
 
-        if (section === "all") {
-          document.getElementById("all-section").classList.add("active");
-          showAllSentences();
-        } else if (section === "quiz") {
-          document.getElementById("quiz-section").classList.add("active");
-          startQuiz();
-        } else {
-          document.getElementById("all-section").classList.add("active");
-          showSentencesByType(section);
+        // Show selected section
+        document.getElementById(sectionId).classList.add("active");
+
+        // Initialize quiz if needed
+        if (sectionId.startsWith("quiz-")) {
+          initQuiz(sectionId);
         }
       }
 
-      function showAllSentences() {
-        const container = document.getElementById("all-sentences");
-        let html = "";
-        let index = 0;
+      // Initialize quiz
+      function initQuiz(quizType) {
+        let quizData = [];
 
-        Object.keys(sentences).forEach((type) => {
-          const typeNames = {
-            imperative: "🗣️ Câu cầu khiến",
-            modal: "🔧 Động từ khuyết thiếu",
-            separable: "✂️ Động từ tách",
-            yesno: "❓ Câu hỏi nghi vấn",
-            wh: "🤔 Từ để hỏi",
-          };
+        switch (quizType) {
+          case "quiz-imperative":
+            quizData = data.imperative;
+            break;
+          case "quiz-modal":
+            quizData = data.modal;
+            break;
+          case "quiz-separable":
+            quizData = data.separable;
+            break;
+          case "quiz-questions":
+            quizData = [...data.yesNoQuestions, ...data.wQuestions];
+            break;
+          case "quiz-all":
+            quizData = [
+              ...data.imperative,
+              ...data.modal,
+              ...data.separable,
+              ...data.yesNoQuestions,
+              ...data.wQuestions,
+            ];
+            break;
+        }
 
-          html += `<h3 style="color: #667eea; margin: 30px 0 15px 0; font-size: 1.4em;">${typeNames[type]}</h3>`;
+        currentQuiz = shuffleArray([...quizData]);
+        currentQuestionIndex = 0;
+        score = 0;
+        answered = false;
 
-          sentences[type].forEach((sentence) => {
-            html += createSentenceCard(sentence, index++);
-          });
-        });
-
-        container.innerHTML = html;
+        showQuestion(quizType);
       }
 
-      function showSentencesByType(type) {
-        const container = document.getElementById("all-sentences");
-        let html = "";
-
-        const typeNames = {
-          imperative: "🗣️ Câu cầu khiến",
-          modal: "🔧 Động từ khuyết thiếu",
-          separable: "✂️ Động từ tách",
-          yesno: "❓ Câu hỏi nghi vấn",
-          wh: "🤔 Từ để hỏi",
-        };
-
-        html += `<h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.4em;">${typeNames[type]}</h3>`;
-
-        sentences[type].forEach((sentence, index) => {
-          html += createSentenceCard(sentence, index);
-        });
-
-        container.innerHTML = html;
+      // Shuffle array
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
       }
 
-      function startQuiz() {
-        currentQuiz = [];
-        Object.values(sentences).forEach((typeArray) => {
-          currentQuiz = currentQuiz.concat(typeArray);
-        });
-
-        // Shuffle array
-        currentQuiz = currentQuiz.sort(() => Math.random() - 0.5);
-        currentQuizIndex = 0;
-        quizScore = 0;
-
-        showQuizQuestion();
-      }
-
-      function showQuizQuestion() {
-        if (currentQuizIndex >= currentQuiz.length) {
-          showQuizResults();
+      // Show current question
+      function showQuestion(quizType) {
+        if (currentQuestionIndex >= currentQuiz.length) {
+          showResults(quizType);
           return;
         }
 
-        const question = currentQuiz[currentQuizIndex];
-        const container = document.getElementById("quiz-content");
+        const question = currentQuiz[currentQuestionIndex];
+        const container = document.getElementById(quizType + "-content");
+
+        const progressPercent =
+          (currentQuestionIndex / currentQuiz.length) * 100;
+
+        container.innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                </div>
+                <div class="score">Điểm: ${score}/${currentQuestionIndex}</div>
+                <div class="quiz-card">
+                    <div class="quiz-question">${question.vietnamese}</div>
+                    <input type="text" class="quiz-answer" id="answer-input" placeholder="Nhập câu tiếng Đức..." />
+                    <br>
+                    <button class="btn" onclick="checkAnswer('${quizType}')">Kiểm tra</button>
+                    <button class="btn" onclick="showHint('${question.german}')">Gợi ý</button>
+                    <button class="btn" onclick="speakGerman('${question.german}')">🔊 Nghe</button>
+                </div>
+            `;
+
+        // Focus on input
+        setTimeout(() => {
+          document.getElementById("answer-input").focus();
+        }, 100);
+
+        // Add enter key listener
+        document
+          .getElementById("answer-input")
+          .addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+              checkAnswer(quizType);
+            }
+          });
+
+        answered = false;
+      }
+
+      // Check answer
+      function checkAnswer(quizType) {
+        if (answered) return;
+
+        const userAnswer = document.getElementById("answer-input").value.trim();
+        const correctAnswer = currentQuiz[currentQuestionIndex].german;
+
+        const answerInput = document.getElementById("answer-input");
+        const container = document.getElementById(quizType + "-content");
+
+        // Simple comparison (remove punctuation and convert to lowercase)
+        const normalizeString = (str) =>
+          str
+            .toLowerCase()
+            .replace(/[.,!?]/g, "")
+            .trim();
+        const isCorrect =
+          normalizeString(userAnswer) === normalizeString(correctAnswer);
+
+        if (isCorrect) {
+          score++;
+          answerInput.classList.add("correct");
+          answerInput.value = correctAnswer;
+        } else {
+          answerInput.classList.add("incorrect");
+          answerInput.value = `❌ ${userAnswer} → ✅ ${correctAnswer}`;
+        }
+
+        answered = true;
+
+        // Show next button after 2 seconds
+        setTimeout(() => {
+          const nextButton = `<button class="btn" onclick="nextQuestion('${quizType}')">${
+            currentQuestionIndex + 1 < currentQuiz.length
+              ? "Câu tiếp theo"
+              : "Xem kết quả"
+          }</button>`;
+          container.innerHTML += nextButton;
+        }, 2000);
+      }
+
+      // Show hint
+      function showHint(answer) {
+        const firstWord = answer.split(" ")[0];
+        document.getElementById("answer-input").value = firstWord + "...";
+      }
+
+      // Next question
+      function nextQuestion(quizType) {
+        currentQuestionIndex++;
+        showQuestion(quizType);
+      }
+
+      // Show results
+      function showResults(quizType) {
+        const container = document.getElementById(quizType + "-content");
+        const percentage = Math.round((score / currentQuiz.length) * 100);
+
+        let message = "";
+        let emoji = "";
+
+        if (percentage >= 90) {
+          message = "Xuất sắc! Bạn đã thành thạo ngữ pháp này!";
+          emoji = "🏆";
+        } else if (percentage >= 70) {
+          message = "Tốt lắm! Bạn đã hiểu khá tốt.";
+          emoji = "👏";
+        } else if (percentage >= 50) {
+          message = "Khá ổn! Hãy luyện tập thêm nhé.";
+          emoji = "💪";
+        } else {
+          message = "Đừng nản lòng! Hãy ôn tập và thử lại.";
+          emoji = "📚";
+        }
 
         container.innerHTML = `
                 <div class="quiz-card">
-                    <div class="quiz-question">Câu ${currentQuizIndex + 1}/${
-          currentQuiz.length
-        }: Dịch câu này sang tiếng Việt</div>
-                    <div class="german-text" style="color: #333; margin-bottom: 15px;">${
-                      question.german
-                    }</div>
-                    <input type="text" class="quiz-input" id="quiz-answer" placeholder="Nhập câu trả lời...">
-                    <button class="check-btn" onclick="checkAnswer()">Kiểm tra</button>
-                    <button class="check-btn" onclick="skipQuestion()" style="background: linear-gradient(45deg, #ff6b6b, #f5576c);">Bỏ qua</button>
-                    <div id="quiz-result"></div>
+                    <div style="font-size: 4em; margin-bottom: 20px;">${emoji}</div>
+                    <div style="font-size: 2em; margin-bottom: 20px;">Kết quả</div>
+                    <div style="font-size: 3em; margin-bottom: 20px; font-weight: bold;">${score}/${currentQuiz.length}</div>
+                    <div style="font-size: 2em; margin-bottom: 20px;">${percentage}%</div>
+                    <div style="font-size: 1.3em; margin-bottom: 30px;">${message}</div>
+                    <button class="btn" onclick="initQuiz('${quizType}')">Làm lại</button>
+                    <button class="btn" onclick="showSection('review')">Quay về ôn tập</button>
                 </div>
             `;
-
-        // Update progress
-        const progress = (currentQuizIndex / currentQuiz.length) * 100;
-        document.getElementById("progress-fill").style.width = progress + "%";
       }
 
-      function checkAnswer() {
-        const userAnswer = document.getElementById("quiz-answer").value.trim();
-        const correctAnswer = currentQuiz[currentQuizIndex].vietnamese;
-        const resultDiv = document.getElementById("quiz-result");
-
-        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-          quizScore++;
-          resultDiv.innerHTML = `<div class="result correct">✅ Đúng rồi!</div>`;
-        } else {
-          resultDiv.innerHTML = `<div class="result incorrect">❌ Sai rồi! Đáp án đúng: <strong>${correctAnswer}</strong></div>`;
-        }
-
-        setTimeout(() => {
-          currentQuizIndex++;
-          showQuizQuestion();
-        }, 2000);
-      }
-
-      function skipQuestion() {
-        const correctAnswer = currentQuiz[currentQuizIndex].vietnamese;
-        const resultDiv = document.getElementById("quiz-result");
-
-        resultDiv.innerHTML = `<div class="result incorrect">⏭️ Đã bỏ qua! Đáp án đúng: <strong>${correctAnswer}</strong></div>`;
-
-        setTimeout(() => {
-          currentQuizIndex++;
-          showQuizQuestion();
-        }, 2000);
-      }
-
-      function showQuizResults() {
-        const container = document.getElementById("quiz-content");
-        const percentage = Math.round((quizScore / currentQuiz.length) * 100);
-
-        let message = "";
-        if (percentage >= 80) {
-          message = "Xuất sắc! 🎉";
-        } else if (percentage >= 60) {
-          message = "Tốt lắm! 👍";
-        } else {
-          message = "Cần luyện tập thêm! 💪";
-        }
-
-        container.innerHTML = `
-                <div class="quiz-card" style="text-align: center;">
-                    <h3 style="color: #333; margin-bottom: 20px;">🎯 Kết quả Quiz</h3>
-                    <div style="font-size: 3em; margin: 20px 0;">${percentage}%</div>
-                    <div style="font-size: 1.5em; margin-bottom: 20px; color: #667eea;">${message}</div>
-                    <div style="font-size: 1.2em; margin-bottom: 30px;">Đúng ${quizScore}/${currentQuiz.length} câu</div>
-                    <button class="check-btn" onclick="startQuiz()">Làm lại</button>
-                </div>
-            `;
-
-        // Complete progress bar
-        document.getElementById("progress-fill").style.width = "100%";
-      }
-
-      // Initialize
-      showAllSentences();
+      // Initialize app when page loads
+      window.onload = init;
     </script>
   </body>
 </html>
