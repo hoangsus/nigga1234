@@ -255,36 +255,192 @@
         border-radius: 10px;
       }
 
-      @media (max-width: 768px) {
-        .nav-tab {
-          font-size: 12px;
-          padding: 12px 5px;
-        }
+      .tip-card {
+        background: linear-gradient(135deg, #f8f9ff, #e3f2fd);
+        border-radius: 20px;
+        padding: 25px;
+        margin: 20px 0;
+        border-left: 6px solid #2196f3;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
 
-        .header h1 {
-          font-size: 2em;
-        }
+      .tip-card h3 {
+        color: #1976d2;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-        .content {
-          padding: 20px;
-        }
+      .formula {
+        background: #fff3e0;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 4px solid #ff9800;
+      }
 
-        .quiz-card {
-          padding: 25px;
-        }
+      .formula strong {
+        color: #f57c00;
+        font-size: 1.1em;
+      }
+
+      .formula ul {
+        margin: 10px 0 0 20px;
+      }
+
+      .formula li {
+        margin: 8px 0;
+        line-height: 1.6;
+      }
+
+      .tip {
+        background: #e8f5e8;
+        border-radius: 15px;
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid #4caf50;
+        font-weight: 500;
+      }
+
+      .modal-table table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .modal-table th {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 15px;
+        font-weight: 600;
+      }
+
+      .modal-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .modal-table tr:hover {
+        background: #f5f5f5;
+      }
+
+      .separable-examples {
+        background: #fff8e1;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 4px solid #ffb300;
+      }
+
+      .separable-examples ul {
+        margin: 10px 0 0 20px;
+      }
+
+      .separable-examples li {
+        margin: 8px 0;
+        font-family: "Courier New", monospace;
+      }
+
+      .w-words {
+        background: #f3e5f5;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 4px solid #9c27b0;
+      }
+
+      .w-words ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 15px 0;
+        list-style: none;
+        padding: 0;
+      }
+
+      .w-words li {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .sentence-tip {
+        font-size: 0.95em;
+        color: #4a90e2;
+        background: #f0f8ff;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-top: 12px;
+        border-left: 3px solid #4a90e2;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .memory-tricks {
+        background: linear-gradient(135deg, #fff9c4, #f8bbd9);
+        border-left-color: #e91e63;
+      }
+
+      .memory-section {
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        backdrop-filter: blur(10px);
+      }
+
+      .memory-section h4 {
+        color: #c2185b;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+      }
+
+      .memory-section ul {
+        margin: 10px 0 0 20px;
+      }
+
+      .memory-section li {
+        margin: 8px 0;
+        line-height: 1.6;
+      }
+      .nav-tab {
+        font-size: 12px;
+        padding: 12px 5px;
+      }
+
+      .header h1 {
+        font-size: 2em;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .quiz-card {
+        padding: 25px;
       }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>🇩🇪 Ngữ pháp tiếng Đức</h1>
-        <p>Ôn luyện và thực hành các cấu trúc câu quan trọng</p>
+        <h1>🇩🇪 Tiếng Đức A1 - Đúng 5 từ</h1>
+        <p>Mỗi câu chính xác 5 từ - Phù hợp yêu cầu giáo viên</p>
       </div>
 
       <div class="nav-tabs">
         <button class="nav-tab active" onclick="showSection('review')">
           📖 Ôn tập
+        </button>
+        <button class="nav-tab" onclick="showSection('tips')">
+          💡 Mẹo & Công thức
         </button>
         <button class="nav-tab" onclick="showSection('quiz-imperative')">
           ⚡ Quiz Cầu khiến
@@ -304,6 +460,181 @@
       </div>
 
       <div class="content">
+        <!-- Tips Section -->
+        <div id="tips" class="section">
+          <div class="category-title">💡 Mẹo và Công thức Ngữ pháp</div>
+
+          <div class="tip-card">
+            <h3>⚡ Câu cầu khiến (Imperativ)</h3>
+            <div class="formula">
+              <strong>Công thức:</strong>
+              <ul>
+                <li>
+                  <strong>Du-Form:</strong> Động từ gốc (không "st") + ! <br />
+                  <em>VD: gehen → Geh!</em>
+                </li>
+                <li>
+                  <strong>Sie-Form:</strong> Động từ + Sie + ! <br />
+                  <em>VD: Sprechen Sie!</em>
+                </li>
+                <li>
+                  <strong>Ihr-Form:</strong> Động từ + t + ! <br />
+                  <em>VD: Macht!</em>
+                </li>
+              </ul>
+            </div>
+            <div class="tip">
+              <strong>🎯 Mẹo nhớ:</strong> Cầu khiến = Yêu cầu ai đó làm gì.
+              Thêm "bitte" để lịch sự hơn!
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <h3>🎯 Động từ khuyết thiếu (Modalverben)</h3>
+            <div class="formula">
+              <strong>Công thức:</strong> Chủ ngữ + Động từ khuyết thiếu + ... +
+              Động từ chính (nguyên mẫu) <br />
+              <em
+                >VD: Ich <strong>kann</strong> Deutsch
+                <strong>sprechen</strong>.</em
+              >
+            </div>
+            <div class="modal-table">
+              <table>
+                <tr>
+                  <th>Động từ</th>
+                  <th>Ý nghĩa</th>
+                  <th>Ví dụ</th>
+                </tr>
+                <tr>
+                  <td><strong>können</strong></td>
+                  <td>có thể</td>
+                  <td>Ich kann schwimmen</td>
+                </tr>
+                <tr>
+                  <td><strong>müssen</strong></td>
+                  <td>phải</td>
+                  <td>Du musst lernen</td>
+                </tr>
+                <tr>
+                  <td><strong>dürfen</strong></td>
+                  <td>được phép</td>
+                  <td>Darf ich gehen?</td>
+                </tr>
+                <tr>
+                  <td><strong>wollen</strong></td>
+                  <td>muốn</td>
+                  <td>Er will essen</td>
+                </tr>
+                <tr>
+                  <td><strong>sollen</strong></td>
+                  <td>nên</td>
+                  <td>Soll ich helfen?</td>
+                </tr>
+                <tr>
+                  <td><strong>mögen</strong></td>
+                  <td>thích</td>
+                  <td>Ich mag Pizza</td>
+                </tr>
+              </table>
+            </div>
+            <div class="tip">
+              <strong>🎯 Mẹo nhớ:</strong> Động từ khuyết thiếu luôn đi với động
+              từ nguyên mẫu ở cuối câu!
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <h3>🔄 Động từ tách (Trennbare Verben)</h3>
+            <div class="formula">
+              <strong>Công thức:</strong> Chủ ngữ + Động từ chính + ... + Tiền
+              tố <br />
+              <em
+                >VD: aufstehen → Ich <strong>stehe</strong> um 7 Uhr
+                <strong>auf</strong>.</em
+              >
+            </div>
+            <div class="separable-examples">
+              <strong>Các động từ tách phổ biến:</strong>
+              <ul>
+                <li><strong>aufstehen</strong> = dậy → stehe...auf</li>
+                <li><strong>anrufen</strong> = gọi điện → rufe...an</li>
+                <li><strong>einkaufen</strong> = mua sắm → kaufe...ein</li>
+                <li><strong>zumachen</strong> = đóng → mache...zu</li>
+                <li><strong>anziehen</strong> = mặc → ziehe...an</li>
+              </ul>
+            </div>
+            <div class="tip">
+              <strong>🎯 Mẹo nhớ:</strong> Tiền tố "nhảy" về cuối câu! Như một
+              cái kẹp bánh mì 🥪
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <h3>❓ Câu hỏi (Fragesätze)</h3>
+            <div class="formula">
+              <strong>Câu hỏi Yes/No:</strong> Động từ + Chủ ngữ + ... ? <br />
+              <em>VD: <strong>Sprichst</strong> du Deutsch?</em>
+              <br /><br />
+              <strong>Câu hỏi với từ để hỏi:</strong> W-Wort + Động từ + Chủ ngữ
+              + ... ? <br />
+              <em>VD: <strong>Wo</strong> wohnst du?</em>
+            </div>
+            <div class="w-words">
+              <strong>Từ để hỏi (W-Wörter):</strong>
+              <ul>
+                <li><strong>Wer?</strong> = Ai?</li>
+                <li><strong>Was?</strong> = Gì?</li>
+                <li><strong>Wo?</strong> = Ở đâu?</li>
+                <li><strong>Woher?</strong> = Từ đâu?</li>
+                <li><strong>Wohin?</strong> = Đến đâu?</li>
+                <li><strong>Wann?</strong> = Khi nào?</li>
+                <li><strong>Warum?</strong> = Tại sao?</li>
+                <li><strong>Wie?</strong> = Như thế nào?</li>
+              </ul>
+            </div>
+            <div class="tip">
+              <strong>🎯 Mẹo nhớ:</strong> Động từ luôn ở vị trí thứ 2 trong câu
+              tiếng Đức!
+            </div>
+          </div>
+
+          <div class="tip-card memory-tricks">
+            <h3>🧠 Mẹo ghi nhớ cho người mới học</h3>
+            <div class="memory-section">
+              <h4>🎵 Thứ tự từ trong câu (SVT - Subject Verb Time)</h4>
+              <p>
+                <strong>Nhớ:</strong> "Siêu Việt Thời gian" = Chủ ngữ + Động từ
+                + Thời gian/Địa điểm
+              </p>
+              <em>Ich gehe heute nach Hause.</em>
+            </div>
+
+            <div class="memory-section">
+              <h4>🎭 Cách nhớ động từ khuyết thiếu</h4>
+              <p><strong>KDMWSM:</strong> "Không Dám Muốn Với Sếp Mình"</p>
+              <ul>
+                <li><strong>K</strong>önnen = Không thể → Có thể</li>
+                <li><strong>D</strong>ürfen = Dám → Được phép</li>
+                <li><strong>M</strong>üssen = Muốn → Phải</li>
+                <li><strong>W</strong>ollen = Với = Muốn</li>
+                <li><strong>S</strong>ollen = Sếp = Nên (theo lời khuyên)</li>
+                <li><strong>M</strong>ögen = Mình = Thích</li>
+              </ul>
+            </div>
+
+            <div class="memory-section">
+              <h4>📝 Luyện tập hàng ngày</h4>
+              <ul>
+                <li>Mỗi ngày học 2-3 câu mới</li>
+                <li>Nói to câu tiếng Đức 5 lần</li>
+                <li>Viết lại câu từ tiếng Việt sang tiếng Đức</li>
+                <li>Tạo câu mới với cùng cấu trúc</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <!-- Review Section -->
         <div id="review" class="section active">
           <div class="category-title">Câu cầu khiến (Imperativ)</div>
@@ -365,136 +696,166 @@
     </div>
 
     <script>
-      // Data structure
+      // Data structure - Exactly 5 words per sentence with useful tips
       const data = {
         imperative: [
           {
-            german: "Geh bitte sofort nach Hause!",
-            vietnamese: "Hãy đi về nhà ngay lập tức nhé!",
+            german: "Komm bitte zu mir her!",
+            vietnamese: "Hãy đến chỗ tôi đây!",
+            tip: "🎯 Du-Form: kommen → komm. 'zu mir her' = đến chỗ tôi. 'bitte' làm câu lịch sự hơn",
           },
           {
-            german: "Sprechen Sie bitte etwas lauter!",
-            vietnamese: "Làm ơn nói to hơn một chút!",
+            german: "Geh jetzt nach Hause bitte!",
+            vietnamese: "Bây giờ hãy về nhà!",
+            tip: "🎯 gehen → geh. 'nach Hause' (về nhà) là cụm cố định, luôn dùng 'nach'",
           },
           {
-            german: "Macht jetzt eure Hausaufgaben fertig!",
-            vietnamese: "Hãy hoàn thành bài tập về nhà của các em ngay!",
+            german: "Iss das Brot mit Butter!",
+            vietnamese: "Ăn bánh mì với bơ!",
+            tip: "🎯 essen → iss (bất quy tắc). 'mit + Dativ' = với cái gì. das Brot (Akkusativ)",
           },
           {
-            german: "Komm bitte schnell herüber!",
-            vietnamese: "Hãy đến đây nhanh lên!",
+            german: "Trink bitte dein kaltes Wasser!",
+            vietnamese: "Hãy uống nước lạnh của bạn!",
+            tip: "🎯 Tính từ 'kaltes' đứng trước danh từ. 'dein' = của bạn (sở hữu cách)",
           },
           {
-            german: "Sei ruhig, wenn du nach Hause kommst!",
-            vietnamese: "Hãy im lặng khi con về đến nhà!",
+            german: "Sei heute nicht so traurig!",
+            vietnamese: "Hôm nay đừng buồn quá!",
+            tip: "🎯 sein → sei (đặc biệt). 'so + tính từ' = quá như thế nào. 'nicht' phủ định",
           },
         ],
         modal: [
           {
-            german: "Darf ich hier rauchen oder nicht?",
-            vietnamese: "Tôi có được hút thuốc ở đây không?",
+            german: "Ich kann sehr gut schwimmen.",
+            vietnamese: "Tôi có thể bơi rất giỏi.",
+            tip: "🎯 können = khả năng. 'sehr gut' = rất giỏi. Động từ chính 'schwimmen' ở cuối câu",
           },
           {
-            german: "Könntest du bitte etwas trinken?",
-            vietnamese: "Bạn có thể uống một chút không?",
+            german: "Du musst heute Deutsch lernen.",
+            vietnamese: "Hôm nay bạn phải học tiếng Đức.",
+            tip: "🎯 müssen = bắt buộc phải. Thời gian 'heute' đứng sau modal verb",
           },
           {
-            german: "Soll ich das Fenster jetzt öffnen?",
-            vietnamese: "Tôi có nên mở cửa sổ bây giờ không?",
+            german: "Wir wollen zusammen Fußball spielen.",
+            vietnamese: "Chúng ta muốn chơi bóng đá cùng nhau.",
+            tip: "🎯 wollen = ý muốn cá nhân. 'zusammen' = cùng nhau (trạng từ)",
           },
           {
-            german: "Willst du heute nach Berlin fahren?",
-            vietnamese: "Bạn có muốn đi Berlin hôm nay không?",
+            german: "Sie dürfen hier nicht rauchen.",
+            vietnamese: "Họ không được phép hút thuốc ở đây.",
+            tip: "🎯 dürfen + nicht = cấm. 'hier' = ở đây (chỉ địa điểm)",
           },
           {
-            german: "Können Sie mir bitte helfen?",
-            vietnamese: "Ngài có thể giúp tôi không?",
+            german: "Ich soll morgen früh arbeiten.",
+            vietnamese: "Tôi nên làm việc sớm mai.",
+            tip: "🎯 sollen = lời khuyên từ người khác. 'früh' = sớm (trạng từ thời gian)",
           },
           {
-            german: "Dürfen die Kinder draußen mitspielen?",
-            vietnamese: "Bọn trẻ có được chơi cùng bên ngoài không?",
+            german: "Du kannst gut Gitarre spielen.",
+            vietnamese: "Bạn có thể chơi guitar tốt.",
+            tip: "🎯 können + gut = có thể làm tốt. 'Gitarre spielen' = chơi guitar",
           },
           {
-            german: "Müssen Sie morgen früh aufstehen?",
-            vietnamese: "Ngài có phải dậy sớm vào ngày mai không?",
+            german: "Wir müssen pünktlich zur Schule.",
+            vietnamese: "Chúng ta phải đến trường đúng giờ.",
+            tip: "🎯 müssen + zu = phải đến đâu. 'pünktlich' = đúng giờ (trạng từ)",
           },
           {
-            german: "Wollen Sie Pizza oder Pasta essen?",
-            vietnamese: "Ngài muốn ăn pizza hay mì Ý?",
+            german: "Ihr wollt Pizza zum Mittag?",
+            vietnamese: "Các bạn muốn pizza bữa trưa?",
+            tip: "🎯 wollen trong câu hỏi. 'zum Mittag' = bữa trưa (zu + dem = zum)",
           },
           {
-            german: "Ich muss jeden Abend Deutsch lernen.",
-            vietnamese: "Tôi phải học tiếng Đức mỗi tối.",
+            german: "Ich darf heute länger schlafen.",
+            vietnamese: "Hôm nay tôi được ngủ lâu hơn.",
+            tip: "🎯 dürfen = được phép. 'länger' = lâu hơn (so sánh hơn)",
           },
           {
-            german: "Wir dürfen im Klassenzimmer nicht essen.",
-            vietnamese: "Chúng tôi không được phép ăn trong lớp học.",
+            german: "Sie soll mehr Wasser trinken.",
+            vietnamese: "Cô ấy nên uống nhiều nước hơn.",
+            tip: "🎯 sollen = lời khuyên y tế. 'mehr' = nhiều hơn (so sánh)",
           },
         ],
         separable: [
           {
-            german: "Ich stehe jeden Tag um sieben Uhr auf.",
-            vietnamese: "Tôi dậy vào lúc bảy giờ mỗi ngày.",
+            german: "Ich stehe jeden Tag auf.",
+            vietnamese: "Tôi thức dậy mỗi ngày.",
+            tip: "🎯 aufstehen tách: stehe...auf. 'jeden Tag' = mỗi ngày (Akkusativ thời gian)",
           },
           {
-            german: "Er macht die Tür langsam zu.",
-            vietnamese: "Anh ấy đóng cửa lại một cách từ tốn.",
+            german: "Er ruft seine Mutter an.",
+            vietnamese: "Anh ấy gọi điện cho mẹ.",
+            tip: "🎯 anrufen tách: ruft...an. 'seine Mutter' = mẹ của anh ấy (Akkusativ)",
           },
           {
-            german: "Ich ziehe jeden Morgen meine Jacke an.",
-            vietnamese: "Tôi mặc áo khoác mỗi sáng.",
+            german: "Wir kaufen heute Abend ein.",
+            vietnamese: "Chúng ta mua sắm tối nay.",
+            tip: "🎯 einkaufen tách: kaufen...ein. 'heute Abend' = tối nay (thời gian cụ thể)",
           },
           {
-            german: "Du rufst deine Mutter jeden Abend an.",
-            vietnamese: "Bạn gọi cho mẹ bạn mỗi buổi tối.",
+            german: "Du machst das Fenster zu.",
+            vietnamese: "Bạn đóng cửa sổ lại.",
+            tip: "🎯 zumachen tách: machst...zu. 'das Fenster' = cửa sổ (tân ngữ trực tiếp)",
           },
           {
-            german: "Wir kaufen morgen im Supermarkt ein.",
-            vietnamese: "Chúng tôi sẽ đi mua sắm ở siêu thị vào ngày mai.",
+            german: "Sie zieht warme Kleidung an.",
+            vietnamese: "Cô ấy mặc quần áo ấm.",
+            tip: "🎯 anziehen tách: zieht...an. 'warme Kleidung' = quần áo ấm (tính từ + danh từ)",
           },
         ],
         yesNoQuestions: [
           {
-            german: "Sprichst du gut Deutsch inzwischen?",
-            vietnamese: "Bạn đã nói tiếng Đức tốt rồi phải không?",
+            german: "Bist du heute sehr müde?",
+            vietnamese: "Hôm nay bạn có rất mệt không?",
+            tip: "🎯 Câu hỏi Yes/No: động từ lên đầu. 'sehr' nhấn mạnh mức độ mệt",
           },
           {
-            german: "Kommst du heute wirklich nach Hause?",
-            vietnamese: "Bạn hôm nay thật sự sẽ về nhà chứ?",
+            german: "Hast du großen Hunger heute?",
+            vietnamese: "Hôm nay bạn có rất đói không?",
+            tip: "🎯 'großen Hunger haben' = rất đói. Tính từ 'großen' chia theo Akkusativ",
           },
           {
-            german: "Ist das neue Auto von dir?",
-            vietnamese: "Đó có phải là chiếc xe mới của bạn không?",
+            german: "Ist das neue Auto teuer?",
+            vietnamese: "Chiếc xe mới đó có đắt không?",
+            tip: "🎯 'das neue Auto' = chiếc xe mới. Tính từ 'neue' chia theo giống trung tính",
           },
           {
-            german: "Hast du morgen um acht Zeit?",
-            vietnamese: "Bạn có thời gian lúc tám giờ sáng mai không?",
+            german: "Kommst du heute zu mir?",
+            vietnamese: "Hôm nay bạn có đến chỗ tôi không?",
+            tip: "🎯 'zu mir' = đến chỗ tôi. Giới từ 'zu' + Dativ (mir)",
           },
           {
-            german: "Willst du mit uns ins Kino?",
-            vietnamese: "Bạn có muốn đi xem phim với chúng tôi không?",
+            german: "Sprichst du gut Deutsche Sprache?",
+            vietnamese: "Bạn có nói tiếng Đức tốt không?",
+            tip: "🎯 'Deutsche Sprache' = tiếng Đức. 'gut' = tốt (trạng từ cách thức)",
           },
         ],
         wQuestions: [
           {
-            german: "Woher kommst du in Deutschland genau?",
-            vietnamese: "Bạn đến từ đâu ở Đức chính xác?",
+            german: "Wie heißt du denn bitte?",
+            vietnamese: "Bạn tên gì vậy?",
+            tip: "🎯 'Wie heißt du?' = tên gì. 'denn' làm câu hỏi thân thiện hơn, 'bitte' lịch sự",
           },
           {
-            german: "Wer ist der neue Lehrer unserer Klasse?",
-            vietnamese: "Ai là giáo viên mới của lớp chúng ta?",
+            german: "Wo wohnst du in Deutschland?",
+            vietnamese: "Bạn sống ở đâu ở Đức?",
+            tip: "🎯 Wo = ở đâu (địa điểm tĩnh). 'in Deutschland' = ở Đức (Dativ)",
           },
           {
-            german: "Wann beginnt heute der Unterricht?",
-            vietnamese: "Hôm nay tiết học bắt đầu khi nào?",
+            german: "Was ist das für ein?",
+            vietnamese: "Cái đó là gì vậy?",
+            tip: "🎯 'Was für ein?' = gì đó? Dùng khi muốn biết loại/kiểu của vật gì",
           },
           {
-            german: "Warum gehst du nicht zur Schule?",
-            vietnamese: "Tại sao bạn không đi học?",
+            german: "Wann kommst du nach Hause?",
+            vietnamese: "Khi nào bạn về nhà?",
+            tip: "🎯 Wann = khi nào (thời gian). 'nach Hause' = về nhà (cố định)",
           },
           {
-            german: "Was machst du an diesem Wochenende?",
-            vietnamese: "Bạn sẽ làm gì vào cuối tuần này?",
+            german: "Wer ist deine beste Freundin?",
+            vietnamese: "Ai là bạn thân nhất của bạn?",
+            tip: "🎯 Wer = ai (hỏi về người). 'beste' = tốt nhất (tính từ so sánh)",
           },
         ],
       };
@@ -527,6 +888,7 @@
                 <div class="sentence-card" onclick="speakGerman('${sentence.german}')">
                     <div class="german-text">${sentence.german}</div>
                     <div class="vietnamese-text">${sentence.vietnamese}</div>
+                    <div class="sentence-tip">${sentence.tip}</div>
                 </div>
             `
           )
