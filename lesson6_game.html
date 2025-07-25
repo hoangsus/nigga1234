@@ -3,1361 +3,835 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện tập tiếng Đức - Giao tiếp cơ bản</title>
+    <title>Luyện tập Nghe-Viết Tiếng Đức</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
-      }
-
-      .header {
-        text-align: center;
-        margin-bottom: 30px;
-        color: white;
-      }
-
-      .mode-selector {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 30px;
-      }
-
-      .mode-btn {
-        padding: 12px 25px;
-        border: none;
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-weight: bold;
-      }
-
-      .mode-btn.active {
-        background: white;
-        color: #667eea;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
       }
 
       .container {
+        max-width: 800px;
+        margin: 0 auto;
         background: white;
         border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        margin-bottom: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
       }
 
-      /* Flashcard Mode */
-      .flashcard-container {
-        display: none;
+      .header {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: white;
+        padding: 30px;
         text-align: center;
       }
 
-      .flashcard {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        border-radius: 15px;
-        padding: 30px;
-        margin: 20px 0;
-        color: white;
-        cursor: pointer;
-        transition: transform 0.3s;
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .flashcard:hover {
-        transform: translateY(-5px);
-      }
-
-      .question-section {
-        margin-bottom: 20px;
-      }
-
-      .german-text {
-        font-size: 28px;
-        font-weight: bold;
+      .header h1 {
+        font-size: 2.5em;
         margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
 
-      .vietnamese-meaning {
-        font-size: 16px;
+      .header p {
+        font-size: 1.2em;
         opacity: 0.9;
-        font-style: italic;
       }
 
-      .answer-section {
-        display: none;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 2px solid rgba(255, 255, 255, 0.3);
+      .content {
+        padding: 30px;
       }
 
-      .answer-section.show {
-        display: block;
-      }
-
-      .audio-btn {
-        background: rgba(255, 255, 255, 0.2);
-        border: none;
+      .practice-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
-        padding: 8px 12px;
         border-radius: 20px;
-        cursor: pointer;
-        margin: 0 5px;
-        transition: background 0.3s;
+        padding: 40px;
+        margin: 20px 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        text-align: center;
       }
 
-      .audio-btn:hover {
-        background: rgba(255, 255, 255, 0.3);
+      .sentence-counter {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .vietnamese-sentence {
+        font-size: 2em;
+        margin: 30px 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        line-height: 1.4;
       }
 
       .controls {
         display: flex;
         justify-content: center;
         gap: 15px;
-        margin-top: 20px;
+        margin: 30px 0;
+        flex-wrap: wrap;
       }
 
       .btn {
-        padding: 12px 25px;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        transition: all 0.3s;
-      }
-
-      .btn-primary {
-        background: #4caf50;
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
         color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        min-width: 120px;
       }
 
-      .btn-primary:hover {
-        background: #45a049;
+      .btn:hover {
         transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
       }
 
       .btn-secondary {
-        background: #2196f3;
-        color: white;
+        background: linear-gradient(135deg, #28a745, #20c997);
       }
 
-      .btn-secondary:hover {
-        background: #1976d2;
-        transform: translateY(-2px);
+      .btn-info {
+        background: linear-gradient(135deg, #17a2b8, #007bff);
       }
 
-      .progress {
-        margin-top: 20px;
-        text-align: center;
-        font-size: 18px;
-        color: #666;
-      }
-
-      /* Writing Practice Mode */
-      .writing-container {
-        display: none;
-      }
-
-      .writing-exercise {
-        background: #f8f9fa;
-        padding: 20px;
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.3);
         border-radius: 10px;
+        overflow: hidden;
         margin: 20px 0;
+        height: 20px;
       }
 
-      .exercise-question {
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
+      .progress-fill {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        height: 100%;
+        transition: width 0.5s ease;
+        border-radius: 10px;
+      }
+
+      .instructions {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .instructions h3 {
         margin-bottom: 15px;
+        font-size: 1.5em;
       }
 
-      .writing-input {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-        font-size: 16px;
+      .instructions ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .instructions li {
         margin: 10px 0;
-        transition: border-color 0.3s;
+        padding-left: 25px;
+        position: relative;
       }
 
-      .writing-input:focus {
-        outline: none;
-        border-color: #667eea;
-      }
-
-      .feedback {
-        margin-top: 10px;
-        padding: 15px;
-        border-radius: 10px;
+      .instructions li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #28a745;
         font-weight: bold;
+        font-size: 1.2em;
       }
 
-      .feedback.correct {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-      }
-
-      .feedback.incorrect {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-      }
-
-      .correct-answer {
-        margin-top: 10px;
-        padding: 10px;
-        background: #e7f3ff;
-        border-radius: 5px;
-        font-style: italic;
-      }
-
-      /* Reference Table Mode */
-      .reference-container {
+      .answer-section {
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
         display: none;
       }
 
-      .topic-section {
-        margin-bottom: 30px;
+      .answer-section.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
       }
 
-      .topic-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 15px;
-        border-radius: 10px;
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 20px;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      .qa-pair {
-        background: #f8f9fa;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        border-left: 4px solid #667eea;
-      }
-
-      .qa-pair h4 {
-        color: #333;
-        margin-bottom: 15px;
-        font-size: 18px;
-      }
-
-      .qa-item {
+      .german-answer {
+        font-size: 1.5em;
+        color: #007bff;
+        font-weight: 600;
         margin-bottom: 10px;
       }
 
-      .qa-label {
-        font-weight: bold;
-        color: #667eea;
-        margin-bottom: 5px;
-      }
-
-      .qa-text {
-        font-size: 16px;
-        margin-bottom: 5px;
-      }
-
-      .qa-meaning {
-        font-size: 14px;
-        color: #666;
+      .grammar-tip {
+        font-size: 1em;
+        color: #6c757d;
         font-style: italic;
+        line-height: 1.4;
       }
 
-      .personal-info {
-        background: #e8f5e8;
-        padding: 15px;
-        border-radius: 10px;
-        margin-top: 20px;
+      .completion-screen {
+        text-align: center;
+        display: none;
       }
 
-      .personal-info h3 {
-        color: #2e7d32;
-        margin-bottom: 15px;
+      .completion-screen.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
       }
 
-      .info-item {
+      .completion-emoji {
+        font-size: 5em;
+        margin: 20px 0;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .stat-item {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .stat-number {
+        font-size: 2em;
+        font-weight: 900;
         margin-bottom: 8px;
-        font-size: 16px;
       }
 
-      .info-german {
-        font-weight: bold;
-        color: #1976d2;
+      .stat-label {
+        font-size: 1em;
+        opacity: 0.9;
       }
 
-      .info-meaning {
-        color: #666;
-        font-style: italic;
-        margin-left: 10px;
+      .timer {
+        font-size: 1.2em;
+        margin: 10px 0;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .vietnamese-sentence {
+          font-size: 1.5em;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 80%;
+          max-width: 300px;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="header">
-      <h1>🇩🇪 Luyện tập tiếng Đức</h1>
-      <h2>Giao tiếp cơ bản với giọng nói</h2>
-    </div>
+    <div class="container">
+      <div class="header">
+        <h1>🎧 Luyện tập Nghe-Viết Tiếng Đức</h1>
+        <p>30 câu luyện tập - Nghe tiếng Việt, viết tiếng Đức</p>
+      </div>
 
-    <div class="mode-selector">
-      <button class="mode-btn active" onclick="showMode('flashcard')">
-        📚 Flashcard
-      </button>
-      <button class="mode-btn" onclick="showMode('writing')">
-        ✍️ Luyện viết
-      </button>
-      <button class="mode-btn" onclick="showMode('reference')">
-        📖 Bảng tham khảo
-      </button>
-    </div>
+      <div class="content">
+        <div class="practice-card" id="practice-section">
+          <div class="instructions">
+            <h3>📝 Hướng dẫn luyện tập</h3>
+            <ul>
+              <li>Nhấn "Phát âm" để nghe câu tiếng Việt</li>
+              <li>Viết câu tiếng Đức tương ứng vào vở (5 từ)</li>
+              <li>Nhấn "Xem đáp án" để kiểm tra</li>
+              <li>Có thể nghe lại nhiều lần nếu cần</li>
+              <li>Dùng Chrome/Edge để có giọng tiếng Việt tốt nhất</li>
+            </ul>
+          </div>
 
-    <!-- Flashcard Mode -->
-    <div id="flashcard-mode" class="flashcard-container">
-      <div class="container">
-        <div
-          class="flashcard-mode-selector"
-          style="text-align: center; margin-bottom: 20px"
-        >
-          <button
-            class="mode-btn active"
-            id="flashcard-answer-btn"
-            onclick="setFlashcardMode('answer')"
-          >
-            📝 Luyện trả lời
-          </button>
-          <button
-            class="mode-btn"
-            id="flashcard-question-btn"
-            onclick="setFlashcardMode('question')"
-          >
-            ❓ Luyện câu hỏi
-          </button>
-        </div>
+          <div class="sentence-counter" id="counter">Câu 1 / 30</div>
 
-        <div class="flashcard" onclick="toggleAnswer()">
-          <div class="question-section">
-            <div class="german-text" id="question-text"></div>
-            <div class="vietnamese-meaning" id="question-meaning"></div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 3.33%"></div>
+          </div>
+
+          <div class="timer" id="timer">⏱️ Thời gian: 00:00</div>
+
+          <div class="vietnamese-sentence" id="vietnamese-text">
+            Nhấn "Bắt đầu" để bắt đầu luyện tập
+          </div>
+
+          <div class="controls">
+            <button class="btn" id="start-btn" onclick="startPractice()">
+              🚀 Bắt đầu
+            </button>
             <button
-              class="audio-btn"
-              onclick="speak('question')"
-              title="Nghe câu hỏi"
+              class="btn btn-secondary"
+              id="speak-btn"
+              onclick="speakVietnamese()"
+              style="display: none"
             >
-              🔊
+              🔊 Phát âm
+            </button>
+            <button
+              class="btn btn-info"
+              id="answer-btn"
+              onclick="showAnswer()"
+              style="display: none"
+            >
+              👀 Xem đáp án
+            </button>
+            <button
+              class="btn"
+              id="next-btn"
+              onclick="nextSentence()"
+              style="display: none"
+            >
+              ➡️ Câu tiếp theo
             </button>
           </div>
+
           <div class="answer-section" id="answer-section">
-            <div class="german-text" id="answer-text"></div>
-            <div class="vietnamese-meaning" id="answer-meaning"></div>
-            <button
-              class="audio-btn"
-              onclick="speak('answer')"
-              title="Nghe câu trả lời"
-            >
-              🔊
+            <div class="german-answer" id="german-answer"></div>
+            <div class="grammar-tip" id="grammar-tip"></div>
+          </div>
+        </div>
+
+        <div class="practice-card completion-screen" id="completion-screen">
+          <div class="completion-emoji">🎉</div>
+          <h2>Hoàn thành xuất sắc!</h2>
+          <p style="font-size: 1.3em; margin: 20px 0">
+            Bạn đã luyện tập hết 30 câu tiếng Đức!
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number">30</div>
+              <div class="stat-label">Câu đã luyện</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-time">--:--</div>
+              <div class="stat-label">Thời gian</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Hoàn thành</div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="resetPractice()">🔄 Luyện lại</button>
+            <button class="btn btn-secondary" onclick="shuffleAndRestart()">
+              🎲 Trộn câu & Luyện lại
             </button>
-          </div>
-        </div>
-
-        <div class="controls">
-          <button class="btn btn-primary" onclick="showAnswer()">
-            Hiện đáp án
-          </button>
-          <button class="btn btn-secondary" onclick="nextCard()">
-            Câu tiếp theo
-          </button>
-          <button class="btn btn-secondary" onclick="shuffle()">
-            Trộn bài
-          </button>
-        </div>
-
-        <div class="progress">
-          <span id="current-card">1</span> / <span id="total-cards">0</span>
-          <span
-            id="flashcard-mode-indicator"
-            style="margin-left: 20px; font-style: italic; color: #666"
-            >Chế độ: Luyện trả lời</span
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- Writing Practice Mode -->
-    <div id="writing-mode" class="writing-container">
-      <div class="container">
-        <div
-          class="writing-mode-selector"
-          style="text-align: center; margin-bottom: 20px"
-        >
-          <button
-            class="mode-btn active"
-            id="answer-mode-btn"
-            onclick="setWritingMode('answer')"
-          >
-            📝 Luyện viết trả lời
-          </button>
-          <button
-            class="mode-btn"
-            id="question-mode-btn"
-            onclick="setWritingMode('question')"
-          >
-            ❓ Luyện viết câu hỏi
-          </button>
-        </div>
-
-        <div class="writing-exercise">
-          <div class="exercise-question" id="writing-question"></div>
-          <div class="vietnamese-meaning" id="writing-meaning"></div>
-          <input
-            type="text"
-            class="writing-input"
-            id="writing-input"
-            placeholder="Nhập câu trả lời tiếng Đức..."
-            onkeypress="handleEnter(event)"
-          />
-          <button class="btn btn-primary" onclick="checkAnswer()">
-            Kiểm tra
-          </button>
-          <button class="audio-btn" onclick="speakWritingPrompt()" title="Nghe">
-            🔊 Nghe
-          </button>
-          <div class="feedback" id="feedback" style="display: none"></div>
-          <div
-            class="correct-answer"
-            id="correct-answer"
-            style="display: none"
-          ></div>
-        </div>
-
-        <div class="controls">
-          <button class="btn btn-secondary" onclick="nextWritingExercise()">
-            Câu tiếp theo
-          </button>
-          <button class="btn btn-secondary" onclick="shuffleWriting()">
-            Trộn bài
-          </button>
-        </div>
-
-        <div class="progress">
-          Câu <span id="writing-current">1</span> /
-          <span id="writing-total">0</span>
-          <span
-            id="writing-mode-indicator"
-            style="margin-left: 20px; font-style: italic; color: #666"
-            >Chế độ: Luyện trả lời</span
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- Reference Mode -->
-    <div id="reference-mode" class="reference-container">
-      <div class="container">
-        <div class="personal-info">
-          <h3>🎯 Thông tin cá nhân của Alex (Ví dụ):</h3>
-          <div class="info-item">
-            <span class="info-german">Ich heiße Alex lê</span>
-            <span class="info-meaning">- Tôi tên là Alex Lê</span>
-          </div>
-          <div class="info-item">
-            <span class="info-german">Ich bin dreiundzwanzig Jahre alt</span>
-            <span class="info-meaning">- Tôi 23 tuổi</span>
-          </div>
-          <div class="info-item">
-            <span class="info-german">Ich komme aus Vietnam</span>
-            <span class="info-meaning">- Tôi đến từ Việt Nam</span>
-          </div>
-          <div class="info-item">
-            <span class="info-german">Ich wohne in Hà Nội</span>
-            <span class="info-meaning">- Tôi sống ở Hà Nội</span>
-          </div>
-          <div class="info-item">
-            <span class="info-german"
-              >Ich spreche Vietnamesisch und ein bisschen Deutsch</span
-            >
-            <span class="info-meaning"
-              >- Tôi nói tiếng Việt và một chút tiếng Đức</span
-            >
-          </div>
-          <div class="info-item">
-            <span class="info-german">Ich bin nur noch ein Auszubildender</span>
-            <span class="info-meaning">- Tôi chỉ là học viên thực tập</span>
-          </div>
-          <div class="info-item">
-            <span class="info-german"
-              >Meine Hobbys sind Filme schauen und Computer spielen</span
-            >
-            <span class="info-meaning"
-              >- Sở thích của tôi là xem phim và chơi máy tính</span
-            >
-          </div>
-        </div>
-
-        <div class="topic-section">
-          <div class="topic-header">
-            Dạng "Sie" (Lịch sự - với người lớn tuổi, không quen)
-          </div>
-
-          <div class="qa-pair">
-            <h4>👤 Hỏi tên</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Wie heißen Sie?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Wie heißen Sie?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn tên gì? (lịch sự)</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich heiße Alex Lê.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich heiße Alex Lê')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi tên là Alex Lê.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🎂 Hỏi tuổi</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Wie alt sind Sie?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Wie alt sind Sie?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn bao nhiêu tuổi?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich bin dreiundzwanzig Jahre alt.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich bin dreiundzwanzig Jahre alt')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi 23 tuổi.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🌍 Hỏi quê quán</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Woher kommen Sie?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Woher kommen Sie?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn đến từ đâu?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich komme aus Vietnam.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich komme aus Vietnam')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi đến từ Việt Nam.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🏠 Hỏi nơi ở</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Wo wohnen Sie?
-                <button class="audio-btn" onclick="speakText('Wo wohnen Sie?')">
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn sống ở đâu?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich wohne in Hà Nội.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich wohne in Hà Nội')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi sống ở Hà Nội.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🗣️ Hỏi ngôn ngữ</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Welche Sprachen sprechen Sie?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Welche Sprachen sprechen Sie?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn nói được những ngôn ngữ nào?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich spreche Vietnamesisch und ein bisschen Deutsch.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich spreche Vietnamesisch und ein bisschen Deutsch')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">
-                Tôi nói tiếng Việt và một chút tiếng Đức.
-              </div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>💼 Hỏi nghề nghiệp</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Was sind Sie von Beruf?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Was sind Sie von Beruf?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn làm nghề gì?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich bin nur noch ein Auszubildender.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich bin nur noch ein Auszubildender')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi chỉ là học viên thực tập.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🎮 Hỏi sở thích</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Was sind Ihre Hobbys?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Was sind Ihre Hobbys?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Sở thích của bạn là gì?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Meine Hobbys sind Filme schauen und Computer spielen.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Meine Hobbys sind Filme schauen und Computer spielen')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">
-                Sở thích của tôi là xem phim và chơi máy tính.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="topic-section">
-          <div class="topic-header">
-            Dạng "du" (Thân mật - với bạn bè, người cùng tuổi)
-          </div>
-
-          <div class="qa-pair">
-            <h4>👤 Hỏi tên</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Wie heißt du?
-                <button class="audio-btn" onclick="speakText('Wie heißt du?')">
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn tên gì? (thân mật)</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich heiße Alex Lê.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich heiße Alex Lê')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi tên là Alex Lê.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🎂 Hỏi tuổi</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Wie alt bist du?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Wie alt bist du?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn bao nhiêu tuổi?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich bin dreiundzwanzig Jahre alt.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich bin dreiundzwanzig Jahre alt')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi 23 tuổi.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🌍 Hỏi quê quán</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Woher kommst du?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Woher kommst du?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn đến từ đâu?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich komme aus Vietnam.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich komme aus Vietnam')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi đến từ Việt Nam.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🏠 Hỏi nơi ở</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Wo wohnst du?
-                <button class="audio-btn" onclick="speakText('Wo wohnst du?')">
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn sống ở đâu?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich wohne in Hà Nội.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich wohne in Hà Nội')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi sống ở Hà Nội.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🗣️ Hỏi ngôn ngữ</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Welche Sprachen sprichst du?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Welche Sprachen sprichst du?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn nói được những ngôn ngữ nào?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich spreche Vietnamesisch und ein bisschen Deutsch.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich spreche Vietnamesisch und ein bisschen Deutsch')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">
-                Tôi nói tiếng Việt và một chút tiếng Đức.
-              </div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>💼 Hỏi nghề nghiệp</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Was bist du von Beruf?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Was bist du von Beruf?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Bạn làm nghề gì?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Ich bin nur noch ein Auszubildender.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Ich bin nur noch ein Auszubildender')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Tôi chỉ là học viên thực tập.</div>
-            </div>
-          </div>
-
-          <div class="qa-pair">
-            <h4>🎮 Hỏi sở thích</h4>
-            <div class="qa-item">
-              <div class="qa-label">Câu hỏi:</div>
-              <div class="qa-text">
-                Was sind deine Hobbys?
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Was sind deine Hobbys?')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">Sở thích của bạn là gì?</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-label">Trả lời:</div>
-              <div class="qa-text">
-                Meine Hobbys sind Filme schauen und Computer spielen.
-                <button
-                  class="audio-btn"
-                  onclick="speakText('Meine Hobbys sind Filme schauen und Computer spielen')"
-                >
-                  🔊
-                </button>
-              </div>
-              <div class="qa-meaning">
-                Sở thích của tôi là xem phim và chơi máy tính.
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      // Data với đầy đủ câu hỏi và trả lời
-      let qaData = [
+      // 30 câu luyện tập với đa dạng ngữ pháp
+      const practiceData = [
         {
-          question: "Wie heißen Sie?",
-          questionMeaning: "Bạn tên gì? (lịch sự)",
-          answer: "Ich heiße Alex Lê.",
-          answerMeaning: "Tôi tên là Alex Lê.",
-          category: "Sie",
+          vietnamese: "Hãy đến chỗ tôi đây!",
+          german: "Komm bitte zu mir her!",
+          tip: "🎯 Câu cầu khiến Du-Form: kommen → komm. 'zu mir her' = đến chỗ tôi",
         },
         {
-          question: "Wie heißt du?",
-          questionMeaning: "Bạn tên gì? (thân mật)",
-          answer: "Ich heiße Alex Lê.",
-          answerMeaning: "Tôi tên là Alex Lê.",
-          category: "du",
+          vietnamese: "Tôi có thể bơi rất giỏi.",
+          german: "Ich kann sehr gut schwimmen.",
+          tip: "🎯 Động từ khuyết thiếu: können = có thể. Động từ chính 'schwimmen' ở cuối",
         },
         {
-          question: "Wie alt sind Sie?",
-          questionMeaning: "Bạn bao nhiêu tuổi? (lịch sự)",
-          answer: "Ich bin dreiundzwanzig Jahre alt.",
-          answerMeaning: "Tôi 23 tuổi.",
-          category: "Sie",
+          vietnamese: "Tôi thức dậy mỗi ngày.",
+          german: "Ich stehe jeden Tag auf.",
+          tip: "🎯 Động từ tách: aufstehen → stehe...auf. 'jeden Tag' = mỗi ngày",
         },
         {
-          question: "Wie alt bist du?",
-          questionMeaning: "Bạn bao nhiêu tuổi? (thân mật)",
-          answer: "Ich bin dreiundzwanzig Jahre alt.",
-          answerMeaning: "Tôi 23 tuổi.",
-          category: "du",
+          vietnamese: "Hôm nay bạn có rất mệt không?",
+          german: "Bist du heute sehr müde?",
+          tip: "🎯 Câu hỏi Yes/No: động từ lên đầu. 'sehr' nhấn mạnh mức độ",
         },
         {
-          question: "Woher kommen Sie?",
-          questionMeaning: "Bạn đến từ đâu? (lịch sự)",
-          answer: "Ich komme aus Vietnam.",
-          answerMeaning: "Tôi đến từ Việt Nam.",
-          category: "Sie",
+          vietnamese: "Bạn tên gì vậy?",
+          german: "Wie heißt du denn bitte?",
+          tip: "🎯 Câu hỏi W: Wie = như thế nào. 'denn' làm câu thân thiện hơn",
         },
         {
-          question: "Woher kommst du?",
-          questionMeaning: "Bạn đến từ đâu? (thân mật)",
-          answer: "Ich komme aus Vietnam.",
-          answerMeaning: "Tôi đến từ Việt Nam.",
-          category: "du",
+          vietnamese: "Bây giờ hãy về nhà!",
+          german: "Geh jetzt nach Hause bitte!",
+          tip: "🎯 Cầu khiến: gehen → geh. 'nach Hause' = về nhà (cố định)",
         },
         {
-          question: "Wo wohnen Sie?",
-          questionMeaning: "Bạn sống ở đâu? (lịch sự)",
-          answer: "Ich wohne in Hà Nội.",
-          answerMeaning: "Tôi sống ở Hà Nội.",
-          category: "Sie",
+          vietnamese: "Hôm nay bạn phải học tiếng Đức.",
+          german: "Du musst heute Deutsch lernen.",
+          tip: "🎯 müssen = bắt buộc phải. Thời gian 'heute' sau modal verb",
         },
         {
-          question: "Wo wohnst du?",
-          questionMeaning: "Bạn sống ở đâu? (thân mật)",
-          answer: "Ich wohne in Hà Nội.",
-          answerMeaning: "Tôi sống ở Hà Nội.",
-          category: "du",
+          vietnamese: "Anh ấy gọi điện cho mẹ.",
+          german: "Er ruft seine Mutter an.",
+          tip: "🎯 anrufen tách: ruft...an. 'seine Mutter' = mẹ của anh ấy",
         },
         {
-          question: "Welche Sprachen sprechen Sie?",
-          questionMeaning: "Bạn nói được những ngôn ngữ nào? (lịch sự)",
-          answer: "Ich spreche Vietnamesisch und ein bisschen Deutsch.",
-          answerMeaning: "Tôi nói tiếng Việt và một chút tiếng Đức.",
-          category: "Sie",
+          vietnamese: "Chiếc xe mới đó có đắt không?",
+          german: "Ist das neue Auto teuer?",
+          tip: "🎯 'das neue Auto' = chiếc xe mới. Tính từ chia theo giống trung tính",
         },
         {
-          question: "Welche Sprachen sprichst du?",
-          questionMeaning: "Bạn nói được những ngôn ngữ nào? (thân mật)",
-          answer: "Ich spreche Vietnamesisch und ein bisschen Deutsch.",
-          answerMeaning: "Tôi nói tiếng Việt và một chút tiếng Đức.",
-          category: "du",
+          vietnamese: "Bạn sống ở đâu ở Đức?",
+          german: "Wo wohnst du in Deutschland?",
+          tip: "🎯 Wo = ở đâu (địa điểm tĩnh). 'in Deutschland' = ở Đức",
         },
         {
-          question: "Was sind Sie von Beruf?",
-          questionMeaning: "Bạn làm nghề gì? (lịch sự)",
-          answer: "Ich bin nur noch ein Auszubildender.",
-          answerMeaning: "Tôi chỉ là học viên thực tập.",
-          category: "Sie",
+          vietnamese: "Ăn bánh mì với bơ!",
+          german: "Iss das Brot mit Butter!",
+          tip: "🎯 essen → iss (bất quy tắc). 'mit + Dativ' = với cái gì",
         },
         {
-          question: "Was bist du von Beruf?",
-          questionMeaning: "Bạn làm nghề gì? (thân mật)",
-          answer: "Ich bin nur noch ein Auszubildender.",
-          answerMeaning: "Tôi chỉ là học viên thực tập.",
-          category: "du",
+          vietnamese: "Chúng ta muốn chơi bóng đá cùng nhau.",
+          german: "Wir wollen zusammen Fußball spielen.",
+          tip: "🎯 wollen = ý muốn. 'zusammen' = cùng nhau (trạng từ)",
         },
         {
-          question: "Was sind Ihre Hobbys?",
-          questionMeaning: "Sở thích của bạn là gì? (lịch sự)",
-          answer: "Meine Hobbys sind Filme schauen und Computer spielen.",
-          answerMeaning: "Sở thích của tôi là xem phim và chơi máy tính.",
-          category: "Sie",
+          vietnamese: "Chúng ta mua sắm tối nay.",
+          german: "Wir kaufen heute Abend ein.",
+          tip: "🎯 einkaufen tách: kaufen...ein. 'heute Abend' = tối nay",
         },
         {
-          question: "Was sind deine Hobbys?",
-          questionMeaning: "Sở thích của bạn là gì? (thân mật)",
-          answer: "Meine Hobbys sind Filme schauen und Computer spielen.",
-          answerMeaning: "Sở thích của tôi là xem phim và chơi máy tính.",
-          category: "du",
+          vietnamese: "Hôm nay bạn có đến chỗ tôi không?",
+          german: "Kommst du heute zu mir?",
+          tip: "🎯 'zu mir' = đến chỗ tôi. Giới từ 'zu' + Dativ (mir)",
         },
         {
-          question: "Wie ist Ihre Telefonnummer?",
-          questionMeaning: "Số điện thoại của bạn là gì? (lịch sự)",
-          answer: "Meine Telefonnummer ist 0384299606.",
-          answerMeaning: "Số điện thoại của tôi là 0384299606.",
-          category: "Sie",
+          vietnamese: "Khi nào bạn về nhà?",
+          german: "Wann kommst du nach Hause?",
+          tip: "🎯 Wann = khi nào (thời gian). 'nach Hause' = về nhà",
         },
         {
-          question: "Wie ist deine Telefonnummer?",
-          questionMeaning: "Số điện thoại của bạn là gì? (thân mật)",
-          answer: "Meine Telefonnummer ist 0384299606.",
-          answerMeaning: "Số điện thoại của tôi là 0384299606.",
-          category: "du",
+          vietnamese: "Hãy uống nước lạnh của bạn!",
+          german: "Trink bitte dein kaltes Wasser!",
+          tip: "🎯 Tính từ 'kaltes' trước danh từ. 'dein' = của bạn",
         },
         {
-          question: "Wie ist Ihre Adresse?",
-          questionMeaning: "Địa chỉ của bạn là gì? (lịch sự)",
-          answer: "Meine Adresse ist Thụy Khuê Straße 186.",
-          answerMeaning: "Địa chỉ của tôi là đường Thụy Khuê số 186.",
-          category: "Sie",
+          vietnamese: "Họ không được phép hút thuốc ở đây.",
+          german: "Sie dürfen hier nicht rauchen.",
+          tip: "🎯 dürfen + nicht = cấm. 'hier' = ở đây",
         },
         {
-          question: "Wie ist deine Adresse?",
-          questionMeaning: "Địa chỉ của bạn là gì? (thân mật)",
-          answer: "Meine Adresse ist Thụy Khuê Straße 186.",
-          answerMeaning: "Địa chỉ của tôi là đường Thụy Khuê số 186.",
-          category: "du",
+          vietnamese: "Bạn đóng cửa sổ lại.",
+          german: "Du machst das Fenster zu.",
+          tip: "🎯 zumachen tách: machst...zu. 'das Fenster' = cửa sổ",
         },
         {
-          question: "Wann sind Sie geboren?",
-          questionMeaning: "Bạn sinh năm nào? (lịch sự)",
-          answer: "Ich bin am neunten Februar zweitausendzwei geboren.",
-          answerMeaning: "Tôi sinh ngày 9 tháng 2 năm 2002.",
-          category: "Sie",
+          vietnamese: "Bạn có nói tiếng Đức tốt không?",
+          german: "Sprichst du gut Deutsche Sprache?",
+          tip: "🎯 'Deutsche Sprache' = tiếng Đức. 'gut' = tốt (trạng từ)",
         },
         {
-          question: "Wann bist du geboren?",
-          questionMeaning: "Bạn sinh năm nào? (thân mật)",
-          answer: "Ich bin am neunten Februar zweitausendzwei geboren.",
-          answerMeaning: "Tôi sinh ngày 9 tháng 2 năm 2002.",
-          category: "du",
+          vietnamese: "Ai là bạn thân nhất của bạn?",
+          german: "Wer ist deine beste Freundin?",
+          tip: "🎯 Wer = ai (hỏi về người). 'beste' = tốt nhất",
+        },
+        {
+          vietnamese: "Hôm nay đừng buồn quá!",
+          german: "Sei heute nicht so traurig!",
+          tip: "🎯 sein → sei (đặc biệt). 'so + tính từ' = quá như thế nào",
+        },
+        {
+          vietnamese: "Tôi nên làm việc sớm mai.",
+          german: "Ich soll morgen früh arbeiten.",
+          tip: "🎯 sollen = lời khuyên từ người khác. 'früh' = sớm",
+        },
+        {
+          vietnamese: "Cô ấy mặc quần áo ấm.",
+          german: "Sie zieht warme Kleidung an.",
+          tip: "🎯 anziehen tách: zieht...an. 'warme Kleidung' = quần áo ấm",
+        },
+        {
+          vietnamese: "Hôm nay bạn có rất đói không?",
+          german: "Hast du großen Hunger heute?",
+          tip: "🎯 'großen Hunger haben' = rất đói. Tính từ chia Akkusativ",
+        },
+        {
+          vietnamese: "Cái đó là gì vậy?",
+          german: "Was ist das für ein?",
+          tip: "🎯 'Was für ein?' = gì đó? Hỏi về loại/kiểu của vật",
+        },
+        {
+          vietnamese: "Bạn có thể chơi guitar tốt.",
+          german: "Du kannst gut Gitarre spielen.",
+          tip: "🎯 können + gut = có thể làm tốt. 'Gitarre spielen'",
+        },
+        {
+          vietnamese: "Chúng ta phải đi học đúng giờ.",
+          german: "Wir müssen pünktlich zur Schule.",
+          tip: "🎯 müssen + zur Schule. Động từ 'gehen' bị lược bỏ",
+        },
+        {
+          vietnamese: "Hôm nay tôi được ngủ lâu hơn.",
+          german: "Ich darf heute länger schlafen.",
+          tip: "🎯 dürfen = được phép. 'länger' = lâu hơn (so sánh)",
+        },
+        {
+          vietnamese: "Cô ấy nên uống nhiều nước hơn.",
+          german: "Sie soll mehr Wasser trinken.",
+          tip: "🎯 sollen = lời khuyên y tế. 'mehr' = nhiều hơn",
+        },
+        {
+          vietnamese: "Hôm nay các bạn muốn ăn pizza?",
+          german: "Ihr wollt heute Pizza essen?",
+          tip: "🎯 wollen trong câu hỏi. Cần 'essen' để hoàn thiện ý nghĩa",
         },
       ];
 
-      // Variables
-      let currentFlashcardIndex = 0;
-      let currentWritingIndex = 0;
-      let isAnswerVisible = false;
-      let writingMode = "answer"; // 'answer' hoặc 'question'
-      let flashcardMode = "answer"; // 'answer' hoặc 'question'
+      // App state
+      let currentIndex = 0;
+      let isStarted = false;
+      let startTime = null;
+      let timerInterval = null;
+      let currentData = [...practiceData];
 
-      // Text-to-Speech function
-      function speakText(text) {
+      // Initialize voices when available
+      function initializeVoices() {
         if ("speechSynthesis" in window) {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "de-DE";
-          utterance.rate = 0.8;
-          window.speechSynthesis.speak(utterance);
-        } else {
-          alert("Trình duyệt không hỗ trợ text-to-speech");
-        }
-      }
+          // Load voices
+          speechSynthesis.getVoices();
 
-      // Mode switching
-      function showMode(mode) {
-        document
-          .querySelectorAll(".mode-btn")
-          .forEach((btn) => btn.classList.remove("active"));
-        event.target.classList.add("active");
+          // Check for Vietnamese voice
+          setTimeout(() => {
+            const voices = speechSynthesis.getVoices();
+            const vietnameseVoice = voices.find(
+              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+            );
 
-        document.getElementById("flashcard-mode").style.display = "none";
-        document.getElementById("writing-mode").style.display = "none";
-        document.getElementById("reference-mode").style.display = "none";
+            if (!vietnameseVoice) {
+              console.log(
+                "Không tìm thấy giọng tiếng Việt. Sử dụng giọng mặc định."
+              );
+              // Show notification
+              const notification = document.createElement("div");
+              notification.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: #ff9800;
+                            color: white;
+                            padding: 15px;
+                            border-radius: 10px;
+                            z-index: 1000;
+                            max-width: 300px;
+                            font-size: 14px;
+                            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        `;
+              notification.innerHTML = `
+                            <strong>💡 Mẹo:</strong><br>
+                            Để có giọng tiếng Việt tốt hơn, hãy cài đặt Voice Pack tiếng Việt trong Windows hoặc dùng Chrome/Edge!
+                        `;
+              document.body.appendChild(notification);
 
-        if (mode === "flashcard") {
-          document.getElementById("flashcard-mode").style.display = "block";
-          initializeFlashcard();
-        } else if (mode === "writing") {
-          document.getElementById("writing-mode").style.display = "block";
-          initializeWriting();
-        } else if (mode === "reference") {
-          document.getElementById("reference-mode").style.display = "block";
-        }
-      }
-
-      // Flashcard functions
-      function setFlashcardMode(mode) {
-        flashcardMode = mode;
-        document
-          .querySelectorAll("#flashcard-mode .mode-btn")
-          .forEach((btn) => btn.classList.remove("active"));
-
-        if (mode === "answer") {
-          document
-            .getElementById("flashcard-answer-btn")
-            .classList.add("active");
-          document.getElementById("flashcard-mode-indicator").textContent =
-            "Chế độ: Luyện trả lời";
-        } else {
-          document
-            .getElementById("flashcard-question-btn")
-            .classList.add("active");
-          document.getElementById("flashcard-mode-indicator").textContent =
-            "Chế độ: Luyện câu hỏi";
-        }
-
-        showFlashcard();
-      }
-
-      function initializeFlashcard() {
-        document.getElementById("total-cards").textContent = qaData.length;
-        showFlashcard();
-      }
-
-      function showFlashcard() {
-        const data = qaData[currentFlashcardIndex];
-        document.getElementById("current-card").textContent =
-          currentFlashcardIndex + 1;
-
-        if (flashcardMode === "answer") {
-          // Luyện trả lời: Hiển thị câu hỏi, ẩn câu trả lời
-          document.getElementById("question-text").textContent = data.question;
-          document.getElementById("question-meaning").textContent =
-            data.questionMeaning;
-          document.getElementById("answer-text").textContent = data.answer;
-          document.getElementById("answer-meaning").textContent =
-            data.answerMeaning;
-        } else {
-          // Luyện câu hỏi: Hiển thị câu trả lời, ẩn câu hỏi
-          document.getElementById("question-text").textContent = data.answer;
-          document.getElementById("question-meaning").textContent =
-            data.answerMeaning;
-          document.getElementById("answer-text").textContent = data.question;
-          document.getElementById("answer-meaning").textContent =
-            data.questionMeaning;
-        }
-
-        // Hide answer
-        document.getElementById("answer-section").classList.remove("show");
-        isAnswerVisible = false;
-      }
-
-      function showAnswer() {
-        document.getElementById("answer-section").classList.add("show");
-        isAnswerVisible = true;
-      }
-
-      function toggleAnswer() {
-        if (isAnswerVisible) {
-          document.getElementById("answer-section").classList.remove("show");
-          isAnswerVisible = false;
-        } else {
-          showAnswer();
-        }
-      }
-
-      function nextCard() {
-        currentFlashcardIndex = (currentFlashcardIndex + 1) % qaData.length;
-        showFlashcard();
-      }
-
-      function shuffle() {
-        for (let i = qaData.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [qaData[i], qaData[j]] = [qaData[j], qaData[i]];
-        }
-        currentFlashcardIndex = 0;
-        showFlashcard();
-      }
-
-      function speak(type) {
-        const data = qaData[currentFlashcardIndex];
-        if (flashcardMode === "answer") {
-          // Chế độ luyện trả lời
-          if (type === "question") {
-            speakText(data.question);
-          } else if (type === "answer") {
-            speakText(data.answer);
-          }
-        } else {
-          // Chế độ luyện câu hỏi
-          if (type === "question") {
-            speakText(data.answer);
-          } else if (type === "answer") {
-            speakText(data.question);
-          }
-        }
-      }
-
-      // Writing practice functions
-      function setWritingMode(mode) {
-        writingMode = mode;
-        document
-          .querySelectorAll("#writing-mode .mode-btn")
-          .forEach((btn) => btn.classList.remove("active"));
-
-        if (mode === "answer") {
-          document.getElementById("answer-mode-btn").classList.add("active");
-          document.getElementById("writing-mode-indicator").textContent =
-            "Chế độ: Luyện trả lời";
-        } else {
-          document.getElementById("question-mode-btn").classList.add("active");
-          document.getElementById("writing-mode-indicator").textContent =
-            "Chế độ: Luyện câu hỏi";
-        }
-
-        showWritingExercise();
-      }
-
-      function initializeWriting() {
-        document.getElementById("writing-total").textContent = qaData.length;
-        showWritingExercise();
-      }
-
-      function showWritingExercise() {
-        const data = qaData[currentWritingIndex];
-        document.getElementById("writing-input").value = "";
-        document.getElementById("writing-current").textContent =
-          currentWritingIndex + 1;
-
-        if (writingMode === "answer") {
-          // Luyện viết câu trả lời
-          document.getElementById("writing-question").textContent =
-            data.question;
-          document.getElementById("writing-meaning").textContent =
-            data.questionMeaning;
-          document.getElementById("writing-input").placeholder =
-            "Nhập câu trả lời tiếng Đức...";
-        } else {
-          // Luyện viết câu hỏi
-          document.getElementById("writing-question").textContent = data.answer;
-          document.getElementById("writing-meaning").textContent =
-            data.answerMeaning;
-          document.getElementById("writing-input").placeholder =
-            "Nhập câu hỏi tiếng Đức...";
-        }
-
-        // Hide feedback
-        document.getElementById("feedback").style.display = "none";
-        document.getElementById("correct-answer").style.display = "none";
-      }
-
-      function checkAnswer() {
-        const userAnswer = document
-          .getElementById("writing-input")
-          .value.trim();
-        const data = qaData[currentWritingIndex];
-        const correctAnswer =
-          writingMode === "answer" ? data.answer : data.question;
-        const correctMeaning =
-          writingMode === "answer" ? data.answerMeaning : data.questionMeaning;
-
-        const feedback = document.getElementById("feedback");
-        const correctAnswerDiv = document.getElementById("correct-answer");
-
-        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-          feedback.textContent = "✅ Chính xác! Tuyệt vời!";
-          feedback.className = "feedback correct";
-          correctAnswerDiv.style.display = "none";
-        } else {
-          feedback.textContent = "❌ Chưa đúng, hãy thử lại!";
-          feedback.className = "feedback incorrect";
-          correctAnswerDiv.innerHTML = `<strong>Đáp án đúng:</strong> ${correctAnswer}<br><em>${correctMeaning}</em>`;
-          correctAnswerDiv.style.display = "block";
-        }
-
-        feedback.style.display = "block";
-      }
-
-      function speakWritingPrompt() {
-        const data = qaData[currentWritingIndex];
-        if (writingMode === "answer") {
-          speakText(data.question);
-        } else {
-          speakText(data.answer);
-        }
-      }
-
-      function nextWritingExercise() {
-        currentWritingIndex = (currentWritingIndex + 1) % qaData.length;
-        showWritingExercise();
-      }
-
-      function shuffleWriting() {
-        for (let i = qaData.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [qaData[i], qaData[j]] = [qaData[j], qaData[i]];
-        }
-        currentWritingIndex = 0;
-        showWritingExercise();
-      }
-
-      function handleEnter(event) {
-        if (event.key === "Enter") {
-          checkAnswer();
+              setTimeout(() => {
+                notification.remove();
+              }, 5000);
+            }
+          }, 1000);
         }
       }
 
       // Initialize
-      document.getElementById("flashcard-mode").style.display = "block";
-      initializeFlashcard();
+      function init() {
+        updateDisplay();
+        initializeVoices();
+
+        // Ensure voices are loaded
+        if ("speechSynthesis" in window) {
+          speechSynthesis.onvoiceschanged = initializeVoices;
+        }
+      }
+
+      // Start practice
+      function startPractice() {
+        isStarted = true;
+        currentIndex = 0;
+        startTime = new Date();
+
+        // Show/hide buttons
+        document.getElementById("start-btn").style.display = "none";
+        document.getElementById("speak-btn").style.display = "inline-block";
+        document.getElementById("answer-btn").style.display = "inline-block";
+
+        // Start timer
+        startTimer();
+
+        // Load first sentence
+        loadSentence();
+      }
+
+      // Start timer
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          if (startTime) {
+            const elapsed = new Date() - startTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            document.getElementById(
+              "timer"
+            ).textContent = `⏱️ Thời gian: ${minutes
+              .toString()
+              .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+          }
+        }, 1000);
+      }
+
+      // Stop timer
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      // Load current sentence
+      function loadSentence() {
+        const current = currentData[currentIndex];
+        document.getElementById("vietnamese-text").textContent =
+          current.vietnamese;
+        document.getElementById("counter").textContent = `Câu ${
+          currentIndex + 1
+        } / 30`;
+
+        // Update progress
+        const progress = ((currentIndex + 1) / 30) * 100;
+        document.getElementById("progress").style.width = `${progress}%`;
+
+        // Hide answer section
+        document.getElementById("answer-section").classList.remove("show");
+        document.getElementById("next-btn").style.display = "none";
+
+        // Auto speak Vietnamese
+        setTimeout(() => speakVietnamese(), 500);
+      }
+
+      // Speak Vietnamese text
+      function speakVietnamese() {
+        if ("speechSynthesis" in window) {
+          const text = currentData[currentIndex].vietnamese;
+          speechSynthesis.cancel(); // Stop any ongoing speech
+
+          const utterance = new SpeechSynthesisUtterance(text);
+
+          // Try to find Vietnamese voice, fallback to default
+          const voices = speechSynthesis.getVoices();
+          const vietnameseVoice = voices.find(
+            (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+          );
+
+          if (vietnameseVoice) {
+            utterance.voice = vietnameseVoice;
+            utterance.lang = "vi-VN";
+          } else {
+            // Fallback - slower rate for better pronunciation
+            utterance.lang = "vi-VN";
+          }
+
+          utterance.rate = 0.7; // Slower for better listening
+          utterance.pitch = 1.0;
+          utterance.volume = 1.0;
+
+          speechSynthesis.speak(utterance);
+
+          // Add button feedback
+          const speakBtn = document.getElementById("speak-btn");
+          speakBtn.style.background =
+            "linear-gradient(135deg, #ffa726, #ff7043)";
+          speakBtn.textContent = "🔊 Đang phát...";
+
+          utterance.onend = function () {
+            speakBtn.style.background =
+              "linear-gradient(135deg, #28a745, #20c997)";
+            speakBtn.textContent = "🔊 Phát âm";
+          };
+        } else {
+          alert(
+            "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
+          );
+        }
+      }
+
+      // Show answer
+      function showAnswer() {
+        const current = currentData[currentIndex];
+        document.getElementById("german-answer").textContent = current.german;
+        document.getElementById("grammar-tip").textContent = current.tip;
+        document.getElementById("answer-section").classList.add("show");
+        document.getElementById("next-btn").style.display = "inline-block";
+
+        // Speak German answer
+        speakGerman(current.german);
+      }
+
+      // Speak German text
+      function speakGerman(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      // Next sentence
+      function nextSentence() {
+        currentIndex++;
+
+        if (currentIndex >= currentData.length) {
+          // Completed all sentences
+          completeSession();
+        } else {
+          loadSentence();
+        }
+      }
+
+      // Complete session
+      function completeSession() {
+        stopTimer();
+
+        // Calculate final time
+        const elapsed = new Date() - startTime;
+        const minutes = Math.floor(elapsed / 60000);
+        const seconds = Math.floor((elapsed % 60000) / 1000);
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+
+        document.getElementById("final-time").textContent = timeStr;
+
+        // Show completion screen
+        document.getElementById("practice-section").style.display = "none";
+        document.getElementById("completion-screen").classList.add("show");
+      }
+
+      // Reset practice
+      function resetPractice() {
+        currentIndex = 0;
+        isStarted = false;
+        startTime = null;
+        stopTimer();
+
+        // Reset UI
+        document.getElementById("practice-section").style.display = "block";
+        document.getElementById("completion-screen").classList.remove("show");
+        document.getElementById("start-btn").style.display = "inline-block";
+        document.getElementById("speak-btn").style.display = "none";
+        document.getElementById("answer-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "none";
+
+        // Reset display
+        document.getElementById("vietnamese-text").textContent =
+          'Nhấn "Bắt đầu" để bắt đầu luyện tập';
+        document.getElementById("counter").textContent = "Câu 1 / 30";
+        document.getElementById("progress").style.width = "3.33%";
+        document.getElementById("timer").textContent = "⏱️ Thời gian: 00:00";
+        document.getElementById("answer-section").classList.remove("show");
+      }
+
+      // Shuffle and restart
+      function shuffleAndRestart() {
+        // Shuffle the data
+        currentData = [...practiceData];
+        for (let i = currentData.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [currentData[i], currentData[j]] = [currentData[j], currentData[i]];
+        }
+
+        resetPractice();
+      }
+
+      // Update display
+      function updateDisplay() {
+        if (!isStarted) {
+          document.getElementById("vietnamese-text").textContent =
+            'Nhấn "Bắt đầu" để bắt đầu luyện tập';
+        }
+      }
 
       // Keyboard shortcuts
-      document.addEventListener("keydown", function (event) {
-        if (
-          document.getElementById("flashcard-mode").style.display === "block"
-        ) {
-          if (event.code === "Space") {
-            event.preventDefault();
-            toggleAnswer();
-          } else if (event.code === "ArrowRight" || event.code === "Enter") {
-            nextCard();
-          } else if (event.code === "KeyS") {
-            shuffle();
-          }
+      document.addEventListener("keydown", function (e) {
+        if (!isStarted) return;
+
+        switch (e.key) {
+          case " ": // Spacebar to speak
+            e.preventDefault();
+            speakVietnamese();
+            break;
+          case "Enter": // Enter to show answer
+            e.preventDefault();
+            if (
+              document
+                .getElementById("answer-section")
+                .classList.contains("show")
+            ) {
+              nextSentence();
+            } else {
+              showAnswer();
+            }
+            break;
+          case "ArrowRight": // Right arrow for next
+            if (document.getElementById("next-btn").style.display !== "none") {
+              nextSentence();
+            }
+            break;
         }
       });
+
+      // Initialize when page loads
+      window.onload = init;
     </script>
   </body>
 </html>
