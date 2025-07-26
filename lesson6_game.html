@@ -278,7 +278,9 @@
     <div class="container">
       <div class="header">
         <h1>🎧 Luyện tập Nghe-Viết Tiếng Đức</h1>
-        <p>30 câu luyện tập - Nghe tiếng Việt, viết tiếng Đức</p>
+        <p>
+          30 câu theo thứ tự ngữ pháp - Imperativ → Modal → Trennbar → Fragen
+        </p>
       </div>
 
       <div class="content">
@@ -375,32 +377,13 @@
     </div>
 
     <script>
-      // 30 câu luyện tập với đa dạng ngữ pháp
+      // 30 câu luyện tập theo thứ tự ngữ pháp từ dễ đến khó
       const practiceData = [
+        // NHÓM 1: CÂU CẦU KHIẾN (IMPERATIV) - 6 câu
         {
           vietnamese: "Hãy đến chỗ tôi đây!",
           german: "Komm bitte zu mir her!",
           tip: "🎯 Câu cầu khiến Du-Form: kommen → komm. 'zu mir her' = đến chỗ tôi",
-        },
-        {
-          vietnamese: "Tôi có thể bơi rất giỏi.",
-          german: "Ich kann sehr gut schwimmen.",
-          tip: "🎯 Động từ khuyết thiếu: können = có thể. Động từ chính 'schwimmen' ở cuối",
-        },
-        {
-          vietnamese: "Tôi thức dậy mỗi ngày.",
-          german: "Ich stehe jeden Tag auf.",
-          tip: "🎯 Động từ tách: aufstehen → stehe...auf. 'jeden Tag' = mỗi ngày",
-        },
-        {
-          vietnamese: "Hôm nay bạn có rất mệt không?",
-          german: "Bist du heute sehr müde?",
-          tip: "🎯 Câu hỏi Yes/No: động từ lên đầu. 'sehr' nhấn mạnh mức độ",
-        },
-        {
-          vietnamese: "Bạn tên gì vậy?",
-          german: "Wie heißt du denn bitte?",
-          tip: "🎯 Câu hỏi W: Wie = như thế nào. 'denn' làm câu thân thiện hơn",
         },
         {
           vietnamese: "Bây giờ hãy về nhà!",
@@ -408,49 +391,9 @@
           tip: "🎯 Cầu khiến: gehen → geh. 'nach Hause' = về nhà (cố định)",
         },
         {
-          vietnamese: "Hôm nay bạn phải học tiếng Đức.",
-          german: "Du musst heute Deutsch lernen.",
-          tip: "🎯 müssen = bắt buộc phải. Thời gian 'heute' sau modal verb",
-        },
-        {
-          vietnamese: "Anh ấy gọi điện cho mẹ.",
-          german: "Er ruft seine Mutter an.",
-          tip: "🎯 anrufen tách: ruft...an. 'seine Mutter' = mẹ của anh ấy",
-        },
-        {
-          vietnamese: "Chiếc xe mới đó có đắt không?",
-          german: "Ist das neue Auto teuer?",
-          tip: "🎯 'das neue Auto' = chiếc xe mới. Tính từ chia theo giống trung tính",
-        },
-        {
-          vietnamese: "Bạn sống ở đâu ở Đức?",
-          german: "Wo wohnst du in Deutschland?",
-          tip: "🎯 Wo = ở đâu (địa điểm tĩnh). 'in Deutschland' = ở Đức",
-        },
-        {
           vietnamese: "Ăn bánh mì với bơ!",
           german: "Iss das Brot mit Butter!",
           tip: "🎯 essen → iss (bất quy tắc). 'mit + Dativ' = với cái gì",
-        },
-        {
-          vietnamese: "Chúng ta muốn chơi bóng đá cùng nhau.",
-          german: "Wir wollen zusammen Fußball spielen.",
-          tip: "🎯 wollen = ý muốn. 'zusammen' = cùng nhau (trạng từ)",
-        },
-        {
-          vietnamese: "Chúng ta mua sắm tối nay.",
-          german: "Wir kaufen heute Abend ein.",
-          tip: "🎯 einkaufen tách: kaufen...ein. 'heute Abend' = tối nay",
-        },
-        {
-          vietnamese: "Hôm nay bạn có đến chỗ tôi không?",
-          german: "Kommst du heute zu mir?",
-          tip: "🎯 'zu mir' = đến chỗ tôi. Giới từ 'zu' + Dativ (mir)",
-        },
-        {
-          vietnamese: "Khi nào bạn về nhà?",
-          german: "Wann kommst du nach Hause?",
-          tip: "🎯 Wann = khi nào (thời gian). 'nach Hause' = về nhà",
         },
         {
           vietnamese: "Hãy uống nước lạnh của bạn!",
@@ -458,49 +401,36 @@
           tip: "🎯 Tính từ 'kaltes' trước danh từ. 'dein' = của bạn",
         },
         {
+          vietnamese: "Hôm nay đừng buồn quá!",
+          german: "Sei heute nicht so traurig!",
+          tip: "🎯 sein → sei (đặc biệt). 'so + tính từ' = quá như thế nào",
+        },
+
+        // NHÓM 2: ĐỘNG TỪ KHUYẾT THIẾU (MODALVERBEN) - 8 câu
+        {
+          vietnamese: "Tôi có thể bơi rất giỏi.",
+          german: "Ich kann sehr gut schwimmen.",
+          tip: "🎯 können = có thể. Động từ chính 'schwimmen' ở cuối câu",
+        },
+        {
+          vietnamese: "Hôm nay bạn phải học tiếng Đức.",
+          german: "Du musst heute Deutsch lernen.",
+          tip: "🎯 müssen = bắt buộc phải. Thời gian 'heute' sau modal verb",
+        },
+        {
+          vietnamese: "Chúng ta muốn chơi bóng đá cùng nhau.",
+          german: "Wir wollen zusammen Fußball spielen.",
+          tip: "🎯 wollen = ý muốn. 'zusammen' = cùng nhau (trạng từ)",
+        },
+        {
           vietnamese: "Họ không được phép hút thuốc ở đây.",
           german: "Sie dürfen hier nicht rauchen.",
           tip: "🎯 dürfen + nicht = cấm. 'hier' = ở đây",
         },
         {
-          vietnamese: "Bạn đóng cửa sổ lại.",
-          german: "Du machst das Fenster zu.",
-          tip: "🎯 zumachen tách: machst...zu. 'das Fenster' = cửa sổ",
-        },
-        {
-          vietnamese: "Bạn có nói tiếng Đức tốt không?",
-          german: "Sprichst du gut Deutsche Sprache?",
-          tip: "🎯 'Deutsche Sprache' = tiếng Đức. 'gut' = tốt (trạng từ)",
-        },
-        {
-          vietnamese: "Ai là bạn thân nhất của bạn?",
-          german: "Wer ist deine beste Freundin?",
-          tip: "🎯 Wer = ai (hỏi về người). 'beste' = tốt nhất",
-        },
-        {
-          vietnamese: "Hôm nay đừng buồn quá!",
-          german: "Sei heute nicht so traurig!",
-          tip: "🎯 sein → sei (đặc biệt). 'so + tính từ' = quá như thế nào",
-        },
-        {
           vietnamese: "Tôi nên làm việc sớm mai.",
           german: "Ich soll morgen früh arbeiten.",
           tip: "🎯 sollen = lời khuyên từ người khác. 'früh' = sớm",
-        },
-        {
-          vietnamese: "Cô ấy mặc quần áo ấm.",
-          german: "Sie zieht warme Kleidung an.",
-          tip: "🎯 anziehen tách: zieht...an. 'warme Kleidung' = quần áo ấm",
-        },
-        {
-          vietnamese: "Hôm nay bạn có rất đói không?",
-          german: "Hast du großen Hunger heute?",
-          tip: "🎯 'großen Hunger haben' = rất đói. Tính từ chia Akkusativ",
-        },
-        {
-          vietnamese: "Cái đó là gì vậy?",
-          german: "Was ist das für ein?",
-          tip: "🎯 'Was für ein?' = gì đó? Hỏi về loại/kiểu của vật",
         },
         {
           vietnamese: "Bạn có thể chơi guitar tốt.",
@@ -526,6 +456,87 @@
           vietnamese: "Hôm nay các bạn muốn ăn pizza?",
           german: "Ihr wollt heute Pizza essen?",
           tip: "🎯 wollen trong câu hỏi. Cần 'essen' để hoàn thiện ý nghĩa",
+        },
+
+        // NHÓM 3: ĐỘNG TỪ TÁCH (TRENNBARE VERBEN) - 6 câu
+        {
+          vietnamese: "Tôi thức dậy mỗi ngày.",
+          german: "Ich stehe jeden Tag auf.",
+          tip: "🎯 aufstehen tách: stehe...auf. 'jeden Tag' = mỗi ngày",
+        },
+        {
+          vietnamese: "Anh ấy gọi điện cho mẹ.",
+          german: "Er ruft seine Mutter an.",
+          tip: "🎯 anrufen tách: ruft...an. 'seine Mutter' = mẹ của anh ấy",
+        },
+        {
+          vietnamese: "Chúng ta mua sắm tối nay.",
+          german: "Wir kaufen heute Abend ein.",
+          tip: "🎯 einkaufen tách: kaufen...ein. 'heute Abend' = tối nay",
+        },
+        {
+          vietnamese: "Bạn đóng cửa sổ lại.",
+          german: "Du machst das Fenster zu.",
+          tip: "🎯 zumachen tách: machst...zu. 'das Fenster' = cửa sổ",
+        },
+        {
+          vietnamese: "Cô ấy mặc quần áo ấm.",
+          german: "Sie zieht warme Kleidung an.",
+          tip: "🎯 anziehen tách: zieht...an. 'warme Kleidung' = quần áo ấm",
+        },
+
+        // NHÓM 4: CÂU HỎI YES/NO (JA/NEIN-FRAGEN) - 5 câu
+        {
+          vietnamese: "Hôm nay bạn có rất mệt không?",
+          german: "Bist du heute sehr müde?",
+          tip: "🎯 Câu hỏi Yes/No: động từ lên đầu. 'sehr' nhấn mạnh mức độ",
+        },
+        {
+          vietnamese: "Chiếc xe mới đó có đắt không?",
+          german: "Ist das neue Auto teuer?",
+          tip: "🎯 'das neue Auto' = chiếc xe mới. Tính từ chia theo giống trung tính",
+        },
+        {
+          vietnamese: "Hôm nay bạn có đến chỗ tôi không?",
+          german: "Kommst du heute zu mir?",
+          tip: "🎯 'zu mir' = đến chỗ tôi. Giới từ 'zu' + Dativ (mir)",
+        },
+        {
+          vietnamese: "Bạn có nói tiếng Đức tốt không?",
+          german: "Sprichst du gut Deutsche Sprache?",
+          tip: "🎯 'Deutsche Sprache' = tiếng Đức. 'gut' = tốt (trạng từ)",
+        },
+        {
+          vietnamese: "Hôm nay bạn có rất đói không?",
+          german: "Hast du großen Hunger heute?",
+          tip: "🎯 'großen Hunger haben' = rất đói. Tính từ chia Akkusativ",
+        },
+
+        // NHÓM 5: CÂU HỎI W-FRAGEN - 5 câu
+        {
+          vietnamese: "Bạn tên gì vậy?",
+          german: "Wie heißt du denn bitte?",
+          tip: "🎯 Câu hỏi W: Wie = như thế nào. 'denn' làm câu thân thiện hơn",
+        },
+        {
+          vietnamese: "Bạn sống ở đâu ở Đức?",
+          german: "Wo wohnst du in Deutschland?",
+          tip: "🎯 Wo = ở đâu (địa điểm tĩnh). 'in Deutschland' = ở Đức",
+        },
+        {
+          vietnamese: "Khi nào bạn về nhà?",
+          german: "Wann kommst du nach Hause?",
+          tip: "🎯 Wann = khi nào (thời gian). 'nach Hause' = về nhà",
+        },
+        {
+          vietnamese: "Ai là bạn thân nhất của bạn?",
+          german: "Wer ist deine beste Freundin?",
+          tip: "🎯 Wer = ai (hỏi về người). 'beste' = tốt nhất",
+        },
+        {
+          vietnamese: "Cái đó là gì vậy?",
+          german: "Was ist das für ein?",
+          tip: "🎯 'Was für ein?' = gì đó? Hỏi về loại/kiểu của vật",
         },
       ];
 
