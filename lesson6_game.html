@@ -60,6 +60,17 @@
         font-size: 1.5em;
       }
 
+      @keyframes slideIn {
+        from {
+          transform: translateX(300px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
       .content {
         padding: 30px;
       }
@@ -822,9 +833,12 @@
         document.getElementById("incorrect-btn").style.display = "none";
         document.getElementById("next-btn").style.display = "inline-block";
 
-        // Check if target reached
-        if (correctCount >= 18) {
-          setTimeout(() => completeChallenge("success"), 1000);
+        // Show success message if reached 18 correct but continue until time ends
+        if (
+          correctCount >= 18 &&
+          !document.getElementById("success-notification")
+        ) {
+          showSuccessNotification();
         }
       }
 
@@ -851,7 +865,40 @@
         }
       }
 
-      // Next sentence
+      // Show success notification when reaching 18 correct answers
+      function showSuccessNotification() {
+        const notification = document.createElement("div");
+        notification.id = "success-notification";
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: linear-gradient(135deg, #28a745, #20c997);
+          color: white;
+          padding: 20px;
+          border-radius: 15px;
+          z-index: 1000;
+          max-width: 300px;
+          font-size: 16px;
+          box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+          animation: slideIn 0.5s ease;
+        `;
+        notification.innerHTML = `
+          <div style="font-size: 24px; margin-bottom: 10px;">🎉</div>
+          <strong>Xuất sắc!</strong><br>
+          Bạn đã đạt ${correctCount} câu đúng!<br>
+          <small>Tiếp tục luyện tập đến hết 5 phút nhé!</small>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Auto remove after 4 seconds
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 4000);
+      }
       function nextSentence() {
         currentIndex++;
         loadSentence();
@@ -863,6 +910,12 @@
         challengeCompleted = true;
 
         stopTimer();
+
+        // Remove success notification if exists
+        const notification = document.getElementById("success-notification");
+        if (notification) {
+          notification.remove();
+        }
 
         // Calculate final stats
         const timeUsed = timeLimit - timeRemaining;
@@ -883,32 +936,19 @@
         document.getElementById("final-accuracy").textContent = `${accuracy}%`;
         document.getElementById("final-time").textContent = timeStr;
 
-        // Determine result
+        // Determine result - always based on reaching 18+ correct answers
         let resultEmoji, resultTitle, resultMessage, resultClass;
 
-        if (reason === "success") {
+        if (correctCount >= 18) {
           resultEmoji = "🏆";
-          resultTitle = "Xuất sắc! Thành công!";
-          resultMessage = `Bạn đã đạt ${correctCount} câu đúng trong thời gian cho phép!`;
+          resultTitle = "Thành công rồi!";
+          resultMessage = `Bạn đã đạt ${correctCount} câu đúng và hoàn thành thử thách 5 phút!`;
           resultClass = "result-success";
-        } else if (reason === "time") {
-          if (correctCount >= 18) {
-            resultEmoji = "🎯";
-            resultTitle = "Hoàn thành đúng hạn!";
-            resultMessage = `Bạn đã đạt ${correctCount} câu đúng đúng trong 5 phút!`;
-            resultClass = "result-success";
-          } else {
-            resultEmoji = "⏰";
-            resultTitle = "Hết thời gian!";
-            resultMessage = `Bạn đạt ${correctCount}/18 câu đúng. Hãy thử lại!`;
-            resultClass = "result-failure";
-          }
         } else {
-          resultEmoji = "🎉";
-          resultTitle = "Hoàn thành!";
-          resultMessage = `Bạn đã hoàn thành ${totalAnswered} câu với ${correctCount} câu đúng!`;
-          resultClass =
-            correctCount >= 18 ? "result-success" : "result-failure";
+          resultEmoji = "⏰";
+          resultTitle = "Chưa đạt mục tiêu!";
+          resultMessage = `Bạn đạt ${correctCount}/18 câu đúng trong 5 phút. Hãy thử lại!`;
+          resultClass = "result-failure";
         }
 
         document.getElementById("result-emoji").textContent = resultEmoji;
