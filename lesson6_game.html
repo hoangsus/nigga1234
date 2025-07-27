@@ -60,17 +60,6 @@
         font-size: 1.5em;
       }
 
-      @keyframes slideIn {
-        from {
-          transform: translateX(300px);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-
       .content {
         padding: 30px;
       }
@@ -125,6 +114,17 @@
           opacity: 0.7;
         }
         100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(300px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
           opacity: 1;
         }
       }
@@ -478,102 +478,102 @@
     </div>
 
     <script>
-      // 30 câu luyện tập theo thứ tự ngữ pháp từ dễ đến khó
+      // 30 câu luyện tập theo dữ liệu JSON gốc
       const practiceData = [
         // NHÓM 1: ĐỘNG TỪ KHUYẾT THIẾU (MODALVERBEN) - 10 câu
         {
           vietnamese: "Tôi có thể bơi rất giỏi.",
           german: "Ich kann sehr gut schwimmen.",
-          tip: "🎯 können = có thể. Động từ chính 'schwimmen' ở cuối câu",
+          tip: "🎯 können = khả năng. 'sehr gut' = rất giỏi. Động từ chính 'schwimmen' ở cuối câu",
         },
         {
           vietnamese: "Hôm nay bạn phải học tiếng Đức.",
           german: "Du musst heute Deutsch lernen.",
-          tip: "🎯 müssen = bắt buộc phải. Thời gian 'heute' sau modal verb",
+          tip: "🎯 müssen = bắt buộc phải. Thời gian 'heute' đứng sau modal verb",
         },
         {
           vietnamese: "Chúng ta muốn chơi bóng đá cùng nhau.",
           german: "Wir wollen zusammen Fußball spielen.",
-          tip: "🎯 wollen = ý muốn. 'zusammen' = cùng nhau (trạng từ)",
+          tip: "🎯 wollen = ý muốn cá nhân. 'zusammen' = cùng nhau (trạng từ)",
         },
         {
           vietnamese: "Họ không được phép hút thuốc ở đây.",
           german: "Sie dürfen hier nicht rauchen.",
-          tip: "🎯 dürfen + nicht = cấm. 'hier' = ở đây",
+          tip: "🎯 dürfen + nicht = cấm. 'hier' = ở đây (chỉ địa điểm)",
         },
         {
           vietnamese: "Tôi nên làm việc sớm mai.",
           german: "Ich soll morgen früh arbeiten.",
-          tip: "🎯 sollen = lời khuyên từ người khác. 'früh' = sớm",
+          tip: "🎯 sollen = lời khuyên từ người khác. 'früh' = sớm (trạng từ thời gian)",
         },
         {
           vietnamese: "Bạn có thể chơi guitar tốt.",
           german: "Du kannst gut Gitarre spielen.",
-          tip: "🎯 können + gut = có thể làm tốt. 'Gitarre spielen'",
+          tip: "🎯 können + gut = có thể làm tốt. 'Gitarre spielen' = chơi guitar",
         },
         {
           vietnamese: "Chúng ta phải đi học đúng giờ.",
-          german: "Wir müssen pünktlich zur Schule.",
-          tip: "🎯 müssen + zur Schule. Động từ 'gehen' bị lược bỏ",
-        },
-        {
-          vietnamese: "Hôm nay tôi được ngủ lâu hơn.",
-          german: "Ich darf heute länger schlafen.",
-          tip: "🎯 dürfen = được phép. 'länger' = lâu hơn (so sánh)",
-        },
-        {
-          vietnamese: "Cô ấy nên uống nhiều nước hơn.",
-          german: "Sie soll mehr Wasser trinken.",
-          tip: "🎯 sollen = lời khuyên y tế. 'mehr' = nhiều hơn",
+          german: "Wir müssen pünktlich zur Schule gehen.",
+          tip: "🎯 müssen + zur Schule gehen = phải đi học đúng giờ. Động từ 'gehen' hoàn thiện ý nghĩa",
         },
         {
           vietnamese: "Hôm nay các bạn muốn ăn pizza?",
           german: "Ihr wollt heute Pizza essen?",
-          tip: "🎯 wollen trong câu hỏi. Cần 'essen' để hoàn thiện ý nghĩa",
+          tip: "🎯 wollen trong câu hỏi. Cần động từ 'essen' để hoàn thiện ý nghĩa",
+        },
+        {
+          vietnamese: "Hôm nay tôi được ngủ lâu hơn.",
+          german: "Ich darf heute länger schlafen.",
+          tip: "🎯 dürfen = được phép. 'länger' = lâu hơn (so sánh hơn)",
+        },
+        {
+          vietnamese: "Cô ấy nên uống nhiều nước hơn.",
+          german: "Sie soll mehr Wasser trinken.",
+          tip: "🎯 sollen = lời khuyên y tế. 'mehr' = nhiều hơn (so sánh)",
         },
 
-        // NHÓM 2: ĐỘNG TỪ TÁCH (TRENNBARE VERBEN) - 6 câu
+        // NHÓM 2: ĐỘNG TỪ TÁCH (TRENNBARE VERBEN) - 5 câu
         {
           vietnamese: "Tôi thức dậy mỗi ngày.",
           german: "Ich stehe jeden Tag auf.",
-          tip: "🎯 aufstehen tách: stehe...auf. 'jeden Tag' = mỗi ngày",
+          tip: "🎯 aufstehen tách: stehe...auf. 'jeden Tag' = mỗi ngày (Akkusativ thời gian)",
         },
         {
           vietnamese: "Anh ấy gọi điện cho mẹ.",
           german: "Er ruft seine Mutter an.",
-          tip: "🎯 anrufen tách: ruft...an. 'seine Mutter' = mẹ của anh ấy",
+          tip: "🎯 anrufen tách: ruft...an. 'seine Mutter' = mẹ của anh ấy (Akkusativ)",
         },
         {
           vietnamese: "Chúng ta mua sắm tối nay.",
           german: "Wir kaufen heute Abend ein.",
-          tip: "🎯 einkaufen tách: kaufen...ein. 'heute Abend' = tối nay",
+          tip: "🎯 einkaufen tách: kaufen...ein. 'heute Abend' = tối nay (thời gian cụ thể)",
         },
         {
           vietnamese: "Bạn đóng cửa sổ lại.",
           german: "Du machst das Fenster zu.",
-          tip: "🎯 zumachen tách: machst...zu. 'das Fenster' = cửa sổ",
+          tip: "🎯 zumachen tách: machst...zu. 'das Fenster' = cửa sổ (tân ngữ trực tiếp)",
         },
         {
           vietnamese: "Cô ấy mặc quần áo ấm.",
           german: "Sie zieht warme Kleidung an.",
-          tip: "🎯 anziehen tách: zieht...an. 'warme Kleidung' = quần áo ấm",
-        },
-        {
-          vietnamese: "Tôi chuẩn bị bài kiểm tra.",
-          german: "Ich bereite die Prüfung vor.",
-          tip: "🎯 vorbereiten tách: bereite...vor. 'die Prüfung' = bài kiểm tra",
+          tip: "🎯 anziehen tách: zieht...an. 'warme Kleidung' = quần áo ấm (tính từ + danh từ)",
         },
 
         // NHÓM 3: CÂU HỎI YES/NO (JA/NEIN-FRAGEN) - 5 câu
         {
           vietnamese: "Hôm nay bạn có rất mệt không?",
           german: "Bist du heute sehr müde?",
-          tip: "🎯 Câu hỏi Yes/No: động từ lên đầu. 'sehr' nhấn mạnh mức độ",
+          tip: "🎯 Câu hỏi Yes/No: động từ lên đầu. 'sehr' nhấn mạnh mức độ mệt",
+        },
+        {
+          vietnamese: "Hôm nay bạn có rất đói không?",
+          german: "Bist du heute sehr hungrig?",
+          tip: "🎯 'sehr hungrig' = rất đói, tự nhiên hơn. Động từ 'sein' (bist) phù hợp khi nói về trạng thái đói",
         },
         {
           vietnamese: "Chiếc xe mới đó có đắt không?",
           german: "Ist das neue Auto teuer?",
-          tip: "🎯 'das neue Auto' = chiếc xe mới. Tính từ chia theo giống trung tính",
+          tip: "🎯 'das neue Auto' = chiếc xe mới. Tính từ 'neue' chia theo giống trung tính",
         },
         {
           vietnamese: "Hôm nay bạn có đến chỗ tôi không?",
@@ -581,63 +581,64 @@
           tip: "🎯 'zu mir' = đến chỗ tôi. Giới từ 'zu' + Dativ (mir)",
         },
         {
-          vietnamese: "Bạn có nói tiếng Đức tốt không?",
-          german: "Sprichst du gut Deutsch?",
-          tip: "🎯 'Deutsch sprechen' = nói tiếng Đức. 'gut' = tốt (trạng từ)",
-        },
-        {
-          vietnamese: "Hôm nay bạn có rất đói không?",
-          german: "Hast du heute großen Hunger?",
-          tip: "🎯 'großen Hunger haben' = rất đói. Tính từ chia Akkusativ",
+          vietnamese:
+            "Hôm nay bạn có nói tiếng Đức rất tốt với giáo viên không?",
+          german: "Sprichst du heute sehr gut Deutsch mit deinem Lehrer?",
+          tip: "🎯 'Deutsch' = tiếng Đức, không cần 'Sprache'. 'heute' và 'mit deinem Lehrer' (Dativ) bổ sung ngữ cảnh, 'sehr gut' nhấn mạnh kỹ năng",
         },
 
         // NHÓM 4: CÂU HỎI W-FRAGEN - 5 câu
         {
           vietnamese: "Bạn tên gì vậy?",
-          german: "Wie heißt du denn?",
-          tip: "🎯 Câu hỏi W: Wie = như thế nào. 'denn' làm câu thân thiện hơn",
+          german: "Wie heißt du denn bitte?",
+          tip: "🎯 'Wie heißt du?' = tên gì. 'denn' làm câu hỏi thân thiện hơn, 'bitte' lịch sự",
         },
         {
           vietnamese: "Bạn sống ở đâu ở Đức?",
           german: "Wo wohnst du in Deutschland?",
-          tip: "🎯 Wo = ở đâu (địa điểm tĩnh). 'in Deutschland' = ở Đức",
+          tip: "🎯 Wo = ở đâu (địa điểm tĩnh). 'in Deutschland' = ở Đức (Dativ)",
+        },
+        {
+          vietnamese: "Chiếc xe đó là loại gì vậy?",
+          german: "Was ist das für ein Auto?",
+          tip: "🎯 'Was für ein' cần danh từ theo sau, ví dụ 'Auto' (chiếc xe). Câu hoàn chỉnh: 'Loại xe gì vậy?'",
         },
         {
           vietnamese: "Khi nào bạn về nhà?",
           german: "Wann kommst du nach Hause?",
-          tip: "🎯 Wann = khi nào (thời gian). 'nach Hause' = về nhà",
+          tip: "🎯 Wann = khi nào (thời gian). 'nach Hause' = về nhà (cố định)",
         },
         {
           vietnamese: "Ai là bạn thân nhất của bạn?",
-          german: "Wer ist dein bester Freund?",
-          tip: "🎯 Wer = ai (hỏi về người). 'bester' = tốt nhất",
-        },
-        {
-          vietnamese: "Cái đó là gì vậy?",
-          german: "Was ist das denn?",
-          tip: "🎯 'Was ist das?' = đó là gì? 'denn' thêm sắc thái ngạc nhiên",
+          german: "Wer ist deine beste Freundin?",
+          tip: "🎯 Wer = ai (hỏi về người). 'beste' = tốt nhất (tính từ so sánh)",
         },
 
-        // NHÓM 5: CÂU CẦU KHIẾN (IMPERATIV) - 4 câu
+        // NHÓM 5: CÂU CẦU KHIẾN (IMPERATIV) - 5 câu
         {
           vietnamese: "Hãy đi về nhà ngay lập tức nhé!",
           german: "Geh bitte sofort nach Hause!",
-          tip: "🎯 Câu cầu khiến Du-Form: gehen → geh. 'sofort' = ngay lập tức",
+          tip: "🎯 Du-Form: gehen → Geh. 'sofort' = ngay lập tức. 'bitte' làm câu lịch sự",
         },
         {
           vietnamese: "Làm ơn nói to hơn một chút!",
           german: "Sprechen Sie bitte etwas lauter!",
-          tip: "🎯 Cầu khiến Sie-Form: lịch sự. 'etwas lauter' = to hơn một chút",
+          tip: "🎯 Sie-Form lịch sự: Động từ + Sie. 'etwas lauter' = to hơn một chút",
         },
         {
-          vietnamese: "Hãy hoàn thành bài tập về nhà ngay!",
+          vietnamese: "Hãy hoàn thành bài tập về nhà của các em ngay!",
           german: "Macht jetzt eure Hausaufgaben fertig!",
-          tip: "🎯 Cầu khiến Ihr-Form: macht. 'eure Hausaufgaben' = bài tập của các em",
+          tip: "🎯 Ihr-Form: machen → macht. 'eure Hausaufgaben' = bài tập của các em",
         },
         {
           vietnamese: "Hãy đến đây nhanh lên!",
           german: "Komm bitte schnell herüber!",
-          tip: "🎯 Du-Form: kommen → komm. 'schnell herüber' = nhanh đến đây",
+          tip: "🎯 'herüber' = đến đây (từ xa). 'schnell' = nhanh chóng",
+        },
+        {
+          vietnamese: "Hãy im lặng khi con về đến nhà!",
+          german: "Sei ruhig, wenn du nach Hause kommst!",
+          tip: "🎯 sein → sei (đặc biệt). 'ruhig' = im lặng. 'wenn' = khi",
         },
       ];
 
@@ -842,29 +843,6 @@
         }
       }
 
-      // Show answer
-      function showAnswer() {
-        const current = currentData[currentIndex];
-        document.getElementById("german-answer").textContent = current.german;
-        document.getElementById("grammar-tip").textContent = current.tip;
-        document.getElementById("answer-section").classList.add("show");
-
-        // Speak German answer
-        speakGerman(current.german);
-      }
-
-      // Speak German text
-      function speakGerman(text) {
-        if ("speechSynthesis" in window) {
-          speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "de-DE";
-          utterance.rate = 0.7;
-          utterance.volume = 1.0;
-          speechSynthesis.speak(utterance);
-        }
-      }
-
       // Show success notification when reaching 18 correct answers
       function showSuccessNotification() {
         const notification = document.createElement("div");
@@ -899,9 +877,34 @@
           }
         }, 4000);
       }
+
+      // Next sentence
       function nextSentence() {
         currentIndex++;
         loadSentence();
+      }
+
+      // Show answer
+      function showAnswer() {
+        const current = currentData[currentIndex];
+        document.getElementById("german-answer").textContent = current.german;
+        document.getElementById("grammar-tip").textContent = current.tip;
+        document.getElementById("answer-section").classList.add("show");
+
+        // Speak German answer
+        speakGerman(current.german);
+      }
+
+      // Speak German text
+      function speakGerman(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        }
       }
 
       // Complete challenge
