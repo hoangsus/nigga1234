@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập từ vựng tiếng Đức</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .mode-btn {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        color: white;
+      }
+
+      .mode-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .mode-btn.active {
+        background: linear-gradient(45deg, #2ecc71, #27ae60);
+      }
+
+      .category-btn {
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        color: white;
+      }
+
+      .category-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .category-btn.active {
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+      }
+
+      .quiz-container {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .progress-bar {
+        background: #ddd;
+        border-radius: 10px;
+        height: 20px;
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        background: linear-gradient(45deg, #2ecc71, #27ae60);
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .question {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2c3e50;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .speaker-btn {
+        background: linear-gradient(45deg, #f39c12, #e67e22);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .speaker-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .input-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"] {
+        padding: 15px;
+        font-size: 18px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        width: 300px;
+        max-width: 90%;
+        text-align: center;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+      }
+
+      .feedback {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px 0;
+        padding: 15px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .correct {
+        background: linear-gradient(45deg, #2ecc71, #27ae60);
+        color: white;
+      }
+
+      .incorrect {
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+        color: white;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        background: #34495e;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 24px;
+        font-weight: bold;
+        display: block;
+      }
+
+      .vocab-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .vocab-item {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #3498db;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .vocab-content {
+        flex: 1;
+      }
+
+      .vocab-item strong {
+        color: #2c3e50;
+      }
+
+      .next-btn {
+        background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+      }
+
+      .next-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .reset-btn {
+        background: linear-gradient(45deg, #e67e22, #d35400);
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .completed {
+        text-align: center;
+        font-size: 24px;
+        color: #2ecc71;
+        font-weight: bold;
+        padding: 40px;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        input[type="text"] {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🇩🇪 Luyện tập từ vựng tiếng Đức</h1>
+
+      <div class="controls">
+        <button
+          class="mode-btn active"
+          onclick="setMode('vietnamese-to-german')"
+        >
+          Việt → Đức
+        </button>
+        <button class="mode-btn" onclick="setMode('german-to-vietnamese')">
+          Đức → Việt
+        </button>
+        <button class="mode-btn" onclick="setMode('study')">Xem từ vựng</button>
+      </div>
+
+      <div class="controls">
+        <button class="category-btn active" onclick="setCategory('all')">
+          Tất cả
+        </button>
+        <button class="category-btn" onclick="setCategory('time')">
+          Thời gian
+        </button>
+        <button class="category-btn" onclick="setCategory('family')">
+          Gia đình
+        </button>
+        <button class="category-btn" onclick="setCategory('daily')">
+          Hàng ngày
+        </button>
+        <button class="reset-btn" onclick="resetProgress()">Làm lại</button>
+      </div>
+
+      <div id="quiz-mode" class="quiz-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill">0/0</div>
+        </div>
+
+        <div class="question" id="question"></div>
+        <div class="input-container">
+          <input
+            type="text"
+            id="answer"
+            placeholder="Nhập câu trả lời..."
+            onkeypress="checkEnter(event)"
+          />
+        </div>
+        <div class="input-container">
+          <button class="next-btn" onclick="checkAnswer()">Kiểm tra</button>
+          <button
+            class="next-btn"
+            onclick="nextQuestion()"
+            id="next-btn"
+            style="display: none"
+          >
+            Câu tiếp theo
+          </button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+
+        <div id="completed" class="completed" style="display: none">
+          🎉 Chúc mừng! Bạn đã hoàn thành tất cả từ vựng!<br />
+          <button
+            class="next-btn"
+            onclick="resetProgress()"
+            style="margin-top: 20px"
+          >
+            Làm lại
+          </button>
+        </div>
+      </div>
+
+      <div id="study-mode" class="vocab-list" style="display: none"></div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-number" id="correct-count">0</span>
+          <span>Đúng</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="total-count">0</span>
+          <span>Tổng số</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="accuracy">0%</span>
+          <span>Độ chính xác</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Từ vựng theo đúng thứ tự trong hình ảnh
+      const vocabulary = {
+        time: [
+          // Hình 1 - Time related vocabulary
+          { vi: "Gần trước 4h", de: "kurz vor vier" },
+          { vi: "Đúng 4h", de: "gleich vier" },
+          { vi: "Đúng 4h", de: "genau vier Uhr" },
+          { vi: "4:05", de: "fünf (Minuten) nach vier" },
+          { vi: "Bây giờ là 14:30", de: "Es ist vierzehn Uhr dreißig" },
+          { vi: "Bây giờ là 2:30", de: "Es ist halb drei" },
+          { vi: "3h", de: "um drei Uhr" },
+          { vi: "Từ 2 → 3h", de: "von zwei bis drei Uhr" },
+          { vi: "Từ 3h", de: "ab drei Uhr" },
+          { vi: "Bắt đầu", de: "anfangen" },
+          { vi: "Khởi đầu", de: "der Anfang" },
+          { vi: "Dừng lại", de: "aufhören" },
+          { vi: "Kết Thúc", de: "das Ende" },
+          { vi: "Kéo dài", de: "dauern" },
+          { vi: "Tên", de: "der Vorname" },
+          { vi: "Tên đệm", de: "der Familienname" },
+          { vi: "Họ Tên", de: "der Nachname" },
+          // Hình 3 - Days and time
+          { vi: "Điện Thoại", de: "das Telefon" },
+          { vi: "Gọi điện", de: "telefonieren" },
+          { vi: "Gọi", de: "anrufen" },
+          { vi: "Email", de: "die E-mail" },
+          { vi: "Tuần", de: "die Woche" },
+          { vi: "Thứ 2", de: "Montag" },
+          { vi: "Thứ 3", de: "Dienstag" },
+          { vi: "Thứ 4", de: "Mittwoch" },
+          { vi: "Thứ 5", de: "Donnerstag" },
+          { vi: "Thứ 6", de: "Freitag" },
+          { vi: "Thứ 7", de: "Samstag" },
+          { vi: "Chủ Nhật", de: "Sonntag" },
+          { vi: "Vào Ngày", de: "am + Tag" },
+          { vi: "Vào thứ 2", de: "am Montag" },
+          { vi: "Cuối tuần", de: "das Wochenende" },
+          { vi: "Vào cuối tuần", de: "am Wochenende" },
+          { vi: "Ngày Nghỉ", de: "der Feiertag" },
+          { vi: "Năm tháng", de: "das Jahr / der Monat" },
+          { vi: "Tháng 1", de: "Januar" },
+          { vi: "Tháng 2", de: "Februar" },
+          { vi: "Tháng 3", de: "März" },
+          // Hình 4 - More months and time
+          { vi: "Tháng 4", de: "April" },
+          { vi: "Tháng 5", de: "Mai" },
+          { vi: "Tháng 6", de: "Juni" },
+          { vi: "Tháng 7", de: "Juli" },
+          { vi: "Tháng 8", de: "August" },
+          { vi: "VÀO ngày đầu tháng 8", de: "am ersten August" },
+          { vi: "Thời gian", de: "die Uhrzeit" },
+          { vi: "Khi nào", de: "Wann...?" },
+          { vi: "Mấy giờ?", de: "Wie spät ist es?" },
+          { vi: "Bây giờ là mấy giờ?", de: "Wie viel Uhr ist es?" },
+          { vi: "Nó là", de: "Es ist" },
+          { vi: "1h", de: "ein Uhr" },
+          { vi: "1:30", de: "halb zwei" },
+          { vi: "2:45", de: "viertel vor drei" },
+          { vi: "3:15", de: "viertel nach drei" },
+          { vi: "3:55", de: "fünf (Minuten) vor vier" },
+          { vi: "Tháng 9", de: "September" },
+          { vi: "Tháng 10", de: "Oktober" },
+          { vi: "Tháng 11", de: "November" },
+          { vi: "Tháng 12", de: "Dezember" },
+          { vi: "Trong tháng", de: "im + Monat" },
+          { vi: "Trong tháng 1", de: "im Januar" },
+        ],
+        family: [
+          // Hình 2 - Family and personal info
+          { vi: "Đánh vần", de: "buchstabieren" },
+          { vi: "Bà", de: "die Großmutter / Oma" },
+          { vi: "Người đàn ông", de: "der Mann" },
+          { vi: "Quý bà", de: "die Frau Dame" },
+          { vi: "Quý ông", de: "der Herr" },
+          { vi: "Nam", de: "männlich" },
+          { vi: "Nữ", de: "weiblich" },
+          { vi: "Cô gái", de: "das Mädchen" },
+          { vi: "Người trẻ", de: "die Jungen" },
+          { vi: "Địa chỉ", de: "die Adresse" },
+          { vi: "Nơi ở", de: "der Wohnort" },
+          { vi: "Sinh sống", de: "wohnen" },
+          { vi: "Sống", de: "leben" },
+          { vi: "Đường", de: "die Straße" },
+          { vi: "Không gian", de: "der Platz" },
+          { vi: "Số", de: "die Nummer" },
+          { vi: "Số nhà", de: "die Hausnummer" },
+          { vi: "Phố", de: "die Stadt" },
+          { vi: "Mã bưu điện", de: "die Postleitzahl" },
+          { vi: "Làng", de: "das Dorf" },
+          { vi: "Đất nước", de: "das Land" },
+          { vi: "Sinh ở", de: "Geboren in" },
+          { vi: "Tuổi", de: "Jahre alt sein" },
+          { vi: "30 tuổi", de: "dreißig Jahre alt" },
+          { vi: "Gia đình", de: "die Familie" },
+          { vi: "Tình trạng hôn nhân", de: "der Familienstand" },
+          { vi: "Đã kết hôn", de: "verheiratet" },
+          { vi: "Kết hôn", de: "heiraten" },
+          { vi: "Vợ", de: "die Ehefrau" },
+          { vi: "Chồng", de: "der Ehemann / Ehemann" },
+          { vi: "Đám cưới", de: "die Hochzeit" },
+          { vi: "Bố", de: "der Vater" },
+          { vi: "Mẹ", de: "die Mutter" },
+          { vi: "Bố mẹ", de: "die Eltern" },
+          { vi: "Đứa trẻ", de: "das Kind" },
+          { vi: "Em bé", de: "das Baby" },
+          { vi: "Con trai", de: "der Sohn" },
+          { vi: "Con gái", de: "die Tochter" },
+          { vi: "Anh em trai", de: "die Geschwister / der Bruder" },
+          { vi: "Chị em gái", de: "die Schwester" },
+          { vi: "Anh chị em", de: "die Geschwister" },
+          { vi: "Ông", de: "der Großvater / Opa" },
+        ],
+        daily: [
+          // Hình 1 - Daily vocabulary
+          { vi: "Ban gái", de: "die Freundin" },
+          { vi: "Người quen", de: "der / die Bekannte" },
+          { vi: "Người Lớn", de: "der / die Erwachsene" },
+          { vi: "Thanh thiếu niên", de: "der Jugendliche" },
+          { vi: "Nhà trẻ", de: "der Kindergarten" },
+          { vi: "Hộ chiếu", de: "der Pass" },
+          { vi: "Hộ chiếu du lịch", de: "der Reisepass" },
+          { vi: "CMND", de: "der Ausweis" },
+          { vi: "Giấy Tờ", de: "die Papiere" },
+          { vi: "Mẫu đơn", de: "das Formular" },
+          { vi: "Điền mẫu đơn", de: "ein Formular ausfüllen" },
+          { vi: "Quốc Tịch", de: "die Staatsangehörigkeit" },
+          { vi: "Bằng lái xe", de: "der Führerschein" },
+          { vi: "Ký tên", de: "unterschreiben" },
+          { vi: "Chữ ký", de: "die Unterschrift" },
+          { vi: "Tôi sinh ra vào", de: "Ich bin geboren am" },
+          { vi: "Ngày sinh", de: "das Geburtsdatum" },
+          { vi: "Sinh nhật", de: "der Geburtstag" },
+          { vi: "Bạn trai", de: "der Freund" },
+          { vi: "Mùa xuân", de: "der Frühling" },
+          { vi: "Mùa Hạ", de: "der Sommer" },
+          { vi: "Mùa Thu", de: "der Herbst" },
+          { vi: "Mùa Xuân", de: "der Winter" },
+          { vi: "Ngày", de: "der Tag" },
+          { vi: "Sáng", de: "der Morgen" },
+          { vi: "Trước Trưa", de: "der Vormittag" },
+          { vi: "Buổi trưa", de: "der Mittag" },
+          { vi: "Sau Trưa", de: "der Nachmittag" },
+          { vi: "Tối đêm", de: "der Abend / die Nacht" },
+          { vi: "Vào sáng", de: "am Morgen" },
+          { vi: "Vào lúc trưa", de: "am Vormittag" },
+          { vi: "Vào Trưa", de: "am Mittag" },
+          { vi: "Chiều vào sau trưa", de: "am Nachmittag" },
+          { vi: "Vào tối", de: "am Abend" },
+          { vi: "Chúc ngủ ngon", de: "in der Nacht / Gute Nacht" },
+          { vi: "Ngày đầu", de: "der erste" },
+        ],
+      };
+
+      let currentMode = "vietnamese-to-german";
+      let currentCategory = "all";
+      let currentQuestionIndex = 0;
+      let correctAnswers = 0;
+      let totalQuestions = 0;
+      let currentVocab = [];
+      let questionOrder = [];
+      let usedQuestions = new Set();
+
+      function getAllVocabulary() {
+        return [...vocabulary.time, ...vocabulary.family, ...vocabulary.daily];
+      }
+
+      function getCurrentVocabulary() {
+        if (currentCategory === "all") {
+          return getAllVocabulary();
+        }
+        return vocabulary[currentCategory] || [];
+      }
+
+      function speakText(text, lang = "de-DE") {
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = lang;
+          utterance.rate = 0.8;
+          utterance.pitch = 1;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      function setMode(mode) {
+        currentMode = mode;
+        document
+          .querySelectorAll(".mode-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        if (mode === "study") {
+          document.getElementById("quiz-mode").style.display = "none";
+          document.getElementById("study-mode").style.display = "grid";
+          showStudyMode();
+        } else {
+          document.getElementById("quiz-mode").style.display = "block";
+          document.getElementById("study-mode").style.display = "none";
+          resetProgress();
+        }
+      }
+
+      function setCategory(category) {
+        currentCategory = category;
+        document
+          .querySelectorAll(".category-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        if (currentMode === "study") {
+          showStudyMode();
+        } else {
+          resetProgress();
+        }
+      }
+
+      function showStudyMode() {
+        const studyContainer = document.getElementById("study-mode");
+        const vocab = getCurrentVocabulary();
+
+        studyContainer.innerHTML = vocab
+          .map(
+            (item) => `
+                <div class="vocab-item">
+                    <div class="vocab-content">
+                        <strong>🇻🇳 ${item.vi}</strong><br>
+                        <span>🇩🇪 ${item.de}</span>
+                    </div>
+                    <button class="speaker-btn" onclick="speakText('${item.de}')">🔊</button>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      function resetProgress() {
+        currentVocab = getCurrentVocabulary();
+        questionOrder = [...Array(currentVocab.length).keys()]; // [0, 1, 2, ...]
+        usedQuestions = new Set();
+        currentQuestionIndex = 0;
+        correctAnswers = 0;
+        totalQuestions = 0;
+
+        document.getElementById("completed").style.display = "none";
+        document.getElementById("question").style.display = "block";
+        document.getElementById("answer").style.display = "block";
+        document.querySelector(".input-container").style.display = "block";
+
+        updateProgress();
+        updateStats();
+        startNewQuestion();
+      }
+
+      function updateProgress() {
+        const progress = (usedQuestions.size / currentVocab.length) * 100;
+        const progressFill = document.getElementById("progress-fill");
+        progressFill.style.width = progress + "%";
+        progressFill.textContent = `${usedQuestions.size}/${currentVocab.length}`;
+      }
+
+      function startNewQuestion() {
+        if (usedQuestions.size >= currentVocab.length) {
+          // Hoàn thành tất cả câu hỏi
+          document.getElementById("completed").style.display = "block";
+          document.getElementById("question").style.display = "none";
+          document.getElementById("answer").style.display = "none";
+          document.querySelector(".input-container").style.display = "none";
+          return;
+        }
+
+        // Tìm câu hỏi tiếp theo theo thứ tự
+        while (
+          currentQuestionIndex < questionOrder.length &&
+          usedQuestions.has(questionOrder[currentQuestionIndex])
+        ) {
+          currentQuestionIndex++;
+        }
+
+        if (currentQuestionIndex >= questionOrder.length) {
+          currentQuestionIndex = 0;
+        }
+
+        const questionIndex = questionOrder[currentQuestionIndex];
+        const question = currentVocab[questionIndex];
+
+        const questionElement = document.getElementById("question");
+        if (currentMode === "vietnamese-to-german") {
+          questionElement.innerHTML = `🇻🇳 ${question.vi}<br><small>Dịch sang tiếng Đức</small>`;
+        } else {
+          questionElement.innerHTML = `🇩🇪 ${question.de}
+                    <button class="speaker-btn" onclick="speakText('${question.de}')">🔊</button>
+                    <br><small>Dịch sang tiếng Việt</small>`;
+        }
+
+        document.getElementById("answer").value = "";
+        document.getElementById("feedback").textContent = "";
+        document.getElementById("feedback").className = "feedback";
+        document.getElementById("next-btn").style.display = "none";
+
+        updateProgress();
+      }
+
+      function checkAnswer() {
+        const questionIndex = questionOrder[currentQuestionIndex];
+        const userAnswer = document
+          .getElementById("answer")
+          .value.trim()
+          .toLowerCase();
+        const question = currentVocab[questionIndex];
+
+        let correctAnswer;
+        if (currentMode === "vietnamese-to-german") {
+          correctAnswer = question.de.toLowerCase();
+        } else {
+          correctAnswer = question.vi.toLowerCase();
+        }
+
+        const feedbackElement = document.getElementById("feedback");
+        totalQuestions++;
+        usedQuestions.add(questionIndex);
+
+        // Kiểm tra nhiều khả năng đúng
+        const normalizedUserAnswer = userAnswer.replace(/[\/\(\)]/g, "").trim();
+        const normalizedCorrectAnswer = correctAnswer
+          .replace(/[\/\(\)]/g, "")
+          .trim();
+
+        const isCorrect =
+          normalizedUserAnswer === normalizedCorrectAnswer ||
+          normalizedCorrectAnswer.includes(normalizedUserAnswer) ||
+          normalizedUserAnswer.includes(
+            normalizedCorrectAnswer.split(" ")[0]
+          ) ||
+          normalizedUserAnswer === normalizedCorrectAnswer.split(" / ")[0] ||
+          normalizedUserAnswer === normalizedCorrectAnswer.split(" / ")[1];
+
+        if (isCorrect) {
+          correctAnswers++;
+          feedbackElement.innerHTML = "✅ Chính xác!";
+          feedbackElement.className = "feedback correct";
+
+          // Phát âm câu trả lời đúng nếu là tiếng Đức
+          if (currentMode === "vietnamese-to-german") {
+            setTimeout(() => speakText(question.de), 500);
+          }
+        } else {
+          const correctText =
+            currentMode === "vietnamese-to-german" ? question.de : question.vi;
+          feedbackElement.innerHTML = `❌ Sai rồi!<br>Đáp án đúng: <strong>${correctText}</strong>`;
+          feedbackElement.className = "feedback incorrect";
+
+          // Phát âm câu trả lời đúng nếu là tiếng Đức
+          if (currentMode === "vietnamese-to-german") {
+            setTimeout(() => speakText(question.de), 500);
+          }
+        }
+
+        updateStats();
+        updateProgress();
+        document.getElementById("next-btn").style.display = "inline-block";
+      }
+
+      function nextQuestion() {
+        currentQuestionIndex++;
+        startNewQuestion();
+      }
+
+      function checkEnter(event) {
+        if (event.key === "Enter") {
+          const nextBtn = document.getElementById("next-btn");
+          if (nextBtn.style.display === "none") {
+            checkAnswer();
+          } else {
+            nextQuestion();
+          }
+        }
+      }
+
+      function updateStats() {
+        document.getElementById("correct-count").textContent = correctAnswers;
+        document.getElementById("total-count").textContent = totalQuestions;
+        const accuracy =
+          totalQuestions > 0
+            ? Math.round((correctAnswers / totalQuestions) * 100)
+            : 0;
+        document.getElementById("accuracy").textContent = accuracy + "%";
+      }
+
+      // Khởi tạo
+      resetProgress();
+    </script>
+  </body>
+</html>
