@@ -438,7 +438,7 @@
         <h1>🎯 Thử thách Nói Tiếng Đức 4 phút</h1>
         <p>Luyện tập dịch từ tiếng Việt sang tiếng Đức</p>
         <div class="challenge-info">
-          <h3>🏆 Thử thách</h3>
+          <h3>🏆 Chọn chế độ thử thách</h3>
           <p>
             <strong>Thời gian:</strong> 4 phút |
             <strong>Mục tiêu:</strong> 18/24 câu đúng
@@ -460,8 +460,11 @@
           </div>
 
           <div class="controls">
-            <button class="btn" onclick="startPractice()">
-              🚀 Bắt đầu kiểm tra 4 phút
+            <button class="btn" onclick="startPractice('translation')">
+              🚀 Dịch Việt→Đức (4 phút)
+            </button>
+            <button class="btn btn-info" onclick="startPractice('reading')">
+              📖 Đọc tiếng Đức (4 phút)
             </button>
             <button class="btn btn-secondary" onclick="toggleStudyView()">
               👁️ Thu gọn/Mở rộng danh sách
@@ -728,6 +731,7 @@
       let timeRemaining = timeLimit;
       let challengeCompleted = false;
       let studyCollapsed = false;
+      let testMode = "translation"; // 'translation' or 'reading'
 
       // Initialize voices when available
       function initializeVoices() {
@@ -835,7 +839,9 @@
       }
 
       // Start practice
-      function startPractice() {
+      function startPractice(mode = "translation") {
+        testMode = mode;
+
         // Hide study section, show practice section
         document.getElementById("study-section").style.display = "none";
         document.getElementById("practice-section").style.display = "block";
@@ -848,11 +854,24 @@
         challengeCompleted = false;
         startTime = new Date();
 
-        // Show/hide buttons
+        // Show/hide buttons based on mode
         document.getElementById("start-btn").style.display = "none";
         document.getElementById("speak-btn").style.display = "inline-block";
         document.getElementById("correct-btn").style.display = "inline-block";
         document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        // Update speak button text based on mode
+        const speakBtn = document.getElementById("speak-btn");
+        if (testMode === "translation") {
+          speakBtn.textContent = "🔊 Phát âm";
+          speakBtn.onclick = speakVietnamese;
+        } else {
+          speakBtn.textContent = "🔊 Đọc lại";
+          speakBtn.onclick = speakGermanSentence;
+        }
+
+        // Update instructions based on mode
+        updateInstructions();
 
         // Start timer
         startTimer();
@@ -900,7 +919,35 @@
         }
       }
 
-      // Load current sentence
+      // Update instructions based on test mode
+      function updateInstructions() {
+        const instructionsElement = document.querySelector(
+          "#practice-section .instructions"
+        );
+        if (testMode === "translation") {
+          instructionsElement.innerHTML = `
+                    <h3>📝 Hướng dẫn luyện tập - Dịch Việt→Đức</h3>
+                    <ul>
+                        <li>Nhấn "Phát âm" để nghe câu tiếng Việt</li>
+                        <li>Viết câu tiếng Đức tương ứng vào vở</li>
+                        <li>Nhấn "Đúng" hoặc "Sai" để đánh giá bản thân</li>
+                        <li>Xem đáp án tiếng Đức sau khi đánh giá</li>
+                        <li>Mục tiêu: đạt 18 câu đúng trong 4 phút</li>
+                    </ul>
+                `;
+        } else {
+          instructionsElement.innerHTML = `
+                    <h3>📖 Hướng dẫn luyện tập - Đọc tiếng Đức</h3>
+                    <ul>
+                        <li>Đọc to câu tiếng Đức hiển thị trên màn hình</li>
+                        <li>Chú ý phát âm các từ được <span class="highlight">tô sáng</span></li>
+                        <li>Nhấn "Đúng" nếu bạn đọc chính xác, "Sai" nếu chưa tốt</li>
+                        <li>Nghe phát âm chuẩn sau khi đánh giá</li>
+                        <li>Mục tiêu: đạt 18 câu đúng trong 4 phút</li>
+                    </ul>
+                `;
+        }
+      }
       function loadSentence() {
         if (currentIndex >= currentData.length) {
           completeChallenge("finished");
@@ -981,7 +1028,47 @@
         document.getElementById("correct-count").textContent = correctCount;
         document.getElementById("total-answered").textContent = totalAnswered;
 
-        // Show answer
+        // Speak German sentence for reading mode
+        function speakGermanSentence() {
+          if ("speechSynthesis" in window) {
+            const text = currentData[currentIndex].german.replace(
+              /<[^>]*>/g,
+              ""
+            );
+            speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            const voices = speechSynthesis.getVoices();
+            const germanVoice = voices.find(
+              (voice) => voice.lang.includes("de") || voice.lang.includes("DE")
+            );
+
+            if (germanVoice) {
+              utterance.voice = germanVoice;
+            }
+            utterance.lang = "de-DE";
+            utterance.rate = 0.7;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+
+            speechSynthesis.speak(utterance);
+
+            const speakBtn = document.getElementById("speak-btn");
+            speakBtn.style.background =
+              "linear-gradient(135deg, #ffa726, #ff7043)";
+            speakBtn.textContent = "🔊 Đang phát...";
+
+            utterance.onend = function () {
+              speakBtn.style.background =
+                "linear-gradient(135deg, #28a745, #20c997)";
+              speakBtn.textContent = "🔊 Đọc lại";
+            };
+          } else {
+            alert(
+              "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
+            );
+          }
+        }
         showAnswer();
 
         // Hide correct/incorrect buttons, show next button
@@ -1042,12 +1129,24 @@
       // Show answer
       function showAnswer() {
         const current = currentData[currentIndex];
-        document.getElementById("german-answer").textContent = current.german;
-        document.getElementById("grammar-tip").textContent = current.tip;
-        document.getElementById("answer-section").classList.add("show");
 
-        // Speak German answer
-        speakGerman(current.german);
+        if (testMode === "translation") {
+          document.getElementById("german-answer").textContent =
+            current.german.replace(/<[^>]*>/g, "");
+          document.getElementById("grammar-tip").textContent = current.tip;
+          // Speak German answer for translation mode
+          speakGerman(current.german.replace(/<[^>]*>/g, ""));
+        } else {
+          // For reading mode, show Vietnamese translation
+          document.getElementById(
+            "german-answer"
+          ).textContent = `Nghĩa: ${current.vietnamese}`;
+          document.getElementById("grammar-tip").textContent = current.tip;
+          // Speak German again for reading mode
+          speakGerman(current.german.replace(/<[^>]*>/g, ""));
+        }
+
+        document.getElementById("answer-section").classList.add("show");
       }
 
       // Speak German text
@@ -1163,7 +1262,11 @@
         switch (e.key) {
           case " ": // Spacebar to speak
             e.preventDefault();
-            speakVietnamese();
+            if (testMode === "translation") {
+              speakVietnamese();
+            } else {
+              speakGermanSentence();
+            }
             break;
           case "1": // Number 1 for correct
             e.preventDefault();
