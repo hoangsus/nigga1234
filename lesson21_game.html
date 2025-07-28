@@ -1172,35 +1172,8 @@
     </div>
 
     <script>
-      // Data structure - Exactly 5 words per sentence with useful tips
+      // Data structure - Updated with new sentences
       const data = {
-        imperative: [
-          {
-            german: "Geh bitte sofort nach Hause!",
-            vietnamese: "Hãy đi về nhà ngay lập tức nhé!",
-            tip: "🎯 Du-Form: gehen → Geh. 'sofort' = ngay lập tức. 'bitte' làm câu lịch sự",
-          },
-          {
-            german: "Sprechen Sie bitte etwas lauter!",
-            vietnamese: "Làm ơn nói to hơn một chút!",
-            tip: "🎯 Sie-Form lịch sự: Động từ + Sie. 'etwas lauter' = to hơn một chút",
-          },
-          {
-            german: "Macht jetzt eure Hausaufgaben fertig!",
-            vietnamese: "Hãy hoàn thành bài tập về nhà của các em ngay!",
-            tip: "🎯 Ihr-Form: machen → macht. 'eure Hausaufgaben' = bài tập của các em",
-          },
-          {
-            german: "Komm bitte schnell herüber!",
-            vietnamese: "Hãy đến đây nhanh lên!",
-            tip: "🎯 'herüber' = đến đây (từ xa). 'schnell' = nhanh chóng",
-          },
-          {
-            german: "Sei ruhig, wenn du nach Hause kommst!",
-            vietnamese: "Hãy im lặng khi con về đến nhà!",
-            tip: "🎯 sein → sei (đặc biệt). 'ruhig' = im lặng. 'wenn' = khi",
-          },
-        ],
         modal: [
           {
             german: "Ich kann sehr gut schwimmen.",
@@ -1255,29 +1228,29 @@
         ],
         separable: [
           {
-            german: "Ich stehe jeden Tag auf.",
-            vietnamese: "Tôi thức dậy mỗi ngày.",
-            tip: "🎯 aufstehen tách: stehe...auf. 'jeden Tag' = mỗi ngày (Akkusativ thời gian)",
+            german: "Ich stehe morgens jeden Tag auf.",
+            vietnamese: "Tôi thức dậy mỗi ngày vào buổi sáng.",
+            tip: "🎯 aufstehen tách: stehe...auf. 'morgens' = buổi sáng, 'jeden Tag' = mỗi ngày",
           },
           {
-            german: "Er ruft seine Mutter an.",
-            vietnamese: "Anh ấy gọi điện cho mẹ.",
-            tip: "🎯 anrufen tách: ruft...an. 'seine Mutter' = mẹ của anh ấy (Akkusativ)",
+            german: "Er ruft heute seine Mutter an.",
+            vietnamese: "Hôm nay anh ấy gọi điện cho mẹ.",
+            tip: "🎯 anrufen tách: ruft...an. 'heute' = hôm nay, 'seine Mutter' = mẹ của anh ấy",
           },
           {
-            german: "Wir kaufen heute Abend ein.",
-            vietnamese: "Chúng ta mua sắm tối nay.",
-            tip: "🎯 einkaufen tách: kaufen...ein. 'heute Abend' = tối nay (thời gian cụ thể)",
+            german: "Wir kaufen gerne heute Abend ein.",
+            vietnamese: "Chúng ta thích mua sắm tối nay.",
+            tip: "🎯 einkaufen tách: kaufen...ein. 'gerne' = thích/sẵn lòng, 'heute Abend' = tối nay",
           },
           {
-            german: "Du machst das Fenster zu.",
-            vietnamese: "Bạn đóng cửa sổ lại.",
-            tip: "🎯 zumachen tách: machst...zu. 'das Fenster' = cửa sổ (tân ngữ trực tiếp)",
+            german: "Du machst bitte das Fenster zu.",
+            vietnamese: "Làm ơn đóng cửa sổ lại.",
+            tip: "🎯 zumachen tách: machst...zu. 'bitte' = làm ơn, 'das Fenster' = cửa sổ",
           },
           {
-            german: "Sie zieht warme Kleidung an.",
-            vietnamese: "Cô ấy mặc quần áo ấm.",
-            tip: "🎯 anziehen tách: zieht...an. 'warme Kleidung' = quần áo ấm (tính từ + danh từ)",
+            german: "Sie zieht jeden Morgen warme Kleidung an.",
+            vietnamese: "Mỗi sáng cô ấy mặc quần áo ấm.",
+            tip: "🎯 anziehen tách: zieht...an. 'jeden Morgen' = mỗi sáng (2 từ), 'warme Kleidung' = quần áo ấm",
           },
         ],
         yesNoQuestions: [
@@ -1335,7 +1308,35 @@
             tip: "🎯 Wer = ai (hỏi về người). 'beste' = tốt nhất (tính từ so sánh)",
           },
         ],
+        imperative: [
+          {
+            german: "Geh bitte sofort nach Hause!",
+            vietnamese: "Hãy đi về nhà ngay lập tức nhé!",
+            tip: "🎯 Du-Form: gehen → Geh. 'sofort' = ngay lập tức. 'bitte' làm câu lịch sự",
+          },
+          {
+            german: "Sprechen Sie bitte etwas lauter!",
+            vietnamese: "Làm ơn nói to hơn một chút!",
+            tip: "🎯 Sie-Form lịch sự: Động từ + Sie. 'etwas lauter' = to hơn một chút",
+          },
+          {
+            german: "Macht jetzt eure Hausaufgaben fertig!",
+            vietnamese: "Hãy hoàn thành bài tập về nhà của các em ngay!",
+            tip: "🎯 Ihr-Form: machen → macht. 'eure Hausaufgaben' = bài tập của các em",
+          },
+          {
+            german: "Komm bitte schnell herüber!",
+            vietnamese: "Hãy đến đây nhanh lên!",
+            tip: "🎯 'herüber' = đến đây (từ xa). 'schnell' = nhanh chóng",
+          },
+          {
+            german: "Sei ruhig, wenn du nach Hause kommst!",
+            vietnamese: "Hãy im lặng khi con về đến nhà!",
+            tip: "🎯 sein → sei (đặc biệt). 'ruhig' = im lặng. 'wenn' = khi",
+          },
+        ],
       };
+
       // Quiz state
       let currentQuiz = null;
       let currentQuestionIndex = 0;
