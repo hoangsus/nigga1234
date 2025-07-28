@@ -319,29 +319,116 @@
         border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
-      @media (max-width: 768px) {
-        .header h1 {
-          font-size: 2em;
-        }
+      .study-list {
+        margin: 30px 0;
+        max-height: 500px;
+        overflow-y: auto;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+      }
 
-        .vietnamese-sentence {
-          font-size: 1.5em;
-        }
+      .study-item {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
 
-        .controls {
-          flex-direction: column;
-          align-items: center;
-        }
+      .study-item:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateX(5px);
+      }
 
-        .btn {
-          width: 80%;
-          max-width: 300px;
-        }
+      .study-number {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: white;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 15px;
+        font-size: 0.9em;
+      }
 
-        .stats-row {
-          grid-template-columns: 1fr;
-          gap: 10px;
-        }
+      .study-content {
+        display: inline-block;
+        vertical-align: top;
+        width: calc(100% - 60px);
+      }
+
+      .vietnamese-text {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .german-text {
+        font-size: 1.2em;
+        margin-bottom: 8px;
+        color: #a8edea;
+        font-weight: 500;
+      }
+
+      .tip-text {
+        font-size: 1em;
+        color: rgba(255, 255, 255, 0.8);
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      .study-collapsed {
+        max-height: 200px;
+      }
+
+      .play-buttons {
+        margin-top: 10px;
+      }
+
+      .play-btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .play-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .header h1 {
+        font-size: 2em;
+      }
+
+      .vietnamese-sentence {
+        font-size: 1.5em;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
       }
     </style>
   </head>
@@ -360,7 +447,33 @@
       </div>
 
       <div class="content">
-        <div class="practice-card" id="practice-section">
+        <!-- Study Section -->
+        <div class="practice-card" id="study-section">
+          <div class="instructions">
+            <h3>📚 Ôn tập trước khi kiểm tra</h3>
+            <ul>
+              <li>Xem toàn bộ 24 câu trong câu chuyện Liebesgeschichte</li>
+              <li>Nhấn vào từng câu để nghe phát âm tiếng Việt và tiếng Đức</li>
+              <li>Đọc grammar tips để hiểu cấu trúc câu</li>
+              <li>Sẵn sàng thì nhấn "Bắt đầu kiểm tra" để thử thách 4 phút</li>
+            </ul>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="startPractice()">
+              🚀 Bắt đầu kiểm tra 4 phút
+            </button>
+            <button class="btn btn-secondary" onclick="toggleStudyView()">
+              👁️ Thu gọn/Mở rộng danh sách
+            </button>
+          </div>
+
+          <div class="study-list" id="study-list">
+            <!-- Study content will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="practice-card" id="practice-section" style="display: none">
           <div class="instructions">
             <h3>📝 Hướng dẫn luyện tập</h3>
             <ul>
@@ -614,6 +727,7 @@
       let timeLimit = 4 * 60; // 4 minutes in seconds
       let timeRemaining = timeLimit;
       let challengeCompleted = false;
+      let studyCollapsed = false;
 
       // Initialize voices when available
       function initializeVoices() {
@@ -638,14 +752,94 @@
       function init() {
         updateDisplay();
         initializeVoices();
+        populateStudyList();
 
         if ("speechSynthesis" in window) {
           speechSynthesis.onvoiceschanged = initializeVoices;
         }
       }
 
+      // Populate study list
+      function populateStudyList() {
+        const studyList = document.getElementById("study-list");
+        studyList.innerHTML = "";
+
+        practiceData.forEach((item, index) => {
+          const studyItem = document.createElement("div");
+          studyItem.className = "study-item";
+          studyItem.innerHTML = `
+                    <span class="study-number">${index + 1}</span>
+                    <div class="study-content">
+                        <div class="vietnamese-text">${item.vietnamese}</div>
+                        <div class="german-text">${item.german}</div>
+                        <div class="tip-text">${item.tip}</div>
+                        <div class="play-buttons">
+                            <button class="play-btn" onclick="speakText('${
+                              item.vietnamese
+                            }', 'vi-VN')">🔊 Tiếng Việt</button>
+                            <button class="play-btn" onclick="speakText('${item.german.replace(
+                              /<[^>]*>/g,
+                              ""
+                            )}', 'de-DE')">🔊 Tiếng Đức</button>
+                        </div>
+                    </div>
+                `;
+
+          studyList.appendChild(studyItem);
+        });
+      }
+
+      // Toggle study view
+      function toggleStudyView() {
+        const studyList = document.getElementById("study-list");
+        studyCollapsed = !studyCollapsed;
+
+        if (studyCollapsed) {
+          studyList.classList.add("study-collapsed");
+        } else {
+          studyList.classList.remove("study-collapsed");
+        }
+      }
+
+      // Speak any text
+      function speakText(text, lang) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          const voices = speechSynthesis.getVoices();
+
+          if (lang === "vi-VN") {
+            const vietnameseVoice = voices.find(
+              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+            );
+            if (vietnameseVoice) {
+              utterance.voice = vietnameseVoice;
+            }
+          } else if (lang === "de-DE") {
+            const germanVoice = voices.find(
+              (voice) => voice.lang.includes("de") || voice.lang.includes("DE")
+            );
+            if (germanVoice) {
+              utterance.voice = germanVoice;
+            }
+          }
+
+          utterance.lang = lang;
+          utterance.rate = 0.7;
+          utterance.pitch = 1.0;
+          utterance.volume = 1.0;
+
+          speechSynthesis.speak(utterance);
+        }
+      }
+
       // Start practice
       function startPractice() {
+        // Hide study section, show practice section
+        document.getElementById("study-section").style.display = "none";
+        document.getElementById("practice-section").style.display = "block";
+
         isStarted = true;
         currentIndex = 0;
         correctCount = 0;
@@ -936,25 +1130,10 @@
         startTime = null;
         stopTimer();
 
-        // Reset UI
-        document.getElementById("practice-section").style.display = "block";
+        // Show study section, hide practice and completion sections
+        document.getElementById("study-section").style.display = "block";
+        document.getElementById("practice-section").style.display = "none";
         document.getElementById("completion-screen").classList.remove("show");
-        document.getElementById("start-btn").style.display = "inline-block";
-        document.getElementById("speak-btn").style.display = "none";
-        document.getElementById("correct-btn").style.display = "none";
-        document.getElementById("incorrect-btn").style.display = "none";
-        document.getElementById("next-btn").style.display = "none";
-
-        // Reset display
-        document.getElementById("vietnamese-text").textContent =
-          'Nhấn "Bắt đầu" để bắt đầu thử thách dịch tiếng Đức';
-        document.getElementById("counter").textContent = "Câu 1 / 24";
-        document.getElementById("progress").style.width = "4.17%";
-        document.getElementById("timer").textContent = "04:00";
-        document.getElementById("timer").classList.remove("timer-warning");
-        document.getElementById("correct-count").textContent = "0";
-        document.getElementById("total-answered").textContent = "0";
-        document.getElementById("answer-section").classList.remove("show");
       }
 
       // Shuffle and restart
