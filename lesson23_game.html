@@ -538,11 +538,21 @@
 
       function speakText(text, lang = "de-DE") {
         if ("speechSynthesis" in window) {
+          // Dừng phát âm hiện tại nếu có
+          speechSynthesis.cancel();
+
           const utterance = new SpeechSynthesisUtterance(text);
           utterance.lang = lang;
-          utterance.rate = 0.8;
+          utterance.rate = 0.7;
           utterance.pitch = 1;
-          speechSynthesis.speak(utterance);
+          utterance.volume = 1;
+
+          // Đợi một chút rồi mới phát âm
+          setTimeout(() => {
+            speechSynthesis.speak(utterance);
+          }, 100);
+        } else {
+          console.log("Speech synthesis not supported");
         }
       }
 
@@ -666,37 +676,55 @@
 
       function checkAnswer() {
         const questionIndex = questionOrder[currentQuestionIndex];
-        const userAnswer = document
-          .getElementById("answer")
-          .value.trim()
-          .toLowerCase();
+        const userAnswer = document.getElementById("answer").value.trim();
         const question = currentVocab[questionIndex];
 
         let correctAnswer;
         if (currentMode === "vietnamese-to-german") {
-          correctAnswer = question.de.toLowerCase();
+          correctAnswer = question.de;
         } else {
-          correctAnswer = question.vi.toLowerCase();
+          correctAnswer = question.vi;
         }
 
         const feedbackElement = document.getElementById("feedback");
         totalQuestions++;
         usedQuestions.add(questionIndex);
 
-        // Kiểm tra nhiều khả năng đúng
-        const normalizedUserAnswer = userAnswer.replace(/[\/\(\)]/g, "").trim();
-        const normalizedCorrectAnswer = correctAnswer
-          .replace(/[\/\(\)]/g, "")
-          .trim();
+        // Chuẩn hóa câu trả lời để so sánh
+        function normalizeText(text) {
+          return text
+            .toLowerCase()
+            .replace(/\s+/g, " ") // Thay nhiều khoảng trắng bằng 1
+            .trim();
+        }
 
-        const isCorrect =
-          normalizedUserAnswer === normalizedCorrectAnswer ||
-          normalizedCorrectAnswer.includes(normalizedUserAnswer) ||
-          normalizedUserAnswer.includes(
-            normalizedCorrectAnswer.split(" ")[0]
-          ) ||
-          normalizedUserAnswer === normalizedCorrectAnswer.split(" / ")[0] ||
-          normalizedUserAnswer === normalizedCorrectAnswer.split(" / ")[1];
+        const normalizedUserAnswer = normalizeText(userAnswer);
+        const normalizedCorrectAnswer = normalizeText(correctAnswer);
+
+        // Tách các phương án trả lời (nếu có dấu /)
+        const correctOptions = normalizedCorrectAnswer
+          .split(" / ")
+          .map((option) => option.trim());
+
+        // Kiểm tra nếu câu trả lời khớp với bất kỳ phương án nào
+        let isCorrect = false;
+
+        for (let option of correctOptions) {
+          // Loại bỏ phần trong ngoặc đơn (nếu có) để có thêm phương án
+          const optionWithoutParentheses = option
+            .replace(/\([^)]*\)/g, "")
+            .trim();
+
+          if (
+            normalizedUserAnswer === option ||
+            normalizedUserAnswer === optionWithoutParentheses ||
+            (option.includes("(") &&
+              normalizedUserAnswer === option.split("(")[0].trim())
+          ) {
+            isCorrect = true;
+            break;
+          }
+        }
 
         if (isCorrect) {
           correctAnswers++;
@@ -705,7 +733,14 @@
 
           // Phát âm câu trả lời đúng nếu là tiếng Đức
           if (currentMode === "vietnamese-to-german") {
-            setTimeout(() => speakText(question.de), 500);
+            setTimeout(() => {
+              // Lấy phần đầu tiên trước dấu / và loại bỏ ngoặc đơn
+              let textToSpeak = question.de
+                .split(" / ")[0]
+                .replace(/\([^)]*\)/g, "")
+                .trim();
+              speakText(textToSpeak);
+            }, 500);
           }
         } else {
           const correctText =
@@ -715,7 +750,14 @@
 
           // Phát âm câu trả lời đúng nếu là tiếng Đức
           if (currentMode === "vietnamese-to-german") {
-            setTimeout(() => speakText(question.de), 500);
+            setTimeout(() => {
+              // Lấy phần đầu tiên trước dấu / và loại bỏ ngoặc đơn
+              let textToSpeak = question.de
+                .split(" / ")[0]
+                .replace(/\([^)]*\)/g, "")
+                .trim();
+              speakText(textToSpeak);
+            }, 500);
           }
         }
 
