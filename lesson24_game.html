@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập: Lebensmittel einkaufen</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .nav-tabs {
+        display: flex;
+        background: #f8f9fa;
+        border-bottom: 2px solid #dee2e6;
+      }
+
+      .nav-tab {
+        flex: 1;
+        padding: 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: all 0.3s;
+      }
+
+      .nav-tab.active {
+        background: #007bff;
+        color: white;
+      }
+
+      .nav-tab:hover {
+        background: #0056b3;
+        color: white;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Vocabulary Section */
+      .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .vocab-card {
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .vocab-card h3 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-size: 1.3em;
+      }
+
+      .vocab-card p {
+        color: #34495e;
+        font-size: 1.1em;
+      }
+
+      .price {
+        color: #e74c3c;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      /* Dialog Section */
+      .dialog-container {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 20px 0;
+      }
+
+      .dialog-line {
+        margin: 15px 0;
+        padding: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .seller {
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+        color: white;
+        margin-left: 50px;
+      }
+
+      .customer {
+        background: linear-gradient(135deg, #00b894, #00a085);
+        color: white;
+        margin-right: 50px;
+      }
+
+      .dialog-line:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .german {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+      }
+
+      .vietnamese {
+        font-size: 0.95em;
+        opacity: 0.9;
+      }
+
+      /* Quiz Section */
+      .quiz-card {
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 20px 0;
+        transition: all 0.3s;
+      }
+
+      .quiz-card.correct {
+        border-color: #28a745;
+        background: #d4edda;
+      }
+
+      .quiz-card.incorrect {
+        border-color: #dc3545;
+        background: #f8d7da;
+      }
+
+      .question {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #2c3e50;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .option {
+        padding: 12px 20px;
+        background: #f8f9fa;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .option:hover {
+        background: #e9ecef;
+        border-color: #007bff;
+      }
+
+      .option.selected {
+        background: #007bff;
+        color: white;
+        border-color: #007bff;
+      }
+
+      .option.correct {
+        background: #28a745;
+        color: white;
+        border-color: #28a745;
+      }
+
+      .option.incorrect {
+        background: #dc3545;
+        color: white;
+        border-color: #dc3545;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: all 0.3s;
+        margin: 10px 5px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .score {
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #2c3e50;
+        margin: 20px 0;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px 0;
+      }
+
+      .progress {
+        height: 100%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        transition: width 0.5s ease;
+        border-radius: 10px;
+      }
+
+      .audio-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin-left: 10px;
+      }
+
+      .audio-btn:hover {
+        background: #218838;
+      }
+
+      @media (max-width: 768px) {
+        .nav-tabs {
+          flex-direction: column;
+        }
+        .vocab-grid {
+          grid-template-columns: 1fr;
+        }
+        .seller,
+        .customer {
+          margin: 0;
+        }
+        .content {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🛒 Lebensmittel einkaufen</h1>
+        <p>Luyện tập mua sắm thực phẩm bằng tiếng Đức</p>
+      </div>
+
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('vocabulary')">
+          📚 Từ vựng
+        </button>
+        <button class="nav-tab" onclick="showTab('dialog')">
+          💬 Hội thoại
+        </button>
+        <button class="nav-tab" onclick="showTab('quiz')">🎯 Kiểm tra</button>
+        <button class="nav-tab" onclick="showTab('practice')">
+          🎭 Thực hành
+        </button>
+      </div>
+
+      <div class="content">
+        <!-- Vocabulary Tab -->
+        <div id="vocabulary" class="tab-content active">
+          <h2>🍎 Từ vựng quan trọng (Đầy đủ từ 30 câu)</h2>
+          <div class="vocab-grid">
+            <div class="vocab-card" onclick="speak('die Äpfel')">
+              <h3>die Äpfel 🔊</h3>
+              <p>Táo</p>
+              <p class="price">1 Euro 59/kg</p>
+              <h3>💰 Số đếm và tiền tệ (Quan trọng cho thi nói):</h3>
+              <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('eins')">
+                  <h3>1 - eins 🔊</h3>
+                  <p>Một</p>
+                </div>
+                <div class="vocab-card" onclick="speak('zwei')">
+                  <h3>2 - zwei 🔊</h3>
+                  <p>Hai</p>
+                </div>
+                <div class="vocab-card" onclick="speak('drei')">
+                  <h3>3 - drei 🔊</h3>
+                  <p>Ba</p>
+                </div>
+                <div class="vocab-card" onclick="speak('vier')">
+                  <h3>4 - vier 🔊</h3>
+                  <p>Bốn</p>
+                </div>
+                <div class="vocab-card" onclick="speak('fünf')">
+                  <h3>5 - fünf 🔊</h3>
+                  <p>Năm</p>
+                </div>
+                <div class="vocab-card" onclick="speak('neunundneunzig')">
+                  <h3>99 - neunundneunzig 🔊</h3>
+                  <p>Chín mươi chín</p>
+                </div>
+                <div
+                  class="vocab-card"
+                  onclick="speak('ein Euro neunundfünfzig')"
+                >
+                  <h3>1,59€ 🔊</h3>
+                  <p>Ein Euro neunundfünfzig</p>
+                </div>
+                <div class="vocab-card" onclick="speak('vier Euro neunzig')">
+                  <h3>4,90€ 🔊</h3>
+                  <p>Vier Euro neunzig</p>
+                </div>
+              </div>
+
+              <h3>🎭 Từ nối và cảm thán (Cần cho giao tiếp tự nhiên):</h3>
+              <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('Guten Tag')">
+                  <h3>Guten Tag! 🔊</h3>
+                  <p>Chào bạn! (chính thức)</p>
+                </div>
+                <div class="vocab-card" onclick="speak('Gerne')">
+                  <h3>Gerne! 🔊</h3>
+                  <p>Với pleasure!/Được thôi!</p>
+                </div>
+                <div class="vocab-card" onclick="speak('Ja')">
+                  <h3>Ja 🔊</h3>
+                  <p>Vâng/Có</p>
+                </div>
+                <div class="vocab-card" onclick="speak('und')">
+                  <h3>und 🔊</h3>
+                  <p>Và</p>
+                </div>
+                <div class="vocab-card" onclick="speak('aber')">
+                  <h3>aber 🔊</h3>
+                  <p>Nhưng/Tuy nhiên</p>
+                </div>
+                <div class="vocab-card" onclick="speak('dann')">
+                  <h3>dann 🔊</h3>
+                  <p>Thì/Sau đó</p>
+                </div>
+                <div class="vocab-card" onclick="speak('auch')">
+                  <h3>auch 🔊</h3>
+                  <p>Cũng/Nữa</p>
+                </div>
+                <div class="vocab-card" onclick="speak('nur')">
+                  <h3>nur 🔊</h3>
+                  <p>Chỉ/Chỉ có</p>
+                </div>
+                <div class="vocab-card" onclick="speak('noch')">
+                  <h3>noch 🔊</h3>
+                  <p>Còn/Nữa</p>
+                </div>
+                <div class="vocab-card" onclick="speak('heute')">
+                  <h3>heute 🔊</h3>
+                  <p>Hôm nay</p>
+                </div>
+              </div>
+
+              <h3>🏪 Từ vựng siêu thị (Mở rộng giao tiếp thực tế):</h3>
+              <div class="vocab-grid">
+                <div
+                  class="vocab-card"
+                  onclick="speak('die Obst- und Gemüseabteilung')"
+                >
+                  <h3>Obst- und Gemüseabteilung 🔊</h3>
+                  <p>Quầy hoa quả và rau củ</p>
+                </div>
+                <div
+                  class="vocab-card"
+                  onclick="speak('die Getränkeabteilung')"
+                >
+                  <h3>Getränkeabteilung 🔊</h3>
+                  <p>Quầy đồ uống</p>
+                </div>
+                <div
+                  class="vocab-card"
+                  onclick="speak('die Wurst- und Fleischabteilung')"
+                >
+                  <h3>Wurst- und Fleischabteilung 🔊</h3>
+                  <p>Quầy xúc xích và thịt</p>
+                </div>
+                <div class="vocab-card" onclick="speak('der erste Stock')">
+                  <h3>der erste Stock 🔊</h3>
+                  <p>Tầng một</p>
+                </div>
+                <div class="vocab-card" onclick="speak('die Literflasche')">
+                  <h3>die Literflasche 🔊</h3>
+                  <p>Chai một lít</p>
+                </div>
+                <div class="vocab-card" onclick="speak('frisch und knusprig')">
+                  <h3>frisch und knusprig 🔊</h3>
+                  <p>Tươi và giòn</p>
+                </div>
+                <div class="vocab-card" onclick="speak('ganz frisch')">
+                  <h3>ganz frisch 🔊</h3>
+                  <p>Rất tươi</p>
+                </div>
+                <div class="vocab-card" onclick="speak('zum Preis von')">
+                  <h3>zum Preis von 🔊</h3>
+                  <p>Với giá</p>
+                </div>
+              </div>
+              <div class="vocab-card" onclick="speak('die Birnen')">
+                <h3>die Birnen 🔊</h3>
+                <p>Lê</p>
+                <p class="price">1 Euro 75/kg</p>
+              </div>
+              <div class="vocab-card" onclick="speak('die Bananen')">
+                <h3>die Bananen 🔊</h3>
+                <p>Chuối</p>
+                <p class="price">1 Euro 90/0.5kg</p>
+              </div>
+              <div class="vocab-card" onclick="speak('die Tomaten')">
+                <h3>die Tomaten 🔊</h3>
+                <p>Cà chua</p>
+                <p class="price">1 Euro 44/0.5kg</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('die Kartoffeln, festkochende')"
+              >
+                <h3>die Kartoffeln 🔊</h3>
+                <p>Khoai tây (cứng)</p>
+                <p class="price">1 Euro 85/kg</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('das französische Weißbrot')"
+              >
+                <h3>das Weißbrot 🔊</h3>
+                <p>Bánh mì trắng Pháp</p>
+                <p class="price">99 Cent</p>
+              </div>
+              <div class="vocab-card" onclick="speak('die Bio-Milch Almenhof')">
+                <h3>die Bio-Milch 🔊</h3>
+                <p>Sữa hữu cơ</p>
+                <p class="price">1 Euro 07/lít</p>
+              </div>
+              <div class="vocab-card" onclick="speak('McGary Pommes frites')">
+                <h3>Pommes frites 🔊</h3>
+                <p>Khoai tây chiên McGary</p>
+                <p class="price">1 Euro 25/gói</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('das Klosterbach Mineralwasser')"
+              >
+                <h3>das Mineralwasser 🔊</h3>
+                <p>Nước khoáng Klosterbach</p>
+                <p class="price">59 Cent/lít</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('der Wohlstätter Apfelsaft')"
+              >
+                <h3>der Apfelsaft 🔊</h3>
+                <p>Nước ép táo Wohlstätter</p>
+                <p class="price">79 Cent/lít</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('der Parmaschinken aus Italien')"
+              >
+                <h3>der Parmaschinken 🔊</h3>
+                <p>Giăm bông Parma từ Ý</p>
+                <p class="price">Đặc sản cao cấp</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('der Serranoschinken aus Spanien')"
+              >
+                <h3>der Serranoschinken 🔊</h3>
+                <p>Giăm bông Serrano từ Tây Ban Nha</p>
+                <p class="price">Đặc sản cao cấp</p>
+              </div>
+              <div class="vocab-card" onclick="speak('ein ganzes Hähnchen')">
+                <h3>das Hähnchen 🔊</h3>
+                <p>Gà (nguyên con)</p>
+                <p class="price">2 Euro 95/con</p>
+              </div>
+              <div class="vocab-card" onclick="speak('die Fischabteilung')">
+                <h3>die Fischabteilung 🔊</h3>
+                <p>Quầy cá</p>
+                <p class="price">Tầng 1</p>
+              </div>
+              <div class="vocab-card" onclick="speak('das Kilo')">
+                <h3>das Kilo 🔊</h3>
+                <p>Cân (1kg)</p>
+                <p class="price">Đơn vị đo</p>
+              </div>
+              <div class="vocab-card" onclick="speak('das Pfund')">
+                <h3>das Pfund 🔊</h3>
+                <p>Nửa cân (0.5kg)</p>
+                <p class="price">Đơn vị đo</p>
+              </div>
+              <div class="vocab-card" onclick="speak('der Liter')">
+                <h3>der Liter 🔊</h3>
+                <p>Lít</p>
+                <p class="price">Đơn vị đo</p>
+              </div>
+              <div class="vocab-card" onclick="speak('die Packung')">
+                <h3>die Packung 🔊</h3>
+                <p>Gói/Đóng gói</p>
+                <p class="price">Đơn vị bán</p>
+              </div>
+            </div>
+
+            <h3>🗣️ Cụm từ giao tiếp (Click để nghe):</h3>
+            <div class="vocab-grid">
+              <div class="vocab-card" onclick="speak('Liebe Kunden')">
+                <h3>Liebe Kunden! 🔊</h3>
+                <p>Kính chào quý khách hàng!</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Wie teuer sind die Äpfel')"
+              >
+                <h3>Wie teuer sind...? 🔊</h3>
+                <p>... giá bao nhiêu?</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Ich hätte gern ein Kilo Äpfel')"
+              >
+                <h3>Ich hätte gern... 🔊</h3>
+                <p>Tôi muốn...</p>
+              </div>
+              <div class="vocab-card" onclick="speak('Sonst noch etwas')">
+                <h3>Sonst noch etwas? 🔊</h3>
+                <p>Còn gì nữa không?</p>
+              </div>
+              <div class="vocab-card" onclick="speak('Das ist alles')">
+                <h3>Das ist alles 🔊</h3>
+                <p>Thế là hết</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Das macht zusammen vier Euro neunzig')"
+              >
+                <h3>Das macht zusammen... 🔊</h3>
+                <p>Tổng cộng là...</p>
+              </div>
+              <div class="vocab-card" onclick="speak('Greifen Sie zu')">
+                <h3>Greifen Sie zu 🔊</h3>
+                <p>Mời quý khách chọn mua</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Im Sonderangebot diese Woche')"
+              >
+                <h3>Im Sonderangebot 🔊</h3>
+                <p>Trong chương trình khuyến mãi</p>
+              </div>
+              <div class="vocab-card" onclick="speak('Heute besonders billig')">
+                <h3>Besonders billig 🔊</h3>
+                <p>Đặc biệt rẻ</p>
+              </div>
+              <div class="vocab-card" onclick="speak('Oh, wie dumm')">
+                <h3>Wie dumm! 🔊</h3>
+                <p>Thật tệ! (thán từ)</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Haben Sie noch einen Wunsch')"
+              >
+                <h3>Haben Sie noch einen Wunsch? 🔊</h3>
+                <p>Quý khách còn muốn gì nữa không?</p>
+              </div>
+              <div class="vocab-card" onclick="speak('Meine Damen und Herren')">
+                <h3>Meine Damen und Herren 🔊</h3>
+                <p>Kính thưa quý bà và quý ông</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Besuchen Sie unsere Wurst- und Fleischabteilung')"
+              >
+                <h3>Besuchen Sie... 🔊</h3>
+                <p>Mời quý khách thăm...</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Eine besondere Spezialität')"
+              >
+                <h3>Besondere Spezialität 🔊</h3>
+                <p>Đặc sản đặc biệt</p>
+              </div>
+              <div class="vocab-card" onclick="speak('Frisch angekommen')">
+                <h3>Frisch angekommen 🔊</h3>
+                <p>Vừa mới về/tươi</p>
+              </div>
+              <div
+                class="vocab-card"
+                onclick="speak('Aus der Region, ganz frisch')"
+              >
+                <h3>Aus der Region 🔊</h3>
+                <p>Từ vùng địa phương</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dialog Tab -->
+        <div id="dialog" class="tab-content">
+          <h2>💬 Hội thoại đầy đủ (30 câu - Bản word-by-word cho thi)</h2>
+          <div
+            style="
+              background: #fff3cd;
+              padding: 15px;
+              border-radius: 8px;
+              margin-bottom: 20px;
+              border-left: 4px solid #ffc107;
+            "
+          >
+            <strong>🎯 Lưu ý:</strong> Đây là bản dịch word-by-word theo docx
+            gốc để luyện thi nghe (sắp xếp thứ tự) và thi nói. Hãy học thuộc
+            chính xác các câu tiếng Việt này!
+          </div>
+          <div class="dialog-container">
+            <h3>🍎 Phần 1: Lời chào và giới thiệu</h3>
+            <div class="dialog-line seller">
+              <div class="german">1. Liebe Kunden!</div>
+              <div class="vietnamese">Kính chào quý khách hàng!</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                2. In unserer Obst- und Gemüseabteilung bieten wir Ihnen heute:
+              </div>
+              <div class="vietnamese">
+                Tại quầy hoa quả và rau củ chúng tôi cung cấp cho ngài hôm nay:
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                3. 1 Kilo Äpfel für 1 Euro 59, das Kilo Birnen für 1 Euro 75.
+              </div>
+              <div class="vietnamese">
+                1 cân táo 1 Euro 59, cái cân lê cho 1 Euro 75.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">4. Im Sonderangebot diese Woche:</div>
+              <div class="vietnamese">Trong đặc biệt chào hàng này tuần:</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                5. Tomaten, das Pfund für 1 Euro 44, und Kartoffeln,
+                festkochende, das Kilo für 1 Euro 85, Bananen, das Pfund, 1 Euro
+                90.
+              </div>
+              <div class="vietnamese">
+                Cà chua, cái nửa cân cho 1 Euro 44, và khoai tây, cứng, cái cân
+                cho 1 Euro 85, chuối, cái nửa cân, 1 Euro 90.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">6. Greifen Sie zu.</div>
+              <div class="vietnamese">Lấy đi ngài.</div>
+            </div>
+
+            <h3>🛒 Phần 2: Khuyến mãi đặc biệt</h3>
+            <div class="dialog-line seller">
+              <div class="german">7. Und heute im Sonderangebot:</div>
+              <div class="vietnamese">Và hôm nay trong đặc biệt chào hàng:</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                8. Französisches Weißbrot, frisch und knusprig, nur noch 99
+                Cent.
+              </div>
+              <div class="vietnamese">
+                Pháp trắng bánh mì, tươi và giòn, chỉ còn 99 cent.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                9. McGary Pommes frites, die Packung nur 1 Euro 25.
+              </div>
+              <div class="vietnamese">
+                McGary khoai tây chiên, cái đóng gói chỉ 1 Euro 25.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                10. Bio-Milch Almenhof, der Liter für 1 Euro 07.
+              </div>
+              <div class="vietnamese">
+                Hữu cơ-sữa Almenhof, cái lít cho 1 Euro 07.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                11. In unserer Getränkeabteilung gibt es Klosterbach
+                Mineralwasser, die Literflasche heute für nur 59 Cent,
+                Wohlstätter Apfelsaft, den Liter für 79 Cent.
+              </div>
+              <div class="vietnamese">
+                Trong của chúng tôi đồ uống gian hàng có nó Klosterbach khoáng
+                nước, cái lít chai hôm nay cho chỉ 59 Cent, Wohlstätter táo nước
+                ép, cái lít cho 79 Cent.
+              </div>
+            </div>
+
+            <h3>🛍️ Phần 3: Cuộc hội thoại mua sắm</h3>
+            <div class="dialog-line customer">
+              <div class="german">
+                12. Guten Tag, ich hätte gern ein Kilo Äpfel.
+              </div>
+              <div class="vietnamese">Tốt ngày, tôi có thích một cân táo.</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">13. Gerne.</div>
+              <div class="vietnamese">Thích.</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">14. Sonst noch etwas?</div>
+              <div class="vietnamese">Ngoài ra còn gì đó?</div>
+            </div>
+
+            <div class="dialog-line customer">
+              <div class="german">15. Ja, die Bananen sehen schön aus.</div>
+              <div class="vietnamese">Vâng, cái chuối trông đẹp.</div>
+            </div>
+
+            <div class="dialog-line customer">
+              <div class="german">16. Bitte fünf Bananen.</div>
+              <div class="vietnamese">Làm ơn năm chuối.</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">17. Haben Sie noch einen Wunsch?</div>
+              <div class="vietnamese">Có ngài vẫn một mong muốn?</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                18. Wir haben Birnen, aus der Region, ganz frisch, das Kilo für
+                1 Euro 50.
+              </div>
+              <div class="vietnamese">
+                Chúng tôi có lê, từ cái vùng, hoàn toàn tươi, cái cân cho 1 Euro
+                50.
+              </div>
+            </div>
+
+            <div class="dialog-line customer">
+              <div class="german">19. Gut, dann auch noch ein Kilo Birnen.</div>
+              <div class="vietnamese">Tốt, sau đó cũng còn một cân lê.</div>
+            </div>
+
+            <div class="dialog-line customer">
+              <div class="german">20. Das ist alles.</div>
+              <div class="vietnamese">Đó là tất cả.</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                21. Die Äpfel, die Bananen und die Birnen ... das macht zusammen
+                4 Euro 90.
+              </div>
+              <div class="vietnamese">
+                Cái táo, cái chuối và cái lê ... nó làm cùng nhau 4 Euro 90.
+              </div>
+            </div>
+
+            <div class="dialog-line customer">
+              <div class="german">
+                22. Oh, wie dumm, ich sehe gerade, ich habe nur drei Euro dabei.
+              </div>
+              <div class="vietnamese">
+                Ồ, như ngốc, tôi thấy ngay, tôi có chỉ ba Euro ở đây.
+              </div>
+            </div>
+
+            <div class="dialog-line customer">
+              <div class="german">23. Wie teuer sind die Bananen?</div>
+              <div class="vietnamese">Như đắt là cái chuối?</div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">24. 2 Euro.</div>
+              <div class="vietnamese">2 Euro.</div>
+            </div>
+
+            <div class="dialog-line customer">
+              <div class="german">
+                25. Dann geben Sie mir nur die Äpfel und die Birnen.
+              </div>
+              <div class="vietnamese">
+                Sau đó đưa ngài cho tôi chỉ cái táo và cái lê.
+              </div>
+            </div>
+
+            <h3>🥩 Phần 4: Quầy thịt và xúc xích</h3>
+            <div class="dialog-line seller">
+              <div class="german">
+                26. Meine Damen und Herren, besuchen Sie unsere Wurst- und
+                Fleischabteilung.
+              </div>
+              <div class="vietnamese">
+                Của tôi quý bà và quý ông, thăm ngài của chúng tôi xúc xích và
+                thịt gian hàng.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                27. Heute: Parmaschinken aus Italien und Serranoschinken aus
+                Spanien, frisch angekommen -- eine besondere Spezialität.
+              </div>
+              <div class="vietnamese">
+                Hôm nay: Parma giăm bông từ Italia và Serrano giăm bông từ Tây
+                Ban Nha, tươi đã đến -- một đặc biệt đặc sản.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                28. Heute besonders billig: ein ganzes Hähnchen für nur 2 Euro
+                95.
+              </div>
+              <div class="vietnamese">
+                Hôm nay đặc biệt rẻ: một hoàn toàn gà con cho chỉ 2 Euro 95.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                29. Und 2 Hähnchen gibt es zum Preis von fünf Euro.
+              </div>
+              <div class="vietnamese">
+                Và 2 gà con có nó để giá của năm Euro.
+              </div>
+            </div>
+
+            <div class="dialog-line seller">
+              <div class="german">
+                30. Besuchen Sie auch unsere Fischabteilung im ersten Stock.
+              </div>
+              <div class="vietnamese">
+                Thăm ngài cũng của chúng tôi cá gian hàng trong thứ nhất tầng.
+              </div>
+            </div>
+          </div>
+
+          <button class="btn" onclick="playDialog()">
+            🔊 Nghe toàn bộ hội thoại
+          </button>
+          <button class="btn" onclick="testListening()">
+            🎧 Luyện thi NGHE (sắp xếp thứ tự)
+          </button>
+          <button class="btn" onclick="testSpeaking()">
+            🗣️ Luyện thi NÓI (đọc theo vai)
+          </button>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz" class="tab-content">
+          <h2>🎯 Kiểm tra kiến thức toàn diện</h2>
+
+          <div
+            style="
+              background: #e3f2fd;
+              padding: 15px;
+              border-radius: 8px;
+              margin-bottom: 20px;
+              border-left: 4px solid #2196f3;
+            "
+          >
+            <strong>📋 Quiz này bao gồm:</strong><br />
+            • Từ vựng thực phẩm & giá cả<br />
+            • Cụm từ giao tiếp quan trọng<br />
+            • Số đếm & tiền tệ (cho thi nói)<br />
+            • Nhận biết vai trong hội thoại<br />
+            • Từ khóa đặc biệt word-by-word (cho thi nghe)
+          </div>
+
+          <div class="score">
+            Điểm: <span id="score">0</span>/<span id="total">0</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+          </div>
+
+          <div id="quiz-container"></div>
+
+          <div style="text-align: center; margin: 20px 0">
+            <button class="btn" onclick="startQuiz()">🔄 Làm lại</button>
+            <button
+              class="btn"
+              onclick="nextQuestion()"
+              id="next-btn"
+              style="display: none"
+            >
+              ➡️ Câu tiếp theo
+            </button>
+            <button class="btn" onclick="startAdvancedQuiz()">
+              🎓 Quiz nâng cao
+            </button>
+          </div>
+
+          <div id="advanced-quiz" style="display: none">
+            <h3>🎓 Quiz nâng cao - Mô phỏng thi thật</h3>
+            <div id="advanced-container"></div>
+          </div>
+        </div>
+
+        <!-- Practice Tab -->
+        <div id="practice" class="tab-content">
+          <h2>🎭 Luyện thi chuyên sâu</h2>
+
+          <div class="dialog-container">
+            <h3>🎧 Luyện thi NGHE - Sắp xếp thứ tự nâng cao</h3>
+            <p>
+              <strong>Mô phỏng thi thật:</strong> Nghe câu tiếng Đức, tìm câu
+              tiếng Việt word-by-word tương ứng
+            </p>
+
+            <div
+              style="
+                background: #fff3cd;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 15px 0;
+                border-left: 4px solid #ffc107;
+              "
+            >
+              <strong>⚡ Mẹo thi nghe hiệu quả:</strong><br />
+              • <strong>Nghe từ khóa đầu tiên:</strong> "Liebe Kunden" = câu 1,
+              "Guten Tag" = câu 12<br />
+              • <strong>Chú ý số tiền:</strong> "4 Euro 90" = câu 21, "2 Euro
+              95" = câu 28<br />
+              • <strong>Nhận biết thứ tự logic:</strong> Giới thiệu → Mua sắm →
+              Thịt<br />
+              • <strong>Từ đặc biệt:</strong> "wie dumm" = câu 22, "Meine Damen"
+              = câu 26
+            </div>
+
+            <div id="listening-practice"></div>
+            <div style="text-align: center; margin: 15px 0">
+              <button class="btn" onclick="startListeningTest()">
+                🔄 Bắt đầu luyện nghe
+              </button>
+              <button class="btn" onclick="startRandomListening()">
+                🎲 Luyện nghe ngẫu nhiên
+              </button>
+              <button class="btn" onclick="startFullListening()">
+                📻 Nghe toàn bộ 30 câu
+              </button>
+            </div>
+          </div>
+
+          <div class="dialog-container">
+            <h3>🗣️ Luyện thi NÓI - Đóng vai nâng cao</h3>
+            <p>
+              <strong>Hướng dẫn:</strong> Đọc to câu tiếng Đức theo vai của mình
+              với intonation tự nhiên
+            </p>
+
+            <div
+              style="
+                background: #fff3cd;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 15px 0;
+                border-left: 4px solid #ffc107;
+              "
+            >
+              <strong>💡 Lưu ý quan trọng cho thi nói:</strong><br />
+              - <strong>Số đếm:</strong> Phải phát âm rõ "eins, zwei, drei,
+              vier, fünf"<br />
+              - <strong>Tiền tệ:</strong> "Ein Euro neunundfünfzig" (không phải
+              "1 Euro 59")<br />
+              - <strong>Intonation:</strong> Câu hỏi lên giọng ↗️, câu khẳng
+              định xuống giọng ↘️<br />
+              - <strong>Pause:</strong> Dừng tự nhiên giữa các cụm từ
+            </div>
+
+            <div style="margin: 15px 0">
+              <button class="btn" onclick="practiceRole('customer')">
+                👤 Luyện vai KHÁCH HÀNG
+              </button>
+              <button class="btn" onclick="practiceRole('seller')">
+                🛒 Luyện vai NGƯỜI BÁN
+              </button>
+              <button class="btn" onclick="practiceRole('both')">
+                🎭 Luyện CẢ HAI VAI
+              </button>
+              <button class="btn" onclick="practiceNumbers()">
+                💰 Luyện SỐ & TIỀN TỆ
+              </button>
+              <button class="btn" onclick="startPronunciationTest()">
+                🎤 Test phát âm
+              </button>
+              <button class="btn" onclick="startSpeedReading()">
+                ⚡ Luyện đọc nhanh
+              </button>
+            </div>
+            <div id="speaking-practice"></div>
+          </div>
+
+          <div class="dialog-container">
+            <h3>💡 Mẹo luyện tập hiệu quả:</h3>
+            <div style="display: grid; gap: 15px">
+              <div
+                style="
+                  padding: 15px;
+                  background: #e8f5e8;
+                  border-radius: 8px;
+                  border-left: 4px solid #28a745;
+                "
+              >
+                <strong>🎯 Cho thi NGHE:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px">
+                  <li>
+                    Học thuộc lòng từ khóa đặc biệt: "như ngốc", "thăm ngài",
+                    "cái cân"
+                  </li>
+                  <li>
+                    Tập nghe 1 câu tiếng Đức → tìm ngay câu tiếng Việt tương ứng
+                  </li>
+                  <li>
+                    Chú ý thứ tự: câu 1-11 (giới thiệu), 12-25 (mua sắm), 26-30
+                    (thịt)
+                  </li>
+                </ul>
+              </div>
+              <div
+                style="
+                  padding: 15px;
+                  background: #e3f2fd;
+                  border-radius: 8px;
+                  border-left: 4px solid #2196f3;
+                "
+              >
+                <strong>🗣️ Cho thi NÓI:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px">
+                  <li>Đọc to nhiều lần để quen phát âm</li>
+                  <li>Tập chuyển đổi nhanh giữa vai khách hàng/người bán</li>
+                  <li>
+                    Nhấn mạnh intonation: câu hỏi lên giọng, câu khẳng định
+                    xuống giọng
+                  </li>
+                </ul>
+              </div>
+              <div
+                style="
+                  padding: 15px;
+                  background: #fff3e0;
+                  border-radius: 8px;
+                  border-left: 4px solid #ff9800;
+                "
+              >
+                <strong>⚡ Luyện tập hàng ngày:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px">
+                  <li>Sáng: Luyện nghe 15 phút (tập sắp xếp thứ tự)</li>
+                  <li>Chiều: Luyện nói 15 phút (đóng vai liên tục)</li>
+                  <li>Tối: Ôn lại từ vựng và cụm từ khó</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Tab switching
+      function showTab(tabName) {
+        // Hide all tabs
+        const tabs = document.querySelectorAll(".tab-content");
+        tabs.forEach((tab) => tab.classList.remove("active"));
+
+        // Remove active class from all nav tabs
+        const navTabs = document.querySelectorAll(".nav-tab");
+        navTabs.forEach((tab) => tab.classList.remove("active"));
+
+        // Show selected tab
+        document.getElementById(tabName).classList.add("active");
+        event.target.classList.add("active");
+      }
+
+      // Quiz functionality
+      const quizQuestions = [
+        // Từ vựng cơ bản
+        {
+          question: "Táo bằng tiếng Đức là gì?",
+          options: ["die Birnen", "die Äpfel", "die Bananen", "die Tomaten"],
+          correct: 1,
+        },
+        {
+          question: "Giá 1 kg lê từ vùng địa phương là bao nhiêu?",
+          options: ["1 Euro 50", "1 Euro 75", "1 Euro 90", "1 Euro 44"],
+          correct: 0,
+        },
+        // Cụm từ giao tiếp
+        {
+          question: "'Ich hätte gern...' có nghĩa là gì?",
+          options: ["Tôi có...", "Tôi muốn...", "Tôi thích...", "Tôi cần..."],
+          correct: 1,
+        },
+        {
+          question: "Bánh mì trắng Pháp giá bao nhiêu?",
+          options: ["1 Euro 07", "99 Cent", "79 Cent", "59 Cent"],
+          correct: 1,
+        },
+        // Địa điểm và xuất xứ
+        {
+          question: "Giăm bông Parma đến từ đâu?",
+          options: ["Tây Ban Nha", "Pháp", "Ý", "Đức"],
+          correct: 2,
+        },
+        {
+          question: "'Das macht zusammen...' có nghĩa là gì?",
+          options: [
+            "Tổng cộng là...",
+            "Còn lại là...",
+            "Giảm giá...",
+            "Thêm vào...",
+          ],
+          correct: 0,
+        },
+        // Số tiền (quan trọng)
+        {
+          question: "Một con gà nguyên con giá bao nhiêu?",
+          options: ["2 Euro 95", "5 Euro", "1 Euro 85", "1 Euro 25"],
+          correct: 0,
+        },
+        {
+          question: "Nước khoáng Klosterbach giá bao nhiêu?",
+          options: ["79 Cent", "99 Cent", "59 Cent", "1 Euro 07"],
+          correct: 2,
+        },
+        // Từ đặc biệt word-by-word
+        {
+          question: "'Greifen Sie zu' có nghĩa là gì?",
+          options: [
+            "Cảm ơn bạn",
+            "Tạm biệt",
+            "Mời quý khách chọn mua",
+            "Xin lỗi",
+          ],
+          correct: 2,
+        },
+        {
+          question: "Quầy cá ở tầng nào?",
+          options: ["Tầng trệt", "Tầng một", "Tầng hai", "Tầng ba"],
+          correct: 1,
+        },
+        {
+          question: "Khoai tây chiên McGary giá bao nhiêu?",
+          options: ["1 Euro 07", "1 Euro 25", "1 Euro 44", "1 Euro 85"],
+          correct: 1,
+        },
+        {
+          question: "'Wie dumm' có nghĩa là gì?",
+          options: ["Thật tuyệt", "Thật tệ", "Thật đắt", "Thật rẻ"],
+          correct: 1,
+        },
+        // Số đếm tiếng Đức (mới - quan trọng cho thi nói)
+        {
+          question: "Số 5 bằng tiếng Đức là gì?",
+          options: ["vier", "fünf", "sechs", "drei"],
+          correct: 1,
+        },
+        {
+          question: "'99 Cent' đọc như thế nào?",
+          options: [
+            "neun neun Cent",
+            "neunundneunzig Cent",
+            "neunzig neun Cent",
+            "nine nine Cent",
+          ],
+          correct: 1,
+        },
+        {
+          question: "'4 Euro 90' đọc như thế nào?",
+          options: [
+            "vier Euro neunzig",
+            "four Euro ninety",
+            "vier Euro neunundneunzig",
+            "vierzig Euro neun",
+          ],
+          correct: 0,
+        },
+        // Nhận biết vai trong hội thoại
+        {
+          question: "Câu 'Liebe Kunden!' là của ai?",
+          options: ["Khách hàng", "Người bán hàng", "Cả hai", "Không rõ"],
+          correct: 1,
+        },
+        {
+          question: "Câu 'Guten Tag, ich hätte gern...' là của ai?",
+          options: ["Khách hàng", "Người bán hàng", "Cả hai", "Không rõ"],
+          correct: 0,
+        },
+        {
+          question: "'Meine Damen und Herren' dùng để làm gì?",
+          options: [
+            "Chào tạm biệt",
+            "Giới thiệu sản phẩm",
+            "Hỏi giá",
+            "Cảm ơn",
+          ],
+          correct: 1,
+        },
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+      let answered = false;
+
+      function startQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        answered = false;
+        document.getElementById("score").textContent = score;
+        document.getElementById("total").textContent = quizQuestions.length;
+        updateProgressBar();
+        showQuestion();
+      }
+
+      function showQuestion() {
+        if (currentQuestion >= quizQuestions.length) {
+          showFinalScore();
+          return;
+        }
+
+        const question = quizQuestions[currentQuestion];
+        const container = document.getElementById("quiz-container");
+
+        container.innerHTML = `
+                <div class="quiz-card">
+                    <div class="question">${currentQuestion + 1}. ${
+          question.question
+        }</div>
+                    <div class="options">
+                        ${question.options
+                          .map(
+                            (option, index) =>
+                              `<div class="option" onclick="selectAnswer(${index})">${option}</div>`
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            `;
+
+        answered = false;
+        document.getElementById("next-btn").style.display = "none";
+      }
+
+      function selectAnswer(selectedIndex) {
+        if (answered) return;
+
+        const question = quizQuestions[currentQuestion];
+        const options = document.querySelectorAll(".option");
+        const quizCard = document.querySelector(".quiz-card");
+
+        options[selectedIndex].classList.add("selected");
+
+        setTimeout(() => {
+          options.forEach((option, index) => {
+            if (index === question.correct) {
+              option.classList.add("correct");
+            } else if (index === selectedIndex && index !== question.correct) {
+              option.classList.add("incorrect");
+            }
+          });
+
+          if (selectedIndex === question.correct) {
+            score++;
+            quizCard.classList.add("correct");
+          } else {
+            quizCard.classList.add("incorrect");
+          }
+
+          document.getElementById("score").textContent = score;
+          answered = true;
+          document.getElementById("next-btn").style.display = "inline-block";
+        }, 500);
+      }
+
+      function nextQuestion() {
+        currentQuestion++;
+        updateProgressBar();
+        showQuestion();
+      }
+
+      function updateProgressBar() {
+        const progress = (currentQuestion / quizQuestions.length) * 100;
+        document.getElementById("progress-bar").style.width = progress + "%";
+      }
+
+      function showFinalScore() {
+        const container = document.getElementById("quiz-container");
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+        let message = "";
+
+        if (percentage >= 80) {
+          message = "🎉 Xuất sắc! Bạn đã nắm vững bài học!";
+        } else if (percentage >= 60) {
+          message = "👍 Khá tốt! Hãy ôn luyện thêm một chút.";
+        } else {
+          message = "💪 Hãy xem lại từ vựng và thử lại nhé!";
+        }
+
+        container.innerHTML = `
+                <div class="quiz-card">
+                    <h3>🏆 Kết quả cuối cùng</h3>
+                    <div class="score" style="font-size: 2em; margin: 20px 0;">
+                        ${score}/${quizQuestions.length} (${percentage}%)
+                    </div>
+                    <p style="font-size: 1.2em; text-align: center;">${message}</p>
+                </div>
+            `;
+
+        document.getElementById("next-btn").style.display = "none";
+      }
+
+      // Simulate audio (placeholder)
+      function playDialog() {
+        alert(
+          "🔊 Chức năng âm thanh sẽ được cập nhật trong phiên bản tiếp theo!"
+        );
+      }
+
+      // Test modes
+      function testListening() {
+        alert(
+          "🎧 Chế độ luyện thi NGHE: Sẽ phát câu tiếng Đức ngẫu nhiên, bạn tìm câu tiếng Việt tương ứng!"
+        );
+      }
+
+      function testSpeaking() {
+        alert(
+          "🗣️ Chế độ luyện thi NÓI: Sẽ hiển thị tình huống, bạn đóng vai và nói tiếng Đức!"
+        );
+      }
+
+      // Listening practice
+      let listeningQuestions = [];
+      let currentListeningQ = 0;
+
+      function startListeningTest() {
+        // Create randomized listening questions from dialog
+        listeningQuestions = [
+          {
+            german: "Liebe Kunden!",
+            vietnamese: "Kính chào quý khách hàng!",
+            number: 1,
+          },
+          {
+            german: "Guten Tag, ich hätte gern ein Kilo Äpfel.",
+            vietnamese: "Tốt ngày, tôi có thích một cân táo những.",
+            number: 12,
+          },
+          {
+            german:
+              "Oh, wie dumm, ich sehe gerade, ich habe nur drei Euro dabei.",
+            vietnamese: "Ồ, như ngốc, tôi thấy ngay, tôi có chỉ ba Euro ở đây.",
+            number: 22,
+          },
+          {
+            german:
+              "Meine Damen und Herren, besuchen Sie unsere Wurst- und Fleischabteilung.",
+            vietnamese:
+              "Của tôi quý bà và quý ông, thăm ngài của chúng tôi xúc xích và thịt gian hàng.",
+            number: 26,
+          },
+          {
+            german: "Das macht zusammen 4 Euro 90.",
+            vietnamese: "Nó làm cùng nhau 4 Euro 90.",
+            number: 21,
+          },
+        ];
+
+        currentListeningQ = 0;
+        showListeningQuestion();
+      }
+
+      function showListeningQuestion() {
+        if (currentListeningQ >= listeningQuestions.length) {
+          document.getElementById("listening-practice").innerHTML = `
+                    <div style="text-align: center; padding: 20px; background: #d4edda; border-radius: 8px;">
+                        <h3>🎉 Hoàn thành!</h3>
+                        <p>Bạn đã luyện xong ${listeningQuestions.length} câu. Hãy luyện thêm để thuộc hết 30 câu!</p>
+                    </div>
+                `;
+          return;
+        }
+
+        const q = listeningQuestions[currentListeningQ];
+        document.getElementById("listening-practice").innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <h4>🎧 Câu ${currentListeningQ + 1}/${
+          listeningQuestions.length
+        }</h4>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>Tiếng Đức:</strong> "${q.german}"
+                    </div>
+                    <p><strong>Hãy tìm câu tiếng Việt tương ứng (câu số ${
+                      q.number
+                    }):</strong></p>
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 10px 0; cursor: pointer;" onclick="showVietnamese()">
+                        <em>👆 Click để xem đáp án</em>
+                    </div>
+                    <div id="answer-area"></div>
+                    <button class="btn" onclick="nextListeningQ()" style="margin-top: 15px;">Câu tiếp theo →</button>
+                </div>
+            `;
+      }
+
+      function showVietnamese() {
+        const q = listeningQuestions[currentListeningQ];
+        document.getElementById("answer-area").innerHTML = `
+                <div style="background: #d4edda; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                    <strong>Đáp án (câu ${q.number}):</strong> "${q.vietnamese}"
+                </div>
+            `;
+      }
+
+      function nextListeningQ() {
+        currentListeningQ++;
+        showListeningQuestion();
+      }
+
+      // Speaking practice
+      function practiceRole(role) {
+        const container = document.getElementById("speaking-practice");
+        let content = "";
+
+        if (role === "customer") {
+          content = `
+                    <div style="background: white; padding: 20px; border-radius: 8px;">
+                        <h4>👤 Luyện vai KHÁCH HÀNG</h4>
+                        <p>Hãy đọc to các câu của khách hàng với giọng điệu tự nhiên:</p>
+                        <div class="customer" style="margin: 10px 0; padding: 15px; background: linear-gradient(135deg, #00b894, #00a085); color: white; border-radius: 8px;">
+                            <strong>Câu 12:</strong> "Guten Tag, ich hätte gern ein Kilo Äpfel." 
+                            <button class="audio-btn" onclick="speak('Guten Tag, ich hätte gern ein Kilo Äpfel')">🔊</button>
+                        </div>
+                        <div class="customer" style="margin: 10px 0; padding: 15px; background: linear-gradient(135deg, #00b894, #00a085); color: white; border-radius: 8px;">
+                            <strong>Câu 15:</strong> "Ja, die Bananen sehen schön aus."
+                            <button class="audio-btn" onclick="speak('Ja, die Bananen sehen schön aus')">🔊</button>
+                        </div>
+                        <div class="customer" style="margin: 10px 0; padding: 15px; background: linear-gradient(135deg, #00b894, #00a085); color: white; border-radius: 8px;">
+                            <strong>Câu 22:</strong> "Oh, wie dumm, ich sehe gerade, ich habe nur drei Euro dabei."
+                            <button class="audio-btn" onclick="speak('Oh, wie dumm, ich sehe gerade, ich habe nur drei Euro dabei')">🔊</button>
+                        </div>
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>💡 Mẹo:</strong> Khách hàng nói với giọng điệu thân thiện, hơi ngập ngừng khi đếm tiền
+                        </div>
+                    </div>
+                `;
+        } else if (role === "seller") {
+          content = `
+                    <div style="background: white; padding: 20px; border-radius: 8px;">
+                        <h4>🛒 Luyện vai NGƯỜI BÁN</h4>
+                        <p>Hãy đọc to các câu của người bán với giọng điệu chuyên nghiệp:</p>
+                        <div class="seller" style="margin: 10px 0; padding: 15px; background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border-radius: 8px;">
+                            <strong>Câu 1:</strong> "Liebe Kunden!"
+                            <button class="audio-btn" onclick="speak('Liebe Kunden')">🔊</button>
+                        </div>
+                        <div class="seller" style="margin: 10px 0; padding: 15px; background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border-radius: 8px;">
+                            <strong>Câu 13:</strong> "Gerne."
+                            <button class="audio-btn" onclick="speak('Gerne')">🔊</button>
+                        </div>
+                        <div class="seller" style="margin: 10px 0; padding: 15px; background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border-radius: 8px;">
+                            <strong>Câu 21:</strong> "Die Äpfel, die Bananen und die Birnen ... das macht zusammen vier Euro neunzig."
+                            <button class="audio-btn" onclick="speak('Die Äpfel, die Bananen und die Birnen, das macht zusammen vier Euro neunzig')">🔊</button>
+                        </div>
+                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>💡 Mẹo:</strong> Người bán nói rõ ràng, chậm rãi, nhấn mạnh giá cả
+                        </div>
+                    </div>
+                `;
+        } else if (role === "numbers") {
+          content = `
+                    <div style="background: white; padding: 20px; border-radius: 8px;">
+                        <h4>💰 Luyện SỐ & TIỀN TỆ</h4>
+                        <p>Quan trọng nhất cho thi nói - phải phát âm số và tiền chính xác:</p>
+                        <div style="display: grid; gap: 10px; margin: 15px 0;">
+                            <div style="padding: 10px; background: #fff3cd; border-radius: 5px;">
+                                <strong>1 Euro 59:</strong> "Ein Euro neunundfünfzig" 
+                                <button class="audio-btn" onclick="speak('Ein Euro neunundfünfzig')">🔊</button>
+                            </div>
+                            <div style="padding: 10px; background: #fff3cd; border-radius: 5px;">
+                                <strong>1 Euro 75:</strong> "Ein Euro fünfundsiebzig"
+                                <button class="audio-btn" onclick="speak('Ein Euro fünfundsiebzig')">🔊</button>
+                            </div>
+                            <div style="padding: 10px; background: #fff3cd; border-radius: 5px;">
+                                <strong>4 Euro 90:</strong> "Vier Euro neunzig"
+                                <button class="audio-btn" onclick="speak('Vier Euro neunzig')">🔊</button>
+                            </div>
+                            <div style="padding: 10px; background: #fff3cd; border-radius: 5px;">
+                                <strong>2 Euro 95:</strong> "Zwei Euro fünfundneunzig"
+                                <button class="audio-btn" onclick="speak('Zwei Euro fünfundneunzig')">🔊</button>
+                            </div>
+                            <div style="padding: 10px; background: #fff3cd; border-radius: 5px;">
+                                <strong>99 Cent:</strong> "Neunundneunzig Cent"
+                                <button class="audio-btn" onclick="speak('Neunundneunzig Cent')">🔊</button>
+                            </div>
+                        </div>
+                        <div style="background: #ffe6e6; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>⚠️ Lỗi thường gặp:</strong><br>
+                            - Đừng nói "one Euro fifty-nine" (kiểu Anh)<br>
+                            - Đừng nói từng chữ số riêng lẻ<br>
+                            - Nhớ "und" trong số phức hợp: "neun<strong>und</strong>neunzig"
+                        </div>
+                    </div>
+                `;
+        } else {
+          content = `
+                    <div style="background: white; padding: 20px; border-radius: 8px;">
+                        <h4>🎭 Luyện CẢ HAI VAI</h4>
+                        <p>Hãy đọc to luân phiên theo cuộc hội thoại hoàn chỉnh 30 câu ở tab Hội thoại!</p>
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>💡 Mẹo:</strong> Đổi giọng điệu khi chuyển vai:<br>
+                            - <strong>Người bán:</strong> Giọng chuyên nghiệp, rõ ràng, nhấn mạnh giá<br>
+                            - <strong>Khách hàng:</strong> Giọng thân thiện, tự nhiên, có suy nghĩ<br>
+                            - <strong>Pause:</strong> Dừng 2-3 giây giữa mỗi câu
+                        </div>
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong>🎯 Lộ trình luyện:</strong><br>
+                            1. Đọc từng vai riêng biệt trước<br>
+                            2. Sau đó mới luyện đối thoại liên tục<br>
+                            3. Cuối cùng luyện không nhìn text
+                        </div>
+                    </div>
+                `;
+        }
+
+        container.innerHTML = content;
+      }
+
+      // Advanced Quiz
+      function startAdvancedQuiz() {
+        const advancedQuestions = [
+          {
+            type: "listening",
+            question: "🎧 Nghe và chọn câu tiếng Việt đúng:",
+            audio: "Liebe Kunden",
+            options: [
+              "Kính chào quý khách hàng!",
+              "Cảm ơn quý khách!",
+              "Chào tạm biệt!",
+              "Xin chào các bạn!",
+            ],
+            correct: 0,
+          },
+          {
+            type: "speaking",
+            question: '🗣️ Đọc số tiền này bằng tiếng Đức: "1 Euro 59"',
+            answer: "Ein Euro neunundfünfzig",
+            options: [
+              "Ein Euro neunundfünfzig",
+              "Eins Euro neunundfünfzig",
+              "Ein Euro fünfundneunzig",
+              "Ein Euro neunzehnfünf",
+            ],
+            correct: 0,
+          },
+          {
+            type: "context",
+            question: '🎭 Trong tình huống nào khách hàng nói "Wie dumm"?',
+            options: [
+              "Khi thấy hàng đẹp",
+              "Khi phát hiện không đủ tiền",
+              "Khi hài lòng với giá",
+              "Khi chào hỏi",
+            ],
+            correct: 1,
+          },
+        ];
+
+        document.getElementById("advanced-quiz").style.display = "block";
+        document.getElementById("advanced-container").innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 8px;">
+                    <p>Quiz nâng cao với 3 dạng câu hỏi khác nhau để chuẩn bị thi thật!</p>
+                    <div id="advanced-questions"></div>
+                    <button class="btn" onclick="showAdvancedQuestion(0)">Bắt đầu</button>
+                </div>
+            `;
+      }
+
+      // Random listening practice
+      function startRandomListening() {
+        const randomQuestions = [
+          {
+            german:
+              "In unserer Obst- und Gemüseabteilung bieten wir Ihnen heute:",
+            vietnamese:
+              "Tại quầy hoa quả và rau củ chúng tôi cung cấp cho ngài hôm nay:",
+            number: 2,
+          },
+          {
+            german: "Im Sonderangebot diese Woche:",
+            vietnamese: "Trong đặc biệt chào hàng này tuần:",
+            number: 4,
+          },
+          {
+            german:
+              "Französisches Weißbrot, frisch und knusprig, nur noch 99 Cent.",
+            vietnamese: "Pháp trắng bánh mì, tươi và giòn, chỉ còn 99 cent.",
+            number: 8,
+          },
+          {
+            german: "Haben Sie noch einen Wunsch?",
+            vietnamese: "Có ngài vẫn một mong muốn?",
+            number: 17,
+          },
+          {
+            german:
+              "Heute besonders billig: ein ganzes Hähnchen für nur 2 Euro 95.",
+            vietnamese:
+              "Hôm nay đặc biệt rẻ: một hoàn toàn gà con cho chỉ 2 Euro 95.",
+            number: 28,
+          },
+        ];
+
+        // Shuffle questions
+        const shuffled = randomQuestions.sort(() => Math.random() - 0.5);
+        listeningQuestions = shuffled;
+        currentListeningQ = 0;
+        showListeningQuestion();
+      }
+
+      // Full listening practice
+      function startFullListening() {
+        document.getElementById("listening-practice").innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 8px;">
+                    <h4>📻 Nghe toàn bộ 30 câu liên tục</h4>
+                    <p>Chế độ này sẽ phát 30 câu liên tục. Hãy cố gắng theo dõi và nhận biết thứ tự!</p>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>📝 Chuẩn bị:</strong> Lấy giấy bút, ghi số thứ tự câu mà bạn nghe được
+                    </div>
+                    <button class="btn" onclick="playFullDialog()">▶️ Bắt đầu nghe 30 câu</button>
+                    <button class="btn" onclick="pauseFullDialog()">⏸️ Tạm dừng</button>
+                </div>
+            `;
+      }
+
+      // Pronunciation test
+      function startPronunciationTest() {
+        const container = document.getElementById("speaking-practice");
+        container.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 8px;">
+                    <h4>🎤 Test phát âm - Tự đánh giá</h4>
+                    <p>Nghe mẫu, sau đó tự đọc và so sánh:</p>
+                    <div id="pronunciation-items">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <strong>1. Chào hỏi:</strong> "Guten Tag, ich hätte gern..."
+                            <button class="audio-btn" onclick="speak('Guten Tag, ich hätte gern ein Kilo Äpfel')">🔊 Nghe mẫu</button>
+                            <div style="margin-top: 10px;">
+                                <em>👆 Nghe xong, hãy đọc to và so sánh với mẫu</em>
+                            </div>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <strong>2. Số tiền:</strong> "Das macht zusammen vier Euro neunzig"
+                            <button class="audio-btn" onclick="speak('Das macht zusammen vier Euro neunzig')">🔊 Nghe mẫu</button>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <strong>3. Thán từ:</strong> "Oh, wie dumm!"
+                            <button class="audio-btn" onclick="speak('Oh, wie dumm')">🔊 Nghe mẫu</button>
+                        </div>
+                    </div>
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>💡 Tự đánh giá:</strong><br>
+                        ✅ Phát âm rõ ràng từng từ<br>
+                        ✅ Intonation đúng (câu hỏi lên giọng)<br>
+                        ✅ Tốc độ vừa phải, không vội vã
+                    </div>
+                </div>
+            `;
+      }
+
+      // Speed reading practice
+      function startSpeedReading() {
+        const container = document.getElementById("speaking-practice");
+        container.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 8px;">
+                    <h4>⚡ Luyện đọc nhanh - Tăng tốc độ giao tiếp</h4>
+                    <p>Đọc những câu này càng nhanh càng tốt nhưng vẫn rõ ràng:</p>
+                    
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>🎯 Mục tiêu:</strong> Đọc mỗi câu trong 3-4 giây
+                    </div>
+                    
+                    <div id="speed-sentences">
+                        <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px;">
+                            <strong>1.</strong> "Ich hätte gern ein Kilo Äpfel"
+                            <button class="audio-btn" onclick="speak('Ich hätte gern ein Kilo Äpfel')">🔊</button>
+                        </div>
+                        <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px;">
+                            <strong>2.</strong> "Das macht zusammen vier Euro neunzig"
+                            <button class="audio-btn" onclick="speak('Das macht zusammen vier Euro neunzig')">🔊</button>
+                        </div>
+                        <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px;">
+                            <strong>3.</strong> "Meine Damen und Herren, besuchen Sie unsere Wurst- und Fleischabteilung"
+                            <button class="audio-btn" onclick="speak('Meine Damen und Herren, besuchen Sie unsere Wurst- und Fleischabteilung')">🔊</button>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>⚠️ Chú ý:</strong> Đừng hy sinh độ rõ ràng để đuổi theo tốc độ!
+                    </div>
+                </div>
+            `;
+      }
+
+      // Placeholder functions for new features
+      function playFullDialog() {
+        alert(
+          "🔊 Sẽ phát 30 câu liên tục với khoảng dừng 3 giây giữa mỗi câu. Hãy chuẩn bị giấy bút!"
+        );
+      }
+
+      function pauseFullDialog() {
+        alert('⏸️ Đã tạm dừng. Click "Bắt đầu nghe" để tiếp tục.');
+      }
+
+      // Text-to-Speech function
+      function speak(text) {
+        // Check if browser supports speech synthesis
+        if ("speechSynthesis" in window) {
+          // Cancel any ongoing speech
+          window.speechSynthesis.cancel();
+
+          // Create speech synthesis utterance
+          const utterance = new SpeechSynthesisUtterance(text);
+
+          // Set German language
+          utterance.lang = "de-DE";
+
+          // Set speech properties
+          utterance.rate = 0.8; // Slower for learning
+          utterance.pitch = 1;
+          utterance.volume = 1;
+
+          // Try to find German voice
+          const voices = window.speechSynthesis.getVoices();
+          const germanVoice = voices.find(
+            (voice) =>
+              voice.lang.includes("de") ||
+              voice.name.toLowerCase().includes("german") ||
+              voice.name.toLowerCase().includes("deutsch")
+          );
+
+          if (germanVoice) {
+            utterance.voice = germanVoice;
+          }
+
+          // Add visual feedback
+          utterance.onstart = function () {
+            console.log("🔊 Đang phát âm: " + text);
+          };
+
+          utterance.onerror = function (event) {
+            console.log("❌ Lỗi phát âm: " + event.error);
+            alert("Lỗi phát âm. Vui lòng thử lại!");
+          };
+
+          // Speak the text
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert(
+            "Trình duyệt của bạn không hỗ trợ text-to-speech. Vui lòng sử dụng Chrome hoặc Firefox!"
+          );
+        }
+      }
+
+      // Initialize when page loads
+      window.onload = function () {
+        startQuiz();
+
+        // Load voices for text-to-speech
+        window.speechSynthesis.getVoices();
+
+        // Some browsers need time to load voices
+        window.speechSynthesis.onvoiceschanged = function () {
+          console.log(
+            "✅ Voices loaded:",
+            window.speechSynthesis.getVoices().length
+          );
+        };
+      };
+    </script>
+  </body>
+</html>
