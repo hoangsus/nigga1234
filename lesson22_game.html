@@ -19,7 +19,7 @@
       }
 
       .container {
-        max-width: 800px;
+        max-width: 1000px;
         margin: 0 auto;
         background: white;
         border-radius: 20px;
@@ -129,32 +129,34 @@
         }
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
       .sentence-counter {
         font-size: 1.5em;
         margin-bottom: 20px;
         font-weight: 600;
       }
 
-      .vietnamese-sentence {
-        font-size: 2em;
+      .german-sentence {
+        font-size: 1.8em;
         margin: 30px 0;
-        padding: 20px;
+        padding: 25px;
         background: rgba(255, 255, 255, 0.2);
         border-radius: 15px;
         backdrop-filter: blur(10px);
         border: 2px solid rgba(255, 255, 255, 0.3);
         line-height: 1.4;
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .highlight {
+        background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-weight: bold;
+        color: #333;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
       .controls {
@@ -253,34 +255,6 @@
         font-size: 1.2em;
       }
 
-      .answer-section {
-        background: rgba(255, 255, 255, 0.9);
-        color: #333;
-        border-radius: 15px;
-        padding: 25px;
-        margin: 20px 0;
-        display: none;
-      }
-
-      .answer-section.show {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      .german-answer {
-        font-size: 1.5em;
-        color: #007bff;
-        font-weight: 600;
-        margin-bottom: 10px;
-      }
-
-      .grammar-tip {
-        font-size: 1em;
-        color: #6c757d;
-        font-style: italic;
-        line-height: 1.4;
-      }
-
       .completion-screen {
         text-align: center;
         display: none;
@@ -289,6 +263,17 @@
       .completion-screen.show {
         display: block;
         animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .completion-emoji {
@@ -319,116 +304,29 @@
         border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
-      .study-list {
-        margin: 30px 0;
-        max-height: 500px;
-        overflow-y: auto;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 20px;
-      }
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2em;
+        }
 
-      .study-item {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 12px;
-        padding: 20px;
-        margin: 15px 0;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
+        .german-sentence {
+          font-size: 1.4em;
+        }
 
-      .study-item:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: translateX(5px);
-      }
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
 
-      .study-number {
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-        color: white;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        margin-right: 15px;
-        font-size: 0.9em;
-      }
+        .btn {
+          width: 80%;
+          max-width: 300px;
+        }
 
-      .study-content {
-        display: inline-block;
-        vertical-align: top;
-        width: calc(100% - 60px);
-      }
-
-      .vietnamese-text {
-        font-size: 1.3em;
-        margin-bottom: 10px;
-        color: #fff;
-        font-weight: 600;
-      }
-
-      .german-text {
-        font-size: 1.2em;
-        margin-bottom: 8px;
-        color: #a8edea;
-        font-weight: 500;
-      }
-
-      .tip-text {
-        font-size: 1em;
-        color: rgba(255, 255, 255, 0.8);
-        font-style: italic;
-        line-height: 1.4;
-      }
-
-      .study-collapsed {
-        max-height: 200px;
-      }
-
-      .play-buttons {
-        margin-top: 10px;
-      }
-
-      .play-btn {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 20px;
-        font-size: 0.9em;
-        cursor: pointer;
-        margin-right: 10px;
-        transition: all 0.3s ease;
-      }
-
-      .play-btn:hover {
-        background: rgba(255, 255, 255, 0.3);
-      }
-      .header h1 {
-        font-size: 2em;
-      }
-
-      .vietnamese-sentence {
-        font-size: 1.5em;
-      }
-
-      .controls {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .btn {
-        width: 80%;
-        max-width: 300px;
-      }
-
-      .stats-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        .stats-row {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
       }
     </style>
   </head>
@@ -436,7 +334,7 @@
     <div class="container">
       <div class="header">
         <h1>🎯 Thử thách Nói Tiếng Đức 4 phút</h1>
-        <p>Luyện tập dịch từ tiếng Việt sang tiếng Đức</p>
+        <p>Luyện tập đọc câu chuyện Liebesgeschichte</p>
         <div class="challenge-info">
           <h3>🏆 Thử thách</h3>
           <p>
@@ -447,41 +345,19 @@
       </div>
 
       <div class="content">
-        <!-- Study Section -->
-        <div class="practice-card" id="study-section">
-          <div class="instructions">
-            <h3>📚 Ôn tập trước khi kiểm tra</h3>
-            <ul>
-              <li>Xem toàn bộ 24 câu trong câu chuyện Liebesgeschichte</li>
-              <li>Nhấn vào từng câu để nghe phát âm tiếng Việt và tiếng Đức</li>
-              <li>Đọc grammar tips để hiểu cấu trúc câu</li>
-              <li>Sẵn sàng thì nhấn "Bắt đầu kiểm tra" để thử thách 4 phút</li>
-            </ul>
-          </div>
-
-          <div class="controls">
-            <button class="btn" onclick="startPractice()">
-              🚀 Bắt đầu kiểm tra 4 phút
-            </button>
-            <button class="btn btn-secondary" onclick="toggleStudyView()">
-              👁️ Thu gọn/Mở rộng danh sách
-            </button>
-          </div>
-
-          <div class="study-list" id="study-list">
-            <!-- Study content will be populated by JavaScript -->
-          </div>
-        </div>
-
-        <div class="practice-card" id="practice-section" style="display: none">
+        <div class="practice-card" id="practice-section">
           <div class="instructions">
             <h3>📝 Hướng dẫn luyện tập</h3>
             <ul>
-              <li>Nhấn "Phát âm" để nghe câu tiếng Việt</li>
-              <li>Viết câu tiếng Đức tương ứng vào vở</li>
-              <li>Nhấn "Đúng" hoặc "Sai" để đánh giá bản thân</li>
-              <li>Xem đáp án tiếng Đức sau khi đánh giá</li>
+              <li>Đọc to câu tiếng Đức hiển thị trên màn hình</li>
+              <li>
+                Chú ý phát âm các từ được <span class="highlight">tô sáng</span>
+              </li>
+              <li>Nhấn "Đúng" nếu bạn đọc chính xác, "Sai" nếu chưa tốt</li>
               <li>Mục tiêu: đạt 18 câu đúng trong 4 phút</li>
+              <li>
+                Phím tắt: Space (đọc lại), 1 (Đúng), 2 (Sai), Enter (Tiếp theo)
+              </li>
             </ul>
           </div>
 
@@ -506,8 +382,8 @@
             <div class="progress-fill" id="progress" style="width: 4.17%"></div>
           </div>
 
-          <div class="vietnamese-sentence" id="vietnamese-text">
-            Nhấn "Bắt đầu" để bắt đầu thử thách dịch tiếng Đức
+          <div class="german-sentence" id="german-text">
+            Nhấn "Bắt đầu" để bắt đầu thử thách đọc tiếng Đức
           </div>
 
           <div class="controls">
@@ -517,10 +393,10 @@
             <button
               class="btn btn-secondary"
               id="speak-btn"
-              onclick="speakVietnamese()"
+              onclick="speakGerman()"
               style="display: none"
             >
-              🔊 Phát âm
+              🔊 Đọc lại
             </button>
             <button
               class="btn btn-correct"
@@ -546,11 +422,6 @@
             >
               ➡️ Câu tiếp theo
             </button>
-          </div>
-
-          <div class="answer-section" id="answer-section">
-            <div class="german-answer" id="german-answer"></div>
-            <div class="grammar-tip" id="grammar-tip"></div>
           </div>
         </div>
 
@@ -591,68 +462,122 @@
     </div>
 
     <script>
-      // Dữ liệu 24 câu từ câu chuyện Liebesgeschichte với nghĩa tiếng Việt
+      // Dữ liệu 24 câu từ câu chuyện Liebesgeschichte
       const practiceData = [
         {
-          vietnamese: "Trong giờ nghỉ tôi sẽ đọc quảng cáo.",
-          german: "In der Pause werde ich die Anzeigen lesen.",
-          tip: "🎯 'in der Pause' = trong giờ nghỉ. Thì tương lai: 'werden + infinitive'",
-        },
-        {
-          vietnamese: "Xe buýt đến.",
-          german: "Der Bus kommt.",
-          tip: "🎯 Câu đơn giản: chủ ngữ + động từ. 'kommen' = đến",
-        },
-        {
-          vietnamese: "Tôi đến studio muộn nửa tiếng.",
-          german: "Ich bin eine halbe Stunde später im Studio.",
-          tip: "🎯 'eine halbe Stunde später' = muộn nửa tiếng. 'im Studio' = ở studio (Dativ)",
-        },
-        {
-          vietnamese: "Buổi sáng thật mệt mỏi.",
-          german: "Der Vormittag ist anstrengend.",
-          tip: "🎯 'der Vormittag' = buổi sáng. 'anstrengend' = mệt mỏi/căng thẳng",
-        },
-        {
-          vietnamese: "Giờ nghỉ trưa là lúc 12 giờ.",
-          german: "Mittagspause ist um zwölf Uhr.",
-          tip: "🎯 'die Mittagspause' = giờ nghỉ trưa. 'um zwölf Uhr' = lúc 12 giờ",
-        },
-        {
-          vietnamese: "Tôi mong chờ giờ nghỉ.",
-          german: "Ich freue mich auf die Pause.",
-          tip: "🎯 'sich freuen auf + Akkusativ' = mong chờ/vui mừng về cái gì",
-        },
-        {
-          vietnamese: "Tôi đói vì tôi chưa ăn gì cả ngày.",
           german:
+            "Ich bin heute Morgen <span class='highlight'>in großer Eile</span>.",
+          plain: "Ich bin heute Morgen in großer Eile.",
+        },
+        {
+          german:
+            "Ich muss <span class='highlight'>um neun Uhr</span> im Studio sein.",
+          plain: "Ich muss um neun Uhr im Studio sein.",
+        },
+        {
+          german:
+            "Ich habe gerade noch Zeit <span class='highlight'>für ein schnelles Frühstück</span>.",
+          plain: "Ich habe gerade noch Zeit für ein schnelles Frühstück.",
+        },
+        {
+          german: "Ich gehe <span class='highlight'>in die Küche</span>.",
+          plain: "Ich gehe in die Küche.",
+        },
+        {
+          german:
+            "Der Boden ist <span class='highlight'>nass</span> vor dem Kühlschrank.",
+          plain: "Der Boden ist nass vor dem Kühlschrank.",
+        },
+        {
+          german: "Ich öffne <span class='highlight'>den Kühlschrank</span>.",
+          plain: "Ich öffne den Kühlschrank.",
+        },
+        {
+          german:
+            "Drinnen ist es <span class='highlight'>dunkel, nicht kalt</span>.",
+          plain: "Drinnen ist es dunkel, nicht kalt.",
+        },
+        {
+          german:
+            "Die Butter ist <span class='highlight'>weich,</span> die Milch ist <span class='highlight'>sauer.</span>",
+          plain: "Die Butter ist weich, die Milch ist sauer.",
+        },
+        {
+          german: "Er ist <span class='highlight'>kaputt.</span>",
+          plain: "Er ist kaputt.",
+        },
+        {
+          german:
+            "Ich laufe <span class='highlight'>zur Bushaltestelle</span>.",
+          plain: "Ich laufe zur Bushaltestelle.",
+        },
+        {
+          german:
+            "Ich kaufe am Kiosk <span class='highlight'>eine Tageszeitung</span>.",
+          plain: "Ich kaufe am Kiosk eine Tageszeitung.",
+        },
+        {
+          german:
+            "Ich finde vielleicht einen <span class='highlight'>billigen</span> Kühlschrank.",
+          plain: "Ich finde vielleicht einen billigen Kühlschrank.",
+        },
+        {
+          german:
+            "<span class='highlight'>In der Pause</span> werde ich die Anzeigen lesen.",
+          plain: "In der Pause werde ich die Anzeigen lesen.",
+        },
+        {
+          german: "<span class='highlight'>Der Bus</span> kommt.",
+          plain: "Der Bus kommt.",
+        },
+        {
+          german:
+            "Ich bin <span class='highlight'>eine halbe Stunde später</span> im Studio.",
+          plain: "Ich bin eine halbe Stunde später im Studio.",
+        },
+        {
+          german:
+            "Der Vormittag ist <span class='highlight'>anstrengend</span>.",
+          plain: "Der Vormittag ist anstrengend.",
+        },
+        {
+          german:
+            "<span class='highlight'>Mittagspause</span> ist um zwölf Uhr.",
+          plain: "Mittagspause ist um zwölf Uhr.",
+        },
+        {
+          german:
+            "Ich freue mich <span class='highlight'>auf die Pause</span>.",
+          plain: "Ich freue mich auf die Pause.",
+        },
+        {
+          german:
+            "Ich habe Hunger, <span class='highlight'>denn ich habe den ganzen Tag noch nichts gegessen</span>.",
+          plain:
             "Ich habe Hunger, denn ich habe den ganzen Tag noch nichts gegessen.",
-          tip: "🎯 'Hunger haben' = đói. 'denn' = vì (liên từ). 'den ganzen Tag' = cả ngày",
         },
         {
-          vietnamese: "Nhưng trước tiên tôi tìm một tủ lạnh.",
-          german: "Ich suche aber zuerst einen Kühlschrank.",
-          tip: "🎯 'aber' = nhưng. 'zuerst' = trước tiên. 'suchen' = tìm kiếm",
+          german:
+            "Ich suche aber zuerst <span class='highlight'>einen Kühlschrank</span>.",
+          plain: "Ich suche aber zuerst einen Kühlschrank.",
         },
         {
-          vietnamese: "Tôi ngồi vào văn phòng.",
-          german: "Ich setze mich ins Büro.",
-          tip: "🎯 'sich setzen' = ngồi xuống. 'ins Büro' = vào văn phòng (Akkusativ - chuyển động)",
+          german: "Ich setze mich <span class='highlight'>ins Büro</span>.",
+          plain: "Ich setze mich ins Büro.",
         },
         {
-          vietnamese: "Tôi đọc các quảng cáo.",
-          german: "Ich lese die Anzeigen.",
-          tip: "🎯 'lesen' = đọc. 'die Anzeigen' = các quảng cáo (số nhiều)",
+          german: "Ich lese <span class='highlight'>die Anzeigen</span>.",
+          plain: "Ich lese die Anzeigen.",
         },
         {
-          vietnamese: "Có nhiều lời đề nghị trong báo.",
-          german: "Es gibt viele Angebote in der Zeitung.",
-          tip: "🎯 'es gibt' = có (cấu trúc cố định). 'viele Angebote' = nhiều lời đề nghị",
+          german:
+            "Es gibt viele Angebote <span class='highlight'>in der Zeitung</span>.",
+          plain: "Es gibt viele Angebote in der Zeitung.",
         },
         {
-          vietnamese: "Tôi đánh dấu những quảng cáo thú vị.",
-          german: "Ich markiere die interessanten Anzeigen.",
-          tip: "🎯 'markieren' = đánh dấu. 'interessant' = thú vị (tính từ chia theo Akkusativ)",
+          german:
+            "Ich markiere <span class='highlight'>die interessanten</span> Anzeigen.",
+          plain: "Ich markiere die interessanten Anzeigen.",
         },
       ];
 
@@ -667,24 +592,11 @@
       let timeLimit = 4 * 60; // 4 minutes in seconds
       let timeRemaining = timeLimit;
       let challengeCompleted = false;
-      let studyCollapsed = false;
 
       // Initialize voices when available
       function initializeVoices() {
         if ("speechSynthesis" in window) {
           speechSynthesis.getVoices();
-          setTimeout(() => {
-            const voices = speechSynthesis.getVoices();
-            const vietnameseVoice = voices.find(
-              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
-            );
-
-            if (!vietnameseVoice) {
-              console.log(
-                "Không tìm thấy giọng tiếng Việt. Sử dụng giọng mặc định."
-              );
-            }
-          }, 1000);
         }
       }
 
@@ -692,94 +604,14 @@
       function init() {
         updateDisplay();
         initializeVoices();
-        populateStudyList();
 
         if ("speechSynthesis" in window) {
           speechSynthesis.onvoiceschanged = initializeVoices;
         }
       }
 
-      // Populate study list
-      function populateStudyList() {
-        const studyList = document.getElementById("study-list");
-        studyList.innerHTML = "";
-
-        practiceData.forEach((item, index) => {
-          const studyItem = document.createElement("div");
-          studyItem.className = "study-item";
-          studyItem.innerHTML = `
-                    <span class="study-number">${index + 1}</span>
-                    <div class="study-content">
-                        <div class="vietnamese-text">${item.vietnamese}</div>
-                        <div class="german-text">${item.german}</div>
-                        <div class="tip-text">${item.tip}</div>
-                        <div class="play-buttons">
-                            <button class="play-btn" onclick="speakText('${
-                              item.vietnamese
-                            }', 'vi-VN')">🔊 Tiếng Việt</button>
-                            <button class="play-btn" onclick="speakText('${item.german.replace(
-                              /<[^>]*>/g,
-                              ""
-                            )}', 'de-DE')">🔊 Tiếng Đức</button>
-                        </div>
-                    </div>
-                `;
-
-          studyList.appendChild(studyItem);
-        });
-      }
-
-      // Toggle study view
-      function toggleStudyView() {
-        const studyList = document.getElementById("study-list");
-        studyCollapsed = !studyCollapsed;
-
-        if (studyCollapsed) {
-          studyList.classList.add("study-collapsed");
-        } else {
-          studyList.classList.remove("study-collapsed");
-        }
-      }
-
-      // Speak any text
-      function speakText(text, lang) {
-        if ("speechSynthesis" in window) {
-          speechSynthesis.cancel();
-
-          const utterance = new SpeechSynthesisUtterance(text);
-          const voices = speechSynthesis.getVoices();
-
-          if (lang === "vi-VN") {
-            const vietnameseVoice = voices.find(
-              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
-            );
-            if (vietnameseVoice) {
-              utterance.voice = vietnameseVoice;
-            }
-          } else if (lang === "de-DE") {
-            const germanVoice = voices.find(
-              (voice) => voice.lang.includes("de") || voice.lang.includes("DE")
-            );
-            if (germanVoice) {
-              utterance.voice = germanVoice;
-            }
-          }
-
-          utterance.lang = lang;
-          utterance.rate = 0.7;
-          utterance.pitch = 1.0;
-          utterance.volume = 1.0;
-
-          speechSynthesis.speak(utterance);
-        }
-      }
-
       // Start practice
       function startPractice() {
-        // Hide study section, show practice section
-        document.getElementById("study-section").style.display = "none";
-        document.getElementById("practice-section").style.display = "block";
-
         isStarted = true;
         currentIndex = 0;
         correctCount = 0;
@@ -848,8 +680,7 @@
         }
 
         const current = currentData[currentIndex];
-        document.getElementById("vietnamese-text").textContent =
-          current.vietnamese;
+        document.getElementById("german-text").innerHTML = current.german;
         document.getElementById("counter").textContent = `Câu ${
           currentIndex + 1
         } / 24`;
@@ -858,35 +689,31 @@
         const progress = ((currentIndex + 1) / 24) * 100;
         document.getElementById("progress").style.width = `${progress}%`;
 
-        // Hide answer section and next button
-        document.getElementById("answer-section").classList.remove("show");
+        // Hide next button, show correct/incorrect buttons
         document.getElementById("next-btn").style.display = "none";
         document.getElementById("correct-btn").style.display = "inline-block";
         document.getElementById("incorrect-btn").style.display = "inline-block";
 
-        // Auto speak Vietnamese
-        setTimeout(() => speakVietnamese(), 500);
+        // Auto speak German sentence
+        setTimeout(() => speakGerman(), 500);
       }
 
-      // Speak Vietnamese text
-      function speakVietnamese() {
+      // Speak German text
+      function speakGerman() {
         if ("speechSynthesis" in window) {
-          const text = currentData[currentIndex].vietnamese;
+          const text = currentData[currentIndex].plain;
           speechSynthesis.cancel();
 
           const utterance = new SpeechSynthesisUtterance(text);
           const voices = speechSynthesis.getVoices();
-          const vietnameseVoice = voices.find(
-            (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+          const germanVoice = voices.find(
+            (voice) => voice.lang.includes("de") || voice.lang.includes("DE")
           );
 
-          if (vietnameseVoice) {
-            utterance.voice = vietnameseVoice;
-            utterance.lang = "vi-VN";
-          } else {
-            utterance.lang = "vi-VN";
+          if (germanVoice) {
+            utterance.voice = germanVoice;
           }
-
+          utterance.lang = "de-DE";
           utterance.rate = 0.7;
           utterance.pitch = 1.0;
           utterance.volume = 1.0;
@@ -901,7 +728,7 @@
           utterance.onend = function () {
             speakBtn.style.background =
               "linear-gradient(135deg, #28a745, #20c997)";
-            speakBtn.textContent = "🔊 Phát âm";
+            speakBtn.textContent = "🔊 Đọc lại";
           };
         } else {
           alert(
@@ -921,15 +748,12 @@
         document.getElementById("correct-count").textContent = correctCount;
         document.getElementById("total-answered").textContent = totalAnswered;
 
-        // Show answer
-        showAnswer();
-
         // Hide correct/incorrect buttons, show next button
         document.getElementById("correct-btn").style.display = "none";
         document.getElementById("incorrect-btn").style.display = "none";
         document.getElementById("next-btn").style.display = "inline-block";
 
-        // Show success message if reached 18 correct but continue until time ends
+        // Show success notification if reached 18 correct but continue until time ends
         if (
           correctCount >= 18 &&
           !document.getElementById("success-notification")
@@ -979,29 +803,6 @@
         loadSentence();
       }
 
-      // Show answer
-      function showAnswer() {
-        const current = currentData[currentIndex];
-        document.getElementById("german-answer").textContent = current.german;
-        document.getElementById("grammar-tip").textContent = current.tip;
-        document.getElementById("answer-section").classList.add("show");
-
-        // Speak German answer
-        speakGerman(current.german);
-      }
-
-      // Speak German text
-      function speakGerman(text) {
-        if ("speechSynthesis" in window) {
-          speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "de-DE";
-          utterance.rate = 0.7;
-          utterance.volume = 1.0;
-          speechSynthesis.speak(utterance);
-        }
-      }
-
       // Complete challenge
       function completeChallenge(reason) {
         if (challengeCompleted) return;
@@ -1034,7 +835,7 @@
         document.getElementById("final-accuracy").textContent = `${accuracy}%`;
         document.getElementById("final-time").textContent = timeStr;
 
-        // Determine result - always based on reaching 18+ correct answers
+        // Determine result
         let resultEmoji, resultTitle, resultMessage, resultClass;
 
         if (correctCount >= 18) {
@@ -1070,10 +871,24 @@
         startTime = null;
         stopTimer();
 
-        // Show study section, hide practice and completion sections
-        document.getElementById("study-section").style.display = "block";
-        document.getElementById("practice-section").style.display = "none";
+        // Reset UI
+        document.getElementById("practice-section").style.display = "block";
         document.getElementById("completion-screen").classList.remove("show");
+        document.getElementById("start-btn").style.display = "inline-block";
+        document.getElementById("speak-btn").style.display = "none";
+        document.getElementById("correct-btn").style.display = "none";
+        document.getElementById("incorrect-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "none";
+
+        // Reset display
+        document.getElementById("german-text").textContent =
+          'Nhấn "Bắt đầu" để bắt đầu thử thách đọc tiếng Đức';
+        document.getElementById("counter").textContent = "Câu 1 / 24";
+        document.getElementById("progress").style.width = "4.17%";
+        document.getElementById("timer").textContent = "04:00";
+        document.getElementById("timer").classList.remove("timer-warning");
+        document.getElementById("correct-count").textContent = "0";
+        document.getElementById("total-answered").textContent = "0";
       }
 
       // Shuffle and restart
@@ -1091,8 +906,8 @@
       // Update display
       function updateDisplay() {
         if (!isStarted) {
-          document.getElementById("vietnamese-text").textContent =
-            'Nhấn "Bắt đầu" để bắt đầu thử thách dịch tiếng Đức';
+          document.getElementById("german-text").textContent =
+            'Nhấn "Bắt đầu" để bắt đầu thử thách đọc tiếng Đức';
         }
       }
 
@@ -1103,7 +918,7 @@
         switch (e.key) {
           case " ": // Spacebar to speak
             e.preventDefault();
-            speakVietnamese();
+            speakGerman();
             break;
           case "1": // Number 1 for correct
             e.preventDefault();
