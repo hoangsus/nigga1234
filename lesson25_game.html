@@ -269,7 +269,7 @@
           </div>
         </div>
 
-        <div id="timer" class="timer">⏰ 03:00</div>
+        <div id="timer" class="timer">⏰ 04:00</div>
 
         <div class="question">
           <div id="vietnameseWord" class="vietnamese-word"></div>
@@ -474,7 +474,7 @@
       let currentSection = 1;
       let currentQuestionIndex = 0;
       let knownAnswers = 0;
-      let timeLeft = 180; // 3 phút = 180 giây
+      let timeLeft = 300; // 5 phút = 300 giây
       let timer;
       let questions = [];
       let currentQuestion = null;
@@ -496,7 +496,7 @@
 
         currentQuestionIndex = 0;
         knownAnswers = 0;
-        timeLeft = 180;
+        timeLeft = 300;
 
         document.getElementById("menu").style.display = "none";
         document.getElementById("quiz").style.display = "block";
