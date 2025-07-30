@@ -479,18 +479,34 @@
       let questions = [];
       let currentQuestion = null;
 
-      // Text-to-Speech function
+      // Function để dừng tất cả âm thanh đang phát
+      function stopAllSpeech() {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+        }
+      }
+
+      // Text-to-Speech function đã được cải thiện
       function speak(text, lang = "vi-VN") {
         if ("speechSynthesis" in window) {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = lang;
-          utterance.rate = 0.8;
-          utterance.pitch = 1;
-          speechSynthesis.speak(utterance);
+          // Dừng tất cả âm thanh trước khi phát âm thanh mới
+          stopAllSpeech();
+
+          // Đợi một chút để đảm bảo âm thanh cũ đã dừng hoàn toàn
+          setTimeout(() => {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            speechSynthesis.speak(utterance);
+          }, 100);
         }
       }
 
       function startQuiz(section) {
+        // Dừng tất cả âm thanh khi bắt đầu quiz mới
+        stopAllSpeech();
+
         currentSection = section;
         questions = vocabularyData[section]; // Giữ nguyên thứ tự từ sách
 
@@ -524,6 +540,9 @@
       }
 
       function showQuestion() {
+        // Dừng tất cả âm thanh trước khi hiển thị câu hỏi mới
+        stopAllSpeech();
+
         if (currentQuestionIndex >= questions.length) {
           endQuiz();
           return;
@@ -545,7 +564,7 @@
         document.getElementById("currentQuestion").textContent =
           currentQuestionIndex + 1;
 
-        // Auto play Vietnamese
+        // Auto play Vietnamese sau khi đã dừng âm thanh cũ
         setTimeout(() => {
           playVietnamese();
         }, 500);
@@ -597,19 +616,23 @@
         document.getElementById("nextBtn").style.display = "inline-block";
         document.getElementById("playGermanBtn").style.display = "inline-block";
 
-        // Auto play German pronunciation
+        // Auto play German pronunciation sau khi dừng âm thanh cũ
         setTimeout(() => {
           playGerman();
         }, 300);
       }
 
       function nextQuestion() {
+        // Dừng âm thanh trước khi chuyển câu hỏi
+        stopAllSpeech();
         currentQuestionIndex++;
         showQuestion();
       }
 
       function endQuiz() {
         clearInterval(timer);
+        stopAllSpeech(); // Dừng âm thanh khi kết thúc quiz
+
         const percentage = Math.round((knownAnswers / questions.length) * 100);
         let message = "";
         let emoji = "";
@@ -645,6 +668,7 @@
 
       function backToMenu() {
         clearInterval(timer);
+        stopAllSpeech(); // Dừng âm thanh khi về menu
         document.getElementById("menu").style.display = "flex";
         document.getElementById("quiz").style.display = "none";
       }
@@ -688,6 +712,18 @@
         const instruction = document.querySelector(".instruction");
         instruction.innerHTML +=
           "<br><br>🎮 <strong>Phím tắt:</strong> Space = Biết | X = Không biết | V = Nghe tiếng Việt | G = Nghe tiếng Đức";
+      });
+
+      // Dừng âm thanh khi người dùng rời khỏi trang
+      window.addEventListener("beforeunload", function () {
+        stopAllSpeech();
+      });
+
+      // Dừng âm thanh khi tab bị ẩn
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          stopAllSpeech();
+        }
       });
     </script>
   </body>
