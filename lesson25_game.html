@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập từ vựng tiếng Đức</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 600px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #4a5568;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .section-btn {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 20px 30px;
+        border-radius: 15px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .quiz-container {
+        display: none;
+      }
+
+      .timer {
+        font-size: 1.5em;
+        color: #e53e3e;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .question {
+        background: #f7fafc;
+        padding: 40px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        border-left: 5px solid #667eea;
+      }
+
+      .vietnamese-word {
+        font-size: 2.5em;
+        color: #2d3748;
+        margin-bottom: 30px;
+        font-weight: bold;
+      }
+
+      .audio-controls {
+        margin: 30px 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .audio-btn {
+        background: linear-gradient(45deg, #38a169, #48bb78);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .audio-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .audio-btn:disabled {
+        background: #a0aec0;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn {
+        background: linear-gradient(45deg, #48bb78, #38a169);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 1.1em;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-danger {
+        background: linear-gradient(45deg, #f56565, #e53e3e);
+      }
+
+      .btn-large {
+        padding: 20px 40px;
+        font-size: 1.3em;
+        margin: 15px;
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 1.2em;
+        display: none;
+      }
+
+      .correct {
+        background: #c6f6d5;
+        color: #22543d;
+        border: 2px solid #48bb78;
+      }
+
+      .skipped {
+        background: #fed7d7;
+        color: #742a2a;
+        border: 2px solid #f56565;
+      }
+
+      .progress {
+        background: #e2e8f0;
+        border-radius: 10px;
+        height: 20px;
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2em;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      .stat-label {
+        color: #718096;
+      }
+
+      .final-score {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-top: 20px;
+      }
+
+      .instruction {
+        background: #e6fffa;
+        color: #234e52;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border-left: 4px solid #38b2ac;
+      }
+
+      .german-word-display {
+        font-size: 2.2em;
+        color: #2b6cb0;
+        margin: 20px 0;
+        font-weight: bold;
+        background: #ebf8ff;
+        padding: 20px;
+        border-radius: 10px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🇩🇪 Luyện tập từ vựng tiếng Đức</h1>
+
+      <div id="menu" class="menu">
+        <div class="instruction">
+          🎧 Chế độ nghe và nhớ: Nghe từ tiếng Việt, nhớ từ tiếng Đức, sau đó
+          bấm "Biết rồi" hoặc "Không biết"
+        </div>
+        <button class="section-btn" onclick="startQuiz(1)">
+          📚 Phần 1: Từ vựng cơ bản (72 từ)
+        </button>
+        <button class="section-btn" onclick="startQuiz(2)">
+          🎯 Phần 2: Thời gian rảnh & Hoạt động (57 từ)
+        </button>
+      </div>
+
+      <div id="quiz" class="quiz-container">
+        <div class="progress">
+          <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div id="currentQuestion" class="stat-number">1</div>
+            <div class="stat-label">Câu hiện tại</div>
+          </div>
+          <div class="stat">
+            <div id="totalQuestions" class="stat-number">0</div>
+            <div class="stat-label">Tổng số câu</div>
+          </div>
+          <div class="stat">
+            <div id="correctCount" class="stat-number">0</div>
+            <div class="stat-label">Biết</div>
+          </div>
+        </div>
+
+        <div id="timer" class="timer">⏰ 03:00</div>
+
+        <div class="question">
+          <div id="vietnameseWord" class="vietnamese-word"></div>
+
+          <div class="audio-controls">
+            <button
+              id="playVietnameseBtn"
+              class="audio-btn"
+              onclick="playVietnamese()"
+            >
+              🔊 Nghe tiếng Việt
+            </button>
+            <button
+              id="playGermanBtn"
+              class="audio-btn"
+              onclick="playGerman()"
+              style="display: none"
+            >
+              🎵 Nghe tiếng Đức
+            </button>
+          </div>
+
+          <div id="germanWordDisplay" class="german-word-display"></div>
+
+          <div id="answerButtons" style="margin-top: 30px">
+            <button id="knowBtn" class="btn btn-large" onclick="markAsKnown()">
+              ✅ Biết rồi
+            </button>
+            <button
+              id="dontKnowBtn"
+              class="btn btn-danger btn-large"
+              onclick="markAsUnknown()"
+            >
+              ❌ Không biết
+            </button>
+          </div>
+        </div>
+
+        <div id="result" class="result"></div>
+
+        <button
+          id="nextBtn"
+          class="btn btn-large"
+          onclick="nextQuestion()"
+          style="display: none"
+        >
+          ➡️ Câu tiếp theo
+        </button>
+        <button id="backBtn" class="btn btn-danger" onclick="backToMenu()">
+          🏠 Về menu
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Dữ liệu từ vựng từ các hình ảnh
+      const vocabularyData = {
+        1: [
+          // Phần 1: Từ vựng cơ bản (72 từ)
+          { german: "essen", vietnamese: "ăn" },
+          { german: "trinken", vietnamese: "uống" },
+          { german: "Hunger haben", vietnamese: "đói" },
+          { german: "Durst haben", vietnamese: "khát" },
+          { german: "das Frühstück", vietnamese: "bữa sáng" },
+          { german: "frühstücken", vietnamese: "ăn sáng" },
+          { german: "das Mittagessen", vietnamese: "bữa trua" },
+          { german: "das Abendessen", vietnamese: "bữa tối" },
+          { german: "die Küche", vietnamese: "bếp" },
+          { german: "die Suppe", vietnamese: "súp" },
+          { german: "Guten Appetit!", vietnamese: "chúc ngon miệng" },
+          { german: "das Geschäft", vietnamese: "cửa hàng" },
+          { german: "die Bäckerei", vietnamese: "tiệm bánh" },
+          { german: "der Supermarkt", vietnamese: "siêu thị" },
+          { german: "geöffnet (von - bis)", vietnamese: "mở cửa" },
+          { german: "die Lebensmittel (Plural)", vietnamese: "thực phẩm" },
+          { german: "das Brot", vietnamese: "bánh mì" },
+          { german: "das Brötchen", vietnamese: "bánh mì nhỏ" },
+          { german: "die Butter", vietnamese: "bơ" },
+          { german: "die Milch", vietnamese: "sữa" },
+          { german: "der Käse", vietnamese: "phô mai" },
+          { german: "das Ei", vietnamese: "trứng" },
+          { german: "der Fisch", vietnamese: "cá" },
+          { german: "das Fleisch", vietnamese: "thịt" },
+          { german: "das Hähnchen", vietnamese: "gà" },
+          { german: "der Schinken", vietnamese: "giăm bông" },
+          { german: "das Gemüse", vietnamese: "rau củ" },
+          { german: "die Tomate", vietnamese: "cà chua" },
+          { german: "die Kartoffel", vietnamese: "khoai tây" },
+          {
+            german: "die Pommes (frites) (Plural)",
+            vietnamese: "khoai tây chiên",
+          },
+          { german: "der Salat", vietnamese: "salad" },
+          { german: "das Öl", vietnamese: "dầu ăn" },
+          { german: "die Nudeln (Plural)", vietnamese: "mì" },
+          { german: "der Kuchen", vietnamese: "bánh ngọt" },
+          { german: "das Obst", vietnamese: "trái cây" },
+          { german: "die Orange", vietnamese: "cam" },
+          { german: "der Apfel", vietnamese: "táo" },
+          { german: "die Banane", vietnamese: "chuối" },
+          { german: "die Birne", vietnamese: "lê" },
+          { german: "die Zitrone", vietnamese: "chanh" },
+          { german: "der Reis", vietnamese: "gạo" },
+          { german: "das Salz", vietnamese: "muối" },
+          { german: "das Getränk", vietnamese: "đồ uống" },
+          { german: "das Wasser", vietnamese: "nước" },
+          { german: "der Kaffee", vietnamese: "cà phê" },
+          { german: "der Tee", vietnamese: "trà" },
+          { german: "der Saft", vietnamese: "nước ép" },
+          { german: "das Bier", vietnamese: "bia" },
+          { german: "der Wein", vietnamese: "rượu vang" },
+          { german: "kaufen", vietnamese: "mua" },
+          { german: "einkaufen", vietnamese: "đi mua sắm" },
+          { german: "verkaufen", vietnamese: "bán" },
+          { german: "das Angebot", vietnamese: "ưu đãi" },
+          { german: "günstig/billig", vietnamese: "rẻ" },
+          { german: "teuer", vietnamese: "đắt" },
+          { german: "mögen", vietnamese: "thích" },
+          { german: "brauchen", vietnamese: "cần" },
+          { german: "nehmen", vietnamese: "lấy" },
+          { german: "es gibt", vietnamese: "có" },
+          { german: "das Kilogramm", vietnamese: "kg" },
+          { german: "das Pfund", vietnamese: "pound" },
+          { german: "das Gramm", vietnamese: "gram" },
+          { german: "kosten", vietnamese: "có giá" },
+          { german: "der Preis", vietnamese: "giá" },
+          { german: "bezahlen/zahlen", vietnamese: "trả tiền" },
+          { german: "bar (bezahlen)", vietnamese: "tiền mặt" },
+          { german: "die Kasse", vietnamese: "quầy tính tiền" },
+          { german: "das Geld", vietnamese: "tiền" },
+          { german: "der Euro", vietnamese: "euro" },
+          { german: "das Restaurant", vietnamese: "nhà hàng" },
+          { german: "das Café", vietnamese: "quán cà phê" },
+          { german: "die Speisekarte", vietnamese: "thực đơn" },
+          { german: "bestellen", vietnamese: "gọi món" },
+          { german: "die Rechnung", vietnamese: "hóa đơn" },
+          { german: "bekommen", vietnamese: "nhận được" },
+        ],
+        2: [
+          // Phần 2: Thời gian rảnh và hoạt động (57 từ)
+          { german: "die Freizeit", vietnamese: "thời gian rảnh" },
+          { german: "die Ferien (Plural)", vietnamese: "kỳ nghỉ" },
+          { german: "der Urlaub", vietnamese: "kỳ nghỉ" },
+          { german: "Ferien/Urlaub machen", vietnamese: "đi nghỉ" },
+          { german: "Ferien/Urlaub haben", vietnamese: "có kỳ nghỉ" },
+          { german: "das Hobby", vietnamese: "sở thích" },
+          { german: "spielen", vietnamese: "chơi" },
+          { german: "Fußball spielen", vietnamese: "chơi bóng đá" },
+          { german: "der Ball", vietnamese: "quả bóng" },
+          { german: "Karten spielen", vietnamese: "chơi bài" },
+          { german: "Gitarre spielen", vietnamese: "chơi guitar" },
+          { german: "Musik hören", vietnamese: "nghe nhạc" },
+          { german: "die Musik", vietnamese: "âm nhạc" },
+          { german: "die CD", vietnamese: "đĩa CD" },
+          { german: "wandern", vietnamese: "đi bộ đường dài" },
+          { german: "schwimmen", vietnamese: "bơi" },
+          { german: "lesen", vietnamese: "đọc" },
+          { german: "das Buch", vietnamese: "sách" },
+          { german: "die Zeitung", vietnamese: "báo" },
+          { german: "fernsehen", vietnamese: "xem tivi" },
+          { german: "tanzen", vietnamese: "nhảy" },
+          { german: "der Computer", vietnamese: "máy tính" },
+          { german: "Computer spielen", vietnamese: "chơi máy tính" },
+          { german: "der Sport", vietnamese: "thể thao" },
+          { german: "Sport machen", vietnamese: "tập thể thao" },
+          { german: "ins Kino gehen", vietnamese: "đi xem phim" },
+          { german: "das Kino", vietnamese: "rạp chiếu phim" },
+          { german: "einen Film sehen", vietnamese: "xem phim" },
+          { german: "der Film", vietnamese: "bộ phim" },
+          { german: "Rad fahren", vietnamese: "đi xe đạp" },
+          { german: "spazieren gehen", vietnamese: "đi dạo" },
+          { german: "in die Disco gehen", vietnamese: "đi disco" },
+          { german: "die Disco", vietnamese: "vũ trường" },
+          { german: "das Museum", vietnamese: "bảo tàng" },
+          { german: "der Verein", vietnamese: "câu lạc bộ" },
+          { german: "der Sportverein", vietnamese: "câu lạc bộ thể thao" },
+          { german: "sich anmelden", vietnamese: "đăng ký" },
+          { german: "die Anmeldung", vietnamese: "đơn đăng ký" },
+          { german: "das Schwimmbad", vietnamese: "bể bơi" },
+          { german: "gefallen", vietnamese: "thích" },
+          { german: "das gefällt mir", vietnamese: "tôi thích cái đó" },
+          { german: "das gefällt mir nicht", vietnamese: "tôi không thích" },
+          { german: "schön", vietnamese: "đẹp" },
+          { german: "interessant", vietnamese: "thú vị" },
+          { german: "mögen", vietnamese: "thích" },
+          { german: "ich mag", vietnamese: "tôi thích" },
+          { german: "es gibt", vietnamese: "có" },
+          { german: "geöffnet (sein)", vietnamese: "mở cửa" },
+          { german: "auf (sein) / offen (sein)", vietnamese: "mở" },
+          { german: "geschlossen (sein)", vietnamese: "đóng cửa" },
+          { german: "zu (sein)/haben", vietnamese: "đóng" },
+          { german: "von - bis", vietnamese: "từ - đến" },
+          { german: "die Karte", vietnamese: "thẻ" },
+          { german: "die Eintrittskarte", vietnamese: "vé vào cửa" },
+          { german: "das Ticket", vietnamese: "vé" },
+          { german: "kaufen", vietnamese: "mua" },
+          { german: "reservieren", vietnamese: "đặt chỗ" },
+          { german: "(sich) treffen", vietnamese: "gặp nhau" },
+        ],
+      };
+
+      let currentSection = 1;
+      let currentQuestionIndex = 0;
+      let knownAnswers = 0;
+      let timeLeft = 180; // 3 phút = 180 giây
+      let timer;
+      let questions = [];
+      let currentQuestion = null;
+
+      // Text-to-Speech function
+      function speak(text, lang = "vi-VN") {
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = lang;
+          utterance.rate = 0.8;
+          utterance.pitch = 1;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      function startQuiz(section) {
+        currentSection = section;
+        questions = vocabularyData[section]; // Giữ nguyên thứ tự từ sách
+
+        currentQuestionIndex = 0;
+        knownAnswers = 0;
+        timeLeft = 180;
+
+        document.getElementById("menu").style.display = "none";
+        document.getElementById("quiz").style.display = "block";
+        document.getElementById("totalQuestions").textContent =
+          questions.length;
+
+        startTimer();
+        showQuestion();
+      }
+
+      function startTimer() {
+        timer = setInterval(() => {
+          timeLeft--;
+          const minutes = Math.floor(timeLeft / 60);
+          const seconds = timeLeft % 60;
+          document.getElementById("timer").textContent = `⏰ ${minutes
+            .toString()
+            .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            endQuiz();
+          }
+        }, 1000);
+      }
+
+      function showQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+          endQuiz();
+          return;
+        }
+
+        currentQuestion = questions[currentQuestionIndex];
+        document.getElementById("vietnameseWord").textContent =
+          currentQuestion.vietnamese;
+        document.getElementById("germanWordDisplay").style.display = "none";
+        document.getElementById("germanWordDisplay").textContent = "";
+        document.getElementById("result").style.display = "none";
+        document.getElementById("nextBtn").style.display = "none";
+        document.getElementById("answerButtons").style.display = "block";
+        document.getElementById("playGermanBtn").style.display = "none";
+
+        // Cập nhật progress
+        const progress = (currentQuestionIndex / questions.length) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("currentQuestion").textContent =
+          currentQuestionIndex + 1;
+
+        // Auto play Vietnamese
+        setTimeout(() => {
+          playVietnamese();
+        }, 500);
+      }
+
+      function playVietnamese() {
+        speak(currentQuestion.vietnamese, "vi-VN");
+      }
+
+      function playGerman() {
+        speak(currentQuestion.german, "de-DE");
+      }
+
+      function markAsKnown() {
+        knownAnswers++;
+        showResult(true);
+        document.getElementById("correctCount").textContent = knownAnswers;
+      }
+
+      function markAsUnknown() {
+        showResult(false);
+      }
+
+      function showResult(isKnown) {
+        const resultDiv = document.getElementById("result");
+        const germanDisplay = document.getElementById("germanWordDisplay");
+
+        germanDisplay.textContent = currentQuestion.german;
+        germanDisplay.style.display = "block";
+
+        if (isKnown) {
+          resultDiv.innerHTML = `
+                    <div class="correct">
+                        ✅ Tuyệt vời! Bạn đã biết từ này
+                    </div>
+                `;
+          resultDiv.className = "result correct";
+        } else {
+          resultDiv.innerHTML = `
+                    <div class="skipped">
+                        📚 Hãy ghi nhớ từ này nhé!
+                    </div>
+                `;
+          resultDiv.className = "result skipped";
+        }
+
+        resultDiv.style.display = "block";
+        document.getElementById("answerButtons").style.display = "none";
+        document.getElementById("nextBtn").style.display = "inline-block";
+        document.getElementById("playGermanBtn").style.display = "inline-block";
+
+        // Auto play German pronunciation
+        setTimeout(() => {
+          playGerman();
+        }, 300);
+      }
+
+      function nextQuestion() {
+        currentQuestionIndex++;
+        showQuestion();
+      }
+
+      function endQuiz() {
+        clearInterval(timer);
+        const percentage = Math.round((knownAnswers / questions.length) * 100);
+        let message = "";
+        let emoji = "";
+
+        if (percentage >= 90) {
+          message = "Xuất sắc!";
+          emoji = "🌟";
+        } else if (percentage >= 80) {
+          message = "Rất tốt!";
+          emoji = "🎉";
+        } else if (percentage >= 70) {
+          message = "Tốt!";
+          emoji = "👍";
+        } else if (percentage >= 60) {
+          message = "Khá!";
+          emoji = "👌";
+        } else {
+          message = "Cần ôn tập thêm!";
+          emoji = "💪";
+        }
+
+        document.getElementById("quiz").innerHTML = `
+                <div class="final-score">
+                    <h2>${emoji} ${message}</h2>
+                    <div style="font-size: 3em; margin: 20px 0;">${percentage}%</div>
+                    <p>Bạn đã biết <strong>${knownAnswers}</strong> / <strong>${questions.length}</strong> từ</p>
+                    <button class="btn" onclick="location.reload()" style="margin-top: 30px; background: white; color: #667eea;">
+                        🔄 Làm lại
+                    </button>
+                </div>
+            `;
+      }
+
+      function backToMenu() {
+        clearInterval(timer);
+        document.getElementById("menu").style.display = "flex";
+        document.getElementById("quiz").style.display = "none";
+      }
+
+      // Xử lý phím tắt
+      document.addEventListener("keydown", function (event) {
+        if (document.getElementById("quiz").style.display === "block") {
+          if (event.code === "Space") {
+            event.preventDefault();
+            const knowBtn = document.getElementById("knowBtn");
+            const nextBtn = document.getElementById("nextBtn");
+
+            if (knowBtn.parentElement.style.display !== "none") {
+              markAsKnown();
+            } else if (nextBtn.style.display !== "none") {
+              nextQuestion();
+            }
+          } else if (event.code === "KeyX") {
+            event.preventDefault();
+            if (
+              document.getElementById("answerButtons").style.display !== "none"
+            ) {
+              markAsUnknown();
+            }
+          } else if (event.code === "KeyV") {
+            event.preventDefault();
+            playVietnamese();
+          } else if (event.code === "KeyG") {
+            event.preventDefault();
+            if (
+              document.getElementById("playGermanBtn").style.display !== "none"
+            ) {
+              playGerman();
+            }
+          }
+        }
+      });
+
+      // Hiển thị hướng dẫn phím tắt
+      document.addEventListener("DOMContentLoaded", function () {
+        const instruction = document.querySelector(".instruction");
+        instruction.innerHTML +=
+          "<br><br>🎮 <strong>Phím tắt:</strong> Space = Biết | X = Không biết | V = Nghe tiếng Việt | G = Nghe tiếng Đức";
+      });
+    </script>
+  </body>
+</html>
