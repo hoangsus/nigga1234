@@ -344,12 +344,12 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>🎯 Thử thách Freizeit - 5 phút</h1>
+        <h1>🎯 Thử thách Freizeit - 4 phút</h1>
         <p>Luyện tập nghe-viết câu giao tiếp hàng ngày</p>
         <div class="challenge-info">
           <h3>🏆 Thử thách</h3>
           <p>
-            <strong>Thời gian:</strong> 5 phút |
+            <strong>Thời gian:</strong> 4 phút |
             <strong>Mục tiêu:</strong> 15/25 câu đúng
           </p>
         </div>
@@ -364,13 +364,13 @@
               <li>Viết câu tiếng Đức tương ứng vào vở</li>
               <li>Nhấn "Đúng" hoặc "Sai" để đánh giá bản thân</li>
               <li>Xem đáp án sau khi đánh giá</li>
-              <li>Mục tiêu: đạt 15 câu đúng trong 5 phút</li>
+              <li>Mục tiêu: đạt 15 câu đúng trong 4 phút</li>
             </ul>
           </div>
 
           <div class="stats-row">
             <div class="stat-box">
-              <div class="stat-number" id="timer">05:00</div>
+              <div class="stat-number" id="timer">04:00</div>
               <div class="stat-label">⏰ Thời gian còn lại</div>
             </div>
             <div class="stat-box">
@@ -465,7 +465,7 @@
               <div class="stat-label">Độ chính xác</div>
             </div>
             <div class="stat-item">
-              <div class="stat-number" id="final-time">05:00</div>
+              <div class="stat-number" id="final-time">04:00</div>
               <div class="stat-label">Thời gian</div>
             </div>
           </div>
@@ -645,7 +645,7 @@
       let currentData = [...practiceData];
       let correctCount = 0;
       let totalAnswered = 0;
-      let timeLimit = 5 * 60; // 5 minutes in seconds
+      let timeLimit = 4 * 60; // 4 minutes in seconds
       let timeRemaining = timeLimit;
       let challengeCompleted = false;
       const targetScore = 15; // Target: 15/25 correct answers
@@ -862,7 +862,7 @@
           <div style="font-size: 24px; margin-bottom: 10px;">🎉</div>
           <strong>Xuất sắc!</strong><br>
           Bạn đã đạt ${correctCount} câu đúng!<br>
-          <small>Tiếp tục luyện tập đến hết 5 phút nhé!</small>
+          <small>Tiếp tục luyện tập đến hết 4 phút nhé!</small>
         `;
 
         document.body.appendChild(notification);
@@ -1002,12 +1002,12 @@
         if (correctCount >= targetScore) {
           resultEmoji = "🏆";
           resultTitle = "Thành công rồi!";
-          resultMessage = `Bạn đã đạt ${correctCount} câu đúng và hoàn thành thử thách Freizeit!`;
+          resultMessage = `Bạn đã đạt ${correctCount} câu đúng và hoàn thành thử thách Freizeit 4 phút!`;
           resultClass = "result-success";
         } else {
           resultEmoji = "⏰";
           resultTitle = "Chưa đạt mục tiêu!";
-          resultMessage = `Bạn đạt ${correctCount}/${targetScore} câu đúng trong 5 phút. Hãy thử lại!`;
+          resultMessage = `Bạn đạt ${correctCount}/${targetScore} câu đúng trong 4 phút. Hãy thử lại!`;
           resultClass = "result-failure";
         }
 
@@ -1048,7 +1048,7 @@
           'Nhấn "Bắt đầu" để bắt đầu thử thách';
         document.getElementById("counter").textContent = "Câu 1 / 25";
         document.getElementById("progress").style.width = "4%";
-        document.getElementById("timer").textContent = "05:00";
+        document.getElementById("timer").textContent = "04:00";
         document.getElementById("timer").classList.remove("timer-warning");
         document.getElementById("correct-count").textContent = "0";
         document.getElementById("total-answered").textContent = "0";
