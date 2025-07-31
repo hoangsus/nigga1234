@@ -916,8 +916,15 @@
                 <span class="preview-number">${index + 1}</span>
                 ${item.vietnamese}
               </div>
-              <div class="preview-german">${item.german}</div>
-              <div class="preview-tip">${item.tip}</div>
+              <div class="preview-controls">
+                <div class="preview-german">${item.german}</div>
+                <button class="speak-german-btn" onclick="speakGermanPreview('${item.german.replace(
+                  /'/g,
+                  "\\'"
+                )}')">
+                  🔊 Nghe
+                </button>
+              </div>
             </div>
           `;
         });
@@ -927,6 +934,22 @@
         // Hide main screen, show preview
         document.getElementById("practice-section").style.display = "none";
         document.getElementById("preview-screen").classList.add("show");
+      }
+
+      // Speak German text in preview
+      function speakGermanPreview(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        } else {
+          alert(
+            "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
+          );
+        }
       }
 
       // Hide preview and return to main screen
