@@ -399,6 +399,13 @@
             </button>
             <button
               class="btn btn-secondary"
+              id="preview-btn"
+              onclick="showPreview()"
+            >
+              👀 Xem trước 25 câu
+            </button>
+            <button
+              class="btn btn-secondary"
               id="speak-btn"
               onclick="speakVietnamese()"
               style="display: none"
@@ -467,6 +474,32 @@
             <button class="btn" onclick="resetPractice()">🔄 Thử lại</button>
             <button class="btn btn-secondary" onclick="shuffleAndRestart()">
               🎲 Trộn câu & Thử lại
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview Screen -->
+        <div class="practice-card completion-screen" id="preview-screen">
+          <div class="completion-emoji">📚</div>
+          <h2 style="color: #667eea; margin-bottom: 30px">Xem trước 25 câu</h2>
+
+          <div
+            style="
+              max-height: 400px;
+              overflow-y: auto;
+              margin: 20px 0;
+              padding: 20px;
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 15px;
+            "
+          >
+            <div id="preview-content"></div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="hidePreview()">⬅️ Quay lại</button>
+            <button class="btn btn-secondary" onclick="hidePreviewAndStart()">
+              🚀 Bắt đầu luyện tập
             </button>
           </div>
         </div>
@@ -658,6 +691,7 @@
 
         // Show/hide buttons
         document.getElementById("start-btn").style.display = "none";
+        document.getElementById("preview-btn").style.display = "none";
         document.getElementById("speak-btn").style.display = "inline-block";
         document.getElementById("correct-btn").style.display = "inline-block";
         document.getElementById("incorrect-btn").style.display = "inline-block";
@@ -870,6 +904,43 @@
         }
       }
 
+      // Show preview of all 25 sentences
+      function showPreview() {
+        const previewContent = document.getElementById("preview-content");
+        let html = "";
+
+        practiceData.forEach((item, index) => {
+          html += `
+            <div class="preview-item">
+              <div class="preview-vietnamese">
+                <span class="preview-number">${index + 1}</span>
+                ${item.vietnamese}
+              </div>
+              <div class="preview-german">${item.german}</div>
+              <div class="preview-tip">${item.tip}</div>
+            </div>
+          `;
+        });
+
+        previewContent.innerHTML = html;
+
+        // Hide main screen, show preview
+        document.getElementById("practice-section").style.display = "none";
+        document.getElementById("preview-screen").classList.add("show");
+      }
+
+      // Hide preview and return to main screen
+      function hidePreview() {
+        document.getElementById("preview-screen").classList.remove("show");
+        document.getElementById("practice-section").style.display = "block";
+      }
+
+      // Hide preview and start practice
+      function hidePreviewAndStart() {
+        hidePreview();
+        setTimeout(() => startPractice(), 300);
+      }
+
       // Complete challenge
       function completeChallenge(reason) {
         if (challengeCompleted) return;
@@ -941,7 +1012,9 @@
         // Reset UI
         document.getElementById("practice-section").style.display = "block";
         document.getElementById("completion-screen").classList.remove("show");
+        document.getElementById("preview-screen").classList.remove("show");
         document.getElementById("start-btn").style.display = "inline-block";
+        document.getElementById("preview-btn").style.display = "inline-block";
         document.getElementById("speak-btn").style.display = "none";
         document.getElementById("correct-btn").style.display = "none";
         document.getElementById("incorrect-btn").style.display = "none";
