@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập Đóng vai - Tiếng Đức</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .scenario-selector {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .scenario-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 15px;
+        padding: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .scenario-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .scenario-card.shopping {
+        background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      }
+
+      .scenario-card.restaurant {
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+      }
+
+      .practice-area {
+        display: none;
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 20px 0;
+      }
+
+      .practice-area.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .role-section {
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 15px;
+        border-left: 5px solid;
+      }
+
+      .customer {
+        background: #e3f2fd;
+        border-left-color: #2196f3;
+      }
+
+      .staff {
+        background: #f3e5f5;
+        border-left-color: #9c27b0;
+      }
+
+      .role-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .dialog-item {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .dialog-number {
+        position: absolute;
+        top: -10px;
+        left: 15px;
+        background: #667eea;
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+
+      .dialog-text {
+        font-size: 1.2em;
+        line-height: 1.4;
+        margin-top: 10px;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-play {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-back {
+        background: linear-gradient(135deg, #6c757d, #495057);
+      }
+
+      .instructions {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        border: 2px solid #e9ecef;
+      }
+
+      .instructions h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+      }
+
+      .instructions ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .instructions li {
+        margin: 8px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .instructions li::before {
+        content: "🎭";
+        position: absolute;
+        left: 0;
+      }
+
+      .scenario-info {
+        text-align: center;
+        margin: 20px 0;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      .hidden-text {
+        filter: blur(5px);
+        transition: filter 0.3s ease;
+        cursor: pointer;
+      }
+
+      .hidden-text:hover {
+        filter: blur(0);
+      }
+
+      .reveal-btn {
+        background: linear-gradient(135deg, #ffc107, #fd7e14);
+        font-size: 0.9em;
+        padding: 8px 15px;
+        margin-left: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .scenario-selector {
+          grid-template-columns: 1fr;
+        }
+
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .dialog-text {
+          font-size: 1.1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎭 Luyện tập Đóng vai</h1>
+        <p>Hội thoại Tiếng Đức - Mua sắm & Nhà hàng</p>
+      </div>
+
+      <div class="content">
+        <!-- Scenario Selection -->
+        <div id="scenario-selection">
+          <div class="instructions">
+            <h3>🎯 Hướng dẫn luyện tập</h3>
+            <ul>
+              <li>Chọn tình huống muốn luyện tập</li>
+              <li>Đọc to phần của vai bạn chọn</li>
+              <li>Có thể che/mở câu để tự kiểm tra</li>
+              <li>Luyện phát âm và ngữ điệu tự nhiên</li>
+              <li>Thử đóng cả hai vai để hiểu cuộc hội thoại</li>
+            </ul>
+          </div>
+
+          <div class="scenario-selector">
+            <div
+              class="scenario-card shopping"
+              onclick="showScenario('shopping')"
+            >
+              <h3>🛒 Mua sắm tại siêu thị</h3>
+              <p><strong>2 vai diễn:</strong></p>
+              <p>👤 Khách hàng (5 lượt)</p>
+              <p>👩‍💼 Người bán (4 lượt)</p>
+              <p><em>Mua táo, chuối, lê</em></p>
+            </div>
+
+            <div
+              class="scenario-card restaurant"
+              onclick="showScenario('restaurant')"
+            >
+              <h3>🍽️ Đặt món tại nhà hàng</h3>
+              <p><strong>2 vai diễn:</strong></p>
+              <p>👤 Khách hàng (7 lượt)</p>
+              <p>👩‍🍳 Phục vụ (5 lượt)</p>
+              <p><em>Đặt món, thanh toán</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shopping Scenario -->
+        <div id="shopping-practice" class="practice-area">
+          <div class="scenario-info">
+            <h2>🛒 Tình huống: Mua sắm tại siêu thị</h2>
+            <p>Khách hàng muốn mua hoa quả nhưng không đủ tiền</p>
+          </div>
+
+          <div class="role-section customer">
+            <div class="role-title">👤 KHÁCH HÀNG (5 lượt nói)</div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">1</div>
+              <div class="dialog-text">
+                Guten Tag, ich hätte gern ein Kilo Äpfel.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Guten Tag, ich hätte gern ein Kilo Äpfel.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">2</div>
+              <div class="dialog-text">
+                Ja, die Bananen sehen schön aus. Bitte fünf Bananen.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Ja, die Bananen sehen schön aus. Bitte fünf Bananen.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">3</div>
+              <div class="dialog-text">
+                Gut, dann auch noch ein Kilo Birnen. Das ist alles.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Gut, dann auch noch ein Kilo Birnen. Das ist alles.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">4</div>
+              <div class="dialog-text">
+                Oh, wie dumm, ich sehe gerade, ich habe nur drei Euro dabei. Wie
+                teuer sind die Bananen?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Oh, wie dumm, ich sehe gerade, ich habe nur drei Euro dabei. Wie teuer sind die Bananen?')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">5</div>
+              <div class="dialog-text">
+                Dann geben Sie mir nur die Äpfel und die Birnen.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Dann geben Sie mir nur die Äpfel und die Birnen.')"
+              >
+                🔊
+              </button>
+            </div>
+          </div>
+
+          <div class="role-section staff">
+            <div class="role-title">👩‍💼 NGƯỜI BÁN (4 lượt nói)</div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">1</div>
+              <div class="dialog-text">Gerne. Sonst noch etwas?</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Gerne. Sonst noch etwas?')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">2</div>
+              <div class="dialog-text">
+                Haben Sie noch einen Wunsch? Wir haben Birnen, aus der Region,
+                ganz frisch, das Kilo für 1 Euro 50.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Haben Sie noch einen Wunsch? Wir haben Birnen, aus der Region, ganz frisch, das Kilo für 1 Euro 50.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">3</div>
+              <div class="dialog-text">
+                Die Äpfel, die Bananen und die Birnen ... das macht zusammen 4
+                Euro 90.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Die Äpfel, die Bananen und die Birnen ... das macht zusammen 4 Euro 90.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">4</div>
+              <div class="dialog-text">2 Euro.</div>
+              <button class="btn btn-play" onclick="speakGerman('2 Euro.')">
+                🔊
+              </button>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn btn-back" onclick="showSelection()">
+              ⬅️ Quay lại
+            </button>
+            <button class="btn" onclick="showScenario('restaurant')">
+              ➡️ Nhà hàng
+            </button>
+          </div>
+        </div>
+
+        <!-- Restaurant Scenario -->
+        <div id="restaurant-practice" class="practice-area">
+          <div class="scenario-info">
+            <h2>🍽️ Tình huống: Đặt món tại nhà hàng</h2>
+            <p>Khách hàng đặt món ăn và đồ uống, sau đó thanh toán</p>
+          </div>
+
+          <div class="role-section customer">
+            <div class="role-title">👤 KHÁCH HÀNG (7 lượt nói)</div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">1</div>
+              <div class="dialog-text">
+                Guten Tag, ich möchte gern bestellen. Haben Sie eine
+                Speisekarte?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Guten Tag, ich möchte gern bestellen. Haben Sie eine Speisekarte?')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">2</div>
+              <div class="dialog-text">
+                Ich nehme die Tomatensuppe und einen Salat.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Ich nehme die Tomatensuppe und einen Salat.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">3</div>
+              <div class="dialog-text">Einen Kaffee, bitte.</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Einen Kaffee, bitte.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">4</div>
+              <div class="dialog-text">Dann bitte einen Apfelsaft.</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Dann bitte einen Apfelsaft.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">5</div>
+              <div class="dialog-text">
+                Ich möchte bezahlen. Die Rechnung bitte.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Ich möchte bezahlen. Die Rechnung bitte.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">6</div>
+              <div class="dialog-text">
+                Muss ich bar zahlen oder geht's auch mit Karte?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Muss ich bar zahlen oder geht auch mit Karte?')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">7</div>
+              <div class="dialog-text">
+                Ich bezahle bar. 12 Euro – der Rest ist für Sie.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Ich bezahle bar. 12 Euro – der Rest ist für Sie.')"
+              >
+                🔊
+              </button>
+            </div>
+          </div>
+
+          <div class="role-section staff">
+            <div class="role-title">👩‍🍳 PHỤC VỤ (5 lượt nói)</div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">1</div>
+              <div class="dialog-text">
+                Bitte schön, hier ist die Speisekarte.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Bitte schön, hier ist die Speisekarte.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">2</div>
+              <div class="dialog-text">
+                Eine Tomatensuppe und einen Salat, gerne. Und was möchten Sie
+                trinken?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Eine Tomatensuppe und einen Salat, gerne. Und was möchten Sie trinken?')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">3</div>
+              <div class="dialog-text">
+                Oh, tut mir leid, wir haben im Moment keine warmen Getränke. Die
+                Kaffeemaschine ist kaputt.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Oh, tut mir leid, wir haben im Moment keine warmen Getränke. Die Kaffeemaschine ist kaputt.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">4</div>
+              <div class="dialog-text">
+                Bitte schön. Eine Tomatensuppe, einen Salat und der Apfelsaft,
+                das macht € 10,75.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Bitte schön. Eine Tomatensuppe, einen Salat und der Apfelsaft, das macht € 10,75.')"
+              >
+                🔊
+              </button>
+            </div>
+
+            <div class="dialog-item">
+              <div class="dialog-number">5</div>
+              <div class="dialog-text">
+                Sie können natürlich mit Karte zahlen.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Sie können natürlich mit Karte zahlen.')"
+              >
+                🔊
+              </button>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn btn-back" onclick="showSelection()">
+              ⬅️ Quay lại
+            </button>
+            <button class="btn" onclick="showScenario('shopping')">
+              ➡️ Mua sắm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showScenario(type) {
+        // Hide selection screen
+        document.getElementById("scenario-selection").style.display = "none";
+
+        // Hide all practice areas
+        document.getElementById("shopping-practice").classList.remove("active");
+        document
+          .getElementById("restaurant-practice")
+          .classList.remove("active");
+
+        // Show selected scenario
+        if (type === "shopping") {
+          document.getElementById("shopping-practice").classList.add("active");
+        } else if (type === "restaurant") {
+          document
+            .getElementById("restaurant-practice")
+            .classList.add("active");
+        }
+      }
+
+      function showSelection() {
+        // Hide all practice areas
+        document.getElementById("shopping-practice").classList.remove("active");
+        document
+          .getElementById("restaurant-practice")
+          .classList.remove("active");
+
+        // Show selection screen
+        document.getElementById("scenario-selection").style.display = "block";
+      }
+
+      function speakGerman(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.8;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        } else {
+          alert(
+            "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
+          );
+        }
+      }
+
+      // Initialize voices
+      if ("speechSynthesis" in window) {
+        speechSynthesis.onvoiceschanged = function () {
+          const voices = speechSynthesis.getVoices();
+          console.log("Available voices:", voices.length);
+        };
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          showSelection();
+        }
+      });
+    </script>
+  </body>
+</html>
