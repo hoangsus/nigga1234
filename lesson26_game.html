@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện tập Nghe-Viết Tiếng Đức - Freizeit (25 câu)</title>
+    <title>Luyện tập Nghe-Viết Tiếng Đức - Alex Edition (25 câu)</title>
     <style>
       * {
         margin: 0;
@@ -315,6 +315,64 @@
         border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
+      .preview-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .preview-vietnamese {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .preview-number {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      .preview-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .preview-german {
+        flex: 1;
+        color: #007bff;
+        font-weight: 600;
+      }
+
+      .speak-german-btn {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .speak-german-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
       @media (max-width: 768px) {
         .header h1 {
           font-size: 2em;
@@ -338,14 +396,23 @@
           grid-template-columns: 1fr;
           gap: 10px;
         }
+
+        .preview-controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .speak-german-btn {
+          margin-top: 10px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>🎯 Thử thách Freizeit - 4 phút</h1>
-        <p>Luyện tập nghe-viết câu giao tiếp hàng ngày</p>
+        <h1>🎯 Thử thách Giao tiếp - 4 phút</h1>
+        <p>Luyện tập nghe-viết câu giao tiếp hàng ngày - Alex Edition</p>
         <div class="challenge-info">
           <h3>🏆 Thử thách</h3>
           <p>
@@ -507,88 +574,88 @@
     </div>
 
     <script>
-      // 25 câu luyện tập từ tài liệu Freizeit
+      // 25 câu luyện tập giao tiếp hàng ngày - Alex Edition
       const practiceData = [
         {
-          vietnamese: "Chào Angelika.",
-          german: "Hallo, Angelika.",
-          tip: "🎯 Chào hỏi đơn giản. 'Hallo' dùng phổ biến trong giao tiếp hàng ngày.",
+          vietnamese: "Chào Sarah.",
+          german: "Hallo Sarah.",
+          tip: "🎯 Chào hỏi đơn giản và thân thiện. 'Hallo' dùng phổ biến trong mọi tình huống.",
         },
         {
-          vietnamese: "Chúng ta muốn đi xem phim tối nay.",
-          german: "Wir wollen doch heute Abend ins Kino gehen.",
-          tip: "🎯 'heute Abend' = tối nay, 'ins Kino gehen' = đi xem phim. 'doch' nhấn mạnh ý định.",
+          vietnamese: "Mình muốn đi mua sắm sáng thứ Bảy.",
+          german:
+            "Wir wollen doch am Samstagvormittag zusammen einkaufen gehen.",
+          tip: "🎯 'am Samstagvormittag' = sáng thứ Bảy, 'zusammen' = cùng nhau, 'einkaufen gehen' = đi mua sắm.",
         },
         {
-          vietnamese: "Tiếc là tôi không thể đến cùng.",
+          vietnamese: "Tiếc là mình không thể đi cùng.",
           german: "Leider kann ich nicht mitkommen.",
           tip: "🎯 'Leider' = tiếc là, 'mitkommen' = đi cùng. Modal verb 'können' ở vị trí thứ 2.",
         },
         {
-          vietnamese: "Con gái tôi bị ốm.",
-          german: "Meine Tochter ist krank.",
-          tip: "🎯 'Meine Tochter' = con gái tôi, 'krank' = ốm/bệnh. Động từ 'sein' mô tả trạng thái.",
+          vietnamese: "Mẹ mình bị ốm.",
+          german: "Meine Mutter ist krank.",
+          tip: "🎯 'Meine Mutter' = mẹ mình, 'krank' = ốm/bệnh. Tính từ sau động từ 'sein'.",
         },
         {
-          vietnamese:
-            "Gọi điện cho tôi sau đó, chúng ta sẽ thỏa thuận làm gì khác.",
+          vietnamese: "Gọi điện cho mình nhé, chúng ta sẽ hẹn làm gì khác.",
           german: "Ruf mich an, dann machen wir etwas anderes aus.",
-          tip: "🎯 'anrufen' = gọi điện (trennbar), 'dann' = sau đó, 'etwas anderes' = gì đó khác.",
+          tip: "🎯 'anrufen' = gọi điện (trennbar), 'etwas anderes ausmachen' = hẹn/thỏa thuận gì khác.",
         },
         {
-          vietnamese: "Hẹn gặp sau, Julia.",
-          german: "Bis dann, Julia.",
-          tip: "🎯 'Bis dann' = hẹn gặp sau, cách chào tạm biệt thông dụng.",
+          vietnamese: "Hẹn gặp sau, Alex.",
+          german: "Bis dann, Alex.",
+          tip: "🎯 'Bis dann' = hẹn gặp sau, cách chào tạm biệt thông dụng và thân thiện.",
         },
         {
-          vietnamese: "Thính giả thân mến, đây là thông tin từ cảnh sát.",
+          vietnamese: "Thính giả thân mến, đây là thông báo của cảnh sát.",
           german: "Liebe Hörer, hier eine Mitteilung der Polizei.",
-          tip: "🎯 'Liebe Hörer' = thính giả thân mến, 'Mitteilung' = thông báo, 'der Polizei' = của cảnh sát (Genitiv).",
+          tip: "🎯 'Liebe Hörer' = thính giả thân mến, 'Mitteilung der Polizei' = thông báo của cảnh sát (Genitiv).",
         },
         {
-          vietnamese: "Ở sân vận động Wald không còn chỗ đậu xe nữa.",
-          german: "Am Waldstadion gibt es keine Parkplätze mehr.",
-          tip: "🎯 'Am Waldstadion' = tại sân vận động Wald, 'keine...mehr' = không còn...nữa, 'Parkplätze' = chỗ đậu xe.",
+          vietnamese: "Ở sân vận động Mỹ Đình không còn chỗ đậu xe.",
+          german: "Am My Dinh Stadion gibt es keine Parkplätze mehr.",
+          tip: "🎯 'Am Stadion' = tại sân vận động, 'keine...mehr' = không còn...nữa, 'Parkplätze' = chỗ đậu xe.",
         },
         {
-          vietnamese: "Khán giả xem trận bóng đá:",
-          german: "Besucher des Fußballspiels:",
-          tip: "🎯 'Besucher' = khán giả/du khách, 'des Fußballspiels' = của trận bóng đá (Genitiv).",
+          vietnamese: "Khán giả xem trận bóng đá Thái Lan gặp Việt Nam:",
+          german: "Besucher des Fußballspiels Thailand gegen Vietnam:",
+          tip: "🎯 'Besucher des Fußballspiels' = khán giả trận bóng đá (Genitiv), 'gegen' = gặp/chống lại.",
         },
         {
-          vietnamese: "Làm ơn đến bằng tàu điện ngầm hoặc xe buýt.",
-          german: "Bitte kommen Sie mit der U-Bahn oder mit dem Bus.",
-          tip: "🎯 Câu lịch sự với 'Sie'. 'mit der U-Bahn' = bằng tàu điện ngầm, 'mit dem Bus' = bằng xe buýt (Dativ).",
+          vietnamese: "Xin hãy đến bằng xe buýt hoặc taxi.",
+          german: "Bitte kommen Sie mit dem Bus oder Taxi.",
+          tip: "🎯 Câu lịch sự với 'Sie'. 'mit dem Bus' = bằng xe buýt (Dativ), taxi không cần mạo từ.",
         },
         {
-          vietnamese: "Chào Robert!",
-          german: "Hej Robert!",
-          tip: "🎯 'Hej' = chào (phong cách Bắc Âu), thân thiện và không trang trọng.",
+          vietnamese: "Chào Mundo!",
+          german: "Hej Mundo!",
+          tip: "🎯 'Hej' = chào (phong cách Bắc Âu), thân thiện và không trang trọng như 'Hallo'.",
         },
         {
-          vietnamese: "Uwe đây.",
-          german: "Uwe hier.",
+          vietnamese: "Alex đây.",
+          german: "Alex hier.",
           tip: "🎯 Cách giới thiệu qua điện thoại đơn giản: tên + 'hier'.",
         },
         {
-          vietnamese: "Bạn không có ở nhà à?",
+          vietnamese: "Sao bạn không có ở nhà thế?",
           german: "Nie bist du zu Hause?",
           tip: "🎯 'Nie' = không bao giờ, 'zu Hause' = ở nhà. Câu hỏi thể hiện sự ngạc nhiên.",
         },
         {
-          vietnamese: "Bây giờ tôi còn đang ở bể bơi.",
-          german: "Ich bin jetzt noch im Schwimmbad.",
-          tip: "🎯 'jetzt noch' = bây giờ còn, 'im Schwimmbad' = ở bể bơi (Dativ).",
+          vietnamese: "Bây giờ mình còn đang ở khách sạn với bạn gái.",
+          german: "Ich bin jetzt mit meiner Freundin noch im Hotel.",
+          tip: "🎯 'mit meiner Freundin' = với bạn gái, 'noch' = còn, 'im Hotel' = ở khách sạn (Dativ).",
         },
         {
-          vietnamese: "Thời tiết quá tuyệt vời.",
-          german: "Das Wetter ist so toll.",
-          tip: "🎯 'Das Wetter' = thời tiết, 'so toll' = quá tuyệt vời. 'so' nhấn mạnh mức độ.",
+          vietnamese: "Thời tiết không được tốt lắm.",
+          german: "Das Wetter ist nicht so gut.",
+          tip: "🎯 'Das Wetter' = thời tiết, 'nicht so gut' = không được tốt lắm. 'so' nhấn mạnh mức độ.",
         },
         {
-          vietnamese: "Tôi sẽ đến buổi hòa nhạc đúng 8 giờ tối.",
-          german: "Ich komme dann um 20 Uhr zum Konzert.",
-          tip: "🎯 'um 20 Uhr' = lúc 8 giờ tối, 'zum Konzert' = đến buổi hòa nhạc (Dativ).",
+          vietnamese: "Mình sẽ lái xe đến rạp phim lúc 8 giờ tối.",
+          german: "Ich komme dann um 20 Uhr mit dem Auto zum Kino.",
+          tip: "🎯 'mit dem Auto' = bằng xe hơi, 'um 20 Uhr' = lúc 8 giờ tối, 'zum Kino' = đến rạp phim.",
         },
         {
           vietnamese: "Chúng ta gặp nhau ở đó nhé?",
@@ -596,44 +663,44 @@
           tip: "🎯 'sich treffen' = gặp nhau, 'uns' = chúng ta (phản thân), 'dort' = ở đó.",
         },
         {
-          vietnamese: "Tôi rất vui.",
+          vietnamese: "Mình rất mong được gặp.",
           german: "Ich freue mich.",
           tip: "🎯 'sich freuen' = vui/mong chờ. Động từ phản thân với 'mich'.",
         },
         {
-          vietnamese: "Chào Andrea, Jasmin đây.",
-          german: "Hallo, Andrea, hier ist Jasmin.",
-          tip: "🎯 Cách giới thiệu qua điện thoại: 'hier ist + tên'.",
+          vietnamese: "Chào Kevin, Alex đây.",
+          german: "Hallo, Kevin, hier ist Alex.",
+          tip: "🎯 Cách giới thiệu qua điện thoại chính thức hơn: 'hier ist + tên'.",
         },
         {
-          vietnamese: "Chúng ta muốn gặp nhau vào thứ Bảy.",
-          german: "Wir wollen uns doch am Samstag treffen.",
-          tip: "🎯 'am Samstag' = vào thứ Bảy, 'sich treffen' = gặp nhau, 'doch' nhấn mạnh.",
+          vietnamese: "Chúng ta có hẹn gặp nhau chủ nhật.",
+          german: "Wir wollen uns doch am Sonntag treffen.",
+          tip: "🎯 'am Sonntag' = vào chủ nhật, 'sich treffen' = gặp nhau, 'doch' nhấn mạnh.",
         },
         {
-          vietnamese: "Đến nhà tôi nhé.",
+          vietnamese: "Đến nhà mình nhé.",
           german: "Komm doch zu mir.",
-          tip: "🎯 Câu mời thân thiện. 'zu mir' = đến chỗ tôi, 'doch' làm câu thân thiện hơn.",
+          tip: "🎯 Câu mời thân thiện. 'zu mir' = đến chỗ mình, 'doch' làm câu thân thiện hơn.",
         },
         {
-          vietnamese: "Trên tivi có một bộ phim hay lúc 8 giờ.",
-          german: "Im Fernsehen gibt es einen tollen Film um acht Uhr.",
-          tip: "🎯 'Im Fernsehen' = trên tivi, 'es gibt' = có, 'einen tollen Film' = một bộ phim hay (Akkusativ).",
+          vietnamese: "Trên TV có một bộ phim hay lúc 10 giờ sáng.",
+          german: "Im Fernsehen gibt es einen tollen Film um 10 Uhr.",
+          tip: "🎯 'Im Fernsehen' = trên TV, 'es gibt' = có, 'einen tollen Film' = một bộ phim hay (Akkusativ).",
         },
         {
-          vietnamese: "Tuần tới chúng ta có thể đi xem phim.",
-          german: "Nächste Woche können wir ja ins Kino gehen.",
-          tip: "🎯 'Nächste Woche' = tuần tới, 'können' = có thể, 'ja' làm câu thân thiện.",
+          vietnamese: "Tuần sau chúng ta có thể đi xem xiếc.",
+          german: "Nächste Woche können wir ja zum Zirkus gehen.",
+          tip: "🎯 'Nächste Woche' = tuần sau, 'zum Zirkus' = đến rạp xiếc, 'ja' làm câu thân thiện.",
         },
         {
-          vietnamese: "Sau đó tôi đặt pizza.",
-          german: "Ich bestelle dann Pizza.",
-          tip: "🎯 'bestellen' = đặt (đồ ăn), 'dann' = sau đó. Pizza không cần mạo từ.",
+          vietnamese: "Mình sẽ đặt gà rán với khoai tây chiên.",
+          german: "Ich bestelle dann Hähnchen mit Pommes.",
+          tip: "🎯 'bestellen' = đặt (đồ ăn), 'Hähnchen' = gà, 'Pommes' = khoai tây chiên (viết tắt của Pommes frites).",
         },
         {
-          vietnamese: "Đồng ý không?",
+          vietnamese: "Được không?",
           german: "Okay?",
-          tip: "🎯 Cách hỏi đồng ý đơn giản và thân thiện. 'Okay' được dùng rộng rãi.",
+          tip: "🎯 Cách hỏi đồng ý đơn giản và thân thiện. 'Okay' được dùng rộng rãi trong giao tiếp.",
         },
       ];
 
@@ -860,7 +927,7 @@
         `;
         notification.innerHTML = `
           <div style="font-size: 24px; margin-bottom: 10px;">🎉</div>
-          <strong>Xuất sắc!</strong><br>
+          <strong>Xuất sắc Alex!</strong><br>
           Bạn đã đạt ${correctCount} câu đúng!<br>
           <small>Tiếp tục luyện tập đến hết 4 phút nhé!</small>
         `;
@@ -1001,13 +1068,13 @@
 
         if (correctCount >= targetScore) {
           resultEmoji = "🏆";
-          resultTitle = "Thành công rồi!";
-          resultMessage = `Bạn đã đạt ${correctCount} câu đúng và hoàn thành thử thách Freizeit 4 phút!`;
+          resultTitle = "Tuyệt vời Alex!";
+          resultMessage = `Bạn đã đạt ${correctCount} câu đúng và hoàn thành thử thách giao tiếp 4 phút!`;
           resultClass = "result-success";
         } else {
           resultEmoji = "⏰";
           resultTitle = "Chưa đạt mục tiêu!";
-          resultMessage = `Bạn đạt ${correctCount}/${targetScore} câu đúng trong 4 phút. Hãy thử lại!`;
+          resultMessage = `Bạn đạt ${correctCount}/${targetScore} câu đúng trong 4 phút. Hãy thử lại Alex!`;
           resultClass = "result-failure";
         }
 
