@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập Tiếng Đức - Kleidung - Thử thách 3 phút</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .challenge-info {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
+
+      .challenge-info h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .practice-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin: 20px 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 1.8em;
+        font-weight: 900;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+      }
+
+      .timer-warning {
+        color: #ff6b6b !important;
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(300px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .sentence-counter {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .vietnamese-sentence {
+        font-size: 2em;
+        margin: 30px 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        line-height: 1.4;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        min-width: 120px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-correct {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-incorrect {
+        background: linear-gradient(135deg, #dc3545, #ff6b6b);
+      }
+
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px 0;
+        height: 20px;
+      }
+
+      .progress-fill {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        height: 100%;
+        transition: width 0.5s ease;
+        border-radius: 10px;
+      }
+
+      .instructions {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .instructions h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .instructions ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .instructions li {
+        margin: 10px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .instructions li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .answer-section {
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        display: none;
+      }
+
+      .answer-section.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .german-answer {
+        font-size: 1.5em;
+        color: #007bff;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .grammar-tip {
+        font-size: 1em;
+        color: #6c757d;
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      .completion-screen {
+        text-align: center;
+        display: none;
+      }
+
+      .completion-screen.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .completion-emoji {
+        font-size: 5em;
+        margin: 20px 0;
+      }
+
+      .result-success {
+        color: #28a745;
+      }
+
+      .result-failure {
+        color: #dc3545;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .stat-item {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .vietnamese-sentence {
+          font-size: 1.5em;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 80%;
+          max-width: 300px;
+        }
+
+        .stats-row {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🛍️ Luyện tập Kleidung - 3 phút</h1>
+        <p>Chủ đề: Quần áo & Mua sắm</p>
+        <div class="challenge-info">
+          <h3>🏆 Thử thách</h3>
+          <p>
+            <strong>Thời gian:</strong> 3 phút |
+            <strong>Mục tiêu:</strong> 12/19 câu đúng
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="practice-card" id="practice-section">
+          <div class="instructions">
+            <h3>📝 Hướng dẫn luyện tập</h3>
+            <ul>
+              <li>Nhấn "Phát âm" để nghe câu tiếng Việt</li>
+              <li>Viết câu tiếng Đức tương ứng vào vở</li>
+              <li>Nhấn "Đúng" hoặc "Sai" để đánh giá bản thân</li>
+              <li>Xem đáp án sau khi đánh giá</li>
+              <li>Mục tiêu: đạt 12 câu đúng trong 3 phút</li>
+            </ul>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-number" id="timer">03:00</div>
+              <div class="stat-label">⏰ Thời gian còn lại</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="correct-count">0</div>
+              <div class="stat-label">✅ Câu đúng</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="total-answered">0</div>
+              <div class="stat-label">📝 Đã làm</div>
+            </div>
+          </div>
+
+          <div class="sentence-counter" id="counter">Câu 1 / 19</div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 5.26%"></div>
+          </div>
+
+          <div class="vietnamese-sentence" id="vietnamese-text">
+            Nhấn "Bắt đầu" để bắt đầu thử thách
+          </div>
+
+          <div class="controls">
+            <button class="btn" id="start-btn" onclick="startPractice()">
+              🚀 Bắt đầu thử thách
+            </button>
+            <button
+              class="btn btn-secondary"
+              id="speak-btn"
+              onclick="speakVietnamese()"
+              style="display: none"
+            >
+              🔊 Phát âm
+            </button>
+            <button
+              class="btn btn-correct"
+              id="correct-btn"
+              onclick="markAnswer(true)"
+              style="display: none"
+            >
+              ✅ Đúng
+            </button>
+            <button
+              class="btn btn-incorrect"
+              id="incorrect-btn"
+              onclick="markAnswer(false)"
+              style="display: none"
+            >
+              ❌ Sai
+            </button>
+            <button
+              class="btn"
+              id="next-btn"
+              onclick="nextSentence()"
+              style="display: none"
+            >
+              ➡️ Câu tiếp theo
+            </button>
+          </div>
+
+          <div class="answer-section" id="answer-section">
+            <div class="german-answer" id="german-answer"></div>
+            <div class="grammar-tip" id="grammar-tip"></div>
+          </div>
+        </div>
+
+        <div class="practice-card completion-screen" id="completion-screen">
+          <div class="completion-emoji" id="result-emoji">🎉</div>
+          <h2 id="result-title">Hoàn thành thử thách!</h2>
+          <p style="font-size: 1.3em; margin: 20px 0" id="result-message">
+            Kết quả sẽ hiển thị ở đây
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number" id="final-correct">0</div>
+              <div class="stat-label">Câu đúng</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-answered">0</div>
+              <div class="stat-label">Đã làm</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-accuracy">0%</div>
+              <div class="stat-label">Độ chính xác</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-time">03:00</div>
+              <div class="stat-label">Thời gian</div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="resetPractice()">🔄 Thử lại</button>
+            <button class="btn btn-secondary" onclick="shuffleAndRestart()">
+              🎲 Trộn câu & Thử lại
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 19 câu luyện tập từ bài Kleidung
+      const practiceData = [
+        {
+          vietnamese: "Tôi có thể giúp gì cho bạn?",
+          german: "Kann ich Ihnen helfen?",
+          tip: "🎯 Câu hỏi lịch sự của nhân viên bán hàng. 'Kann ich' = tôi có thể, 'Ihnen' = cho bạn (dạng lịch sự)",
+        },
+        {
+          vietnamese: "Vâng, cái áo khoác này giá bao nhiêu?",
+          german: "Ja, was kostet die Jacke?",
+          tip: "🎯 'was kostet' = giá bao nhiêu. 'die Jacke' = cái áo khoác (giống cái)",
+        },
+        {
+          vietnamese: "154 Euro phải không?",
+          german: "Stimmt das, 154 Euro?",
+          tip: "🎯 'Stimmt das' = đúng không/phải không. Cách hỏi xác nhận thông tin",
+        },
+        {
+          vietnamese: "Nó có thực sự quá đắt không?",
+          german: "Ist die wirklich so teuer?",
+          tip: "🎯 'wirklich' = thực sự, 'so teuer' = quá đắt như vậy. 'die' thay thế cho 'die Jacke'",
+        },
+        {
+          vietnamese: "Để tôi xem.",
+          german: "Mal sehen.",
+          tip: "🎯 'Mal sehen' = để xem/xem nào. Cụm từ cố định thể hiện việc kiểm tra",
+        },
+        {
+          vietnamese: "Tôi nghĩ đây vẫn còn là giá cũ.",
+          german: "Ich glaube, da ist noch der alte Preis dran.",
+          tip: "🎯 'Ich glaube' = tôi nghĩ/tin, 'der alte Preis' = giá cũ, 'dran' = gắn vào",
+        },
+        {
+          vietnamese: "Tôi tra cứu lại trong máy tính.",
+          german: "Ich schaue mal im Computer nach.",
+          tip: "🎯 'schaue...nach' = tra cứu/kiểm tra, 'im Computer' = trong máy tính (Dativ)",
+        },
+        {
+          vietnamese: "Cái áo khoác bây giờ có giá 94 Euro.",
+          german: "Die Jacke kostet jetzt 94 Euro.",
+          tip: "🎯 'jetzt' = bây giờ, 'kostet' = có giá. Thông báo giá mới",
+        },
+        {
+          vietnamese: "À, vậy tốt hơn rồi.",
+          german: "Aha, das ist schon besser.",
+          tip: "🎯 'Aha' = à/ồ, 'schon besser' = tốt hơn rồi. 'schon' nhấn mạnh sự cải thiện",
+        },
+        {
+          vietnamese:
+            "Xin lỗi, tôi tìm giày, giày thường, không phải giày thể thao.",
+          german:
+            "Entschuldigung, ich suche Schuhe, normale Schuhe, keine Sportschuhe.",
+          tip: "🎯 'Entschuldigung' = xin lỗi, 'normale Schuhe' = giày thường, 'keine' = không phải",
+        },
+        {
+          vietnamese: "Chúng có ở đây ở tầng ba không?",
+          german: "Sind die auch hier im dritten Stock?",
+          tip: "🎯 'Sind die auch' = chúng có...không, 'im dritten Stock' = ở tầng ba (Dativ)",
+        },
+        {
+          vietnamese: "Không, anh phải lên tầng một.",
+          german: "Nein, da müssen Sie in den ersten Stock gehen.",
+          tip: "🎯 'müssen' = phải, 'in den ersten Stock' = lên tầng một (Akkusativ - chuyển động)",
+        },
+        {
+          vietnamese: "Ở đây là quầy thể thao.",
+          german: "Hier ist die Sportabteilung.",
+          tip: "🎯 'Hier ist' = ở đây là, 'die Sportabteilung' = quầy/bộ phận thể thao",
+        },
+        {
+          vietnamese: "Ở tầng một có giày nam.",
+          german: "Im ersten Stock gibt es Herrenschuhe.",
+          tip: "🎯 'gibt es' = có, 'Herrenschuhe' = giày nam (từ ghép: Herren + Schuhe)",
+        },
+        {
+          vietnamese: "Vâng, anh tìm giày cho mình?",
+          german: "Sie suchen doch Schuhe für sich?",
+          tip: "🎯 'Sie suchen doch' = anh tìm...phải không, 'für sich' = cho mình. 'doch' làm câu hỏi nhẹ nhàng hơn",
+        },
+        {
+          vietnamese: "Giày trẻ em thì có ở tầng hai.",
+          german: "Kinderschuhe gibt es im zweiten Stock.",
+          tip: "🎯 'Kinderschuhe' = giày trẻ em, 'im zweiten Stock' = ở tầng hai. Cấu trúc 'gibt es' = có",
+        },
+        {
+          vietnamese: "Vâng, tôi tìm giày cho tôi.",
+          german: "Ja, ich suche Schuhe für mich.",
+          tip: "🎯 'für mich' = cho tôi (Akkusativ). Khẳng định lại việc tìm giày cho bản thân",
+        },
+        {
+          vietnamese: "Anh tìm thấy chúng ở tầng một như đã nói.",
+          german: "Die finden Sie, wie gesagt, im ersten Stock.",
+          tip: "🎯 'Die finden Sie' = anh tìm thấy chúng, 'wie gesagt' = như đã nói. Cấu trúc đảo ngữ",
+        },
+        {
+          vietnamese: "Cảm ơn.",
+          german: "Danke.",
+          tip: "🎯 'Danke' = cảm ơn. Cách cảm ơn đơn giản và phổ biến nhất",
+        },
+      ];
+
+      // App state
+      let currentIndex = 0;
+      let isStarted = false;
+      let startTime = null;
+      let timerInterval = null;
+      let currentData = [...practiceData];
+      let correctCount = 0;
+      let totalAnswered = 0;
+      let timeLimit = 3 * 60; // 3 minutes in seconds
+      let timeRemaining = timeLimit;
+      let challengeCompleted = false;
+
+      // Initialize voices when available
+      function initializeVoices() {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.getVoices();
+          setTimeout(() => {
+            const voices = speechSynthesis.getVoices();
+            const vietnameseVoice = voices.find(
+              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+            );
+
+            if (!vietnameseVoice) {
+              console.log(
+                "Không tìm thấy giọng tiếng Việt. Sử dụng giọng mặc định."
+              );
+            }
+          }, 1000);
+        }
+      }
+
+      // Initialize
+      function init() {
+        updateDisplay();
+        initializeVoices();
+
+        if ("speechSynthesis" in window) {
+          speechSynthesis.onvoiceschanged = initializeVoices;
+        }
+      }
+
+      // Start practice
+      function startPractice() {
+        isStarted = true;
+        currentIndex = 0;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = timeLimit;
+        challengeCompleted = false;
+        startTime = new Date();
+
+        // Show/hide buttons
+        document.getElementById("start-btn").style.display = "none";
+        document.getElementById("speak-btn").style.display = "inline-block";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        // Start timer
+        startTimer();
+
+        // Load first sentence
+        loadSentence();
+      }
+
+      // Start timer
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          timeRemaining--;
+          updateTimerDisplay();
+
+          if (timeRemaining <= 0) {
+            completeChallenge("time");
+          }
+        }, 1000);
+      }
+
+      // Update timer display
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+
+        const timerElement = document.getElementById("timer");
+        timerElement.textContent = timeStr;
+
+        // Add warning style when time is low
+        if (timeRemaining <= 30) {
+          timerElement.classList.add("timer-warning");
+        } else {
+          timerElement.classList.remove("timer-warning");
+        }
+      }
+
+      // Stop timer
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      // Load current sentence
+      function loadSentence() {
+        if (currentIndex >= currentData.length) {
+          completeChallenge("finished");
+          return;
+        }
+
+        const current = currentData[currentIndex];
+        document.getElementById("vietnamese-text").textContent =
+          current.vietnamese;
+        document.getElementById("counter").textContent = `Câu ${
+          currentIndex + 1
+        } / 19`;
+
+        // Update progress
+        const progress = ((currentIndex + 1) / 19) * 100;
+        document.getElementById("progress").style.width = `${progress}%`;
+
+        // Hide answer section and next button
+        document.getElementById("answer-section").classList.remove("show");
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        // Auto speak Vietnamese
+        setTimeout(() => speakVietnamese(), 500);
+      }
+
+      // Speak Vietnamese text
+      function speakVietnamese() {
+        if ("speechSynthesis" in window) {
+          const text = currentData[currentIndex].vietnamese;
+          speechSynthesis.cancel();
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          const voices = speechSynthesis.getVoices();
+          const vietnameseVoice = voices.find(
+            (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+          );
+
+          if (vietnameseVoice) {
+            utterance.voice = vietnameseVoice;
+            utterance.lang = "vi-VN";
+          } else {
+            utterance.lang = "vi-VN";
+          }
+
+          utterance.rate = 0.7;
+          utterance.pitch = 1.0;
+          utterance.volume = 1.0;
+
+          speechSynthesis.speak(utterance);
+
+          const speakBtn = document.getElementById("speak-btn");
+          speakBtn.style.background =
+            "linear-gradient(135deg, #ffa726, #ff7043)";
+          speakBtn.textContent = "🔊 Đang phát...";
+
+          utterance.onend = function () {
+            speakBtn.style.background =
+              "linear-gradient(135deg, #28a745, #20c997)";
+            speakBtn.textContent = "🔊 Phát âm";
+          };
+        } else {
+          alert(
+            "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
+          );
+        }
+      }
+
+      // Mark answer as correct or incorrect
+      function markAnswer(isCorrect) {
+        totalAnswered++;
+        if (isCorrect) {
+          correctCount++;
+        }
+
+        // Update stats display
+        document.getElementById("correct-count").textContent = correctCount;
+        document.getElementById("total-answered").textContent = totalAnswered;
+
+        // Show answer
+        showAnswer();
+
+        // Hide correct/incorrect buttons, show next button
+        document.getElementById("correct-btn").style.display = "none";
+        document.getElementById("incorrect-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "inline-block";
+
+        // Show success message if reached 12 correct but continue until time ends
+        if (
+          correctCount >= 12 &&
+          !document.getElementById("success-notification")
+        ) {
+          showSuccessNotification();
+        }
+      }
+
+      // Show success notification when reaching 12 correct answers
+      function showSuccessNotification() {
+        const notification = document.createElement("div");
+        notification.id = "success-notification";
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: linear-gradient(135deg, #28a745, #20c997);
+          color: white;
+          padding: 20px;
+          border-radius: 15px;
+          z-index: 1000;
+          max-width: 300px;
+          font-size: 16px;
+          box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+          animation: slideIn 0.5s ease;
+        `;
+        notification.innerHTML = `
+          <div style="font-size: 24px; margin-bottom: 10px;">🎉</div>
+          <strong>Xuất sắc!</strong><br>
+          Bạn đã đạt ${correctCount} câu đúng!<br>
+          <small>Tiếp tục luyện tập đến hết 3 phút nhé!</small>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Auto remove after 4 seconds
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 4000);
+      }
+
+      // Next sentence
+      function nextSentence() {
+        currentIndex++;
+        loadSentence();
+      }
+
+      // Show answer
+      function showAnswer() {
+        const current = currentData[currentIndex];
+        document.getElementById("german-answer").textContent = current.german;
+        document.getElementById("grammar-tip").textContent = current.tip;
+        document.getElementById("answer-section").classList.add("show");
+
+        // Speak German answer
+        speakGerman(current.german);
+      }
+
+      // Speak German text
+      function speakGerman(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      // Complete challenge
+      function completeChallenge(reason) {
+        if (challengeCompleted) return;
+        challengeCompleted = true;
+
+        stopTimer();
+
+        // Remove success notification if exists
+        const notification = document.getElementById("success-notification");
+        if (notification) {
+          notification.remove();
+        }
+
+        // Calculate final stats
+        const timeUsed = timeLimit - timeRemaining;
+        const minutes = Math.floor(timeUsed / 60);
+        const seconds = timeUsed % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+
+        const accuracy =
+          totalAnswered > 0
+            ? Math.round((correctCount / totalAnswered) * 100)
+            : 0;
+
+        // Update final stats
+        document.getElementById("final-correct").textContent = correctCount;
+        document.getElementById("final-answered").textContent = totalAnswered;
+        document.getElementById("final-accuracy").textContent = `${accuracy}%`;
+        document.getElementById("final-time").textContent = timeStr;
+
+        // Determine result - always based on reaching 12+ correct answers
+        let resultEmoji, resultTitle, resultMessage, resultClass;
+
+        if (correctCount >= 12) {
+          resultEmoji = "🏆";
+          resultTitle = "Thành công rồi!";
+          resultMessage = `Bạn đã đạt ${correctCount} câu đúng và hoàn thành thử thách Kleidung 3 phút!`;
+          resultClass = "result-success";
+        } else {
+          resultEmoji = "⏰";
+          resultTitle = "Chưa đạt mục tiêu!";
+          resultMessage = `Bạn đạt ${correctCount}/12 câu đúng trong 3 phút. Hãy thử lại!`;
+          resultClass = "result-failure";
+        }
+
+        document.getElementById("result-emoji").textContent = resultEmoji;
+        document.getElementById("result-title").textContent = resultTitle;
+        document.getElementById("result-title").className = resultClass;
+        document.getElementById("result-message").textContent = resultMessage;
+
+        // Show completion screen
+        document.getElementById("practice-section").style.display = "none";
+        document.getElementById("completion-screen").classList.add("show");
+      }
+
+      // Reset practice
+      function resetPractice() {
+        currentIndex = 0;
+        isStarted = false;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = timeLimit;
+        challengeCompleted = false;
+        startTime = null;
+        stopTimer();
+
+        // Reset UI
+        document.getElementById("practice-section").style.display = "block";
+        document.getElementById("completion-screen").classList.remove("show");
+        document.getElementById("start-btn").style.display = "inline-block";
+        document.getElementById("speak-btn").style.display = "none";
+        document.getElementById("correct-btn").style.display = "none";
+        document.getElementById("incorrect-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "none";
+
+        // Reset display
+        document.getElementById("vietnamese-text").textContent =
+          'Nhấn "Bắt đầu" để bắt đầu thử thách';
+        document.getElementById("counter").textContent = "Câu 1 / 19";
+        document.getElementById("progress").style.width = "5.26%";
+        document.getElementById("timer").textContent = "03:00";
+        document.getElementById("timer").classList.remove("timer-warning");
+        document.getElementById("correct-count").textContent = "0";
+        document.getElementById("total-answered").textContent = "0";
+        document.getElementById("answer-section").classList.remove("show");
+      }
+
+      // Shuffle and restart
+      function shuffleAndRestart() {
+        // Shuffle the data
+        currentData = [...practiceData];
+        for (let i = currentData.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [currentData[i], currentData[j]] = [currentData[j], currentData[i]];
+        }
+
+        resetPractice();
+      }
+
+      // Update display
+      function updateDisplay() {
+        if (!isStarted) {
+          document.getElementById("vietnamese-text").textContent =
+            'Nhấn "Bắt đầu" để bắt đầu thử thách';
+        }
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (!isStarted || challengeCompleted) return;
+
+        switch (e.key) {
+          case " ": // Spacebar to speak
+            e.preventDefault();
+            speakVietnamese();
+            break;
+          case "1": // Number 1 for correct
+            e.preventDefault();
+            if (
+              document.getElementById("correct-btn").style.display !== "none"
+            ) {
+              markAnswer(true);
+            }
+            break;
+          case "2": // Number 2 for incorrect
+            e.preventDefault();
+            if (
+              document.getElementById("incorrect-btn").style.display !== "none"
+            ) {
+              markAnswer(false);
+            }
+            break;
+          case "Enter": // Enter for next
+            e.preventDefault();
+            if (document.getElementById("next-btn").style.display !== "none") {
+              nextSentence();
+            }
+            break;
+        }
+      });
+
+      // Initialize when page loads
+      window.onload = init;
+    </script>
+  </body>
+</html>
