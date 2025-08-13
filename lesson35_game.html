@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập Hội thoại Tiếng Đức - 3 Bài</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .section-info {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
+
+      .section-info h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .practice-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin: 20px 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 1.8em;
+        font-weight: 900;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+      }
+
+      .timer-warning {
+        color: #ff6b6b !important;
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .section-counter {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+        font-weight: 600;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        display: inline-block;
+      }
+
+      .sentence-counter {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .vietnamese-sentence {
+        font-size: 2em;
+        margin: 30px 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        line-height: 1.4;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        min-width: 120px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-correct {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-incorrect {
+        background: linear-gradient(135deg, #dc3545, #ff6b6b);
+      }
+
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px 0;
+        height: 20px;
+      }
+
+      .progress-fill {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        height: 100%;
+        transition: width 0.5s ease;
+        border-radius: 10px;
+      }
+
+      .instructions {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .instructions h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .instructions ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .instructions li {
+        margin: 10px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .instructions li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .answer-section {
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        display: none;
+      }
+
+      .answer-section.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .german-answer {
+        font-size: 1.5em;
+        color: #007bff;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .grammar-tip {
+        font-size: 1em;
+        color: #6c757d;
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+
+      .completion-screen {
+        text-align: center;
+        display: none;
+      }
+
+      .completion-screen.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .completion-emoji {
+        font-size: 5em;
+        margin: 20px 0;
+      }
+
+      .result-success {
+        color: #28a745;
+      }
+      .result-failure {
+        color: #dc3545;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .stat-item {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .section-selector {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .section-card {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .section-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .section-card h4 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #ff6b6b;
+      }
+
+      .section-card p {
+        margin: 5px 0;
+        opacity: 0.9;
+      }
+
+      .train-theme {
+        background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+      }
+      .airport-theme {
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+      }
+      .bus-theme {
+        background: linear-gradient(135deg, #fd79a8, #e84393);
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2em;
+        }
+        .vietnamese-sentence {
+          font-size: 1.5em;
+        }
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+        .btn {
+          width: 80%;
+          max-width: 300px;
+        }
+        .stats-row {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .section-selector {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🗣️ Luyện tập Hội thoại Tiếng Đức</h1>
+        <p>3 bài tập thực hành - Mỗi bài 2 phút</p>
+        <div class="section-info">
+          <h3>🎯 Cấu trúc bài học</h3>
+          <p>
+            <strong>Bài 1:</strong> Hội thoại mua vé tàu (12 câu - 2 phút) |
+            <strong>Bài 2:</strong> Tin nhắn đón bạn ở sân bay (7 câu - 2 phút)
+            | <strong>Bài 3:</strong> Hỏi điểm bắt xe buýt (4 câu - 2 phút)
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- Section Selection Screen -->
+        <div class="practice-card" id="selection-screen">
+          <div class="instructions">
+            <h3>📖 Hướng dẫn luyện tập</h3>
+            <ul>
+              <li>23 câu hội thoại tiếng Đức thực tế (từ tài liệu gốc)</li>
+              <li>Mỗi bài: 2 phút luyện tập</li>
+              <li>Nghe câu tiếng Việt → Nghĩ câu tiếng Đức → Đánh giá</li>
+              <li>Xem đáp án chính xác với ghi chú ngữ pháp</li>
+              <li>
+                Phím tắt: Space (phát âm), 1 (đúng), 2 (sai), Enter (tiếp)
+              </li>
+            </ul>
+          </div>
+
+          <div class="section-selector">
+            <div class="section-card" onclick="startSection(0)">
+              <h4>🚆 Bài 1</h4>
+              <p><strong>Hội thoại mua vé tàu</strong></p>
+              <p>12 câu - 2 phút</p>
+              <p>Guten Tag. Ich möchte zwei Fahrkarten...</p>
+            </div>
+            <div class="section-card" onclick="startSection(1)">
+              <h4>✈️ Bài 2</h4>
+              <p><strong>Tin nhắn đón bạn ở sân bay</strong></p>
+              <p>7 câu - 2 phút</p>
+              <p>Hallo... hier... Du kommst ja morgen...</p>
+            </div>
+            <div class="section-card" onclick="startSection(2)">
+              <h4>🚌 Bài 3</h4>
+              <p><strong>Hỏi điểm bắt xe buýt</strong></p>
+              <p>4 câu - 2 phút</p>
+              <p>Ich suche den Bus Linie 30...</p>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="startAllSections()">
+              🚀 Làm cả 3 bài (6 phút)
+            </button>
+            <button class="btn btn-secondary" onclick="showPreview()">
+              👀 Xem trước 23 câu
+            </button>
+          </div>
+        </div>
+
+        <!-- Practice Screen -->
+        <div class="practice-card" id="practice-section" style="display: none">
+          <div class="section-counter" id="section-info">
+            Bài 1: Hội thoại mua vé tàu
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-number" id="timer">02:00</div>
+              <div class="stat-label">⏰ Thời gian</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="correct-count">0</div>
+              <div class="stat-label">✅ Câu đúng</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="total-answered">0</div>
+              <div class="stat-label">📝 Đã làm</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="current-section">1/3</div>
+              <div class="stat-label">📚 Bài hiện tại</div>
+            </div>
+          </div>
+
+          <div class="sentence-counter" id="counter">Câu 1 / 12</div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 8%"></div>
+          </div>
+
+          <div class="vietnamese-sentence" id="vietnamese-text">
+            Nhấn "Bắt đầu" để bắt đầu luyện tập
+          </div>
+
+          <div class="controls">
+            <button
+              class="btn btn-secondary"
+              id="speak-btn"
+              onclick="speakVietnamese()"
+              style="display: none"
+            >
+              🔊 Phát âm
+            </button>
+            <button
+              class="btn btn-correct"
+              id="correct-btn"
+              onclick="markAnswer(true)"
+              style="display: none"
+            >
+              ✅ Hiểu & Đúng
+            </button>
+            <button
+              class="btn btn-incorrect"
+              id="incorrect-btn"
+              onclick="markAnswer(false)"
+              style="display: none"
+            >
+              ❌ Chưa hiểu
+            </button>
+            <button
+              class="btn"
+              id="next-btn"
+              onclick="nextSentence()"
+              style="display: none"
+            >
+              ➡️ Câu tiếp theo
+            </button>
+          </div>
+
+          <div class="answer-section" id="answer-section">
+            <div class="german-answer" id="german-answer"></div>
+            <div class="grammar-tip" id="grammar-tip"></div>
+          </div>
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="practice-card completion-screen" id="completion-screen">
+          <div class="completion-emoji" id="result-emoji">🎉</div>
+          <h2 id="result-title">Hoàn thành!</h2>
+          <p style="font-size: 1.3em; margin: 20px 0" id="result-message">
+            Kết quả sẽ hiển thị ở đây
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number" id="final-correct">0</div>
+              <div class="stat-label">Tổng câu đúng</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-answered">0</div>
+              <div class="stat-label">Tổng đã làm</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-accuracy">0%</div>
+              <div class="stat-label">Độ chính xác</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-time">00:00</div>
+              <div class="stat-label">Thời gian</div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="resetPractice()">🔄 Làm lại</button>
+            <button class="btn btn-secondary" onclick="shuffleAndRestart()">
+              🎲 Trộn câu & Làm lại
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview Screen -->
+        <div class="practice-card completion-screen" id="preview-screen">
+          <div class="completion-emoji">📚</div>
+          <h2 style="color: #667eea; margin-bottom: 30px">
+            Xem trước 23 câu hội thoại
+          </h2>
+
+          <div
+            style="
+              max-height: 500px;
+              overflow-y: auto;
+              margin: 20px 0;
+              padding: 20px;
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 15px;
+            "
+          >
+            <div id="preview-content"></div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="hidePreview()">⬅️ Quay lại</button>
+            <button class="btn btn-secondary" onclick="hidePreviewAndStart()">
+              🚀 Bắt đầu luyện tập
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 3 bài hội thoại tiếng Đức từ tài liệu gốc của người dùng
+      const practiceData = [
+        // BÀI 1: HỘI THOẠI MUA VÉ TÀU (12 câu - 2 phút)
+        [
+          {
+            vietnamese: "Chào bạn.",
+            german: "Guten Tag.",
+            tip: "👋 Lời chào cơ bản trong tiếng Đức",
+          },
+          {
+            vietnamese: "Tôi muốn mua hai vé tàu đi Đà Nẵng.",
+            german: "Ich möchte zwei Fahrkarte nach Da Nang.",
+            tip: "🎫 'Fahrkarte' = vé tàu, 'möchte' = muốn (lịch sự)",
+          },
+          {
+            vietnamese: "Chào bạn.",
+            german: "Guten Tag.",
+            tip: "👋 Nhân viên đáp lại lời chào",
+          },
+          {
+            vietnamese: "Khứ hồi à?",
+            german: "Hin und zurück?",
+            tip: "🔄 'Hin und zurück' = khứ hồi (đi và về)",
+          },
+          {
+            vietnamese: "Không, chỉ một chiều thôi.",
+            german: "Nein, bitte nur einfach.",
+            tip: "➡️ 'nur einfach' = chỉ một chiều",
+          },
+          {
+            vietnamese: "Và bạn muốn đi khi nào?",
+            german: "Und wann möchten Sie fahren?",
+            tip: "📅 'wann' = khi nào, 'Sie' = bạn (lịch sự)",
+          },
+          {
+            vietnamese: "Sáng ngày kia.",
+            german: "Übermorgen Vormittag.",
+            tip: "🌅 'Übermorgen' = ngày kia, 'Vormittag' = buổi sáng",
+          },
+          {
+            vietnamese:
+              "Tốt, tôi đề xuất cho bạn chuyến tàu khởi hành lúc 9.35.",
+            german:
+              "Gut, dann empfehle ich Ihnen den Zug, Abfahrt um 9.35 Uhr.",
+            tip: "🚂 'empfehle' = đề xuất, 'Abfahrt' = khởi hành",
+          },
+          {
+            vietnamese: "Và tôi đến Đà Nẵng lúc nào?",
+            german: "Und wann bin ich in Da Nang?",
+            tip: "🎯 'wann bin ich' = tôi sẽ đến lúc nào",
+          },
+          {
+            vietnamese: "Tàu đến lúc 16.05, khởi hành ở sân ga số 2.",
+            german:
+              "Die Ankunft ist um 16.05 Uhr, der Zug fährt auf Gleis 2 ab.",
+            tip: "🚉 'Ankunft' = sự đến, 'Gleis' = sân ga",
+          },
+          {
+            vietnamese: "Vậy làm ơn hai vé hạng nhất.",
+            german: "Dann bitte zwei Fahrkarten, erste Klasse.",
+            tip: "⭐ 'erste Klasse' = hạng nhất",
+          },
+          {
+            vietnamese: "Bạn có muốn đặt chỗ không?",
+            german: "Möchte Sie reservieren?",
+            tip: "💺 'reservieren' = đặt chỗ trước",
+          },
+          {
+            vietnamese: "Có, làm ơn.",
+            german: "Ja, bitte.",
+            tip: "✅ Đồng ý đặt chỗ",
+          },
+          {
+            vietnamese: "Tôi có thể trả bằng thẻ ATM không?",
+            german: "Kann ich mit ATM-Karte zahlen?",
+            tip: "💳 'zahlen' = trả tiền",
+          },
+          {
+            vietnamese: "Có, tất nhiên.",
+            german: "Ja, natürlich.",
+            tip: "✅ 'natürlich' = tất nhiên, dĩ nhiên",
+          },
+        ],
+
+        // BÀI 2: TIN NHẮN ĐÓN BẠN Ở SÂN BAY (7 câu - 2 phút)
+        [
+          {
+            vietnamese: "Xin chào [tên], đây là [tên tôi].",
+            german: "Hallo ..., hier ...",
+            tip: "📱 'hier' = đây là (khi giới thiệu trong tin nhắn/điện thoại)",
+          },
+          {
+            vietnamese: "Bạn đến lúc 19.35 ngày mai như bạn đã nhắn tôi.",
+            german:
+              "Du kommst ja morgen um 19.35 Uhr an, hast du mir geschrieben.",
+            tip: "✈️ 'ankommen' = đến nơi, 'geschrieben' = đã viết",
+          },
+          {
+            vietnamese: "Tôi sẽ đón bạn ở sân bay.",
+            german: "Ich hole dich dann am Flughafen ab.",
+            tip: "🚗 'abholen' = đón (ai đó), 'Flughafen' = sân bay",
+          },
+          {
+            vietnamese: "Nhưng tiếc là tôi chỉ có thể đến muộn 20 phút.",
+            german: "Ich kann aber leider erst 20 Minuten später kommen.",
+            tip: "⏰ 'leider' = tiếc là, 'später' = muộn hơn",
+          },
+          {
+            vietnamese: "Tôi còn có một cuộc hẹn trước đó.",
+            german: "Ich habe vorher noch einen Termin.",
+            tip: "📅 'Termin' = cuộc hẹn, 'vorher' = trước đó",
+          },
+          {
+            vietnamese: "Hẹn gặp ngày mai.",
+            german: "Bis morgen.",
+            tip: "👋 'Bis morgen' = hẹn gặp ngày mai",
+          },
+          {
+            vietnamese: "Tôi mong được gặp bạn.",
+            german: "Ich freue mich.",
+            tip: "😊 'sich freuen' = vui mừng, mong chờ",
+          },
+        ],
+
+        // BÀI 3: HỎI ĐIỂM BẮT XE BUÝT (4 câu - 2 phút)
+        [
+          {
+            vietnamese:
+              "Chào bạn, tôi tìm xe buýt tuyến 30 đi khu đô thị Times City.",
+            german:
+              "Guten Tag, ich suche den Bus Linie 30 zum städtischen Raum Times City.",
+            tip: "🚌 'Linie' = tuyến, 'suchen' = tìm kiếm",
+          },
+          {
+            vietnamese: "Bến xe ở đâu?",
+            german: "Wo ist die Haltestelle?",
+            tip: "🚏 'Haltestelle' = bến xe buýt",
+          },
+          {
+            vietnamese:
+              "Đi con đường đầu tiên bên trái rồi ngay lập tức rẽ phải.",
+            german:
+              "Gehen Sie die erste Straße links und dann gleich nach rechts.",
+            tip: "🗺️ 'links' = trái, 'rechts' = phải, 'gleich' = ngay lập tức",
+          },
+          {
+            vietnamese: "Đó là bến xe.",
+            german: "Das ist die Haltestelle.",
+            tip: "📍 Chỉ đường đến bến xe buýt",
+          },
+        ],
+      ];
+
+      // App state
+      let currentSectionIndex = 0;
+      let currentQuestionIndex = 0;
+      let isStarted = false;
+      let startTime = null;
+      let timerInterval = null;
+      let correctCount = 0;
+      let totalAnswered = 0;
+      let timeRemaining = 120; // Default 2 minutes
+      let sectionCompleted = false;
+      let isAllSections = false;
+      let totalCorrectAllSections = 0;
+      let totalAnsweredAllSections = 0;
+      let allSectionsStartTime = null;
+
+      const sectionNames = [
+        "🚆 Hội thoại mua vé tàu",
+        "✈️ Tin nhắn đón bạn ở sân bay",
+        "🚌 Hỏi điểm bắt xe buýt",
+      ];
+      const sectionThemes = ["train-theme", "airport-theme", "bus-theme"];
+      const sectionCounts = [15, 7, 4]; // Số câu trong mỗi bài (đã tách rõ từng câu)
+      const sectionTimes = [120, 120, 120]; // Thời gian (giây) cho mỗi bài - 2 phút
+
+      // Initialize
+      function init() {
+        updateDisplay();
+        initializeVoices();
+      }
+
+      // Initialize voices
+      function initializeVoices() {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.getVoices();
+          setTimeout(() => {
+            const voices = speechSynthesis.getVoices();
+            const vietnameseVoice = voices.find(
+              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+            );
+            if (!vietnameseVoice) {
+              console.log("Không tìm thấy giọng tiếng Việt.");
+            }
+          }, 1000);
+        }
+      }
+
+      // Start specific section
+      function startSection(sectionIndex) {
+        currentSectionIndex = sectionIndex;
+        isAllSections = false;
+        startPracticeSession();
+      }
+
+      // Start all sections
+      function startAllSections() {
+        currentSectionIndex = 0;
+        isAllSections = true;
+        totalCorrectAllSections = 0;
+        totalAnsweredAllSections = 0;
+        allSectionsStartTime = new Date();
+        startPracticeSession();
+      }
+
+      // Start practice session
+      function startPracticeSession() {
+        isStarted = true;
+        currentQuestionIndex = 0;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = sectionTimes[currentSectionIndex]; // Set time based on section
+        sectionCompleted = false;
+        startTime = new Date();
+
+        // Update theme
+        const practiceCard = document.getElementById("practice-section");
+        practiceCard.className = `practice-card ${sectionThemes[currentSectionIndex]}`;
+
+        // Show practice screen
+        document.getElementById("selection-screen").style.display = "none";
+        document.getElementById("practice-section").style.display = "block";
+        document.getElementById("speak-btn").style.display = "inline-block";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        // Update section info
+        document.getElementById("section-info").textContent = `Bài ${
+          currentSectionIndex + 1
+        }: ${sectionNames[currentSectionIndex].substring(2)}`;
+        document.getElementById("current-section").textContent = `${
+          currentSectionIndex + 1
+        }/3`;
+
+        // Start timer and load first question
+        startTimer();
+        loadQuestion();
+      }
+
+      // Start timer
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          timeRemaining--;
+          updateTimerDisplay();
+
+          if (timeRemaining <= 0) {
+            completeSection("time");
+          }
+        }, 1000);
+      }
+
+      // Update timer display
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+
+        const timerElement = document.getElementById("timer");
+        timerElement.textContent = timeStr;
+
+        if (timeRemaining <= 30) {
+          timerElement.classList.add("timer-warning");
+        } else {
+          timerElement.classList.remove("timer-warning");
+        }
+      }
+
+      // Stop timer
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      // Load current question
+      function loadQuestion() {
+        if (currentQuestionIndex >= practiceData[currentSectionIndex].length) {
+          completeSection("finished");
+          return;
+        }
+
+        const current = practiceData[currentSectionIndex][currentQuestionIndex];
+        const sectionCount = sectionCounts[currentSectionIndex];
+
+        document.getElementById("vietnamese-text").textContent =
+          current.vietnamese;
+        document.getElementById("counter").textContent = `Câu ${
+          currentQuestionIndex + 1
+        } / ${sectionCount}`;
+
+        // Update progress
+        const progress = ((currentQuestionIndex + 1) / sectionCount) * 100;
+        document.getElementById("progress").style.width = `${progress}%`;
+
+        // Hide answer section and reset buttons
+        document.getElementById("answer-section").classList.remove("show");
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        // Auto speak Vietnamese
+        setTimeout(() => speakVietnamese(), 500);
+      }
+
+      // Speak Vietnamese text
+      function speakVietnamese() {
+        if ("speechSynthesis" in window) {
+          const text =
+            practiceData[currentSectionIndex][currentQuestionIndex].vietnamese;
+          speechSynthesis.cancel();
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          const voices = speechSynthesis.getVoices();
+          const vietnameseVoice = voices.find(
+            (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+          );
+
+          if (vietnameseVoice) {
+            utterance.voice = vietnameseVoice;
+            utterance.lang = "vi-VN";
+          } else {
+            utterance.lang = "vi-VN";
+          }
+
+          utterance.rate = 0.7;
+          utterance.pitch = 1.0;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+
+          const speakBtn = document.getElementById("speak-btn");
+          speakBtn.style.background =
+            "linear-gradient(135deg, #ffa726, #ff7043)";
+          speakBtn.textContent = "🔊 Đang phát...";
+
+          utterance.onend = function () {
+            speakBtn.style.background =
+              "linear-gradient(135deg, #28a745, #20c997)";
+            speakBtn.textContent = "🔊 Phát âm";
+          };
+        }
+      }
+
+      // Mark answer
+      function markAnswer(isCorrect) {
+        totalAnswered++;
+        if (isCorrect) {
+          correctCount++;
+        }
+
+        // Update display
+        document.getElementById("correct-count").textContent = correctCount;
+        document.getElementById("total-answered").textContent = totalAnswered;
+
+        // Show answer
+        showAnswer();
+
+        // Update buttons
+        document.getElementById("correct-btn").style.display = "none";
+        document.getElementById("incorrect-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "inline-block";
+      }
+
+      // Show answer
+      function showAnswer() {
+        const current = practiceData[currentSectionIndex][currentQuestionIndex];
+        document.getElementById("german-answer").textContent = current.german;
+        document.getElementById("grammar-tip").textContent = current.tip;
+        document.getElementById("answer-section").classList.add("show");
+
+        // Speak German answer
+        speakGerman(current.german);
+      }
+
+      // Speak German text
+      function speakGerman(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      // Next question
+      function nextSentence() {
+        currentQuestionIndex++;
+        loadQuestion();
+      }
+
+      // Complete section
+      function completeSection(reason) {
+        if (sectionCompleted) return;
+        sectionCompleted = true;
+        stopTimer();
+
+        // Add to total if doing all sections
+        if (isAllSections) {
+          totalCorrectAllSections += correctCount;
+          totalAnsweredAllSections += totalAnswered;
+        }
+
+        // Check if continuing to next section
+        if (isAllSections && currentSectionIndex < 2) {
+          setTimeout(() => {
+            currentSectionIndex++;
+            startPracticeSession();
+          }, 2000);
+
+          // Show brief transition message
+          document.getElementById(
+            "vietnamese-text"
+          ).textContent = `Hoàn thành bài ${
+            currentSectionIndex + 1
+          }! Chuyển sang ${sectionNames[currentSectionIndex + 1]}...`;
+          return;
+        }
+
+        // Show final results
+        showResults();
+      }
+
+      // Show results
+      function showResults() {
+        const totalTime = isAllSections
+          ? Math.floor((new Date() - allSectionsStartTime) / 1000)
+          : sectionTimes[currentSectionIndex] - timeRemaining;
+
+        const minutes = Math.floor(totalTime / 60);
+        const seconds = totalTime % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+
+        const finalCorrect = isAllSections
+          ? totalCorrectAllSections
+          : correctCount;
+        const finalAnswered = isAllSections
+          ? totalAnsweredAllSections
+          : totalAnswered;
+        const accuracy =
+          finalAnswered > 0
+            ? Math.round((finalCorrect / finalAnswered) * 100)
+            : 0;
+
+        const targetScore = isAllSections
+          ? 19 // ~80% of 26 (tổng số câu thực tế)
+          : Math.ceil(sectionCounts[currentSectionIndex] * 0.8); // 80% của tổng số câu
+        const maxScore = isAllSections
+          ? 26 // Tổng số câu thực tế (15+7+4)
+          : sectionCounts[currentSectionIndex];
+
+        // Update final stats
+        document.getElementById("final-correct").textContent = finalCorrect;
+        document.getElementById("final-answered").textContent = finalAnswered;
+        document.getElementById("final-accuracy").textContent = `${accuracy}%`;
+        document.getElementById("final-time").textContent = timeStr;
+
+        // Determine result
+        let resultEmoji, resultTitle, resultMessage, resultClass;
+        if (finalCorrect >= targetScore) {
+          resultEmoji = "🏆";
+          resultTitle = "Xuất sắc!";
+          resultMessage = `Bạn đạt ${finalCorrect}/${maxScore} câu đúng! Chúc mừng!`;
+          resultClass = "result-success";
+        } else {
+          resultEmoji = "📚";
+          resultTitle = "Cần luyện tập thêm!";
+          resultMessage = `Bạn đạt ${finalCorrect}/${maxScore} câu đúng. Mục tiêu: ${targetScore} câu đúng.`;
+          resultClass = "result-failure";
+        }
+
+        document.getElementById("result-emoji").textContent = resultEmoji;
+        document.getElementById("result-title").textContent = resultTitle;
+        document.getElementById("result-title").className = resultClass;
+        document.getElementById("result-message").textContent = resultMessage;
+
+        // Show completion screen
+        document.getElementById("practice-section").style.display = "none";
+        document.getElementById("completion-screen").classList.add("show");
+      }
+
+      // Show preview
+      function showPreview() {
+        const previewContent = document.getElementById("preview-content");
+        let html = "";
+        let globalIndex = 1;
+
+        practiceData.forEach((section, sectionIndex) => {
+          html += `<div style="margin-bottom: 30px;">`;
+          html += `<h3 style="color: #667eea; margin-bottom: 15px;">${sectionNames[sectionIndex]} (${section.length} câu - 2 phút)</h3>`;
+
+          section.forEach((item, questionIndex) => {
+            html += `
+              <div style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 15px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                <div style="font-weight: bold; margin-bottom: 10px; font-size: 1.1em;">
+                  <span style="display: inline-block; background: #667eea; color: white; width: 25px; height: 25px; border-radius: 50%; text-align: center; line-height: 25px; font-size: 0.9em; font-weight: bold; margin-right: 10px;">${globalIndex}</span>
+                  ${item.vietnamese}
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                  <div style="color: #007bff; font-weight: 600; flex: 1;">${
+                    item.german
+                  }</div>
+                  <button style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; cursor: pointer; transition: all 0.3s ease; flex-shrink: 0;" onclick="speakGermanPreview('${item.german.replace(
+                    /'/g,
+                    "\\'"
+                  )}')">
+                    🔊 Nghe
+                  </button>
+                </div>
+                <div style="font-size: 0.9em; opacity: 0.8; margin-top: 8px; font-style: italic;">${
+                  item.tip
+                }</div>
+              </div>
+            `;
+            globalIndex++;
+          });
+          html += `</div>`;
+        });
+
+        previewContent.innerHTML = html;
+        document.getElementById("selection-screen").style.display = "none";
+        document.getElementById("preview-screen").classList.add("show");
+      }
+
+      // Speak German text in preview
+      function speakGermanPreview(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        } else {
+          alert(
+            "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
+          );
+        }
+      }
+
+      // Hide preview
+      function hidePreview() {
+        document.getElementById("preview-screen").classList.remove("show");
+        document.getElementById("selection-screen").style.display = "block";
+      }
+
+      // Hide preview and start
+      function hidePreviewAndStart() {
+        hidePreview();
+        setTimeout(() => startAllSections(), 300);
+      }
+
+      // Reset practice
+      function resetPractice() {
+        currentSectionIndex = 0;
+        currentQuestionIndex = 0;
+        isStarted = false;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = 120;
+        sectionCompleted = false;
+        isAllSections = false;
+        totalCorrectAllSections = 0;
+        totalAnsweredAllSections = 0;
+        stopTimer();
+
+        // Reset UI
+        document.getElementById("selection-screen").style.display = "block";
+        document.getElementById("practice-section").style.display = "none";
+        document.getElementById("completion-screen").classList.remove("show");
+        document.getElementById("preview-screen").classList.remove("show");
+      }
+
+      // Shuffle and restart
+      function shuffleAndRestart() {
+        // Shuffle each section
+        practiceData.forEach((section) => {
+          for (let i = section.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [section[i], section[j]] = [section[j], section[i]];
+          }
+        });
+        resetPractice();
+      }
+
+      // Update display
+      function updateDisplay() {
+        if (!isStarted) {
+          document.getElementById("vietnamese-text").textContent =
+            'Chọn bài luyện tập hoặc nhấn "Làm cả 3 bài"';
+        }
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (!isStarted || sectionCompleted) return;
+
+        switch (e.key) {
+          case " ":
+            e.preventDefault();
+            speakVietnamese();
+            break;
+          case "1":
+            e.preventDefault();
+            if (
+              document.getElementById("correct-btn").style.display !== "none"
+            ) {
+              markAnswer(true);
+            }
+            break;
+          case "2":
+            e.preventDefault();
+            if (
+              document.getElementById("incorrect-btn").style.display !== "none"
+            ) {
+              markAnswer(false);
+            }
+            break;
+          case "Enter":
+            e.preventDefault();
+            if (document.getElementById("next-btn").style.display !== "none") {
+              nextSentence();
+            }
+            break;
+        }
+      });
+
+      // Initialize when page loads
+      window.onload = init;
+
+      // Add voices changed event
+      if ("speechSynthesis" in window) {
+        speechSynthesis.onvoiceschanged = initializeVoices;
+      }
+    </script>
+  </body>
+</html>
