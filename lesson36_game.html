@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện tập Hội thoại Tiếng Đức - Mua bán</title>
+    <title>Luyện tập Hội thoại Tiếng Đức - Mua bán Tủ lạnh</title>
     <style>
       * {
         margin: 0;
@@ -13,7 +13,7 @@
 
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #4a90e2 0%, #9013fe 100%);
         min-height: 100vh;
         padding: 20px;
       }
@@ -21,15 +21,15 @@
       .container {
         max-width: 1000px;
         margin: 0 auto;
-        background: white;
+        background: #f9f9fb;
         border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         overflow: hidden;
       }
 
       .header {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: #fff;
         padding: 30px;
         text-align: center;
       }
@@ -40,20 +40,24 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
 
+      .header p {
+        color: #fefefe;
+        font-size: 1.2em;
+      }
+
       .content {
         padding: 30px;
       }
 
       .practice-card {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+        color: #333;
         border-radius: 20px;
         padding: 30px;
         margin: 20px 0;
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
       }
 
-      /* Các phần CSS khác giữ nguyên từ code trước */
       .role-section {
         margin: 20px 0;
         padding: 20px;
@@ -62,13 +66,13 @@
       }
 
       .noll {
-        background: #e3f2fd;
-        border-left-color: #2196f3;
+        background: #e6f3ff;
+        border-left-color: #1e88e5;
       }
 
       .jenny {
-        background: #f3e5f5;
-        border-left-color: #9c27b0;
+        background: #fce4ec;
+        border-left-color: #d81b60;
       }
 
       .role-title {
@@ -78,10 +82,11 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        color: #333;
       }
 
       .dialog-item {
-        background: white;
+        background: #fff;
         border-radius: 10px;
         padding: 15px;
         margin: 10px 0;
@@ -93,8 +98,8 @@
         position: absolute;
         top: -10px;
         left: 15px;
-        background: #667eea;
-        color: white;
+        background: #1e88e5;
+        color: #fff;
         width: 25px;
         height: 25px;
         border-radius: 50%;
@@ -108,7 +113,7 @@
       .dialog-number.triangle {
         border-radius: 0;
         clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        background: #9c27b0;
+        background: #d81b60;
       }
 
       .dialog-text {
@@ -120,12 +125,12 @@
       .german-text {
         font-weight: bold;
         margin-bottom: 8px;
-        color: #333;
+        color: #222;
       }
 
       .vietnamese-text {
         font-size: 0.95em;
-        color: #666;
+        color: #555;
         font-style: italic;
       }
 
@@ -140,6 +145,73 @@
         border-radius: 0 5px 5px 0;
       }
 
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .stat-box {
+        background: #fff;
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-number {
+        font-size: 1.8em;
+        font-weight: 900;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .stat-label {
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .timer-warning {
+        color: #e91e63 !important;
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .sentence-counter {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        font-weight: 600;
+        text-align: center;
+        color: #333;
+      }
+
+      .progress-bar {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px 0;
+        height: 20px;
+      }
+
+      .progress-fill {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        height: 100%;
+        transition: width 0.5s ease;
+        border-radius: 10px;
+      }
+
       .controls {
         display: flex;
         justify-content: center;
@@ -149,8 +221,8 @@
       }
 
       .btn {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+        background: linear-gradient(135deg, #1e88e5, #1976d2);
+        color: #fff;
         border: none;
         padding: 12px 25px;
         border-radius: 25px;
@@ -171,20 +243,28 @@
       }
 
       .btn-back {
-        background: linear-gradient(135deg, #6c757d, #495057);
+        background: linear-gradient(135deg, #78909c, #546e7a);
+      }
+
+      .btn-correct {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-incorrect {
+        background: linear-gradient(135deg, #e91e63, #d81b60);
       }
 
       .instructions {
-        background: rgba(255, 255, 255, 0.9);
+        background: #fff;
         border-radius: 15px;
         padding: 20px;
         margin: 20px 0;
-        border: 2px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         color: #333;
       }
 
       .instructions h3 {
-        color: #667eea;
+        color: #1e88e5;
         margin-bottom: 15px;
       }
 
@@ -197,6 +277,7 @@
         margin: 8px 0;
         padding-left: 25px;
         position: relative;
+        color: #444;
       }
 
       .instructions li::before {
@@ -213,9 +294,9 @@
       }
 
       .mode-btn {
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid white;
-        color: white;
+        background: rgba(255, 255, 255, 0.3);
+        border: 2px solid #fff;
+        color: #fff;
         padding: 15px 25px;
         border-radius: 15px;
         cursor: pointer;
@@ -224,8 +305,8 @@
       }
 
       .mode-btn.active {
-        background: white;
-        color: #667eea;
+        background: #fff;
+        color: #1e88e5;
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
@@ -235,7 +316,6 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
 
-      /* Chế độ Full Conversation */
       .full-conversation {
         background: #f8f9fa;
         border-radius: 15px;
@@ -250,13 +330,13 @@
       }
 
       .noll-line {
-        background-color: #e3f2fd;
-        border-left: 4px solid #2196f3;
+        background-color: #e6f3ff;
+        border-left: 4px solid #1e88e5;
       }
 
       .jenny-line {
-        background-color: #f3e5f5;
-        border-left: 4px solid #9c27b0;
+        background-color: #fce4ec;
+        border-left: 4px solid #d81b60;
       }
 
       .speaker {
@@ -265,20 +345,20 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        color: #333;
       }
 
       .original-text {
         font-weight: bold;
-        color: #333;
+        color: #222;
       }
 
       .translated-text {
-        color: #666;
+        color: #555;
         font-style: italic;
         margin-top: 5px;
       }
 
-      /* Chế độ Roleplay */
       .roleplay-practice {
         display: none;
         background: #f8f9fa;
@@ -288,7 +368,7 @@
       }
 
       .current-dialog {
-        background: white;
+        background: #fff;
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 15px;
@@ -297,12 +377,53 @@
 
       .answer-section {
         display: none;
-        background: white;
+        background: #fff;
         border-radius: 10px;
         padding: 20px;
         margin-top: 15px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         border-left: 4px solid #28a745;
+      }
+
+      .completion-screen {
+        text-align: center;
+        display: none;
+      }
+
+      .completion-screen.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .completion-emoji {
+        font-size: 5em;
+        margin: 20px 0;
+      }
+
+      .result-success {
+        color: #28a745;
+      }
+
+      .result-failure {
+        color: #e91e63;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
       }
 
       @media (max-width: 768px) {
@@ -317,6 +438,10 @@
         .practice-mode-selector {
           flex-direction: column;
         }
+
+        .stats-row {
+          grid-template-columns: 1fr 1fr;
+        }
       }
     </style>
   </head>
@@ -324,7 +449,7 @@
     <div class="container">
       <div class="header">
         <h1>🎭 Luyện tập Hội thoại Tiếng Đức</h1>
-        <p>Mua bán tủ lạnh - Frau Noll và Jenny</p>
+        <p>Mua bán tủ lạnh - Frau Noll và Jenny (5 phút)</p>
       </div>
 
       <div class="content">
@@ -337,14 +462,18 @@
                 dịch tự nhiên
               </li>
               <li>
-                <strong>Chế độ Đóng vai:</strong> Thực hành nói một vai và kiểm
-                tra đáp án
+                <strong>Chế độ Đóng vai:</strong> Thực hành nói một vai trong 5
+                phút, tự đánh giá
               </li>
               <li>
-                <strong>Chế độ Full:</strong> Xem hội thoại đầy đủ như file gốc
-                với bản dịch cải tiến
+                <strong>Chế độ Full:</strong> Xem hội thoại đầy đủ với bản dịch
+                cải tiến
               </li>
-              <li>Nhấn nút 🔊 để nghe phát âm tiếng Đức chuẩn</li>
+              <li>Nhấn 🔊 để nghe phát âm tiếng Đức chuẩn</li>
+              <li>
+                Phím tắt (Đóng vai): Space (phát âm), 1 (đúng), 2 (sai), Enter
+                (tiếp), Escape (quay lại)
+              </li>
             </ul>
           </div>
 
@@ -371,8 +500,7 @@
           <!-- Chế độ Đọc hiểu -->
           <div id="reading-content">
             <div class="role-section noll">
-              <div class="role-title">🔵 FRAU NOLL (Người bán)</div>
-              <!-- [Nội dung chế độ đọc hiểu giữ nguyên như code trước] -->
+              <div class="role-title">🔵 FRAU NOLL (Người bán - 8 lượt)</div>
               <div class="dialog-item">
                 <div class="dialog-number">1</div>
                 <div class="dialog-text">
@@ -383,12 +511,137 @@
                   🔊
                 </button>
               </div>
-              <!-- Thêm các dialog-item khác của Frau Noll -->
+              <div class="dialog-item">
+                <div class="dialog-number">2</div>
+                <div class="dialog-text">
+                  <div class="german-text">Ja, der ist noch da.</div>
+                  <div class="vietnamese-text">
+                    Vâng, tủ lạnh vẫn còn bán ạ.
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Ja, der ist noch da.')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number">3</div>
+                <div class="dialog-text">
+                  <div class="german-text">Ach, vielleicht zwei Jahre.</div>
+                  <div class="vietnamese-text">
+                    À, tủ mới dùng khoảng 2 năm thôi ạ.
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Ach, vielleicht zwei Jahre.')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number">4</div>
+                <div class="dialog-text">
+                  <div class="german-text">Aber natürlich!</div>
+                  <div class="vietnamese-text">
+                    Dĩ nhiên là vẫn hoạt động tốt ạ!
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Aber natürlich!')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number">5</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    Klar, kommen Sie am besten heute noch vorbei. Passt Ihnen
+                    18.00 Uhr?
+                  </div>
+                  <div class="vietnamese-text">
+                    Vâng, chị cứ qua xem hôm nay đi ạ. Khoảng 6 giờ tối có được
+                    không ạ?
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Klar, kommen Sie am besten heute noch vorbei. Passt Ihnen 18.00 Uhr?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number">6</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    Von mir aus. Ich bin ab 16 Uhr zu Hause.
+                  </div>
+                  <div class="vietnamese-text">
+                    Cũng được ạ. Từ 4 giờ tôi có ở nhà.
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Von mir aus. Ich bin ab 16 Uhr zu Hause.')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number">7</div>
+                <div class="dialog-text">
+                  <div class="german-text">Romanstraße 12.</div>
+                  <div class="vietnamese-text">Số 12 đường Romanstraße ạ.</div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Romanstraße 12.')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number">8</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    Können Sie den Kühlschrank denn gleich mitnehmen? Sie
+                    bekommen ihn dann noch ein bisschen billiger. Sagen wir 130
+                    Euro?
+                  </div>
+                  <div class="vietnamese-text">
+                    Chị có thể lấy tủ ngay không? Nếu lấy ngay em giảm còn 130
+                    euro nhé?
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Können Sie den Kühlschrank denn gleich mitnehmen? Sie bekommen ihn dann noch ein bisschen billiger. Sagen wir 130 Euro?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number">9</div>
+                <div class="dialog-text">
+                  <div class="german-text">Auf Wiederhören.</div>
+                  <div class="vietnamese-text">Tạm biệt chị nhé!</div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Auf Wiederhören.')"
+                >
+                  🔊
+                </button>
+              </div>
             </div>
 
             <div class="role-section jenny">
-              <div class="role-title">🔴 JENNY (Người mua)</div>
-              <!-- [Nội dung chế độ đọc hiểu giữ nguyên như code trước] -->
+              <div class="role-title">🔴 JENNY (Người mua - 8 lượt)</div>
               <div class="dialog-item">
                 <div class="dialog-number triangle">1</div>
                 <div class="dialog-text">
@@ -404,18 +657,169 @@
                   🔊
                 </button>
               </div>
-              <!-- Thêm các dialog-item khác của Jenny -->
+              <div class="dialog-item">
+                <div class="dialog-number triangle">2</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    Ich habe Ihre Anzeige gelesen. Gibt es den Kühlschrank noch?
+                  </div>
+                  <div class="vietnamese-text">
+                    Tôi thấy quảng cáo tủ lạnh của chị. Tủ này còn không ạ?
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Ich habe Ihre Anzeige gelesen. Gibt es den Kühlschrank noch?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number triangle">3</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    In der Anzeige steht: fast neu. Wie alt ist der Kühlschrank
+                    denn?
+                  </div>
+                  <div class="vietnamese-text">
+                    Quảng cáo ghi là 'gần như mới'. Tủ dùng được mấy năm rồi
+                    chị?
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('In der Anzeige steht: fast neu. Wie alt ist der Kühlschrank denn?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number triangle">4</div>
+                <div class="dialog-text">
+                  <div class="german-text">Und er ist völlig in Ordnung?</div>
+                  <div class="vietnamese-text">Tủ vẫn chạy tốt chứ chị?</div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Und er ist völlig in Ordnung?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number triangle">5</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    Hm. 150 Euro sind ein bisschen viel für mich. Kann ich ihn
+                    mir denn mal ansehen?
+                  </div>
+                  <div class="vietnamese-text">
+                    150 euro hơi cao với tôi. Tôi có thể qua xem trước được
+                    không?
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Hm. 150 Euro sind ein bisschen viel für mich. Kann ich ihn mir denn mal ansehen?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number triangle">6</div>
+                <div class="dialog-text">
+                  <div class="german-text">18.00 Uhr? Geht es auch früher?</div>
+                  <div class="vietnamese-text">
+                    6 giờ tối ạ? Có thể sớm hơn được không?
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('18.00 Uhr? Geht es auch früher?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number triangle">7</div>
+                <div class="dialog-text">
+                  <div class="german-text">Wie ist denn Ihre Adresse?</div>
+                  <div class="vietnamese-text">
+                    Chị cho hỏi địa chỉ nhà chị là gì ạ?
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Wie ist denn Ihre Adresse?')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number triangle">8</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    Romanstraße? Das ist ja ganz in der Nähe.
+                  </div>
+                  <div class="vietnamese-text">
+                    Đường Romanstraße à? Gần đây thôi nhỉ.
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Romanstraße? Das ist ja ganz in der Nähe.')"
+                >
+                  🔊
+                </button>
+              </div>
+              <div class="dialog-item">
+                <div class="dialog-number triangle">9</div>
+                <div class="dialog-text">
+                  <div class="german-text">
+                    Ich sehe ihn mir erst mal an. Bis später. Tschüs.
+                  </div>
+                  <div class="vietnamese-text">
+                    Tôi sẽ qua xem thử nhé. Hẹn gặp lại chị. Tạm biệt!
+                  </div>
+                </div>
+                <button
+                  class="btn btn-play"
+                  onclick="speakGerman('Ich sehe ihn mir erst mal an. Bis später. Tschüs.')"
+                >
+                  🔊
+                </button>
+              </div>
             </div>
           </div>
 
           <!-- Chế độ Đóng vai -->
           <div id="roleplay-content" class="roleplay-practice">
             <div class="instructions">
-              <h3>🎭 Chọn vai để luyện tập</h3>
+              <h3>🎭 Chế độ Đóng vai (5 phút)</h3>
               <p>
-                Đọc to phần của vai bạn chọn bằng tiếng Đức, sau đó kiểm tra đáp
-                án
+                Chọn vai, đọc to câu tiếng Đức, tự đánh giá và kiểm tra đáp án
               </p>
+            </div>
+
+            <div class="stats-row">
+              <div class="stat-box">
+                <div class="stat-number" id="timer">05:00</div>
+                <div class="stat-label">⏰ Thời gian</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number" id="correct-count">0</div>
+                <div class="stat-label">✅ Câu đúng</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number" id="total-answered">0</div>
+                <div class="stat-label">📝 Đã làm</div>
+              </div>
+            </div>
+
+            <div class="sentence-counter" id="counter">Câu 1 / 0</div>
+
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress" style="width: 0%"></div>
             </div>
 
             <div class="controls">
@@ -441,10 +845,33 @@
               </div>
 
               <div class="controls">
-                <button class="btn btn-play" onclick="showAnswer()">
-                  👀 Xem đáp án
+                <button
+                  class="btn btn-play"
+                  id="speak-btn"
+                  onclick="speakCurrentGerman()"
+                >
+                  🔊 Phát âm
                 </button>
-                <button class="btn" onclick="nextDialog()">
+                <button
+                  class="btn btn-correct"
+                  id="correct-btn"
+                  onclick="markAnswer(true)"
+                >
+                  ✅ Hiểu & Đúng
+                </button>
+                <button
+                  class="btn btn-incorrect"
+                  id="incorrect-btn"
+                  onclick="markAnswer(false)"
+                >
+                  ❌ Chưa hiểu
+                </button>
+                <button
+                  class="btn"
+                  id="next-btn"
+                  onclick="nextDialog()"
+                  style="display: none"
+                >
                   ➡️ Câu tiếp theo
                 </button>
               </div>
@@ -481,7 +908,6 @@
                 🔊
               </button>
             </div>
-
             <div class="conversation-line jenny-line">
               <div class="speaker">
                 🔴 Jenny:
@@ -498,23 +924,6 @@
                 🔊
               </button>
             </div>
-
-            <!-- Thêm các đoạn hội thoại tiếp theo -->
-            <div class="conversation-line noll-line">
-              <div class="speaker">
-                🔵 Frau Noll:
-                <span class="original-text">Ja, der ist noch da.</span>
-              </div>
-              <div class="translated-text">Vâng, tủ lạnh vẫn còn bán ạ.</div>
-              <button
-                class="btn btn-play"
-                onclick="speakGerman('Ja, der ist noch da.')"
-                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
-              >
-                🔊
-              </button>
-            </div>
-
             <div class="conversation-line jenny-line">
               <div class="speaker">
                 🔴 Jenny:
@@ -534,13 +943,316 @@
                 🔊
               </button>
             </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll:
+                <span class="original-text">Ja, der ist noch da.</span>
+              </div>
+              <div class="translated-text">Vâng, tủ lạnh vẫn còn bán ạ.</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Ja, der ist noch da.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text"
+                  >In der Anzeige steht: fast neu.</span
+                >
+              </div>
+              <div class="translated-text">Quảng cáo ghi là 'gần như mới'.</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('In der Anzeige steht: fast neu.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text"
+                  >Wie alt ist der Kühlschrank denn?</span
+                >
+              </div>
+              <div class="translated-text">Tủ dùng được mấy năm rồi chị?</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Wie alt ist der Kühlschrank denn?')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll:
+                <span class="original-text">Ach, vielleicht zwei Jahre.</span>
+              </div>
+              <div class="translated-text">
+                À, tủ mới dùng khoảng 2 năm thôi ạ.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Ach, vielleicht zwei Jahre.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text">Und er ist völlig in Ordnung?</span>
+              </div>
+              <div class="translated-text">Tủ vẫn chạy tốt chứ chị?</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Und er ist völlig in Ordnung?')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll: <span class="original-text">Aber natürlich!</span>
+              </div>
+              <div class="translated-text">
+                Dĩ nhiên là vẫn hoạt động tốt ạ!
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Aber natürlich!')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text"
+                  >Hm. 150 Euro sind ein bisschen viel für mich. Kann ich ihn
+                  mir denn mal ansehen?</span
+                >
+              </div>
+              <div class="translated-text">
+                150 euro hơi cao với tôi. Tôi có thể qua xem trước được không?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Hm. 150 Euro sind ein bisschen viel für mich. Kann ich ihn mir denn mal ansehen?')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll:
+                <span class="original-text"
+                  >Klar, kommen Sie am besten heute noch vorbei. Passt Ihnen
+                  18.00 Uhr?</span
+                >
+              </div>
+              <div class="translated-text">
+                Vâng, chị cứ qua xem hôm nay đi ạ. Khoảng 6 giờ tối có được
+                không ạ?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Klar, kommen Sie am besten heute noch vorbei. Passt Ihnen 18.00 Uhr?')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text"
+                  >18.00 Uhr? Geht es auch früher?</span
+                >
+              </div>
+              <div class="translated-text">
+                6 giờ tối ạ? Có thể sớm hơn được không?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('18.00 Uhr? Geht es auch früher?')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll:
+                <span class="original-text"
+                  >Von mir aus. Ich bin ab 16 Uhr zu Hause.</span
+                >
+              </div>
+              <div class="translated-text">
+                Cũng được ạ. Từ 4 giờ tôi có ở nhà.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Von mir aus. Ich bin ab 16 Uhr zu Hause.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text">Wie ist denn Ihre Adresse?</span>
+              </div>
+              <div class="translated-text">
+                Chị cho hỏi địa chỉ nhà chị là gì ạ?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Wie ist denn Ihre Adresse?')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll: <span class="original-text">Romanstraße 12.</span>
+              </div>
+              <div class="translated-text">Số 12 đường Romanstraße ạ.</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Romanstraße 12.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text"
+                  >Romanstraße? Das ist ja ganz in der Nähe.</span
+                >
+              </div>
+              <div class="translated-text">
+                Đường Romanstraße à? Gần đây thôi nhỉ.
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Romanstraße? Das ist ja ganz in der Nähe.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll:
+                <span class="original-text"
+                  >Können Sie den Kühlschrank denn gleich mitnehmen? Sie
+                  bekommen ihn dann noch ein bisschen billiger. Sagen wir 130
+                  Euro?</span
+                >
+              </div>
+              <div class="translated-text">
+                Chị có thể lấy tủ ngay không? Nếu lấy ngay em giảm còn 130 euro
+                nhé?
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Können Sie den Kühlschrank denn gleich mitnehmen? Sie bekommen ihn dann noch ein bisschen billiger. Sagen wir 130 Euro?')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line jenny-line">
+              <div class="speaker">
+                🔴 Jenny:
+                <span class="original-text"
+                  >Ich sehe ihn mir erst mal an. Bis später. Tschüs.</span
+                >
+              </div>
+              <div class="translated-text">
+                Tôi sẽ qua xem thử nhé. Hẹn gặp lại chị. Tạm biệt!
+              </div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Ich sehe ihn mir erst mal an. Bis später. Tschüs.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+            <div class="conversation-line noll-line">
+              <div class="speaker">
+                🔵 Frau Noll:
+                <span class="original-text">Auf Wiederhören.</span>
+              </div>
+              <div class="translated-text">Tạm biệt chị nhé!</div>
+              <button
+                class="btn btn-play"
+                onclick="speakGerman('Auf Wiederhören.')"
+                style="margin-top: 5px; padding: 5px 10px; font-size: 0.9em"
+              >
+                🔊
+              </button>
+            </div>
+          </div>
 
-            <!-- [Thêm tất cả các đoạn hội thoại còn lại theo cùng cách] -->
+          <!-- Màn hình kết quả -->
+          <div id="completion-screen" class="completion-screen">
+            <div class="completion-emoji" id="result-emoji">🎉</div>
+            <h2 id="result-title">Hoàn thành!</h2>
+            <p
+              style="font-size: 1.3em; margin: 20px 0; color: #333"
+              id="result-message"
+            >
+              Kết quả sẽ hiển thị ở đây
+            </p>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-number" id="final-correct">0</div>
+                <div class="stat-label">Tổng câu đúng</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number" id="final-answered">0</div>
+                <div class="stat-label">Tổng đã làm</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number" id="final-accuracy">0%</div>
+                <div class="stat-label">Độ chính xác</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number" id="final-time">00:00</div>
+                <div class="stat-label">Thời gian</div>
+              </div>
+            </div>
+            <div class="controls">
+              <button class="btn" onclick="resetPractice()">🔄 Làm lại</button>
+              <button class="btn btn-back" onclick="setMode('roleplay')">
+                ⬅️ Quay lại
+              </button>
+            </div>
           </div>
 
           <div class="controls">
             <button class="btn btn-play" onclick="speakAllGerman()">
               🔊 Nghe toàn bộ hội thoại
+            </button>
+            <button class="btn btn-back" onclick="setMode('reading')">
+              ⬅️ Quay lại Đọc hiểu
             </button>
           </div>
         </div>
@@ -569,6 +1281,10 @@
               "Klar, kommen Sie am besten heute noch vorbei. Passt Ihnen 18.00 Uhr?",
             vietnamese:
               "Vâng, chị cứ qua xem hôm nay đi ạ. Khoảng 6 giờ tối có được không ạ?",
+          },
+          {
+            german: "Von mir aus. Ich bin ab 16 Uhr zu Hause.",
+            vietnamese: "Cũng được ạ. Từ 4 giờ tôi có ở nhà.",
           },
           {
             german: "Romanstraße 12.",
@@ -614,8 +1330,8 @@
             vietnamese: "6 giờ tối ạ? Có thể sớm hơn được không?",
           },
           {
-            german: "Von mir aus. Ich bin ab 16 Uhr zu Hause.",
-            vietnamese: "Cũng được ạ. Từ 4 giờ tôi có ở nhà.",
+            german: "Wie ist denn Ihre Adresse?",
+            vietnamese: "Chị cho hỏi địa chỉ nhà chị là gì ạ?",
           },
           {
             german: "Romanstraße? Das ist ja ganz in der Nähe.",
@@ -634,6 +1350,13 @@
             vietnamese: "Xin chào, tôi là Stölken.",
           },
           {
+            speaker: "jenny",
+            german:
+              "Ich habe Ihre Anzeige gelesen. Gibt es den Kühlschrank noch?",
+            vietnamese:
+              "Tôi thấy quảng cáo tủ lạnh của chị. Tủ này còn không ạ?",
+          },
+          {
             speaker: "noll",
             german: "Ja, der ist noch da.",
             vietnamese: "Vâng, tủ lạnh vẫn còn bán ạ.",
@@ -641,11 +1364,81 @@
           {
             speaker: "jenny",
             german:
-              "Ich habe Ihre Anzeige gelesen. Gibt es den Kühlschrank noch?",
+              "In der Anzeige steht: fast neu. Wie alt ist der Kühlschrank denn?",
             vietnamese:
-              "Tôi thấy quảng cáo tủ lạnh của chị. Tủ này còn không ạ?",
+              "Quảng cáo ghi là 'gần như mới'. Tủ dùng được mấy năm rồi chị?",
           },
-          // [Thêm tất cả các câu thoại còn lại]
+          {
+            speaker: "noll",
+            german: "Ach, vielleicht zwei Jahre.",
+            vietnamese: "À, tủ mới dùng khoảng 2 năm thôi ạ.",
+          },
+          {
+            speaker: "jenny",
+            german: "Und er ist völlig in Ordnung?",
+            vietnamese: "Tủ vẫn chạy tốt chứ chị?",
+          },
+          {
+            speaker: "noll",
+            german: "Aber natürlich!",
+            vietnamese: "Dĩ nhiên là vẫn hoạt động tốt ạ!",
+          },
+          {
+            speaker: "jenny",
+            german:
+              "Hm. 150 Euro sind ein bisschen viel für mich. Kann ich ihn mir denn mal ansehen?",
+            vietnamese:
+              "150 euro hơi cao với tôi. Tôi có thể qua xem trước được không?",
+          },
+          {
+            speaker: "noll",
+            german:
+              "Klar, kommen Sie am besten heute noch vorbei. Passt Ihnen 18.00 Uhr?",
+            vietnamese:
+              "Vâng, chị cứ qua xem hôm nay đi ạ. Khoảng 6 giờ tối có được không ạ?",
+          },
+          {
+            speaker: "jenny",
+            german: "18.00 Uhr? Geht es auch früher?",
+            vietnamese: "6 giờ tối ạ? Có thể sớm hơn được không?",
+          },
+          {
+            speaker: "noll",
+            german: "Von mir aus. Ich bin ab 16 Uhr zu Hause.",
+            vietnamese: "Cũng được ạ. Từ 4 giờ tôi có ở nhà.",
+          },
+          {
+            speaker: "jenny",
+            german: "Wie ist denn Ihre Adresse?",
+            vietnamese: "Chị cho hỏi địa chỉ nhà chị là gì ạ?",
+          },
+          {
+            speaker: "noll",
+            german: "Romanstraße 12.",
+            vietnamese: "Số 12 đường Romanstraße ạ.",
+          },
+          {
+            speaker: "jenny",
+            german: "Romanstraße? Das ist ja ganz in der Nähe.",
+            vietnamese: "Đường Romanstraße à? Gần đây thôi nhỉ.",
+          },
+          {
+            speaker: "noll",
+            german:
+              "Können Sie den Kühlschrank denn gleich mitnehmen? Sie bekommen ihn dann noch ein bisschen billiger. Sagen wir 130 Euro?",
+            vietnamese:
+              "Chị có thể lấy tủ ngay không? Nếu lấy ngay em giảm còn 130 euro nhé?",
+          },
+          {
+            speaker: "jenny",
+            german: "Ich sehe ihn mir erst mal an. Bis später. Tschüs.",
+            vietnamese: "Tôi sẽ qua xem thử nhé. Hẹn gặp lại chị. Tạm biệt!",
+          },
+          {
+            speaker: "noll",
+            german: "Auf Wiederhören.",
+            vietnamese: "Tạm biệt chị nhé!",
+          },
         ],
       };
 
@@ -653,23 +1446,28 @@
       let currentMode = "reading";
       let currentRole = "";
       let currentDialogIndex = 0;
-      let currentFullIndex = 0;
+      let isStarted = false;
+      let timerInterval = null;
+      let timeRemaining = 300; // 5 minutes
+      let correctCount = 0;
+      let totalAnswered = 0;
+      let startTime = null;
 
       // Chuyển chế độ
       function setMode(mode) {
         currentMode = mode;
+        stopTimer();
+        resetPractice();
 
-        // Ẩn tất cả nội dung
         document.getElementById("reading-content").style.display = "none";
         document.getElementById("roleplay-content").style.display = "none";
         document.getElementById("full-content").style.display = "none";
+        document.getElementById("completion-screen").classList.remove("show");
 
-        // Xóa active tất cả nút
         document.getElementById("reading-btn").classList.remove("active");
         document.getElementById("roleplay-btn").classList.remove("active");
         document.getElementById("full-btn").classList.remove("active");
 
-        // Hiển thị nội dung tương ứng và thêm active cho nút
         if (mode === "reading") {
           document.getElementById("reading-content").style.display = "block";
           document.getElementById("reading-btn").classList.add("active");
@@ -686,40 +1484,183 @@
       function startRoleplay(role) {
         currentRole = role;
         currentDialogIndex = 0;
+        isStarted = true;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = 300;
+        startTime = new Date();
+
         document.getElementById("roleplay-area").style.display = "block";
+        document.getElementById("practice-noll-btn").style.display = "none";
+        document.getElementById("practice-jenny-btn").style.display = "none";
+        document.getElementById("speak-btn").style.display = "inline-block";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        startTimer();
         loadCurrentDialog();
       }
 
       // Tải đoạn hội thoại hiện tại
       function loadCurrentDialog() {
+        if (currentDialogIndex >= dialogueData[currentRole].length) {
+          completePractice();
+          return;
+        }
+
         const dialog = dialogueData[currentRole][currentDialogIndex];
+        const dialogNumber = currentDialogIndex + 1;
         document.getElementById("current-prompt").innerHTML = `
-                <div class="vietnamese-text">${dialog.vietnamese}</div>
-                <div class="improved-translation">Hãy nói bằng tiếng Đức:</div>
-            `;
+          <div class="dialog-number ${
+            currentRole === "noll" ? "" : "triangle"
+          }">${dialogNumber}</div>
+          <div class="vietnamese-text">${dialog.vietnamese}</div>
+          <div class="improved-translation">Hãy nói bằng tiếng Đức:</div>
+        `;
+        document.getElementById(
+          "counter"
+        ).textContent = `Câu ${dialogNumber} / ${dialogueData[currentRole].length}`;
         document.getElementById("answer-section").style.display = "none";
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        const progress =
+          ((currentDialogIndex + 1) / dialogueData[currentRole].length) * 100;
+        document.getElementById("progress").style.width = `${progress}%`;
+      }
+
+      // Đánh giá câu trả lời
+      function markAnswer(isCorrect) {
+        totalAnswered++;
+        if (isCorrect) {
+          correctCount++;
+        }
+
+        document.getElementById("correct-count").textContent = correctCount;
+        document.getElementById("total-answered").textContent = totalAnswered;
+
+        showAnswer();
+        document.getElementById("correct-btn").style.display = "none";
+        document.getElementById("incorrect-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "inline-block";
       }
 
       // Hiển thị đáp án
       function showAnswer() {
         const dialog = dialogueData[currentRole][currentDialogIndex];
         document.getElementById("correct-answer").innerHTML = `
-                <div class="german-text">${dialog.german}</div>
-                <div class="improved-translation">Phát âm: ${dialog.german}</div>
-            `;
+          <div class="german-text">${dialog.german}</div>
+          <div class="improved-translation">Phát âm: ${dialog.german}</div>
+        `;
         document.getElementById("answer-section").style.display = "block";
       }
 
       // Chuyển đến đoạn hội thoại tiếp theo
       function nextDialog() {
-        if (currentDialogIndex < dialogueData[currentRole].length - 1) {
-          currentDialogIndex++;
-          loadCurrentDialog();
+        currentDialogIndex++;
+        loadCurrentDialog();
+      }
+
+      // Bắt đầu bộ đếm thời gian
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          timeRemaining--;
+          updateTimerDisplay();
+
+          if (timeRemaining <= 0) {
+            completePractice();
+          }
+        }, 1000);
+      }
+
+      // Cập nhật hiển thị thời gian
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+        const timerElement = document.getElementById("timer");
+        timerElement.textContent = timeStr;
+
+        if (timeRemaining <= 30) {
+          timerElement.classList.add("timer-warning");
         } else {
-          alert(
-            "Chúc mừng! Bạn đã hoàn thành tất cả các câu thoại của vai này!"
-          );
+          timerElement.classList.remove("timer-warning");
         }
+      }
+
+      // Dừng bộ đếm thời gian
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      // Hoàn thành luyện tập
+      function completePractice() {
+        stopTimer();
+
+        const totalTime = Math.floor((new Date() - startTime) / 1000);
+        const minutes = Math.floor(totalTime / 60);
+        const seconds = totalTime % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+        const accuracy =
+          totalAnswered > 0
+            ? Math.round((correctCount / totalAnswered) * 100)
+            : 0;
+        const targetScore = Math.ceil(dialogueData[currentRole].length * 0.8);
+
+        document.getElementById("final-correct").textContent = correctCount;
+        document.getElementById("final-answered").textContent = totalAnswered;
+        document.getElementById("final-accuracy").textContent = `${accuracy}%`;
+        document.getElementById("final-time").textContent = timeStr;
+
+        let resultEmoji, resultTitle, resultMessage, resultClass;
+        if (correctCount >= targetScore) {
+          resultEmoji = "🏆";
+          resultTitle = "Xuất sắc!";
+          resultMessage = `Bạn đạt ${correctCount}/${dialogueData[currentRole].length} câu đúng! Chúc mừng!`;
+          resultClass = "result-success";
+        } else {
+          resultEmoji = "📚";
+          resultTitle = "Cần luyện tập thêm!";
+          resultMessage = `Bạn đạt ${correctCount}/${dialogueData[currentRole].length} câu đúng. Mục tiêu: ${targetScore} câu đúng.`;
+          resultClass = "result-failure";
+        }
+
+        document.getElementById("result-emoji").textContent = resultEmoji;
+        document.getElementById("result-title").textContent = resultTitle;
+        document.getElementById("result-title").className = resultClass;
+        document.getElementById("result-message").textContent = resultMessage;
+
+        document.getElementById("roleplay-content").style.display = "none";
+        document.getElementById("completion-screen").classList.add("show");
+      }
+
+      // Đặt lại luyện tập
+      function resetPractice() {
+        isStarted = false;
+        currentDialogIndex = 0;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = 300;
+        stopTimer();
+
+        document.getElementById("roleplay-area").style.display = "none";
+        document.getElementById("completion-screen").classList.remove("show");
+        document.getElementById("practice-noll-btn").style.display =
+          "inline-block";
+        document.getElementById("practice-jenny-btn").style.display =
+          "inline-block";
+        document.getElementById("timer").textContent = "05:00";
+        document.getElementById("correct-count").textContent = "0";
+        document.getElementById("total-answered").textContent = "0";
+        document.getElementById("progress").style.width = "0%";
       }
 
       // Phát âm tiếng Đức
@@ -746,15 +1687,7 @@
 
       // Phát toàn bộ hội thoại
       function speakAllGerman() {
-        let allText = [];
-
-        if (currentMode === "reading") {
-          dialogueData.noll.forEach((item) => allText.push(item.german));
-          dialogueData.jenny.forEach((item) => allText.push(item.german));
-        } else if (currentMode === "full") {
-          dialogueData.full.forEach((item) => allText.push(item.german));
-        }
-
+        let allText = dialogueData.full.map((item) => item.german);
         let i = 0;
         function speakNext() {
           if (i < allText.length) {
@@ -766,8 +1699,53 @@
         speakNext();
       }
 
+      // Xử lý phím tắt
+      document.addEventListener("keydown", function (e) {
+        if (!isStarted || currentMode !== "roleplay") return;
+
+        switch (e.key) {
+          case " ":
+            e.preventDefault();
+            speakCurrentGerman();
+            break;
+          case "1":
+            e.preventDefault();
+            if (
+              document.getElementById("correct-btn").style.display !== "none"
+            ) {
+              markAnswer(true);
+            }
+            break;
+          case "2":
+            e.preventDefault();
+            if (
+              document.getElementById("incorrect-btn").style.display !== "none"
+            ) {
+              markAnswer(false);
+            }
+            break;
+          case "Enter":
+            e.preventDefault();
+            if (document.getElementById("next-btn").style.display !== "none") {
+              nextDialog();
+            }
+            break;
+          case "Escape":
+            e.preventDefault();
+            setMode("roleplay");
+            break;
+        }
+      });
+
       // Khởi tạo
       setMode("reading");
+
+      if ("speechSynthesis" in window) {
+        speechSynthesis.onvoiceschanged = function () {
+          const voices = speechSynthesis.getVoices();
+          console.log("Available voices:", voices.length);
+        };
+      }
     </script>
   </body>
 </html>
