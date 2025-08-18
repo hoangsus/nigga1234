@@ -569,13 +569,19 @@
         return shuffled;
       }
 
-      // Text-to-Speech
+      // Text-to-Speech - dừng tiếng cũ trước khi phát tiếng mới
       function speak(text, lang = "de-DE") {
         if ("speechSynthesis" in window) {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = lang;
-          utterance.rate = 0.8;
-          speechSynthesis.speak(utterance);
+          // Dừng tất cả tiếng đang phát
+          speechSynthesis.cancel();
+
+          // Chờ một chút để đảm bảo dừng hoàn toàn
+          setTimeout(() => {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+          }, 100);
         }
       }
 
@@ -783,23 +789,26 @@
         nextTestCard();
       }
 
-      // Chuyển thẻ tiếp theo
+      // Chuyển thẻ tiếp theo - dừng tiếng trước khi chuyển
       function nextCard() {
+        speechSynthesis.cancel(); // Dừng tiếng đang phát
         showAnswer = false;
         currentIndex++;
         showStudyCard();
       }
 
-      // Chuyển thẻ trước
+      // Chuyển thẻ trước - dừng tiếng trước khi chuyển
       function previousCard() {
+        speechSynthesis.cancel(); // Dừng tiếng đang phát
         showAnswer = false;
         currentIndex =
           currentIndex > 0 ? currentIndex - 1 : currentItems.length - 1;
         showStudyCard();
       }
 
-      // Chuyển câu hỏi tiếp theo trong test
+      // Chuyển câu hỏi tiếp theo trong test - dừng tiếng trước khi chuyển
       function nextTestCard() {
+        speechSynthesis.cancel(); // Dừng tiếng đang phát
         showAnswer = false;
         currentIndex++;
         showTestCard();
@@ -879,8 +888,9 @@
             `;
       }
 
-      // Về menu chính
+      // Về menu chính - dừng tất cả tiếng
       function backToMenu() {
+        speechSynthesis.cancel(); // Dừng tiếng đang phát
         clearInterval(timer);
         document.getElementById("timer").classList.add("hidden");
         document.getElementById("modeSelector").classList.remove("hidden");
