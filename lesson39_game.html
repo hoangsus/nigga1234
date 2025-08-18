@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Tiếng Đức - German Practice</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4caf50, #45a049);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .mode-selector {
+        padding: 30px;
+        text-align: center;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .mode-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .mode-btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 200px;
+      }
+
+      .mode-btn.study {
+        background: linear-gradient(135deg, #2196f3, #1976d2);
+        color: white;
+      }
+
+      .mode-btn.test {
+        background: linear-gradient(135deg, #ff5722, #d84315);
+        color: white;
+      }
+
+      .mode-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .content {
+        padding: 30px;
+        min-height: 400px;
+      }
+
+      .card {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .keyword {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .question-section {
+        background: #e3f2fd;
+        border-left: 5px solid #2196f3;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+      }
+
+      .answer-section {
+        background: #e8f5e8;
+        border-left: 5px solid #4caf50;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 0 10px 10px 0;
+      }
+
+      .german-text {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #1565c0;
+        margin-bottom: 10px;
+      }
+
+      .vietnamese-text {
+        font-size: 1.1rem;
+        color: #666;
+        font-style: italic;
+      }
+
+      .controls {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+      }
+
+      .btn-primary {
+        background: #2196f3;
+        color: white;
+      }
+
+      .btn-success {
+        background: #4caf50;
+        color: white;
+      }
+
+      .btn-warning {
+        background: #ff9800;
+        color: white;
+      }
+
+      .btn-danger {
+        background: #f44336;
+        color: white;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .timer {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #f44336;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
+        z-index: 1000;
+      }
+
+      .progress {
+        background: #e0e0e0;
+        border-radius: 10px;
+        height: 10px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        background: linear-gradient(90deg, #4caf50, #45a049);
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.3s ease;
+      }
+
+      .score {
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 10px 0;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .tips {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 20px 0;
+      }
+
+      .tips h3 {
+        color: #856404;
+        margin-bottom: 10px;
+      }
+
+      .tips ul {
+        color: #856404;
+        margin-left: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .keyword {
+          font-size: 2rem;
+        }
+
+        .mode-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🇩🇪 Luyện Tập Tiếng Đức</h1>
+        <p>Ôn tập từ vựng và câu hỏi - trả lời cơ bản</p>
+      </div>
+
+      <div class="mode-selector" id="modeSelector">
+        <h2 style="margin-bottom: 20px">Chọn chế độ học tập</h2>
+        <div class="mode-buttons">
+          <button class="mode-btn study" onclick="startStudyMode()">
+            📚 Chế độ ôn luyện
+            <br /><small>Học từ vựng với tiếng nói</small>
+          </button>
+          <button class="mode-btn test" onclick="startTestMode()">
+            ⏱️ Chế độ kiểm tra 2 phút
+            <br /><small>Luyện tập nhanh</small>
+          </button>
+        </div>
+      </div>
+
+      <div class="content" id="studyContent">
+        <div class="tips">
+          <h3>💡 Mẹo học tập hiệu quả:</h3>
+          <ul>
+            <li>Nghe và lặp lại nhiều lần để cải thiện phát âm</li>
+            <li>
+              Chú ý ngữ pháp: động từ chia theo ngôi (ich spiele, Sie spielen)
+            </li>
+            <li>
+              Học thuộc các cụm từ cơ bản: "am Wochenende", "mit meinen
+              Freunden"
+            </li>
+            <li>Câu trả lời ngắn gọn nhưng đầy đủ ý</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timer hidden" id="timer">2:00</div>
+    </div>
+
+    <script>
+      // Dữ liệu bài học từ file docx - sửa lại ngữ pháp và đổi thành câu trả lời tích cực
+      const vocabularyData = {
+        Freizeit: [
+          {
+            keyword: "Hobby",
+            question: "Was sind Ihre Hobbys?",
+            questionVN: "Sở thích của bạn là gì?",
+            answer: "Meine Hobbys sind Fußball spielen und kochen.",
+            answerVN: "Sở thích của tôi là chơi bóng đá và nấu ăn.",
+            simpleAnswer: "Meine Hobbys sind Fußball und Kochen.",
+          },
+          {
+            keyword: "Wochenende",
+            question: "Was machen Sie am Wochenende?",
+            questionVN: "Bạn làm gì vào cuối tuần?",
+            answer:
+              "Am Wochenende spiele ich Fußball mit meinen Freunden im Park.",
+            answerVN: "Cuối tuần tôi chơi bóng đá với bạn bè ở công viên.",
+            simpleAnswer: "Ich spiele Fußball mit Freunden.",
+          },
+          {
+            keyword: "Wann?",
+            question: "Wann spielen Sie Fußball mit Ihren Freunden?",
+            questionVN: "Khi nào bạn chơi bóng đá với bạn bè?",
+            answer:
+              "Ich spiele Fußball mit meinen Freunden am Wochenende im Park.",
+            answerVN: "Tôi chơi bóng đá với bạn bè vào cuối tuần ở công viên.",
+            simpleAnswer: "Ich spiele am Wochenende.",
+          },
+          {
+            keyword: "Fußball",
+            question:
+              "Wo spielen Sie am Wochenende Fußball mit Ihren Freunden?",
+            questionVN: "Bạn chơi bóng đá với bạn bè ở đâu vào cuối tuần?",
+            answer:
+              "Ich spiele am Wochenende Fußball mit meinen Freunden im Park.",
+            answerVN: "Tôi chơi bóng đá với bạn bè ở công viên vào cuối tuần.",
+            simpleAnswer: "Ich spiele im Park.",
+          },
+          {
+            keyword: "Lieblingssport",
+            question: "Was ist Ihr Lieblingssport?",
+            questionVN: "Môn thể thao yêu thích của bạn là gì?",
+            answer: "Mein Lieblingssport ist Fußball.",
+            answerVN: "Môn thể thao yêu thích của tôi là bóng đá.",
+            simpleAnswer: "Mein Lieblingssport ist Fußball.",
+          },
+          {
+            keyword: "Sonntag",
+            question: "Was machen Sie am Sonntag?",
+            questionVN: "Bạn làm gì vào chủ nhật?",
+            answer:
+              "Am Sonntag spiele ich Fußball mit meinen Freunden im Park.",
+            answerVN: "Chủ nhật tôi chơi bóng đá với bạn bè ở công viên.",
+            simpleAnswer: "Ich spiele Fußball mit Freunden.",
+          },
+        ],
+        Reisen: [
+          {
+            keyword: "Wohin?",
+            question: "Wohin reisen Sie im Sommer?",
+            questionVN: "Bạn đi du lịch đâu vào mùa hè?",
+            answer: "Im Sommer reise ich nach Hanoi.",
+            answerVN: "Mùa hè tôi đi du lịch Hà Nội.",
+            simpleAnswer: "Ich reise nach Hanoi.",
+          },
+          {
+            keyword: "Hotel",
+            question: "Übernachten Sie oft im Urlaub in Hotels?",
+            questionVN: "Bạn có thường ở khách sạn khi đi du lịch không?",
+            answer:
+              "Ja, ich übernachte gern in Hotels. Sie sind sehr komfortabel.",
+            answerVN: "Có, tôi thích ở khách sạn. Chúng rất thoải mái.",
+            simpleAnswer: "Ja, ich übernachte gern in Hotels.",
+          },
+          {
+            keyword: "Urlaub",
+            question: "Wo machen Sie Urlaub im Sommer?",
+            questionVN: "Bạn nghỉ phép ở đâu vào mùa hè?",
+            answer: "Im Sommer mache ich Urlaub in Hanoi.",
+            answerVN: "Mùa hè tôi nghỉ phép ở Hà Nội.",
+            simpleAnswer: "Ich mache Urlaub in Hanoi.",
+          },
+          {
+            keyword: "Länder",
+            question: "In welchen Ländern machen Sie Ihre Reise?",
+            questionVN: "Bạn du lịch những nước nào?",
+            answer: "Ich mache meine Reise in Deutschland und Vietnam.",
+            answerVN: "Tôi du lịch ở Đức và Việt Nam.",
+            simpleAnswer: "Ich reise in Deutschland und Vietnam.",
+          },
+          {
+            keyword: "Auto",
+            question: "Reisen Sie mit dem Auto nach Hanoi?",
+            questionVN: "Bạn có đi du lịch Hà Nội bằng ô tô không?",
+            answer: "Ja, ich reise gern mit dem Auto. Das ist sehr praktisch.",
+            answerVN: "Có, tôi thích đi bằng ô tô. Rất tiện lợi.",
+            simpleAnswer: "Ja, ich reise mit dem Auto.",
+          },
+          {
+            keyword: "Wann?",
+            question: "Wann machen Sie Ihre Reise in diesem Jahr?",
+            questionVN: "Khi nào bạn đi du lịch trong năm nay?",
+            answer: "In diesem Jahr mache ich meine Reise im Sommer.",
+            answerVN: "Năm nay tôi đi du lịch vào mùa hè.",
+            simpleAnswer: "Ich reise im Sommer.",
+          },
+        ],
+        Sport: [
+          {
+            keyword: "Fußball",
+            question:
+              "Spielen Sie am Samstag mit Ihren Freunden Fußball im Park?",
+            questionVN:
+              "Bạn có chơi bóng đá với bạn bè ở công viên thứ 7 không?",
+            answer:
+              "Ja, ich spiele jeden Samstag mit meinen Freunden Fußball im Park.",
+            answerVN: "Có, tôi chơi bóng đá với bạn bè ở công viên mỗi thứ 7.",
+            simpleAnswer: "Ja, ich spiele am Samstag Fußball.",
+          },
+          {
+            keyword: "Fahrrad fahren",
+            question:
+              "Fahren Sie am Samstag mit Ihren Freunden Fahrrad um den Hoan Kiem See?",
+            questionVN:
+              "Bạn có đạp xe với bạn bè quanh hồ Hoàn Kiếm thứ 7 không?",
+            answer:
+              "Ja, ich fahre gern am Samstag mit meinen Freunden Fahrrad um den Hoan Kiem See.",
+            answerVN:
+              "Có, tôi thích đạp xe với bạn bè quanh hồ Hoàn Kiếm thứ 7.",
+            simpleAnswer: "Ja, ich fahre am Samstag Fahrrad.",
+          },
+          {
+            keyword: "schwimmen",
+            question: "Wo schwimmen Sie am Samstag?",
+            questionVN: "Bạn bơi ở đâu vào thứ 7?",
+            answer: "Ich schwimme am Samstag im Schwimmbad.",
+            answerVN: "Tôi bơi ở bể bơi vào thứ 7.",
+            simpleAnswer: "Ich schwimme im Schwimmbad.",
+          },
+          {
+            keyword: "wandern",
+            question: "Wo wandern Sie am Samstag?",
+            questionVN: "Bạn đi bộ đường dài ở đâu vào thứ 7?",
+            answer: "Am Samstag wandere ich in den Bergen.",
+            answerVN: "Thứ 7 tôi đi bộ đường dài ở núi.",
+            simpleAnswer: "Ich wandere in den Bergen.",
+          },
+          {
+            keyword: "Verein",
+            question: "Spielen Sie in einem Sportverein?",
+            questionVN: "Bạn có chơi trong câu lạc bộ thể thao không?",
+            answer:
+              "Ja, ich spiele in einem Fußballverein. Das macht viel Spaß.",
+            answerVN: "Có, tôi chơi trong câu lạc bộ bóng đá. Rất vui.",
+            simpleAnswer: "Ja, ich spiele in einem Fußballverein.",
+          },
+          {
+            keyword: "Wochenende",
+            question: "Machen Sie Sport am Wochenende?",
+            questionVN: "Bạn có chơi thể thao cuối tuần không?",
+            answer:
+              "Ja, ich mache gern Sport am Wochenende. Ich spiele Fußball.",
+            answerVN:
+              "Có, tôi thích chơi thể thao cuối tuần. Tôi chơi bóng đá.",
+            simpleAnswer: "Ja, ich mache Sport am Wochenende.",
+          },
+        ],
+        Wochenende: [
+          {
+            keyword: "Ausflug",
+            question:
+              "Machen Sie einen Ausflug mit Ihren Eltern am Wochenende in die Berge?",
+            questionVN: "Bạn có đi chơi với bố mẹ lên núi cuối tuần không?",
+            answer:
+              "Ja, ich mache gern einen Ausflug mit meinen Eltern in die Berge.",
+            answerVN: "Có, tôi thích đi chơi với bố mẹ lên núi.",
+            simpleAnswer: "Ja, ich mache einen Ausflug.",
+          },
+          {
+            keyword: "Sport",
+            question: "Machen Sie Sport am Samstag mit Ihren Freunden im Park?",
+            questionVN:
+              "Bạn có chơi thể thao với bạn bè ở công viên thứ 7 không?",
+            answer:
+              "Ja, ich mache gern Sport am Samstag mit meinen Freunden im Park.",
+            answerVN:
+              "Có, tôi thích chơi thể thao với bạn bè ở công viên thứ 7.",
+            simpleAnswer: "Ja, ich mache Sport am Samstag.",
+          },
+          {
+            keyword: "fernsehen",
+            question:
+              "Möchten Sie am Samstag mit Ihren Eltern zu Hause fernsehen?",
+            questionVN: "Bạn có muốn xem TV với bố mẹ ở nhà thứ 7 không?",
+            answer: "Ja, ich sehe gern am Samstag mit meinen Eltern fern.",
+            answerVN: "Có, tôi thích xem TV với bố mẹ thứ 7.",
+            simpleAnswer: "Ja, ich sehe gern fern.",
+          },
+          {
+            keyword: "Kino",
+            question: "Möchten Sie am Samstag mit Ihren Eltern ins Kino gehen?",
+            questionVN: "Bạn có muốn đi xem phim với bố mẹ thứ 7 không?",
+            answer: "Ja, ich gehe gern am Samstag mit meinen Eltern ins Kino.",
+            answerVN: "Có, tôi thích đi xem phim với bố mẹ thứ 7.",
+            simpleAnswer: "Ja, ich gehe gern ins Kino.",
+          },
+          {
+            keyword: "kochen",
+            question:
+              "Möchten Sie am Samstag mit Ihren Eltern zu Hause kochen?",
+            questionVN: "Bạn có muốn nấu ăn với bố mẹ ở nhà thứ 7 không?",
+            answer: "Ja, ich koche gern am Samstag mit meinen Eltern zu Hause.",
+            answerVN: "Có, tôi thích nấu ăn với bố mẹ ở nhà thứ 7.",
+            simpleAnswer: "Ja, ich koche gern.",
+          },
+          {
+            keyword: "schlafen",
+            question: "Möchten Sie am Wochenende zu Hause schlafen?",
+            questionVN: "Bạn có muốn ngủ ở nhà cuối tuần không?",
+            answer:
+              "Ja, ich schlafe gern am Wochenende zu Hause. Das ist sehr entspannend.",
+            answerVN: "Có, tôi thích ngủ ở nhà cuối tuần. Rất thư giãn.",
+            simpleAnswer: "Ja, ich schlafe gern zu Hause.",
+          },
+        ],
+      };
+
+      // Biến toàn cục
+      let currentMode = "study";
+      let currentItems = [];
+      let currentIndex = 0;
+      let timer = null;
+      let timeLeft = 120; // 2 phút
+      let score = 0;
+      let totalQuestions = 0;
+      let showAnswer = false;
+
+      // Khởi tạo tất cả items
+      function getAllItems() {
+        const allItems = [];
+        for (const category in vocabularyData) {
+          allItems.push(...vocabularyData[category]);
+        }
+        return shuffleArray(allItems);
+      }
+
+      // Xáo trộn mảng
+      function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
+
+      // Text-to-Speech
+      function speak(text, lang = "de-DE") {
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = lang;
+          utterance.rate = 0.8;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      // Bắt đầu chế độ ôn luyện
+      function startStudyMode() {
+        currentMode = "study";
+        currentItems = getAllItems();
+        currentIndex = 0;
+        showAnswer = false;
+
+        document.getElementById("modeSelector").classList.add("hidden");
+        showStudyCard();
+      }
+
+      // Bắt đầu chế độ kiểm tra
+      function startTestMode() {
+        currentMode = "test";
+        currentItems = getAllItems().slice(0, 20); // Giới hạn 20 câu
+        currentIndex = 0;
+        score = 0;
+        totalQuestions = 0;
+        timeLeft = 120;
+        showAnswer = false;
+
+        document.getElementById("modeSelector").classList.add("hidden");
+        document.getElementById("timer").classList.remove("hidden");
+
+        startTimer();
+        showTestCard();
+      }
+
+      // Hiển thị thẻ ôn luyện
+      function showStudyCard() {
+        if (currentIndex >= currentItems.length) {
+          currentIndex = 0;
+        }
+
+        const item = currentItems[currentIndex];
+        const content = document.getElementById("studyContent");
+
+        content.innerHTML = `
+                <div class="card fade-in">
+                    <div class="keyword">${item.keyword}</div>
+                    
+                    <div class="question-section">
+                        <div class="german-text">${item.question}</div>
+                        <div class="vietnamese-text">${item.questionVN}</div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="speak('${
+                          item.question
+                        }')">
+                            🔊 Nghe câu hỏi
+                        </button>
+                        <button class="btn btn-success" onclick="toggleAnswer()">
+                            ${showAnswer ? "🙈 Ẩn đáp án" : "👁️ Xem đáp án"}
+                        </button>
+                    </div>
+                    
+                    <div id="answerSection" class="${
+                      showAnswer ? "" : "hidden"
+                    }">
+                        <div class="answer-section">
+                            <div class="german-text">Câu trả lời đầy đủ: ${
+                              item.answer
+                            }</div>
+                            <div class="vietnamese-text">${item.answerVN}</div>
+                            <div class="german-text" style="color: #FF5722; margin-top: 10px;">
+                                Câu trả lời ngắn: ${item.simpleAnswer}
+                            </div>
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="btn btn-primary" onclick="speak('${
+                              item.answer
+                            }')">
+                                🔊 Nghe đáp án đầy đủ
+                            </button>
+                            <button class="btn btn-warning" onclick="speak('${
+                              item.simpleAnswer
+                            }')">
+                                🔊 Nghe đáp án ngắn
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="previousCard()">⬅️ Trước</button>
+                        <button class="btn btn-success" onclick="nextCard()">Tiếp ➡️</button>
+                        <button class="btn btn-danger" onclick="backToMenu()">🏠 Về menu</button>
+                    </div>
+                    
+                    <div class="progress">
+                        <div class="progress-bar" style="width: ${
+                          ((currentIndex + 1) / currentItems.length) * 100
+                        }%"></div>
+                    </div>
+                    <div class="score">Thẻ ${currentIndex + 1} / ${
+          currentItems.length
+        }</div>
+                </div>
+            `;
+      }
+
+      // Hiển thị thẻ kiểm tra
+      function showTestCard() {
+        if (currentIndex >= currentItems.length) {
+          endTest();
+          return;
+        }
+
+        const item = currentItems[currentIndex];
+        const content = document.getElementById("studyContent");
+
+        content.innerHTML = `
+                <div class="card fade-in">
+                    <div class="keyword">${item.keyword}</div>
+                    
+                    <div class="question-section">
+                        <h3>Đoán câu hỏi từ từ khóa này:</h3>
+                        <div class="vietnamese-text">Gợi ý: ${
+                          item.questionVN
+                        }</div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="showTestAnswer()">
+                            👁️ Xem câu hỏi & đáp án
+                        </button>
+                        <button class="btn btn-success" onclick="speak('${
+                          item.keyword
+                        }')">
+                            🔊 Nghe từ khóa
+                        </button>
+                    </div>
+                    
+                    <div id="testAnswerSection" class="${
+                      showAnswer ? "" : "hidden"
+                    }">
+                        <div class="question-section">
+                            <div class="german-text">Câu hỏi: ${
+                              item.question
+                            }</div>
+                        </div>
+                        
+                        <div class="answer-section">
+                            <div class="german-text">Đáp án ngắn: ${
+                              item.simpleAnswer
+                            }</div>
+                            <div class="vietnamese-text">${item.answerVN}</div>
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="btn btn-primary" onclick="speak('${
+                              item.question
+                            }')">🔊 Nghe câu hỏi</button>
+                            <button class="btn btn-warning" onclick="speak('${
+                              item.simpleAnswer
+                            }')">🔊 Nghe đáp án</button>
+                        </div>
+                        
+                        <div class="controls" style="margin-top: 20px;">
+                            <button class="btn btn-success" onclick="markCorrect()">✅ Biết</button>
+                            <button class="btn btn-danger" onclick="markIncorrect()">❌ Không biết</button>
+                        </div>
+                    </div>
+                    
+                    <div class="progress">
+                        <div class="progress-bar" style="width: ${
+                          ((currentIndex + 1) / currentItems.length) * 100
+                        }%"></div>
+                    </div>
+                    <div class="score">
+                        Câu ${currentIndex + 1} / ${
+          currentItems.length
+        } | Đúng: ${score}/${totalQuestions}
+                    </div>
+                </div>
+            `;
+      }
+
+      // Bật/tắt hiển thị đáp án trong chế độ ôn luyện
+      function toggleAnswer() {
+        showAnswer = !showAnswer;
+        showStudyCard();
+      }
+
+      // Hiển thị đáp án trong chế độ kiểm tra
+      function showTestAnswer() {
+        showAnswer = true;
+        showTestCard();
+      }
+
+      // Đánh dấu câu đúng
+      function markCorrect() {
+        score++;
+        totalQuestions++;
+        nextTestCard();
+      }
+
+      // Đánh dấu câu sai
+      function markIncorrect() {
+        totalQuestions++;
+        nextTestCard();
+      }
+
+      // Chuyển thẻ tiếp theo
+      function nextCard() {
+        showAnswer = false;
+        currentIndex++;
+        showStudyCard();
+      }
+
+      // Chuyển thẻ trước
+      function previousCard() {
+        showAnswer = false;
+        currentIndex =
+          currentIndex > 0 ? currentIndex - 1 : currentItems.length - 1;
+        showStudyCard();
+      }
+
+      // Chuyển câu hỏi tiếp theo trong test
+      function nextTestCard() {
+        showAnswer = false;
+        currentIndex++;
+        showTestCard();
+      }
+
+      // Bắt đầu timer
+      function startTimer() {
+        timer = setInterval(() => {
+          timeLeft--;
+          const minutes = Math.floor(timeLeft / 60);
+          const seconds = timeLeft % 60;
+          document.getElementById("timer").textContent = `${minutes}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+
+          if (timeLeft <= 0) {
+            endTest();
+          }
+        }, 1000);
+      }
+
+      // Kết thúc bài test
+      function endTest() {
+        clearInterval(timer);
+        document.getElementById("timer").classList.add("hidden");
+
+        const percentage =
+          totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+        let feedback = "";
+        let emoji = "";
+
+        if (percentage >= 80) {
+          feedback = "Xuất sắc! Bạn đã nắm vững từ vựng tiếng Đức.";
+          emoji = "🏆";
+        } else if (percentage >= 60) {
+          feedback = "Tốt! Bạn cần ôn luyện thêm một chút.";
+          emoji = "👍";
+        } else {
+          feedback = "Cần cố gắng hơn! Hãy ôn luyện thêm nhé.";
+          emoji = "💪";
+        }
+
+        const content = document.getElementById("studyContent");
+        content.innerHTML = `
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">${emoji}</div>
+                    <h2 style="color: #2c3e50; margin-bottom: 20px;">Kết quả bài test</h2>
+                    
+                    <div style="font-size: 3rem; font-weight: bold; color: #4CAF50; margin: 20px 0;">
+                        ${score}/${totalQuestions}
+                    </div>
+                    
+                    <div style="font-size: 2rem; color: #FF5722; margin-bottom: 20px;">
+                        ${percentage}%
+                    </div>
+                    
+                    <div style="font-size: 1.2rem; color: #666; margin-bottom: 30px;">
+                        ${feedback}
+                    </div>
+                    
+                    <div class="tips">
+                        <h3>📝 Lời khuyên để cải thiện:</h3>
+                        <ul style="text-align: left;">
+                            <li>Ôn luyện các từ vựng còn yếu trong chế độ học tập</li>
+                            <li>Luyện phát âm bằng cách nghe và lặp lại</li>
+                            <li>Học thuộc các mẫu câu trả lời ngắn</li>
+                            <li>Thực hành thường xuyên mỗi ngày</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="startTestMode()">🔄 Làm lại test</button>
+                        <button class="btn btn-success" onclick="startStudyMode()">📚 Ôn luyện</button>
+                        <button class="btn btn-danger" onclick="backToMenu()">🏠 Về menu</button>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Về menu chính
+      function backToMenu() {
+        clearInterval(timer);
+        document.getElementById("timer").classList.add("hidden");
+        document.getElementById("modeSelector").classList.remove("hidden");
+
+        const content = document.getElementById("studyContent");
+        content.innerHTML = `
+                <div class="tips">
+                    <h3>💡 Mẹo học tập hiệu quả:</h3>
+                    <ul>
+                        <li>Nghe và lặp lại nhiều lần để cải thiện phát âm</li>
+                        <li>Chú ý ngữ pháp: động từ chia theo ngôi (ich spiele, Sie spielen)</li>
+                        <li>Học thuộc các cụm từ cơ bản: "am Wochenende", "mit meinen Freunden"</li>
+                        <li>Câu trả lời ngắn gọn nhưng đầy đủ ý</li>
+                    </ul>
+                </div>
+            `;
+
+        // Reset các biến
+        currentIndex = 0;
+        showAnswer = false;
+        score = 0;
+        totalQuestions = 0;
+        timeLeft = 120;
+      }
+
+      // Khởi tạo ứng dụng
+      function initApp() {
+        // Kiểm tra hỗ trợ Speech Synthesis
+        if (!("speechSynthesis" in window)) {
+          console.warn("Trình duyệt không hỗ trợ text-to-speech");
+        }
+
+        // Thêm keyboard shortcuts
+        document.addEventListener("keydown", function (e) {
+          if (currentMode === "study") {
+            if (e.key === "ArrowRight" || e.key === " ") {
+              e.preventDefault();
+              nextCard();
+            } else if (e.key === "ArrowLeft") {
+              e.preventDefault();
+              previousCard();
+            } else if (e.key === "Enter") {
+              e.preventDefault();
+              toggleAnswer();
+            }
+          } else if (currentMode === "test" && showAnswer) {
+            if (e.key === "1") {
+              e.preventDefault();
+              markCorrect();
+            } else if (e.key === "2") {
+              e.preventDefault();
+              markIncorrect();
+            }
+          }
+
+          if (e.key === "Escape") {
+            e.preventDefault();
+            backToMenu();
+          }
+        });
+      }
+
+      // Khởi tạo khi trang load
+      window.addEventListener("load", initApp);
+    </script>
+  </body>
+</html>
