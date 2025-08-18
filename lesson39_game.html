@@ -282,11 +282,22 @@
         <div class="mode-buttons">
           <button class="mode-btn study" onclick="startStudyMode()">
             📚 Chế độ ôn luyện
-            <br /><small>Học từ vựng với tiếng nói</small>
+            <br /><small>Học từ vựng theo chủ đề</small>
           </button>
           <button class="mode-btn test" onclick="startTestMode()">
-            ⏱️ Chế độ kiểm tra 2 phút
-            <br /><small>Luyện tập nhanh</small>
+            ⏱️ Kiểm tra tổng hợp 2 phút
+            <br /><small>Luyện tập nhanh tất cả chủ đề</small>
+          </button>
+          <button
+            class="mode-btn"
+            onclick="startTopicTestMode()"
+            style="
+              background: linear-gradient(135deg, #9c27b0, #673ab7);
+              color: white;
+            "
+          >
+            🎯 Kiểm tra theo chủ đề 2 phút
+            <br /><small>Luyện tập từng chủ đề riêng biệt</small>
           </button>
         </div>
       </div>
@@ -544,6 +555,7 @@
       let currentMode = "study";
       let currentItems = [];
       let currentIndex = 0;
+      let currentTopic = ""; // Thêm biến để lưu chủ đề hiện tại
       let timer = null;
       let timeLeft = 120; // 2 phút
       let score = 0;
@@ -585,15 +597,517 @@
         }
       }
 
-      // Bắt đầu chế độ ôn luyện
+      // Bắt đầu chế độ ôn luyện - hiển thị danh sách theo chủ đề
       function startStudyMode() {
         currentMode = "study";
+        showTopicList();
+      }
+
+      // Hiển thị danh sách chủ đề
+      function showTopicList() {
+        document.getElementById("modeSelector").classList.add("hidden");
+        const content = document.getElementById("studyContent");
+
+        content.innerHTML = `
+                <div class="card fade-in">
+                    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">
+                        📚 Chọn chủ đề ôn luyện
+                    </h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        ${Object.keys(vocabularyData)
+                          .map(
+                            (topic) => `
+                            <div class="topic-card" onclick="showTopicDetail('${topic}')" style="
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                color: white;
+                                padding: 25px;
+                                border-radius: 15px;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                text-align: center;
+                                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                            " onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <h3 style="margin-bottom: 15px; font-size: 1.5rem;">
+                                    ${getTopicIcon(topic)} ${getTopicTitle(
+                              topic
+                            )}
+                                </h3>
+                                <p style="opacity: 0.9; margin-bottom: 15px;">
+                                    ${vocabularyData[topic].length} từ vựng
+                                </p>
+                                <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px;">
+                                    ${vocabularyData[topic]
+                                      .slice(0, 3)
+                                      .map(
+                                        (item) =>
+                                          `<span style="font-size: 0.9rem;">${item.keyword}</span>`
+                                      )
+                                      .join(" • ")}${
+                              vocabularyData[topic].length > 3 ? " • ..." : ""
+                            }
+                                </div>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="studyAllTopics()">
+                            📖 Ôn tất cả chủ đề
+                        </button>
+                        <button class="btn btn-danger" onclick="backToMenu()">
+                            🏠 Về menu
+                        </button>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Lấy icon cho chủ đề
+      function getTopicIcon(topic) {
+        const icons = {
+          Freizeit: "🎯",
+          Reisen: "✈️",
+          Sport: "⚽",
+          Wochenende: "🌅",
+        };
+        return icons[topic] || "📝";
+      }
+
+      // Lấy tiêu đề tiếng Việt cho chủ đề
+      function getTopicTitle(topic) {
+        const titles = {
+          Freizeit: "Thời gian rảnh rỗi",
+          Reisen: "Du lịch",
+          Sport: "Thể thao",
+          Wochenende: "Cuối tuần",
+        };
+        return titles[topic] || topic;
+      }
+
+      // Hiển thị chi tiết một chủ đề
+      function showTopicDetail(topic) {
+        speechSynthesis.cancel(); // Dừng tiếng đang phát
+
+        const content = document.getElementById("studyContent");
+        const items = vocabularyData[topic];
+
+        content.innerHTML = `
+                <div class="card fade-in">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h2 style="color: #2c3e50;">
+                            ${getTopicIcon(topic)} ${getTopicTitle(topic)}
+                        </h2>
+                        <p style="color: #666; font-size: 1.1rem;">
+                            ${items.length} từ vựng và câu hỏi - trả lời
+                        </p>
+                    </div>
+                    
+                    <div class="vocabulary-list">
+                        ${items
+                          .map(
+                            (item, index) => `
+                            <div class="vocabulary-item" style="
+                                background: #f8f9fa;
+                                border-left: 5px solid #4CAF50;
+                                margin-bottom: 20px;
+                                border-radius: 0 10px 10px 0;
+                                overflow: hidden;
+                                box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+                            ">
+                                <div style="padding: 20px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <div class="keyword" style="
+                                            font-size: 1.8rem;
+                                            font-weight: bold;
+                                            color: #2c3e50;
+                                            margin: 0;
+                                        ">${item.keyword}</div>
+                                        <button class="btn btn-primary" onclick="speak('${item.keyword}')" style="padding: 8px 16px;">
+                                            🔊
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="question-section" style="
+                                        background: #e3f2fd;
+                                        padding: 15px;
+                                        border-radius: 8px;
+                                        margin-bottom: 15px;
+                                    ">
+                                        <div class="german-text" style="font-size: 1.2rem; font-weight: bold; color: #1565c0; margin-bottom: 8px;">
+                                            ${item.question}
+                                        </div>
+                                        <div class="vietnamese-text" style="font-size: 1rem; color: #666; font-style: italic;">
+                                            ${item.questionVN}
+                                        </div>
+                                        <button class="btn btn-primary" onclick="speak('${item.question}')" 
+                                                style="margin-top: 10px; padding: 6px 12px; font-size: 0.9rem;">
+                                            🔊 Nghe câu hỏi
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="answer-section" style="
+                                        background: #e8f5e8;
+                                        padding: 15px;
+                                        border-radius: 8px;
+                                    ">
+                                        <div style="margin-bottom: 10px;">
+                                            <div class="german-text" style="font-size: 1.1rem; font-weight: bold; color: #2e7d32; margin-bottom: 5px;">
+                                                ✅ ${item.answer}
+                                            </div>
+                                            <div class="vietnamese-text" style="font-size: 0.95rem; color: #666; margin-bottom: 10px;">
+                                                ${item.answerVN}
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="background: rgba(255,152,0,0.1); padding: 10px; border-radius: 6px; margin-bottom: 10px;">
+                                            <div class="german-text" style="font-size: 1rem; font-weight: bold; color: #FF5722;">
+                                                💡 Câu trả lời ngắn: ${item.simpleAnswer}
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                            <button class="btn btn-success" onclick="speak('${item.answer}')" style="padding: 6px 12px; font-size: 0.9rem;">
+                                                🔊 Nghe đáp án đầy đủ
+                                            </button>
+                                            <button class="btn btn-warning" onclick="speak('${item.simpleAnswer}')" style="padding: 6px 12px; font-size: 0.9rem;">
+                                                🔊 Nghe đáp án ngắn
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="showTopicList()">
+                            ⬅️ Về danh sách chủ đề
+                        </button>
+                        <button class="btn btn-success" onclick="practiceTopicCards('${topic}')">
+                            🎯 Luyện tập flashcard
+                        </button>
+                        <button class="btn btn-danger" onclick="backToMenu()">
+                            🏠 Về menu
+                        </button>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Ôn tất cả chủ đề
+      function studyAllTopics() {
         currentItems = getAllItems();
         currentIndex = 0;
         showAnswer = false;
-
-        document.getElementById("modeSelector").classList.add("hidden");
         showStudyCard();
+      }
+
+      // Bắt đầu chế độ kiểm tra theo chủ đề
+      function startTopicTestMode() {
+        currentMode = "topicTest";
+        showTopicTestList();
+      }
+
+      // Hiển thị danh sách chủ đề cho kiểm tra
+      function showTopicTestList() {
+        document.getElementById("modeSelector").classList.add("hidden");
+        const content = document.getElementById("studyContent");
+
+        content.innerHTML = `
+                <div class="card fade-in">
+                    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">
+                        🎯 Chọn chủ đề kiểm tra 2 phút
+                    </h2>
+                    
+                    <div class="tips" style="margin-bottom: 30px;">
+                        <h3>💡 Mẹo kiểm tra theo chủ đề:</h3>
+                        <ul>
+                            <li>Luyện tập từng chủ đề một cách có hệ thống</li>
+                            <li>Tập trung vào điểm yếu cụ thể</li>
+                            <li>Dễ dàng theo dõi tiến độ từng phần</li>
+                            <li>Áp dụng kiến thức ngay sau khi ôn luyện</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        ${Object.keys(vocabularyData)
+                          .map(
+                            (topic) => `
+                            <div class="topic-card" onclick="startTopicTest('${topic}')" style="
+                                background: linear-gradient(135deg, #9C27B0, #673AB7);
+                                color: white;
+                                padding: 25px;
+                                border-radius: 15px;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                text-align: center;
+                                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                                position: relative;
+                                overflow: hidden;
+                            " onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <div style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">
+                                    ⏱️ 2 phút
+                                </div>
+                                <h3 style="margin-bottom: 15px; font-size: 1.5rem;">
+                                    ${getTopicIcon(topic)} ${getTopicTitle(
+                              topic
+                            )}
+                                </h3>
+                                <p style="opacity: 0.9; margin-bottom: 15px;">
+                                    ${vocabularyData[topic].length} câu hỏi
+                                </p>
+                                <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                                    ${vocabularyData[topic]
+                                      .slice(0, 3)
+                                      .map(
+                                        (item) =>
+                                          `<span style="font-size: 0.9rem;">${item.keyword}</span>`
+                                      )
+                                      .join(" • ")}${
+                              vocabularyData[topic].length > 3 ? " • ..." : ""
+                            }
+                                </div>
+                                <div style="background: rgba(255,255,255,0.1); padding: 8px; border-radius: 6px; font-size: 0.9rem;">
+                                    🎯 Bắt đầu kiểm tra ngay
+                                </div>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="startRandomTopicTest()">
+                            🎲 Kiểm tra chủ đề ngẫu nhiên
+                        </button>
+                        <button class="btn btn-danger" onclick="backToMenu()">
+                            🏠 Về menu
+                        </button>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Bắt đầu kiểm tra một chủ đề cụ thể
+      function startTopicTest(topic) {
+        currentMode = "topicTest";
+        currentTopic = topic;
+        currentItems = shuffleArray(vocabularyData[topic]);
+        currentIndex = 0;
+        score = 0;
+        totalQuestions = 0;
+        timeLeft = 120;
+        showAnswer = false;
+
+        document.getElementById("timer").classList.remove("hidden");
+
+        startTimer();
+        showTopicTestCard();
+      }
+
+      // Hiển thị thẻ kiểm tra theo chủ đề
+      function showTopicTestCard() {
+        if (currentIndex >= currentItems.length) {
+          endTopicTest();
+          return;
+        }
+
+        const item = currentItems[currentIndex];
+        const content = document.getElementById("studyContent");
+
+        content.innerHTML = `
+                <div class="card fade-in">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h3 style="color: #9C27B0; margin-bottom: 10px;">
+                            ${getTopicIcon(
+                              currentTopic
+                            )} Kiểm tra: ${getTopicTitle(currentTopic)}
+                        </h3>
+                        <div style="background: linear-gradient(135deg, #9C27B0, #673AB7); color: white; padding: 8px 16px; border-radius: 20px; display: inline-block; font-size: 0.9rem;">
+                            Câu ${currentIndex + 1}/${currentItems.length}
+                        </div>
+                    </div>
+                    
+                    <div class="keyword">${item.keyword}</div>
+                    
+                    <div class="question-section">
+                        <h3>🎯 Đoán câu hỏi từ từ khóa này:</h3>
+                        <div class="vietnamese-text">Gợi ý: ${
+                          item.questionVN
+                        }</div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="showTopicTestAnswer()">
+                            👁️ Xem câu hỏi & đáp án
+                        </button>
+                        <button class="btn btn-success" onclick="speak('${
+                          item.keyword
+                        }')" style="background: #9C27B0;">
+                            🔊 Nghe từ khóa
+                        </button>
+                    </div>
+                    
+                    <div id="testAnswerSection" class="${
+                      showAnswer ? "" : "hidden"
+                    }">
+                        <div class="question-section">
+                            <div class="german-text">Câu hỏi: ${
+                              item.question
+                            }</div>
+                        </div>
+                        
+                        <div class="answer-section">
+                            <div class="german-text">Đáp án ngắn: ${
+                              item.simpleAnswer
+                            }</div>
+                            <div class="vietnamese-text">${item.answerVN}</div>
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="btn btn-primary" onclick="speak('${
+                              item.question
+                            }')">🔊 Nghe câu hỏi</button>
+                            <button class="btn btn-warning" onclick="speak('${
+                              item.simpleAnswer
+                            }')">🔊 Nghe đáp án</button>
+                        </div>
+                        
+                        <div class="controls" style="margin-top: 20px;">
+                            <button class="btn btn-success" onclick="markTopicTestCorrect()">✅ Biết</button>
+                            <button class="btn btn-danger" onclick="markTopicTestIncorrect()">❌ Không biết</button>
+                        </div>
+                    </div>
+                    
+                    <div class="progress">
+                        <div class="progress-bar" style="width: ${
+                          ((currentIndex + 1) / currentItems.length) * 100
+                        }%; background: linear-gradient(90deg, #9C27B0, #673AB7);"></div>
+                    </div>
+                    <div class="score">
+                        Câu ${currentIndex + 1} / ${
+          currentItems.length
+        } | Đúng: ${score}/${totalQuestions}
+                    </div>
+                </div>
+            `;
+      }
+
+      // Hiển thị đáp án trong kiểm tra theo chủ đề
+      function showTopicTestAnswer() {
+        showAnswer = true;
+        showTopicTestCard();
+      }
+
+      // Đánh dấu câu đúng trong kiểm tra chủ đề
+      function markTopicTestCorrect() {
+        score++;
+        totalQuestions++;
+        nextTopicTestCard();
+      }
+
+      // Đánh dấu câu sai trong kiểm tra chủ đề
+      function markTopicTestIncorrect() {
+        totalQuestions++;
+        nextTopicTestCard();
+      }
+
+      // Chuyển câu hỏi tiếp theo trong kiểm tra chủ đề
+      function nextTopicTestCard() {
+        speechSynthesis.cancel();
+        showAnswer = false;
+        currentIndex++;
+        showTopicTestCard();
+      }
+
+      // Kết thúc bài test theo chủ đề
+      function endTopicTest() {
+        clearInterval(timer);
+        document.getElementById("timer").classList.add("hidden");
+
+        const percentage =
+          totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+        let feedback = "";
+        let emoji = "";
+
+        if (percentage >= 80) {
+          feedback = `Xuất sắc! Bạn đã nắm vững chủ đề "${getTopicTitle(
+            currentTopic
+          )}".`;
+          emoji = "🏆";
+        } else if (percentage >= 60) {
+          feedback = `Tốt! Bạn cần ôn luyện thêm chủ đề "${getTopicTitle(
+            currentTopic
+          )}".`;
+          emoji = "👍";
+        } else {
+          feedback = `Hãy ôn luyện thêm chủ đề "${getTopicTitle(
+            currentTopic
+          )}" nhé!`;
+          emoji = "💪";
+        }
+
+        const content = document.getElementById("studyContent");
+        content.innerHTML = `
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">${emoji}</div>
+                    <h2 style="color: #2c3e50; margin-bottom: 15px;">Kết quả kiểm tra</h2>
+                    <h3 style="color: #9C27B0; margin-bottom: 20px;">
+                        ${getTopicIcon(currentTopic)} ${getTopicTitle(
+          currentTopic
+        )}
+                    </h3>
+                    
+                    <div style="font-size: 3rem; font-weight: bold; color: #9C27B0; margin: 20px 0;">
+                        ${score}/${totalQuestions}
+                    </div>
+                    
+                    <div style="font-size: 2rem; color: #FF5722; margin-bottom: 20px;">
+                        ${percentage}%
+                    </div>
+                    
+                    <div style="font-size: 1.2rem; color: #666; margin-bottom: 30px;">
+                        ${feedback}
+                    </div>
+                    
+                    <div class="tips">
+                        <h3>📝 Gợi ý tiếp theo:</h3>
+                        <ul style="text-align: left;">
+                            <li>Ôn luyện lại chủ đề này trong chế độ học tập</li>
+                            <li>Thử kiểm tra các chủ đề khác</li>
+                            <li>Luyện phát âm với các từ vựng còn yếu</li>
+                            <li>Thực hành kiểm tra tổng hợp khi đã thành thạo</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="controls" style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="startTopicTest('${currentTopic}')" style="background: #9C27B0;">
+                            🔄 Làm lại chủ đề này
+                        </button>
+                        <button class="btn btn-success" onclick="showTopicDetail('${currentTopic}')">
+                            📚 Ôn luyện chủ đề này
+                        </button>
+                        <button class="btn btn-warning" onclick="showTopicTestList()">
+                            🎯 Chọn chủ đề khác
+                        </button>
+                        <button class="btn btn-danger" onclick="backToMenu()">
+                            🏠 Về menu
+                        </button>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Kiểm tra chủ đề ngẫu nhiên
+      function startRandomTopicTest() {
+        const topics = Object.keys(vocabularyData);
+        const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+        startTopicTest(randomTopic);
       }
 
       // Bắt đầu chế độ kiểm tra
@@ -910,6 +1424,7 @@
 
         // Reset các biến
         currentIndex = 0;
+        currentTopic = "";
         showAnswer = false;
         score = 0;
         totalQuestions = 0;
