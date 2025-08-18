@@ -323,206 +323,230 @@
     </div>
 
     <script>
-      // Dữ liệu bài học - sửa lại đúng chủ đề theo hình ảnh
+      // Dữ liệu bài học từ file docx - sửa lại ngữ pháp và đổi thành câu trả lời tích cực
       const vocabularyData = {
-        Wochenende: [
-          {
-            keyword: "Ausflug",
-            question: "Machen Sie einen Ausflug?",
-            questionVN: "Bạn có đi chơi không?",
-            answer: "Ja, ich mache gern einen Ausflug.",
-            answerVN: "Có, tôi thích đi chơi.",
-            simpleAnswer: "Ja, ich mache einen Ausflug.",
-          },
-          {
-            keyword: "Sport",
-            question: "Machen Sie Sport?",
-            questionVN: "Bạn có chơi thể thao không?",
-            answer: "Ja, ich mache gern Sport.",
-            answerVN: "Có, tôi thích chơi thể thao.",
-            simpleAnswer: "Ja, ich mache Sport.",
-          },
-          {
-            keyword: "fernsehen",
-            question: "Sehen Sie fern?",
-            questionVN: "Bạn có xem TV không?",
-            answer: "Ja, ich sehe gern fern.",
-            answerVN: "Có, tôi thích xem TV.",
-            simpleAnswer: "Ja, ich sehe fern.",
-          },
-          {
-            keyword: "Kino",
-            question: "Gehen Sie ins Kino?",
-            questionVN: "Bạn có đi xem phim không?",
-            answer: "Ja, ich gehe gern ins Kino.",
-            answerVN: "Có, tôi thích đi xem phim.",
-            simpleAnswer: "Ja, ich gehe ins Kino.",
-          },
-          {
-            keyword: "kochen",
-            question: "Kochen Sie gern?",
-            questionVN: "Bạn có thích nấu ăn không?",
-            answer: "Ja, ich koche sehr gern.",
-            answerVN: "Có, tôi rất thích nấu ăn.",
-            simpleAnswer: "Ja, ich koche gern.",
-          },
-          {
-            keyword: "schlafen",
-            question: "Schlafen Sie gern?",
-            questionVN: "Bạn có thích ngủ không?",
-            answer: "Ja, ich schlafe sehr gern.",
-            answerVN: "Có, tôi rất thích ngủ.",
-            simpleAnswer: "Ja, ich schlafe gern.",
-          },
-        ],
-        Sport: [
-          {
-            keyword: "Fußball",
-            question: "Spielen Sie Fußball?",
-            questionVN: "Bạn có chơi bóng đá không?",
-            answer: "Ja, ich spiele gern Fußball.",
-            answerVN: "Có, tôi thích chơi bóng đá.",
-            simpleAnswer: "Ja, ich spiele Fußball.",
-          },
-          {
-            keyword: "Fahrrad fahren",
-            question: "Fahren Sie Fahrrad?",
-            questionVN: "Bạn có đạp xe không?",
-            answer: "Ja, ich fahre gern Fahrrad.",
-            answerVN: "Có, tôi thích đạp xe.",
-            simpleAnswer: "Ja, ich fahre Fahrrad.",
-          },
-          {
-            keyword: "schwimmen",
-            question: "Schwimmen Sie gern?",
-            questionVN: "Bạn có thích bơi không?",
-            answer: "Ja, ich schwimme sehr gern.",
-            answerVN: "Có, tôi rất thích bơi.",
-            simpleAnswer: "Ja, ich schwimme gern.",
-          },
-          {
-            keyword: "wandern",
-            question: "Wandern Sie gern?",
-            questionVN: "Bạn có thích đi bộ đường dài không?",
-            answer: "Ja, ich wandere sehr gern.",
-            answerVN: "Có, tôi rất thích đi bộ đường dài.",
-            simpleAnswer: "Ja, ich wandere gern.",
-          },
-          {
-            keyword: "Verein",
-            question: "Sind Sie in einem Verein?",
-            questionVN: "Bạn có tham gia câu lạc bộ không?",
-            answer: "Ja, ich bin in einem Sportverein.",
-            answerVN: "Có, tôi tham gia câu lạc bộ thể thao.",
-            simpleAnswer: "Ja, ich bin in einem Verein.",
-          },
-          {
-            keyword: "Wochenende",
-            question: "Machen Sie Sport am Wochenende?",
-            questionVN: "Bạn có chơi thể thao cuối tuần không?",
-            answer: "Ja, ich mache Sport am Wochenende.",
-            answerVN: "Có, tôi chơi thể thao cuối tuần.",
-            simpleAnswer: "Ja, am Wochenende.",
-          },
-        ],
-        Reisen: [
-          {
-            keyword: "Wohin?",
-            question: "Wohin reisen Sie?",
-            questionVN: "Bạn đi du lịch đâu?",
-            answer: "Ich reise nach Deutschland.",
-            answerVN: "Tôi đi du lịch Đức.",
-            simpleAnswer: "Nach Deutschland.",
-          },
-          {
-            keyword: "Hotel",
-            question: "Wohnen Sie im Hotel?",
-            questionVN: "Bạn có ở khách sạn không?",
-            answer: "Ja, ich wohne gern im Hotel.",
-            answerVN: "Có, tôi thích ở khách sạn.",
-            simpleAnswer: "Ja, im Hotel.",
-          },
-          {
-            keyword: "Urlaub",
-            question: "Machen Sie Urlaub?",
-            questionVN: "Bạn có đi nghỉ không?",
-            answer: "Ja, ich mache gern Urlaub.",
-            answerVN: "Có, tôi thích đi nghỉ.",
-            simpleAnswer: "Ja, ich mache Urlaub.",
-          },
-          {
-            keyword: "Länder",
-            question: "Welche Länder besuchen Sie?",
-            questionVN: "Bạn thăm những nước nào?",
-            answer: "Ich besuche Deutschland und Vietnam.",
-            answerVN: "Tôi thăm Đức và Việt Nam.",
-            simpleAnswer: "Deutschland und Vietnam.",
-          },
-          {
-            keyword: "Auto",
-            question: "Reisen Sie mit dem Auto?",
-            questionVN: "Bạn có đi du lịch bằng ô tô không?",
-            answer: "Ja, ich reise gern mit dem Auto.",
-            answerVN: "Có, tôi thích đi du lịch bằng ô tô.",
-            simpleAnswer: "Ja, mit dem Auto.",
-          },
-          {
-            keyword: "Wann?",
-            question: "Wann reisen Sie?",
-            questionVN: "Khi nào bạn đi du lịch?",
-            answer: "Ich reise im Sommer.",
-            answerVN: "Tôi đi du lịch vào mùa hè.",
-            simpleAnswer: "Im Sommer.",
-          },
-        ],
         Freizeit: [
           {
             keyword: "Hobby",
-            question: "Was ist Ihr Hobby?",
+            question: "Was sind Ihre Hobbys?",
             questionVN: "Sở thích của bạn là gì?",
-            answer: "Mein Hobby ist Musik.",
-            answerVN: "Sở thích của tôi là âm nhạc.",
-            simpleAnswer: "Musik.",
+            answer: "Meine Hobbys sind Fußball spielen und kochen.",
+            answerVN: "Sở thích của tôi là chơi bóng đá và nấu ăn.",
+            simpleAnswer: "Meine Hobbys sind Fußball und Kochen.",
           },
           {
             keyword: "Wochenende",
             question: "Was machen Sie am Wochenende?",
-            questionVN: "Bạn làm gì cuối tuần?",
-            answer: "Ich lese Bücher am Wochenende.",
-            answerVN: "Tôi đọc sách cuối tuần.",
-            simpleAnswer: "Ich lese Bücher.",
+            questionVN: "Bạn làm gì vào cuối tuần?",
+            answer:
+              "Am Wochenende spiele ich Fußball mit meinen Freunden im Park.",
+            answerVN: "Cuối tuần tôi chơi bóng đá với bạn bè ở công viên.",
+            simpleAnswer: "Ich spiele Fußball mit Freunden.",
           },
           {
             keyword: "Wann?",
-            question: "Wann haben Sie Zeit?",
-            questionVN: "Khi nào bạn có thời gian?",
-            answer: "Ich habe am Abend Zeit.",
-            answerVN: "Tôi có thời gian vào buổi tối.",
-            simpleAnswer: "Am Abend.",
+            question: "Wann spielen Sie Fußball mit Ihren Freunden?",
+            questionVN: "Khi nào bạn chơi bóng đá với bạn bè?",
+            answer:
+              "Ich spiele Fußball mit meinen Freunden am Wochenende im Park.",
+            answerVN: "Tôi chơi bóng đá với bạn bè vào cuối tuần ở công viên.",
+            simpleAnswer: "Ich spiele am Wochenende.",
           },
           {
             keyword: "Fußball",
-            question: "Mögen Sie Fußball?",
-            questionVN: "Bạn có thích bóng đá không?",
-            answer: "Ja, ich mag Fußball sehr.",
-            answerVN: "Có, tôi rất thích bóng đá.",
-            simpleAnswer: "Ja, sehr gern.",
+            question:
+              "Wo spielen Sie am Wochenende Fußball mit Ihren Freunden?",
+            questionVN: "Bạn chơi bóng đá với bạn bè ở đâu vào cuối tuần?",
+            answer:
+              "Ich spiele am Wochenende Fußball mit meinen Freunden im Park.",
+            answerVN: "Tôi chơi bóng đá với bạn bè ở công viên vào cuối tuần.",
+            simpleAnswer: "Ich spiele im Park.",
           },
           {
             keyword: "Lieblingssport",
             question: "Was ist Ihr Lieblingssport?",
             questionVN: "Môn thể thao yêu thích của bạn là gì?",
-            answer: "Mein Lieblingssport ist Tennis.",
-            answerVN: "Môn thể thao yêu thích của tôi là quần vợt.",
-            simpleAnswer: "Tennis.",
+            answer: "Mein Lieblingssport ist Fußball.",
+            answerVN: "Môn thể thao yêu thích của tôi là bóng đá.",
+            simpleAnswer: "Mein Lieblingssport ist Fußball.",
           },
           {
             keyword: "Sonntag",
             question: "Was machen Sie am Sonntag?",
             questionVN: "Bạn làm gì vào chủ nhật?",
-            answer: "Ich besuche Freunde am Sonntag.",
-            answerVN: "Tôi thăm bạn bè vào chủ nhật.",
-            simpleAnswer: "Ich besuche Freunde.",
+            answer:
+              "Am Sonntag spiele ich Fußball mit meinen Freunden im Park.",
+            answerVN: "Chủ nhật tôi chơi bóng đá với bạn bè ở công viên.",
+            simpleAnswer: "Ich spiele Fußball mit Freunden.",
+          },
+        ],
+        Reisen: [
+          {
+            keyword: "Wohin?",
+            question: "Wohin reisen Sie im Sommer?",
+            questionVN: "Bạn đi du lịch đâu vào mùa hè?",
+            answer: "Im Sommer reise ich nach Hanoi.",
+            answerVN: "Mùa hè tôi đi du lịch Hà Nội.",
+            simpleAnswer: "Ich reise nach Hanoi.",
+          },
+          {
+            keyword: "Hotel",
+            question: "Übernachten Sie oft im Urlaub in Hotels?",
+            questionVN: "Bạn có thường ở khách sạn khi đi du lịch không?",
+            answer:
+              "Ja, ich übernachte gern in Hotels. Sie sind sehr komfortabel.",
+            answerVN: "Có, tôi thích ở khách sạn. Chúng rất thoải mái.",
+            simpleAnswer: "Ja, ich übernachte gern in Hotels.",
+          },
+          {
+            keyword: "Urlaub",
+            question: "Wo machen Sie Urlaub im Sommer?",
+            questionVN: "Bạn nghỉ phép ở đâu vào mùa hè?",
+            answer: "Im Sommer mache ich Urlaub in Hanoi.",
+            answerVN: "Mùa hè tôi nghỉ phép ở Hà Nội.",
+            simpleAnswer: "Ich mache Urlaub in Hanoi.",
+          },
+          {
+            keyword: "Länder",
+            question: "In welchen Ländern machen Sie Ihre Reise?",
+            questionVN: "Bạn du lịch những nước nào?",
+            answer: "Ich mache meine Reise in Deutschland und Vietnam.",
+            answerVN: "Tôi du lịch ở Đức và Việt Nam.",
+            simpleAnswer: "Ich reise in Deutschland und Vietnam.",
+          },
+          {
+            keyword: "Auto",
+            question: "Reisen Sie mit dem Auto nach Hanoi?",
+            questionVN: "Bạn có đi du lịch Hà Nội bằng ô tô không?",
+            answer: "Ja, ich reise gern mit dem Auto. Das ist sehr praktisch.",
+            answerVN: "Có, tôi thích đi bằng ô tô. Rất tiện lợi.",
+            simpleAnswer: "Ja, ich reise mit dem Auto.",
+          },
+          {
+            keyword: "Wann?",
+            question: "Wann machen Sie Ihre Reise in diesem Jahr?",
+            questionVN: "Khi nào bạn đi du lịch trong năm nay?",
+            answer: "In diesem Jahr mache ich meine Reise im Sommer.",
+            answerVN: "Năm nay tôi đi du lịch vào mùa hè.",
+            simpleAnswer: "Ich reise im Sommer.",
+          },
+        ],
+        Sport: [
+          {
+            keyword: "Fußball",
+            question:
+              "Spielen Sie am Samstag mit Ihren Freunden Fußball im Park?",
+            questionVN:
+              "Bạn có chơi bóng đá với bạn bè ở công viên thứ 7 không?",
+            answer:
+              "Ja, ich spiele jeden Samstag mit meinen Freunden Fußball im Park.",
+            answerVN: "Có, tôi chơi bóng đá với bạn bè ở công viên mỗi thứ 7.",
+            simpleAnswer: "Ja, ich spiele am Samstag Fußball.",
+          },
+          {
+            keyword: "Fahrrad fahren",
+            question:
+              "Fahren Sie am Samstag mit Ihren Freunden Fahrrad um den Hoan Kiem See?",
+            questionVN:
+              "Bạn có đạp xe với bạn bè quanh hồ Hoàn Kiếm thứ 7 không?",
+            answer:
+              "Ja, ich fahre gern am Samstag mit meinen Freunden Fahrrad um den Hoan Kiem See.",
+            answerVN:
+              "Có, tôi thích đạp xe với bạn bè quanh hồ Hoàn Kiếm thứ 7.",
+            simpleAnswer: "Ja, ich fahre am Samstag Fahrrad.",
+          },
+          {
+            keyword: "schwimmen",
+            question: "Wo schwimmen Sie am Samstag?",
+            questionVN: "Bạn bơi ở đâu vào thứ 7?",
+            answer: "Ich schwimme am Samstag im Schwimmbad.",
+            answerVN: "Tôi bơi ở bể bơi vào thứ 7.",
+            simpleAnswer: "Ich schwimme im Schwimmbad.",
+          },
+          {
+            keyword: "wandern",
+            question: "Wo wandern Sie am Samstag?",
+            questionVN: "Bạn đi bộ đường dài ở đâu vào thứ 7?",
+            answer: "Am Samstag wandere ich in den Bergen.",
+            answerVN: "Thứ 7 tôi đi bộ đường dài ở núi.",
+            simpleAnswer: "Ich wandere in den Bergen.",
+          },
+          {
+            keyword: "Verein",
+            question: "Spielen Sie in einem Sportverein?",
+            questionVN: "Bạn có chơi trong câu lạc bộ thể thao không?",
+            answer:
+              "Ja, ich spiele in einem Fußballverein. Das macht viel Spaß.",
+            answerVN: "Có, tôi chơi trong câu lạc bộ bóng đá. Rất vui.",
+            simpleAnswer: "Ja, ich spiele in einem Fußballverein.",
+          },
+          {
+            keyword: "Wochenende",
+            question: "Machen Sie Sport am Wochenende?",
+            questionVN: "Bạn có chơi thể thao cuối tuần không?",
+            answer:
+              "Ja, ich mache gern Sport am Wochenende. Ich spiele Fußball.",
+            answerVN:
+              "Có, tôi thích chơi thể thao cuối tuần. Tôi chơi bóng đá.",
+            simpleAnswer: "Ja, ich mache Sport am Wochenende.",
+          },
+        ],
+        Wochenende: [
+          {
+            keyword: "Ausflug",
+            question:
+              "Machen Sie einen Ausflug mit Ihren Eltern am Wochenende in die Berge?",
+            questionVN: "Bạn có đi chơi với bố mẹ lên núi cuối tuần không?",
+            answer:
+              "Ja, ich mache gern einen Ausflug mit meinen Eltern in die Berge.",
+            answerVN: "Có, tôi thích đi chơi với bố mẹ lên núi.",
+            simpleAnswer: "Ja, ich mache einen Ausflug.",
+          },
+          {
+            keyword: "Sport",
+            question: "Machen Sie Sport am Samstag mit Ihren Freunden im Park?",
+            questionVN:
+              "Bạn có chơi thể thao với bạn bè ở công viên thứ 7 không?",
+            answer:
+              "Ja, ich mache gern Sport am Samstag mit meinen Freunden im Park.",
+            answerVN:
+              "Có, tôi thích chơi thể thao với bạn bè ở công viên thứ 7.",
+            simpleAnswer: "Ja, ich mache Sport am Samstag.",
+          },
+          {
+            keyword: "fernsehen",
+            question:
+              "Möchten Sie am Samstag mit Ihren Eltern zu Hause fernsehen?",
+            questionVN: "Bạn có muốn xem TV với bố mẹ ở nhà thứ 7 không?",
+            answer: "Ja, ich sehe gern am Samstag mit meinen Eltern fern.",
+            answerVN: "Có, tôi thích xem TV với bố mẹ thứ 7.",
+            simpleAnswer: "Ja, ich sehe gern fern.",
+          },
+          {
+            keyword: "Kino",
+            question: "Möchten Sie am Samstag mit Ihren Eltern ins Kino gehen?",
+            questionVN: "Bạn có muốn đi xem phim với bố mẹ thứ 7 không?",
+            answer: "Ja, ich gehe gern am Samstag mit meinen Eltern ins Kino.",
+            answerVN: "Có, tôi thích đi xem phim với bố mẹ thứ 7.",
+            simpleAnswer: "Ja, ich gehe gern ins Kino.",
+          },
+          {
+            keyword: "kochen",
+            question:
+              "Möchten Sie am Samstag mit Ihren Eltern zu Hause kochen?",
+            questionVN: "Bạn có muốn nấu ăn với bố mẹ ở nhà thứ 7 không?",
+            answer: "Ja, ich koche gern am Samstag mit meinen Eltern zu Hause.",
+            answerVN: "Có, tôi thích nấu ăn với bố mẹ ở nhà thứ 7.",
+            simpleAnswer: "Ja, ich koche gern.",
+          },
+          {
+            keyword: "schlafen",
+            question: "Möchten Sie am Wochenende zu Hause schlafen?",
+            questionVN: "Bạn có muốn ngủ ở nhà cuối tuần không?",
+            answer:
+              "Ja, ich schlafe gern am Wochenende zu Hause. Das ist sehr entspannend.",
+            answerVN: "Có, tôi thích ngủ ở nhà cuối tuần. Rất thư giãn.",
+            simpleAnswer: "Ja, ich schlafe gern zu Hause.",
           },
         ],
       };
