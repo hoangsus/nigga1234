@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập viết tiếng Đức - German Writing Practice</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .header h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-size: 2.5rem;
+      }
+
+      .header p {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+      }
+
+      .document-section {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .document-title {
+        background: linear-gradient(45deg, #3498db, #2ecc71);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        margin: -25px -25px 25px -25px;
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      .exercise {
+        border: 2px solid #e8f4fd;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+        background: #f8fdff;
+        transition: all 0.3s ease;
+      }
+
+      .exercise:hover {
+        border-color: #3498db;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+      }
+
+      .exercise-number {
+        background: #3498db;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+      }
+
+      .requirements {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      .requirements h4 {
+        color: #d68910;
+        margin-bottom: 10px;
+      }
+
+      .requirements ul {
+        margin-left: 20px;
+      }
+
+      .requirements li {
+        color: #d68910;
+        margin-bottom: 5px;
+      }
+
+      .german-text {
+        background: #e8f5e8;
+        border-left: 4px solid #27ae60;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 0 8px 8px 0;
+        font-family: "Courier New", monospace;
+        line-height: 1.8;
+      }
+
+      .vietnamese-text {
+        background: #fef9e7;
+        border-left: 4px solid #f39c12;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 0 8px 8px 0;
+        color: #8b7355;
+      }
+
+      .toggle-btn {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+        margin: 5px;
+      }
+
+      .toggle-btn:hover {
+        background: #2980b9;
+        transform: translateY(-2px);
+      }
+
+      .toggle-btn.active {
+        background: #27ae60;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .grammar-note {
+        background: #e8f4fd;
+        border: 1px solid #b8daff;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 0.9rem;
+      }
+
+      .grammar-note strong {
+        color: #1e88e5;
+      }
+
+      .control-panel {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .control-panel button {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+      }
+
+      .control-panel button:hover {
+        background: #c0392b;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+      }
+
+      .telephone-message {
+        background: #f0f8ff;
+        border: 2px solid #4169e1;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        font-style: italic;
+      }
+
+      .telephone-message::before {
+        content: "📞 ";
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .document-section {
+          padding: 15px;
+        }
+
+        .document-title {
+          margin: -15px -15px 15px -15px;
+          padding: 10px 15px;
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🇩🇪 Luyện tập viết tiếng Đức</h1>
+        <p>German Writing Practice - Bài tập viết thư và tin nhắn</p>
+      </div>
+
+      <div class="control-panel">
+        <button onclick="showAllTranslations()">Hiện tất cả bản dịch</button>
+        <button onclick="hideAllTranslations()">Ẩn tất cả bản dịch</button>
+      </div>
+
+      <!-- Document 1: Letter Writing Exercises -->
+      <div class="document-section">
+        <div class="document-title">
+          📝 Tài liệu 1: Bài tập viết thư (Brief schreiben)
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 1</div>
+          <div class="requirements">
+            <h4>Yêu cầu:</h4>
+            <ul>
+              <li>Viết thư cho bạn bè về tiệc sinh nhật cuối tuần</li>
+              <li>Mời bạn bè tham dự</li>
+              <li>Khách phải mang nhạc và trò chơi</li>
+              <li>Mỗi ý 1-2 câu (khoảng 30 từ)</li>
+              <li>Có lời chào và lời kết</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('german1')">
+            Bản tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('vietnamese1')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="german1" class="german-text hidden">
+            Hallo Anne und Thomas,<br /><br />
+            ich mache am Sonntag um 20 Uhr eine Geburtstagsparty im Garten.<br />
+            Wir grillen zusammen und hören Musik.<br />
+            Ihr seid hiermit herzlich eingeladen.<br />
+            Eure Gitarre und Spielkarten sollt ihr mitbringen.<br />
+            Dann bis Samstag.<br /><br />
+            Liebe Grüße<br />
+            Alissa
+          </div>
+
+          <div id="vietnamese1" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Chào Anne và Thomas,<br /><br />
+            Tôi tổ chức tiệc sinh nhật vào Chủ nhật lúc 20 giờ trong vườn.<br />
+            Chúng ta sẽ nướng cùng nhau và nghe nhạc.<br />
+            Các bạn được mời tham dự một cách trân trọng.<br />
+            Các bạn nên mang theo đàn guitar và bài tây.<br />
+            Hẹn gặp vào thứ Bảy.<br /><br />
+            Gửi lời chào thân ái<br />
+            Alissa
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "am Sonntag" = vào Chủ nhật (dùng "am" với ngày trong tuần)<br />
+              • "um 20 Uhr" = lúc 20 giờ (dùng "um" với giờ cụ thể)<br />
+              • "herzlich eingeladen" = được mời trân trọng<br />
+              • "sollt ihr mitbringen" = các bạn nên mang theo (dạng lịch sự)
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 2</div>
+          <div class="requirements">
+            <h4>Yêu cầu:</h4>
+            <ul>
+              <li>Muốn đi du lịch Sapa vào mùa đông</li>
+              <li>Viết thư cho văn phòng du lịch</li>
+              <li>Hỏi về nhà nghỉ giá rẻ và điểm tham quan</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('german2')">
+            Bản tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('vietnamese2')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="german2" class="german-text hidden">
+            Sehr geehrte Damen und Herren,<br /><br />
+            ich möchte im Winter nach Sapa fahren und dort Urlaub machen.<br />
+            Ich habe eine Bitte: Können Sie mir Informationen von günstigen
+            Jugendherbergen schicken?<br />
+            Welche Sehenswürdigkeiten gibt es dort? Vielen Dank für
+            Informationen.<br /><br />
+            Mit freundlichen Grüßen<br />
+            Anne Nguyen
+          </div>
+
+          <div id="vietnamese2" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Kính gửi quý ông bà,<br /><br />
+            Tôi muốn đến Sapa vào mùa đông và nghỉ mát ở đó.<br />
+            Tôi có một yêu cầu: Quý vị có thể gửi cho tôi thông tin về các nhà
+            nghỉ thanh niên giá rẻ không?<br />
+            Ở đó có những điểm tham quan nào? Xin cảm ơn quý vị về thông tin.<br /><br />
+            Trân trọng<br />
+            Anne Nguyen
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "Sehr geehrte..." = Kính gửi (cách xưng hô trang trọng)<br />
+              • "im Winter" = vào mùa đông<br />
+              • "Können Sie mir...schicken?" = Quý vị có thể gửi cho
+              tôi...không?<br />
+              • "Mit freundlichen Grüßen" = Trân trọng (kết thư trang trọng)
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 3</div>
+          <div class="requirements">
+            <h4>Yêu cầu:</h4>
+            <ul>
+              <li>Bạn cần sách tiếng Đức, bạn muốn giúp</li>
+              <li>Hỏi loại sách, trình độ, giá cả</li>
+              <li>Lấy ở nhà hay hiệu sách</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('german3')">
+            Bản tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('vietnamese3')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="german3" class="german-text hidden">
+            Hallo Thomas,<br /><br />
+            suchst du ein Deutschbuch? Ich habe ein paar Fragen.<br />
+            Was für ein Deutschbuch brauchst du?<br />
+            Welche Stufe lernst du?<br />
+            Wie teuer soll das Buch sein?<br />
+            Möchtest du zu Hause oder in der Buchhandlung abholen?<br /><br />
+            Liebe Grüße<br />
+            Anne
+          </div>
+
+          <div id="vietnamese3" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Chào Thomas,<br /><br />
+            Bạn có đang tìm sách tiếng Đức không? Tôi có vài câu hỏi.<br />
+            Bạn cần loại sách tiếng Đức nào?<br />
+            Bạn đang học trình độ nào?<br />
+            Cuốn sách đó nên có giá bao nhiêu?<br />
+            Bạn muốn lấy ở nhà hay ở hiệu sách?<br /><br />
+            Gửi lời chào thân ái<br />
+            Anne
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "Was für ein..." = loại...nào (câu hỏi về loại)<br />
+              • "Welche Stufe" = trình độ nào<br />
+              • "Wie teuer soll..." = ...nên có giá bao nhiêu<br />
+              • "abholen" = đến lấy, đón
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 4</div>
+          <div class="requirements">
+            <h4>Yêu cầu:</h4>
+            <ul>
+              <li>Hẹn đi xem xiếc chiều mai</li>
+              <li>Mẹ bị cảm, phải ở nhà chăm sóc</li>
+              <li>Viết SMS cho bạn</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('german4')">
+            Bản tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('vietnamese4')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="german4" class="german-text hidden">
+            Hallo Thomas,<br /><br />
+            wir wollen morgen Nachmittag zum Zirkus gehen. Meine Mutter hat aber
+            Erkältung und ich muss zu Hause bleiben, um meine Mutter zu
+            pflegen.<br />
+            Es geht meiner Mutter jetzt nicht gut. Wir treffen uns am Samstag um
+            10 Uhr bei mir zu Hause.<br /><br />
+            Liebe Grüße<br />
+            Anne
+          </div>
+
+          <div id="vietnamese4" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Chào Thomas,<br /><br />
+            Chúng ta định đi xem xiếc chiều mai. Nhưng mẹ tôi bị cảm và tôi phải
+            ở nhà để chăm sóc mẹ.<br />
+            Bây giờ mẹ tôi không khỏe. Chúng ta hẹn gặp nhau vào thứ Bảy lúc 10
+            giờ tại nhà tôi.<br /><br />
+            Gửi lời chào thân ái<br />
+            Anne
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "morgen Nachmittag" = chiều mai<br />
+              • "zum Zirkus gehen" = đi xem xiếc<br />
+              • "Erkältung haben" = bị cảm lạnh<br />
+              • "pflegen" = chăm sóc, điều dưỡng<br />
+              • "Es geht...nicht gut" = ...không khỏe
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 5</div>
+          <div class="requirements">
+            <h4>Yêu cầu:</h4>
+            <ul>
+              <li>Muốn học tiếng Anh buổi tối vào mùa đông</li>
+              <li>Tìm khóa học</li>
+              <li>Viết thư cho trường ngôn ngữ</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('german5')">
+            Bản tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('vietnamese5')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="german5" class="german-text hidden">
+            Sehr geehrte Damen und Herren,<br /><br />
+            ich möchte im Winter Englisch in Vietnam lernen und suche einen
+            Kurs.<br />
+            Weil ich morgens in Hanoi arbeiten muss, möchte ich abends dort
+            lernen.<br />
+            Ich möchte A1-Kurs machen. Haben Sie einen Kurs für mich?<br /><br />
+            Mit freundlichen Grüßen<br />
+            Anne Nguyen
+          </div>
+
+          <div id="vietnamese5" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Kính gửi quý ông bà,<br /><br />
+            Tôi muốn học tiếng Anh ở Việt Nam vào mùa đông và đang tìm một khóa
+            học.<br />
+            Vì tôi phải làm việc buổi sáng ở Hà Nội, tôi muốn học buổi tối ở
+            đó.<br />
+            Tôi muốn học khóa A1. Quý vị có khóa học nào cho tôi không?<br /><br />
+            Trân trọng<br />
+            Anne Nguyen
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "im Winter" = vào mùa đông<br />
+              • "weil" = vì (liên từ phụ thuộc)<br />
+              • "morgens" = buổi sáng, "abends" = buổi tối<br />
+              • "A1-Kurs machen" = học khóa A1
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document 2: Phone Messages -->
+      <div class="document-section">
+        <div class="document-title">
+          📞 Tài liệu 2: Tin nhắn điện thoại (Telefonische Nachrichten)
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 1</div>
+          <div class="requirements">
+            <h4>Tình huống:</h4>
+            <ul>
+              <li>Bạn làm ở nhà hàng Sent</li>
+              <li>Nhà hàng nghỉ từ 27/2 đến 7/3 để cải tạo</li>
+              <li>8/3 hoạt động trở lại</li>
+              <li>Ghi âm thông báo tự động (ít nhất 4 câu)</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('phone1')">
+            Tin nhắn tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('phone1vn')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="phone1" class="telephone-message hidden">
+            <strong
+              >Guten Tag, Sie haben die Rufnummer 096 76 333 69 gewählt. Sent
+              Restaurant. Wir renovieren von 27. Februar bis zum 7. März unser
+              Restaurant. Am 8. März sind wir wieder für Sie da.</strong
+            >
+          </div>
+
+          <div id="phone1vn" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Chào bạn, bạn đã quay số 096 76 333 69. Nhà hàng Sent. Chúng tôi
+            đang cải tạo nhà hàng từ ngày 27 tháng 2 đến ngày 7 tháng 3. Ngày 8
+            tháng 3, chúng tôi sẽ phục vụ quý khách trở lại.
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "Sie haben...gewählt" = bạn đã quay số<br />
+              • "renovieren" = cải tạo, tu sửa<br />
+              • "von...bis" = từ...đến<br />
+              • "wieder für Sie da sein" = phục vụ quý khách trở lại
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 2</div>
+          <div class="requirements">
+            <h4>Tình huống:</h4>
+            <ul>
+              <li>Bạn hẹn gặp 9h sáng thứ Bảy trước cổng nhà thờ</li>
+              <li>Đi mua sách hoặc đi dạo</li>
+              <li>Trả lời đồng ý (ít nhất 4 câu)</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('phone2')">
+            Tin nhắn tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('phone2vn')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="phone2" class="telephone-message hidden">
+            <strong
+              >Hallo Claudia, hier Heidi. Immer diese Anrufbeantworter! Ja, ich
+              habe deinen Anruf gehört, okay, wir treffen uns dann am Samstag
+              vor der Kirche, um 9 Uhr, dann können wir später Buch kaufen oder
+              spazieren gehen. Bis dann.</strong
+            >
+          </div>
+
+          <div id="phone2vn" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Chào Claudia, đây là Heidi. Mãi mãi là máy trả lời tự động này!
+            Vâng, tôi đã nghe cuộc gọi của bạn, được rồi, chúng ta sẽ gặp nhau
+            vào thứ Bảy trước nhà thờ, lúc 9 giờ, sau đó chúng ta có thể mua
+            sách hoặc đi dạo. Hẹn gặp lại.
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "hier Heidi" = đây là Heidi (cách tự giới thiệu qua điện
+              thoại)<br />
+              • "Anrufbeantworter" = máy trả lời tự động<br />
+              • "vor der Kirche" = trước nhà thờ<br />
+              • "spazieren gehen" = đi dạo<br />
+              • "bis dann" = hẹn gặp lại
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 3</div>
+          <div class="requirements">
+            <h4>Tình huống:</h4>
+            <ul>
+              <li>Bạn làm ở Viettel</li>
+              <li>
+                Thông báo số điện thoại mới của trung tâm ngôn ngữ Timescareer
+              </li>
+              <li>Ít nhất 3 câu</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('phone3')">
+            Tin nhắn tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('phone3vn')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="phone3" class="telephone-message hidden">
+            <strong
+              >Telefonansagedienst der Vietnamesischen Viettel. Die Rufnummer
+              des Timescareer Sprachzentrums hat sich geändert. Die neue
+              Telefonnummer ist: 096 76 333 69.</strong
+            >
+          </div>
+
+          <div id="phone3vn" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Dịch vụ thông báo điện thoại của Viettel Việt Nam. Số điện thoại của
+            Trung tâm Ngôn ngữ Timescareer đã thay đổi. Số điện thoại mới là:
+            096 76 333 69.
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "Telefonansagedienst" = dịch vụ thông báo điện thoại<br />
+              • "hat sich geändert" = đã thay đổi<br />
+              • "Sprachzentrum" = trung tâm ngôn ngữ
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 4</div>
+          <div class="requirements">
+            <h4>Tình huống:</h4>
+            <ul>
+              <li>Xe máy bị hỏng, phải đi taxi đến lớp thầy Sieger</li>
+              <li>Gọi bạn nhờ báo thầy sẽ đến muộn</li>
+              <li>Ít nhất 5 câu</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('phone4')">
+            Tin nhắn tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('phone4vn')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="phone4" class="telephone-message hidden">
+            <strong
+              >Hallo Albert, du, ich komme heute etwas später zum Kurs. Sagst du
+              das bitte Herr Sieger? Mein Motorrad ist kaputt und ich muss mit
+              dem Taxi fahren. Das dauert länger. Bis später.</strong
+            >
+          </div>
+
+          <div id="phone4vn" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Chào Albert, này, hôm nay tôi sẽ đến lớp muộn một chút. Bạn có thể
+            nói với thầy Sieger không? Xe máy của tôi bị hỏng và tôi phải đi
+            taxi. Điều đó sẽ mất nhiều thời gian hơn. Hẹn gặp sau.
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "etwas später" = muộn một chút<br />
+              • "zum Kurs kommen" = đến lớp<br />
+              • "Sagst du das...?" = Bạn có thể nói...không?<br />
+              • "ist kaputt" = bị hỏng<br />
+              • "mit dem Taxi fahren" = đi taxi<br />
+              • "das dauert länger" = điều đó mất nhiều thời gian hơn
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-number">Bài 5</div>
+          <div class="requirements">
+            <h4>Tình huống:</h4>
+            <ul>
+              <li>Bạn làm phòng nhân sự công ty Timescareer</li>
+              <li>Gọi cho ứng viên thực tập Albert</li>
+              <li>Thông báo có thể bắt đầu ngày mai</li>
+              <li>Cần mang căn cước hoặc bản sao</li>
+              <li>Ít nhất 7 câu</li>
+            </ul>
+          </div>
+
+          <button class="toggle-btn" onclick="toggleContent('phone5')">
+            Tin nhắn tiếng Đức
+          </button>
+          <button class="toggle-btn" onclick="toggleContent('phone5vn')">
+            Bản dịch tiếng Việt
+          </button>
+
+          <div id="phone5" class="telephone-message hidden">
+            <strong
+              >Guten Tag, Herr Albert. Hier Sieger Vu von der Firma Timescareer.
+              Sie fangen doch morgen bei uns mit Ihrem Praktikum an. Alle
+              wichtigen Formulare haben wir ja schon, wir brauchen aber noch
+              Ihren Ausweis oder eine Kopie. Bitte vergessen Sie das nicht. Dann
+              bis morgen. Auf Wiederhören.</strong
+            >
+          </div>
+
+          <div id="phone5vn" class="vietnamese-text hidden">
+            <strong>Bản dịch:</strong><br />
+            Chào anh Albert. Đây là Sieger Vu từ công ty Timescareer. Anh sẽ bắt
+            đầu thực tập với chúng tôi vào ngày mai. Tất cả các mẫu đơn quan
+            trọng chúng tôi đã có rồi, nhưng chúng tôi vẫn cần căn cước của anh
+            hoặc một bản sao. Xin đừng quên điều đó. Vậy hẹn gặp ngày mai. Tạm
+            biệt.
+
+            <div class="grammar-note">
+              <strong>Ghi chú ngữ pháp:</strong><br />
+              • "von der Firma" = từ công ty<br />
+              • "anfangen mit" = bắt đầu với<br />
+              • "Praktikum" = thực tập<br />
+              • "Formulare" = mẫu đơn, biểu mẫu<br />
+              • "Ausweis" = căn cước, giấy tờ tùy thân<br />
+              • "eine Kopie" = một bản sao<br />
+              • "vergessen Sie nicht" = đừng quên<br />
+              • "Auf Wiederhören" = tạm biệt (qua điện thoại)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Study Tips Section -->
+      <div class="document-section">
+        <div class="document-title">💡 Mẹo học tập (Study Tips)</div>
+
+        <div class="exercise">
+          <h3>🎯 Cách viết thư tiếng Đức hiệu quả</h3>
+
+          <div class="grammar-note">
+            <strong>1. Cấu trúc thư trang trọng:</strong><br />
+            • Lời chào: "Sehr geehrte Damen und Herren" / "Sehr geehrter
+            Herr..." / "Sehr geehrte Frau..."<br />
+            • Nội dung: Nêu rõ mục đích, yêu cầu cụ thể<br />
+            • Kết thúc: "Mit freundlichen Grüßen"<br /><br />
+
+            <strong>2. Cấu trúc thư thân mật:</strong><br />
+            • Lời chào: "Hallo" / "Lieber..." / "Liebe..."<br />
+            • Nội dung: Tự nhiên, thân thiện<br />
+            • Kết thúc: "Liebe Grüße" / "Bis bald"<br /><br />
+
+            <strong>3. Tin nhắn điện thoại:</strong><br />
+            • Tự giới thiệu: "Hier ist..." / "Hier..."<br />
+            • Nội dung ngắn gọn, rõ ràng<br />
+            • Kết thúc: "Bis dann" / "Auf Wiederhören"
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3>📚 Từ vựng quan trọng</h3>
+
+          <div class="grammar-note">
+            <strong>Thời gian:</strong><br />
+            • morgens (buổi sáng), nachmittags (buổi chiều), abends (buổi
+            tối)<br />
+            • am Montag (thứ Hai), im Winter (mùa đông)<br />
+            • um 9 Uhr (lúc 9 giờ), von...bis (từ...đến)<br /><br />
+
+            <strong>Hoạt động:</strong><br />
+            • eine Party machen (tổ chức tiệc), einladen (mời)<br />
+            • Urlaub machen (đi nghỉ), lernen (học)<br />
+            • treffen (gặp), abholen (đến lấy)<br /><br />
+
+            <strong>Cụm từ hữu ích:</strong><br />
+            • Ich habe eine Bitte (Tôi có một yêu cầu)<br />
+            • Können Sie mir...? (Quý vị có thể...cho tôi không?)<br />
+            • Was für ein...? (Loại...nào?)<br />
+            • Wie teuer...? (Giá bao nhiêu?)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleContent(elementId) {
+        const element = document.getElementById(elementId);
+        const button = event.target;
+
+        if (element.classList.contains("hidden")) {
+          element.classList.remove("hidden");
+          button.classList.add("active");
+        } else {
+          element.classList.add("hidden");
+          button.classList.remove("active");
+        }
+      }
+
+      function showAllTranslations() {
+        const vietnameseTexts = document.querySelectorAll(".vietnamese-text");
+        const buttons = document.querySelectorAll(".toggle-btn");
+
+        vietnameseTexts.forEach((text) => {
+          text.classList.remove("hidden");
+        });
+
+        buttons.forEach((button) => {
+          if (
+            button.textContent.includes("tiếng Việt") ||
+            button.textContent.includes("Bản dịch")
+          ) {
+            button.classList.add("active");
+          }
+        });
+      }
+
+      function hideAllTranslations() {
+        const allContent = document.querySelectorAll(
+          ".german-text, .vietnamese-text, .telephone-message"
+        );
+        const buttons = document.querySelectorAll(".toggle-btn");
+
+        allContent.forEach((content) => {
+          content.classList.add("hidden");
+        });
+
+        buttons.forEach((button) => {
+          button.classList.remove("active");
+        });
+      }
+
+      // Add smooth scrolling for better UX
+      document.querySelectorAll(".toggle-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          setTimeout(() => {
+            this.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 100);
+        });
+      });
+
+      // Add keyboard navigation
+      document.addEventListener("keydown", function (event) {
+        if (event.ctrlKey && event.key === "h") {
+          event.preventDefault();
+          hideAllTranslations();
+        } else if (event.ctrlKey && event.key === "s") {
+          event.preventDefault();
+          showAllTranslations();
+        }
+      });
+    </script>
+  </body>
+</html>
