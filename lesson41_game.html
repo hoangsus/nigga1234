@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài tập viết tiếng Đức A1</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(45deg, #ff6b6b, #feca57);
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .exercise {
+        margin-bottom: 50px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .exercise:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .exercise-header {
+        background: linear-gradient(45deg, #4facfe, #00f2fe);
+        color: white;
+        padding: 20px;
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+
+      .exercise-content {
+        padding: 30px;
+      }
+
+      .language-toggle {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+      }
+
+      .toggle-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .toggle-btn.active {
+        background: #667eea;
+        color: white;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .toggle-btn:not(.active) {
+        background: #e9ecef;
+        color: #495057;
+      }
+
+      .toggle-btn:hover:not(.active) {
+        background: #dee2e6;
+      }
+
+      .letter-content {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        border-left: 4px solid #667eea;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .german-text {
+        display: block;
+      }
+
+      .vietnamese-text {
+        display: none;
+      }
+
+      .letter-content.show-vietnamese .german-text {
+        display: none;
+      }
+
+      .letter-content.show-vietnamese .vietnamese-text {
+        display: block;
+      }
+
+      .letter-content h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+
+      .letter-body {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #2c3e50;
+      }
+
+      .word-count {
+        background: linear-gradient(45deg, #ff9a9e, #fecfef);
+        color: #2c3e50;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-top: 15px;
+      }
+
+      .vocabulary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-top: 40px;
+      }
+
+      .vocabulary h2 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .vocab-category {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+
+      .vocab-category h3 {
+        margin-bottom: 15px;
+        color: #feca57;
+      }
+
+      .vocab-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .exercise-content {
+          padding: 20px;
+        }
+
+        .language-toggle {
+          flex-direction: column;
+        }
+
+        .toggle-btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🇩🇪 Bài tập viết tiếng Đức A1</h1>
+        <p>6 bài viết cơ bản với bản dịch tiếng Việt</p>
+      </div>
+
+      <div class="content">
+        <!-- Exercise 1 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            1. Postkarte aus dem Urlaub (Bưu thiếp từ kỳ nghỉ)
+          </div>
+          <div class="exercise-content">
+            <div class="language-toggle">
+              <button
+                class="toggle-btn active"
+                onclick="showLanguage(1, 'german')"
+              >
+                🇩🇪 Tiếng Đức
+              </button>
+              <button
+                class="toggle-btn"
+                onclick="showLanguage(1, 'vietnamese')"
+              >
+                🇻🇳 Tiếng Việt
+              </button>
+            </div>
+            <div class="letter-content" id="letter1">
+              <div class="german-text">
+                <h3>Lieber Max,</h3>
+                <div class="letter-body">
+                  ich mache Urlaub in München. Das Wetter ist sehr schön und
+                  warm. Die Sonne scheint jeden Tag. Ich besuche viele Museen
+                  und esse deutsches Essen. Am Abend gehe ich spazieren. Es ist
+                  sehr interessant hier!<br /><br />
+                  Bis bald!<br />
+                  Deine Anna
+                </div>
+              </div>
+              <div class="vietnamese-text">
+                <h3>Max thân mến,</h3>
+                <div class="letter-body">
+                  tôi đang nghỉ mát ở München. Thời tiết rất đẹp và ấm áp. Mặt
+                  trời chiếu sáng mỗi ngày. Tôi thăm nhiều bảo tàng và ăn đồ ăn
+                  Đức. Buổi tối tôi đi dạo. Ở đây rất thú vị!<br /><br />
+                  Hẹn gặp lại!<br />
+                  Anna của bạn
+                </div>
+              </div>
+              <div class="word-count">📝 Số từ: 42</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            2. Brief an den Nachbarn (Thư gửi hàng xóm)
+          </div>
+          <div class="exercise-content">
+            <div class="language-toggle">
+              <button
+                class="toggle-btn active"
+                onclick="showLanguage(2, 'german')"
+              >
+                🇩🇪 Tiếng Đức
+              </button>
+              <button
+                class="toggle-btn"
+                onclick="showLanguage(2, 'vietnamese')"
+              >
+                🇻🇳 Tiếng Việt
+              </button>
+            </div>
+            <div class="letter-content" id="letter2">
+              <div class="german-text">
+                <h3>Lieber Herr Schneider,</h3>
+                <div class="letter-body">
+                  ich bekomme am Dienstagnachmittag einen neuen Kühlschrank. Die
+                  Lieferung kommt um 14:00 Uhr. Ich bin bei der Arbeit und kann
+                  nicht zu Hause sein. Können Sie bitte meinen Schlüssel nehmen
+                  und zu Hause warten? Das wäre sehr nett!<br /><br />
+                  Vielen Dank!<br />
+                  Ihr Nachbar<br />
+                  Tom Weber
+                </div>
+              </div>
+              <div class="vietnamese-text">
+                <h3>Ông Schneider thân mến,</h3>
+                <div class="letter-body">
+                  tôi sẽ nhận một tủ lạnh mới vào chiều thứ Ba. Việc giao hàng
+                  sẽ đến lúc 14:00. Tôi đang làm việc và không thể có mặt ở nhà.
+                  Ông có thể vui lòng lấy chìa khóa của tôi và đợi ở nhà không?
+                  Điều đó sẽ rất tốt!<br /><br />
+                  Cảm ơn rất nhiều!<br />
+                  Hàng xóm của ông<br />
+                  Tom Weber
+                </div>
+              </div>
+              <div class="word-count">📝 Số từ: 45</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 3 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            3. Brief an das Reisebüro (Thư gửi công ty du lịch)
+          </div>
+          <div class="exercise-content">
+            <div class="language-toggle">
+              <button
+                class="toggle-btn active"
+                onclick="showLanguage(3, 'german')"
+              >
+                🇩🇪 Tiếng Đức
+              </button>
+              <button
+                class="toggle-btn"
+                onclick="showLanguage(3, 'vietnamese')"
+              >
+                🇻🇳 Tiếng Việt
+              </button>
+            </div>
+            <div class="letter-content" id="letter3">
+              <div class="german-text">
+                <h3>Sehr geehrte Damen und Herren,</h3>
+                <div class="letter-body">
+                  ich möchte am 3. Juli nach Deutschland reisen. Wir sind zwei
+                  Personen und brauchen ein Doppelzimmer für eine Woche. Können
+                  Sie mir bitte den Preis für Hotel und Flug sagen? Ich warte
+                  auf Ihre Antwort.<br /><br />
+                  Mit freundlichen Grüßen<br />
+                  Maria Schmidt
+                </div>
+              </div>
+              <div class="vietnamese-text">
+                <h3>Kính gửi Quý Ông Bà,</h3>
+                <div class="letter-body">
+                  tôi muốn du lịch đến Đức vào ngày 3 tháng 7. Chúng tôi là hai
+                  người và cần một phòng đôi trong một tuần. Quý vị có thể vui
+                  lòng cho tôi biết giá khách sạn và vé máy bay không? Tôi chờ
+                  câu trả lời của quý vị.<br /><br />
+                  Trân trọng<br />
+                  Maria Schmidt
+                </div>
+              </div>
+              <div class="word-count">📝 Số từ: 44</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 4 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            4. Brief an den Freund Peter (Thư gửi bạn Peter)
+          </div>
+          <div class="exercise-content">
+            <div class="language-toggle">
+              <button
+                class="toggle-btn active"
+                onclick="showLanguage(4, 'german')"
+              >
+                🇩🇪 Tiếng Đức
+              </button>
+              <button
+                class="toggle-btn"
+                onclick="showLanguage(4, 'vietnamese')"
+              >
+                🇻🇳 Tiếng Việt
+              </button>
+            </div>
+            <div class="letter-content" id="letter4">
+              <div class="german-text">
+                <h3>Lieber Peter,</h3>
+                <div class="letter-body">
+                  ich ziehe am Samstag in die Berlinerstraße 10 um. Meine alte
+                  Wohnung ist zu klein. Kannst du mir mit deinem Auto helfen?
+                  Wir können um 10:00 Uhr anfangen. Ich kaufe Pizza für uns!<br /><br />
+                  Danke!<br />
+                  Dein Freund<br />
+                  Klaus
+                </div>
+              </div>
+              <div class="vietnamese-text">
+                <h3>Peter thân mến,</h3>
+                <div class="letter-body">
+                  tôi sẽ chuyển đến số 10 đường Berliner vào thứ Bảy. Căn hộ cũ
+                  của tôi quá nhỏ. Bạn có thể giúp tôi với xe của bạn không?
+                  Chúng ta có thể bắt đầu lúc 10:00. Tôi sẽ mua pizza cho chúng
+                  ta!<br /><br />
+                  Cảm ơn!<br />
+                  Bạn của cậu<br />
+                  Klaus
+                </div>
+              </div>
+              <div class="word-count">📝 Số từ: 40</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 5 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            5. Brief wegen der Wohnung (Thư về căn hộ)
+          </div>
+          <div class="exercise-content">
+            <div class="language-toggle">
+              <button
+                class="toggle-btn active"
+                onclick="showLanguage(5, 'german')"
+              >
+                🇩🇪 Tiếng Đức
+              </button>
+              <button
+                class="toggle-btn"
+                onclick="showLanguage(5, 'vietnamese')"
+              >
+                🇻🇳 Tiếng Việt
+              </button>
+            </div>
+            <div class="letter-content" id="letter5">
+              <div class="german-text">
+                <h3>Sehr geehrter Herr Müller,</h3>
+                <div class="letter-body">
+                  ich habe Ihre Wohnungsanzeige gelesen. Ich suche eine neue
+                  Wohnung, weil ich nach Berlin ziehe. Kann ich die Wohnung am
+                  Mittwoch um 16:00 Uhr sehen? Wie ist Ihre Adresse? Bitte
+                  antworten Sie mir.<br /><br />
+                  Mit freundlichen Grüßen<br />
+                  Lisa Wagner
+                </div>
+              </div>
+              <div class="vietnamese-text">
+                <h3>Kính gửi Ông Müller,</h3>
+                <div class="letter-body">
+                  tôi đã đọc quảng cáo căn hộ của ông. Tôi đang tìm một căn hộ
+                  mới vì tôi chuyển đến Berlin. Tôi có thể xem căn hộ vào thứ Tư
+                  lúc 16:00 không? Địa chỉ của ông là gì? Xin vui lòng trả lời
+                  tôi.<br /><br />
+                  Trân trọng<br />
+                  Lisa Wagner
+                </div>
+              </div>
+              <div class="word-count">📝 Số từ: 42</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 6 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            6. Brief an das Restaurant (Thư gửi nhà hàng)
+          </div>
+          <div class="exercise-content">
+            <div class="language-toggle">
+              <button
+                class="toggle-btn active"
+                onclick="showLanguage(6, 'german')"
+              >
+                🇩🇪 Tiếng Đức
+              </button>
+              <button
+                class="toggle-btn"
+                onclick="showLanguage(6, 'vietnamese')"
+              >
+                🇻🇳 Tiếng Việt
+              </button>
+            </div>
+            <div class="letter-content" id="letter6">
+              <div class="german-text">
+                <h3>Liebe Leute vom Restaurant "San und Bo",</h3>
+                <div class="letter-body">
+                  ich mache am Freitag eine Party für 10 Personen. Können Sie
+                  das Essen für uns kochen? Wir möchten Pizza, Salat und
+                  Getränke. Wie viel kostet das? Können Sie das Essen zu mir
+                  nach Hause bringen?<br /><br />
+                  Vielen Dank!<br />
+                  Sophie Braun
+                </div>
+              </div>
+              <div class="vietnamese-text">
+                <h3>Các bạn thân mến từ nhà hàng "San und Bo",</h3>
+                <div class="letter-body">
+                  tôi tổ chức tiệc vào thứ Sáu cho 10 người. Các bạn có thể nấu
+                  đồ ăn cho chúng tôi không? Chúng tôi muốn pizza, salad và đồ
+                  uống. Giá bao nhiêu? Các bạn có thể mang đồ ăn đến nhà tôi
+                  không?<br /><br />
+                  Cảm ơn rất nhiều!<br />
+                  Sophie Braun
+                </div>
+              </div>
+              <div class="word-count">📝 Số từ: 46</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vocabulary Section -->
+        <div class="vocabulary">
+          <h2>📚 Từ vựng hữu ích cho trình độ A1</h2>
+          <div class="vocab-grid">
+            <div class="vocab-category">
+              <h3>🤝 Lời chào & kết thúc</h3>
+              <div class="vocab-item">
+                <span>Lieber/Liebe</span>
+                <span>thân mến</span>
+              </div>
+              <div class="vocab-item">
+                <span>Sehr geehrte</span>
+                <span>kính gửi</span>
+              </div>
+              <div class="vocab-item">
+                <span>Mit freundlichen Grüßen</span>
+                <span>trân trọng</span>
+              </div>
+              <div class="vocab-item">
+                <span>Bis bald</span>
+                <span>hẹn gặp lại</span>
+              </div>
+            </div>
+            <div class="vocab-category">
+              <h3>⏰ Thời gian</h3>
+              <div class="vocab-item">
+                <span>am Montag</span>
+                <span>thứ hai</span>
+              </div>
+              <div class="vocab-item">
+                <span>um 14:00 Uhr</span>
+                <span>lúc 14:00</span>
+              </div>
+              <div class="vocab-item">
+                <span>jeden Tag</span>
+                <span>mỗi ngày</span>
+              </div>
+              <div class="vocab-item">
+                <span>eine Woche</span>
+                <span>một tuần</span>
+              </div>
+            </div>
+            <div class="vocab-category">
+              <h3>🏠 Nhà ở</h3>
+              <div class="vocab-item">
+                <span>umziehen</span>
+                <span>chuyển nhà</span>
+              </div>
+              <div class="vocab-item">
+                <span>Wohnung</span>
+                <span>căn hộ</span>
+              </div>
+              <div class="vocab-item">
+                <span>Schlüssel</span>
+                <span>chìa khóa</span>
+              </div>
+              <div class="vocab-item">
+                <span>Adresse</span>
+                <span>địa chỉ</span>
+              </div>
+            </div>
+            <div class="vocab-category">
+              <h3>🙏 Lịch sự</h3>
+              <div class="vocab-item">
+                <span>bitte</span>
+                <span>xin hãy</span>
+              </div>
+              <div class="vocab-item">
+                <span>danke</span>
+                <span>cảm ơn</span>
+              </div>
+              <div class="vocab-item">
+                <span>können Sie...?</span>
+                <span>bạn có thể...?</span>
+              </div>
+              <div class="vocab-item">
+                <span>das wäre nett</span>
+                <span>điều đó sẽ tốt</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showLanguage(exerciseId, language) {
+        const letterContent = document.getElementById(`letter${exerciseId}`);
+        const buttons =
+          letterContent.parentElement.querySelectorAll(".toggle-btn");
+
+        // Update button states
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        if (language === "german") {
+          buttons[0].classList.add("active");
+          letterContent.classList.remove("show-vietnamese");
+        } else {
+          buttons[1].classList.add("active");
+          letterContent.classList.add("show-vietnamese");
+        }
+      }
+
+      // Add smooth scrolling for better UX
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Add loading animation
+      window.addEventListener("load", function () {
+        const exercises = document.querySelectorAll(".exercise");
+        exercises.forEach((exercise, index) => {
+          setTimeout(() => {
+            exercise.style.opacity = "0";
+            exercise.style.transform = "translateY(20px)";
+            exercise.style.transition = "all 0.6s ease";
+
+            setTimeout(() => {
+              exercise.style.opacity = "1";
+              exercise.style.transform = "translateY(0)";
+            }, 100);
+          }, index * 100);
+        });
+      });
+    </script>
+  </body>
+</html>
