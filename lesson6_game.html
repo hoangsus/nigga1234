@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện tập Nghe-Viết Tiếng Đức - Thử thách 5 phút</title>
+    <title>Cấu trúc câu tiếng Đức giao tiếp</title>
     <style>
       * {
         margin: 0;
@@ -13,334 +13,182 @@
 
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
-        padding: 20px;
       }
 
       .container {
-        max-width: 800px;
+        max-width: 1200px;
         margin: 0 auto;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+        padding: 20px;
       }
 
       .header {
-        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
-        color: white;
-        padding: 30px;
         text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       }
 
       .header h1 {
-        font-size: 2.5em;
+        color: #2c3e50;
         margin-bottom: 10px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        font-size: 2.5rem;
       }
 
       .header p {
-        font-size: 1.2em;
-        opacity: 0.9;
+        color: #7f8c8d;
+        font-size: 1.1rem;
       }
 
-      .challenge-info {
-        background: rgba(255, 255, 255, 0.2);
+      .pattern-section {
+        background: rgba(255, 255, 255, 0.95);
         border-radius: 15px;
-        padding: 20px;
-        margin: 20px 0;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        text-align: center;
       }
 
-      .challenge-info h3 {
-        margin-bottom: 15px;
-        font-size: 1.5em;
-      }
-
-      .content {
-        padding: 30px;
-      }
-
-      .practice-card {
-        background: linear-gradient(135deg, #667eea, #764ba2);
+      .section-title {
+        background: linear-gradient(45deg, #3498db, #2ecc71);
         color: white;
-        border-radius: 20px;
-        padding: 40px;
-        margin: 20px 0;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        padding: 15px 25px;
+        border-radius: 10px;
+        margin: -25px -25px 25px -25px;
+        font-size: 1.4rem;
+        font-weight: bold;
       }
 
-      .stats-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-        margin: 20px 0;
-      }
-
-      .stat-box {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 15px;
-        padding: 15px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        text-align: center;
-      }
-
-      .stat-number {
-        font-size: 1.8em;
-        font-weight: 900;
-        margin-bottom: 5px;
-      }
-
-      .stat-label {
-        font-size: 0.9em;
-        opacity: 0.9;
-      }
-
-      .timer-warning {
-        color: #ff6b6b !important;
-        animation: pulse 1s infinite;
-      }
-
-      @keyframes pulse {
-        0% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.7;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-
-      @keyframes slideIn {
-        from {
-          transform: translateX(300px);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-
-      .sentence-counter {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-        font-weight: 600;
-      }
-
-      .vietnamese-sentence {
-        font-size: 2em;
-        margin: 30px 0;
+      .pattern-item {
+        border: 2px solid #e8f4fd;
+        border-radius: 12px;
         padding: 20px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        line-height: 1.4;
+        margin-bottom: 20px;
+        background: #f8fdff;
+        transition: all 0.3s ease;
       }
 
-      .controls {
+      .pattern-item:hover {
+        border-color: #3498db;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+      }
+
+      .pattern-formula {
+        background: #e8f5e8;
+        border-left: 4px solid #27ae60;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 0 8px 8px 0;
+        font-family: "Courier New", monospace;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .examples {
+        background: #fff9e6;
+        border-left: 4px solid #f39c12;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .example-item {
+        margin: 8px 0;
+        padding: 5px 0;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      .example-item:last-child {
+        border-bottom: none;
+      }
+
+      .german-text {
+        color: #2c3e50;
+        font-weight: bold;
+      }
+
+      .vietnamese-text {
+        color: #8b7355;
+        font-style: italic;
+        margin-left: 10px;
+      }
+
+      .variable {
+        color: #e74c3c;
+        font-weight: bold;
+        background: #ffeaa7;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      .note {
+        background: #e8f4fd;
+        border: 1px solid #b8daff;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 0.9rem;
+      }
+
+      .tabs {
         display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin: 30px 0;
         flex-wrap: wrap;
+        margin-bottom: 20px;
+        gap: 10px;
       }
 
-      .btn {
-        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+      .tab {
+        background: #3498db;
         color: white;
         border: none;
-        padding: 15px 25px;
-        border-radius: 25px;
-        font-size: 1.1em;
-        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 20px;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        min-width: 120px;
       }
 
-      .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      .tab:hover {
+        background: #2980b9;
       }
 
-      .btn:active {
-        transform: translateY(0);
+      .tab.active {
+        background: #27ae60;
       }
 
-      .btn-secondary {
-        background: linear-gradient(135deg, #28a745, #20c997);
-      }
-
-      .btn-info {
-        background: linear-gradient(135deg, #17a2b8, #007bff);
-      }
-
-      .btn-correct {
-        background: linear-gradient(135deg, #28a745, #20c997);
-      }
-
-      .btn-incorrect {
-        background: linear-gradient(135deg, #dc3545, #ff6b6b);
-      }
-
-      .progress-bar {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 10px;
-        overflow: hidden;
-        margin: 20px 0;
-        height: 20px;
-      }
-
-      .progress-fill {
-        background: linear-gradient(135deg, #28a745, #20c997);
-        height: 100%;
-        transition: width 0.5s ease;
-        border-radius: 10px;
-      }
-
-      .instructions {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 15px;
-        padding: 25px;
-        margin: 20px 0;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-      }
-
-      .instructions h3 {
-        margin-bottom: 15px;
-        font-size: 1.5em;
-      }
-
-      .instructions ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .instructions li {
-        margin: 10px 0;
-        padding-left: 25px;
-        position: relative;
-      }
-
-      .instructions li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: #28a745;
-        font-weight: bold;
-        font-size: 1.2em;
-      }
-
-      .answer-section {
-        background: rgba(255, 255, 255, 0.9);
-        color: #333;
-        border-radius: 15px;
-        padding: 25px;
-        margin: 20px 0;
+      .tab-content {
         display: none;
       }
 
-      .answer-section.show {
+      .tab-content.active {
         display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .german-answer {
-        font-size: 1.5em;
-        color: #007bff;
-        font-weight: 600;
-        margin-bottom: 10px;
-      }
-
-      .grammar-tip {
-        font-size: 1em;
-        color: #6c757d;
-        font-style: italic;
-        line-height: 1.4;
-      }
-
-      .completion-screen {
-        text-align: center;
-        display: none;
-      }
-
-      .completion-screen.show {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      .completion-emoji {
-        font-size: 5em;
-        margin: 20px 0;
-      }
-
-      .result-success {
-        color: #28a745;
-      }
-
-      .result-failure {
-        color: #dc3545;
-      }
-
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 20px;
-        margin: 30px 0;
-      }
-
-      .stat-item {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 15px;
-        padding: 20px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
       @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
         .header h1 {
-          font-size: 2em;
+          font-size: 1.8rem;
         }
 
-        .vietnamese-sentence {
-          font-size: 1.5em;
+        .pattern-section {
+          padding: 15px;
         }
 
-        .controls {
-          flex-direction: column;
-          align-items: center;
+        .section-title {
+          margin: -15px -15px 15px -15px;
+          padding: 10px 15px;
+          font-size: 1.2rem;
         }
 
-        .btn {
-          width: 80%;
-          max-width: 300px;
-        }
-
-        .stats-row {
-          grid-template-columns: 1fr;
-          gap: 10px;
+        .tabs {
+          justify-content: center;
         }
       }
     </style>
@@ -348,710 +196,818 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>🎯 Thử thách Tiếng Đức 5 phút</h1>
-        <p>Luyện tập nghe-viết theo thứ tự ngữ pháp</p>
-        <div class="challenge-info">
-          <h3>🏆 Thử thách</h3>
-          <p>
-            <strong>Thời gian:</strong> 5 phút |
-            <strong>Mục tiêu:</strong> 18/30 câu đúng
-          </p>
+        <h1>🇩🇪 Cấu trúc câu tiếng Đức</h1>
+        <p>Học theo mẫu - Thay từ vào chỗ trống - Giao tiếp tự tin</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('basic')">Cơ bản</button>
+        <button class="tab" onclick="showTab('questions')">Câu hỏi</button>
+        <button class="tab" onclick="showTab('negative')">Câu phủ định</button>
+        <button class="tab" onclick="showTab('modal')">
+          Động từ tình thái
+        </button>
+        <button class="tab" onclick="showTab('time')">Thời gian</button>
+        <button class="tab" onclick="showTab('daily')">
+          Giao tiếp hàng ngày
+        </button>
+      </div>
+
+      <!-- CƠ BẢN -->
+      <div id="basic" class="tab-content active">
+        <div class="pattern-section">
+          <div class="section-title">📝 Cấu trúc câu cơ bản</div>
+
+          <div class="pattern-item">
+            <h3>1. Ich ... gern ...</h3>
+            <div class="pattern-formula">
+              Ich + <span class="variable">ĐỘNG TỪ</span> + gern +
+              <span class="variable">TÂN NGỮ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich esse gern Pizza.</span>
+                <span class="vietnamese-text">Tôi thích ăn pizza.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich höre gern Musik.</span>
+                <span class="vietnamese-text">Tôi thích nghe nhạc.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich spiele gern Fußball.</span>
+                <span class="vietnamese-text">Tôi thích chơi bóng đá.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>2. Ich bin ... (Tính từ vị ngữ)</h3>
+            <div class="pattern-formula">
+              Ich bin + <span class="variable">TÍNH TỪ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich bin müde.</span>
+                <span class="vietnamese-text">Tôi mệt.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich bin zufrieden.</span>
+                <span class="vietnamese-text">Tôi hài lòng.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich bin krank.</span>
+                <span class="vietnamese-text">Tôi ốm.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>3. Ich habe ... (Sở hữu)</h3>
+            <div class="pattern-formula">
+              Ich habe + <span class="variable">TÂN NGỮ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich habe ein Auto.</span>
+                <span class="vietnamese-text">Tôi có một chiếc xe.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich habe Zeit.</span>
+                <span class="vietnamese-text">Tôi có thời gian.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich habe Hunger.</span>
+                <span class="vietnamese-text">Tôi đói.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>4. Ich gehe ... (Đi đâu đó)</h3>
+            <div class="pattern-formula">
+              Ich gehe + <span class="variable">NƠI CHỐN</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich gehe ins Kino.</span>
+                <span class="vietnamese-text">Tôi đi xem phim.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich gehe nach Hause.</span>
+                <span class="vietnamese-text">Tôi về nhà.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich gehe zur Arbeit.</span>
+                <span class="vietnamese-text">Tôi đi làm.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="content">
-        <div class="practice-card" id="practice-section">
-          <div class="instructions">
-            <h3>📝 Hướng dẫn luyện tập</h3>
-            <ul>
-              <li>Nhấn "Phát âm" để nghe câu tiếng Việt</li>
-              <li>Viết câu tiếng Đức tương ứng vào vở</li>
-              <li>Nhấn "Đúng" hoặc "Sai" để đánh giá bản thân</li>
-              <li>Xem đáp án sau khi đánh giá</li>
-              <li>Mục tiêu: đạt 18 câu đúng trong 5 phút</li>
-            </ul>
-          </div>
+      <!-- CÂU HỎI -->
+      <div id="questions" class="tab-content">
+        <div class="pattern-section">
+          <div class="section-title">❓ Cấu trúc câu hỏi</div>
 
-          <div class="stats-row">
-            <div class="stat-box">
-              <div class="stat-number" id="timer">05:00</div>
-              <div class="stat-label">⏰ Thời gian còn lại</div>
+          <div class="pattern-item">
+            <h3>1. Câu hỏi Yes/No</h3>
+            <div class="pattern-formula">
+              <span class="variable">ĐỘNG TỪ</span> + Sie/du +
+              <span class="variable">TÂN NGỮ</span>?
             </div>
-            <div class="stat-box">
-              <div class="stat-number" id="correct-count">0</div>
-              <div class="stat-label">✅ Câu đúng</div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Haben Sie Zeit?</span>
+                <span class="vietnamese-text">Anh/chị có thời gian không?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Sind Sie müde?</span>
+                <span class="vietnamese-text">Anh/chị có mệt không?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Kommst du mit?</span>
+                <span class="vietnamese-text">Bạn đi cùng không?</span>
+              </div>
             </div>
-            <div class="stat-box">
-              <div class="stat-number" id="total-answered">0</div>
-              <div class="stat-label">📝 Đã làm</div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>2. Câu hỏi với từ để hỏi</h3>
+            <div class="pattern-formula">
+              <span class="variable">W-WORT</span> +
+              <span class="variable">ĐỘNG TỪ</span> + Sie/du?
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Wie heißen Sie?</span>
+                <span class="vietnamese-text">Anh/chị tên gì?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Wo wohnen Sie?</span>
+                <span class="vietnamese-text">Anh/chị ở đâu?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Was machen Sie?</span>
+                <span class="vietnamese-text">Anh/chị làm gì?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Wann kommen Sie?</span>
+                <span class="vietnamese-text">Anh/chị đến khi nào?</span>
+              </div>
             </div>
           </div>
 
-          <div class="sentence-counter" id="counter">Câu 1 / 30</div>
+          <div class="pattern-item">
+            <h3>3. Wie ... ? (Hỏi về mức độ/cách thức)</h3>
+            <div class="pattern-formula">
+              Wie + <span class="variable">TÍNH TỪ</span> + ist/sind +
+              <span class="variable">CHỦ NGỮ</span>?
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Wie alt sind Sie?</span>
+                <span class="vietnamese-text">Anh/chị bao nhiêu tuổi?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Wie groß ist das Zimmer?</span>
+                <span class="vietnamese-text">Phòng lớn thế nào?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Wie teuer ist das Auto?</span>
+                <span class="vietnamese-text">Xe đó giá bao nhiêu?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <div class="progress-bar">
-            <div class="progress-fill" id="progress" style="width: 3.33%"></div>
+      <!-- CÂU PHỦ ĐỊNH -->
+      <div id="negative" class="tab-content">
+        <div class="pattern-section">
+          <div class="section-title">❌ Cấu trúc câu phủ định</div>
+
+          <div class="pattern-item">
+            <h3>1. ... nicht (Phủ định động từ/tính từ)</h3>
+            <div class="pattern-formula">
+              Ich + <span class="variable">ĐỘNG TỪ</span> + nicht
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich verstehe nicht.</span>
+                <span class="vietnamese-text">Tôi không hiểu.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Das ist nicht richtig.</span>
+                <span class="vietnamese-text">Điều đó không đúng.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich komme nicht mit.</span>
+                <span class="vietnamese-text">Tôi không đi cùng.</span>
+              </div>
+            </div>
           </div>
 
-          <div class="vietnamese-sentence" id="vietnamese-text">
-            Nhấn "Bắt đầu" để bắt đầu thử thách
+          <div class="pattern-item">
+            <h3>2. kein/keine ... (Phủ định danh từ)</h3>
+            <div class="pattern-formula">
+              Ich habe + kein/keine + <span class="variable">DANH TỪ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich habe kein Auto.</span>
+                <span class="vietnamese-text">Tôi không có xe.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich habe keine Zeit.</span>
+                <span class="vietnamese-text">Tôi không có thời gian.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Das ist kein Problem.</span>
+                <span class="vietnamese-text">Đó không phải vấn đề.</span>
+              </div>
+            </div>
           </div>
 
-          <div class="controls">
-            <button class="btn" id="start-btn" onclick="startPractice()">
-              🚀 Bắt đầu thử thách
-            </button>
-            <button
-              class="btn btn-secondary"
-              id="speak-btn"
-              onclick="speakVietnamese()"
-              style="display: none"
-            >
-              🔊 Phát âm
-            </button>
-            <button
-              class="btn btn-correct"
-              id="correct-btn"
-              onclick="markAnswer(true)"
-              style="display: none"
-            >
-              ✅ Đúng
-            </button>
-            <button
-              class="btn btn-incorrect"
-              id="incorrect-btn"
-              onclick="markAnswer(false)"
-              style="display: none"
-            >
-              ❌ Sai
-            </button>
-            <button
-              class="btn"
-              id="next-btn"
-              onclick="nextSentence()"
-              style="display: none"
-            >
-              ➡️ Câu tiếp theo
-            </button>
+          <div class="pattern-item">
+            <h3>3. ... nicht gern (Không thích)</h3>
+            <div class="pattern-formula">
+              Ich + <span class="variable">ĐỘNG TỪ</span> + nicht gern +
+              <span class="variable">TÂN NGỮ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich esse nicht gern Fisch.</span>
+                <span class="vietnamese-text">Tôi không thích ăn cá.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich höre nicht gern Rockmusik.</span>
+                <span class="vietnamese-text"
+                  >Tôi không thích nghe nhạc rock.</span
+                >
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich gehe nicht gern einkaufen.</span>
+                <span class="vietnamese-text">Tôi không thích đi mua sắm.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ĐỘNG TỪ TÌNH THÁI -->
+      <div id="modal" class="tab-content">
+        <div class="pattern-section">
+          <div class="section-title">🔄 Động từ tình thái</div>
+
+          <div class="pattern-item">
+            <h3>1. Ich möchte ... (Muốn - lịch sự)</h3>
+            <div class="pattern-formula">
+              Ich möchte +
+              <span class="variable">ĐỘNG TỪ NGUYÊN MẪU/TÂN NGỮ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich möchte schlafen.</span>
+                <span class="vietnamese-text">Tôi muốn ngủ.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich möchte einen Kaffee.</span>
+                <span class="vietnamese-text">Tôi muốn một ly cà phê.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich möchte nach Hause gehen.</span>
+                <span class="vietnamese-text">Tôi muốn về nhà.</span>
+              </div>
+            </div>
           </div>
 
-          <div class="answer-section" id="answer-section">
-            <div class="german-answer" id="german-answer"></div>
-            <div class="grammar-tip" id="grammar-tip"></div>
+          <div class="pattern-item">
+            <h3>2. Ich kann ... (Có thể)</h3>
+            <div class="pattern-formula">
+              Ich kann + <span class="variable">ĐỘNG TỪ NGUYÊN MẪU</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich kann Deutsch sprechen.</span>
+                <span class="vietnamese-text">Tôi có thể nói tiếng Đức.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich kann nicht kommen.</span>
+                <span class="vietnamese-text">Tôi không thể đến.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Kann ich Ihnen helfen?</span>
+                <span class="vietnamese-text"
+                  >Tôi có thể giúp anh/chị không?</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>3. Ich muss ... (Phải)</h3>
+            <div class="pattern-formula">
+              Ich muss + <span class="variable">ĐỘNG TỪ NGUYÊN MẪU</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich muss arbeiten.</span>
+                <span class="vietnamese-text">Tôi phải làm việc.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich muss früh aufstehen.</span>
+                <span class="vietnamese-text">Tôi phải dậy sớm.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Muss ich bezahlen?</span>
+                <span class="vietnamese-text">Tôi có phải trả tiền không?</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>4. Ich will ... (Muốn - quyết tâm)</h3>
+            <div class="pattern-formula">
+              Ich will + <span class="variable">ĐỘNG TỪ NGUYÊN MẪU</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich will Deutsch lernen.</span>
+                <span class="vietnamese-text">Tôi muốn học tiếng Đức.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich will nicht warten.</span>
+                <span class="vietnamese-text">Tôi không muốn chờ.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Was willst du machen?</span>
+                <span class="vietnamese-text">Bạn muốn làm gì?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THỜI GIAN -->
+      <div id="time" class="tab-content">
+        <div class="pattern-section">
+          <div class="section-title">🕐 Cấu trúc thời gian</div>
+
+          <div class="pattern-item">
+            <h3>1. Ich ... um ... Uhr (Giờ cụ thể)</h3>
+            <div class="pattern-formula">
+              Ich + <span class="variable">ĐỘNG TỪ</span> + um +
+              <span class="variable">SỐ</span> + Uhr
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich stehe um 7 Uhr auf.</span>
+                <span class="vietnamese-text">Tôi thức dậy lúc 7 giờ.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich esse um 12 Uhr zu Mittag.</span>
+                <span class="vietnamese-text">Tôi ăn trưa lúc 12 giờ.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Der Film beginnt um 20 Uhr.</span>
+                <span class="vietnamese-text">Phim bắt đầu lúc 20 giờ.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>2. Ich ... am ... (Ngày trong tuần)</h3>
+            <div class="pattern-formula">
+              Ich + <span class="variable">ĐỘNG TỪ</span> + am +
+              <span class="variable">THỨ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich arbeite am Montag.</span>
+                <span class="vietnamese-text">Tôi làm việc vào thứ Hai.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text"
+                  >Am Wochenende schlafe ich lange.</span
+                >
+                <span class="vietnamese-text">Cuối tuần tôi ngủ dậy muộn.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Am Sonntag gehe ich ins Kino.</span>
+                <span class="vietnamese-text">Chủ nhật tôi đi xem phim.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>3. Heute/Morgen/Gestern ... (Thời gian tương đối)</h3>
+            <div class="pattern-formula">
+              <span class="variable">THỜI GIAN</span> +
+              <span class="variable">ĐỘNG TỪ</span> + ich + ...
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Heute gehe ich einkaufen.</span>
+                <span class="vietnamese-text">Hôm nay tôi đi mua sắm.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Morgen habe ich frei.</span>
+                <span class="vietnamese-text">Ngày mai tôi được nghỉ.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Gestern war ich krank.</span>
+                <span class="vietnamese-text">Hôm qua tôi ốm.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIAO TIẾP HÀNG NGÀY -->
+      <div id="daily" class="tab-content">
+        <div class="pattern-section">
+          <div class="section-title">💬 Giao tiếp hàng ngày</div>
+
+          <div class="pattern-item">
+            <h3>1. Entschuldigung, ... (Xin lỗi, ...)</h3>
+            <div class="pattern-formula">
+              Entschuldigung, + <span class="variable">CÂU HỎI/YÊU CẦU</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text"
+                  >Entschuldigung, wo ist der Bahnhof?</span
+                >
+                <span class="vietnamese-text">Xin lỗi, ga tàu ở đâu?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text"
+                  >Entschuldigung, können Sie mir helfen?</span
+                >
+                <span class="vietnamese-text"
+                  >Xin lỗi, anh/chị có thể giúp tôi không?</span
+                >
+              </div>
+              <div class="example-item">
+                <span class="german-text"
+                  >Entschuldigung, sprechen Sie Englisch?</span
+                >
+                <span class="vietnamese-text"
+                  >Xin lỗi, anh/chị có nói tiếng Anh không?</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>2. Ich hätte gern ... (Tôi muốn ... - mua sắm)</h3>
+            <div class="pattern-formula">
+              Ich hätte gern + <span class="variable">TÂN NGỮ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich hätte gern einen Kaffee.</span>
+                <span class="vietnamese-text">Tôi muốn một ly cà phê.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich hätte gern die Rechnung.</span>
+                <span class="vietnamese-text">Tôi muốn thanh toán.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich hätte gern zwei Brötchen.</span>
+                <span class="vietnamese-text">Tôi muốn hai chiếc bánh mì.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>3. Können Sie mir ... ? (Anh/chị có thể ... cho tôi không?)</h3>
+            <div class="pattern-formula">
+              Können Sie mir + <span class="variable">ĐỘNG TỪ NGUYÊN MẪU</span>?
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Können Sie mir helfen?</span>
+                <span class="vietnamese-text"
+                  >Anh/chị có thể giúp tôi không?</span
+                >
+              </div>
+              <div class="example-item">
+                <span class="german-text">Können Sie mir den Weg zeigen?</span>
+                <span class="vietnamese-text"
+                  >Anh/chị có thể chỉ đường cho tôi không?</span
+                >
+              </div>
+              <div class="example-item">
+                <span class="german-text">Können Sie mir das erklären?</span>
+                <span class="vietnamese-text"
+                  >Anh/chị có thể giải thích cho tôi không?</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>
+              4. Was kostet ... ? / Wie viel kostet ... ? (... giá bao nhiêu?)
+            </h3>
+            <div class="pattern-formula">
+              Was/Wie viel kostet + <span class="variable">DANH TỪ</span>?
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Was kostet das Buch?</span>
+                <span class="vietnamese-text">Cuốn sách giá bao nhiêu?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Wie viel kostet ein Kilo Äpfel?</span>
+                <span class="vietnamese-text">Một kg táo giá bao nhiêu?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Was kostet die Fahrkarte?</span>
+                <span class="vietnamese-text">Vé xe giá bao nhiêu?</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>5. Ich suche ... (Tôi đang tìm ...)</h3>
+            <div class="pattern-formula">
+              Ich suche + <span class="variable">TÂN NGỮ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich suche den Bahnhof.</span>
+                <span class="vietnamese-text">Tôi đang tìm ga tàu.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich suche eine Apotheke.</span>
+                <span class="vietnamese-text">Tôi đang tìm hiệu thuốc.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich suche mein Handy.</span>
+                <span class="vietnamese-text">Tôi đang tìm điện thoại.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>6. Ich brauche ... (Tôi cần ...)</h3>
+            <div class="pattern-formula">
+              Ich brauche + <span class="variable">TÂN NGỮ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich brauche einen Arzt.</span>
+                <span class="vietnamese-text">Tôi cần bác sĩ.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich brauche Hilfe.</span>
+                <span class="vietnamese-text">Tôi cần giúp đỡ.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich brauche mehr Zeit.</span>
+                <span class="vietnamese-text">Tôi cần thêm thời gian.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>7. Es gibt ... (Có ...)</h3>
+            <div class="pattern-formula">
+              Es gibt + <span class="variable">TÂN NGỮ</span> +
+              <span class="variable">NƠI CHỐN (tùy chọn)</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Es gibt hier einen Supermarkt.</span>
+                <span class="vietnamese-text">Ở đây có một siêu thị.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Gibt es ein Problem?</span>
+                <span class="vietnamese-text">Có vấn đề gì không?</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Es gibt heute Regen.</span>
+                <span class="vietnamese-text">Hôm nay có mưa.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>8. Mir gefällt ... (Tôi thích ...)</h3>
+            <div class="pattern-formula">
+              Mir gefällt + <span class="variable">CHỦ NGỮ</span> / Mir gefallen
+              + <span class="variable">CHỦ NGỮ SỐ NHIỀU</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Mir gefällt das Buch.</span>
+                <span class="vietnamese-text">Tôi thích cuốn sách.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Mir gefallen die Schuhe.</span>
+                <span class="vietnamese-text">Tôi thích đôi giày.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Gefällt Ihnen Deutschland?</span>
+                <span class="vietnamese-text"
+                  >Anh/chị có thích nước Đức không?</span
+                >
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="practice-card completion-screen" id="completion-screen">
-          <div class="completion-emoji" id="result-emoji">🎉</div>
-          <h2 id="result-title">Hoàn thành thử thách!</h2>
-          <p style="font-size: 1.3em; margin: 20px 0" id="result-message">
-            Kết quả sẽ hiển thị ở đây
-          </p>
+        <div class="pattern-section">
+          <div class="section-title">🎯 Cấu trúc thi cử quan trọng</div>
 
-          <div class="stats-grid">
-            <div class="stat-item">
-              <div class="stat-number" id="final-correct">0</div>
-              <div class="stat-label">Câu đúng</div>
+          <div class="pattern-item">
+            <h3>1. Mein Name ist ... / Ich heiße ... (Tên tôi là ...)</h3>
+            <div class="pattern-formula">
+              Mein Name ist + <span class="variable">TÊN</span> / Ich heiße +
+              <span class="variable">TÊN</span>
             </div>
-            <div class="stat-item">
-              <div class="stat-number" id="final-answered">0</div>
-              <div class="stat-label">Đã làm</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" id="final-accuracy">0%</div>
-              <div class="stat-label">Độ chính xác</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" id="final-time">05:00</div>
-              <div class="stat-label">Thời gian</div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Mein Name ist Anna Schmidt.</span>
+                <span class="vietnamese-text">Tên tôi là Anna Schmidt.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich heiße Peter.</span>
+                <span class="vietnamese-text">Tôi tên Peter.</span>
+              </div>
             </div>
           </div>
 
-          <div class="controls">
-            <button class="btn" onclick="resetPractice()">🔄 Thử lại</button>
-            <button class="btn btn-secondary" onclick="shuffleAndRestart()">
-              🎲 Trộn câu & Thử lại
-            </button>
+          <div class="pattern-item">
+            <h3>
+              2. Ich komme aus ... / Ich wohne in ... (Tôi đến từ ... / Tôi sống
+              ở ...)
+            </h3>
+            <div class="pattern-formula">
+              Ich komme aus + <span class="variable">QUỐC GIA/THÀNH PHỐ</span> /
+              Ich wohne in + <span class="variable">THÀNH PHỐ</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich komme aus Vietnam.</span>
+                <span class="vietnamese-text">Tôi đến từ Việt Nam.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich wohne in Hanoi.</span>
+                <span class="vietnamese-text">Tôi sống ở Hà Nội.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text"
+                  >Ich wohne seit 3 Jahren in Deutschland.</span
+                >
+                <span class="vietnamese-text">Tôi đã sống ở Đức 3 năm.</span>
+              </div>
+            </div>
           </div>
+
+          <div class="pattern-item">
+            <h3>
+              3. Ich bin ... Jahre alt / Ich arbeite als ... (Tôi ... tuổi / Tôi
+              làm nghề ...)
+            </h3>
+            <div class="pattern-formula">
+              Ich bin + <span class="variable">SỐ</span> + Jahre alt / Ich
+              arbeite als + <span class="variable">NGHỀ NGHIỆP</span>
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text">Ich bin 25 Jahre alt.</span>
+                <span class="vietnamese-text">Tôi 25 tuổi.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich arbeite als Lehrer.</span>
+                <span class="vietnamese-text">Tôi làm giáo viên.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text">Ich bin Student.</span>
+                <span class="vietnamese-text">Tôi là sinh viên.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-item">
+            <h3>4. Meine Familie besteht aus ... (Gia đình tôi gồm ...)</h3>
+            <div class="pattern-formula">
+              Meine Familie besteht aus + <span class="variable">SỐ</span> +
+              Personen
+            </div>
+            <div class="examples">
+              <div class="example-item">
+                <span class="german-text"
+                  >Meine Familie besteht aus 4 Personen.</span
+                >
+                <span class="vietnamese-text">Gia đình tôi gồm 4 người.</span>
+              </div>
+              <div class="example-item">
+                <span class="german-text"
+                  >Ich habe einen Bruder und eine Schwester.</span
+                >
+                <span class="vietnamese-text"
+                  >Tôi có một anh trai và một chị gái.</span
+                >
+              </div>
+              <div class="example-item">
+                <span class="german-text">Meine Eltern sind Rentner.</span>
+                <span class="vietnamese-text">Bố mẹ tôi đã nghỉ hưu.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-section">
+        <div class="section-title">💡 Mẹo học cấu trúc hiệu quả</div>
+
+        <div class="note">
+          <strong>🎯 Cách sử dụng:</strong><br />
+          1. <strong>Chọn 1 cấu trúc</strong> → Luyện tập đến thành thạo<br />
+          2. <strong>Thay từ vào chỗ trống</strong> → Tạo ra 10-20 câu mới<br />
+          3. <strong>Nói to</strong> → Luyện phát âm và ghi nhớ<br />
+          4. <strong>Viết ra giấy</strong> → Củng cố ngữ pháp<br />
+          5. <strong>Áp dụng trong đời sống</strong> → Giao tiếp thực tế
+        </div>
+
+        <div class="note">
+          <strong>⚡ Bí quyết thành công:</strong><br />
+          • Học <strong>5 cấu trúc/ngày</strong> thay vì học ngữ pháp khô
+          khan<br />
+          • <strong>Lặp lại</strong> mỗi cấu trúc 20 lần với từ khác nhau<br />
+          • <strong>Ghi âm</strong> giọng nói của mình để so sánh<br />
+          • <strong>Sử dụng ngay</strong> trong cuộc sống hàng ngày<br />
+          • <strong>Kết hợp cấu trúc</strong> để tạo đoạn hội thoại hoàn chỉnh
         </div>
       </div>
     </div>
 
     <script>
-      // 30 câu luyện tập theo dữ liệu JSON gốc
-      const practiceData = [
-        // NHÓM 1: ĐỘNG TỪ KHUYẾT THIẾU (MODALVERBEN) - 10 câu
-        {
-          vietnamese: "Tôi có thể bơi rất giỏi.",
-          german: "Ich kann sehr gut schwimmen.",
-          tip: "🎯 können = khả năng. 'sehr gut' = rất giỏi. Động từ chính 'schwimmen' ở cuối câu",
-        },
-        {
-          vietnamese: "Hôm nay bạn phải học tiếng Đức.",
-          german: "Du musst heute Deutsch lernen.",
-          tip: "🎯 müssen = bắt buộc phải. Thời gian 'heute' đứng sau modal verb",
-        },
-        {
-          vietnamese: "Chúng ta muốn chơi bóng đá cùng nhau.",
-          german: "Wir wollen zusammen Fußball spielen.",
-          tip: "🎯 wollen = ý muốn cá nhân. 'zusammen' = cùng nhau (trạng từ)",
-        },
-        {
-          vietnamese: "Họ không được phép hút thuốc ở đây.",
-          german: "Sie dürfen hier nicht rauchen.",
-          tip: "🎯 dürfen + nicht = cấm. 'hier' = ở đây (chỉ địa điểm)",
-        },
-        {
-          vietnamese: "Tôi nên làm việc sớm mai.",
-          german: "Ich soll morgen früh arbeiten.",
-          tip: "🎯 sollen = lời khuyên từ người khác. 'früh' = sớm (trạng từ thời gian)",
-        },
-        {
-          vietnamese: "Bạn có thể chơi guitar tốt.",
-          german: "Du kannst gut Gitarre spielen.",
-          tip: "🎯 können + gut = có thể làm tốt. 'Gitarre spielen' = chơi guitar",
-        },
-        {
-          vietnamese: "Chúng ta phải đi học đúng giờ.",
-          german: "Wir müssen pünktlich zur Schule gehen.",
-          tip: "🎯 müssen + zur Schule gehen = phải đi học đúng giờ. Động từ 'gehen' hoàn thiện ý nghĩa",
-        },
-        {
-          vietnamese: "Hôm nay các bạn muốn ăn pizza?",
-          german: "Ihr wollt heute Pizza essen?",
-          tip: "🎯 wollen trong câu hỏi. Cần động từ 'essen' để hoàn thiện ý nghĩa",
-        },
-        {
-          vietnamese: "Hôm nay tôi được ngủ lâu hơn.",
-          german: "Ich darf heute länger schlafen.",
-          tip: "🎯 dürfen = được phép. 'länger' = lâu hơn (so sánh hơn)",
-        },
-        {
-          vietnamese: "Cô ấy nên uống nhiều nước hơn.",
-          german: "Sie soll mehr Wasser trinken.",
-          tip: "🎯 sollen = lời khuyên y tế. 'mehr' = nhiều hơn (so sánh)",
-        },
+      function showTab(tabName) {
+        // Hide all tab contents
+        const tabContents = document.querySelectorAll(".tab-content");
+        tabContents.forEach((content) => {
+          content.classList.remove("active");
+        });
 
-        // NHÓM 2: ĐỘNG TỪ TÁCH (TRENNBARE VERBEN) - 5 câu
-        {
-          vietnamese: "Tôi thức dậy mỗi ngày vào buổi sáng.",
-          german: "Ich stehe morgens jeden Tag auf.",
-          tip: "🎯 aufstehen tách: stehe...auf. 'morgens' = buổi sáng, 'jeden Tag' = mỗi ngày",
-        },
-        {
-          vietnamese: "Hôm nay anh ấy gọi điện cho mẹ.",
-          german: "Er ruft heute seine Mutter an.",
-          tip: "🎯 anrufen tách: ruft...an. 'heute' = hôm nay, 'seine Mutter' = mẹ của anh ấy",
-        },
-        {
-          vietnamese: "Chúng ta thích mua sắm tối nay.",
-          german: "Wir kaufen gerne heute Abend ein.",
-          tip: "🎯 einkaufen tách: kaufen...ein. 'gerne' = thích/sẵn lòng, 'heute Abend' = tối nay",
-        },
-        {
-          vietnamese: "Làm ơn đóng cửa sổ lại.",
-          german: "Du machst bitte das Fenster zu.",
-          tip: "🎯 zumachen tách: machst...zu. 'bitte' = làm ơn, 'das Fenster' = cửa sổ",
-        },
-        {
-          vietnamese: "Mỗi sáng cô ấy mặc quần áo ấm.",
-          german: "Sie zieht jeden Morgen warme Kleidung an.",
-          tip: "🎯 anziehen tách: zieht...an. 'jeden Morgen' = mỗi sáng (2 từ), 'warme Kleidung' = quần áo ấm",
-        },
+        // Remove active class from all tabs
+        const tabs = document.querySelectorAll(".tab");
+        tabs.forEach((tab) => {
+          tab.classList.remove("active");
+        });
 
-        // NHÓM 3: CÂU HỎI YES/NO (JA/NEIN-FRAGEN) - 5 câu
-        {
-          vietnamese: "Hôm nay bạn có rất mệt không?",
-          german: "Bist du heute sehr müde?",
-          tip: "🎯 Câu hỏi Yes/No: động từ lên đầu. 'sehr' nhấn mạnh mức độ mệt",
-        },
-        {
-          vietnamese: "Hôm nay bạn có rất đói không?",
-          german: "Bist du heute sehr hungrig?",
-          tip: "🎯 'sehr hungrig' = rất đói, tự nhiên hơn. Động từ 'sein' (bist) phù hợp khi nói về trạng thái đói",
-        },
-        {
-          vietnamese: "Chiếc xe mới đó có đắt không?",
-          german: "Ist das neue Auto teuer?",
-          tip: "🎯 'das neue Auto' = chiếc xe mới. Tính từ 'neue' chia theo giống trung tính",
-        },
-        {
-          vietnamese: "Hôm nay bạn có đến chỗ tôi không?",
-          german: "Kommst du heute zu mir?",
-          tip: "🎯 'zu mir' = đến chỗ tôi. Giới từ 'zu' + Dativ (mir)",
-        },
-        {
-          vietnamese:
-            "Hôm nay bạn có nói tiếng Đức rất tốt với giáo viên không?",
-          german: "Sprichst du heute sehr gut Deutsch mit deinem Lehrer?",
-          tip: "🎯 'Deutsch' = tiếng Đức, không cần 'Sprache'. 'heute' và 'mit deinem Lehrer' (Dativ) bổ sung ngữ cảnh, 'sehr gut' nhấn mạnh kỹ năng",
-        },
+        // Show selected tab content
+        document.getElementById(tabName).classList.add("active");
 
-        // NHÓM 4: CÂU HỎI W-FRAGEN - 5 câu
-        {
-          vietnamese: "Bạn tên gì vậy?",
-          german: "Wie heißt du denn bitte?",
-          tip: "🎯 'Wie heißt du?' = tên gì. 'denn' làm câu hỏi thân thiện hơn, 'bitte' lịch sự",
-        },
-        {
-          vietnamese: "Bạn sống ở đâu ở Đức?",
-          german: "Wo wohnst du in Deutschland?",
-          tip: "🎯 Wo = ở đâu (địa điểm tĩnh). 'in Deutschland' = ở Đức (Dativ)",
-        },
-        {
-          vietnamese: "Chiếc xe đó là loại gì vậy?",
-          german: "Was ist das für ein Auto?",
-          tip: "🎯 'Was für ein' cần danh từ theo sau, ví dụ 'Auto' (chiếc xe). Câu hoàn chỉnh: 'Loại xe gì vậy?'",
-        },
-        {
-          vietnamese: "Khi nào bạn về nhà?",
-          german: "Wann kommst du nach Hause?",
-          tip: "🎯 Wann = khi nào (thời gian). 'nach Hause' = về nhà (cố định)",
-        },
-        {
-          vietnamese: "Ai là bạn thân nhất của bạn?",
-          german: "Wer ist deine beste Freundin?",
-          tip: "🎯 Wer = ai (hỏi về người). 'beste' = tốt nhất (tính từ so sánh)",
-        },
+        // Add active class to clicked tab
+        event.target.classList.add("active");
+      }
 
-        // NHÓM 5: CÂU CẦU KHIẾN (IMPERATIV) - 5 câu
-        {
-          vietnamese: "Hãy đi về nhà ngay lập tức nhé!",
-          german: "Geh bitte sofort nach Hause!",
-          tip: "🎯 Du-Form: gehen → Geh. 'sofort' = ngay lập tức. 'bitte' làm câu lịch sự",
-        },
-        {
-          vietnamese: "Làm ơn nói to hơn một chút!",
-          german: "Sprechen Sie bitte etwas lauter!",
-          tip: "🎯 Sie-Form lịch sự: Động từ + Sie. 'etwas lauter' = to hơn một chút",
-        },
-        {
-          vietnamese: "Hãy hoàn thành bài tập về nhà của các em ngay!",
-          german: "Macht jetzt eure Hausaufgaben fertig!",
-          tip: "🎯 Ihr-Form: machen → macht. 'eure Hausaufgaben' = bài tập của các em",
-        },
-        {
-          vietnamese: "Hãy đến đây nhanh lên!",
-          german: "Komm bitte schnell herüber!",
-          tip: "🎯 'herüber' = đến đây (từ xa). 'schnell' = nhanh chóng",
-        },
-        {
-          vietnamese: "Hãy im lặng khi con về đến nhà!",
-          german: "Sei ruhig, wenn du nach Hause kommst!",
-          tip: "🎯 sein → sei (đặc biệt). 'ruhig' = im lặng. 'wenn' = khi",
-        },
-      ];
+      // Add some interactive features
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add click handlers to pattern formulas to highlight variables
+        const variables = document.querySelectorAll(".variable");
+        variables.forEach((variable) => {
+          variable.addEventListener("click", function () {
+            this.style.backgroundColor = "#e74c3c";
+            this.style.color = "white";
+            setTimeout(() => {
+              this.style.backgroundColor = "#ffeaa7";
+              this.style.color = "#e74c3c";
+            }, 500);
+          });
+        });
 
-      // App state
-      let currentIndex = 0;
-      let isStarted = false;
-      let startTime = null;
-      let timerInterval = null;
-      let currentData = [...practiceData];
-      let correctCount = 0;
-      let totalAnswered = 0;
-      let timeLimit = 5 * 60; // 5 minutes in seconds
-      let timeRemaining = timeLimit;
-      let challengeCompleted = false;
+        // Add pronunciation practice feature
+        const germanTexts = document.querySelectorAll(".german-text");
+        germanTexts.forEach((text) => {
+          text.addEventListener("click", function () {
+            if ("speechSynthesis" in window) {
+              const utterance = new SpeechSynthesisUtterance(this.textContent);
+              utterance.lang = "de-DE";
+              utterance.rate = 0.8;
+              window.speechSynthesis.speak(utterance);
 
-      // Initialize voices when available
-      function initializeVoices() {
-        if ("speechSynthesis" in window) {
-          speechSynthesis.getVoices();
-          setTimeout(() => {
-            const voices = speechSynthesis.getVoices();
-            const vietnameseVoice = voices.find(
-              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
-            );
+              // Visual feedback
+              this.style.backgroundColor = "#27ae60";
+              this.style.color = "white";
+              this.style.borderRadius = "4px";
+              this.style.padding = "2px 4px";
 
-            if (!vietnameseVoice) {
-              console.log(
-                "Không tìm thấy giọng tiếng Việt. Sử dụng giọng mặc định."
-              );
+              setTimeout(() => {
+                this.style.backgroundColor = "transparent";
+                this.style.color = "#2c3e50";
+                this.style.padding = "0";
+              }, 2000);
             }
-          }, 1000);
-        }
-      }
-
-      // Initialize
-      function init() {
-        updateDisplay();
-        initializeVoices();
-
-        if ("speechSynthesis" in window) {
-          speechSynthesis.onvoiceschanged = initializeVoices;
-        }
-      }
-
-      // Start practice
-      function startPractice() {
-        isStarted = true;
-        currentIndex = 0;
-        correctCount = 0;
-        totalAnswered = 0;
-        timeRemaining = timeLimit;
-        challengeCompleted = false;
-        startTime = new Date();
-
-        // Show/hide buttons
-        document.getElementById("start-btn").style.display = "none";
-        document.getElementById("speak-btn").style.display = "inline-block";
-        document.getElementById("correct-btn").style.display = "inline-block";
-        document.getElementById("incorrect-btn").style.display = "inline-block";
-
-        // Start timer
-        startTimer();
-
-        // Load first sentence
-        loadSentence();
-      }
-
-      // Start timer
-      function startTimer() {
-        timerInterval = setInterval(() => {
-          timeRemaining--;
-          updateTimerDisplay();
-
-          if (timeRemaining <= 0) {
-            completeChallenge("time");
-          }
-        }, 1000);
-      }
-
-      // Update timer display
-      function updateTimerDisplay() {
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining % 60;
-        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
-          .toString()
-          .padStart(2, "0")}`;
-
-        const timerElement = document.getElementById("timer");
-        timerElement.textContent = timeStr;
-
-        // Add warning style when time is low
-        if (timeRemaining <= 60) {
-          timerElement.classList.add("timer-warning");
-        } else {
-          timerElement.classList.remove("timer-warning");
-        }
-      }
-
-      // Stop timer
-      function stopTimer() {
-        if (timerInterval) {
-          clearInterval(timerInterval);
-          timerInterval = null;
-        }
-      }
-
-      // Load current sentence
-      function loadSentence() {
-        if (currentIndex >= currentData.length) {
-          completeChallenge("finished");
-          return;
-        }
-
-        const current = currentData[currentIndex];
-        document.getElementById("vietnamese-text").textContent =
-          current.vietnamese;
-        document.getElementById("counter").textContent = `Câu ${
-          currentIndex + 1
-        } / 30`;
-
-        // Update progress
-        const progress = ((currentIndex + 1) / 30) * 100;
-        document.getElementById("progress").style.width = `${progress}%`;
-
-        // Hide answer section and next button
-        document.getElementById("answer-section").classList.remove("show");
-        document.getElementById("next-btn").style.display = "none";
-        document.getElementById("correct-btn").style.display = "inline-block";
-        document.getElementById("incorrect-btn").style.display = "inline-block";
-
-        // Auto speak Vietnamese
-        setTimeout(() => speakVietnamese(), 500);
-      }
-
-      // Speak Vietnamese text
-      function speakVietnamese() {
-        if ("speechSynthesis" in window) {
-          const text = currentData[currentIndex].vietnamese;
-          speechSynthesis.cancel();
-
-          const utterance = new SpeechSynthesisUtterance(text);
-          const voices = speechSynthesis.getVoices();
-          const vietnameseVoice = voices.find(
-            (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
-          );
-
-          if (vietnameseVoice) {
-            utterance.voice = vietnameseVoice;
-            utterance.lang = "vi-VN";
-          } else {
-            utterance.lang = "vi-VN";
-          }
-
-          utterance.rate = 0.7;
-          utterance.pitch = 1.0;
-          utterance.volume = 1.0;
-
-          speechSynthesis.speak(utterance);
-
-          const speakBtn = document.getElementById("speak-btn");
-          speakBtn.style.background =
-            "linear-gradient(135deg, #ffa726, #ff7043)";
-          speakBtn.textContent = "🔊 Đang phát...";
-
-          utterance.onend = function () {
-            speakBtn.style.background =
-              "linear-gradient(135deg, #28a745, #20c997)";
-            speakBtn.textContent = "🔊 Phát âm";
-          };
-        } else {
-          alert(
-            "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
-          );
-        }
-      }
-
-      // Mark answer as correct or incorrect
-      function markAnswer(isCorrect) {
-        totalAnswered++;
-        if (isCorrect) {
-          correctCount++;
-        }
-
-        // Update stats display
-        document.getElementById("correct-count").textContent = correctCount;
-        document.getElementById("total-answered").textContent = totalAnswered;
-
-        // Show answer
-        showAnswer();
-
-        // Hide correct/incorrect buttons, show next button
-        document.getElementById("correct-btn").style.display = "none";
-        document.getElementById("incorrect-btn").style.display = "none";
-        document.getElementById("next-btn").style.display = "inline-block";
-
-        // Show success message if reached 18 correct but continue until time ends
-        if (
-          correctCount >= 18 &&
-          !document.getElementById("success-notification")
-        ) {
-          showSuccessNotification();
-        }
-      }
-
-      // Show success notification when reaching 18 correct answers
-      function showSuccessNotification() {
-        const notification = document.createElement("div");
-        notification.id = "success-notification";
-        notification.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          background: linear-gradient(135deg, #28a745, #20c997);
-          color: white;
-          padding: 20px;
-          border-radius: 15px;
-          z-index: 1000;
-          max-width: 300px;
-          font-size: 16px;
-          box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-          animation: slideIn 0.5s ease;
-        `;
-        notification.innerHTML = `
-          <div style="font-size: 24px; margin-bottom: 10px;">🎉</div>
-          <strong>Xuất sắc!</strong><br>
-          Bạn đã đạt ${correctCount} câu đúng!<br>
-          <small>Tiếp tục luyện tập đến hết 5 phút nhé!</small>
-        `;
-
-        document.body.appendChild(notification);
-
-        // Auto remove after 4 seconds
-        setTimeout(() => {
-          if (notification.parentNode) {
-            notification.remove();
-          }
-        }, 4000);
-      }
-
-      // Next sentence
-      function nextSentence() {
-        currentIndex++;
-        loadSentence();
-      }
-
-      // Show answer
-      function showAnswer() {
-        const current = currentData[currentIndex];
-        document.getElementById("german-answer").textContent = current.german;
-        document.getElementById("grammar-tip").textContent = current.tip;
-        document.getElementById("answer-section").classList.add("show");
-
-        // Speak German answer
-        speakGerman(current.german);
-      }
-
-      // Speak German text
-      function speakGerman(text) {
-        if ("speechSynthesis" in window) {
-          speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "de-DE";
-          utterance.rate = 0.7;
-          utterance.volume = 1.0;
-          speechSynthesis.speak(utterance);
-        }
-      }
-
-      // Complete challenge
-      function completeChallenge(reason) {
-        if (challengeCompleted) return;
-        challengeCompleted = true;
-
-        stopTimer();
-
-        // Remove success notification if exists
-        const notification = document.getElementById("success-notification");
-        if (notification) {
-          notification.remove();
-        }
-
-        // Calculate final stats
-        const timeUsed = timeLimit - timeRemaining;
-        const minutes = Math.floor(timeUsed / 60);
-        const seconds = timeUsed % 60;
-        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
-          .toString()
-          .padStart(2, "0")}`;
-
-        const accuracy =
-          totalAnswered > 0
-            ? Math.round((correctCount / totalAnswered) * 100)
-            : 0;
-
-        // Update final stats
-        document.getElementById("final-correct").textContent = correctCount;
-        document.getElementById("final-answered").textContent = totalAnswered;
-        document.getElementById("final-accuracy").textContent = `${accuracy}%`;
-        document.getElementById("final-time").textContent = timeStr;
-
-        // Determine result - always based on reaching 18+ correct answers
-        let resultEmoji, resultTitle, resultMessage, resultClass;
-
-        if (correctCount >= 18) {
-          resultEmoji = "🏆";
-          resultTitle = "Thành công rồi!";
-          resultMessage = `Bạn đã đạt ${correctCount} câu đúng và hoàn thành thử thách 5 phút!`;
-          resultClass = "result-success";
-        } else {
-          resultEmoji = "⏰";
-          resultTitle = "Chưa đạt mục tiêu!";
-          resultMessage = `Bạn đạt ${correctCount}/18 câu đúng trong 5 phút. Hãy thử lại!`;
-          resultClass = "result-failure";
-        }
-
-        document.getElementById("result-emoji").textContent = resultEmoji;
-        document.getElementById("result-title").textContent = resultTitle;
-        document.getElementById("result-title").className = resultClass;
-        document.getElementById("result-message").textContent = resultMessage;
-
-        // Show completion screen
-        document.getElementById("practice-section").style.display = "none";
-        document.getElementById("completion-screen").classList.add("show");
-      }
-
-      // Reset practice
-      function resetPractice() {
-        currentIndex = 0;
-        isStarted = false;
-        correctCount = 0;
-        totalAnswered = 0;
-        timeRemaining = timeLimit;
-        challengeCompleted = false;
-        startTime = null;
-        stopTimer();
-
-        // Reset UI
-        document.getElementById("practice-section").style.display = "block";
-        document.getElementById("completion-screen").classList.remove("show");
-        document.getElementById("start-btn").style.display = "inline-block";
-        document.getElementById("speak-btn").style.display = "none";
-        document.getElementById("correct-btn").style.display = "none";
-        document.getElementById("incorrect-btn").style.display = "none";
-        document.getElementById("next-btn").style.display = "none";
-
-        // Reset display
-        document.getElementById("vietnamese-text").textContent =
-          'Nhấn "Bắt đầu" để bắt đầu thử thách';
-        document.getElementById("counter").textContent = "Câu 1 / 30";
-        document.getElementById("progress").style.width = "3.33%";
-        document.getElementById("timer").textContent = "05:00";
-        document.getElementById("timer").classList.remove("timer-warning");
-        document.getElementById("correct-count").textContent = "0";
-        document.getElementById("total-answered").textContent = "0";
-        document.getElementById("answer-section").classList.remove("show");
-      }
-
-      // Shuffle and restart
-      function shuffleAndRestart() {
-        // Shuffle the data
-        currentData = [...practiceData];
-        for (let i = currentData.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [currentData[i], currentData[j]] = [currentData[j], currentData[i]];
-        }
-
-        resetPractice();
-      }
-
-      // Update display
-      function updateDisplay() {
-        if (!isStarted) {
-          document.getElementById("vietnamese-text").textContent =
-            'Nhấn "Bắt đầu" để bắt đầu thử thách';
-        }
-      }
-
-      // Keyboard shortcuts
-      document.addEventListener("keydown", function (e) {
-        if (!isStarted || challengeCompleted) return;
-
-        switch (e.key) {
-          case " ": // Spacebar to speak
-            e.preventDefault();
-            speakVietnamese();
-            break;
-          case "1": // Number 1 for correct
-            e.preventDefault();
-            if (
-              document.getElementById("correct-btn").style.display !== "none"
-            ) {
-              markAnswer(true);
-            }
-            break;
-          case "2": // Number 2 for incorrect
-            e.preventDefault();
-            if (
-              document.getElementById("incorrect-btn").style.display !== "none"
-            ) {
-              markAnswer(false);
-            }
-            break;
-          case "Enter": // Enter for next
-            e.preventDefault();
-            if (document.getElementById("next-btn").style.display !== "none") {
-              nextSentence();
-            }
-            break;
-        }
+          });
+        });
       });
-
-      // Initialize when page loads
-      window.onload = init;
     </script>
   </body>
 </html>

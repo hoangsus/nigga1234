@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện tập Modelltest 3 Teil 1 - Tiếng Đức</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .section-info {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
+
+      .section-info h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .practice-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin: 20px 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 1.8em;
+        font-weight: 900;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+      }
+
+      .timer-warning {
+        color: #ff6b6b !important;
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .section-counter {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+        font-weight: 600;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        display: inline-block;
+      }
+
+      .sentence-counter {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .vietnamese-sentence {
+        font-size: 2em;
+        margin: 30px 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        line-height: 1.4;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        min-width: 120px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-correct {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .btn-incorrect {
+        background: linear-gradient(135deg, #dc3545, #ff6b6b);
+      }
+
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px 0;
+        height: 20px;
+      }
+
+      .progress-fill {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        height: 100%;
+        transition: width 0.5s ease;
+        border-radius: 10px;
+      }
+
+      .instructions {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .instructions h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .instructions ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .instructions li {
+        margin: 10px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .instructions li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .answer-section {
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        display: none;
+        text-align: left;
+      }
+
+      .answer-section.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .german-answer {
+        font-size: 1.8em;
+        color: #007bff;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-align: center;
+        padding: 15px;
+        background: #e3f2fd;
+        border-radius: 10px;
+      }
+
+      .grammar-analysis {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 4px solid #007bff;
+      }
+
+      .grammar-analysis h4 {
+        color: #007bff;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+      }
+
+      .sentence-structure {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+        font-family: "Courier New", monospace;
+        font-size: 1.1em;
+        line-height: 1.6;
+      }
+
+      .word-analysis {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .word-box {
+        background: #e8f5e8;
+        border: 1px solid #27ae60;
+        border-radius: 5px;
+        padding: 8px;
+        font-size: 0.9em;
+        text-align: center;
+      }
+
+      .word-german {
+        font-weight: bold;
+        color: #2c3e50;
+      }
+
+      .word-type {
+        color: #27ae60;
+        font-size: 0.8em;
+      }
+
+      .word-meaning {
+        color: #7f8c8d;
+        font-size: 0.8em;
+      }
+
+      .grammar-tip {
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+        font-size: 1em;
+        color: #1565c0;
+      }
+
+      .case-explanation {
+        background: #f3e5f5;
+        border-left: 4px solid #9c27b0;
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 8px;
+        font-size: 0.95em;
+        color: #6a1b9a;
+      }
+
+      .completion-screen {
+        text-align: center;
+        display: none;
+      }
+
+      .completion-screen.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .completion-emoji {
+        font-size: 5em;
+        margin: 20px 0;
+      }
+
+      .result-success {
+        color: #28a745;
+      }
+      .result-failure {
+        color: #dc3545;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .stat-item {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .section-selector {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .section-card {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .section-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .section-card h4 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #ff6b6b;
+      }
+
+      .section-card p {
+        margin: 5px 0;
+        opacity: 0.9;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2em;
+        }
+        .vietnamese-sentence {
+          font-size: 1.5em;
+        }
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+        .btn {
+          width: 80%;
+          max-width: 300px;
+        }
+        .stats-row {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .section-selector {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        .word-analysis {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎧 Modelltest 3 Teil 1</h1>
+        <p>32 câu chuẩn từ bài kiểm tra tiếng Đức - 3 phút</p>
+        <div class="section-info">
+          <h3>📚 Cấu trúc bài học</h3>
+          <p>
+            <strong>Ví dụ:</strong> 8 câu | <strong>Dialog 1:</strong> 8 câu |
+            <strong>Dialog 2:</strong> 9 câu | <strong>Dialog 3:</strong> 7 câu
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- Section Selection Screen -->
+        <div class="practice-card" id="selection-screen">
+          <div class="instructions">
+            <h3>📖 Hướng dẫn luyện tập</h3>
+            <ul>
+              <li>32 câu được lấy chính xác từ Modelltest 3 Teil 1</li>
+              <li>Thời gian: 3 phút cho toàn bộ bài</li>
+              <li>Nghe câu tiếng Việt → Nghĩ câu tiếng Đức → Đánh giá</li>
+              <li>Xem đáp án với phân tích ngữ pháp chi tiết</li>
+              <li>
+                Phím tắt: Space (nghe lại), 1 (đúng), 2 (sai), Enter (tiếp)
+              </li>
+            </ul>
+          </div>
+
+          <div class="section-selector">
+            <div class="section-card" onclick="startSection(0)">
+              <h4>📝 Ví dụ</h4>
+              <p><strong>8 câu về kỳ nghỉ</strong></p>
+              <p>Habt ihr ein Glück!</p>
+            </div>
+            <div class="section-card" onclick="startSection(1)">
+              <h4>🍽️ Dialog 1</h4>
+              <p><strong>8 câu ở nhà hàng</strong></p>
+              <p>Guten Tag, haben Sie schon gewählt?</p>
+            </div>
+            <div class="section-card" onclick="startSection(2)">
+              <h4>👧 Dialog 2</h4>
+              <p><strong>9 câu về con gái</strong></p>
+              <p>Hallo Sonja! Sag mal...</p>
+            </div>
+          </div>
+
+          <div class="section-selector">
+            <div class="section-card" onclick="startSection(3)">
+              <h4>🎬 Dialog 3</h4>
+              <p><strong>7 câu về kế hoạch tối</strong></p>
+              <p>Sag mal Eva, was machst du heute Abend?</p>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="startAllSections()">
+              🚀 Làm toàn bộ 32 câu (3 phút)
+            </button>
+            <button class="btn btn-secondary" onclick="showPreview()">
+              👀 Xem trước 32 câu
+            </button>
+          </div>
+        </div>
+
+        <!-- Practice Screen -->
+        <div class="practice-card" id="practice-section" style="display: none">
+          <div class="section-counter" id="section-info">Ví dụ: Về kỳ nghỉ</div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-number" id="timer">01:30</div>
+              <div class="stat-label">⏰ Thời gian</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="correct-count">0</div>
+              <div class="stat-label">✅ Câu đúng</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="total-answered">0</div>
+              <div class="stat-label">📝 Đã làm</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="current-section">1/4</div>
+              <div class="stat-label">📚 Phần hiện tại</div>
+            </div>
+          </div>
+
+          <div class="sentence-counter" id="counter">Câu 1 / 8</div>
+
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              id="progress"
+              style="width: 3.125%"
+            ></div>
+          </div>
+
+          <div class="vietnamese-sentence" id="vietnamese-text">
+            Nhấn "Bắt đầu" để bắt đầu luyện tập
+          </div>
+
+          <div class="controls">
+            <button
+              class="btn btn-secondary"
+              id="speak-btn"
+              onclick="speakVietnamese()"
+              style="display: none"
+            >
+              🔊 Phát âm
+            </button>
+            <button
+              class="btn btn-correct"
+              id="correct-btn"
+              onclick="markAnswer(true)"
+              style="display: none"
+            >
+              ✅ Hiểu & Đúng
+            </button>
+            <button
+              class="btn btn-incorrect"
+              id="incorrect-btn"
+              onclick="markAnswer(false)"
+              style="display: none"
+            >
+              ❌ Chưa hiểu
+            </button>
+            <button
+              class="btn"
+              id="next-btn"
+              onclick="nextSentence()"
+              style="display: none"
+            >
+              ➡️ Câu tiếp theo
+            </button>
+          </div>
+
+          <div class="answer-section" id="answer-section">
+            <div class="german-answer" id="german-answer"></div>
+
+            <div class="grammar-analysis">
+              <h4>📝 Phân tích cấu trúc câu</h4>
+              <div class="sentence-structure" id="sentence-structure"></div>
+              <div class="word-analysis" id="word-analysis"></div>
+            </div>
+
+            <div class="grammar-tip" id="grammar-tip"></div>
+            <div class="case-explanation" id="case-explanation"></div>
+          </div>
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="practice-card completion-screen" id="completion-screen">
+          <div class="completion-emoji" id="result-emoji">🎉</div>
+          <h2 id="result-title">Hoàn thành!</h2>
+          <p style="font-size: 1.3em; margin: 20px 0" id="result-message">
+            Kết quả sẽ hiển thị ở đây
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number" id="final-correct">0</div>
+              <div class="stat-label">Tổng câu đúng</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-answered">0</div>
+              <div class="stat-label">Tổng đã làm</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-accuracy">0%</div>
+              <div class="stat-label">Độ chính xác</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="final-time">00:00</div>
+              <div class="stat-label">Thời gian đã dùng</div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="resetPractice()">🔄 Làm lại</button>
+            <button class="btn btn-secondary" onclick="shuffleAndRestart()">
+              🎲 Trộn câu & Làm lại
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview Screen -->
+        <div class="practice-card completion-screen" id="preview-screen">
+          <div class="completion-emoji">📚</div>
+          <h2 style="color: #667eea; margin-bottom: 30px">
+            Xem trước 32 câu chuẩn
+          </h2>
+
+          <div
+            style="
+              max-height: 500px;
+              overflow-y: auto;
+              margin: 20px 0;
+              padding: 20px;
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 15px;
+            "
+          >
+            <div id="preview-content"></div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" onclick="hidePreview()">⬅️ Quay lại</button>
+            <button class="btn btn-secondary" onclick="hidePreviewAndStart()">
+              🚀 Bắt đầu luyện tập
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 32 câu chuẩn từ Modelltest 3 Teil 1 với phân tích ngữ pháp chi tiết
+      const practiceData = [
+        // VÍ DỤ: VỀ KỲ NGHỈ (8 câu)
+        [
+          {
+            vietnamese: "Các bạn thật may mắn!",
+            german: "Habt ihr ein Glück!",
+            tip: "🍀 'Glück haben' = may mắn. Thán từ thể hiện sự ngưỡng mộ",
+            explanation:
+              "'Habt ihr' = các bạn có. 'ein Glück' = một may mắn. Câu cảm thán thể hiện sự ghen tị tích cực.",
+            structure:
+              "Habt   ihr   ein Glück!\n  ↑     ↑       ↑\n V1    1    Akk (Tân ngữ)",
+            analysis: [
+              {
+                word: "Habt",
+                type: "Động từ V1",
+                meaning: "có (câu hỏi/cảm thán)",
+              },
+              { word: "ihr", type: "Chủ ngữ", meaning: "các bạn" },
+              {
+                word: "ein Glück",
+                type: "Tân ngữ (Akk)",
+                meaning: "một may mắn",
+              },
+            ],
+            grammarType: "Câu cảm thán với 'haben'",
+          },
+          {
+            vietnamese: "Thời tiết tuyệt vời và ngày mai các bạn đi du lịch.",
+            german: "Tolles Wetter und morgen fahrt ihr weg.",
+            tip: "☀️ 'tolles Wetter' = thời tiết tuyệt. 'wegfahren' = đi du lịch",
+            explanation:
+              "'Toll' = tuyệt vời. 'wegfahren' là động từ tách, 'weg' đứng cuối câu.",
+            structure:
+              "Tolles Wetter   und   morgen   fahrt   ihr   weg\n      ↑         ↑       ↑       ↑      ↑     ↑\n   Nominativ   Liên từ   Te     V2     1   Động từ tách",
+            analysis: [
+              {
+                word: "Tolles Wetter",
+                type: "Chủ ngữ (Nom)",
+                meaning: "thời tiết tuyệt vời",
+              },
+              { word: "und", type: "Liên từ", meaning: "và" },
+              { word: "morgen", type: "Te (thời gian)", meaning: "ngày mai" },
+              { word: "fahrt", type: "Động từ V2", meaning: "đi" },
+              { word: "ihr", type: "Chủ ngữ", meaning: "các bạn" },
+              { word: "weg", type: "Động từ tách", meaning: "đi xa" },
+            ],
+            grammarType: "Câu phức với động từ tách rời",
+          },
+          {
+            vietnamese: "Vâng, tôi đã rất mong chờ kỳ nghỉ này.",
+            german: "Ja, ich freue mich schon so auf den Urlaub.",
+            tip: "😊 'sich freuen auf' = mong chờ. 'schon' = đã",
+            explanation:
+              "'sich freuen auf + Akkusativ' = mong chờ điều gì. 'so' = rất/như vậy.",
+            structure:
+              "Ja,   ich   freue   mich   schon   so   auf den Urlaub\n ↑     ↑      ↑       ↑       ↑     ↑         ↑\nThán   1     V2    Ref    Bổ nghĩa Bổ  Cụm giới từ",
+            analysis: [
+              { word: "Ja", type: "Thán từ", meaning: "vâng" },
+              { word: "ich", type: "Chủ ngữ", meaning: "tôi" },
+              {
+                word: "freue mich",
+                type: "Động từ phản thân",
+                meaning: "vui/mong chờ",
+              },
+              { word: "schon", type: "Bổ nghĩa", meaning: "đã" },
+              { word: "so", type: "Bổ nghĩa", meaning: "như vậy" },
+              {
+                word: "auf den Urlaub",
+                type: "Cụm giới từ",
+                meaning: "cho kỳ nghỉ",
+              },
+            ],
+            grammarType: "Động từ phản thân + giới từ",
+          },
+          {
+            vietnamese: "Các bạn lại bay đến Berlin hay lần này dùng ô tô?",
+            german:
+              "Fliegt ihr wieder nach Berlin oder nehmt ihr dieses Mal das Auto?",
+            tip: "✈️🚗 'wieder' = lại. 'dieses Mal' = lần này",
+            explanation:
+              "'wieder' = một lần nữa. 'dieses Mal' = lần này. Câu hỏi lựa chọn với 'oder'.",
+            structure:
+              "Fliegt   ihr   wieder   nach Berlin   oder   nehmt   ihr   dieses Mal   das Auto?\n   ↑      ↑      ↑          ↑         ↑       ↑      ↑        ↑          ↑\n  V1     1    Bổ nghĩa     Lo      Liên từ   V1     1       Te        Akk",
+            analysis: [
+              { word: "Fliegt", type: "Động từ V1", meaning: "bay" },
+              { word: "ihr", type: "Chủ ngữ", meaning: "các bạn" },
+              { word: "wieder", type: "Bổ nghĩa", meaning: "lại" },
+              {
+                word: "nach Berlin",
+                type: "Lo (hướng)",
+                meaning: "đến Berlin",
+              },
+              { word: "oder", type: "Liên từ", meaning: "hoặc" },
+              { word: "nehmt", type: "Động từ V1", meaning: "lấy" },
+              {
+                word: "dieses Mal",
+                type: "Te (thời gian)",
+                meaning: "lần này",
+              },
+              { word: "das Auto", type: "Tân ngữ (Akk)", meaning: "ô tô" },
+            ],
+            grammarType: "Câu hỏi lựa chọn với 'oder'",
+          },
+          {
+            vietnamese: "Không, năm nay chúng tôi đi tàu.",
+            german: "Nein, dieses Jahr nehmen wir den Zug.",
+            tip: "🚆 'den Zug nehmen' = đi tàu. 'dieses Jahr' = năm nay",
+            explanation:
+              "Đây là câu trả lời đúng trong bài test. 'nehmen' = lấy/chọn phương tiện.",
+            structure:
+              "Nein,   dieses Jahr   nehmen   wir   den Zug\n  ↑         ↑           ↑       ↑       ↑\nThán       Te          V2      1     Akk",
+            analysis: [
+              { word: "Nein", type: "Thán từ", meaning: "không" },
+              {
+                word: "dieses Jahr",
+                type: "Te (thời gian)",
+                meaning: "năm nay",
+              },
+              { word: "nehmen", type: "Động từ V2", meaning: "lấy/chọn" },
+              { word: "wir", type: "Chủ ngữ", meaning: "chúng tôi" },
+              { word: "den Zug", type: "Tân ngữ (Akk)", meaning: "tàu hỏa" },
+            ],
+            grammarType: "Câu với đảo ngữ (Te lên vị trí 1)",
+          },
+          {
+            vietnamese: "Các chuyến bay quá đắt.",
+            german: "Die Flüge waren zu teuer.",
+            tip: "💸 'zu teuer' = quá đắt. 'Flüge' = số nhiều của 'Flug'",
+            explanation:
+              "'waren' = đã là (quá khứ của sein). 'zu' = quá (trước tính từ).",
+            structure:
+              "Die Flüge   waren   zu teuer\n    ↑        ↑        ↑\n    1       V2   Tính từ vị ngữ",
+            analysis: [
+              {
+                word: "Die Flüge",
+                type: "Chủ ngữ (Nom)",
+                meaning: "các chuyến bay",
+              },
+              { word: "waren", type: "Động từ V2", meaning: "đã là" },
+              { word: "zu teuer", type: "Tính từ vị ngữ", meaning: "quá đắt" },
+            ],
+            grammarType: "Câu với tính từ vị ngữ (quá khứ)",
+          },
+          {
+            vietnamese: "Chúc kỳ nghỉ vui vẻ!",
+            german: "Dann schönen Urlaub!",
+            tip: "🏖️ Lời chúc ngắn gọn: 'schönen Urlaub!'",
+            explanation:
+              "Câu chúc rút gọn. Đầy đủ: 'Ich wünsche Ihnen einen schönen Urlaub!'",
+            structure:
+              "Dann   schönen Urlaub!\n  ↑         ↑\nBổ nghĩa  Akk (rút gọn)",
+            analysis: [
+              { word: "Dann", type: "Bổ nghĩa", meaning: "vậy thì" },
+              {
+                word: "schönen Urlaub",
+                type: "Akk (rút gọn)",
+                meaning: "kỳ nghỉ vui vẻ",
+              },
+            ],
+            grammarType: "Câu chúc rút gọn (Ellipse)",
+          },
+          {
+            vietnamese: "Cảm ơn!",
+            german: "Danke!",
+            tip: "🙏 'Danke' = cảm ơn. Ngắn gọn và thân thiện",
+            explanation:
+              "Cách cảm ơn cơ bản nhất trong tiếng Đức. Có thể nói 'Danke schön!' để trang trọng hơn.",
+            structure: "Danke!\n  ↑\nThán từ",
+            analysis: [{ word: "Danke", type: "Thán từ", meaning: "cảm ơn" }],
+            grammarType: "Câu một từ (Einwortsatz)",
+          },
+        ],
+
+        // DIALOG 1: Ở NHÀ HÀNG (8 câu)
+        [
+          {
+            vietnamese: "Chào bạn! Bạn đã chọn món chưa?",
+            german: "Guten Tag! Haben Sie schon gewählt?",
+            tip: "🍽️ 'gewählt' = đã chọn (từ động từ 'wählen')",
+            explanation:
+              "'wählen' = chọn. Perfekt: haben + gewählt. Câu hỏi lịch sự của nhân viên phục vụ.",
+            structure:
+              "Guten Tag!   Haben   Sie   schon   gewählt?\n     ↑         ↑      ↑      ↑        ↑\nLời chào     V1     1   Bổ nghĩa  Quá khứ phân từ",
+            analysis: [
+              { word: "Guten Tag", type: "Lời chào", meaning: "chào bạn" },
+              { word: "Haben", type: "Động từ V1", meaning: "có/đã" },
+              { word: "Sie", type: "Chủ ngữ", meaning: "bạn (trang trọng)" },
+              { word: "schon", type: "Bổ nghĩa", meaning: "đã" },
+              { word: "gewählt", type: "Quá khứ phân từ", meaning: "chọn" },
+            ],
+            grammarType: "Câu hỏi với thì Perfekt",
+          },
+          {
+            vietnamese: "Hmm, bạn có thể khuyên gì?",
+            german: "Hm, was können Sie empfehlen?",
+            tip: "🤔 'empfehlen' = khuyên/giới thiệu. 'können' = có thể",
+            explanation:
+              "'empfehlen' = đề xuất. Cách hỏi gợi ý từ nhân viên một cách lịch sự.",
+            structure:
+              "Hm,   was   können   Sie   empfehlen?\n ↑     ↑      ↑       ↑        ↑\nThán  W-Wort  V1     1    Động từ nguyên mẫu",
+            analysis: [
+              { word: "Hm", type: "Thán từ", meaning: "hmm" },
+              { word: "was", type: "Từ để hỏi", meaning: "gì" },
+              { word: "können", type: "Động từ V1", meaning: "có thể" },
+              { word: "Sie", type: "Chủ ngữ", meaning: "bạn" },
+              {
+                word: "empfehlen",
+                type: "Động từ nguyên mẫu",
+                meaning: "khuyên",
+              },
+            ],
+            grammarType: "Câu hỏi W- với động từ khiếm khuyết",
+          },
+          {
+            vietnamese: "Bạn có cá tươi không?",
+            german: "Haben Sie frischen Fisch?",
+            tip: "🐟 'frisch' = tươi. 'Fisch' = cá (danh từ nam tính)",
+            explanation:
+              "'frischen' = tươi (tính từ biến đổi theo Akkusativ). Câu hỏi về sản phẩm có sẵn.",
+            structure:
+              "Haben   Sie   frischen Fisch?\n  ↑      ↑         ↑\n V1     1       Akk",
+            analysis: [
+              { word: "Haben", type: "Động từ V1", meaning: "có" },
+              { word: "Sie", type: "Chủ ngữ", meaning: "bạn" },
+              {
+                word: "frischen Fisch",
+                type: "Tân ngữ (Akk)",
+                meaning: "cá tươi",
+              },
+            ],
+            grammarType: "Câu hỏi Yes/No với 'haben'",
+          },
+          {
+            vietnamese: "Không, hôm nay tiếc là không có.",
+            german: "Nein, heute leider nicht.",
+            tip: "😔 'leider' = tiếc là/rất tiếc. Thể hiện sự tiếc nuối",
+            explanation:
+              "'leider' thể hiện sự tiếc nuối. Câu trả lời ngắn gọn khi không có sản phẩm.",
+            structure:
+              "Nein,   heute   leider   nicht\n  ↑       ↑        ↑       ↑\nThán     Te   Bổ nghĩa  Phủ định",
+            analysis: [
+              { word: "Nein", type: "Thán từ", meaning: "không" },
+              { word: "heute", type: "Te (thời gian)", meaning: "hôm nay" },
+              { word: "leider", type: "Bổ nghĩa", meaning: "tiếc là" },
+              { word: "nicht", type: "Phủ định", meaning: "không" },
+            ],
+            grammarType: "Câu trả lời rút gọn với 'leider'",
+          },
+          {
+            vietnamese: "Nhưng chúng tôi có súp cá rất ngon.",
+            german: "Aber wir haben eine sehr gute Fischsuppe.",
+            tip: "🍲 'Fischsuppe' = súp cá. 'sehr gut' = rất ngon",
+            explanation:
+              "'aber' = nhưng. Đề xuất món thay thế khi không có món khách yêu cầu.",
+            structure:
+              "Aber   wir   haben   eine sehr gute Fischsuppe\n  ↑     ↑      ↑              ↑\nLiên từ  1     V2           Akk",
+            analysis: [
+              { word: "Aber", type: "Liên từ", meaning: "nhưng" },
+              { word: "wir", type: "Chủ ngữ", meaning: "chúng tôi" },
+              { word: "haben", type: "Động từ V2", meaning: "có" },
+              {
+                word: "eine sehr gute Fischsuppe",
+                type: "Tân ngữ (Akk)",
+                meaning: "một súp cá rất ngon",
+              },
+            ],
+            grammarType: "Câu với liên từ đối lập 'aber'",
+          },
+          {
+            vietnamese: "Và có lẽ kèm theo một món salad?",
+            german: "Und dazu vielleicht einen Salat?",
+            tip: "🥗 'dazu' = kèm theo. 'vielleicht' = có lẽ/có thể",
+            explanation:
+              "'dazu' = cùng với đó. Gợi ý món ăn kèm một cách lịch sự với 'vielleicht'.",
+            structure:
+              "Und   dazu   vielleicht   einen Salat?\n ↑     ↑         ↑            ↑\nLiên từ Bổ nghĩa  Bổ nghĩa    Akk (rút gọn)",
+            analysis: [
+              { word: "Und", type: "Liên từ", meaning: "và" },
+              { word: "dazu", type: "Bổ nghĩa", meaning: "kèm theo" },
+              { word: "vielleicht", type: "Bổ nghĩa", meaning: "có lẽ" },
+              {
+                word: "einen Salat",
+                type: "Akk (rút gọn)",
+                meaning: "một món salad",
+              },
+            ],
+            grammarType: "Câu hỏi rút gọn với 'vielleicht'",
+          },
+          {
+            vietnamese: "Hmm, tôi lấy súp cá, nhưng xin đừng salad.",
+            german:
+              "Hm, die Fischsuppe nehme ich gern, aber bitte keinen Salat.",
+            tip: "✅❌ 'gern nehmen' = sẵn lòng lấy. 'keinen' = không (Akkusativ)",
+            explanation:
+              "Đây là câu trả lời đúng. 'gern' thể hiện sự sẵn lòng. 'keinen' phủ định trong Akkusativ.",
+            structure:
+              "Hm,   die Fischsuppe   nehme   ich   gern,   aber   bitte   keinen Salat\n ↑          ↑            ↑      ↑     ↑      ↑       ↑         ↑\nThán      Akk          V2     1   Bổ nghĩa Liên từ Bổ nghĩa  Akk (phủ định)",
+            analysis: [
+              { word: "Hm", type: "Thán từ", meaning: "hmm" },
+              {
+                word: "die Fischsuppe",
+                type: "Tân ngữ (Akk)",
+                meaning: "súp cá",
+              },
+              { word: "nehme", type: "Động từ V2", meaning: "lấy" },
+              { word: "ich", type: "Chủ ngữ", meaning: "tôi" },
+              { word: "gern", type: "Bổ nghĩa", meaning: "sẵn lòng" },
+              { word: "aber", type: "Liên từ", meaning: "nhưng" },
+              { word: "bitte", type: "Bổ nghĩa", meaning: "xin" },
+              {
+                word: "keinen Salat",
+                type: "Akk (phủ định)",
+                meaning: "không salad",
+              },
+            ],
+            grammarType: "Câu phức với đảo ngữ và phủ định",
+          },
+          {
+            vietnamese: "Và để uống có thể một ly rượu vang trắng?",
+            german: "Und zu trinken vielleicht ein Glas Weißwein?",
+            tip: "🍷 'zu trinken' = để uống. 'Weißwein' = rượu vang trắng",
+            explanation:
+              "'zu trinken' = cho việc uống. Gợi ý đồ uống phù hợp với món ăn.",
+            structure:
+              "Und   zu trinken   vielleicht   ein Glas Weißwein?\n ↑        ↑           ↑              ↑\nLiên từ Cụm mục đích  Bổ nghĩa     Akk (rút gọn)",
+            analysis: [
+              { word: "Und", type: "Liên từ", meaning: "và" },
+              { word: "zu trinken", type: "Cụm mục đích", meaning: "để uống" },
+              { word: "vielleicht", type: "Bổ nghĩa", meaning: "có lẽ" },
+              {
+                word: "ein Glas Weißwein",
+                type: "Akk (rút gọn)",
+                meaning: "một ly rượu vang trắng",
+              },
+            ],
+            grammarType: "Câu hỏi gợi ý với 'zu + Infinitiv'",
+          },
+        ],
+
+        // DIALOG 2: VỀ CON GÁI (9 câu)
+        [
+          {
+            vietnamese: "Chào Sonja! Nghe này,",
+            german: "Hallo Sonja! Sag mal,",
+            tip: "👋 'Sag mal' = nghe này/nói đi. Cách bắt đầu câu chuyện",
+            explanation:
+              "'Sag mal' là cách thân thiện để bắt đầu một câu hỏi hoặc chủ đề mới.",
+            structure:
+              "Hallo Sonja!   Sag   mal,\n     ↑          ↑     ↑\nLời chào    Mệnh lệnh Từ tình thái",
+            analysis: [
+              { word: "Hallo Sonja", type: "Lời chào", meaning: "chào Sonja" },
+              { word: "Sag", type: "Mệnh lệnh", meaning: "nói" },
+              { word: "mal", type: "Từ tình thái", meaning: "một chút/đi" },
+            ],
+            grammarType: "Lời chào + mệnh lệnh thân thiện",
+          },
+          {
+            vietnamese: "con gái bạn bao nhiêu tuổi?",
+            german: "wie alt ist deine Tochter?",
+            tip: "👧 'wie alt' = bao nhiêu tuổi. 'Tochter' = con gái",
+            explanation:
+              "'wie alt' dùng để hỏi tuổi. 'deine' = của bạn (sở hữu cách thân thiện).",
+            structure:
+              "wie alt   ist   deine Tochter?\n   ↑      ↑         ↑\nW-Wort   V2        1",
+            analysis: [
+              { word: "wie alt", type: "Từ để hỏi", meaning: "bao nhiêu tuổi" },
+              { word: "ist", type: "Động từ V2", meaning: "là" },
+              {
+                word: "deine Tochter",
+                type: "Chủ ngữ",
+                meaning: "con gái của bạn",
+              },
+            ],
+            grammarType: "Câu hỏi W- với 'wie alt'",
+          },
+          {
+            vietnamese: "Anja bây giờ 7 tuổi.",
+            german: "Anja ist jetzt 7 Jahre alt.",
+            tip: "7️⃣ 'Jahre alt' = tuổi. 'jetzt' = bây giờ",
+            explanation:
+              "'Jahre alt' = tuổi. 'jetzt' nhấn mạnh thời điểm hiện tại.",
+            structure:
+              "Anja   ist   jetzt   7 Jahre alt\n  ↑     ↑      ↑         ↑\n  1    V2     Te    Tính từ vị ngữ",
+            analysis: [
+              { word: "Anja", type: "Chủ ngữ", meaning: "Anja" },
+              { word: "ist", type: "Động từ V2", meaning: "là" },
+              { word: "jetzt", type: "Te (thời gian)", meaning: "bây giờ" },
+              {
+                word: "7 Jahre alt",
+                type: "Tính từ vị ngữ",
+                meaning: "7 tuổi",
+              },
+            ],
+            grammarType: "Câu với tính từ vị ngữ (tuổi)",
+          },
+          {
+            vietnamese: "7 tuổi?",
+            german: "7 Jahre?",
+            tip: "❓ Câu hỏi ngắn thể hiện sự ngạc nhiên",
+            explanation:
+              "Câu hỏi lặp lại để xác nhận hoặc thể hiện sự ngạc nhiên.",
+            structure: "7 Jahre?\n   ↑\nCâu hỏi rút gọn",
+            analysis: [
+              { word: "7 Jahre", type: "Câu hỏi rút gọn", meaning: "7 tuổi" },
+            ],
+            grammarType: "Câu hỏi lặp lại (Echo-Frage)",
+          },
+          {
+            vietnamese: "Vậy thì cô bé đã đi học rồi.",
+            german: "Dann geht sie ja schon in die Schule.",
+            tip: "🏫 'in die Schule gehen' = đi học. 'ja' = thì/đã",
+            explanation:
+              "'dann' = vậy thì. 'ja' trong câu này mang nghĩa 'đã'. Suy luận logic từ tuổi.",
+            structure:
+              "Dann   geht   sie   ja   schon   in die Schule\n  ↑     ↑     ↑    ↑     ↑         ↑\n  1    V2    3   Từ tình thái Bổ nghĩa    Lo",
+            analysis: [
+              { word: "Dann", type: "Bổ nghĩa (Vị trí 1)", meaning: "vậy thì" },
+              { word: "geht", type: "Động từ V2", meaning: "đi" },
+              { word: "sie", type: "Chủ ngữ", meaning: "cô bé" },
+              { word: "ja", type: "Từ tình thái", meaning: "đã/thì" },
+              { word: "schon", type: "Bổ nghĩa", meaning: "đã" },
+              {
+                word: "in die Schule",
+                type: "Lo (hướng)",
+                meaning: "đến trường",
+              },
+            ],
+            grammarType: "Câu với đảo ngữ và từ tình thái",
+          },
+          {
+            vietnamese: "Và cô bé học lớp nào?",
+            german: "Und in welche Klasse geht sie?",
+            tip: "📚 'welche Klasse' = lớp nào. 'gehen in' = học ở",
+            explanation:
+              "'welche' = nào (dành cho danh từ nữ tính). Câu hỏi về cấp độ học tập.",
+            structure:
+              "Und   in welche Klasse   geht   sie?\n ↑           ↑            ↑     ↑\nLiên từ  Cụm giới từ     V2    1",
+            analysis: [
+              { word: "Und", type: "Liên từ", meaning: "và" },
+              {
+                word: "in welche Klasse",
+                type: "Cụm giới từ",
+                meaning: "vào lớp nào",
+              },
+              { word: "geht", type: "Động từ V2", meaning: "đi/học" },
+              { word: "sie", type: "Chủ ngữ", meaning: "cô bé" },
+            ],
+            grammarType: "Câu hỏi W- với giới từ",
+          },
+          {
+            vietnamese: "Lớp 1 hay lớp 2?",
+            german: "In die 1. oder die 2.?",
+            tip: "1️⃣2️⃣ '1.' = erste (thứ nhất). '2.' = zweite (thứ hai)",
+            explanation:
+              "Câu hỏi lựa chọn rút gọn. Đầy đủ: 'In die erste oder die zweite Klasse?'",
+            structure:
+              "In die 1.   oder   die 2.?\n    ↑        ↑       ↑\nCụm giới từ Liên từ Cụm giới từ (rút gọn)",
+            analysis: [
+              { word: "In die 1.", type: "Cụm giới từ", meaning: "vào lớp 1" },
+              { word: "oder", type: "Liên từ", meaning: "hoặc" },
+              {
+                word: "die 2.",
+                type: "Cụm giới từ (rút gọn)",
+                meaning: "lớp 2",
+              },
+            ],
+            grammarType: "Câu hỏi lựa chọn rút gọn",
+          },
+          {
+            vietnamese: "Anja bây giờ học lớp 2.",
+            german: "Anja ist jetzt in der 2. Klasse.",
+            tip: "✅ 'in der 2. Klasse' = ở lớp 2. Đây là câu trả lời đúng",
+            explanation:
+              "Đây là câu trả lời đúng trong bài test. 'in der' + Dativ cho vị trí.",
+            structure:
+              "Anja   ist   jetzt   in der 2. Klasse\n  ↑     ↑      ↑           ↑\n  1    V2     Te      Cụm giới từ",
+            analysis: [
+              { word: "Anja", type: "Chủ ngữ", meaning: "Anja" },
+              { word: "ist", type: "Động từ V2", meaning: "là/ở" },
+              { word: "jetzt", type: "Te (thời gian)", meaning: "bây giờ" },
+              {
+                word: "in der 2. Klasse",
+                type: "Cụm giới từ",
+                meaning: "ở lớp 2",
+              },
+            ],
+            grammarType: "Câu với 'sein' + giới từ chỉ vị trí",
+          },
+          {
+            vietnamese: "Và cô bé rất thích đi học.",
+            german: "Und sie geht sehr gern in die Schule.",
+            tip: "😊 'sehr gern' = rất thích. Thể hiện sự yêu thích",
+            explanation:
+              "'gern' với động từ thể hiện sở thích. 'sehr' = rất, nhấn mạnh mức độ.",
+            structure:
+              "Und   sie   geht   sehr   gern   in die Schule\n ↑     ↑     ↑      ↑     ↑         ↑\nLiên từ 1    V2   Bổ nghĩa Bổ nghĩa    Lo",
+            analysis: [
+              { word: "Und", type: "Liên từ", meaning: "và" },
+              { word: "sie", type: "Chủ ngữ", meaning: "cô bé" },
+              { word: "geht", type: "Động từ V2", meaning: "đi" },
+              { word: "sehr", type: "Bổ nghĩa", meaning: "rất" },
+              { word: "gern", type: "Bổ nghĩa", meaning: "thích" },
+              {
+                word: "in die Schule",
+                type: "Lo (hướng)",
+                meaning: "đến trường",
+              },
+            ],
+            grammarType: "Câu với 'gern' thể hiện sở thích",
+          },
+        ],
+
+        // DIALOG 3: VỀ KẾ HOẠCH TỐI (7 câu)
+        [
+          {
+            vietnamese: "Nghe này Eva, tối nay bạn làm gì?",
+            german: "Sag mal Eva, was machst du heute Abend?",
+            tip: "🌙 'heute Abend' = tối nay. 'was machst du' = bạn làm gì",
+            explanation:
+              "'Sag mal' = nghe này. Cách hỏi kế hoạch một cách thân thiện.",
+            structure:
+              "Sag   mal   Eva,   was   machst   du   heute Abend?\n ↑     ↑     ↑     ↑       ↑      ↑        ↑\nMệnh lệnh Từ tình thái Tên W-Wort  V2     1       Te",
+            analysis: [
+              {
+                word: "Sag mal",
+                type: "Mệnh lệnh thân thiện",
+                meaning: "nghe này",
+              },
+              { word: "Eva", type: "Tên", meaning: "Eva" },
+              { word: "was", type: "Từ để hỏi", meaning: "gì" },
+              { word: "machst", type: "Động từ V2", meaning: "làm" },
+              { word: "du", type: "Chủ ngữ", meaning: "bạn" },
+              {
+                word: "heute Abend",
+                type: "Te (thời gian)",
+                meaning: "tối nay",
+              },
+            ],
+            grammarType: "Câu hỏi W- với lời chào thân thiện",
+          },
+          {
+            vietnamese: "Chúng ta có muốn xem phim không?",
+            german: "Wollen wir einen Film sehen?",
+            tip: "🎬 'wollen wir' = chúng ta có muốn. Lời đề nghị",
+            explanation:
+              "'wollen wir' = shall we/có muốn không. Cách đề nghị hoạt động chung.",
+            structure:
+              "Wollen   wir   einen Film   sehen?\n   ↑      ↑        ↑         ↑\n  V1     1      Akk    Động từ nguyên mẫu",
+            analysis: [
+              { word: "Wollen", type: "Động từ V1", meaning: "muốn" },
+              { word: "wir", type: "Chủ ngữ", meaning: "chúng ta" },
+              {
+                word: "einen Film",
+                type: "Tân ngữ (Akk)",
+                meaning: "một bộ phim",
+              },
+              { word: "sehen", type: "Động từ nguyên mẫu", meaning: "xem" },
+            ],
+            grammarType: "Câu hỏi đề nghị với 'wollen'",
+          },
+          {
+            vietnamese: "Không, tôi phải làm việc. Tôi phải học cho kỳ thi.",
+            german: "Nein, ich muss arbeiten. Ich muss für die Prüfung lernen.",
+            tip: "📚 'müssen' = phải. 'für die Prüfung' = cho kỳ thi",
+            explanation:
+              "Đây là câu trả lời đúng. 'müssen' = bắt buộc. Lý do từ chối lời mời.",
+            structure:
+              "Nein,   ich   muss   arbeiten.   Ich   muss   für die Prüfung   lernen\n  ↑      ↑     ↑        ↑        ↑     ↑           ↑              ↑\nThán    1    V2   Động từ ng.mẫu  1    V2    Cụm giới từ   Động từ ng.mẫu",
+            analysis: [
+              { word: "Nein", type: "Thán từ", meaning: "không" },
+              { word: "ich", type: "Chủ ngữ", meaning: "tôi" },
+              { word: "muss", type: "Động từ V2", meaning: "phải" },
+              {
+                word: "arbeiten",
+                type: "Động từ nguyên mẫu",
+                meaning: "làm việc",
+              },
+              { word: "ich", type: "Chủ ngữ", meaning: "tôi" },
+              { word: "muss", type: "Động từ V2", meaning: "phải" },
+              {
+                word: "für die Prüfung",
+                type: "Cụm giới từ",
+                meaning: "cho kỳ thi",
+              },
+              { word: "lernen", type: "Động từ nguyên mẫu", meaning: "học" },
+            ],
+            grammarType: "Câu với động từ khiếm khuyết 'müssen'",
+          },
+          {
+            vietnamese: "Và chúng ta có muốn đi uống gì đó sau không?",
+            german: "Und wollen wir später etwas trinken gehen?",
+            tip: "🍻 'später' = sau đó. 'trinken gehen' = đi uống",
+            explanation:
+              "'später' = muộn hơn. 'etwas trinken gehen' = đi uống đồ gì đó.",
+            structure:
+              "Und   wollen   wir   später   etwas   trinken gehen?\n ↑       ↑     ↑       ↑       ↑           ↑\nLiên từ  V1    1      Te    Bổ nghĩa   Động từ nguyên mẫu",
+            analysis: [
+              { word: "Und", type: "Liên từ", meaning: "và" },
+              { word: "wollen", type: "Động từ V1", meaning: "muốn" },
+              { word: "wir", type: "Chủ ngữ", meaning: "chúng ta" },
+              { word: "später", type: "Te (thời gian)", meaning: "sau đó" },
+              { word: "etwas", type: "Bổ nghĩa", meaning: "gì đó" },
+              {
+                word: "trinken gehen",
+                type: "Động từ nguyên mẫu",
+                meaning: "đi uống",
+              },
+            ],
+            grammarType: "Câu hỏi với động từ kết hợp",
+          },
+          {
+            vietnamese: "Có một quán cà phê mới ở góc phố này.",
+            german: "Es gibt hier an der Ecke ein neues Café.",
+            tip: "☕ 'es gibt' = có. 'an der Ecke' = ở góc",
+            explanation:
+              "'es gibt' = có (tồn tại). 'an der Ecke' = tại góc đường.",
+            structure:
+              "Es   gibt   hier   an der Ecke   ein neues Café\n ↑     ↑      ↑         ↑              ↑\n 1    V2    Lo    Cụm giới từ        Akk",
+            analysis: [
+              { word: "Es", type: "Chủ ngữ giả", meaning: "nó (there)" },
+              { word: "gibt", type: "Động từ V2", meaning: "có" },
+              { word: "hier", type: "Lo (nơi chốn)", meaning: "ở đây" },
+              { word: "an der Ecke", type: "Cụm giới từ", meaning: "ở góc" },
+              {
+                word: "ein neues Café",
+                type: "Tân ngữ (Akk)",
+                meaning: "một quán cà phê mới",
+              },
+            ],
+            grammarType: "Cấu trúc 'es gibt' + Akkusativ",
+          },
+          {
+            vietnamese: "Không, xin lỗi. Thà là chủ nhật.",
+            german: "Nein, tut mir leid. Lieber am Sonntag.",
+            tip: "😔 'tut mir leid' = xin lỗi. 'lieber' = thà là",
+            explanation:
+              "'tut mir leid' = tôi cảm thấy tiếc. 'lieber' = thích hơn/thà là.",
+            structure:
+              "Nein,   tut mir leid.   Lieber   am Sonntag\n  ↑          ↑            ↑          ↑\nThán   Cụm cố định    Bổ nghĩa      Te",
+            analysis: [
+              { word: "Nein", type: "Thán từ", meaning: "không" },
+              { word: "tut mir leid", type: "Cụm cố định", meaning: "xin lỗi" },
+              { word: "Lieber", type: "Bổ nghĩa", meaning: "thà là" },
+              {
+                word: "am Sonntag",
+                type: "Te (thời gian)",
+                meaning: "vào chủ nhật",
+              },
+            ],
+            grammarType: "Câu từ chối lịch sự với 'lieber'",
+          },
+          {
+            vietnamese: "Lúc đó tôi có thời gian.",
+            german: "Dann habe ich Zeit.",
+            tip: "⏰ 'Zeit haben' = có thời gian. 'dann' = lúc đó",
+            explanation:
+              "'dann' = lúc đó/sau đó. Giải thích lý do tại sao chủ nhật tốt hơn.",
+            structure:
+              "Dann   habe   ich   Zeit\n  ↑      ↑     ↑     ↑\n  1     V2    3   Akk",
+            analysis: [
+              { word: "Dann", type: "Bổ nghĩa (Vị trí 1)", meaning: "lúc đó" },
+              { word: "habe", type: "Động từ V2", meaning: "có" },
+              { word: "ich", type: "Chủ ngữ", meaning: "tôi" },
+              { word: "Zeit", type: "Tân ngữ (Akk)", meaning: "thời gian" },
+            ],
+            grammarType: "Câu với đảo ngữ (dann ở vị trí 1)",
+          },
+        ],
+      ];
+
+      // App state
+      let currentSectionIndex = 0;
+      let currentQuestionIndex = 0;
+      let isStarted = false;
+      let startTime = null;
+      let timerInterval = null;
+      let correctCount = 0;
+      let totalAnswered = 0;
+      let timeLimit = 6 * 60; // 3 minutes total
+      let timeRemaining = timeLimit;
+      let sectionCompleted = false;
+      let isAllSections = false;
+      let totalCorrectAllSections = 0;
+      let totalAnsweredAllSections = 0;
+      let allSectionsStartTime = null;
+
+      const sectionNames = [
+        "📝 Ví dụ: Về kỳ nghỉ",
+        "🍽️ Dialog 1: Ở nhà hàng",
+        "👧 Dialog 2: Về con gái",
+        "🎬 Dialog 3: Kế hoạch tối",
+      ];
+      const sectionCounts = [8, 8, 9, 7]; // Tổng 32 câu
+
+      // Initialize
+      function init() {
+        updateDisplay();
+        initializeVoices();
+      }
+
+      // Initialize voices
+      function initializeVoices() {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.getVoices();
+          setTimeout(() => {
+            const voices = speechSynthesis.getVoices();
+            const vietnameseVoice = voices.find(
+              (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+            );
+            if (!vietnameseVoice) {
+              console.log("Không tìm thấy giọng tiếng Việt.");
+            }
+          }, 1000);
+        }
+      }
+
+      // Start specific section
+      function startSection(sectionIndex) {
+        currentSectionIndex = sectionIndex;
+        isAllSections = false;
+        startPracticeSession();
+      }
+
+      // Start all sections
+      function startAllSections() {
+        currentSectionIndex = 0;
+        isAllSections = true;
+        totalCorrectAllSections = 0;
+        totalAnsweredAllSections = 0;
+        allSectionsStartTime = new Date();
+        startPracticeSession();
+      }
+
+      // Start practice session
+      function startPracticeSession() {
+        isStarted = true;
+        currentQuestionIndex = 0;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = isAllSections
+          ? timeLimit
+          : Math.floor((timeLimit * sectionCounts[currentSectionIndex]) / 32);
+        sectionCompleted = false;
+        startTime = new Date();
+
+        // Show practice screen
+        document.getElementById("selection-screen").style.display = "none";
+        document.getElementById("practice-section").style.display = "block";
+        document.getElementById("speak-btn").style.display = "inline-block";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        // Update section info
+        document.getElementById("section-info").textContent =
+          sectionNames[currentSectionIndex];
+        document.getElementById("current-section").textContent = `${
+          currentSectionIndex + 1
+        }/4`;
+
+        // Start timer and load first question
+        startTimer();
+        loadQuestion();
+      }
+
+      // Start timer
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          timeRemaining--;
+          updateTimerDisplay();
+
+          if (timeRemaining <= 0) {
+            completeSection("time");
+          }
+        }, 1000);
+      }
+
+      // Update timer display
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+
+        const timerElement = document.getElementById("timer");
+        timerElement.textContent = timeStr;
+
+        if (timeRemaining <= 30) {
+          timerElement.classList.add("timer-warning");
+        } else {
+          timerElement.classList.remove("timer-warning");
+        }
+      }
+
+      // Stop timer
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      // Load current question
+      function loadQuestion() {
+        if (currentQuestionIndex >= practiceData[currentSectionIndex].length) {
+          completeSection("finished");
+          return;
+        }
+
+        const current = practiceData[currentSectionIndex][currentQuestionIndex];
+        const sectionCount = sectionCounts[currentSectionIndex];
+
+        document.getElementById("vietnamese-text").textContent =
+          current.vietnamese;
+        document.getElementById("counter").textContent = `Câu ${
+          currentQuestionIndex + 1
+        } / ${sectionCount}`;
+
+        // Update progress
+        const totalQuestions = isAllSections ? 32 : sectionCount;
+        const currentOverall = isAllSections
+          ? sectionCounts
+              .slice(0, currentSectionIndex)
+              .reduce((a, b) => a + b, 0) +
+            currentQuestionIndex +
+            1
+          : currentQuestionIndex + 1;
+        const progress = (currentOverall / totalQuestions) * 100;
+        document.getElementById("progress").style.width = `${progress}%`;
+
+        // Hide answer section and reset buttons
+        document.getElementById("answer-section").classList.remove("show");
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("correct-btn").style.display = "inline-block";
+        document.getElementById("incorrect-btn").style.display = "inline-block";
+
+        // Auto speak Vietnamese
+        setTimeout(() => speakVietnamese(), 500);
+      }
+
+      // Speak Vietnamese text
+      function speakVietnamese() {
+        if ("speechSynthesis" in window) {
+          const text =
+            practiceData[currentSectionIndex][currentQuestionIndex].vietnamese;
+          speechSynthesis.cancel();
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          const voices = speechSynthesis.getVoices();
+          const vietnameseVoice = voices.find(
+            (voice) => voice.lang.includes("vi") || voice.lang.includes("VN")
+          );
+
+          if (vietnameseVoice) {
+            utterance.voice = vietnameseVoice;
+            utterance.lang = "vi-VN";
+          } else {
+            utterance.lang = "vi-VN";
+          }
+
+          utterance.rate = 0.7;
+          utterance.pitch = 1.0;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+
+          const speakBtn = document.getElementById("speak-btn");
+          speakBtn.style.background =
+            "linear-gradient(135deg, #ffa726, #ff7043)";
+          speakBtn.textContent = "🔊 Đang phát...";
+
+          utterance.onend = function () {
+            speakBtn.style.background =
+              "linear-gradient(135deg, #28a745, #20c997)";
+            speakBtn.textContent = "🔊 Phát âm";
+          };
+        }
+      }
+
+      // Mark answer
+      function markAnswer(isCorrect) {
+        totalAnswered++;
+        if (isCorrect) {
+          correctCount++;
+        }
+
+        // Update display
+        document.getElementById("correct-count").textContent = correctCount;
+        document.getElementById("total-answered").textContent = totalAnswered;
+
+        // Show answer
+        showAnswer();
+
+        // Update buttons
+        document.getElementById("correct-btn").style.display = "none";
+        document.getElementById("incorrect-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "inline-block";
+      }
+
+      // Show answer
+      function showAnswer() {
+        const current = practiceData[currentSectionIndex][currentQuestionIndex];
+
+        // Set German answer
+        document.getElementById("german-answer").textContent = current.german;
+
+        // Set sentence structure
+        document.getElementById("sentence-structure").innerHTML =
+          current.structure.replace(/\n/g, "<br>");
+
+        // Set word analysis
+        const wordAnalysisDiv = document.getElementById("word-analysis");
+        wordAnalysisDiv.innerHTML = "";
+
+        if (current.analysis && current.analysis.length > 0) {
+          current.analysis.forEach((item) => {
+            const wordBox = document.createElement("div");
+            wordBox.className = "word-box";
+            wordBox.innerHTML = `
+              <div class="word-german">${item.word}</div>
+              <div class="word-type">${item.type}</div>
+              <div class="word-meaning">${item.meaning}</div>
+            `;
+            wordAnalysisDiv.appendChild(wordBox);
+          });
+        }
+
+        // Set tips and explanations
+        document.getElementById("grammar-tip").innerHTML = `
+          <strong>💡 ${current.grammarType}:</strong><br>
+          ${current.tip}
+        `;
+        document.getElementById("case-explanation").textContent =
+          current.explanation;
+
+        // Show answer section
+        document.getElementById("answer-section").classList.add("show");
+
+        // Speak German answer
+        speakGerman(current.german);
+      }
+
+      // Speak German text
+      function speakGerman(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      // Next question
+      function nextSentence() {
+        currentQuestionIndex++;
+        loadQuestion();
+      }
+
+      // Complete section
+      function completeSection(reason) {
+        if (sectionCompleted) return;
+        sectionCompleted = true;
+        stopTimer();
+
+        // Add to total if doing all sections
+        if (isAllSections) {
+          totalCorrectAllSections += correctCount;
+          totalAnsweredAllSections += totalAnswered;
+        }
+
+        // Check if continuing to next section
+        if (isAllSections && currentSectionIndex < 3) {
+          setTimeout(() => {
+            currentSectionIndex++;
+            startPracticeSession();
+          }, 2000);
+
+          // Show brief transition message
+          document.getElementById(
+            "vietnamese-text"
+          ).textContent = `Hoàn thành ${
+            sectionNames[currentSectionIndex]
+          }! Chuyển sang ${sectionNames[currentSectionIndex + 1]}...`;
+          return;
+        }
+
+        // Show final results
+        showResults();
+      }
+
+      // Show results
+      function showResults() {
+        const totalTime = isAllSections
+          ? Math.floor((new Date() - allSectionsStartTime) / 1000)
+          : Math.floor((new Date() - startTime) / 1000);
+
+        const minutes = Math.floor(totalTime / 60);
+        const seconds = totalTime % 60;
+        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+
+        const finalCorrect = isAllSections
+          ? totalCorrectAllSections
+          : correctCount;
+        const finalAnswered = isAllSections
+          ? totalAnsweredAllSections
+          : totalAnswered;
+        const accuracy =
+          finalAnswered > 0
+            ? Math.round((finalCorrect / finalAnswered) * 100)
+            : 0;
+
+        const targetScore = isAllSections
+          ? 26
+          : Math.ceil(sectionCounts[currentSectionIndex] * 0.8); // 80% của tổng số câu
+        const maxScore = isAllSections
+          ? 32
+          : sectionCounts[currentSectionIndex];
+
+        // Update final stats
+        document.getElementById("final-correct").textContent = finalCorrect;
+        document.getElementById("final-answered").textContent = finalAnswered;
+        document.getElementById("final-accuracy").textContent = `${accuracy}%`;
+        document.getElementById("final-time").textContent = timeStr;
+
+        // Determine result
+        let resultEmoji, resultTitle, resultMessage, resultClass;
+        if (finalCorrect >= targetScore) {
+          resultEmoji = "🏆";
+          resultTitle = "Xuất sắc!";
+          resultMessage = `Bạn đạt ${finalCorrect}/${maxScore} câu đúng! Chúc mừng!`;
+          resultClass = "result-success";
+        } else {
+          resultEmoji = "📚";
+          resultTitle = "Cần luyện tập thêm!";
+          resultMessage = `Bạn đạt ${finalCorrect}/${maxScore} câu đúng. Mục tiêu: ${targetScore} câu đúng.`;
+          resultClass = "result-failure";
+        }
+
+        document.getElementById("result-emoji").textContent = resultEmoji;
+        document.getElementById("result-title").textContent = resultTitle;
+        document.getElementById("result-title").className = resultClass;
+        document.getElementById("result-message").textContent = resultMessage;
+
+        // Show completion screen
+        document.getElementById("practice-section").style.display = "none";
+        document.getElementById("completion-screen").classList.add("show");
+      }
+
+      // Show preview
+      function showPreview() {
+        const previewContent = document.getElementById("preview-content");
+        let html = "";
+        let globalIndex = 1;
+
+        practiceData.forEach((section, sectionIndex) => {
+          html += `<div style="margin-bottom: 30px;">`;
+          html += `<h3 style="color: #667eea; margin-bottom: 15px;">${sectionNames[sectionIndex]}</h3>`;
+
+          section.forEach((item, questionIndex) => {
+            html += `
+              <div style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 15px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                <div style="font-weight: bold; margin-bottom: 10px; font-size: 1.1em;">
+                  <span style="display: inline-block; background: #667eea; color: white; width: 25px; height: 25px; border-radius: 50%; text-align: center; line-height: 25px; font-size: 0.9em; font-weight: bold; margin-right: 10px;">${globalIndex}</span>
+                  ${item.vietnamese}
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                  <div style="color: #007bff; font-weight: 600; flex: 1;">${
+                    item.german
+                  }</div>
+                  <button style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; cursor: pointer; transition: all 0.3s ease; flex-shrink: 0;" onclick="speakGermanPreview('${item.german.replace(
+                    /'/g,
+                    "\\'"
+                  )}')">
+                    🔊 Nghe
+                  </button>
+                </div>
+                <div style="font-size: 0.9em; opacity: 0.8; margin-top: 8px; font-style: italic;">${
+                  item.tip
+                }</div>
+                <div style="font-size: 0.85em; color: #666; margin-top: 5px; padding: 8px; background: rgba(255, 255, 255, 0.3); border-radius: 5px;">
+                  <strong>Cấu trúc:</strong> ${item.grammarType}
+                </div>
+              </div>
+            `;
+            globalIndex++;
+          });
+          html += `</div>`;
+        });
+
+        previewContent.innerHTML = html;
+        document.getElementById("selection-screen").style.display = "none";
+        document.getElementById("preview-screen").classList.add("show");
+      }
+
+      // Speak German text in preview
+      function speakGermanPreview(text) {
+        if ("speechSynthesis" in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "de-DE";
+          utterance.rate = 0.7;
+          utterance.volume = 1.0;
+          speechSynthesis.speak(utterance);
+        } else {
+          alert(
+            "Trình duyệt không hỗ trợ text-to-speech. Hãy thử Chrome hoặc Edge!"
+          );
+        }
+      }
+
+      // Hide preview
+      function hidePreview() {
+        document.getElementById("preview-screen").classList.remove("show");
+        document.getElementById("selection-screen").style.display = "block";
+      }
+
+      // Hide preview and start
+      function hidePreviewAndStart() {
+        hidePreview();
+        setTimeout(() => startAllSections(), 300);
+      }
+
+      // Reset practice
+      function resetPractice() {
+        currentSectionIndex = 0;
+        currentQuestionIndex = 0;
+        isStarted = false;
+        correctCount = 0;
+        totalAnswered = 0;
+        timeRemaining = timeLimit;
+        sectionCompleted = false;
+        isAllSections = false;
+        totalCorrectAllSections = 0;
+        totalAnsweredAllSections = 0;
+        stopTimer();
+
+        // Reset UI
+        document.getElementById("selection-screen").style.display = "block";
+        document.getElementById("practice-section").style.display = "none";
+        document.getElementById("completion-screen").classList.remove("show");
+        document.getElementById("preview-screen").classList.remove("show");
+      }
+
+      // Shuffle and restart
+      function shuffleAndRestart() {
+        // Shuffle each section
+        practiceData.forEach((section) => {
+          for (let i = section.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [section[i], section[j]] = [section[j], section[i]];
+          }
+        });
+        resetPractice();
+      }
+
+      // Update display
+      function updateDisplay() {
+        if (!isStarted) {
+          document.getElementById("vietnamese-text").textContent =
+            'Chọn phần luyện tập hoặc nhấn "Làm toàn bộ 32 câu"';
+        }
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (!isStarted || sectionCompleted) return;
+
+        switch (e.key) {
+          case " ":
+            e.preventDefault();
+            speakVietnamese();
+            break;
+          case "1":
+            e.preventDefault();
+            if (
+              document.getElementById("correct-btn").style.display !== "none"
+            ) {
+              markAnswer(true);
+            }
+            break;
+          case "2":
+            e.preventDefault();
+            if (
+              document.getElementById("incorrect-btn").style.display !== "none"
+            ) {
+              markAnswer(false);
+            }
+            break;
+          case "Enter":
+            e.preventDefault();
+            if (document.getElementById("next-btn").style.display !== "none") {
+              nextSentence();
+            }
+            break;
+        }
+      });
+
+      // Initialize when page loads
+      window.onload = init;
+
+      // Add voices changed event
+      if ("speechSynthesis" in window) {
+        speechSynthesis.onvoiceschanged = initializeVoices;
+      }
+    </script>
+  </body>
+</html>
