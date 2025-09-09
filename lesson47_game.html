@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keywords liên kết câu tiếng Đức A2</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+
+      .container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.2em;
+      }
+
+      .section {
+        margin-bottom: 25px;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #3498db;
+        background: #f8f9fa;
+      }
+
+      .section h3 {
+        color: #2980b9;
+        margin-top: 0;
+        font-size: 1.3em;
+      }
+
+      .keywords-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .keyword-card {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+      }
+
+      .keyword-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: #3498db;
+      }
+
+      .german-word {
+        font-weight: bold;
+        color: #e74c3c;
+        font-size: 1.1em;
+      }
+
+      .vietnamese-word {
+        color: #27ae60;
+        font-style: italic;
+      }
+
+      .practice-section {
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        color: white;
+        margin-top: 30px;
+      }
+
+      .practice-section h3 {
+        color: white;
+      }
+
+      .topic-selector {
+        margin-bottom: 20px;
+      }
+
+      .topic-selector select {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .question-box {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .answer-template {
+        background: rgba(255, 255, 255, 0.9);
+        color: #2c3e50;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .sentence-box {
+        background: #f8f9fa;
+        border: 2px dashed #3498db;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        min-height: 40px;
+        position: relative;
+      }
+
+      .sentence-label {
+        position: absolute;
+        top: -10px;
+        left: 15px;
+        background: #3498db;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 0.8em;
+        font-weight: bold;
+      }
+
+      .keyword-hints {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+
+      .keyword-hints h4 {
+        color: #fff;
+        margin-top: 0;
+        font-size: 1.1em;
+      }
+
+      .hint-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .hint-tag {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .connection-arrow {
+        text-align: center;
+        font-size: 1.5em;
+        color: #3498db;
+        margin: 10px 0;
+      }
+
+      .example-section {
+        border-left-color: #27ae60;
+      }
+
+      .example-analysis {
+        background: #e8f5e8;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+      }
+
+      .analysis-step {
+        margin: 10px 0;
+        padding: 8px;
+        background: rgba(39, 174, 96, 0.1);
+        border-radius: 5px;
+      }
+
+      .btn {
+        background: #27ae60;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #229954;
+      }
+
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        resize: vertical;
+        min-height: 60px;
+      }
+
+      .feedback {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+
+      .feedback.success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .feedback.warning {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔗 Keywords liên kết câu tiếng Đức A2</h1>
+
+      <!-- Phần 1: Keywords mở rộng thông tin -->
+      <div class="section">
+        <h3>📈 Keywords liên kết CÂU 1 → CÂU 2 (Mở rộng thông tin)</h3>
+
+        <h4>🎯 Thêm ví dụ cụ thể:</h4>
+        <div class="keywords-grid">
+          <div class="keyword-card">
+            <div class="german-word">Zum Beispiel</div>
+            <div class="vietnamese-word">(Ví dụ)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Oft</div>
+            <div class="vietnamese-word">(Thường)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Manchmal</div>
+            <div class="vietnamese-word">(Đôi khi)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Am Wochenende</div>
+            <div class="vietnamese-word">(Cuối tuần)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Jeden Tag</div>
+            <div class="vietnamese-word">(Mỗi ngày)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Morgens/Abends</div>
+            <div class="vietnamese-word">(Sáng/Tối)</div>
+          </div>
+        </div>
+
+        <h4>➕ Thêm thông tin bổ sung:</h4>
+        <div class="keywords-grid">
+          <div class="keyword-card">
+            <div class="german-word">Außerdem</div>
+            <div class="vietnamese-word">(Ngoài ra)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Auch</div>
+            <div class="vietnamese-word">(Cũng)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Und</div>
+            <div class="vietnamese-word">(Và)</div>
+          </div>
+        </div>
+
+        <h4>⏰ Thời gian cụ thể:</h4>
+        <div class="keywords-grid">
+          <div class="keyword-card">
+            <div class="german-word">Dann</div>
+            <div class="vietnamese-word">(Sau đó)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Danach</div>
+            <div class="vietnamese-word">(Sau đó)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Später</div>
+            <div class="vietnamese-word">(Sau này)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phần 2: Keywords cảm nhận/lý do -->
+      <div class="section">
+        <h3>🎭 Keywords liên kết CÂU 2 → CÂU 3 (Cảm nhận/Lý do/Kết quả)</h3>
+
+        <h4>🤔 Lý do:</h4>
+        <div class="keywords-grid">
+          <div class="keyword-card">
+            <div class="german-word">Das ist [tính từ], weil...</div>
+            <div class="vietnamese-word">(Điều đó... vì...)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Deshalb</div>
+            <div class="vietnamese-word">(Vì thế)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Deswegen</div>
+            <div class="vietnamese-word">(Vì thế)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Darum</div>
+            <div class="vietnamese-word">(Vì thế)</div>
+          </div>
+        </div>
+
+        <h4>💭 Cảm nhận cá nhân:</h4>
+        <div class="keywords-grid">
+          <div class="keyword-card">
+            <div class="german-word">Das macht mir Spaß</div>
+            <div class="vietnamese-word">(Điều đó làm tôi vui)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Das ist wichtig für mich</div>
+            <div class="vietnamese-word">(Điều đó quan trọng với tôi)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Ich bin [cảm xúc]</div>
+            <div class="vietnamese-word">(Tôi cảm thấy...)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">Ich fühle mich [tính từ]</div>
+            <div class="vietnamese-word">(Tôi cảm thấy...)</div>
+          </div>
+        </div>
+
+        <h4>🎯 Kết quả/Lợi ích:</h4>
+        <div class="keywords-grid">
+          <div class="keyword-card">
+            <div class="german-word">Dadurch</div>
+            <div class="vietnamese-word">(Qua đó)</div>
+          </div>
+          <div class="keyword-card">
+            <div class="german-word">So</div>
+            <div class="vietnamese-word">(Như vậy)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phần 3: Ví dụ phân tích -->
+      <div class="section example-section">
+        <h3>📝 Ví dụ phân tích liên kết</h3>
+
+        <div class="example-analysis">
+          <h4>Chủ đề: Essen (Ăn uống)</h4>
+          <div><strong>Frage:</strong> Was essen Sie gerne?</div>
+
+          <div class="analysis-step">
+            <strong>Câu 1:</strong> Ich esse gerne Reis und Gemüse.
+          </div>
+          <div class="connection-arrow">⬇️ (cùng chủ đề: ăn uống)</div>
+
+          <div class="analysis-step">
+            <strong>Câu 2:</strong>
+            <span style="color: #e74c3c; font-weight: bold">Zum Beispiel</span>
+            koche ich oft Suppe zu Hause.<br />
+            <small
+              >→ Keyword liên kết: "Zum Beispiel" + ví dụ cụ thể về nấu
+              ăn</small
+            >
+          </div>
+          <div class="connection-arrow">⬇️ (cảm nhận về việc ăn uống)</div>
+
+          <div class="analysis-step">
+            <strong>Câu 3:</strong>
+            <span style="color: #e74c3c; font-weight: bold">Das</span> ist
+            gesund und ich fühle mich gut.<br />
+            <small
+              >→ Keyword liên kết: "Das" chỉ về việc ăn healthy + cảm
+              nhận</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phần luyện tập tương tác -->
+    <div class="container practice-section">
+      <h3>🎯 Luyện tập tương tác</h3>
+
+      <div class="topic-selector">
+        <label for="topicSelect" style="display: block; margin-bottom: 10px"
+          >Chọn chủ đề:</label
+        >
+        <select id="topicSelect" onchange="generateQuestion()">
+          <option value="">-- Chọn chủ đề --</option>
+          <option value="essen">Essen (Ăn uống)</option>
+          <option value="arbeit">Arbeit (Công việc)</option>
+          <option value="hobby">Hobby (Sở thích)</option>
+          <option value="familie">Familie (Gia đình)</option>
+          <option value="wohnen">Wohnen (Nơi ở)</option>
+          <option value="freizeit">Freizeit (Thời gian rảnh)</option>
+        </select>
+      </div>
+
+      <div id="questionArea" style="display: none">
+        <div class="question-box">
+          <h4>📋 Câu hỏi:</h4>
+          <div
+            id="questionText"
+            style="font-size: 1.2em; font-weight: bold"
+          ></div>
+        </div>
+
+        <div class="answer-template">
+          <h4>✍️ Viết câu trả lời của bạn:</h4>
+
+          <div class="sentence-box">
+            <div class="sentence-label">Câu 1: Trả lời chính</div>
+            <textarea
+              id="sentence1"
+              placeholder="Viết câu trả lời chính..."
+            ></textarea>
+          </div>
+          <div class="connection-arrow">⬇️</div>
+
+          <div class="sentence-box">
+            <div class="sentence-label">Câu 2: Mở rộng thông tin</div>
+            <textarea
+              id="sentence2"
+              placeholder="Thêm ví dụ, thời gian cụ thể..."
+            ></textarea>
+          </div>
+          <div class="connection-arrow">⬇️</div>
+
+          <div class="sentence-box">
+            <div class="sentence-label">Câu 3: Cảm nhận/Lý do</div>
+            <textarea
+              id="sentence3"
+              placeholder="Nêu cảm nhận, lý do hoặc kết quả..."
+            ></textarea>
+          </div>
+
+          <button class="btn" onclick="checkAnswer()" style="margin-top: 15px">
+            Kiểm tra liên kết
+          </button>
+          <div id="feedback" class="feedback"></div>
+        </div>
+
+        <div class="keyword-hints">
+          <h4>💡 Gợi ý Keywords:</h4>
+          <div><strong>Câu 1 → Câu 2:</strong></div>
+          <div class="hint-tags">
+            <span class="hint-tag">Zum Beispiel</span>
+            <span class="hint-tag">Oft</span>
+            <span class="hint-tag">Manchmal</span>
+            <span class="hint-tag">Außerdem</span>
+            <span class="hint-tag">Jeden Tag</span>
+          </div>
+
+          <div style="margin-top: 10px"><strong>Câu 2 → Câu 3:</strong></div>
+          <div class="hint-tags">
+            <span class="hint-tag">Das ist... weil</span>
+            <span class="hint-tag">Deshalb</span>
+            <span class="hint-tag">Das macht mir Spaß</span>
+            <span class="hint-tag">Ich bin</span>
+            <span class="hint-tag">Dadurch</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const topics = {
+        essen: {
+          question: "Was essen Sie gerne?",
+          keywords: ["essen", "kochen", "Nahrung", "gesund"],
+        },
+        arbeit: {
+          question: "Was arbeiten Sie?",
+          keywords: ["arbeiten", "Job", "Beruf", "Kollegen"],
+        },
+        hobby: {
+          question: "Was ist Ihr Hobby?",
+          keywords: ["Hobby", "Freizeit", "Spaß", "interessant"],
+        },
+        familie: {
+          question: "Wie ist Ihre Familie?",
+          keywords: ["Familie", "Eltern", "Geschwister", "zusammen"],
+        },
+        wohnen: {
+          question: "Wo wohnen Sie?",
+          keywords: ["wohnen", "Haus", "Wohnung", "Stadt"],
+        },
+        freizeit: {
+          question: "Was machen Sie in der Freizeit?",
+          keywords: ["Freizeit", "Zeit", "entspannen", "Aktivität"],
+        },
+      };
+
+      function generateQuestion() {
+        const select = document.getElementById("topicSelect");
+        const questionArea = document.getElementById("questionArea");
+        const questionText = document.getElementById("questionText");
+
+        if (select.value) {
+          questionArea.style.display = "block";
+          questionText.textContent = topics[select.value].question;
+
+          // Clear previous answers
+          document.getElementById("sentence1").value = "";
+          document.getElementById("sentence2").value = "";
+          document.getElementById("sentence3").value = "";
+          document.getElementById("feedback").style.display = "none";
+        } else {
+          questionArea.style.display = "none";
+        }
+      }
+
+      function checkAnswer() {
+        const topic = document.getElementById("topicSelect").value;
+        const sentence1 = document.getElementById("sentence1").value.trim();
+        const sentence2 = document.getElementById("sentence2").value.trim();
+        const sentence3 = document.getElementById("sentence3").value.trim();
+        const feedback = document.getElementById("feedback");
+
+        if (!sentence1 || !sentence2 || !sentence3) {
+          feedback.textContent = "⚠️ Vui lòng điền đầy đủ cả 3 câu!";
+          feedback.className = "feedback warning";
+          feedback.style.display = "block";
+          return;
+        }
+
+        let score = 0;
+        let feedbackText = "📊 Phân tích liên kết:\n\n";
+
+        // Kiểm tra keywords liên kết câu 1-2
+        const linkingWords1to2 = [
+          "zum beispiel",
+          "oft",
+          "manchmal",
+          "außerdem",
+          "auch",
+          "und",
+          "dann",
+          "danach",
+          "später",
+          "jeden tag",
+          "morgens",
+          "abends",
+          "am wochenende",
+        ];
+        const hasLinking1to2 = linkingWords1to2.some((word) =>
+          sentence2.toLowerCase().includes(word)
+        );
+
+        if (hasLinking1to2) {
+          score += 1;
+          feedbackText += "✅ Câu 1→2: Có từ nối mở rộng thông tin!\n";
+        } else {
+          feedbackText +=
+            "❌ Câu 1→2: Thiếu từ nối (Zum Beispiel, Oft, Außerdem...)\n";
+        }
+
+        // Kiểm tra keywords liên kết câu 2-3
+        const linkingWords2to3 = [
+          "das ist",
+          "deshalb",
+          "deswegen",
+          "darum",
+          "das macht mir spaß",
+          "das ist wichtig",
+          "ich bin",
+          "ich fühle mich",
+          "dadurch",
+          "so",
+          "das",
+        ];
+        const hasLinking2to3 = linkingWords2to3.some((word) =>
+          sentence3.toLowerCase().includes(word)
+        );
+
+        if (hasLinking2to3) {
+          score += 1;
+          feedbackText += "✅ Câu 2→3: Có từ nối cảm nhận/lý do!\n";
+        } else {
+          feedbackText +=
+            "❌ Câu 2→3: Thiếu từ nối (Das ist..., Deshalb, Ich bin...)\n";
+        }
+
+        // Kiểm tra từ khóa chủ đề
+        const topicKeywords = topics[topic].keywords;
+        const allText = (
+          sentence1 +
+          " " +
+          sentence2 +
+          " " +
+          sentence3
+        ).toLowerCase();
+        const hasTopicKeyword = topicKeywords.some((keyword) =>
+          allText.includes(keyword.toLowerCase())
+        );
+
+        if (hasTopicKeyword) {
+          score += 1;
+          feedbackText += "✅ Từ khóa chủ đề: Có lặp lại từ khóa liên quan!\n";
+        } else {
+          feedbackText +=
+            "❌ Từ khóa chủ đề: Thiếu từ khóa liên quan đến chủ đề\n";
+        }
+
+        feedbackText += `\n🎯 Điểm số: ${score}/3\n`;
+
+        if (score === 3) {
+          feedbackText += "\n🎉 Xuất sắc! Câu trả lời có liên kết rất tốt!";
+          feedback.className = "feedback success";
+        } else if (score >= 2) {
+          feedbackText += "\n👍 Tốt! Cần cải thiện thêm một chút.";
+          feedback.className = "feedback warning";
+        } else {
+          feedbackText += "\n💪 Cần luyện tập thêm về liên kết câu.";
+          feedback.className = "feedback warning";
+        }
+
+        feedback.textContent = feedbackText;
+        feedback.style.display = "block";
+      }
+    </script>
+  </body>
+</html>
