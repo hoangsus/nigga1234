@@ -3,1217 +3,838 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện tập 29 câu tiếng Đức</title>
+    <title>Phân tích cấu trúc câu tiếng Đức A2</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        padding: 20px;
-        color: #333;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        background-color: #f5f5f5;
       }
-
       .container {
-        max-width: 1000px;
+        max-width: 1400px;
         margin: 0 auto;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
-
-      .header {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 30px;
-        text-align: center;
-      }
-
-      .header h1 {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      }
-
-      .header p {
-        font-size: 1.2em;
-        opacity: 0.9;
-      }
-
-      .content {
-        padding: 30px;
-      }
-
-      .practice-card {
         background: white;
-        border-radius: 15px;
-        padding: 30px;
-        margin: 20px 0;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        text-align: center;
-      }
-
-      .stats-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 15px;
-        margin: 25px 0;
-      }
-
-      .stat-box {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        border-radius: 15px;
         padding: 20px;
-        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
-
-      .stat-number {
-        font-size: 2em;
-        font-weight: 900;
+      .topic {
+        background: #e3f2fd;
+        padding: 15px;
+        margin: 20px 0;
+        border-left: 5px solid #2196f3;
+        border-radius: 5px;
+      }
+      .topic h2 {
+        color: #1565c0;
+        margin-top: 0;
+      }
+      .sentence-group {
+        margin: 15px 0;
+        padding: 15px;
+        background: #fff3e0;
+        border-radius: 8px;
+        border-left: 4px solid #ff9800;
+      }
+      .sentence {
+        margin: 10px 0;
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 5px;
+        border-left: 3px solid #4caf50;
+      }
+      .german {
+        font-weight: bold;
+        color: #1976d2;
+        font-size: 16px;
         margin-bottom: 5px;
       }
-
-      .stat-label {
-        font-size: 0.9em;
-        opacity: 0.9;
-      }
-
-      .timer-warning {
-        background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important;
-        animation: pulse 1s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
-      }
-
-      .sentence-display {
-        font-size: 1.8em;
-        margin: 30px 0;
-        padding: 25px;
-        background: #f8f9ff;
-        border-radius: 15px;
-        border: 3px solid #667eea;
-        line-height: 1.5;
-        min-height: 120px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .controls {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin: 30px 0;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        border: none;
-        padding: 15px 25px;
-        border-radius: 25px;
-        font-size: 1.1em;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        min-width: 140px;
-      }
-
-      .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      }
-
-      .btn-success {
-        background: linear-gradient(135deg, #00b894, #00a085);
-      }
-
-      .btn-danger {
-        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-      }
-
-      .btn-secondary {
-        background: linear-gradient(135deg, #74b9ff, #0984e3);
-      }
-
-      .progress-bar {
-        background: #e0e6ed;
-        border-radius: 10px;
-        overflow: hidden;
-        margin: 20px 0;
-        height: 25px;
-      }
-
-      .progress-fill {
-        background: linear-gradient(135deg, #00b894, #00a085);
-        height: 100%;
-        transition: width 0.5s ease;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-        font-size: 0.9em;
-      }
-
-      .answer-section {
-        background: #f8f9ff;
-        border-radius: 15px;
-        padding: 25px;
-        margin: 20px 0;
-        display: none;
-        text-align: left;
-        border: 2px solid #667eea;
-      }
-
-      .answer-section.show {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .german-text {
-        font-size: 1.5em;
-        color: #2d3436;
-        font-weight: 600;
-        margin-bottom: 15px;
-        padding: 15px;
-        background: #dfe6e9;
-        border-radius: 10px;
-        text-align: center;
-      }
-
-      .analysis {
-        background: #e8f4f8;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 15px 0;
-        border-left: 4px solid #667eea;
-      }
-
-      .analysis h4 {
-        color: #2d3436;
-        margin-bottom: 15px;
-        font-size: 1.2em;
-      }
-
-      .word-analysis {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 10px 0;
-      }
-
-      .word-tag {
-        background: #667eea;
-        color: white;
-        padding: 8px 12px;
-        border-radius: 20px;
-        font-size: 0.9em;
-        font-weight: 600;
-      }
-
-      .completion-screen {
-        text-align: center;
-        display: none;
-        padding: 40px;
-      }
-
-      .completion-screen.show {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      .completion-emoji {
-        font-size: 4em;
-        margin: 20px 0;
-      }
-
-      .result-stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin: 30px 0;
-      }
-
-      .result-stat {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 25px;
-        border-radius: 15px;
-        text-align: center;
-      }
-
-      .result-stat .number {
-        font-size: 2.5em;
-        font-weight: 900;
+      .vietnamese {
+        color: #666;
+        font-style: italic;
         margin-bottom: 10px;
       }
-
-      .instructions {
-        background: #e8f4f8;
-        border-radius: 15px;
-        padding: 25px;
-        margin: 20px 0;
-        border: 2px solid #667eea;
+      .structure {
+        background: #f5f5f5;
+        padding: 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 13px;
+        line-height: 1.8;
       }
-
-      .instructions h3 {
-        color: #2d3436;
-        margin-bottom: 15px;
-        font-size: 1.3em;
+      .opening-closing {
+        background: #e8f5e8;
+        padding: 12px;
+        border-left: 4px solid #4caf50;
+        margin: 15px 0;
       }
-
-      .instructions ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .instructions li {
-        margin: 10px 0;
-        padding-left: 25px;
-        position: relative;
-      }
-
-      .instructions li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: #00b894;
+      .component {
+        display: inline-block;
+        margin: 2px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
         font-weight: bold;
-        font-size: 1.2em;
+      }
+      .subject {
+        background: #ffebee;
+        color: #c62828;
+        border: 1px solid #ef5350;
+      }
+      .verb {
+        background: #e8f5e8;
+        color: #2e7d32;
+        border: 1px solid #66bb6a;
+      }
+      .object {
+        background: #fff3e0;
+        color: #ef6c00;
+        border: 1px solid #ffa726;
+      }
+      .adverb {
+        background: #f3e5f5;
+        color: #7b1fa2;
+        border: 1px solid #ab47bc;
+      }
+      .prep {
+        background: #e1f5fe;
+        color: #0277bd;
+        border: 1px solid #29b6f6;
+      }
+      .conj {
+        background: #fff8e1;
+        color: #f57f17;
+        border: 1px solid #ffca28;
+      }
+      .other {
+        background: #fafafa;
+        color: #424242;
+        border: 1px solid #9e9e9e;
       }
 
-      @media (max-width: 768px) {
-        .header h1 {
-          font-size: 2em;
-        }
-        .sentence-display {
-          font-size: 1.4em;
-          padding: 20px;
-        }
-        .stats-row {
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
-        }
-        .controls {
-          flex-direction: column;
-          align-items: center;
-        }
-        .btn {
-          width: 90%;
-          max-width: 300px;
-        }
+      .formula {
+        margin-top: 8px;
+        padding: 8px;
+        background: #fff9c4;
+        border: 1px solid #fbc02d;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #f57f17;
+        font-weight: bold;
+      }
+
+      .legend {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 20px 0;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+      }
+      .legend-color {
+        width: 25px;
+        height: 18px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="header">
-        <h1>🇩🇪 Luyện tập 29 câu tiếng Đức</h1>
-        <p>Phân tích cấu trúc câu và thứ tự từ - 4 phút</p>
+      <h1>Phân tích cấu trúc câu tiếng Đức A2</h1>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color subject"></div>
+          <span><strong>Đỏ:</strong> Chủ ngữ (Subject)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color verb"></div>
+          <span><strong>Xanh lá:</strong> Động từ (Verb)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color object"></div>
+          <span><strong>Cam:</strong> Tân ngữ (Object)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color adverb"></div>
+          <span><strong>Tím:</strong> Trạng từ (Adverb)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color prep"></div>
+          <span><strong>Xanh dương:</strong> Giới từ (Preposition)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color conj"></div>
+          <span><strong>Vàng:</strong> Liên từ (Conjunction)</span>
+        </div>
       </div>
 
-      <div class="content">
-        <!-- Start Screen -->
-        <div class="practice-card" id="start-screen">
-          <div class="instructions">
-            <h3>📚 Hướng dẫn luyện tập</h3>
-            <ul>
-              <li>29 câu tiếng Đức với phân tích chi tiết cấu trúc</li>
-              <li>Thời gian: 4 phút (khoảng 8 giây/câu)</li>
-              <li>Đọc câu tiếng Đức → Đánh giá hiểu biết → Xem phân tích</li>
-              <li>Học thứ tự từ và cấu trúc ngữ pháp thực tế</li>
-              <li>
-                Phím tắt: Space = Đọc, 1 = Hiểu, 2 = Chưa hiểu, Enter = Tiếp
-              </li>
+      <div class="topic">
+        <h2>AUFGABENKARTE A: "Wofür geben Sie Ihr Geld aus?"</h2>
+
+        <div class="opening-closing">
+          <h3>Câu mở đầu:</h3>
+          <div class="sentence">
+            <div class="german">
+              Heute möchte ich über meine Ausgaben sprechen und erklären, wofür
+              ich mein Geld ausgebe.
+            </div>
+            <div class="vietnamese">
+              Hôm nay tôi muốn nói về các khoản chi tiêu và giải thích tôi tiêu
+              tiền vào việc gì.
+            </div>
+            <div class="structure">
+              <span class="component adverb">Heute (Trạng từ thời gian)</span>
+              <span class="component verb">möchte (Động từ khuyết thiếu)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component prep">über (Giới từ + Akk)</span>
+              <span class="component object"
+                >meine Ausgaben (Tân ngữ - Akk)</span
+              >
+              <span class="component verb">sprechen (Động từ chính)</span>
+              <span class="component conj">und (Liên từ)</span>
+              <span class="component verb">erklären (Động từ)</span>
+              <span class="component other">wofür (Trạng từ nghi vấn)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component object">mein Geld (Tân ngữ - Akk)</span>
+              <span class="component verb"
+                >ausgebe (Động từ tách - cuối câu)</span
+              >
+            </div>
+            <div class="formula">
+              <strong>Công thức câu mở:</strong> Trạng từ thời gian + Động từ
+              khuyết thiếu + Chủ ngữ + [Giới từ + Tân ngữ] + Động từ chính +
+              Liên từ + Động từ + Trạng từ nghi vấn + Chủ ngữ + Tân ngữ + Động
+              từ tách (cuối)
+            </div>
+          </div>
+        </div>
+
+        <div class="sentence-group">
+          <h3>1. Wohnung? (Nhà ở?)</h3>
+
+          <div class="sentence">
+            <div class="german">
+              Für meine Wohnung gebe ich jeden Monat viel Geld aus.
+            </div>
+            <div class="vietnamese">
+              Tôi tiêu nhiều tiền cho nhà ở mỗi tháng.
+            </div>
+            <div class="structure">
+              <span class="component prep">Für (Giới từ + Akk)</span>
+              <span class="component object"
+                >meine Wohnung (Tân ngữ - Akk)</span
+              >
+              <span class="component verb">gebe (Động từ chia - vị trí 2)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component adverb"
+                >jeden Monat (Trạng từ thời gian - Te)</span
+              >
+              <span class="component object"
+                >viel Geld (Tân ngữ trực tiếp - Akk)</span
+              >
+              <span class="component verb">aus (Tiền tố tách - cuối câu)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> [Giới từ + Tân ngữ] + Động từ chia +
+              Chủ ngữ + Te (thời gian) + Tân ngữ trực tiếp + Tiền tố tách
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Zum Beispiel bezahle ich Miete, Strom und Wasser oft pünktlich.
+            </div>
+            <div class="vietnamese">
+              Ví dụ tôi thường thanh toán tiền thuê nhà, điện và nước đúng hạn.
+            </div>
+            <div class="structure">
+              <span class="component conj">Zum Beispiel (Liên từ mở rộng)</span>
+              <span class="component verb"
+                >bezahle (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component object"
+                >Miete, Strom und Wasser (Tân ngữ - Akk)</span
+              >
+              <span class="component adverb">oft (Trạng từ tần suất - Mo)</span>
+              <span class="component adverb"
+                >pünktlich (Trạng từ cách thức - Mo)</span
+              >
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Liên từ mở rộng + Động từ chia + Chủ
+              ngữ + Tân ngữ + Mo (tần suất + cách thức)
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Das ist wichtig für mich, weil ich einen sicheren Wohnplatz
+              brauche.
+            </div>
+            <div class="vietnamese">
+              Điều đó quan trọng với tôi vì tôi cần một chỗ ở an toàn.
+            </div>
+            <div class="structure">
+              <span class="component subject"
+                >Das (Chủ ngữ - đại từ chỉ định)</span
+              >
+              <span class="component verb">ist (Động từ chia - vị trí 2)</span>
+              <span class="component other">wichtig (Tính từ vị ngữ)</span>
+              <span class="component prep">für (Giới từ + Akk)</span>
+              <span class="component object">mich (Tân ngữ - Akk)</span>
+              <span class="component conj">weil (Liên từ phụ thuộc)</span>
+              <span class="component subject">ich (Chủ ngữ câu phụ)</span>
+              <span class="component object"
+                >einen sicheren Wohnplatz (Tân ngữ - Akk)</span
+              >
+              <span class="component verb">brauche (Động từ cuối câu phụ)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Chủ ngữ + Động từ + Tính từ + [Giới từ
+              + Tân ngữ] + weil + [Chủ ngữ + Tân ngữ + Động từ cuối]
+            </div>
+          </div>
+        </div>
+
+        <div class="sentence-group">
+          <h3>2. Hobbys? (Sở thích?)</h3>
+
+          <div class="sentence">
+            <div class="german">
+              Für meine Hobbys gebe ich manchmal Geld aus.
+            </div>
+            <div class="vietnamese">
+              Tôi đôi khi tiêu tiền cho sở thích của mình.
+            </div>
+            <div class="structure">
+              <span class="component prep">Für (Giới từ + Akk)</span>
+              <span class="component object">meine Hobbys (Tân ngữ - Akk)</span>
+              <span class="component verb">gebe (Động từ chia - vị trí 2)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component adverb"
+                >manchmal (Trạng từ tần suất - Mo)</span
+              >
+              <span class="component object">Geld (Tân ngữ - Akk)</span>
+              <span class="component verb">aus (Tiền tố tách - cuối)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> [Giới từ + Tân ngữ] + Động từ chia +
+              Chủ ngữ + Mo (tần suất) + Tân ngữ + Tiền tố tách
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Oft kaufe ich Bücher oder bezahle für Sportkurse am Wochenende.
+            </div>
+            <div class="vietnamese">
+              Tôi thường mua sách hoặc trả tiền khóa thể thao vào cuối tuần.
+            </div>
+            <div class="structure">
+              <span class="component adverb">Oft (Trạng từ tần suất - Mo)</span>
+              <span class="component verb"
+                >kaufe (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component object">Bücher (Tân ngữ - Akk)</span>
+              <span class="component conj">oder (Liên từ ngang hàng)</span>
+              <span class="component verb">bezahle (Động từ chia)</span>
+              <span class="component prep">für (Giới từ + Akk)</span>
+              <span class="component object">Sportkurse (Tân ngữ - Akk)</span>
+              <span class="component adverb"
+                >am Wochenende (Trạng từ thời gian - Te)</span
+              >
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Mo (tần suất) + Động từ chia + Chủ ngữ
+              + Tân ngữ + oder + Động từ + [Giới từ + Tân ngữ] + Te (thời gian)
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Das macht mir Spaß, aber ich kontrolliere meine Ausgaben.
+            </div>
+            <div class="vietnamese">
+              Điều đó vui, nhưng tôi kiểm soát chi tiêu của mình.
+            </div>
+            <div class="structure">
+              <span class="component subject">Das (Chủ ngữ)</span>
+              <span class="component verb"
+                >macht (Động từ chia - vị trí 2)</span
+              >
+              <span class="component object"
+                >mir (Tân ngữ gián tiếp - Dat)</span
+              >
+              <span class="component object"
+                >Spaß (Tân ngữ trực tiếp - Akk)</span
+              >
+              <span class="component conj">aber (Liên từ đối lập)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component verb">kontrolliere (Động từ chia)</span>
+              <span class="component object"
+                >meine Ausgaben (Tân ngữ - Akk)</span
+              >
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Chủ ngữ + Động từ + Dat (gián tiếp) +
+              Akk (trực tiếp) + aber + [Chủ ngữ + Động từ + Tân ngữ]
+            </div>
+          </div>
+        </div>
+
+        <div class="sentence-group">
+          <h3>3. Urlaub? (Kỳ nghỉ?)</h3>
+
+          <div class="sentence">
+            <div class="german">
+              Für Urlaub spare ich jeden Monat etwas Geld.
+            </div>
+            <div class="vietnamese">
+              Tôi tiết kiệm một ít tiền cho kỳ nghỉ mỗi tháng.
+            </div>
+            <div class="structure">
+              <span class="component prep">Für (Giới từ + Akk)</span>
+              <span class="component object">Urlaub (Tân ngữ - Akk)</span>
+              <span class="component verb"
+                >spare (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component adverb"
+                >jeden Monat (Trạng từ thời gian - Te)</span
+              >
+              <span class="component object">etwas Geld (Tân ngữ - Akk)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> [Giới từ + Tân ngữ] + Động từ chia +
+              Chủ ngữ + Te (thời gian) + Tân ngữ trực tiếp
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Oft plane ich Reisen mit meiner Familie oder mit Freunden.
+            </div>
+            <div class="vietnamese">
+              Tôi thường lên kế hoạch du lịch với gia đình hoặc với bạn bè.
+            </div>
+            <div class="structure">
+              <span class="component adverb">Oft (Trạng từ tần suất - Mo)</span>
+              <span class="component verb"
+                >plane (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component object">Reisen (Tân ngữ - Akk)</span>
+              <span class="component prep">mit (Giới từ + Dat)</span>
+              <span class="component object"
+                >meiner Familie (Tân ngữ - Dat)</span
+              >
+              <span class="component conj">oder (Liên từ)</span>
+              <span class="component prep">mit (Giới từ + Dat)</span>
+              <span class="component object">Freunden (Tân ngữ - Dat)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Mo (tần suất) + Động từ chia + Chủ ngữ
+              + Tân ngữ + [mit + Dat] + oder + [mit + Dat]
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Das ist entspannend, deshalb ist es eine gute Investition.
+            </div>
+            <div class="vietnamese">
+              Điều đó thư giãn, vì thế nó là một khoản đầu tư tốt.
+            </div>
+            <div class="structure">
+              <span class="component subject">Das (Chủ ngữ)</span>
+              <span class="component verb">ist (Động từ chia - vị trí 2)</span>
+              <span class="component other">entspannend (Tính từ vị ngữ)</span>
+              <span class="component conj">deshalb (Liên từ nguyên nhân)</span>
+              <span class="component verb">ist (Động từ chia - vị trí 2)</span>
+              <span class="component subject">es (Chủ ngữ)</span>
+              <span class="component object"
+                >eine gute Investition (Tân ngữ - Nom)</span
+              >
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Chủ ngữ + ist + Tính từ + deshalb +
+              ist + Chủ ngữ + Vị ngữ (Nominativ)
+            </div>
+          </div>
+        </div>
+
+        <div class="sentence-group">
+          <h3>4. Essen? (Đồ ăn?)</h3>
+
+          <div class="sentence">
+            <div class="german">Für Essen gebe ich täglich Geld aus.</div>
+            <div class="vietnamese">Tôi tiêu tiền cho đồ ăn hàng ngày.</div>
+            <div class="structure">
+              <span class="component prep">Für (Giới từ + Akk)</span>
+              <span class="component object">Essen (Tân ngữ - Akk)</span>
+              <span class="component verb">gebe (Động từ chia - vị trí 2)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component adverb"
+                >täglich (Trạng từ tần suất - Mo)</span
+              >
+              <span class="component object">Geld (Tân ngữ - Akk)</span>
+              <span class="component verb">aus (Tiền tố tách - cuối)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> [Giới từ + Tân ngữ] + Động từ chia +
+              Chủ ngữ + Mo (tần suất) + Tân ngữ + Tiền tố tách
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Zu Hause koche ich oft, aber manchmal gehe ich ins Restaurant.
+            </div>
+            <div class="vietnamese">
+              Ở nhà tôi thường nấu ăn, nhưng đôi khi tôi đi nhà hàng.
+            </div>
+            <div class="structure">
+              <span class="component adverb"
+                >Zu Hause (Trạng từ địa điểm - Lo)</span
+              >
+              <span class="component verb"
+                >koche (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component adverb">oft (Trạng từ tần suất - Mo)</span>
+              <span class="component conj">aber (Liên từ đối lập)</span>
+              <span class="component adverb">manchmal (Trạng từ tần suất)</span>
+              <span class="component verb">gehe (Động từ chia)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component prep">ins (Giới từ + Akk)</span>
+              <span class="component object">Restaurant (Tân ngữ - Akk)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Lo (địa điểm) + Động từ + Chủ ngữ + Mo
+              (tần suất) + aber + Mo + Động từ + Chủ ngữ + [ins + Tân ngữ]
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Das ist notwendig und das gefällt mir, gesund zu essen.
+            </div>
+            <div class="vietnamese">
+              Điều đó cần thiết và tôi thích ăn lành mạnh.
+            </div>
+            <div class="structure">
+              <span class="component subject">Das (Chủ ngữ)</span>
+              <span class="component verb">ist (Động từ chia - vị trí 2)</span>
+              <span class="component other">notwendig (Tính từ vị ngữ)</span>
+              <span class="component conj">und (Liên từ)</span>
+              <span class="component subject">das (Chủ ngữ)</span>
+              <span class="component verb">gefällt (Động từ chia + Dat)</span>
+              <span class="component object"
+                >mir (Tân ngữ gián tiếp - Dat)</span
+              >
+              <span class="component other">gesund (Trạng từ cách thức)</span>
+              <span class="component verb">zu essen (Động từ nguyên mẫu)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Chủ ngữ + ist + Tính từ + und + Chủ
+              ngữ + gefällt + Dat + Trạng từ + zu + Động từ nguyên mẫu
+            </div>
+          </div>
+        </div>
+
+        <div class="opening-closing">
+          <h3>Câu đóng kết:</h3>
+          <div class="sentence">
+            <div class="german">
+              So verteile ich mein Geld auf verschiedene Bereiche und ich bin
+              zufrieden mit meinen Entscheidungen.
+            </div>
+            <div class="vietnamese">
+              Như vậy tôi phân chia tiền cho các lĩnh vực khác nhau và tôi hài
+              lòng với các quyết định của mình.
+            </div>
+            <div class="structure">
+              <span class="component conj">So (Liên từ kết luận)</span>
+              <span class="component verb"
+                >verteile (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component object">mein Geld (Tân ngữ - Akk)</span>
+              <span class="component prep">auf (Giới từ + Akk)</span>
+              <span class="component object"
+                >verschiedene Bereiche (Tân ngữ - Akk)</span
+              >
+              <span class="component conj">und (Liên từ)</span>
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component verb">bin (Động từ chia)</span>
+              <span class="component other">zufrieden (Tính từ vị ngữ)</span>
+              <span class="component prep">mit (Giới từ + Dat)</span>
+              <span class="component object"
+                >meinen Entscheidungen (Tân ngữ - Dat)</span
+              >
+            </div>
+            <div class="formula">
+              <strong>Công thức câu đóng:</strong> So + Động từ chia + Chủ ngữ +
+              Tân ngữ + [auf + Akk] + und + [Chủ ngữ + bin + Tính từ + mit +
+              Dat]
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h2>AUFGABENKARTE B: "Welches Verkehrsmittel benutzen Sie?"</h2>
+
+        <div class="opening-closing">
+          <h3>Câu mở đầu:</h3>
+          <div class="sentence">
+            <div class="german">
+              Ich benutze verschiedene Verkehrsmittel und möchte heute darüber
+              erzählen.
+            </div>
+            <div class="vietnamese">
+              Tôi sử dụng nhiều phương tiện giao thông khác nhau và hôm nay tôi
+              muốn kể về điều đó.
+            </div>
+            <div class="structure">
+              <span class="component subject">Ich (Chủ ngữ)</span>
+              <span class="component verb"
+                >benutze (Động từ chia - vị trí 2)</span
+              >
+              <span class="component object"
+                >verschiedene Verkehrsmittel (Tân ngữ - Akk)</span
+              >
+              <span class="component conj">und (Liên từ)</span>
+              <span class="component verb">möchte (Động từ khuyết thiếu)</span>
+              <span class="component adverb"
+                >heute (Trạng từ thời gian - Te)</span
+              >
+              <span class="component prep">darüber (Trạng từ giới từ)</span>
+              <span class="component verb"
+                >erzählen (Động từ chính - cuối)</span
+              >
+            </div>
+            <div class="formula">
+              <strong>Công thức câu mở:</strong> Chủ ngữ + Động từ chia + Tân
+              ngữ + und + Động từ khuyết thiếu + Te (thời gian) + Trạng từ giới
+              từ + Động từ chính (cuối)
+            </div>
+          </div>
+        </div>
+
+        <div class="sentence-group">
+          <h3>1. Arbeitsweg? (Đường đi làm?)</h3>
+
+          <div class="sentence">
+            <div class="german">
+              Für den Arbeitsweg benutze ich jeden Tag den Bus.
+            </div>
+            <div class="vietnamese">Tôi đi xe buýt mỗi ngày để đi làm.</div>
+            <div class="structure">
+              <span class="component prep">Für (Giới từ + Akk)</span>
+              <span class="component object"
+                >den Arbeitsweg (Tân ngữ - Akk)</span
+              >
+              <span class="component verb"
+                >benutze (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component adverb"
+                >jeden Tag (Trạng từ thời gian - Te)</span
+              >
+              <span class="component object">den Bus (Tân ngữ - Akk)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> [Giới từ + Tân ngữ] + Động từ chia +
+              Chủ ngữ + Te (thời gian) + Tân ngữ trực tiếp
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Morgens fahre ich oft pünktlich um 7:30 Uhr zur Arbeit.
+            </div>
+            <div class="vietnamese">
+              Sáng tôi thường đi làm đúng giờ lúc 7:30.
+            </div>
+            <div class="structure">
+              <span class="component adverb"
+                >Morgens (Trạng từ thời gian - Te)</span
+              >
+              <span class="component verb"
+                >fahre (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component adverb">oft (Trạng từ tần suất - Mo)</span>
+              <span class="component adverb"
+                >pünktlich (Trạng từ cách thức - Mo)</span
+              >
+              <span class="component adverb"
+                >um 7:30 Uhr (Trạng từ thời gian - Te)</span
+              >
+              <span class="component prep">zur (Giới từ + Dat)</span>
+              <span class="component object">Arbeit (Tân ngữ - Dat)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Te (thời gian) + Động từ chia + Chủ
+              ngữ + Mo (tần suất + cách thức) + Te (giờ cụ thể) + [zur + Dat]
+            </div>
+          </div>
+
+          <div class="sentence">
+            <div class="german">
+              Das ist praktisch, weil ich nicht im Stau stehe.
+            </div>
+            <div class="vietnamese">
+              Điều đó thực tế vì tôi không bị kẹt xe.
+            </div>
+            <div class="structure">
+              <span class="component subject">Das (Chủ ngữ)</span>
+              <span class="component verb">ist (Động từ chia - vị trí 2)</span>
+              <span class="component other">praktisch (Tính từ vị ngữ)</span>
+              <span class="component conj">weil (Liên từ phụ thuộc)</span>
+              <span class="component subject">ich (Chủ ngữ câu phụ)</span>
+              <span class="component other">nicht (Phủ định)</span>
+              <span class="component prep">im (Giới từ + Dat)</span>
+              <span class="component object">Stau (Tân ngữ - Dat)</span>
+              <span class="component verb">stehe (Động từ cuối câu phụ)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức:</strong> Chủ ngữ + ist + Tính từ + weil + [Chủ
+              ngữ + nicht + im + Dat + Động từ cuối]
+            </div>
+          </div>
+        </div>
+
+        <div class="opening-closing">
+          <h3>Câu đóng kết:</h3>
+          <div class="sentence">
+            <div class="german">
+              So wähle ich je nach Situation das passende Verkehrsmittel und das
+              gefällt mir gut.
+            </div>
+            <div class="vietnamese">
+              Như vậy tôi chọn phương tiện giao thông phù hợp tùy theo tình
+              huống và tôi thích điều đó.
+            </div>
+            <div class="structure">
+              <span class="component conj">So (Liên từ kết luận)</span>
+              <span class="component verb"
+                >wähle (Động từ chia - vị trí 2)</span
+              >
+              <span class="component subject">ich (Chủ ngữ)</span>
+              <span class="component prep">je nach (Giới từ + Dat)</span>
+              <span class="component object">Situation (Tân ngữ - Dat)</span>
+              <span class="component object"
+                >das passende Verkehrsmittel (Tân ngữ - Akk)</span
+              >
+              <span class="component conj">und (Liên từ)</span>
+              <span class="component subject">das (Chủ ngữ)</span>
+              <span class="component verb">gefällt (Động từ + Dat)</span>
+              <span class="component object">mir (Tân ngữ - Dat)</span>
+              <span class="component other">gut (Trạng từ)</span>
+            </div>
+            <div class="formula">
+              <strong>Công thức câu đóng:</strong> So + Động từ + Chủ ngữ + [je
+              nach + Dat] + Tân ngữ Akk + und + [Chủ ngữ + gefällt + Dat + Trạng
+              từ]
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="
+          margin-top: 30px;
+          padding: 20px;
+          background: #f0f8ff;
+          border-radius: 8px;
+        "
+      >
+        <h2>Tổng kết về cấu trúc câu tiếng Đức A2:</h2>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+          "
+        >
+          <div
+            style="
+              padding: 15px;
+              background: white;
+              border-radius: 8px;
+              border-left: 4px solid #4caf50;
+            "
+          >
+            <h3 style="color: #2e7d32; margin-top: 0">CÂU MỞ & ĐÓNG:</h3>
+            <ul style="margin: 0; font-size: 14px">
+              <li><strong>Câu mở:</strong> Giới thiệu chủ đề + ý định nói</li>
+              <li><strong>Câu đóng:</strong> Kết luận với "So" + cảm nhận</li>
+              <li>Sử dụng động từ khuyết thiếu (möchte)</li>
+              <li>Có thể dùng liên từ "und" nối 2 ý</li>
             </ul>
           </div>
 
-          <div class="controls">
-            <button class="btn" onclick="startPractice()">
-              🚀 Bắt đầu luyện tập
-            </button>
-            <button class="btn btn-secondary" onclick="showPreview()">
-              👁️ Xem trước 29 câu
-            </button>
-          </div>
-        </div>
-
-        <!-- Practice Screen -->
-        <div class="practice-card" id="practice-screen" style="display: none">
-          <div class="stats-row">
-            <div class="stat-box" id="timer-box">
-              <div class="stat-number" id="timer">04:00</div>
-              <div class="stat-label">⏰ Thời gian</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number" id="correct-count">0</div>
-              <div class="stat-label">✅ Hiểu rõ</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number" id="sentence-counter">1 / 29</div>
-              <div class="stat-label">📝 Câu hiện tại</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number" id="accuracy">0%</div>
-              <div class="stat-label">🎯 Độ chính xác</div>
-            </div>
-          </div>
-
-          <div class="progress-bar">
-            <div class="progress-fill" id="progress">0%</div>
-          </div>
-
-          <div class="sentence-display" id="sentence-display">
-            Nhấn "Bắt đầu" để bắt đầu luyện tập
-          </div>
-
-          <div class="controls" id="main-controls">
-            <button
-              class="btn btn-secondary"
-              onclick="speakGerman()"
-              id="speak-btn"
-              style="display: none"
-            >
-              🔊 Đọc câu
-            </button>
-            <button
-              class="btn btn-success"
-              onclick="markAnswer(true)"
-              id="understand-btn"
-              style="display: none"
-            >
-              ✅ Tôi hiểu
-            </button>
-            <button
-              class="btn btn-danger"
-              onclick="markAnswer(false)"
-              id="not-understand-btn"
-              style="display: none"
-            >
-              ❌ Chưa hiểu
-            </button>
-            <button
-              class="btn"
-              onclick="nextSentence()"
-              id="next-btn"
-              style="display: none"
-            >
-              ➡️ Câu tiếp theo
-            </button>
-          </div>
-
-          <div class="answer-section" id="answer-section">
-            <div class="german-text" id="german-text"></div>
-            <div class="analysis">
-              <h4>🔍 Phân tích cấu trúc câu</h4>
-              <div id="structure-analysis"></div>
-              <div class="word-analysis" id="word-analysis"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Completion Screen -->
-        <div class="completion-screen" id="completion-screen">
-          <div class="completion-emoji" id="result-emoji">🎉</div>
-          <h2 id="result-title">Hoàn thành!</h2>
-          <p style="font-size: 1.3em; margin: 20px 0" id="result-message"></p>
-
-          <div class="result-stats">
-            <div class="result-stat">
-              <div class="number" id="final-correct">0</div>
-              <div>Câu hiểu được</div>
-            </div>
-            <div class="result-stat">
-              <div class="number" id="final-total">0</div>
-              <div>Tổng số câu</div>
-            </div>
-            <div class="result-stat">
-              <div class="number" id="final-accuracy">0%</div>
-              <div>Độ chính xác</div>
-            </div>
-            <div class="result-stat">
-              <div class="number" id="final-time">00:00</div>
-              <div>Thời gian dùng</div>
-            </div>
-          </div>
-
-          <div class="controls">
-            <button class="btn" onclick="resetPractice()">🔄 Làm lại</button>
-            <button class="btn btn-secondary" onclick="showPreview()">
-              📖 Xem lại 29 câu
-            </button>
-          </div>
-        </div>
-
-        <!-- Preview Screen -->
-        <div class="completion-screen" id="preview-screen">
-          <h2 style="color: #2d3436; margin-bottom: 30px">
-            📋 Danh sách 29 câu luyện tập
-          </h2>
-
           <div
             style="
-              max-height: 500px;
-              overflow-y: auto;
-              text-align: left;
-              background: #f8f9ff;
-              padding: 25px;
-              border-radius: 15px;
-              border: 2px solid #667eea;
+              padding: 15px;
+              background: white;
+              border-radius: 8px;
+              border-left: 4px solid #ff9800;
             "
           >
-            <div id="preview-content"></div>
+            <h3 style="color: #ef6c00; margin-top: 0">QUY TẮC VỊ TRÍ:</h3>
+            <ul style="margin: 0; font-size: 14px">
+              <li><strong>Động từ chia:</strong> Luôn ở vị trí 2</li>
+              <li><strong>Tiền tố tách:</strong> Cuối câu chính</li>
+              <li><strong>Câu phụ với "weil":</strong> Động từ cuối</li>
+              <li>
+                <strong>Te-Ka-Mo-Lo:</strong> Thời gian - Nguyên nhân - Cách
+                thức - Địa điểm
+              </li>
+            </ul>
           </div>
+        </div>
 
-          <div class="controls" style="margin-top: 30px">
-            <button class="btn btn-secondary" onclick="hidePreview()">
-              ⬅️ Quay lại
-            </button>
-            <button class="btn" onclick="hidePreviewAndStart()">
-              🚀 Bắt đầu luyện tập
-            </button>
-          </div>
+        <div
+          style="
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff9c4;
+            border: 1px solid #fbc02d;
+            border-radius: 5px;
+          "
+        >
+          <h3 style="color: #f57f17; margin-top: 0">
+            CÔNG THỨC CHUẨN CHO BÀI NÓI A2:
+          </h3>
+          <p style="margin: 10px 0; font-weight: bold">
+            <span style="color: #c62828">Câu mở</span> →
+            <span style="color: #2e7d32">4 nhóm chủ đề phụ</span> (mỗi nhóm 3
+            câu) →
+            <span style="color: #c62828">Câu đóng</span>
+          </p>
+          <p style="margin: 10px 0; font-size: 14px">
+            = 1 + 12 + 1 = <strong>14 câu hoàn chỉnh</strong> với đầy đủ liên từ
+            và cấu trúc ngữ pháp chuẩn
+          </p>
         </div>
       </div>
     </div>
-
-    <script>
-      // Dữ liệu 29 câu với phân tích chi tiết
-      const sentences = [
-        {
-          german: "Hallo Mama!",
-          vietnamese: "Chào mẹ!",
-          analysis: "Lời chào + Xưng hô",
-          structure: "Thán từ chào hỏi",
-          words: ["Hallo (Chào - thán từ)", "Mama (Mẹ - xưng hô)"],
-        },
-        {
-          german: "Hier ist Cornelia.",
-          vietnamese: "Đây là Cornelia.",
-          analysis: "Hier (1) + ist (V2) + Cornelia (3)",
-          structure: "Trạng từ (1) + Động từ (V2) + Chủ ngữ (3)",
-          words: [
-            "Hier (Đây - trạng từ vị trí 1)",
-            "ist (là - động từ V2)",
-            "Cornelia (Cornelia - chủ ngữ vị trí 3)",
-          ],
-        },
-        {
-          german:
-            "Ich wollte dir nur Bescheid sagen, dass ich nicht kommen kann.",
-          vietnamese:
-            "Tôi chỉ muốn báo cho bạn biết rằng tôi không thể đến được.",
-          analysis:
-            "Ich (1) + wollte (V2) + dir (Dat) + nur + Bescheid sagen + dass-Nebensatz",
-          structure:
-            "Chủ ngữ + Động từ + Tân ngữ gián tiếp + Bổ nghĩa + Tân ngữ trực tiếp + Mệnh đề phụ thuộc",
-          words: [
-            "Ich (Tôi - chủ ngữ)",
-            "wollte (muốn - động từ quá khứ)",
-            "dir (cho bạn - Dativ)",
-            "nur (chỉ)",
-            "Bescheid sagen (báo tin)",
-          ],
-        },
-        {
-          german: "Ich habe zu Weihnachten arbeiten.",
-          vietnamese: "Tôi phải làm việc vào dịp Giáng sinh.",
-          analysis:
-            "Ich (1) + habe (V2) + zu Weihnachten (Te) + arbeiten (Inf)",
-          structure: "Chủ ngữ + Động từ trợ + Thời gian + Động từ nguyên mẫu",
-          words: [
-            "Ich (Tôi)",
-            "habe (phải)",
-            "zu Weihnachten (vào Giáng sinh - thời gian)",
-            "arbeiten (làm việc - infinitiv)",
-          ],
-        },
-        {
-          german: "Du Papi ist Dienst.",
-          vietnamese: "Và bố đang làm nhiệm vụ.",
-          analysis: "Du (liên từ) + Papi (1) + ist (V2) + Dienst (vị ngữ)",
-          structure:
-            "Liên từ + Chủ ngữ + Động từ + Vị ngữ (thiếu giới từ 'im')",
-          words: [
-            "Du/Und (Và)",
-            "Papi (Bố)",
-            "ist (đang)",
-            "Dienst (nhiệm vụ)",
-          ],
-        },
-        {
-          german: "Also können wir nicht zu euch fahren.",
-          vietnamese: "Vậy nên chúng tôi không thể đi đến chỗ các bạn.",
-          analysis:
-            "Also (1) + können (V2) + wir (3) + nicht + zu euch (Lo) + fahren (Inf)",
-          structure:
-            "Liên từ + Động từ khiếm khuyết + Chủ ngữ + Phủ định + Nơi chốn + Động từ nguyên mẫu",
-          words: [
-            "Also (Vậy nên)",
-            "können (có thể)",
-            "wir (chúng tôi)",
-            "nicht (không)",
-            "zu euch (đến chỗ bạn)",
-            "fahren (đi)",
-          ],
-        },
-        {
-          german:
-            "Ich hoffe, ihr versteht das, und ich wünsche euch frohe Weihnachten.",
-          vietnamese:
-            "Tôi hy vọng các bạn hiểu điều đó, và tôi chúc các bạn một Giáng sinh vui vẻ.",
-          analysis:
-            "Ich hoffe + Nebensatz + und + ich wünsche + euch (Dat) + frohe Weihnachten (Akk)",
-          structure:
-            "Chủ ngữ + Động từ + Mệnh đề phụ + Liên từ + Chủ ngữ + Động từ + Tân ngữ gián tiếp + Tân ngữ trực tiếp",
-          words: [
-            "Ich (Tôi)",
-            "hoffe (hy vọng)",
-            "wünsche (chúc)",
-            "euch (các bạn - Dativ)",
-            "frohe Weihnachten (Giáng sinh vui vẻ)",
-          ],
-        },
-        {
-          german: "Tut mir leid.",
-          vietnamese: "Tôi xin lỗi.",
-          analysis: "Tut (V1) + mir (Dat) + leid (vị ngữ)",
-          structure: "Cụm từ cố định - Động từ + Tân ngữ gián tiếp + Vị ngữ",
-          words: ["Tut (làm)", "mir (tôi - Dativ)", "leid (buồn/tiếc)"],
-        },
-        {
-          german:
-            "Und hier die aktuelle Verkehrslage mit Staumeldungen, Blitzen, Radarkallen und Baustellen.",
-          vietnamese:
-            "Và đây là tình hình giao thông hiện tại với các thông báo kẹt xe, radar, camera tốc độ và công trình xây dựng.",
-          analysis: "Und + hier + die aktuelle Verkehrslage + mit...(bổ nghĩa)",
-          structure:
-            "Liên từ + Trạng từ + Chủ ngữ phức tạp + Cụm giới từ bổ nghĩa",
-          words: [
-            "Und (Và)",
-            "hier (đây)",
-            "aktuelle Verkehrslage (tình hình giao thông hiện tại)",
-            "Staumeldungen (thông báo kẹt xe)",
-          ],
-        },
-        {
-          german:
-            "Die A3 von Frankfurt Richtung Würzburg ist zwischen den Anschlussstellen Aschaffenburg und Stockstadt gesperrt.",
-          vietnamese:
-            "Đường cao tốc A3 từ Frankfurt hướng Würzburg bị phong tỏa giữa các nút giao Aschaffenberg và Stockstadt.",
-          analysis:
-            "Die A3... (1) + ist (V2) + zwischen... (Lo) + gesperrt (vị ngữ)",
-          structure:
-            "Chủ ngữ mở rộng + Động từ sein + Nơi chốn + Tính từ vị ngữ",
-          words: [
-            "Die A3 (Đường A3)",
-            "von Frankfurt (từ Frankfurt)",
-            "ist (bị)",
-            "gesperrt (phong tỏa)",
-          ],
-        },
-        {
-          german: "Fahren Sie bitte vorsichtig!",
-          vietnamese: "Xin quý vị hãy lái xe cẩn thận!",
-          analysis: "Fahren (V1) + Sie (1) + bitte + vorsichtig (Mo)",
-          structure:
-            "Động từ mệnh lệnh + Chủ ngữ + Trạng từ lịch sự + Cách thức",
-          words: [
-            "Fahren (Lái xe - mệnh lệnh)",
-            "Sie (quý vị)",
-            "bitte (xin hãy)",
-            "vorsichtig (cẩn thận)",
-          ],
-        },
-        {
-          german:
-            "Auf der A7 zwischen Göttingen und Hannover stehen Sie 12 Kilometer Stau.",
-          vietnamese:
-            "Trên đường A7 giữa Göttingen và Hannover, quý vị sẽ gặp phải kẹt xe dài 12 kilomet.",
-          analysis:
-            "Auf der A7... (1) + stehen (V2) + Sie (3) + 12 Kilometer Stau (Akk)",
-          structure: "Cụm nơi chốn + Động từ + Chủ ngữ + Tân ngữ",
-          words: [
-            "Auf der A7 (Trên đường A7)",
-            "stehen (đứng/gặp phải)",
-            "Sie (quý vị)",
-            "12 Kilometer Stau (12km kẹt xe)",
-          ],
-        },
-        {
-          german: "Hallo!",
-          vietnamese: "Chào!",
-          analysis: "Thán từ chào hỏi",
-          structure: "Interjection - Thán từ",
-          words: ["Hallo (Chào - thán từ)"],
-        },
-        {
-          german: "Herr Kranz, hier ist Schwester Renate.",
-          vietnamese: "Ông Kranz, đây là y tá Renate.",
-          analysis:
-            "Herr Kranz (xưng hô) + hier (1) + ist (V2) + Schwester Renate (3)",
-          structure: "Xưng hô + Trạng từ + Động từ + Chủ ngữ",
-          words: [
-            "Herr Kranz (Ông Kranz)",
-            "hier (đây)",
-            "ist (là)",
-            "Schwester Renate (Y tá Renate)",
-          ],
-        },
-        {
-          german: "Ich rufe im Auftrag von Dr. Fahrenheit an.",
-          vietnamese: "Tôi gọi điện thay mặt cho Bác sĩ Fahrenheit.",
-          analysis:
-            "Ich (1) + rufe...an (V2 tách rời) + im Auftrag von Dr. Fahrenheit (Mo)",
-          structure: "Chủ ngữ + Động từ tách rời + Cách thức",
-          words: [
-            "Ich (Tôi)",
-            "rufe...an (gọi điện)",
-            "im Auftrag von (thay mặt cho)",
-            "Dr. Fahrenheit (Bác sĩ Fahrenheit)",
-          ],
-        },
-        {
-          german: "Er kann erst um 12:30 Uhr in seine Praxis kommen.",
-          vietnamese: "Ông ấy chỉ có thể đến phòng khám của mình lúc 12:30.",
-          analysis:
-            "Er (1) + kann (V2) + erst + um 12:30 Uhr (Te) + in seine Praxis (Lo) + kommen (Inf)",
-          structure:
-            "Chủ ngữ + Động từ khiếm khuyết + Bổ nghĩa + Thời gian + Nơi chốn + Động từ nguyên mẫu",
-          words: [
-            "Er (Ông ấy)",
-            "kann (có thể)",
-            "erst (chỉ)",
-            "um 12:30 Uhr (lúc 12:30)",
-            "in seine Praxis (đến phòng khám)",
-          ],
-        },
-        {
-          german: "Könnten Sie Ihren Termin um 13 Uhr machen?",
-          vietnamese: "Ông có thể đặt cuộc hẹn lúc 13 giờ được không?",
-          analysis:
-            "Könnten (V1) + Sie (1) + Ihren Termin (Akk) + um 13 Uhr (Te) + machen (Inf)",
-          structure:
-            "Động từ khiếm khuyết lịch sự + Chủ ngữ + Tân ngữ + Thời gian + Động từ nguyên mẫu",
-          words: [
-            "Könnten (Có thể - lịch sự)",
-            "Sie (ông)",
-            "Ihren Termin (cuộc hẹn)",
-            "um 13 Uhr (lúc 13h)",
-            "machen (đặt)",
-          ],
-        },
-        {
-          german: "Rufen Sie mich bitte zurück.",
-          vietnamese: "Xin ông hãy gọi lại cho tôi.",
-          analysis:
-            "Rufen...zurück (V1 tách rời) + Sie (1) + mich (Akk) + bitte",
-          structure:
-            "Động từ tách rời mệnh lệnh + Chủ ngữ + Tân ngữ + Trạng từ lịch sự",
-          words: [
-            "Rufen...zurück (gọi lại)",
-            "Sie (ông)",
-            "mich (tôi - Akkusativ)",
-            "bitte (xin hãy)",
-          ],
-        },
-        {
-          german: "Hallo!",
-          vietnamese: "Chào!",
-          analysis: "Thán từ chào hỏi",
-          structure: "Interjection",
-          words: ["Hallo (Chào)"],
-        },
-        {
-          german:
-            "Hier ist der Sportclub aus Sachsen mit Samstag ein Spieltag gegen die Wiesbadener geplant war.",
-          vietnamese:
-            "Đây là câu lạc bộ thể thao từ Sachsen - có trận đấu với đội Wiesbaden được lên kế hoạch vào thứ Bảy.",
-          analysis:
-            "Hier (1) + ist (V2) + der Sportclub... (3) + Relativsatz (có lỗi cấu trúc)",
-          structure:
-            "Trạng từ + Động từ + Chủ ngữ mở rộng + Mệnh đề quan hệ (lỗi ngữ pháp)",
-          words: [
-            "Hier (Đây)",
-            "ist (là)",
-            "Sportclub (câu lạc bộ thể thao)",
-            "aus Sachsen (từ Sachsen)",
-          ],
-        },
-        {
-          german:
-            "Er ist gewonnen für ein Spitzenspiel gegen die Wiesbadener geplant für, gewann mit 3 zu 1 in Hamburg.",
-          vietnamese:
-            "(Câu có lỗi cấu trúc - có thể muốn nói: Họ đã thắng trong trận đấu quan trọng với đội Wiesbaden, thắng 3-1 ở Hamburg)",
-          analysis: "Câu có lỗi ngữ pháp nghiêm trọng",
-          structure: "Cấu trúc không rõ ràng do lỗi ngữ pháp",
-          words: [
-            "Er (Họ)",
-            "gewonnen (đã thắng - lỗi cấu trúc)",
-            "Spitzenspiel (trận đấu quan trọng)",
-            "3 zu 1 (3-1)",
-          ],
-        },
-        {
-          german:
-            "Aber am Ende kann dann doch der Sachsen-Team mit seinen Wiesbadener Gewinnen noch mit 3 zu 1.",
-          vietnamese:
-            "Nhưng cuối cùng đội Sachsen vẫn có thể thắng với tỷ số 3-1.",
-          analysis:
-            "Aber + am Ende (1) + kann (V2) + dann doch + der Sachsen-Team (3) + gewinnen (Inf) + mit 3 zu 1",
-          structure:
-            "Liên từ + Thời gian + Động từ khiếm khuyết + Bổ nghĩa + Chủ ngữ + Động từ nguyên mẫu + Kết quả",
-          words: [
-            "Aber (Nhưng)",
-            "am Ende (cuối cùng)",
-            "kann (có thể)",
-            "Sachsen-Team (đội Sachsen)",
-            "mit 3 zu 1 (3-1)",
-          ],
-        },
-        {
-          german:
-            "Das war unser kurzes Sport vier vor und bis hier nach Wiesbadener Geschichten bis 21 zu 21.",
-          vietnamese:
-            "Đó là bản tin thể thao ngắn của chúng tôi... (phần sau không rõ nghĩa do lỗi cấu trúc)",
-          analysis:
-            "Das (1) + war (V2) + unser kurzes Sport + (phần còn lại có lỗi cấu trúc)",
-          structure: "Chủ ngữ + Động từ + Vị ngữ + (cấu trúc lỗi)",
-          words: [
-            "Das (Đó)",
-            "war (đã là)",
-            "unser kurzes Sport (bản tin thể thao ngắn của chúng tôi)",
-          ],
-        },
-        {
-          german: "Achtung, Achtung!",
-          vietnamese: "Chú ý, chú ý!",
-          analysis: "Thán từ cảnh báo lặp lại",
-          structure: "Interjection - Thán từ cảnh báo",
-          words: ["Achtung (Chú ý - thán từ cảnh báo)"],
-        },
-        {
-          german: "Hier spricht LH 2462 nach Helsinki muss umgeleitet werden.",
-          vietnamese:
-            "Đây là thông báo: Chuyến bay LH 2462 đi Helsinki phải được chuyển hướng.",
-          analysis:
-            "Hier (1) + spricht (V2) + LH 2462... (3) + muss umgeleitet werden (bị động)",
-          structure:
-            "Trạng từ + Động từ + Chủ ngữ + Động từ khiếm khuyết + Quá khứ phân từ + Động từ trợ bị động",
-          words: [
-            "Hier (Đây)",
-            "spricht (thông báo)",
-            "LH 2462 (chuyến bay LH 2462)",
-            "muss umgeleitet werden (phải được chuyển hướng)",
-          ],
-        },
-        {
-          german:
-            "Die Passagiere werden gebeten, sich am Informationsschalter 1 zu melden.",
-          vietnamese:
-            "Các hành khách được yêu cầu đến báo cáo tại quầy thông tin số 1.",
-          analysis:
-            "Die Passagiere (1) + werden gebeten (V2 bị động) + sich...zu melden (Inf) + am Informationsschalter 1 (Lo)",
-          structure:
-            "Chủ ngữ + Động từ bị động + Địa điểm + Động từ phản thân + Infinitiv",
-          words: [
-            "Die Passagiere (Các hành khách)",
-            "werden gebeten (được yêu cầu)",
-            "sich melden (báo cáo)",
-            "Informationsschalter (quầy thông tin)",
-          ],
-        },
-        {
-          german:
-            "Letzter Aufruf für alle Passagiere des Lufthansaflugs LH 2598.",
-          vietnamese:
-            "Lời gọi cuối cùng cho tất cả hành khách của chuyến bay Lufthansa LH 2598.",
-          analysis:
-            "Letzter Aufruf (chủ ngữ) + für alle Passagiere... (cụm giới từ bổ nghĩa)",
-          structure:
-            "Danh từ chính + Cụm giới từ bổ nghĩa (Câu danh từ - không có động từ)",
-          words: [
-            "Letzter Aufruf (Lời gọi cuối cùng)",
-            "für alle Passagiere (cho tất cả hành khách)",
-            "Lufthansaflugs LH 2598 (chuyến bay Lufthansa)",
-          ],
-        },
-        {
-          german:
-            "Sie werden gebeten, sich sofort zum Flugsteig A12 zu begeben für Lufthansaflug 2298 nach Paris hat sich geändert.",
-          vietnamese:
-            "Quý vị được yêu cầu ngay lập tức đi đến cửa lên máy bay A12. Chuyến bay Lufthansa 2298 đi Paris đã có thay đổi.",
-          analysis:
-            "Sie werden gebeten...zu begeben + für Lufthansaflug...hat sich geändert (2 câu ghép sai)",
-          structure:
-            "Chủ ngữ + Động từ bị động + Infinitivkonstruktion + Thông tin bổ sung về chuyến bay khác",
-          words: [
-            "Sie (Quý vị)",
-            "werden gebeten (được yêu cầu)",
-            "sofort (ngay lập tức)",
-            "zum Flugsteig A12 (đến cửa A12)",
-            "hat sich geändert (đã thay đổi)",
-          ],
-        },
-        {
-          german: "Das neue Flugsteig ist A15.",
-          vietnamese: "Cửa lên máy bay mới là A15.",
-          analysis: "Das neue Flugsteig (1) + ist (V2) + A15 (vị ngữ)",
-          structure: "Chủ ngữ + Động từ sein + Vị ngữ",
-          words: [
-            "Das neue Flugsteig (Cửa lên máy bay mới)",
-            "ist (là)",
-            "A15 (A15)",
-          ],
-        },
-      ];
-
-      // App state
-      let currentIndex = 0;
-      let correctCount = 0;
-      let totalAnswered = 0;
-      let startTime = null;
-      let timerInterval = null;
-      let timeLimit = 4 * 60; // 4 minutes
-      let timeRemaining = timeLimit;
-      let isStarted = false;
-
-      // Initialize
-      function init() {
-        updateDisplay();
-      }
-
-      // Start practice
-      function startPractice() {
-        isStarted = true;
-        currentIndex = 0;
-        correctCount = 0;
-        totalAnswered = 0;
-        timeRemaining = timeLimit;
-        startTime = new Date();
-
-        document.getElementById("start-screen").style.display = "none";
-        document.getElementById("practice-screen").style.display = "block";
-
-        startTimer();
-        loadCurrentSentence();
-      }
-
-      // Start timer
-      function startTimer() {
-        timerInterval = setInterval(() => {
-          timeRemaining--;
-          updateTimerDisplay();
-
-          if (timeRemaining <= 0) {
-            endPractice();
-          }
-        }, 1000);
-      }
-
-      // Update timer display
-      function updateTimerDisplay() {
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining % 60;
-        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
-          .toString()
-          .padStart(2, "0")}`;
-
-        document.getElementById("timer").textContent = timeStr;
-
-        const timerBox = document.getElementById("timer-box");
-        if (timeRemaining <= 30) {
-          timerBox.classList.add("timer-warning");
-        } else {
-          timerBox.classList.remove("timer-warning");
-        }
-      }
-
-      // Load current sentence
-      function loadCurrentSentence() {
-        if (currentIndex >= sentences.length) {
-          endPractice();
-          return;
-        }
-
-        const sentence = sentences[currentIndex];
-        document.getElementById("sentence-display").textContent =
-          sentence.german;
-        document.getElementById("sentence-counter").textContent = `${
-          currentIndex + 1
-        } / ${sentences.length}`;
-
-        // Update progress
-        const progress = ((currentIndex + 1) / sentences.length) * 100;
-        document.getElementById("progress").style.width = `${progress}%`;
-        document.getElementById("progress").textContent = `${Math.round(
-          progress
-        )}%`;
-
-        // Show control buttons
-        document.getElementById("speak-btn").style.display = "inline-block";
-        document.getElementById("understand-btn").style.display =
-          "inline-block";
-        document.getElementById("not-understand-btn").style.display =
-          "inline-block";
-        document.getElementById("next-btn").style.display = "none";
-        document.getElementById("answer-section").classList.remove("show");
-
-        // Auto speak
-        setTimeout(() => speakGerman(), 500);
-      }
-
-      // Speak German sentence
-      function speakGerman() {
-        if ("speechSynthesis" in window) {
-          const sentence = sentences[currentIndex];
-          speechSynthesis.cancel();
-
-          const utterance = new SpeechSynthesisUtterance(sentence.german);
-          utterance.lang = "de-DE";
-          utterance.rate = 0.7;
-          utterance.pitch = 1.0;
-          utterance.volume = 1.0;
-          speechSynthesis.speak(utterance);
-        }
-      }
-
-      // Mark answer
-      function markAnswer(understood) {
-        totalAnswered++;
-        if (understood) {
-          correctCount++;
-        }
-
-        // Update stats
-        document.getElementById("correct-count").textContent = correctCount;
-        const accuracy =
-          totalAnswered > 0
-            ? Math.round((correctCount / totalAnswered) * 100)
-            : 0;
-        document.getElementById("accuracy").textContent = `${accuracy}%`;
-
-        // Show answer
-        showAnswer();
-
-        // Update buttons
-        document.getElementById("understand-btn").style.display = "none";
-        document.getElementById("not-understand-btn").style.display = "none";
-        document.getElementById("next-btn").style.display = "inline-block";
-      }
-
-      // Show answer with analysis
-      function showAnswer() {
-        const sentence = sentences[currentIndex];
-
-        document.getElementById("german-text").textContent = sentence.german;
-        document.getElementById("structure-analysis").innerHTML = `
-                <p><strong>📝 Dịch nghĩa:</strong> ${sentence.vietnamese}</p>
-                <p><strong>🔍 Phân tích:</strong> ${sentence.analysis}</p>
-                <p><strong>⚙️ Cấu trúc:</strong> ${sentence.structure}</p>
-            `;
-
-        const wordAnalysis = document.getElementById("word-analysis");
-        wordAnalysis.innerHTML = "";
-        sentence.words.forEach((word) => {
-          const tag = document.createElement("span");
-          tag.className = "word-tag";
-          tag.textContent = word;
-          wordAnalysis.appendChild(tag);
-        });
-
-        document.getElementById("answer-section").classList.add("show");
-      }
-
-      // Next sentence
-      function nextSentence() {
-        currentIndex++;
-        loadCurrentSentence();
-      }
-
-      // End practice
-      function endPractice() {
-        if (timerInterval) {
-          clearInterval(timerInterval);
-        }
-
-        const totalTime = Math.floor((new Date() - startTime) / 1000);
-        const minutes = Math.floor(totalTime / 60);
-        const seconds = totalTime % 60;
-        const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
-          .toString()
-          .padStart(2, "0")}`;
-
-        const finalAccuracy =
-          totalAnswered > 0
-            ? Math.round((correctCount / totalAnswered) * 100)
-            : 0;
-
-        // Update final stats
-        document.getElementById("final-correct").textContent = correctCount;
-        document.getElementById("final-total").textContent = totalAnswered;
-        document.getElementById(
-          "final-accuracy"
-        ).textContent = `${finalAccuracy}%`;
-        document.getElementById("final-time").textContent = timeStr;
-
-        // Determine result
-        let resultEmoji, resultTitle, resultMessage;
-        if (finalAccuracy >= 80) {
-          resultEmoji = "🏆";
-          resultTitle = "Xuất sắc!";
-          resultMessage = `Bạn hiểu ${correctCount}/${totalAnswered} câu (${finalAccuracy}%). Tuyệt vời!`;
-        } else if (finalAccuracy >= 60) {
-          resultEmoji = "👍";
-          resultTitle = "Tốt lắm!";
-          resultMessage = `Bạn hiểu ${correctCount}/${totalAnswered} câu (${finalAccuracy}%). Tiếp tục luyện tập!`;
-        } else {
-          resultEmoji = "📚";
-          resultTitle = "Cần luyện thêm!";
-          resultMessage = `Bạn hiểu ${correctCount}/${totalAnswered} câu (${finalAccuracy}%). Đừng nản lòng!`;
-        }
-
-        document.getElementById("result-emoji").textContent = resultEmoji;
-        document.getElementById("result-title").textContent = resultTitle;
-        document.getElementById("result-message").textContent = resultMessage;
-
-        // Show completion screen
-        document.getElementById("practice-screen").style.display = "none";
-        document.getElementById("completion-screen").classList.add("show");
-      }
-
-      // Show preview
-      function showPreview() {
-        let html = "";
-        sentences.forEach((sentence, index) => {
-          html += `
-                    <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 15px; border: 1px solid #ddd;">
-                        <div style="font-weight: bold; font-size: 1.1em; color: #667eea; margin-bottom: 10px;">
-                            <span style="background: #667eea; color: white; padding: 5px 10px; border-radius: 15px; margin-right: 10px; font-size: 0.9em;">${
-                              index + 1
-                            }</span>
-                            ${sentence.german}
-                        </div>
-                        <div style="color: #666; margin-bottom: 8px;">
-                            <strong>📝 Nghĩa:</strong> ${sentence.vietnamese}
-                        </div>
-                        <div style="color: #888; font-size: 0.9em;">
-                            <strong>🔍 Cấu trúc:</strong> ${sentence.structure}
-                        </div>
-                    </div>
-                `;
-        });
-
-        document.getElementById("preview-content").innerHTML = html;
-        document.getElementById("start-screen").style.display = "none";
-        document.getElementById("preview-screen").classList.add("show");
-      }
-
-      // Hide preview
-      function hidePreview() {
-        document.getElementById("preview-screen").classList.remove("show");
-        document.getElementById("start-screen").style.display = "block";
-      }
-
-      // Hide preview and start
-      function hidePreviewAndStart() {
-        document.getElementById("preview-screen").classList.remove("show");
-        startPractice();
-      }
-
-      // Reset practice
-      function resetPractice() {
-        currentIndex = 0;
-        correctCount = 0;
-        totalAnswered = 0;
-        timeRemaining = timeLimit;
-        isStarted = false;
-
-        if (timerInterval) {
-          clearInterval(timerInterval);
-        }
-
-        // Reset UI
-        document.getElementById("completion-screen").classList.remove("show");
-        document.getElementById("start-screen").style.display = "block";
-        document.getElementById("practice-screen").style.display = "none";
-      }
-
-      // Update display
-      function updateDisplay() {
-        if (!isStarted) {
-          document.getElementById("sentence-display").textContent =
-            'Nhấn "Bắt đầu" để bắt đầu luyện tập';
-        }
-      }
-
-      // Keyboard shortcuts
-      document.addEventListener("keydown", function (e) {
-        if (!isStarted) return;
-
-        switch (e.key) {
-          case " ":
-            e.preventDefault();
-            speakGerman();
-            break;
-          case "1":
-            e.preventDefault();
-            if (
-              document.getElementById("understand-btn").style.display !== "none"
-            ) {
-              markAnswer(true);
-            }
-            break;
-          case "2":
-            e.preventDefault();
-            if (
-              document.getElementById("not-understand-btn").style.display !==
-              "none"
-            ) {
-              markAnswer(false);
-            }
-            break;
-          case "Enter":
-            e.preventDefault();
-            if (document.getElementById("next-btn").style.display !== "none") {
-              nextSentence();
-            }
-            break;
-        }
-      });
-
-      // Initialize when page loads
-      window.onload = init;
-    </script>
   </body>
 </html>
