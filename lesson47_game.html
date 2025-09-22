@@ -1,1425 +1,1139 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phân Tích Ngữ Pháp Tiếng Đức A2</title>
     <style>
-      body {
-        font-family: "Arial", sans-serif;
-        line-height: 1.6;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #333;
-      }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #e74c3c;
+            margin-top: 30px;
+            background: #ecf0f1;
+            padding: 10px;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        h3 {
+            color: #27ae60;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 5px;
+        }
 
-      .container {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
+        .keyword-section {
+            background: #f8f9fa;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
 
-      h1 {
-        text-align: center;
-        color: #2c3e50;
-        margin-bottom: 30px;
-        border-bottom: 3px solid #3498db;
-        padding-bottom: 10px;
-      }
+        .keyword-title {
+            background: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .sentence {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .german {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .vietnamese {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .analysis {
+            margin-top: 10px;
+            padding: 15px;
+            background: #e8f5e8;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
 
-      h2 {
-        color: #e74c3c;
-        margin-top: 30px;
-        background: #ecf0f1;
-        padding: 10px;
-        border-left: 5px solid #e74c3c;
-      }
+        .word-analysis {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 8px 0;
+            border-left: 3px solid #ffc107;
+        }
 
-      h3 {
-        color: #27ae60;
-        border-bottom: 2px solid #27ae60;
-        padding-bottom: 5px;
-      }
+        .structure-analysis {
+            background: #d1ecf1;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 8px 0;
+            border-left: 3px solid #17a2b8;
+        }
+        
+        .hauptsatz {
+            border-left-color: #27ae60;
+        }
+        
+        .nebensatz {
+            border-left-color: #e74c3c;
+        }
+        
+        .structure-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-      .keyword-section {
-        background: #f8f9fa;
-        border: 2px solid #3498db;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 20px 0;
-      }
+        .intro-section {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #3498db;
+        }
 
-      .keyword-title {
-        background: #3498db;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        font-weight: bold;
-        font-size: 1.1em;
-        margin-bottom: 15px;
-        text-align: center;
-      }
+        .questions-section {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #6c5ce7;
+        }
 
-      .sentence {
-        margin: 15px 0;
-        padding: 15px;
-        background: white;
-        border-left: 4px solid #3498db;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-
-      .german {
-        font-size: 1.2em;
-        font-weight: bold;
-        margin-bottom: 8px;
-        line-height: 1.8;
-        color: #2c3e50;
-      }
-
-      .vietnamese {
-        color: #7f8c8d;
-        font-style: italic;
-        margin-bottom: 10px;
-      }
-
-      .analysis {
-        margin-top: 10px;
-        padding: 15px;
-        background: #e8f5e8;
-        border-radius: 5px;
-        font-size: 0.95em;
-      }
-
-      .word-analysis {
-        background: #fff3cd;
-        padding: 10px;
-        border-radius: 5px;
-        margin: 8px 0;
-        border-left: 3px solid #ffc107;
-      }
-
-      .structure-analysis {
-        background: #d1ecf1;
-        padding: 10px;
-        border-radius: 5px;
-        margin: 8px 0;
-        border-left: 3px solid #17a2b8;
-      }
-
-      .hauptsatz {
-        border-left-color: #27ae60;
-      }
-
-      .nebensatz {
-        border-left-color: #e74c3c;
-      }
-
-      .structure-box {
-        background: #fff3cd;
-        border: 1px solid #ffeaa7;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 8px;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        background: white;
-      }
-
-      th,
-      td {
-        padding: 12px;
-        text-align: left;
-        border: 1px solid #ddd;
-      }
-
-      th {
-        background-color: #3498db;
-        color: white;
-        font-weight: bold;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      .intro-section {
-        background: #e8f4fd;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 30px;
-        border: 2px solid #3498db;
-      }
-
-      .questions-section {
-        background: #f0f8ff;
-        padding: 15px;
-        border-radius: 8px;
-        margin-top: 20px;
-        border-left: 4px solid #6c5ce7;
-      }
-
-      .word-item {
-        margin: 3px 0;
-        padding: 2px 0;
-      }
+        .word-item {
+            margin: 3px 0;
+            padding: 2px 0;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <h1>PHÂN TÍCH NGỮ PHÁP TIẾNG ĐỨC A2</h1>
-
-      <div class="intro-section">
-        <h3>CẤU TRÚC BÀI NÓI A2:</h3>
-        <p>
-          <strong>1 câu mở đầu</strong> + <strong>4 keywords</strong> (mỗi
-          keyword = 3 câu liên kết) + <strong>1 câu kết luận</strong> +
-          <strong>2 câu hỏi bổ sung</strong>
-        </p>
-      </div>
-
-      <h2>BÀI 1: WAS MACHEN SIE GERN IN IHRER FREIZEIT?</h2>
-
-      <div class="sentence hauptsatz">
-        <div class="german">
-          <strong>CÂU MỞ ĐẦU:</strong> Meine Freizeit ist sehr wichtig für mich.
+        <h1>PHÂN TÍCH NGỮ PHÁP TIẾNG ĐỨC A2</h1>
+        
+        <div class="intro-section">
+            <h3>CẤU TRÚC BÀI NÓI A2:</h3>
+            <p><strong>1 câu mở đầu</strong> + <strong>4 keywords</strong> (mỗi keyword = 3 câu liên kết) + <strong>1 câu kết luận</strong> + <strong>2 câu hỏi bổ sung</strong></p>
         </div>
-        <div class="vietnamese">
-          → Thời gian rảnh của tôi rất quan trọng đối với tôi.
-        </div>
-        <div class="analysis">
-          <div class="word-analysis">
-            <strong>Phân tích từng từ:</strong><br />
-            <div class="word-item">
-              • Meine = Đại từ sở hữu (Possessivpronomen)
-            </div>
-            <div class="word-item">• Freizeit = Danh từ chủ ngữ (Subjekt)</div>
-            <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
-            <div class="word-item">• sehr = Trạng từ (Adverb)</div>
-            <div class="word-item">• wichtig = Tính từ vị ngữ (Adjektiv)</div>
-            <div class="word-item">• für = Giới từ (Präposition)</div>
-            <div class="word-item">
-              • mich = Đại từ tân ngữ (Akkusativ-Pronomen)
-            </div>
-          </div>
-          <div class="structure-analysis">
-            <strong>Cấu trúc:</strong> Hauptsatz - Chủ ngữ + Động từ (vị trí 2)
-            + Tính từ + Giới từ
-          </div>
-        </div>
-      </div>
 
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 1: FREUNDE BESUCHEN</div>
-
+        <h2>BÀI 1: WAS MACHEN SIE GERN IN IHRER FREIZEIT?</h2>
+        
         <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Zu Hause lese ich gern Bücher, besonders am
-            Abend vor dem Schlafen.
-          </div>
-          <div class="vietnamese">
-            → Ở nhà tôi thích đọc sách, đặc biệt vào buổi tối trước khi ngủ.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Zu Hause = Trạng từ chỉ nơi chốn (Lokaladverb - vị trí 1)
-              </div>
-              <div class="word-item">
-                • lese = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
-              <div class="word-item">• gern = Trạng từ (Modaladverb)</div>
-              <div class="word-item">
-                • Bücher = Tân ngữ trực tiếp (Akkusativ-Objekt)
-              </div>
-              <div class="word-item">• besonders = Trạng từ (Adverb)</div>
-              <div class="word-item">
-                • am Abend = Trạng ngữ thời gian (Temporaladverb)
-              </div>
-              <div class="word-item">
-                • vor dem Schlafen = Trạng ngữ thời gian (Dativ)
-              </div>
+            <div class="german">
+                <strong>CÂU MỞ ĐẦU:</strong> Meine Freizeit ist sehr wichtig für mich.
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với trạng từ đầu câu - Vị trí
-              1: Trạng từ → Vị trí 2: Động từ → Vị trí 3: Chủ ngữ
+            <div class="vietnamese">→ Thời gian rảnh của tôi rất quan trọng đối với tôi.</div>
+            <div class="analysis">
+                <div class="word-analysis">
+                    <strong>Phân tích từng từ:</strong><br>
+                    <div class="word-item">• Meine = Đại từ sở hữu (Possessivpronomen)</div>
+                    <div class="word-item">• Freizeit = Danh từ chủ ngữ (Subjekt)</div>
+                    <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                    <div class="word-item">• sehr = Trạng từ (Adverb)</div>
+                    <div class="word-item">• wichtig = Tính từ vị ngữ (Adjektiv)</div>
+                    <div class="word-item">• für = Giới từ (Präposition)</div>
+                    <div class="word-item">• mich = Đại từ tân ngữ (Akkusativ-Pronomen)</div>
+                </div>
+                <div class="structure-analysis">
+                    <strong>Cấu trúc:</strong> Hauptsatz - Chủ ngữ + Động từ (vị trí 2) + Tính từ + Giới từ
+                </div>
             </div>
-          </div>
         </div>
 
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Das macht Spaß und hilft mir beim Lernen.
-          </div>
-          <div class="vietnamese">→ Điều đó vui và giúp tôi học tập.</div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Das = Đại từ chỉ định (Demonstrativpronomen - chủ ngữ)
-              </div>
-              <div class="word-item">
-                • macht = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• Spaß = Tân ngữ (Akkusativ-Objekt)</div>
-              <div class="word-item">
-                • und = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">• hilft = Động từ chia thứ 2 (Verb)</div>
-              <div class="word-item">
-                • mir = Tân ngữ gián tiếp (Dativ-Objekt)
-              </div>
-              <div class="word-item">
-                • beim Lernen = Trạng ngữ (Dativ + danh động từ)
-              </div>
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 1: LESEN</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Zu Hause lese ich gern Bücher, besonders am Abend vor dem Schlafen.
+                </div>
+                <div class="vietnamese">→ Ở nhà tôi thích đọc sách, đặc biệt vào buổi tối trước khi ngủ.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Zu Hause = Trạng từ chỉ nơi chốn (Lokaladverb - vị trí 1)</div>
+                        <div class="word-item">• lese = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• gern = Trạng từ (Modaladverb)</div>
+                        <div class="word-item">• Bücher = Tân ngữ trực tiếp (Akkusativ-Objekt)</div>
+                        <div class="word-item">• besonders = Trạng từ (Adverb)</div>
+                        <div class="word-item">• am Abend = Trạng ngữ thời gian (Temporaladverb)</div>
+                        <div class="word-item">• vor dem Schlafen = Trạng ngữ thời gian (Dativ)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với trạng từ đầu câu - Vị trí 1: Trạng từ → Vị trí 2: Động từ → Vị trí 3: Chủ ngữ
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz ghép với "und" - Đại từ "Das"
-              liên kết với câu trước
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 2: LESEN</div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Auch meine Freunde treffe ich oft in der
-            Freizeit.
-          </div>
-          <div class="vietnamese">
-            → Tôi cũng thường gặp bạn bè trong thời gian rảnh.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">• Auch = Trạng từ (Modalpartikel)</div>
-              <div class="word-item">
-                • meine Freunde = Tân ngữ trực tiếp (Akkusativ-Objekt - vị trí
-                1)
-              </div>
-              <div class="word-item">
-                • treffe = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
-              <div class="word-item">• oft = Trạng từ tần suất (Adverb)</div>
-              <div class="word-item">
-                • in der Freizeit = Trạng ngữ thời gian (Dativ)
-              </div>
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Das macht Spaß und hilft mir beim Lernen.
+                </div>
+                <div class="vietnamese">→ Điều đó vui và giúp tôi học tập.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Das = Đại từ chỉ định (Demonstrativpronomen - chủ ngữ)</div>
+                        <div class="word-item">• macht = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• Spaß = Tân ngữ (Akkusativ-Objekt)</div>
+                        <div class="word-item">• und = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• hilft = Động từ chia thứ 2 (Verb)</div>
+                        <div class="word-item">• mir = Tân ngữ gián tiếp (Dativ-Objekt)</div>
+                        <div class="word-item">• beim Lernen = Trạng ngữ (Dativ + danh động từ)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz ghép với "und" - Đại từ "Das" liên kết với câu trước
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với tân ngữ đầu câu - Tân ngữ
-              lên đầu để nhấn mạnh
-            </div>
-          </div>
         </div>
 
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Am Wochenende gehen wir zusammen spazieren
-            oder trinken Kaffee.
-          </div>
-          <div class="vietnamese">
-            → Cuối tuần chúng tôi cùng đi dạo hoặc uống cà phê.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Am Wochenende = Trạng ngữ thời gian (Temporaladverb - vị trí
-                1)
-              </div>
-              <div class="word-item">
-                • gehen = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• wir = Chủ ngữ (Subjekt - vị trí 3)</div>
-              <div class="word-item">• zusammen = Trạng từ (Adverb)</div>
-              <div class="word-item">
-                • spazieren = Động từ nguyên thể (Infinitiv)
-              </div>
-              <div class="word-item">
-                • oder = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">• trinken = Động từ chia (Verb)</div>
-              <div class="word-item">• Kaffee = Tân ngữ (Akkusativ-Objekt)</div>
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 2: FREUNDE BESUCHEN</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Auch meine Freunde treffe ich oft in der Freizeit.
+                </div>
+                <div class="vietnamese">→ Tôi cũng thường gặp bạn bè trong thời gian rảnh.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Auch = Trạng từ (Modalpartikel)</div>
+                        <div class="word-item">• meine Freunde = Tân ngữ trực tiếp (Akkusativ-Objekt - vị trí 1)</div>
+                        <div class="word-item">• treffe = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• oft = Trạng từ tần suất (Adverb)</div>
+                        <div class="word-item">• in der Freizeit = Trạng ngữ thời gian (Dativ)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với tân ngữ đầu câu - Tân ngữ lên đầu để nhấn mạnh
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với động từ ghép - "gehen
-              spazieren" và liên từ "oder"
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Am Wochenende gehen wir zusammen spazieren oder trinken Kaffee.
+                </div>
+                <div class="vietnamese">→ Cuối tuần chúng tôi cùng đi dạo hoặc uống cà phê.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Am Wochenende = Trạng ngữ thời gian (Temporaladverb - vị trí 1)</div>
+                        <div class="word-item">• gehen = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• wir = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• zusammen = Trạng từ (Adverb)</div>
+                        <div class="word-item">• spazieren = Động từ nguyên thể (Infinitiv)</div>
+                        <div class="word-item">• oder = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• trinken = Động từ chia (Verb)</div>
+                        <div class="word-item">• Kaffee = Tân ngữ (Akkusativ-Objekt)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với động từ ghép - "gehen spazieren" và liên từ "oder"
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <div class="sentence nebensatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> Das gefällt mir sehr, weil wir viel Zeit zum Reden haben.
+                </div>
+                <div class="vietnamese">→ Tôi rất thích điều đó vì chúng tôi có nhiều thời gian để nói chuyện.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề chính:</u><br>
+                        <div class="word-item">• Das = Đại từ chỉ định (Demonstrativpronomen)</div>
+                        <div class="word-item">• gefällt = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• mir = Tân ngữ gián tiếp (Dativ-Objekt)</div>
+                        <div class="word-item">• sehr = Trạng từ (Adverb)</div>
+                        <u>Mệnh đề phụ:</u><br>
+                        <div class="word-item">• weil = Liên từ phụ thuộc (Subjunktion)</div>
+                        <div class="word-item">• wir = Chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• viel = Tính từ (Adjektiv)</div>
+                        <div class="word-item">• Zeit = Tân ngữ (Akkusativ-Objekt)</div>
+                        <div class="word-item">• zum Reden = Giới từ + danh động từ</div>
+                        <div class="word-item">• haben = Động từ chia (cuối câu trong Nebensatz)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz + Nebensatz với "weil" - Động từ "haben" đứng cuối mệnh đề phụ
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="sentence nebensatz">
-          <div class="german">
-            <strong>Câu 3:</strong> Das gefällt mir sehr, weil wir viel Zeit zum
-            Reden haben.
-          </div>
-          <div class="vietnamese">
-            → Tôi rất thích điều đó vì chúng tôi có nhiều thời gian để nói
-            chuyện.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề chính:</u><br />
-              <div class="word-item">
-                • Das = Đại từ chỉ định (Demonstrativpronomen)
-              </div>
-              <div class="word-item">
-                • gefällt = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • mir = Tân ngữ gián tiếp (Dativ-Objekt)
-              </div>
-              <div class="word-item">• sehr = Trạng từ (Adverb)</div>
-              <u>Mệnh đề phụ:</u><br />
-              <div class="word-item">
-                • weil = Liên từ phụ thuộc (Subjunktion)
-              </div>
-              <div class="word-item">• wir = Chủ ngữ (Subjekt)</div>
-              <div class="word-item">• viel = Tính từ (Adjektiv)</div>
-              <div class="word-item">• Zeit = Tân ngữ (Akkusativ-Objekt)</div>
-              <div class="word-item">• zum Reden = Giới từ + danh động từ</div>
-              <div class="word-item">
-                • haben = Động từ chia (cuối câu trong Nebensatz)
-              </div>
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 3: RAD FAHREN</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Am Wochenende fahre ich manchmal Fahrrad.
+                </div>
+                <div class="vietnamese">→ Cuối tuần đôi khi tôi đi xe đạp.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Am Wochenende = Trạng ngữ thời gian (Temporaladverb - vị trí 1)</div>
+                        <div class="word-item">• fahre = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• manchmal = Trạng từ tần suất (Adverb)</div>
+                        <div class="word-item">• Fahrrad = Tân ngữ (Akkusativ-Objekt)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz cơ bản với trạng từ thời gian đầu câu
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz + Nebensatz với "weil" - Động
-              từ "haben" đứng cuối mệnh đề phụ
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 3: RAD FAHREN</div>
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Oft geht es in den Park oder in die Stadt.
+                </div>
+                <div class="vietnamese">→ Thường đi đến công viên hoặc vào thành phố.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Oft = Trạng từ tần suất (Adverb - vị trí 1)</div>
+                        <div class="word-item">• geht = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• es = Đại từ hình thức (Formales Subjekt)</div>
+                        <div class="word-item">• in den Park = Trạng ngữ nơi chốn (Akkusativ)</div>
+                        <div class="word-item">• oder = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• in die Stadt = Trạng ngữ nơi chốn (Akkusativ)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với "es" hình thức - Cấu trúc "es geht + in + Akkusativ"
+                    </div>
+                </div>
+            </div>
 
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Am Wochenende fahre ich manchmal Fahrrad.
-          </div>
-          <div class="vietnamese">→ Cuối tuần đôi khi tôi đi xe đạp.</div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Am Wochenende = Trạng ngữ thời gian (Temporaladverb - vị trí
-                1)
-              </div>
-              <div class="word-item">
-                • fahre = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
-              <div class="word-item">
-                • manchmal = Trạng từ tần suất (Adverb)
-              </div>
-              <div class="word-item">
-                • Fahrrad = Tân ngữ (Akkusativ-Objekt)
-              </div>
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> Radfahren ist gesund, aber nach einer langen Woche bin ich manchmal müde.
+                </div>
+                <div class="vietnamese">→ Đi xe đạp tốt cho sức khỏe, nhưng sau một tuần dài đôi khi tôi mệt.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề 1:</u><br>
+                        <div class="word-item">• Radfahren = Danh động từ làm chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• gesund = Tính từ vị ngữ (Adjektiv)</div>
+                        <u>Mệnh đề 2:</u><br>
+                        <div class="word-item">• aber = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• nach = Giới từ (Präposition)</div>
+                        <div class="word-item">• einer langen Woche = Trạng ngữ thời gian (Dativ)</div>
+                        <div class="word-item">• bin = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• ich = Chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• manchmal = Trạng từ (Adverb)</div>
+                        <div class="word-item">• müde = Tính từ vị ngữ (Adjektiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> 2 Hauptsatz nối bằng "aber" - Liên từ phối hợp không thay đổi vị trí động từ
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz cơ bản với trạng từ thời gian
-              đầu câu
-            </div>
-          </div>
         </div>
 
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Oft geht es in den Park oder in die Stadt.
-          </div>
-          <div class="vietnamese">
-            → Thường đi đến công viên hoặc vào thành phố.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Oft = Trạng từ tần suất (Adverb - vị trí 1)
-              </div>
-              <div class="word-item">
-                • geht = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • es = Đại từ hình thức (Formales Subjekt)
-              </div>
-              <div class="word-item">
-                • in den Park = Trạng ngữ nơi chốn (Akkusativ)
-              </div>
-              <div class="word-item">
-                • oder = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">
-                • in die Stadt = Trạng ngữ nơi chốn (Akkusativ)
-              </div>
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 4: ANDERE AKTIVITÄTEN</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Zu Hause koche ich auch gern.
+                </div>
+                <div class="vietnamese">→ Ở nhà tôi cũng thích nấu ăn.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Zu Hause = Trạng từ nơi chốn (Lokaladverb - vị trí 1)</div>
+                        <div class="word-item">• koche = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• auch = Trạng từ (Modalpartikel)</div>
+                        <div class="word-item">• gern = Trạng từ (Modaladverb)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với trạng từ nơi chốn đầu câu
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với "es" hình thức - Cấu trúc
-              "es geht + in + Akkusativ"
-            </div>
-          </div>
-        </div>
 
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 3:</strong> Radfahren ist gesund, aber nach einer langen
-            Woche bin ich manchmal müde.
-          </div>
-          <div class="vietnamese">
-            → Đi xe đạp tốt cho sức khỏe, nhưng sau một tuần dài đôi khi tôi
-            mệt.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề 1:</u><br />
-              <div class="word-item">
-                • Radfahren = Danh động từ làm chủ ngữ (Subjekt)
-              </div>
-              <div class="word-item">
-                • ist = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• gesund = Tính từ vị ngữ (Adjektiv)</div>
-              <u>Mệnh đề 2:</u><br />
-              <div class="word-item">
-                • aber = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">• nach = Giới từ (Präposition)</div>
-              <div class="word-item">
-                • einer langen Woche = Trạng ngữ thời gian (Dativ)
-              </div>
-              <div class="word-item">
-                • bin = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• ich = Chủ ngữ (Subjekt)</div>
-              <div class="word-item">• manchmal = Trạng từ (Adverb)</div>
-              <div class="word-item">• müde = Tính từ vị ngữ (Adjektiv)</div>
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Besonders Reis mit Gemüse bereite ich oft für meine Familie zu.
+                </div>
+                <div class="vietnamese">→ Đặc biệt cơm với rau tôi thường chuẩn bị cho gia đình.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Besonders = Trạng từ (Adverb)</div>
+                        <div class="word-item">• Reis mit Gemüse = Tân ngữ (Akkusativ-Objekt - vị trí 1)</div>
+                        <div class="word-item">• bereite = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• oft = Trạng từ tần suất (Adverb)</div>
+                        <div class="word-item">• für meine Familie = Trạng ngữ (Dativ)</div>
+                        <div class="word-item">• zu = Phần tử tách rời của động từ (zubereiten)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với tân ngữ đầu câu và động từ tách rời "zubereiten"
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> 2 Hauptsatz nối bằng "aber" - Liên từ
-              phối hợp không thay đổi vị trí động từ
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 4: ANDERE AKTIVITÄTEN</div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Zu Hause koche ich auch gern.
-          </div>
-          <div class="vietnamese">→ Ở nhà tôi cũng thích nấu ăn.</div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Zu Hause = Trạng từ nơi chốn (Lokaladverb - vị trí 1)
-              </div>
-              <div class="word-item">
-                • koche = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
-              <div class="word-item">• auch = Trạng từ (Modalpartikel)</div>
-              <div class="word-item">• gern = Trạng từ (Modaladverb)</div>
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> Das Kochen macht Freude, und meine Familie isst gern zusammen.
+                </div>
+                <div class="vietnamese">→ Việc nấu ăn làm tôi vui, và gia đình tôi thích ăn cùng nhau.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề 1:</u><br>
+                        <div class="word-item">• Das Kochen = Danh động từ có mạo từ (Subjekt)</div>
+                        <div class="word-item">• macht = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• Freude = Tân ngữ (Akkusativ-Objekt)</div>
+                        <u>Mệnh đề 2:</u><br>
+                        <div class="word-item">• und = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• meine Familie = Chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• isst = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• gern = Trạng từ (Modaladverb)</div>
+                        <div class="word-item">• zusammen = Trạng từ (Adverb)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> 2 Hauptsatz ghép với "und" - Danh động từ có mạo từ làm chủ ngữ
+                    </div>
+                </div>
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với trạng từ nơi chốn đầu câu
-            </div>
-          </div>
         </div>
 
         <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Besonders Reis mit Gemüse bereite ich oft
-            für meine Familie zu.
-          </div>
-          <div class="vietnamese">
-            → Đặc biệt cơm với rau tôi thường chuẩn bị cho gia đình.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">• Besonders = Trạng từ (Adverb)</div>
-              <div class="word-item">
-                • Reis mit Gemüse = Tân ngữ (Akkusativ-Objekt - vị trí 1)
-              </div>
-              <div class="word-item">
-                • bereite = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• ich = Chủ ngữ (Subjekt - vị trí 3)</div>
-              <div class="word-item">• oft = Trạng từ tần suất (Adverb)</div>
-              <div class="word-item">
-                • für meine Familie = Trạng ngữ (Dativ)
-              </div>
-              <div class="word-item">
-                • zu = Phần tử tách rời của động từ (zubereiten)
-              </div>
+            <div class="german">
+                <strong>CÂU KẾT LUẬN:</strong> Insgesamt ist meine Freizeit abwechslungsreich.
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với tân ngữ đầu câu và động
-              từ tách rời "zubereiten"
+            <div class="vietnamese">→ Nhìn chung thời gian rảnh của tôi rất đa dạng.</div>
+            <div class="analysis">
+                <div class="word-analysis">
+                    <strong>Phân tích từng từ:</strong><br>
+                    <div class="word-item">• Insgesamt = Trạng từ (Adverb - vị trí 1)</div>
+                    <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                    <div class="word-item">• meine Freizeit = Chủ ngữ (Subjekt - vị trí 3)</div>
+                    <div class="word-item">• abwechslungsreich = Tính từ vị ngữ (Adjektiv)</div>
+                </div>
+                <div class="structure-analysis">
+                    <strong>Cấu trúc:</strong> Hauptsatz với trạng từ tổng kết đầu câu
+                </div>
             </div>
-          </div>
+        </div>
+
+        <div class="questions-section">
+            <h3>CÂU HỎI BỔ SUNG:</h3>
+            <div class="sentence">
+                <div class="german">
+                    <strong>Frage 1:</strong> Gehen Sie manchmal ins Kino?<br>
+                    <strong>Antwort:</strong> Ja, ich gehe manchmal ins Kino. Besonders neue Filme sehe ich gern mit meinen Freunden.
+                </div>
+                <div class="vietnamese">→ Có, tôi đôi khi đi xem phim. Đặc biệt tôi thích xem phim mới với bạn bè.</div>
+            </div>
+            
+            <div class="sentence">
+                <div class="german">
+                    <strong>Frage 2:</strong> Reisen Sie gern in Ihrer Freizeit?<br>
+                    <strong>Antwort:</strong> Ja, ich reise gern, aber nur am Wochenende oder in den Ferien. Neue Orte und Kulturen finde ich spannend.
+                </div>
+                <div class="vietnamese">→ Có, tôi thích du lịch, nhưng chỉ cuối tuần hoặc trong kỳ nghỉ. Tôi thấy những địa điểm và văn hóa mới rất thú vị.</div>
+            </div>
+        </div>
+
+        <h2>BÀI 2: WAS BEDEUTET DAS INTERNET FÜR SIE?</h2>
+        
+        <div class="sentence hauptsatz">
+            <div class="german">
+                <strong>CÂU MỞ ĐẦU:</strong> Das Internet ist heute sehr wichtig im Leben.
+            </div>
+            <div class="vietnamese">→ Internet ngày nay rất quan trọng trong cuộc sống.</div>
+            <div class="analysis">
+                <div class="word-analysis">
+                    <strong>Phân tích từng từ:</strong><br>
+                    <div class="word-item">• Das = Mạo từ xác định (Bestimmter Artikel)</div>
+                    <div class="word-item">• Internet = Danh từ chủ ngữ (Subjekt)</div>
+                    <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                    <div class="word-item">• heute = Trạng từ thời gian (Temporaladverb)</div>
+                    <div class="word-item">• sehr = Trạng từ cường độ (Gradpartikel)</div>
+                    <div class="word-item">• wichtig = Tính từ vị ngữ (Adjektiv)</div>
+                    <div class="word-item">• im Leben = Trạng ngữ chỉ nơi (Lokaladverb)</div>
+                </div>
+                <div class="structure-analysis">
+                    <strong>Cấu trúc:</strong> Hauptsatz cơ bản - Chủ ngữ + Động từ + Tính từ + Trạng ngữ
+                </div>
+            </div>
+        </div>
+
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 1: WICHTIG</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Fast jeder benutzt es täglich für Arbeit, Schule oder Freizeit.
+                </div>
+                <div class="vietnamese">→ Hầu như mọi người đều sử dụng nó hàng ngày cho công việc, học tập hoặc giải trí.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Fast = Trạng từ (Gradpartikel)</div>
+                        <div class="word-item">• jeder = Đại từ bất định (Indefinitpronomen - chủ ngữ)</div>
+                        <div class="word-item">• benutzt = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• es = Đại từ nhân xưng (Akkusativ-Pronomen)</div>
+                        <div class="word-item">• täglich = Trạng từ tần suất (Adverb)</div>
+                        <div class="word-item">• für = Giới từ (Präposition)</div>
+                        <div class="word-item">• Arbeit, Schule oder Freizeit = Danh từ liệt kê (Akkusativ-Objekte)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz - "es" thay thế cho "das Internet" ở câu trước
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Auch für mich spielt es eine große Rolle, weil viele Dinge einfacher werden.
+                </div>
+                <div class="vietnamese">→ Với tôi cũng vậy, nó đóng vai trò lớn vì nhiều việc trở nên dễ dàng hơn.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề chính:</u><br>
+                        <div class="word-item">• Auch = Trạng từ (Modalpartikel)</div>
+                        <div class="word-item">• für mich = Trạng ngữ (Dativ - vị trí 1)</div>
+                        <div class="word-item">• spielt = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• es = Đại từ nhân xưng (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• eine große Rolle = Tân ngữ (Akkusativ-Objekt)</div>
+                        <u>Mệnh đề phụ:</u><br>
+                        <div class="word-item">• weil = Liên từ phụ thuộc (Subjunktion)</div>
+                        <div class="word-item">• viele Dinge = Chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• einfacher = Tính từ so sánh (Komparativ)</div>
+                        <div class="word-item">• werden = Động từ chia (cuối câu trong Nebensatz)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với trạng ngữ đầu câu + Nebensatz với "weil"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 2: WIE LANGE TÄGLICH</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Etwa vier Stunden am Tag wird das Internet genutzt.
+                </div>
+                <div class="vietnamese">→ Khoảng bốn giờ mỗi ngày internet được sử dụng.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Etwa = Trạng từ (Modalpartikel - vị trí 1)</div>
+                        <div class="word-item">• vier Stunden = Trạng ngữ thời gian (Akkusativ)</div>
+                        <div class="word-item">• am Tag = Trạng ngữ thời gian (Temporaladverb)</div>
+                        <div class="word-item">• wird = Động từ trợ (Hilfsverb - vị trí 2)</div>
+                        <div class="word-item">• das Internet = Chủ ngữ trong câu bị động (Subjekt)</div>
+                        <div class="word-item">• genutzt = Phân từ II (Partizip II - cuối câu)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Câu bị động (Passiv) với trạng từ đầu câu - wird + Partizip II
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Morgens werden Nachrichten gelesen und abends Videos geschaut.
+                </div>
+                <div class="vietnamese">→ Buổi sáng đọc tin tức và buổi tối xem video.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Morgens = Trạng từ thời gian (Temporaladverb - vị trí 1)</div>
+                        <div class="word-item">• werden = Động từ trợ (Hilfsverb - vị trí 2)</div>
+                        <div class="word-item">• Nachrichten = Chủ ngữ bị động (Subjekt)</div>
+                        <div class="word-item">• gelesen = Phân từ II (Partizip II)</div>
+                        <div class="word-item">• und = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• abends = Trạng từ thời gian (Temporaladverb)</div>
+                        <div class="word-item">• Videos = Chủ ngữ bị động (Subjekt)</div>
+                        <div class="word-item">• geschaut = Phân từ II (Partizip II)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> 2 câu bị động ghép với "und" - Lược bỏ "werden" ở mệnh đề thứ 2
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> Das ist ziemlich viel Zeit, deshalb möchte ich versuchen, weniger online zu sein.
+                </div>
+                <div class="vietnamese">→ Đó là khá nhiều thời gian, vì vậy tôi muốn cố gắng ít online hơn.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề 1:</u><br>
+                        <div class="word-item">• Das = Đại từ chỉ định (Demonstrativpronomen)</div>
+                        <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• ziemlich = Trạng từ cường độ (Gradpartikel)</div>
+                        <div class="word-item">• viel = Tính từ (Adjektiv)</div>
+                        <div class="word-item">• Zeit = Danh từ (Nominativ)</div>
+                        <u>Mệnh đề 2:</u><br>
+                        <div class="word-item">• deshalb = Trạng từ nối (Konjunktionaladverb)</div>
+                        <div class="word-item">• möchte = Động từ khuyết thiếu (Modalverb - vị trí 2)</div>
+                        <div class="word-item">• ich = Chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• versuchen = Động từ nguyên thể (Infinitiv)</div>
+                        <div class="word-item">• weniger online zu sein = Cụm từ Infinitiv với "zu"</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> 2 Hauptsatz với "deshalb" + Modalverb + Infinitiv với "zu"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 3: LERNEN</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Zum Lernen ist das Internet sehr hilfreich.
+                </div>
+                <div class="vietnamese">→ Để học tập, internet rất hữu ích.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Zum Lernen = Trạng ngữ mục đích (Dativ - vị trí 1)</div>
+                        <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• das Internet = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• sehr = Trạng từ cường độ (Gradpartikel)</div>
+                        <div class="word-item">• hilfreich = Tính từ vị ngữ (Adjektiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với trạng ngữ mục đích đầu câu
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Videos, Artikel oder Online-Übungen helfen beim Verstehen.
+                </div>
+                <div class="vietnamese">→ Video, bài viết hoặc bài tập trực tuyến giúp hiểu bài.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Videos, Artikel oder Online-Übungen = Chủ ngữ liệt kê (Subjekt)</div>
+                        <div class="word-item">• helfen = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• beim Verstehen = Trạng ngữ (Dativ + danh động từ)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với chủ ngữ liệt kê bằng "oder"
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> So können viele neue Dinge gelernt werden.
+                </div>
+                <div class="vietnamese">→ Như vậy nhiều điều mới có thể được học.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• So = Trạng từ nối (Konjunktionaladverb - vị trí 1)</div>
+                        <div class="word-item">• können = Động từ khuyết thiếu (Modalverb - vị trí 2)</div>
+                        <div class="word-item">• viele neue Dinge = Chủ ngữ bị động (Subjekt)</div>
+                        <div class="word-item">• gelernt werden = Infinitiv bị động (Passiv Infinitiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với Modalverb + Passiv Infinitiv
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 4: EINKAUFEN</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Einkaufen ist im Internet sehr bequem.
+                </div>
+                <div class="vietnamese">→ Mua sắm trên internet rất tiện lợi.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Einkaufen = Danh động từ chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• im Internet = Trạng ngữ nơi chốn (Dativ)</div>
+                        <div class="word-item">• sehr = Trạng từ cường độ (Gradpartikel)</div>
+                        <div class="word-item">• bequem = Tính từ vị ngữ (Adjektiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với danh động từ làm chủ ngữ
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Oft werden Bücher oder Kleidung online gekauft.
+                </div>
+                <div class="vietnamese">→ Thường sách hoặc quần áo được mua online.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Oft = Trạng từ tần suất (Adverb - vị trí 1)</div>
+                        <div class="word-item">• werden = Động từ trợ (Hilfsverb - vị trí 2)</div>
+                        <div class="word-item">• Bücher oder Kleidung = Chủ ngữ bị động (Subjekt)</div>
+                        <div class="word-item">• online = Trạng từ (Adverb)</div>
+                        <div class="word-item">• gekauft = Phân từ II (Partizip II - cuối câu)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Câu bị động với trạng từ tần suất đầu câu
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> Das geht schnell, aber die Qualität muss man immer genau prüfen.
+                </div>
+                <div class="vietnamese">→ Điều đó nhanh chóng, nhưng chất lượng phải luôn được kiểm tra cẩn thận.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề 1:</u><br>
+                        <div class="word-item">• Das = Đại từ chỉ định (Demonstrativpronomen)</div>
+                        <div class="word-item">• geht = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• schnell = Trạng từ (Adverb)</div>
+                        <u>Mệnh đề 2:</u><br>
+                        <div class="word-item">• aber = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• die Qualität = Tân ngữ (Akkusativ-Objekt - vị trí 1)</div>
+                        <div class="word-item">• muss = Động từ khuyết thiếu (Modalverb - vị trí 2)</div>
+                        <div class="word-item">• man = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• immer = Trạng từ tần suất (Adverb)</div>
+                        <div class="word-item">• genau = Trạng từ (Adverb)</div>
+                        <div class="word-item">• prüfen = Động từ nguyên thể (Infinitiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> 2 Hauptsatz với "aber" - Tân ngữ đầu câu + Modalverb
+                    </div>
+                </div>
+            </div>
+        </div> class="german">
+                    <strong>Câu 2:</strong> Nachrichten können schnell gefunden werden, und E-Mails werden einfach geschrieben.
+                </div>
+                <div class="vietnamese">→ Tin tức có thể được tìm thấy nhanh chóng và email được viết dễ dàng.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề 1:</u><br>
+                        <div class="word-item">• Nachrichten = Chủ ngữ bị động (Subjekt)</div>
+                        <div class="word-item">• können = Động từ khuyết thiếu (Modalverb - vị trí 2)</div>
+                        <div class="word-item">• schnell = Trạng từ (Adverb)</div>
+                        <div class="word-item">• gefunden werden = Infinitiv bị động (Passiv Infinitiv)</div>
+                        <u>Mệnh đề 2:</u><br>
+                        <div class="word-item">• und = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• E-Mails = Chủ ngữ bị động (Subjekt)</div>
+                        <div class="word-item">• werden = Động từ trợ (Hilfsverb - vị trí 2)</div>
+                        <div class="word-item">• einfach = Trạng từ (Adverb)</div>
+                        <div class="word-item">• geschrieben = Phân từ II (Partizip II)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Modalverb + Passiv Infinitiv + Passiv thường - Kết hợp 2 dạng bị động
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> Manchmal ist man aber zu lange online, und das ist nicht so gut.
+                </div>
+                <div class="vietnamese">→ Đôi khi mọi người online quá lâu và điều đó không tốt lắm.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề 1:</u><br>
+                        <div class="word-item">• Manchmal = Trạng từ (Temporaladverb - vị trí 1)</div>
+                        <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• man = Đại từ bất định (Indefinitpronomen - vị trí 3)</div>
+                        <div class="word-item">• aber = Từ tình thái (Modalpartikel)</div>
+                        <div class="word-item">• zu lange = Trạng từ (Adverb)</div>
+                        <div class="word-item">• online = Tính từ vị ngữ (Adjektiv)</div>
+                        <u>Mệnh đề 2:</u><br>
+                        <div class="word-item">• und = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• das = Đại từ chỉ định (Demonstrativpronomen)</div>
+                        <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• nicht so gut = Tính từ phủ định (negiertes Adjektiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> 2 Hauptsatz với "und" - "man" làm đại từ bất định
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="keyword-section">
+            <div class="keyword-title">KEYWORD 4: LERNEN</div>
+            
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 1:</strong> Einkaufen ist im Internet sehr bequem.
+                </div>
+                <div class="vietnamese">→ Mua sắm trên internet rất tiện lợi.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Einkaufen = Danh động từ chủ ngữ (Subjekt)</div>
+                        <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• im Internet = Trạng ngữ nơi chốn (Dativ)</div>
+                        <div class="word-item">• sehr = Trạng từ cường độ (Gradpartikel)</div>
+                        <div class="word-item">• bequem = Tính từ vị ngữ (Adjektiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Hauptsatz với danh động từ làm chủ ngữ
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 2:</strong> Oft werden Bücher oder Kleidung online gekauft.
+                </div>
+                <div class="vietnamese">→ Thường sách hoặc quần áo được mua online.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <div class="word-item">• Oft = Trạng từ tần suất (Adverb - vị trí 1)</div>
+                        <div class="word-item">• werden = Động từ trợ (Hilfsverb - vị trí 2)</div>
+                        <div class="word-item">• Bücher oder Kleidung = Chủ ngữ bị động (Subjekt)</div>
+                        <div class="word-item">• online = Trạng từ (Adverb)</div>
+                        <div class="word-item">• gekauft = Phân từ II (Partizip II - cuối câu)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> Câu bị động với trạng từ tần suất đầu câu
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence hauptsatz">
+                <div class="german">
+                    <strong>Câu 3:</strong> Das geht schnell, aber die Qualität muss man immer genau prüfen.
+                </div>
+                <div class="vietnamese">→ Điều đó nhanh chóng, nhưng chất lượng phải luôn được kiểm tra cẩn thận.</div>
+                <div class="analysis">
+                    <div class="word-analysis">
+                        <strong>Phân tích từng từ:</strong><br>
+                        <u>Mệnh đề 1:</u><br>
+                        <div class="word-item">• Das = Đại từ chỉ định (Demonstrativpronomen)</div>
+                        <div class="word-item">• geht = Động từ chia (Verb - vị trí 2)</div>
+                        <div class="word-item">• schnell = Trạng từ (Adverb)</div>
+                        <u>Mệnh đề 2:</u><br>
+                        <div class="word-item">• aber = Liên từ phối hợp (Konjunktion)</div>
+                        <div class="word-item">• die Qualität = Tân ngữ (Akkusativ-Objekt - vị trí 1)</div>
+                        <div class="word-item">• muss = Động từ khuyết thiếu (Modalverb - vị trí 2)</div>
+                        <div class="word-item">• man = Chủ ngữ (Subjekt - vị trí 3)</div>
+                        <div class="word-item">• immer = Trạng từ tần suất (Adverb)</div>
+                        <div class="word-item">• genau = Trạng từ (Adverb)</div>
+                        <div class="word-item">• prüfen = Động từ nguyên thể (Infinitiv)</div>
+                    </div>
+                    <div class="structure-analysis">
+                        <strong>Cấu trúc:</strong> 2 Hauptsatz với "aber" - Tân ngữ đầu câu + Modalverb
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 3:</strong> Das Kochen macht Freude, und meine Familie
-            isst gern zusammen.
-          </div>
-          <div class="vietnamese">
-            → Việc nấu ăn làm tôi vui, và gia đình tôi thích ăn cùng nhau.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề 1:</u><br />
-              <div class="word-item">
-                • Das Kochen = Danh động từ có mạo từ (Subjekt)
-              </div>
-              <div class="word-item">
-                • macht = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• Freude = Tân ngữ (Akkusativ-Objekt)</div>
-              <u>Mệnh đề 2:</u><br />
-              <div class="word-item">
-                • und = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">• meine Familie = Chủ ngữ (Subjekt)</div>
-              <div class="word-item">
-                • isst = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• gern = Trạng từ (Modaladverb)</div>
-              <div class="word-item">• zusammen = Trạng từ (Adverb)</div>
+            <div class="german">
+                <strong>CÂU KẾT LUẬN:</strong> Deshalb ist das Internet für mich wirklich sehr wichtig im Alltag.
             </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> 2 Hauptsatz ghép với "und" - Danh động
-              từ có mạo từ làm chủ ngữ
+            <div class="vietnamese">→ Vì vậy internet thực sự rất quan trọng đối với tôi trong cuộc sống hàng ngày.</div>
+            <div class="analysis">
+                <div class="word-analysis">
+                    <strong>Phân tích từng từ:</strong><br>
+                    <div class="word-item">• Deshalb = Trạng từ nối (Konjunktionaladverb - vị trí 1)</div>
+                    <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
+                    <div class="word-item">• das Internet = Chủ ngữ (Subjekt - vị trí 3)</div>
+                    <div class="word-item">• für mich = Trạng ngữ (Dativ)</div>
+                    <div class="word-item">• wirklich = Trạng từ cường độ (Gradpartikel)</div>
+                    <div class="word-item">• sehr = Trạng từ cường độ (Gradpartikel)</div>
+                    <div class="word-item">• wichtig = Tính từ vị ngữ (Adjektiv)</div>
+                    <div class="word-item">• im Alltag = Trạng ngữ (Dativ)</div>
+                </div>
+                <div class="structure-analysis">
+                    <strong>Cấu trúc:</strong> Hauptsatz với "deshalb" - Trạng từ nối tạo kết luận
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sentence hauptsatz">
-        <div class="german">
-          <strong>CÂU KẾT LUẬN:</strong> Insgesamt ist meine Freizeit
-          abwechslungsreich.
-        </div>
-        <div class="vietnamese">
-          → Nhìn chung thời gian rảnh của tôi rất đa dạng.
-        </div>
-        <div class="analysis">
-          <div class="word-analysis">
-            <strong>Phân tích từng từ:</strong><br />
-            <div class="word-item">
-              • Insgesamt = Trạng từ (Adverb - vị trí 1)
-            </div>
-            <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
-            <div class="word-item">
-              • meine Freizeit = Chủ ngữ (Subjekt - vị trí 3)
-            </div>
-            <div class="word-item">
-              • abwechslungsreich = Tính từ vị ngữ (Adjektiv)
-            </div>
-          </div>
-          <div class="structure-analysis">
-            <strong>Cấu trúc:</strong> Hauptsatz với trạng từ tổng kết đầu câu
-          </div>
-        </div>
-      </div>
-
-      <div class="questions-section">
-        <h3>CÂU HỎI BỔ SUNG:</h3>
-        <div class="sentence">
-          <div class="german">
-            <strong>Frage 1:</strong> Gehen Sie manchmal ins Kino?<br />
-            <strong>Antwort:</strong> Ja, ich gehe manchmal ins Kino. Besonders
-            neue Filme sehe ich gern mit meinen Freunden.
-          </div>
-          <div class="vietnamese">
-            → Có, tôi đôi khi đi xem phim. Đặc biệt tôi thích xem phim mới với
-            bạn bè.
-          </div>
         </div>
 
-        <div class="sentence">
-          <div class="german">
-            <strong>Frage 2:</strong> Reisen Sie gern in Ihrer Freizeit?<br />
-            <strong>Antwort:</strong> Ja, ich reise gern, aber nur am Wochenende
-            oder in den Ferien. Neue Orte und Kulturen finde ich spannend.
-          </div>
-          <div class="vietnamese">
-            → Có, tôi thích du lịch, nhưng chỉ cuối tuần hoặc trong kỳ nghỉ. Tôi
-            thấy những địa điểm và văn hóa mới rất thú vị.
-          </div>
-        </div>
-      </div>
-
-      <h2>BÀI 2: WAS BEDEUTET DAS INTERNET FÜR SIE?</h2>
-
-      <div class="sentence hauptsatz">
-        <div class="german">
-          <strong>CÂU MỞ ĐẦU:</strong> Das Internet ist heute sehr wichtig im
-          Leben.
-        </div>
-        <div class="vietnamese">
-          → Internet ngày nay rất quan trọng trong cuộc sống.
-        </div>
-        <div class="analysis">
-          <div class="word-analysis">
-            <strong>Phân tích từng từ:</strong><br />
-            <div class="word-item">
-              • Das = Mạo từ xác định (Bestimmter Artikel)
+        <div class="questions-section">
+            <h3>CÂU HỎI BỔ SUNG:</h3>
+            <div class="sentence">
+                <div class="german">
+                    <strong>Frage 1:</strong> Benutzen Sie das Internet auch für Reisen?<br>
+                    <strong>Antwort:</strong> Ja, ich benutze es für Reisen, zum Beispiel um Tickets oder Hotels zu buchen.
+                </div>
+                <div class="vietnamese">→ Có, tôi dùng nó cho du lịch, ví dụ để đặt vé hoặc khách sạn.</div>
             </div>
-            <div class="word-item">• Internet = Danh từ chủ ngữ (Subjekt)</div>
-            <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
-            <div class="word-item">
-              • heute = Trạng từ thời gian (Temporaladverb)
+            
+            <div class="sentence">
+                <div class="german">
+                    <strong>Frage 2:</strong> Spielen Sie auch Computerspiele im Internet?<br>
+                    <strong>Antwort:</strong> Ja, manchmal spiele ich kleine Computerspiele online, aber nicht sehr oft.
+                </div>
+                <div class="vietnamese">→ Có, đôi khi tôi chơi game nhỏ online, nhưng không thường xuyên lắm.</div>
             </div>
-            <div class="word-item">
-              • sehr = Trạng từ cường độ (Gradpartikel)
-            </div>
-            <div class="word-item">• wichtig = Tính từ vị ngữ (Adjektiv)</div>
-            <div class="word-item">
-              • im Leben = Trạng ngữ chỉ nơi (Lokaladverb)
-            </div>
-          </div>
-          <div class="structure-analysis">
-            <strong>Cấu trúc:</strong> Hauptsatz cơ bản - Chủ ngữ + Động từ +
-            Tính từ + Trạng ngữ
-          </div>
-        </div>
-      </div>
-
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 1: WICHTIG</div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Fast jeder benutzt es täglich für Arbeit,
-            Schule oder Freizeit.
-          </div>
-          <div class="vietnamese">
-            → Hầu như mọi người đều sử dụng nó hàng ngày cho công việc, học tập
-            hoặc giải trí.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">• Fast = Trạng từ (Gradpartikel)</div>
-              <div class="word-item">
-                • jeder = Đại từ bất định (Indefinitpronomen - chủ ngữ)
-              </div>
-              <div class="word-item">
-                • benutzt = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • es = Đại từ nhân xưng (Akkusativ-Pronomen)
-              </div>
-              <div class="word-item">
-                • täglich = Trạng từ tần suất (Adverb)
-              </div>
-              <div class="word-item">• für = Giới từ (Präposition)</div>
-              <div class="word-item">
-                • Arbeit, Schule oder Freizeit = Danh từ liệt kê
-                (Akkusativ-Objekte)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz - "es" thay thế cho "das
-              Internet" ở câu trước
-            </div>
-          </div>
         </div>
 
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Auch für mich spielt es eine große Rolle,
-            weil viele Dinge einfacher werden.
-          </div>
-          <div class="vietnamese">
-            → Với tôi cũng vậy, nó đóng vai trò lớn vì nhiều việc trở nên dễ
-            dàng hơn.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề chính:</u><br />
-              <div class="word-item">• Auch = Trạng từ (Modalpartikel)</div>
-              <div class="word-item">
-                • für mich = Trạng ngữ (Dativ - vị trí 1)
-              </div>
-              <div class="word-item">
-                • spielt = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • es = Đại từ nhân xưng (Subjekt - vị trí 3)
-              </div>
-              <div class="word-item">
-                • eine große Rolle = Tân ngữ (Akkusativ-Objekt)
-              </div>
-              <u>Mệnh đề phụ:</u><br />
-              <div class="word-item">
-                • weil = Liên từ phụ thuộc (Subjunktion)
-              </div>
-              <div class="word-item">• viele Dinge = Chủ ngữ (Subjekt)</div>
-              <div class="word-item">
-                • einfacher = Tính từ so sánh (Komparativ)
-              </div>
-              <div class="word-item">
-                • werden = Động từ chia (cuối câu trong Nebensatz)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với trạng ngữ đầu câu +
-              Nebensatz với "weil"
-            </div>
-          </div>
-        </div>
-      </div>
+        <h2>BẢNG TỔNG HỢP CẤU TRÚC NGỮ PHÁP</h2>
 
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 2: WIE LANGE TÄGLICH</div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Etwa vier Stunden am Tag wird das Internet
-            genutzt.
-          </div>
-          <div class="vietnamese">
-            → Khoảng bốn giờ mỗi ngày internet được sử dụng.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Etwa = Trạng từ (Modalpartikel - vị trí 1)
-              </div>
-              <div class="word-item">
-                • vier Stunden = Trạng ngữ thời gian (Akkusativ)
-              </div>
-              <div class="word-item">
-                • am Tag = Trạng ngữ thời gian (Temporaladverb)
-              </div>
-              <div class="word-item">
-                • wird = Động từ trợ (Hilfsverb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • das Internet = Chủ ngữ trong câu bị động (Subjekt)
-              </div>
-              <div class="word-item">
-                • genutzt = Phân từ II (Partizip II - cuối câu)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Câu bị động (Passiv) với trạng từ đầu
-              câu - wird + Partizip II
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Morgens werden Nachrichten gelesen und
-            abends Videos geschaut.
-          </div>
-          <div class="vietnamese">
-            → Buổi sáng đọc tin tức và buổi tối xem video.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Morgens = Trạng từ thời gian (Temporaladverb - vị trí 1)
-              </div>
-              <div class="word-item">
-                • werden = Động từ trợ (Hilfsverb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • Nachrichten = Chủ ngữ bị động (Subjekt)
-              </div>
-              <div class="word-item">• gelesen = Phân từ II (Partizip II)</div>
-              <div class="word-item">
-                • und = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">
-                • abends = Trạng từ thời gian (Temporaladverb)
-              </div>
-              <div class="word-item">• Videos = Chủ ngữ bị động (Subjekt)</div>
-              <div class="word-item">• geschaut = Phân từ II (Partizip II)</div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> 2 câu bị động ghép với "und" - Lược bỏ
-              "werden" ở mệnh đề thứ 2
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 3:</strong> Das ist ziemlich viel Zeit, deshalb möchte
-            ich versuchen, weniger online zu sein.
-          </div>
-          <div class="vietnamese">
-            → Đó là khá nhiều thời gian, vì vậy tôi muốn cố gắng ít online hơn.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề 1:</u><br />
-              <div class="word-item">
-                • Das = Đại từ chỉ định (Demonstrativpronomen)
-              </div>
-              <div class="word-item">
-                • ist = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • ziemlich = Trạng từ cường độ (Gradpartikel)
-              </div>
-              <div class="word-item">• viel = Tính từ (Adjektiv)</div>
-              <div class="word-item">• Zeit = Danh từ (Nominativ)</div>
-              <u>Mệnh đề 2:</u><br />
-              <div class="word-item">
-                • deshalb = Trạng từ nối (Konjunktionaladverb)
-              </div>
-              <div class="word-item">
-                • möchte = Động từ khuyết thiếu (Modalverb - vị trí 2)
-              </div>
-              <div class="word-item">• ich = Chủ ngữ (Subjekt)</div>
-              <div class="word-item">
-                • versuchen = Động từ nguyên thể (Infinitiv)
-              </div>
-              <div class="word-item">
-                • weniger online zu sein = Cụm từ Infinitiv với "zu"
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> 2 Hauptsatz với "deshalb" + Modalverb +
-              Infinitiv với "zu"
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 3: EINKAUFEN</div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Für Informationen ist das Internet sehr
-            praktisch.
-          </div>
-          <div class="vietnamese">
-            → Đối với thông tin, internet rất tiện lợi.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Für Informationen = Trạng ngữ (Dativ - vị trí 1)
-              </div>
-              <div class="word-item">
-                • ist = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • das Internet = Chủ ngữ (Subjekt - vị trí 3)
-              </div>
-              <div class="word-item">
-                • sehr = Trạng từ cường độ (Gradpartikel)
-              </div>
-              <div class="word-item">
-                • praktisch = Tính từ vị ngữ (Adjektiv)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với trạng ngữ đầu câu để nhấn
-              mạnh
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Nachrichten können schnell gefunden werden,
-            und E-Mails werden einfach geschrieben.
-          </div>
-          <div class="vietnamese">
-            → Tin tức có thể được tìm thấy nhanh chóng và email được viết dễ
-            dàng.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề 1:</u><br />
-              <div class="word-item">
-                • Nachrichten = Chủ ngữ bị động (Subjekt)
-              </div>
-              <div class="word-item">
-                • können = Động từ khuyết thiếu (Modalverb - vị trí 2)
-              </div>
-              <div class="word-item">• schnell = Trạng từ (Adverb)</div>
-              <div class="word-item">
-                • gefunden werden = Infinitiv bị động (Passiv Infinitiv)
-              </div>
-              <u>Mệnh đề 2:</u><br />
-              <div class="word-item">
-                • und = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">• E-Mails = Chủ ngữ bị động (Subjekt)</div>
-              <div class="word-item">
-                • werden = Động từ trợ (Hilfsverb - vị trí 2)
-              </div>
-              <div class="word-item">• einfach = Trạng từ (Adverb)</div>
-              <div class="word-item">
-                • geschrieben = Phân từ II (Partizip II)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Modalverb + Passiv Infinitiv + Passiv
-              thường - Kết hợp 2 dạng bị động
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 3:</strong> Manchmal ist man aber zu lange online, und
-            das ist nicht so gut.
-          </div>
-          <div class="vietnamese">
-            → Đôi khi mọi người online quá lâu và điều đó không tốt lắm.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề 1:</u><br />
-              <div class="word-item">
-                • Manchmal = Trạng từ (Temporaladverb - vị trí 1)
-              </div>
-              <div class="word-item">
-                • ist = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • man = Đại từ bất định (Indefinitpronomen - vị trí 3)
-              </div>
-              <div class="word-item">• aber = Từ tình thái (Modalpartikel)</div>
-              <div class="word-item">• zu lange = Trạng từ (Adverb)</div>
-              <div class="word-item">• online = Tính từ vị ngữ (Adjektiv)</div>
-              <u>Mệnh đề 2:</u><br />
-              <div class="word-item">
-                • und = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">
-                • das = Đại từ chỉ định (Demonstrativpronomen)
-              </div>
-              <div class="word-item">
-                • ist = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • nicht so gut = Tính từ phủ định (negiertes Adjektiv)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> 2 Hauptsatz với "und" - "man" làm đại
-              từ bất định
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="keyword-section">
-        <div class="keyword-title">KEYWORD 4: LERNEN</div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 1:</strong> Einkaufen ist im Internet sehr bequem.
-          </div>
-          <div class="vietnamese">→ Mua sắm trên internet rất tiện lợi.</div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Einkaufen = Danh động từ chủ ngữ (Subjekt)
-              </div>
-              <div class="word-item">
-                • ist = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • im Internet = Trạng ngữ nơi chốn (Dativ)
-              </div>
-              <div class="word-item">
-                • sehr = Trạng từ cường độ (Gradpartikel)
-              </div>
-              <div class="word-item">• bequem = Tính từ vị ngữ (Adjektiv)</div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Hauptsatz với danh động từ làm chủ ngữ
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 2:</strong> Oft werden Bücher oder Kleidung online
-            gekauft.
-          </div>
-          <div class="vietnamese">
-            → Thường sách hoặc quần áo được mua online.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <div class="word-item">
-                • Oft = Trạng từ tần suất (Adverb - vị trí 1)
-              </div>
-              <div class="word-item">
-                • werden = Động từ trợ (Hilfsverb - vị trí 2)
-              </div>
-              <div class="word-item">
-                • Bücher oder Kleidung = Chủ ngữ bị động (Subjekt)
-              </div>
-              <div class="word-item">• online = Trạng từ (Adverb)</div>
-              <div class="word-item">
-                • gekauft = Phân từ II (Partizip II - cuối câu)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> Câu bị động với trạng từ tần suất đầu
-              câu
-            </div>
-          </div>
-        </div>
-
-        <div class="sentence hauptsatz">
-          <div class="german">
-            <strong>Câu 3:</strong> Das geht schnell, aber die Qualität muss man
-            immer genau prüfen.
-          </div>
-          <div class="vietnamese">
-            → Điều đó nhanh chóng, nhưng chất lượng phải luôn được kiểm tra cẩn
-            thận.
-          </div>
-          <div class="analysis">
-            <div class="word-analysis">
-              <strong>Phân tích từng từ:</strong><br />
-              <u>Mệnh đề 1:</u><br />
-              <div class="word-item">
-                • Das = Đại từ chỉ định (Demonstrativpronomen)
-              </div>
-              <div class="word-item">
-                • geht = Động từ chia (Verb - vị trí 2)
-              </div>
-              <div class="word-item">• schnell = Trạng từ (Adverb)</div>
-              <u>Mệnh đề 2:</u><br />
-              <div class="word-item">
-                • aber = Liên từ phối hợp (Konjunktion)
-              </div>
-              <div class="word-item">
-                • die Qualität = Tân ngữ (Akkusativ-Objekt - vị trí 1)
-              </div>
-              <div class="word-item">
-                • muss = Động từ khuyết thiếu (Modalverb - vị trí 2)
-              </div>
-              <div class="word-item">• man = Chủ ngữ (Subjekt - vị trí 3)</div>
-              <div class="word-item">• immer = Trạng từ tần suất (Adverb)</div>
-              <div class="word-item">• genau = Trạng từ (Adverb)</div>
-              <div class="word-item">
-                • prüfen = Động từ nguyên thể (Infinitiv)
-              </div>
-            </div>
-            <div class="structure-analysis">
-              <strong>Cấu trúc:</strong> 2 Hauptsatz với "aber" - Tân ngữ đầu
-              câu + Modalverb
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sentence hauptsatz">
-        <div class="german">
-          <strong>CÂU KẾT LUẬN:</strong> Deshalb ist das Internet für mich
-          wirklich sehr wichtig im Alltag.
-        </div>
-        <div class="vietnamese">
-          → Vì vậy internet thực sự rất quan trọng đối với tôi trong cuộc sống
-          hàng ngày.
-        </div>
-        <div class="analysis">
-          <div class="word-analysis">
-            <strong>Phân tích từng từ:</strong><br />
-            <div class="word-item">
-              • Deshalb = Trạng từ nối (Konjunktionaladverb - vị trí 1)
-            </div>
-            <div class="word-item">• ist = Động từ chia (Verb - vị trí 2)</div>
-            <div class="word-item">
-              • das Internet = Chủ ngữ (Subjekt - vị trí 3)
-            </div>
-            <div class="word-item">• für mich = Trạng ngữ (Dativ)</div>
-            <div class="word-item">
-              • wirklich = Trạng từ cường độ (Gradpartikel)
-            </div>
-            <div class="word-item">
-              • sehr = Trạng từ cường độ (Gradpartikel)
-            </div>
-            <div class="word-item">• wichtig = Tính từ vị ngữ (Adjektiv)</div>
-            <div class="word-item">• im Alltag = Trạng ngữ (Dativ)</div>
-          </div>
-          <div class="structure-analysis">
-            <strong>Cấu trúc:</strong> Hauptsatz với "deshalb" - Trạng từ nối
-            tạo kết luận
-          </div>
-        </div>
-      </div>
-
-      <div class="questions-section">
-        <h3>CÂU HỎI BỔ SUNG:</h3>
-        <div class="sentence">
-          <div class="german">
-            <strong>Frage 1:</strong> Benutzen Sie das Internet auch für
-            Reisen?<br />
-            <strong>Antwort:</strong> Ja, ich benutze es für Reisen, zum
-            Beispiel um Tickets oder Hotels zu buchen.
-          </div>
-          <div class="vietnamese">
-            → Có, tôi dùng nó cho du lịch, ví dụ để đặt vé hoặc khách sạn.
-          </div>
-        </div>
-
-        <div class="sentence">
-          <div class="german">
-            <strong>Frage 2:</strong> Spielen Sie auch Computerspiele im
-            Internet?<br />
-            <strong>Antwort:</strong> Ja, manchmal spiele ich kleine
-            Computerspiele online, aber nicht sehr oft.
-          </div>
-          <div class="vietnamese">
-            → Có, đôi khi tôi chơi game nhỏ online, nhưng không thường xuyên
-            lắm.
-          </div>
-        </div>
-      </div>
-
-      <h2>BẢNG TỔNG HỢP CẤU TRÚC NGỮ PHÁP</h2>
-
-      <table>
-        <tr>
-          <th>Loại câu</th>
-          <th>Cấu trúc</th>
-          <th>Vị trí động từ</th>
-          <th>Ví dụ</th>
-        </tr>
-        <tr>
-          <td><strong>Hauptsatz thường</strong></td>
-          <td>S + V + ...</td>
-          <td>Vị trí 2</td>
-          <td>Ich <strong>lese</strong> gern Bücher.</td>
-        </tr>
-        <tr>
-          <td><strong>Hauptsatz với trạng từ đầu</strong></td>
-          <td>Adv + V + S + ...</td>
-          <td>Vị trí 2</td>
-          <td>Zu Hause <strong>lese</strong> ich...</td>
-        </tr>
-        <tr>
-          <td><strong>Hauptsatz với tân ngữ đầu</strong></td>
-          <td>Obj + V + S + ...</td>
-          <td>Vị trí 2</td>
-          <td>Meine Freunde <strong>treffe</strong> ich...</td>
-        </tr>
-        <tr>
-          <td><strong>Nebensatz với "weil"</strong></td>
-          <td>weil + S + ... + V</td>
-          <td>Cuối câu</td>
-          <td>weil wir viel Zeit <strong>haben</strong></td>
-        </tr>
-        <tr>
-          <td><strong>Hauptsatz với "aber"</strong></td>
-          <td>..., aber + V + S + ...</td>
-          <td>Vị trí 2</td>
-          <td>aber <strong>bin</strong> ich manchmal müde</td>
-        </tr>
-        <tr>
-          <td><strong>Hauptsatz với "deshalb"</strong></td>
-          <td>deshalb + V + S + ...</td>
-          <td>Vị trí 2</td>
-          <td>deshalb <strong>möchte</strong> ich versuchen</td>
-        </tr>
-        <tr>
-          <td><strong>Passiv</strong></td>
-          <td>S + wird/werden + ... + Partizip II</td>
-          <td>wird vị trí 2, Partizip cuối</td>
-          <td>Internet <strong>wird genutzt</strong></td>
-        </tr>
-        <tr>
-          <td><strong>Modalverb + Infinitiv</strong></td>
-          <td>S + Modalverb + ... + Infinitiv</td>
-          <td>Modal vị trí 2, Infinitiv cuối</td>
-          <td>ich <strong>möchte versuchen</strong></td>
-        </tr>
-        <tr>
-          <td><strong>Trennbare Verben</strong></td>
-          <td>S + V + ... + Präfix</td>
-          <td>V vị trí 2, Präfix cuối</td>
-          <td>ich <strong>bereite zu</strong></td>
-        </tr>
-        <tr>
-          <td><strong>Danh động từ làm chủ ngữ</strong></td>
-          <td>Infinitiv + V + ...</td>
-          <td>Vị trí 2</td>
-          <td>Radfahren <strong>ist</strong> gesund</td>
-        </tr>
-      </table>
-
-      <div class="structure-box">
-        <h3>ĐIỂM QUAN TRỌNG NHẤT:</h3>
-        <ul>
-          <li>
-            <strong>Quy tắc vị trí 2:</strong> Trong Hauptsatz, động từ chia
-            LUÔN ở vị trí 2, bất kể từ nào đứng trước
-          </li>
-          <li>
-            <strong>Nebensatz:</strong> weil, dass, wenn → động từ chia đứng
-            cuối câu
-          </li>
-          <li>
-            <strong>Liên từ phối hợp:</strong> aber, und, oder → KHÔNG thay đổi
-            vị trí động từ
-          </li>
-          <li>
-            <strong>Trạng từ nối:</strong> deshalb, dann, trotzdem → động từ vị
-            trí 2 sau chúng
-          </li>
-          <li>
-            <strong>Câu bị động:</strong> wird/werden + Partizip II (cuối câu)
-          </li>
-          <li>
-            <strong>Modalverb:</strong> Modalverb vị trí 2 + Infinitiv cuối câu
-          </li>
-          <li>
-            <strong>Động từ tách rời:</strong> Động từ gốc vị trí 2 + Präfix
-            cuối câu
-          </li>
-          <li>
-            <strong>Infinitiv với "zu":</strong> zu + Infinitiv (thường cuối câu
-            hoặc trước dấu phẩy)
-          </li>
-        </ul>
-      </div>
-
-      <div class="structure-box">
-        <h3>🔗 KEYWORDS LIÊN KẾT QUAN TRỌNG:</h3>
         <table>
-          <tr>
-            <th>Chức năng</th>
-            <th>Keywords</th>
-            <th>Ví dụ sử dụng</th>
-          </tr>
-          <tr>
-            <td><strong>Liên kết câu 1→2</strong></td>
-            <td>Auch, Oft, Manchmal, Besonders, Außerdem</td>
-            <td>Oft geht es in den Park...</td>
-          </tr>
-          <tr>
-            <td><strong>Liên kết câu 2→3</strong></td>
-            <td>Das, Deshalb, weil, aber, trotzdem</td>
-            <td>Das gefällt mir sehr, weil...</td>
-          </tr>
-          <tr>
-            <td><strong>Trạng từ thời gian</strong></td>
-            <td>Am Wochenende, Morgens, Abends, Täglich</td>
-            <td>Am Wochenende fahre ich...</td>
-          </tr>
-          <tr>
-            <td><strong>Trạng từ tần suất</strong></td>
-            <td>Oft, Manchmal, Selten, Immer, Nie</td>
-            <td>Manchmal wird mit Freunden...</td>
-          </tr>
-          <tr>
-            <td><strong>Đại từ chỉ định</strong></td>
-            <td>Das, Es, Dort, Dabei, Danach</td>
-            <td>Das ist sehr praktisch...</td>
-          </tr>
+            <tr>
+                <th>Loại câu</th>
+                <th>Cấu trúc</th>
+                <th>Vị trí động từ</th>
+                <th>Ví dụ</th>
+            </tr>
+            <tr>
+                <td><strong>Hauptsatz thường</strong></td>
+                <td>S + V + ...</td>
+                <td>Vị trí 2</td>
+                <td>Ich <strong>lese</strong> gern Bücher.</td>
+            </tr>
+            <tr>
+                <td><strong>Hauptsatz với trạng từ đầu</strong></td>
+                <td>Adv + V + S + ...</td>
+                <td>Vị trí 2</td>
+                <td>Zu Hause <strong>lese</strong> ich...</td>
+            </tr>
+            <tr>
+                <td><strong>Hauptsatz với tân ngữ đầu</strong></td>
+                <td>Obj + V + S + ...</td>
+                <td>Vị trí 2</td>
+                <td>Meine Freunde <strong>treffe</strong> ich...</td>
+            </tr>
+            <tr>
+                <td><strong>Nebensatz với "weil"</strong></td>
+                <td>weil + S + ... + V</td>
+                <td>Cuối câu</td>
+                <td>weil wir viel Zeit <strong>haben</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Hauptsatz với "aber"</strong></td>
+                <td>..., aber + V + S + ...</td>
+                <td>Vị trí 2</td>
+                <td>aber <strong>bin</strong> ich manchmal müde</td>
+            </tr>
+            <tr>
+                <td><strong>Hauptsatz với "deshalb"</strong></td>
+                <td>deshalb + V + S + ...</td>
+                <td>Vị trí 2</td>
+                <td>deshalb <strong>möchte</strong> ich versuchen</td>
+            </tr>
+            <tr>
+                <td><strong>Passiv</strong></td>
+                <td>S + wird/werden + ... + Partizip II</td>
+                <td>wird vị trí 2, Partizip cuối</td>
+                <td>Internet <strong>wird genutzt</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Modalverb + Infinitiv</strong></td>
+                <td>S + Modalverb + ... + Infinitiv</td>
+                <td>Modal vị trí 2, Infinitiv cuối</td>
+                <td>ich <strong>möchte versuchen</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Trennbare Verben</strong></td>
+                <td>S + V + ... + Präfix</td>
+                <td>V vị trí 2, Präfix cuối</td>
+                <td>ich <strong>bereite zu</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Danh động từ làm chủ ngữ</strong></td>
+                <td>Infinitiv + V + ...</td>
+                <td>Vị trí 2</td>
+                <td>Radfahren <strong>ist</strong> gesund</td>
+            </tr>
         </table>
-      </div>
 
-      <div class="structure-box">
-        <h3>📝 MẪU CÂU CHO TỪNG KEYWORD:</h3>
-        <p><strong>Freunde besuchen:</strong></p>
-        <ul>
-          <li>Câu 1: Ich treffe meine Freunde oft am Wochenende.</li>
-          <li>Câu 2: Dabei gehen wir spazieren oder trinken Kaffee.</li>
-          <li>Câu 3: Das macht mir Spaß, weil wir viel Zeit haben.</li>
-        </ul>
+        <div class="structure-box">
+            <h3>ĐIỂM QUAN TRỌNG NHẤT:</h3>
+            <ul>
+                <li><strong>Quy tắc vị trí 2:</strong> Trong Hauptsatz, động từ chia LUÔN ở vị trí 2, bất kể từ nào đứng trước</li>
+                <li><strong>Nebensatz:</strong> weil, dass, wenn → động từ chia đứng cuối câu</li>
+                <li><strong>Liên từ phối hợp:</strong> aber, und, oder → KHÔNG thay đổi vị trí động từ</li>
+                <li><strong>Trạng từ nối:</strong> deshalb, dann, trotzdem → động từ vị trí 2 sau chúng</li>
+                <li><strong>Câu bị động:</strong> wird/werden + Partizip II (cuối câu)</li>
+                <li><strong>Modalverb:</strong> Modalverb vị trí 2 + Infinitiv cuối câu</li>
+                <li><strong>Động từ tách rời:</strong> Động từ gốc vị trí 2 + Präfix cuối câu</li>
+                <li><strong>Infinitiv với "zu":</strong> zu + Infinitiv (thường cuối câu hoặc trước dấu phẩy)</li>
+            </ul>
+        </div>
 
-        <p><strong>Lesen:</strong></p>
-        <ul>
-          <li>Câu 1: Zu Hause lese ich gern Bücher.</li>
-          <li>Câu 2: Besonders abends ist das sehr entspannend.</li>
-          <li>Câu 3: Das hilft mir beim Lernen, deshalb mache ich es oft.</li>
-        </ul>
+        <div class="structure-box">
+            <h3>🔗 KEYWORDS LIÊN KẾT QUAN TRỌNG:</h3>
+            <table>
+                <tr>
+                    <th>Chức năng</th>
+                    <th>Keywords</th>
+                    <th>Ví dụ sử dụng</th>
+                </tr>
+                <tr>
+                    <td><strong>Liên kết câu 1→2</strong></td>
+                    <td>Auch, Oft, Manchmal, Besonders, Außerdem</td>
+                    <td>Oft geht es in den Park...</td>
+                </tr>
+                <tr>
+                    <td><strong>Liên kết câu 2→3</strong></td>
+                    <td>Das, Deshalb, weil, aber, trotzdem</td>
+                    <td>Das gefällt mir sehr, weil...</td>
+                </tr>
+                <tr>
+                    <td><strong>Trạng từ thời gian</strong></td>
+                    <td>Am Wochenende, Morgens, Abends, Täglich</td>
+                    <td>Am Wochenende fahre ich...</td>
+                </tr>
+                <tr>
+                    <td><strong>Trạng từ tần suất</strong></td>
+                    <td>Oft, Manchmal, Selten, Immer, Nie</td>
+                    <td>Manchmal wird mit Freunden...</td>
+                </tr>
+                <tr>
+                    <td><strong>Đại từ chỉ định</strong></td>
+                    <td>Das, Es, Dort, Dabei, Danach</td>
+                    <td>Das ist sehr praktisch...</td>
+                </tr>
+            </table>
+        </div>
 
-        <p><strong>Internet nutzen:</strong></p>
-        <ul>
-          <li>Câu 1: Täglich nutze ich das Internet für E-Mails.</li>
-          <li>Câu 2: Außerdem schaue ich Videos oder lese Nachrichten.</li>
-          <li>Câu 3: Das ist sehr praktisch, aber manchmal zu viel.</li>
-        </ul>
-      </div>
+        <div class="structure-box">
+            <h3>📝 MẪU CÂU CHO TỪNG KEYWORD:</h3>
+            <p><strong>Lesen:</strong></p>
+            <ul>
+                <li>Câu 1: Zu Hause lese ich gern Bücher.</li>
+                <li>Câu 2: Das macht Spaß und hilft mir beim Lernen.</li>
+                <li>Câu 3: Bücher bilden und unterhalten zugleich.</li>
+            </ul>
+            
+            <p><strong>Freunde besuchen:</strong></p>
+            <ul>
+                <li>Câu 1: Auch meine Freunde treffe ich oft in der Freizeit.</li>
+                <li>Câu 2: Am Wochenende gehen wir zusammen spazieren oder trinken Kaffee.</li>
+                <li>Câu 3: Das gefällt mir sehr, weil wir viel Zeit zum Reden haben.</li>
+            </ul>
+            
+            <p><strong>Internet für Lernen:</strong></p>
+            <ul>
+                <li>Câu 1: Zum Lernen ist das Internet sehr hilfreich.</li>
+                <li>Câu 2: Videos, Artikel oder Online-Übungen helfen beim Verstehen.</li>
+                <li>Câu 3: So können viele neue Dinge gelernt werden.</li>
+            </ul>
 
-      <div class="structure-box">
-        <h3>⚡ CÁCH ÁP DỤNG CHO CHỦ ĐỀ KHÁC:</h3>
-        <p><strong>1. Xác định 4 keywords từ câu hỏi trung tâm</strong></p>
-        <p><strong>2. Mỗi keyword viết 3 câu theo công thức:</strong></p>
-        <ul>
-          <li><strong>Câu 1:</strong> Trả lời trực tiếp keyword</li>
-          <li><strong>Câu 2:</strong> [Keyword liên kết] + chi tiết cụ thể</li>
-          <li>
-            <strong>Câu 3:</strong> [Đại từ chỉ định] + cảm nhận/đánh giá +
-            [weil/deshalb/aber]
-          </li>
-        </ul>
-        <p><strong>3. Sử dụng từ nối đa dạng để tránh lặp lại</strong></p>
-        <p>
-          <strong
-            >4. Kết hợp nhiều cấu trúc ngữ pháp: Hauptsatz, Nebensatz, Passiv,
-            Modalverb</strong
-          >
-        </p>
-      </div>
+            <p><strong>Internet zum Einkaufen:</strong></p>
+            <ul>
+                <li>Câu 1: Einkaufen ist im Internet sehr bequem.</li>
+                <li>Câu 2: Oft werden Bücher oder Kleidung online gekauft.</li>
+                <li>Câu 3: Das geht schnell, aber die Qualität muss man immer genau prüfen.</li>
+            </ul>
+        </div>
 
-      <h2>💡 KẾT LUẬN</h2>
-      <div class="structure-box">
-        <p>
-          File phân tích này cho thấy cấu trúc chi tiết của bài nói A2, từ việc
-          sử dụng keywords liên kết đến các quy tắc ngữ pháp cụ thể. Bằng cách
-          hiểu rõ chức năng của từng từ trong câu và cách chúng liên kết với
-          nhau, bạn có thể tạo ra bài nói tự nhiên và đạt điểm cao.
-        </p>
+        <div class="structure-box">
+            <h3>⚡ CÁCH ÁP DỤNG CHO CHỦ ĐỀ KHÁC:</h3>
+            <p><strong>1. Xác định 4 keywords từ câu hỏi trung tâm</strong></p>
+            <p><strong>2. Mỗi keyword viết 3 câu theo công thức:</strong></p>
+            <ul>
+                <li><strong>Câu 1:</strong> Trả lời trực tiếp keyword</li>
+                <li><strong>Câu 2:</strong> [Keyword liên kết] + chi tiết cụ thể</li>
+                <li><strong>Câu 3:</strong> [Đại từ chỉ định] + cảm nhận/đánh giá + [weil/deshalb/aber]</li>
+            </ul>
+            <p><strong>3. Sử dụng từ nối đa dạng để tránh lặp lại</strong></p>
+            <p><strong>4. Kết hợp nhiều cấu trúc ngữ pháp: Hauptsatz, Nebensatz, Passiv, Modalverb</strong></p>
+        </div>
 
-        <p><strong>Điểm mạnh của phương pháp này:</strong></p>
-        <ul>
-          <li>Cấu trúc rõ ràng, dễ áp dụng cho mọi chủ đề</li>
-          <li>Kết hợp nhiều cấu trúc ngữ pháp A2 quan trọng</li>
-          <li>Keywords liên kết giúp bài nói tự nhiên và logic</li>
-          <li>Từ vựng và từ nối đa dạng, tránh lặp lại nhàm chán</li>
-          <li>Có thể mở rộng và thích nghi với nhiều tình huống khác nhau</li>
-        </ul>
-      </div>
+        <h2>💡 KẾT LUẬN</h2>
+        <div class="structure-box">
+            <p>File phân tích này cho thấy cấu trúc chi tiết của bài nói A2, từ việc sử dụng keywords liên kết đến các quy tắc ngữ pháp cụ thể. Bằng cách hiểu rõ chức năng của từng từ trong câu và cách chúng liên kết với nhau, bạn có thể tạo ra bài nói tự nhiên và đạt điểm cao.</p>
+            
+            <p><strong>Điểm mạnh của phương pháp này:</strong></p>
+            <ul>
+                <li>Cấu trúc rõ ràng, dễ áp dụng cho mọi chủ đề</li>
+                <li>Kết hợp nhiều cấu trúc ngữ pháp A2 quan trọng</li>
+                <li>Keywords liên kết giúp bài nói tự nhiên và logic</li>
+                <li>Từ vựng và từ nối đa dạng, tránh lặp lại nhàm chán</li>
+                <li>Có thể mở rộng và thích nghi với nhiều tình huống khác nhau</li>
+            </ul>
+        </div>
     </div>
-  </body>
+</body>
 </html>
