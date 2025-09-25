@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phân Tích Cấu Trúc Ngữ Pháp Tiếng Đức A2</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+      }
+
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+      }
+
+      h2 {
+        color: #e74c3c;
+        margin-top: 30px;
+        background: #ecf0f1;
+        padding: 10px;
+        border-left: 5px solid #e74c3c;
+      }
+
+      .structure-reference {
+        background: #e8f4fd;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        border: 2px solid #3498db;
+        font-size: 1.1em;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .sentence-group {
+        background: #f8f9fa;
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .sentence-title {
+        background: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .sentence {
+        margin: 15px 0;
+        padding: 15px;
+        background: white;
+        border-left: 4px solid #3498db;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .german {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 8px;
+        line-height: 1.8;
+        color: #2c3e50;
+      }
+
+      .vietnamese {
+        color: #7f8c8d;
+        font-style: italic;
+        margin-bottom: 10px;
+      }
+
+      .analysis {
+        margin-top: 10px;
+        padding: 15px;
+        background: #e8f5e8;
+        border-radius: 5px;
+        font-size: 0.95em;
+      }
+
+      .word-analysis {
+        background: #fff3cd;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 8px 0;
+        border-left: 3px solid #ffc107;
+      }
+
+      .structure-analysis {
+        background: #d1ecf1;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 8px 0;
+        border-left: 3px solid #17a2b8;
+      }
+
+      .word-item {
+        margin: 3px 0;
+        padding: 2px 0;
+      }
+
+      .passiv {
+        border-left-color: #dc3545;
+      }
+      .comparison {
+        border-left-color: #fd7e14;
+      }
+      .comparative {
+        border-left-color: #20c997;
+      }
+      .superlative {
+        border-left-color: #6f42c1;
+      }
+
+      .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+      }
+
+      .summary-table th {
+        background-color: #3498db;
+        color: white;
+        padding: 12px;
+        border: 1px solid #ddd;
+        font-weight: bold;
+      }
+
+      .summary-table td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      .summary-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .highlight {
+        background-color: #ffeb3b;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-weight: bold;
+      }
+
+      .structure-box {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 PHÂN TÍCH CẤU TRÚC NGỮ PHÁP TIẾNG ĐỨC A2</h1>
+
+      <div class="structure-reference">
+        <h3>CẤU TRÚC MỆNH ĐỀ CHÍNH TIẾNG ĐỨC:</h3>
+        <p>
+          Chủ ngữ + Động từ chia + Đại từ phần thân + Dativ + Akkusativ +
+          nicht/kein + Te-Ka-Mo + Tân ngữ gián tiếp + Lo + Tân ngữ trực tiếp +
+          Tiền tố tách được/Động từ phụ
+        </p>
+      </div>
+
+      <h2>🔄 1. CÂU BỊ ĐỘNG (PASSIV)</h2>
+
+      <div class="sentence-group">
+        <div class="sentence-title">CÂU BỊ ĐỘNG THỜI TƯƠNG LAI</div>
+
+        <div class="sentence passiv">
+          <div class="german">
+            Das neue Krankenhaus wird nächstes Jahr von der Regierung gebaut.
+          </div>
+          <div class="vietnamese">
+            → Bệnh viện mới sẽ được xây vào năm tới bởi chính phủ.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Das neue Krankenhaus =
+                <span class="highlight">Chủ ngữ</span> (chủ thể bị tác động)
+              </div>
+              <div class="word-item">
+                • wird = <span class="highlight">Động từ chia</span> (vị trí 2 -
+                trợ động từ bị động)
+              </div>
+              <div class="word-item">
+                • nächstes Jahr = <span class="highlight">Te-Ka-Mo</span> (thời
+                gian)
+              </div>
+              <div class="word-item">
+                • von der Regierung =
+                <span class="highlight">Tân ngữ gián tiếp</span> (tác nhân thực
+                hiện hành động)
+              </div>
+              <div class="word-item">
+                • gebaut = <span class="highlight">Động từ phụ</span> (Partizip
+                II)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + wird + Thời gian + von +
+              Dativ + Partizip II (Futur Passiv)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">CÂU BỊ ĐỘNG THỜI QUÁ KHỨ</div>
+
+        <div class="sentence passiv">
+          <div class="german">
+            Die Hausaufgaben wurden gestern von allen Schülern sorgfältig
+            gemacht.
+          </div>
+          <div class="vietnamese">
+            → Bài tập về nhà đã được tất cả học sinh làm cẩn thận hôm qua.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Die Hausaufgaben = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • wurden = <span class="highlight">Động từ chia</span> (vị trí 2
+                - Präteritum của werden)
+              </div>
+              <div class="word-item">
+                • gestern = <span class="highlight">Te-Ka-Mo</span> (thời gian)
+              </div>
+              <div class="word-item">
+                • von allen Schülern =
+                <span class="highlight">Tân ngữ gián tiếp</span> (tác nhân)
+              </div>
+              <div class="word-item">
+                • sorgfältig = <span class="highlight">Lo</span> (cách thức)
+              </div>
+              <div class="word-item">
+                • gemacht = <span class="highlight">Động từ phụ</span> (Partizip
+                II)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + wurden + Thời gian + von +
+              Dativ + Cách thức + Partizip II
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">CÂU BỊ ĐỘNG HIỆN TẠI</div>
+
+        <div class="sentence passiv">
+          <div class="german">
+            Deutsch wird in vielen Ländern der Welt von Millionen Menschen
+            gelernt.
+          </div>
+          <div class="vietnamese">
+            → Tiếng Đức được học ở nhiều nước trên thế giới bởi hàng triệu
+            người.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Deutsch = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • wird = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • in vielen Ländern der Welt =
+                <span class="highlight">Lo</span> (nơi chốn)
+              </div>
+              <div class="word-item">
+                • von Millionen Menschen =
+                <span class="highlight">Tân ngữ gián tiếp</span> (tác nhân)
+              </div>
+              <div class="word-item">
+                • gelernt = <span class="highlight">Động từ phụ</span> (Partizip
+                II)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + wird + Nơi chốn + von + Dativ
+              + Partizip II
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">CÂU BỊ ĐỘNG ĐANG DIỄN RA</div>
+
+        <div class="sentence passiv">
+          <div class="german">
+            Mein Auto wird gerade in der Werkstatt von einem Mechaniker
+            repariert.
+          </div>
+          <div class="vietnamese">
+            → Xe của tôi đang được sửa ở xưởng bởi một thợ cơ khí.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Mein Auto = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • wird = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • gerade = <span class="highlight">Te-Ka-Mo</span> (thời điểm -
+                ngay lúc này)
+              </div>
+              <div class="word-item">
+                • in der Werkstatt = <span class="highlight">Lo</span> (nơi
+                chốn)
+              </div>
+              <div class="word-item">
+                • von einem Mechaniker =
+                <span class="highlight">Tân ngữ gián tiếp</span> (tác nhân)
+              </div>
+              <div class="word-item">
+                • repariert =
+                <span class="highlight">Động từ phụ</span> (Partizip II)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + wird + gerade + Nơi chốn +
+              von + Dativ + Partizip II
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">CÂU BỊ ĐỘNG HOÀN THÀNH</div>
+
+        <div class="sentence passiv">
+          <div class="german">
+            Die wichtigen Dokumente sind bereits von einer Fachperson übersetzt
+            worden.
+          </div>
+          <div class="vietnamese">
+            → Các tài liệu quan trọng đã được một chuyên gia dịch rồi.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Die wichtigen Dokumente =
+                <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • sind = <span class="highlight">Động từ chia</span> (vị trí 2 -
+                Perfekt Passiv)
+              </div>
+              <div class="word-item">
+                • bereits = <span class="highlight">Te-Ka-Mo</span> (thời điểm -
+                đã rồi)
+              </div>
+              <div class="word-item">
+                • von einer Fachperson =
+                <span class="highlight">Tân ngữ gián tiếp</span> (tác nhân)
+              </div>
+              <div class="word-item">
+                • übersetzt worden =
+                <span class="highlight">Động từ phụ</span> (Partizip II +
+                worden)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + sind + bereits + von + Dativ
+              + Partizip II + worden (Perfekt Passiv)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>⚖️ 2. CÂU SO SÁNH BẰNG (so...wie)</h2>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH TÍNH CHẤT</div>
+
+        <div class="sentence comparison">
+          <div class="german">
+            Mein Bruder ist so groß wie mein Vater und sehr sportlich.
+          </div>
+          <div class="vietnamese">
+            → Anh trai tôi cao bằng bố tôi và rất khỏe mạnh.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Mein Bruder = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • ist = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • so groß wie mein Vater =
+                <span class="highlight">Tân ngữ trực tiếp</span> (bổ ngữ so sánh
+                bằng)
+              </div>
+              <div class="word-item">
+                • und sehr sportlich = Liên từ + bổ ngữ thêm
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + sein + so + tính từ + wie +
+              đối tượng so sánh
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH ĐỘ KHÓ</div>
+
+        <div class="sentence comparison">
+          <div class="german">
+            Diese Aufgabe ist so schwer wie die letzte Prüfung für alle
+            Studenten.
+          </div>
+          <div class="vietnamese">
+            → Bài tập này khó bằng kỳ thi trước với tất cả sinh viên.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Diese Aufgabe = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • ist = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • so schwer wie die letzte Prüfung =
+                <span class="highlight">Tân ngữ trực tiếp</span> (bổ ngữ so
+                sánh)
+              </div>
+              <div class="word-item">
+                • für alle Studenten =
+                <span class="highlight">Tân ngữ gián tiếp</span> (Dativ - đối
+                tượng chịu tác động)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + sein + so + tính từ + wie +
+              đối tượng + für + Dativ
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH ĐỊA ĐIỂM</div>
+
+        <div class="sentence comparison">
+          <div class="german">
+            Berlin ist so interessant wie München für Touristen, besonders im
+            Sommer.
+          </div>
+          <div class="vietnamese">
+            → Berlin thú vị bằng Munich đối với khách du lịch, đặc biệt vào mùa
+            hè.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Berlin = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • ist = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • so interessant wie München =
+                <span class="highlight">Tân ngữ trực tiếp</span> (bổ ngữ so
+                sánh)
+              </div>
+              <div class="word-item">
+                • für Touristen =
+                <span class="highlight">Tân ngữ gián tiếp</span> (Dativ)
+              </div>
+              <div class="word-item">
+                • besonders im Sommer =
+                <span class="highlight">Te-Ka-Mo</span> (thời gian cụ thể)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + sein + so + tính từ + wie +
+              đối tượng + für + Dativ + Thời gian
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH HOẠT ĐỘNG</div>
+
+        <div class="sentence comparison">
+          <div class="german">
+            Ich arbeite so viel wie meine Kollegen jeden Tag im Büro.
+          </div>
+          <div class="vietnamese">
+            → Tôi làm việc nhiều bằng các đồng nghiệp mỗi ngày ở văn phòng.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Ich = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • arbeite = <span class="highlight">Động từ chia</span> (vị trí
+                2)
+              </div>
+              <div class="word-item">
+                • so viel wie meine Kollegen =
+                <span class="highlight">Lo</span> (cách thức so sánh)
+              </div>
+              <div class="word-item">
+                • jeden Tag = <span class="highlight">Te-Ka-Mo</span> (thời
+                gian)
+              </div>
+              <div class="word-item">
+                • im Büro = <span class="highlight">Lo</span> (nơi chốn)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + động từ + so + trạng từ + wie
+              + đối tượng + Thời gian + Nơi chốn
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH CHẤT LƯỢNG DỊCH VỤ</div>
+
+        <div class="sentence comparison">
+          <div class="german">
+            Das neue Restaurant kocht so gut wie das alte und hat freundliches
+            Personal.
+          </div>
+          <div class="vietnamese">
+            → Nhà hàng mới nấu ăn ngon bằng nhà hàng cũ và có nhân viên thân
+            thiện.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Das neue Restaurant = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • kocht = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • so gut wie das alte = <span class="highlight">Lo</span> (cách
+                thức so sánh)
+              </div>
+              <div class="word-item">
+                • und hat freundliches Personal = Câu ghép với liên từ "und"
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + động từ + so + trạng từ + wie
+              + đối tượng + câu ghép
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>📈 3. CÂU SO SÁNH HƠN (Komparativ)</h2>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH ĐỘ KHÓ HỌC</div>
+
+        <div class="sentence comparative">
+          <div class="german">
+            Deutsch ist schwerer als Englisch für mich zu lernen, besonders die
+            Grammatik.
+          </div>
+          <div class="vietnamese">
+            → Tiếng Đức khó học hơn tiếng Anh đối với tôi, đặc biệt là ngữ pháp.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Deutsch = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • ist = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • schwerer als Englisch =
+                <span class="highlight">Tân ngữ trực tiếp</span> (so sánh hơn)
+              </div>
+              <div class="word-item">
+                • für mich =
+                <span class="highlight">Tân ngữ gián tiếp</span> (Dativ)
+              </div>
+              <div class="word-item">
+                • zu lernen =
+                <span class="highlight">Động từ phụ</span> (Infinitiv với zu)
+              </div>
+              <div class="word-item">
+                • besonders die Grammatik = Bổ sung thông tin
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + sein + tính từ + -er + als +
+              đối tượng + für + Dativ + zu + Infinitiv
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH TỐC ĐỘ</div>
+
+        <div class="sentence comparative">
+          <div class="german">
+            Meine Schwester läuft schneller als ich zum Bahnhof jeden Morgen.
+          </div>
+          <div class="vietnamese">
+            → Chị gái tôi chạy nhanh hơn tôi đến ga mỗi sáng.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Meine Schwester = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • läuft = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • schneller als ich = <span class="highlight">Lo</span> (cách
+                thức so sánh hơn)
+              </div>
+              <div class="word-item">
+                • zum Bahnhof = <span class="highlight">Lo</span> (hướng đi)
+              </div>
+              <div class="word-item">
+                • jeden Morgen = <span class="highlight">Te-Ka-Mo</span> (thời
+                gian)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + động từ + trạng từ + -er +
+              als + đối tượng + Hướng đi + Thời gian
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH GIÁ CẢ VÀ KÍCH THƯỚC</div>
+
+        <div class="sentence comparative">
+          <div class="german">
+            Die Wohnung in der Stadt kostet mehr als auf dem Land und ist
+            kleiner.
+          </div>
+          <div class="vietnamese">
+            → Căn hộ trong thành phố đắt hơn ở nông thôn và nhỏ hơn.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Die Wohnung = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • kostet = <span class="highlight">Động từ chia</span> (vị trí
+                2)
+              </div>
+              <div class="word-item">
+                • in der Stadt = <span class="highlight">Lo</span> (nơi chốn)
+              </div>
+              <div class="word-item">
+                • mehr als auf dem Land =
+                <span class="highlight">Tân ngữ trực tiếp</span> (so sánh hơn
+                bất quy tắc)
+              </div>
+              <div class="word-item">
+                • und ist kleiner = Câu ghép với so sánh hơn thứ hai
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + động từ + Nơi chốn + mehr +
+              als + so sánh + câu ghép
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH ÂMthanh</div>
+
+        <div class="sentence comparative">
+          <div class="german">
+            Er spricht lauter als alle anderen Menschen im Zimmer während des
+            Treffens.
+          </div>
+          <div class="vietnamese">
+            → Anh ấy nói to hơn tất cả mọi người khác trong phòng trong suốt
+            cuộc họp.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Er = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • spricht = <span class="highlight">Động từ chia</span> (vị trí
+                2)
+              </div>
+              <div class="word-item">
+                • lauter als alle anderen Menschen =
+                <span class="highlight">Lo</span> (cách thức so sánh hơn)
+              </div>
+              <div class="word-item">
+                • im Zimmer = <span class="highlight">Lo</span> (nơi chốn)
+              </div>
+              <div class="word-item">
+                • während des Treffens =
+                <span class="highlight">Te-Ka-Mo</span> (thời gian)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + động từ + trạng từ + -er +
+              als + đối tượng + Nơi chốn + Thời gian
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH THỜI TIẾT</div>
+
+        <div class="sentence comparative">
+          <div class="german">
+            Heute ist das Wetter wärmer als gestern in unserer Stadt und sehr
+            sonnig.
+          </div>
+          <div class="vietnamese">
+            → Hôm nay thời tiết ấm hơn hôm qua ở thành phố chúng tôi và rất
+            nắng.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Heute = <span class="highlight">Te-Ka-Mo</span> (thời gian -
+                vị trí 1)
+              </div>
+              <div class="word-item">
+                • ist = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • das Wetter = <span class="highlight">Chủ ngữ</span> (vị trí 3)
+              </div>
+              <div class="word-item">
+                • wärmer als gestern =
+                <span class="highlight">Tân ngữ trực tiếp</span> (so sánh hơn)
+              </div>
+              <div class="word-item">
+                • in unserer Stadt = <span class="highlight">Lo</span> (nơi
+                chốn)
+              </div>
+              <div class="word-item">• und sehr sonnig = Bổ sung tính chất</div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Thời gian + sein + Chủ ngữ + tính từ +
+              -er + als + thời gian so sánh + Nơi chốn
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>🏆 4. CÂU SO SÁNH HƠN NHẤT (Superlativ)</h2>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH NHẤT VỀ CẢNH ĐẸP</div>
+
+        <div class="sentence superlative">
+          <div class="german">
+            Das ist der schönste Park in unserer ganzen Stadt und sehr beliebt.
+          </div>
+          <div class="vietnamese">
+            → Đây là công viên đẹp nhất trong toàn bộ thành phố chúng tôi và rất
+            nổi tiếng.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Das = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • ist = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • der schönste Park =
+                <span class="highlight">Tân ngữ trực tiếp</span> (so sánh nhất
+                với mạo từ)
+              </div>
+              <div class="word-item">
+                • in unserer ganzen Stadt =
+                <span class="highlight">Lo</span> (nơi chốn - phạm vi so sánh)
+              </div>
+              <div class="word-item">
+                • und sehr beliebt = Bổ sung tính chất
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + sein + der/die/das + tính từ
+              + -(e)ste + danh từ + in + Dativ
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH NHẤT VỀ KHẢ NĂNG</div>
+
+        <div class="sentence superlative">
+          <div class="german">
+            Mein Großvater erzählt die interessantesten Geschichten von allen
+            Familienmitgliedern.
+          </div>
+          <div class="vietnamese">
+            → Ông tôi kể những câu chuyện thú vị nhất trong tất cả các thành
+            viên gia đình.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Mein Großvater = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • erzählt = <span class="highlight">Động từ chia</span> (vị trí
+                2)
+              </div>
+              <div class="word-item">
+                • die interessantesten Geschichten =
+                <span class="highlight">Tân ngữ trực tiếp</span> (so sánh nhất)
+              </div>
+              <div class="word-item">
+                • von allen Familienmitgliedern =
+                <span class="highlight">Tân ngữ gián tiếp</span> (phạm vi so
+                sánh)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + động từ + die + tính từ +
+              -esten + danh từ + von + Dativ
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH NHẤT VỀ ĐỘ KHÓ</div>
+
+        <div class="sentence superlative">
+          <div class="german">
+            Diese Prüfung war die schwierigste in diesem ganzen Semester für die
+            Studenten.
+          </div>
+          <div class="vietnamese">
+            → Kỳ thi này là khó nhất trong cả học kỳ này đối với sinh viên.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Diese Prüfung = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • war = <span class="highlight">Động từ chia</span> (vị trí 2 -
+                Präteritum của sein)
+              </div>
+              <div class="word-item">
+                • die schwierigste =
+                <span class="highlight">Tân ngữ trực tiếp</span> (so sánh nhất)
+              </div>
+              <div class="word-item">
+                • in diesem ganzen Semester =
+                <span class="highlight">Lo</span> (thời gian - phạm vi so sánh)
+              </div>
+              <div class="word-item">
+                • für die Studenten =
+                <span class="highlight">Tân ngữ gián tiếp</span> (Dativ - đối
+                tượng chịu tác động)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + war + die + tính từ + -ste +
+              in + Dativ + für + Akkusativ
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH NHẤT DẠNG TRẠNG TỪ</div>
+
+        <div class="sentence superlative">
+          <div class="german">
+            Anna lernt am fleißigsten von allen Schülern in der Klasse jeden
+            Tag.
+          </div>
+          <div class="vietnamese">
+            → Anna học chăm chỉ nhất trong tất cả học sinh trong lớp mỗi ngày.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Anna = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • lernt = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • am fleißigsten = <span class="highlight">Lo</span> (cách thức
+                - trạng từ so sánh nhất)
+              </div>
+              <div class="word-item">
+                • von allen Schülern =
+                <span class="highlight">Tân ngữ gián tiếp</span> (phạm vi so
+                sánh)
+              </div>
+              <div class="word-item">
+                • in der Klasse = <span class="highlight">Lo</span> (nơi chốn)
+              </div>
+              <div class="word-item">
+                • jeden Tag = <span class="highlight">Te-Ka-Mo</span> (thời
+                gian)
+              </div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + động từ + am + tính từ +
+              -sten + von + Dativ + Nơi chốn + Thời gian
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sentence-group">
+        <div class="sentence-title">SO SÁNH NHẤT VỀ THỜI TIẾT</div>
+
+        <div class="sentence superlative">
+          <div class="german">
+            Der Winter ist die kälteste Jahreszeit in unserem Land und sehr
+            lang.
+          </div>
+          <div class="vietnamese">
+            → Mùa đông là mùa lạnh nhất trong đất nước chúng tôi và rất dài.
+          </div>
+          <div class="analysis">
+            <div class="word-analysis">
+              <strong>Phân tích theo cụm:</strong><br />
+              <div class="word-item">
+                • Der Winter = <span class="highlight">Chủ ngữ</span>
+              </div>
+              <div class="word-item">
+                • ist = <span class="highlight">Động từ chia</span> (vị trí 2)
+              </div>
+              <div class="word-item">
+                • die kälteste Jahreszeit =
+                <span class="highlight">Tân ngữ trực tiếp</span> (so sánh nhất)
+              </div>
+              <div class="word-item">
+                • in unserem Land = <span class="highlight">Lo</span> (nơi chốn
+                - phạm vi so sánh)
+              </div>
+              <div class="word-item">• und sehr lang = Bổ sung tính chất</div>
+            </div>
+            <div class="structure-analysis">
+              <strong>Cấu trúc:</strong> Chủ ngữ + sein + die + tính từ + -ste +
+              danh từ + in + Dativ
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>📊 BẢNG TỔNG HỢP CẤU TRÚC</h2>
+
+      <table class="summary-table">
+        <tr>
+          <th>Loại câu</th>
+          <th>Cấu trúc chính</th>
+          <th>Ví dụ từ khóa</th>
+          <th>Vị trí trong cấu trúc mệnh đề</th>
+        </tr>
+        <tr>
+          <td><strong>Passiv (Hiện tại)</strong></td>
+          <td>S + wird + ... + Partizip II</td>
+          <td>wird...gelernt</td>
+          <td>Động từ chia + Động từ phụ</td>
+        </tr>
+        <tr>
+          <td><strong>Passiv (Quá khứ)</strong></td>
+          <td>S + wurden + ... + Partizip II</td>
+          <td>wurden...gemacht</td>
+          <td>Động từ chia + Động từ phụ</td>
+        </tr>
+        <tr>
+          <td><strong>Passiv (Hoàn thành)</strong></td>
+          <td>S + sind + ... + Partizip II + worden</td>
+          <td>sind...übersetzt worden</td>
+          <td>Động từ chia + Động từ phụ</td>
+        </tr>
+        <tr>
+          <td><strong>von + Dativ (tác nhân)</strong></td>
+          <td>von + der/den/einem...</td>
+          <td>von der Regierung</td>
+          <td>Tân ngữ gián tiếp</td>
+        </tr>
+        <tr>
+          <td><strong>So sánh bằng</strong></td>
+          <td>so + tính từ + wie + đối tượng</td>
+          <td>so groß wie mein Vater</td>
+          <td>Tân ngữ trực tiếp / Lo</td>
+        </tr>
+        <tr>
+          <td><strong>So sánh hơn</strong></td>
+          <td>tính từ + -er + als + đối tượng</td>
+          <td>schwerer als Englisch</td>
+          <td>Tân ngữ trực tiếp / Lo</td>
+        </tr>
+        <tr>
+          <td><strong>So sánh nhất (tính từ)</strong></td>
+          <td>der/die/das + tính từ + -(e)ste</td>
+          <td>der schönste Park</td>
+          <td>Tân ngữ trực tiếp</td>
+        </tr>
+        <tr>
+          <td><strong>So sánh nhất (trạng từ)</strong></td>
+          <td>am + tính từ + -sten</td>
+          <td>am fleißigsten</td>
+          <td>Lo (cách thức)</td>
+        </tr>
+        <tr>
+          <td><strong>für + Akkusativ</strong></td>
+          <td>für + mich/alle Studenten...</td>
+          <td>für mich zu lernen</td>
+          <td>Tân ngữ gián tiếp</td>
+        </tr>
+        <tr>
+          <td><strong>Thời gian cụ thể</strong></td>
+          <td>gestern, heute, nächstes Jahr...</td>
+          <td>nächstes Jahr</td>
+          <td>Te-Ka-Mo</td>
+        </tr>
+        <tr>
+          <td><strong>Nơi chốn</strong></td>
+          <td>in + Dativ, im Büro...</td>
+          <td>in der Werkstatt</td>
+          <td>Lo</td>
+        </tr>
+        <tr>
+          <td><strong>Cách thức</strong></td>
+          <td>sorgfältig, schnell...</td>
+          <td>sorgfältig</td>
+          <td>Lo</td>
+        </tr>
+      </table>
+
+      <div class="structure-box">
+        <h3>🔑 ĐIỂM QUAN TRỌNG NHẤT:</h3>
+        <ul>
+          <li>
+            <strong>Câu bị động:</strong> "von + Dativ" (tác nhân) thuộc
+            <span class="highlight">Tân ngữ gián tiếp</span>
+          </li>
+          <li>
+            <strong>So sánh bằng:</strong> "so...wie" thuộc
+            <span class="highlight">Tân ngữ trực tiếp</span> hoặc
+            <span class="highlight">Lo</span>
+          </li>
+          <li>
+            <strong>So sánh hơn:</strong> "...er als" thuộc
+            <span class="highlight">Tân ngữ trực tiếp</span> hoặc
+            <span class="highlight">Lo</span>
+          </li>
+          <li>
+            <strong>So sánh nhất:</strong>
+            <ul>
+              <li>
+                Dạng tính từ: "der/die/das...ste" →
+                <span class="highlight">Tân ngữ trực tiếp</span>
+              </li>
+              <li>
+                Dạng trạng từ: "am...sten" →
+                <span class="highlight">Lo</span> (cách thức)
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>für + Akkusativ:</strong> Khi chỉ đối tượng được hưởng lợi →
+            <span class="highlight">Tân ngữ gián tiếp</span>
+          </li>
+          <li>
+            <strong>Thời gian:</strong> gestern, heute, nächstes Jahr →
+            <span class="highlight">Te-Ka-Mo</span>
+          </li>
+          <li>
+            <strong>Nơi chốn:</strong> in der Stadt, im Büro →
+            <span class="highlight">Lo</span>
+          </li>
+          <li>
+            <strong>Cách thức:</strong> sorgfältig, schnell, laut →
+            <span class="highlight">Lo</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="structure-box">
+        <h3>📈 QUY TẮC BIẾN ĐỔI SO SÁNH:</h3>
+        <table style="width: 100%; margin: 10px 0">
+          <tr>
+            <th style="background: #3498db; color: white; padding: 8px">
+              Tính từ gốc
+            </th>
+            <th style="background: #3498db; color: white; padding: 8px">
+              So sánh hơn
+            </th>
+            <th style="background: #3498db; color: white; padding: 8px">
+              So sánh nhất
+            </th>
+            <th style="background: #3498db; color: white; padding: 8px">
+              Đặc biệt
+            </th>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd">groß</td>
+            <td style="padding: 8px; border: 1px solid #ddd">größer</td>
+            <td style="padding: 8px; border: 1px solid #ddd">am größten</td>
+            <td style="padding: 8px; border: 1px solid #ddd">Umlaut ö</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd">gut</td>
+            <td style="padding: 8px; border: 1px solid #ddd">besser</td>
+            <td style="padding: 8px; border: 1px solid #ddd">am besten</td>
+            <td style="padding: 8px; border: 1px solid #ddd">Bất quy tắc</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd">viel</td>
+            <td style="padding: 8px; border: 1px solid #ddd">mehr</td>
+            <td style="padding: 8px; border: 1px solid #ddd">am meisten</td>
+            <td style="padding: 8px; border: 1px solid #ddd">Bất quy tắc</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd">gern</td>
+            <td style="padding: 8px; border: 1px solid #ddd">lieber</td>
+            <td style="padding: 8px; border: 1px solid #ddd">am liebsten</td>
+            <td style="padding: 8px; border: 1px solid #ddd">Bất quy tắc</td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>💡 KẾT LUẬN</h2>
+      <div class="structure-box">
+        <p>
+          Phân tích này cho thấy cách áp dụng cấu trúc mệnh đề chính tiếng Đức
+          vào các dạng câu phức tạp ở trình độ A2. Việc hiểu rõ vị trí của từng
+          thành phần trong câu giúp:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Xây dựng câu bị động chính xác</strong> với "von + Dativ" ở
+            đúng vị trí
+          </li>
+          <li>
+            <strong>Sử dụng các dạng so sánh</strong> phù hợp với ngữ cảnh
+          </li>
+          <li>
+            <strong>Phân biệt rõ ràng</strong> giữa tính từ và trạng từ so sánh
+            nhất
+          </li>
+          <li>
+            <strong>Áp dụng quy tắc Te-Ka-Mo và Lo</strong> cho thời gian và nơi
+            chốn
+          </li>
+          <li><strong>Hiểu vai trò của "für + Akkusativ"</strong> trong câu</li>
+        </ul>
+
+        <p>
+          <strong>Lưu ý quan trọng:</strong> Cấu trúc mệnh đề chính không thay
+          đổi dù câu có phức tạp đến đâu. Việc nắm vững công thức này là chìa
+          khóa để thành thạo tiếng Đức ở mọi trình độ.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
