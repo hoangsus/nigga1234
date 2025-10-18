@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Luyện Redemittel A2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        text-align: center;
+        color: #667eea;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 1.1em;
+      }
+
+      .menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .menu-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border: none;
+        border-radius: 15px;
+        font-size: 1.3em;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        font-weight: bold;
+      }
+
+      .menu-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      }
+
+      .game-area {
+        display: none;
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .situation {
+        background: #f8f9ff;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        border-left: 5px solid #667eea;
+      }
+
+      .situation h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .schedule-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .schedule {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid #667eea;
+      }
+
+      .schedule h4 {
+        color: #667eea;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .time-slot {
+        padding: 8px;
+        margin: 5px 0;
+        background: #f0f0f0;
+        border-radius: 5px;
+        font-size: 0.9em;
+      }
+
+      .time-slot.busy {
+        background: #ffe0e0;
+      }
+
+      .redemittel-section {
+        background: #fff9e6;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border: 2px dashed #ffa500;
+      }
+
+      .redemittel-section h4 {
+        color: #ff8c00;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+      }
+
+      .redemittel-group {
+        margin-bottom: 20px;
+      }
+
+      .redemittel-group h5 {
+        color: #667eea;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+      }
+
+      .redemittel-list {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .redemittel-item {
+        padding: 8px;
+        margin: 5px 0;
+        background: #f0f8ff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .redemittel-item:hover {
+        background: #e0f0ff;
+        transform: translateX(5px);
+      }
+
+      .conversation-area {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border: 2px solid #667eea;
+        min-height: 300px;
+      }
+
+      .message {
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        animation: slideIn 0.3s;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .message.you {
+        background: #e3f2fd;
+        margin-left: 20px;
+      }
+
+      .message.partner {
+        background: #f3e5f5;
+        margin-right: 20px;
+      }
+
+      .speaker {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #667eea;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .option-button {
+        padding: 15px;
+        border: 2px solid #667eea;
+        background: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-align: left;
+        font-size: 1em;
+      }
+
+      .option-button:hover {
+        background: #667eea;
+        color: white;
+        transform: translateX(10px);
+      }
+
+      .option-button.correct {
+        background: #4caf50;
+        color: white;
+        border-color: #4caf50;
+      }
+
+      .option-button.wrong {
+        background: #f44336;
+        color: white;
+        border-color: #f44336;
+      }
+
+      .feedback {
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      .feedback.correct {
+        background: #c8e6c9;
+        color: #2e7d32;
+      }
+
+      .feedback.wrong {
+        background: #ffcdd2;
+        color: #c62828;
+      }
+
+      .progress {
+        background: #f0f0f0;
+        height: 30px;
+        border-radius: 15px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        height: 100%;
+        transition: width 0.5s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      .score {
+        text-align: center;
+        font-size: 1.5em;
+        margin: 20px 0;
+        color: #667eea;
+        font-weight: bold;
+      }
+
+      .back-button,
+      .next-button,
+      .reset-button {
+        padding: 15px 30px;
+        margin: 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: bold;
+      }
+
+      .back-button {
+        background: #f44336;
+        color: white;
+      }
+
+      .next-button {
+        background: #4caf50;
+        color: white;
+      }
+
+      .reset-button {
+        background: #ff9800;
+        color: white;
+      }
+
+      .back-button:hover,
+      .next-button:hover,
+      .reset-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .button-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .explanation {
+        background: #e8f5e9;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 15px 0;
+        border-left: 4px solid #4caf50;
+      }
+
+      .explanation h5 {
+        color: #2e7d32;
+        margin-bottom: 10px;
+      }
+
+      .hint {
+        background: #fff3e0;
+        padding: 10px;
+        border-radius: 8px;
+        margin: 10px 0;
+        font-style: italic;
+        border-left: 3px solid #ff9800;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎮 GAME LUYỆN REDEMITTEL A2</h1>
+      <p class="subtitle">Teil 3: Sprechen - Hội thoại đôi (Paarprüfung)</p>
+
+      <div class="menu" id="menu">
+        <button class="menu-button" onclick="startGame(1)">
+          📚 BÀI 1: HỌC REDEMITTEL<br />
+          <small>Học 50+ mẫu câu chuẩn</small>
+        </button>
+        <button class="menu-button" onclick="startGame(2)">
+          🎯 BÀI 2: LUYỆN TẬP<br />
+          <small>Áp dụng vào 10 tình huống</small>
+        </button>
+        <button class="menu-button" onclick="startGame(3)">
+          ⚡ BÀI 3: THI THỬ<br />
+          <small>3 đề thi thật (như hình)</small>
+        </button>
+      </div>
+
+      <div class="game-area" id="game1">
+        <h2 style="color: #667eea; margin-bottom: 20px">
+          📚 BÀI 1: HỌC REDEMITTEL CƠ BẢN
+        </h2>
+
+        <div class="redemittel-section">
+          <h4>🎯 CẤU TRÚC HỘI THOẠI TEIL 3</h4>
+          <div class="hint">
+            <strong>Quy trình 6 bước:</strong><br />
+            1️⃣ Đưa ra đề nghị → 2️⃣ Hỏi thời gian → 3️⃣ Thương lượng → 4️⃣ Đề nghị
+            khác → 5️⃣ Đồng ý → 6️⃣ Kết thúc
+          </div>
+        </div>
+
+        <div class="redemittel-group">
+          <h5>1️⃣ ĐƯA RA ĐỀ NGHỊ (Einen Vorschlag machen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Ich habe eine Idee... <em>(Tôi có một ý tưởng...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich schlage vor, dass wir...
+              <em>(Tôi đề nghị rằng chúng ta...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wir könnten... / Wir sollten...
+              <em>(Chúng ta có thể... / nên...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich möchte etwas vorschlagen...
+              <em>(Tôi muốn đề nghị điều gì đó...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wollen wir...? <em>(Chúng ta có muốn...?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wie findest du...? / Was meinst du?
+              <em>(Bạn thấy... thế nào? / Bạn nghĩ sao?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Was denkst du? / Wollen wir das machen?
+              <em>(Bạn nghĩ gì? / Chúng ta làm như vậy nhé?)</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="redemittel-group">
+          <h5>2️⃣ HỎI THỜI GIAN & ĐỊA ĐIỂM (Nachfragen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Wann hast du Zeit? / Hast du da Zeit?
+              <em>(Khi nào bạn có thời gian? / Lúc đó bạn có rảnh không?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wann passt es dir? / Passt es dir?
+              <em>(Khi nào phù hợp với bạn? / Hợp với bạn không?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wie findest du das? <em>(Bạn thấy thế nào?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Was hältst du davon? <em>(Bạn nghĩ gì về điều đó?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wo wollen wir uns treffen?
+              <em>(Chúng ta muốn gặp nhau ở đâu?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Um wie viel Uhr treffen wir uns?
+              <em>(Mấy giờ chúng ta gặp nhau?)</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="redemittel-group">
+          <h5>3️⃣ TỪ CHỐI LỊCH SỰ (Ablehnen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Das geht leider nicht. / Leider nicht.
+              <em>(Rất tiếc không được.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Am Montag kann ich leider nicht.
+              <em>(Rất tiếc thứ Hai tôi không thể.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Das passt mir nicht so gut. <em>(Không hợp với tôi lắm.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Tut mir leid, aber da habe ich (leider) keine Zeit.
+              <em>(Xin lỗi, nhưng lúc đó tôi không có thời gian.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Oh Schade, aber da habe ich schon etwas anderes vor.
+              <em>(Ôi tiếc quá, nhưng lúc đó tôi đã có kế hoạch khác rồi.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Das gefällt mir aber nicht.
+              <em>(Tôi không thích điều đó lắm.)</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="redemittel-group">
+          <h5>4️⃣ ĐỀ NGHỊ KHÁC (Gegenvorschlag machen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Wie wäre es mit...? <em>(Vậy... thì sao?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Vielleicht sollten wir lieber...
+              <em>(Có lẽ chúng ta nên... thì tốt hơn)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Es wäre mir lieber, wenn... <em>(Tôi thích hơn nếu...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich denke, es ist sinnvoller, wenn wir...
+              <em>(Tôi nghĩ sẽ hợp lý hơn nếu chúng ta...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Lass uns mal was anderes machen.
+              <em>(Chúng ta hãy làm điều gì đó khác.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wir könnten auch... <em>(Chúng ta cũng có thể...)</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="redemittel-group">
+          <h5>5️⃣ ĐỒNG Ý (Zustimmen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Das ist eine super/tolle Idee!
+              <em>(Đó là một ý tưởng tuyệt vời!)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ja, so sollten wir das machen.
+              <em>(Vâng, chúng ta nên làm như vậy.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Das gefällt mir (sehr gut).
+              <em>(Tôi thích điều đó (rất nhiều).)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Das finde ich gut/super/prima.
+              <em>(Tôi thấy hay/tuyệt/tốt.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Genau! Einverstanden! In Ordnung!
+              <em>(Chính xác! Đồng ý! Được!)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ja gut. Machen wir das so.
+              <em>(Được rồi. Chúng ta làm như vậy.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich bin dafür. / Ich stimme dir zu.
+              <em>(Tôi tán thành. / Tôi đồng ý với bạn.)</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="redemittel-group">
+          <h5>6️⃣ KẾT THÚC (Am Ende das Ergebnis sagen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Perfekt, dann treffen wir uns am... um...
+              <em>(Hoàn hảo, vậy chúng ta gặp nhau vào... lúc...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Okay, dann sagen wir: ... <em>(Được, vậy chúng ta nói:...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Dann machen wir es so: zuerst..., dann..., jetzt müssen wir nur
+              noch...
+              <em
+                >(Vậy chúng ta làm như sau: đầu tiên..., sau đó..., bây giờ
+                chúng ta chỉ cần...)</em
+              >
+            </div>
+            <div class="redemittel-item">
+              ✓ Also dann bis... Ich freue mich.
+              <em>(Vậy hẹn đến... Tôi mong chờ.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich glaube, wir haben schon alles gut geplant.
+              <em>(Tôi nghĩ chúng ta đã lên kế hoạch tốt rồi.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Alles klar, wir sehen uns dann. <em>(Rõ rồi, hẹn gặp lại.)</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="explanation">
+          <h5>💡 CÁCH SỬ DỤNG:</h5>
+          <p>
+            <strong>Bước 1:</strong> Đọc to tất cả Redemittel 10 lần để thuộc
+          </p>
+          <p><strong>Bước 2:</strong> Chuyển sang BÀI 2 để luyện tập</p>
+          <p><strong>Bước 3:</strong> Làm BÀI 3 để thi thử như thật</p>
+        </div>
+
+        <div class="button-container">
+          <button class="back-button" onclick="backToMenu()">
+            ↩️ Quay lại Menu
+          </button>
+          <button class="next-button" onclick="startGame(2)">
+            ▶️ Sang BÀI 2
+          </button>
+        </div>
+      </div>
+
+      <div class="game-area" id="game2">
+        <h2 style="color: #667eea; margin-bottom: 20px">
+          🎯 BÀI 2: LUYỆN TẬP VỚI 10 TÌNH HUỐNG
+        </h2>
+
+        <div class="score" id="score2">
+          Điểm: <span id="points2">0</span>/10
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progress2" style="width: 0%">
+            Câu 1/10
+          </div>
+        </div>
+
+        <div id="situation2"></div>
+        <div id="conversation2" class="conversation-area"></div>
+        <div id="options2" class="options"></div>
+        <div id="feedback2"></div>
+
+        <div class="button-container">
+          <button class="back-button" onclick="backToMenu()">
+            ↩️ Quay lại Menu
+          </button>
+          <button
+            class="next-button"
+            id="nextBtn2"
+            onclick="nextQuestion2()"
+            style="display: none"
+          >
+            ▶️ Câu tiếp
+          </button>
+          <button class="reset-button" onclick="resetGame2()">
+            🔄 Làm lại
+          </button>
+        </div>
+      </div>
+
+      <div class="game-area" id="game3">
+        <h2 style="color: #667eea; margin-bottom: 20px">
+          ⚡ BÀI 3: THI THỬ (3 ĐỀ THẬT)
+        </h2>
+
+        <div class="score" id="score3">Điểm: <span id="points3">0</span>/9</div>
+        <div class="progress">
+          <div class="progress-bar" id="progress3" style="width: 0%">
+            Câu 1/9
+          </div>
+        </div>
+
+        <div id="exam3"></div>
+        <div id="conversation3" class="conversation-area"></div>
+        <div id="options3" class="options"></div>
+        <div id="feedback3"></div>
+
+        <div class="button-container">
+          <button class="back-button" onclick="backToMenu()">
+            ↩️ Quay lại Menu
+          </button>
+          <button
+            class="next-button"
+            id="nextBtn3"
+            onclick="nextQuestion3()"
+            style="display: none"
+          >
+            ▶️ Câu tiếp
+          </button>
+          <button class="reset-button" onclick="resetGame3()">
+            🔄 Làm lại
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Data for Game 2
+      const situations2 = [
+        {
+          scenario: "Bạn muốn đi xem phim với bạn. Hỏi thời gian.",
+          context: "Bạn rảnh tối thứ Sáu và Chủ nhật.",
+          partner:
+            "Hallo! Ich habe am Freitag keine Zeit, aber Sonntag passt mir gut.",
+          options: [
+            "Wann hast du Zeit für das Kino?",
+            "Ich gehe ins Kino.",
+            "Das Kino ist gut.",
+            "Ich mag Filme.",
+          ],
+          correct: 0,
+          type: "nachfragen",
+          explanation:
+            "Dùng 'Wann hast du Zeit?' để hỏi thời gian rảnh của đối tác.",
+        },
+        {
+          scenario: "Bạn bè đề nghị đi ăn pizza, nhưng bạn không thích pizza.",
+          context: "Bạn thích ăn sushi hơn.",
+          partner: "Wollen wir Pizza essen gehen?",
+          options: [
+            "Das finde ich nicht gut. Ich habe eine andere Idee...",
+            "Ja, super!",
+            "Pizza ist lecker.",
+            "Ich esse gern.",
+          ],
+          correct: 0,
+          type: "ablehnen + gegenvorschlag",
+          explanation:
+            "Dùng 'Das finde ich nicht gut' để từ chối lịch sự, sau đó đưa ra đề nghị khác.",
+        },
+        {
+          scenario: "Đối tác đồng ý gặp bạn lúc 14 giờ ở công viên.",
+          context: "Bạn cũng đồng ý.",
+          partner: "Treffen wir uns um 14 Uhr im Park?",
+          options: [
+            "Ja, das ist eine gute Idee! Ich bin dafür.",
+            "Nein, das geht nicht.",
+            "Vielleicht.",
+            "Ich weiß nicht.",
+          ],
+          correct: 0,
+          type: "zustimmen",
+          explanation:
+            "Dùng 'Das ist eine gute Idee!' + 'Ich bin dafür' để đồng ý mạnh mẽ.",
+        },
+        {
+          scenario: "Bạn muốn mời bạn bè đi dã ngoại vào cuối tuần.",
+          context: "Bạn có xe đạp và đồ ăn.",
+          partner: "...",
+          options: [
+            "Ich habe eine Idee. Wir könnten am Wochenende einen Fahrradausflug machen.",
+            "Wir gehen.",
+            "Fahrrad ist gut.",
+            "Am Wochenende arbeite ich.",
+          ],
+          correct: 0,
+          type: "vorschlag machen",
+          explanation:
+            "Dùng 'Ich habe eine Idee' + 'Wir könnten...' để đưa ra đề nghị.",
+        },
+        {
+          scenario: "Bạn không rảnh thứ Hai vì có họp đến 17 giờ.",
+          context: "Đối tác hỏi bạn có rảnh thứ Hai không.",
+          partner: "Hast du am Montag Zeit?",
+          options: [
+            "Tut mir leid, am Montag kann ich leider nicht. Ich arbeite bis 17 Uhr.",
+            "Ja, perfekt!",
+            "Montag ist gut.",
+            "Ich komme.",
+          ],
+          correct: 0,
+          type: "ablehnen + grund",
+          explanation:
+            "Dùng 'Tut mir leid' + 'kann ich leider nicht' + lý do để từ chối lịch sự.",
+        },
+        {
+          scenario:
+            "Đối tác đề nghị gặp lúc 9 giờ sáng, nhưng bạn thích 11 giờ hơn.",
+          context: "9 giờ quá sớm với bạn.",
+          partner: "Treffen wir uns um 9 Uhr?",
+          options: [
+            "9 Uhr ist zu früh. Wie wäre es mit 11 Uhr?",
+            "Ja, gut.",
+            "9 Uhr passt.",
+            "Ich bin da.",
+          ],
+          correct: 0,
+          type: "gegenvorschlag",
+          explanation:
+            "Dùng 'ist zu früh' + 'Wie wäre es mit...?' để đề nghị giờ khác.",
+        },
+        {
+          scenario: "Bạn muốn hỏi ý kiến đối tác về việc đi bơi.",
+          context: "Bạn muốn biết họ nghĩ gì.",
+          partner: "...",
+          options: [
+            "Was meinst du? Sollen wir schwimmen gehen?",
+            "Ich gehe schwimmen.",
+            "Schwimmen ist gut.",
+            "Ich mag Wasser.",
+          ],
+          correct: 0,
+          type: "vorschlag + nachfragen",
+          explanation: "Dùng 'Was meinst du?' để hỏi ý kiến trước khi đề nghị.",
+        },
+        {
+          scenario: "Bạn vừa thống nhất kế hoạch gặp nhau. Tổng kết lại.",
+          context: "Gặp nhau thứ Bảy, 14 giờ, ở công viên.",
+          partner: "Also, alles klar?",
+          options: [
+            "Perfekt, dann treffen wir uns am Samstag um 14 Uhr im Park. Ich freue mich schon!",
+            "Ja.",
+            "Bis dann.",
+            "Okay.",
+          ],
+          correct: 0,
+          type: "zusammenfassen",
+          explanation:
+            "Dùng 'Perfekt, dann...' để tổng kết lại toàn bộ kế hoạch.",
+        },
+        {
+          scenario: "Đối tác hỏi bạn có muốn đi chơi không.",
+          context: "Bạn rất muốn.",
+          partner: "Hast du Lust, etwas zusammen zu machen?",
+          options: [
+            "Ja, gern! Das macht bestimmt viel Spaß.",
+            "Nein.",
+            "Vielleicht.",
+            "Ich weiß nicht.",
+          ],
+          correct: 0,
+          type: "zustimmen enthusiastisch",
+          explanation:
+            "Dùng 'Ja, gern!' + 'Das macht bestimmt viel Spaß' để đồng ý nhiệt tình.",
+        },
+        {
+          scenario: "Bạn muốn hỏi đối tác thích hoạt động nào hơn.",
+          context: "Có 2 lựa chọn: đi bộ hoặc đạp xe.",
+          partner: "...",
+          options: [
+            "Was findest du besser: spazieren gehen oder Fahrrad fahren?",
+            "Ich gehe.",
+            "Fahrrad ist gut.",
+            "Wir machen das.",
+          ],
+          correct: 0,
+          type: "meinung fragen",
+          explanation:
+            "Dùng 'Was findest du besser:... oder...?' để hỏi ý kiến giữa 2 lựa chọn.",
+        },
+      ];
+
+      // Data for Game 3 - Based on the real exam images
+      const exams3 = [
+        // ĐỀ 1: MUA QUÀ SINH NHẬT
+        {
+          title: "ĐỀ 1: Mua quà sinh nhật cho bạn",
+          description:
+            "Bạn Alessia và Thomas cưới. Bạn muốn mua quà cho họ. Tìm lịch phù hợp.",
+          scheduleA: {
+            title: "Lịch của bạn - Thứ Tư, 12 tháng 3",
+            slots: [
+              { time: "7:00", activity: "" },
+              { time: "8:00", activity: "aufstehen" },
+              { time: "9:00", activity: "frühstücken" },
+              { time: "10:00", activity: "" },
+              { time: "11:00", activity: "im Garten arbeiten" },
+              { time: "12:00", activity: "" },
+              { time: "13:00", activity: "" },
+              { time: "14:00", activity: "Mittagessen bei Ole" },
+              { time: "15:00", activity: "" },
+              { time: "16:00", activity: "mit Babysitter telefonieren" },
+              { time: "17:00", activity: "" },
+              { time: "18:00", activity: "Konzertprobe" },
+              { time: "19:00", activity: "" },
+              { time: "20:00", activity: "" },
+              { time: "21:00", activity: "ausgehen" },
+            ],
+          },
+          scheduleB: {
+            title: "Lịch Partner - Thứ Tư, 12 tháng 3",
+            slots: [
+              { time: "7:00", activity: "Schwimmen" },
+              { time: "8:00", activity: "Frühstück bei Anjo" },
+              { time: "9:00", activity: "" },
+              { time: "10:00", activity: "Auto von Werkstatt abholen" },
+              { time: "11:00", activity: "" },
+              { time: "12:00", activity: "am Computer arbeiten" },
+              { time: "13:00", activity: "" },
+              { time: "14:00", activity: "Spaziergang mit Frank und Lena" },
+              { time: "15:00", activity: "" },
+              { time: "16:00", activity: "" },
+              { time: "17:00", activity: "" },
+              { time: "18:00", activity: "Essen gehen mit Eltern" },
+              { time: "19:00", activity: "" },
+              { time: "20:00", activity: "Schwimmen" },
+              { time: "21:00", activity: "" },
+            ],
+          },
+          conversation: [],
+          currentStep: 0,
+        },
+        // ĐỀ 2: THĂM BẠN Ở BỆNH VIỆN
+        {
+          title: "ĐỀ 2: Thăm bạn Lars ở bệnh viện",
+          description:
+            "Bạn Lars nằm viện. Bạn muốn thăm anh ấy. Tìm lịch phù hợp.",
+          scheduleA: {
+            title: "Lịch của bạn - Thứ Sáu, 23 tháng 9",
+            slots: [
+              { time: "7:00", activity: "" },
+              { time: "8:00", activity: "Wochenendeinkauf" },
+              { time: "9:00", activity: "" },
+              { time: "10:00", activity: "" },
+              { time: "11:00", activity: "" },
+              { time: "12:00", activity: "" },
+              { time: "13:00", activity: "Mittagessen vorbereiten" },
+              { time: "14:00", activity: "" },
+              { time: "15:00", activity: "" },
+              {
+                time: "16:00",
+                activity: "mit Großeltern Kaffee trinken gehen",
+              },
+              { time: "17:00", activity: "Lotto spielen" },
+              { time: "18:00", activity: "Volleyball-Training" },
+              { time: "19:00", activity: "" },
+              { time: "20:00", activity: "Krimi im Fernsehen" },
+              { time: "21:00", activity: "" },
+            ],
+          },
+          scheduleB: {
+            title: "Lịch Partner - Thứ Sáu, 23 tháng 9",
+            slots: [
+              { time: "7:00", activity: "" },
+              { time: "8:00", activity: "Wohnung aufräumen und sauber machen" },
+              { time: "9:00", activity: "" },
+              { time: "10:00", activity: "" },
+              { time: "11:00", activity: "" },
+              { time: "12:00", activity: "Paket zur Post bringen" },
+              { time: "13:00", activity: "Handwerker kommt" },
+              { time: "14:00", activity: "" },
+              { time: "15:00", activity: "Skype-Termin" },
+              { time: "16:00", activity: "" },
+              { time: "17:00", activity: "Malkurs" },
+              { time: "18:00", activity: "" },
+              { time: "19:00", activity: "mit Freunden kochen" },
+              { time: "20:00", activity: "" },
+              { time: "21:00", activity: "" },
+            ],
+          },
+          conversation: [],
+          currentStep: 0,
+        },
+        // ĐỀ 3: TỔ CHỨC WORKSHOP
+        {
+          title: "ĐỀ 3: Tổ chức workshop với đồng nghiệp",
+          description:
+            "Bạn muốn tổ chức workshop với đồng nghiệp. Tìm lịch phù hợp.",
+          scheduleA: {
+            title: "Lịch của bạn - Thứ Bảy, 1 tháng 6",
+            slots: [
+              { time: "7:00", activity: "" },
+              { time: "8:00", activity: "lange schlafen" },
+              { time: "9:00", activity: "" },
+              { time: "10:00", activity: "" },
+              { time: "11:00", activity: "joggen" },
+              { time: "12:00", activity: "Frühstück bei Mark" },
+              { time: "13:00", activity: "" },
+              { time: "14:00", activity: "Fahrrad reparieren" },
+              { time: "15:00", activity: "" },
+              { time: "16:00", activity: "" },
+              { time: "17:00", activity: "" },
+              { time: "18:00", activity: "Basketball-Training" },
+              { time: "19:00", activity: "" },
+              { time: "20:00", activity: "" },
+              { time: "21:00", activity: "zu Hause bleiben" },
+            ],
+          },
+          scheduleB: {
+            title: "Lịch Partner - Thứ Bảy, 1 tháng 6",
+            slots: [
+              { time: "7:00", activity: "" },
+              { time: "8:00", activity: "" },
+              { time: "9:00", activity: "Frühstück mit der Familie" },
+              { time: "10:00", activity: "" },
+              { time: "11:00", activity: "" },
+              { time: "12:00", activity: "mit Katze zum Tierarzt" },
+              { time: "13:00", activity: "" },
+              { time: "14:00", activity: "Friseur" },
+              { time: "15:00", activity: "" },
+              { time: "16:00", activity: "" },
+              { time: "17:00", activity: "Sohn bei den Hausaufgaben helfen" },
+              { time: "18:00", activity: "mit Eltern telefonieren" },
+              { time: "19:00", activity: "" },
+              { time: "20:00", activity: "mit Karla ins Konzert" },
+              { time: "21:00", activity: "" },
+            ],
+          },
+          conversation: [],
+          currentStep: 0,
+        },
+      ];
+
+      // Game state
+      let currentGame2 = 0;
+      let score2 = 0;
+      let currentGame3Exam = 0;
+      let currentGame3Step = 0;
+      let score3 = 0;
+
+      // Start game
+      function startGame(gameNum) {
+        document.getElementById("menu").style.display = "none";
+        document.getElementById("game" + gameNum).style.display = "block";
+
+        if (gameNum === 2) {
+          loadQuestion2();
+        } else if (gameNum === 3) {
+          loadExam3();
+        }
+      }
+
+      // Back to menu
+      function backToMenu() {
+        document.querySelectorAll(".game-area").forEach((area) => {
+          area.style.display = "none";
+        });
+        document.getElementById("menu").style.display = "grid";
+      }
+
+      // Game 2 functions
+      function loadQuestion2() {
+        const situation = situations2[currentGame2];
+        const situationHTML = `
+                <div class="situation">
+                    <h3>Tình huống ${currentGame2 + 1}/10</h3>
+                    <p><strong>📋 Tình huống:</strong> ${situation.scenario}</p>
+                    <p><strong>🎯 Bối cảnh:</strong> ${situation.context}</p>
+                    <div class="hint">💡 Loại Redemittel cần dùng: <strong>${
+                      situation.type
+                    }</strong></div>
+                </div>
+            `;
+
+        const conversationHTML = `
+                <div class="message partner">
+                    <div class="speaker">👤 Partner:</div>
+                    <div>${situation.partner}</div>
+                </div>
+                <div class="message you" style="background: #fff9e6; border: 2px dashed #ff9800;">
+                    <div class="speaker">👉 Bạn trả lời:</div>
+                    <div style="font-style: italic; color: #666;">Chọn câu trả lời phù hợp bên dưới ↓</div>
+                </div>
+            `;
+
+        let optionsHTML = "";
+        situation.options.forEach((option, index) => {
+          optionsHTML += `<button class="option-button" onclick="checkAnswer2(${index})">${option}</button>`;
+        });
+
+        document.getElementById("situation2").innerHTML = situationHTML;
+        document.getElementById("conversation2").innerHTML = conversationHTML;
+        document.getElementById("options2").innerHTML = optionsHTML;
+        document.getElementById("feedback2").innerHTML = "";
+        document.getElementById("nextBtn2").style.display = "none";
+
+        updateProgress2();
+      }
+
+      function checkAnswer2(selected) {
+        const situation = situations2[currentGame2];
+        const buttons = document.querySelectorAll("#options2 .option-button");
+
+        buttons.forEach((btn, index) => {
+          btn.disabled = true;
+          if (index === situation.correct) {
+            btn.classList.add("correct");
+          } else if (index === selected) {
+            btn.classList.add("wrong");
+          }
+        });
+
+        let feedbackHTML = "";
+        if (selected === situation.correct) {
+          score2++;
+          feedbackHTML = `
+                    <div class="feedback correct">
+                        ✅ Chính xác! +1 điểm
+                    </div>
+                    <div class="explanation">
+                        <h5>💡 Giải thích:</h5>
+                        <p>${situation.explanation}</p>
+                    </div>
+                `;
+        } else {
+          feedbackHTML = `
+                    <div class="feedback wrong">
+                        ❌ Sai rồi! Đáp án đúng: "${
+                          situation.options[situation.correct]
+                        }"
+                    </div>
+                    <div class="explanation">
+                        <h5>💡 Giải thích:</h5>
+                        <p>${situation.explanation}</p>
+                    </div>
+                `;
+        }
+
+        document.getElementById("feedback2").innerHTML = feedbackHTML;
+        document.getElementById("points2").textContent = score2;
+        document.getElementById("nextBtn2").style.display = "inline-block";
+      }
+
+      function nextQuestion2() {
+        currentGame2++;
+        if (currentGame2 < situations2.length) {
+          loadQuestion2();
+        } else {
+          showFinalResult2();
+        }
+      }
+
+      function updateProgress2() {
+        const progress = ((currentGame2 + 1) / situations2.length) * 100;
+        document.getElementById("progress2").style.width = progress + "%";
+        document.getElementById("progress2").textContent = `Câu ${
+          currentGame2 + 1
+        }/${situations2.length}`;
+      }
+
+      function showFinalResult2() {
+        const percent = (score2 / situations2.length) * 100;
+        let message = "";
+        if (percent >= 80) {
+          message = "🎉 Xuất sắc! Bạn đã thành thạo Redemittel!";
+        } else if (percent >= 60) {
+          message = "👍 Tốt lắm! Luyện thêm một chút nữa là hoàn hảo!";
+        } else {
+          message = "💪 Cố gắng lên! Hãy xem lại BÀI 1 và làm lại nhé!";
+        }
+
+        document.getElementById("situation2").innerHTML = `
+                <div class="situation">
+                    <h3>🏆 KẾT QUẢ CUỐI CÙNG</h3>
+                    <div style="font-size: 2em; text-align: center; margin: 20px 0;">
+                        ${score2}/${situations2.length} điểm (${percent.toFixed(
+          0
+        )}%)
+                    </div>
+                    <div style="text-align: center; font-size: 1.5em; color: #667eea;">
+                        ${message}
+                    </div>
+                </div>
+            `;
+        document.getElementById("conversation2").innerHTML = "";
+        document.getElementById("options2").innerHTML = "";
+        document.getElementById("feedback2").innerHTML = "";
+        document.getElementById("nextBtn2").style.display = "none";
+      }
+
+      function resetGame2() {
+        currentGame2 = 0;
+        score2 = 0;
+        document.getElementById("points2").textContent = "0";
+        loadQuestion2();
+      }
+
+      // Game 3 functions
+      function loadExam3() {
+        const exam = exams3[currentGame3Exam];
+
+        let scheduleAHTML =
+          '<div class="schedule"><h4>' + exam.scheduleA.title + "</h4>";
+        exam.scheduleA.slots.forEach((slot) => {
+          const busyClass = slot.activity ? "busy" : "";
+          scheduleAHTML += `<div class="time-slot ${busyClass}"><strong>${slot.time}</strong> ${slot.activity}</div>`;
+        });
+        scheduleAHTML += "</div>";
+
+        let scheduleBHTML =
+          '<div class="schedule"><h4>' + exam.scheduleB.title + "</h4>";
+        exam.scheduleB.slots.forEach((slot) => {
+          const busyClass = slot.activity ? "busy" : "";
+          scheduleBHTML += `<div class="time-slot ${busyClass}"><strong>${slot.time}</strong> ${slot.activity}</div>`;
+        });
+        scheduleBHTML += "</div>";
+
+        const examHTML = `
+                <div class="situation">
+                    <h3>${exam.title}</h3>
+                    <p><strong>📋 Nhiệm vụ:</strong> ${exam.description}</p>
+                    <div class="hint">💡 Bạn cần: Đề nghị → Hỏi thời gian → Thương lượng → Đồng ý → Tổng kết</div>
+                </div>
+                <div class="schedule-container">
+                    ${scheduleAHTML}
+                    ${scheduleBHTML}
+                </div>
+            `;
+
+        document.getElementById("exam3").innerHTML = examHTML;
+
+        // Start conversation
+        loadConversationStep3();
+      }
+
+      function loadConversationStep3() {
+        const exam = exams3[currentGame3Exam];
+        const steps = [
+          {
+            speaker: "you",
+            question: "Bắt đầu hội thoại - Đưa ra đề nghị",
+            options: [
+              "Hallo! Wir sollten ein Geschenk für unseren Freund kaufen. Wann hast du Zeit?",
+              "Ich gehe einkaufen.",
+              "Geschenk ist wichtig.",
+              "Bis später.",
+            ],
+            correct: 0,
+            type: "vorschlag + nachfragen",
+            partner_response:
+              "Gute Idee! Am Mittwoch habe ich von 16:30 Uhr frei.",
+          },
+          {
+            speaker: "partner",
+            message: "Ich schlage 16:30 Uhr vor. Passt dir das?",
+            options: [
+              "Ja, 16:30 Uhr passt mir auch. Wo treffen wir uns?",
+              "Nein.",
+              "Ich weiß nicht.",
+              "Vielleicht später.",
+            ],
+            correct: 0,
+            type: "zustimmen + nachfragen",
+            partner_response: "Am Einkaufszentrum in der Nähe von mir?",
+          },
+          {
+            speaker: "you",
+            question: "Kết thúc - Tổng kết kế hoạch",
+            options: [
+              "Perfekt, dann treffen wir uns am Mittwoch um 16:30 Uhr im Einkaufszentrum. Ich freue mich schon!",
+              "Okay.",
+              "Bis dann.",
+              "Ja.",
+            ],
+            correct: 0,
+            type: "zusammenfassen",
+            partner_response: "Super! Bis Mittwoch dann!",
+          },
+        ];
+
+        if (currentGame3Step >= steps.length) {
+          // Move to next exam
+          currentGame3Exam++;
+          currentGame3Step = 0;
+          if (currentGame3Exam < exams3.length) {
+            loadExam3();
+          } else {
+            showFinalResult3();
+          }
+          return;
+        }
+
+        const step = steps[currentGame3Step];
+
+        // Display conversation so far
+        let conversationHTML = "";
+        for (let i = 0; i < currentGame3Step; i++) {
+          const prevStep = steps[i];
+          if (prevStep.speaker === "you" && prevStep.partner_response) {
+            conversationHTML += `
+                        <div class="message you">
+                            <div class="speaker">👉 Bạn:</div>
+                            <div>${prevStep.options[prevStep.correct]}</div>
+                        </div>
+                        <div class="message partner">
+                            <div class="speaker">👤 Partner:</div>
+                            <div>${prevStep.partner_response}</div>
+                        </div>
+                    `;
+          } else if (prevStep.speaker === "partner") {
+            conversationHTML += `
+                        <div class="message partner">
+                            <div class="speaker">👤 Partner:</div>
+                            <div>${prevStep.message}</div>
+                        </div>
+                        <div class="message you">
+                            <div class="speaker">👉 Bạn:</div>
+                            <div>${prevStep.options[prevStep.correct]}</div>
+                        </div>
+                    `;
+            if (prevStep.partner_response) {
+              conversationHTML += `
+                            <div class="message partner">
+                                <div class="speaker">👤 Partner:</div>
+                                <div>${prevStep.partner_response}</div>
+                            </div>
+                        `;
+            }
+          }
+        }
+
+        // Add current question
+        if (step.speaker === "partner") {
+          conversationHTML += `
+                    <div class="message partner">
+                        <div class="speaker">👤 Partner:</div>
+                        <div>${step.message}</div>
+                    </div>
+                    <div class="message you" style="background: #fff9e6; border: 2px dashed #ff9800;">
+                        <div class="speaker">👉 Bạn trả lời:</div>
+                        <div style="font-style: italic; color: #666;">Chọn câu trả lời ↓</div>
+                    </div>
+                `;
+        } else {
+          conversationHTML += `
+                    <div class="message you" style="background: #fff9e6; border: 2px dashed #ff9800;">
+                        <div class="speaker">👉 Bạn nói:</div>
+                        <div style="font-style: italic; color: #666;">${step.question} ↓</div>
+                    </div>
+                `;
+        }
+
+        document.getElementById("conversation3").innerHTML = conversationHTML;
+
+        // Display options
+        let optionsHTML = `<div class="hint">💡 Loại Redemittel: <strong>${step.type}</strong></div>`;
+        step.options.forEach((option, index) => {
+          optionsHTML += `<button class="option-button" onclick="checkAnswer3(${index})">${option}</button>`;
+        });
+
+        document.getElementById("options3").innerHTML = optionsHTML;
+        document.getElementById("feedback3").innerHTML = "";
+        document.getElementById("nextBtn3").style.display = "none";
+
+        updateProgress3();
+      }
+
+      function checkAnswer3(selected) {
+        const exam = exams3[currentGame3Exam];
+        const steps = [
+          {
+            correct: 0,
+            explanation:
+              'Dùng "Wir sollten..." để đề nghị và "Wann hast du Zeit?" để hỏi thời gian.',
+          },
+          {
+            correct: 0,
+            explanation:
+              'Dùng "Ja,... passt mir auch" để đồng ý và "Wo treffen wir uns?" để hỏi địa điểm.',
+          },
+          {
+            correct: 0,
+            explanation:
+              'Dùng "Perfekt, dann treffen wir uns am... um..." để tổng kết đầy đủ.',
+          },
+        ];
+
+        const step = steps[currentGame3Step];
+        const buttons = document.querySelectorAll("#options3 .option-button");
+
+        buttons.forEach((btn, index) => {
+          btn.disabled = true;
+          if (index === step.correct) {
+            btn.classList.add("correct");
+          } else if (index === selected) {
+            btn.classList.add("wrong");
+          }
+        });
+
+        let feedbackHTML = "";
+        if (selected === step.correct) {
+          score3++;
+          feedbackHTML = `
+                    <div class="feedback correct">
+                        ✅ Chính xác! +1 điểm
+                    </div>
+                    <div class="explanation">
+                        <h5>💡 Giải thích:</h5>
+                        <p>${step.explanation}</p>
+                    </div>
+                `;
+        } else {
+          feedbackHTML = `
+                    <div class="feedback wrong">
+                        ❌ Sai rồi!
+                    </div>
+                    <div class="explanation">
+                        <h5>💡 Giải thích:</h5>
+                        <p>${step.explanation}</p>
+                    </div>
+                `;
+        }
+
+        document.getElementById("feedback3").innerHTML = feedbackHTML;
+        document.getElementById("points3").textContent = score3;
+        document.getElementById("nextBtn3").style.display = "inline-block";
+      }
+
+      function nextQuestion3() {
+        currentGame3Step++;
+        loadConversationStep3();
+      }
+
+      function updateProgress3() {
+        const totalSteps = exams3.length * 3; // 3 exams, 3 steps each
+        const currentTotal = currentGame3Exam * 3 + currentGame3Step + 1;
+        const progress = (currentTotal / totalSteps) * 100;
+        document.getElementById("progress3").style.width = progress + "%";
+        document.getElementById(
+          "progress3"
+        ).textContent = `Câu ${currentTotal}/${totalSteps}`;
+      }
+
+      function showFinalResult3() {
+        const totalQuestions = 9; // 3 exams × 3 steps
+        const percent = (score3 / totalQuestions) * 100;
+        let message = "";
+        if (percent >= 80) {
+          message = "🎉 Xuất sắc! Bạn đã sẵn sàng cho kỳ thi A2!";
+        } else if (percent >= 60) {
+          message = "👍 Tốt lắm! Luyện thêm một chút nữa là hoàn hảo!";
+        } else {
+          message = "💪 Cần ôn tập thêm! Hãy xem lại BÀI 1 và làm lại BÀI 2!";
+        }
+
+        document.getElementById("exam3").innerHTML = `
+                <div class="situation">
+                    <h3>🏆 KẾT QUẢ CUỐI CÙNG - THI THỬ</h3>
+                    <div style="font-size: 2em; text-align: center; margin: 20px 0;">
+                        ${score3}/${totalQuestions} điểm (${percent.toFixed(
+          0
+        )}%)
+                    </div>
+                    <div style="text-align: center; font-size: 1.5em; color: #667eea;">
+                        ${message}
+                    </div>
+                </div>
+            `;
+        document.getElementById("conversation3").innerHTML = "";
+        document.getElementById("options3").innerHTML = "";
+        document.getElementById("feedback3").innerHTML = "";
+        document.getElementById("nextBtn3").style.display = "none";
+      }
+
+      function resetGame3() {
+        currentGame3Exam = 0;
+        currentGame3Step = 0;
+        score3 = 0;
+        document.getElementById("points3").textContent = "0";
+        loadExam3();
+      }
+    </script>
+  </body>
+</html>
