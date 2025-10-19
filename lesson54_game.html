@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Luyện Redemittel A2</title>
+    <title>Game Luyện Redemittel A2 - Teil 3 Sprechen</title>
     <style>
       * {
         margin: 0;
@@ -100,31 +100,36 @@
         grid-template-columns: 1fr 1fr;
         gap: 20px;
         margin: 20px 0;
-      }
-
-      .schedule {
         background: white;
-        padding: 15px;
+        padding: 20px;
         border-radius: 10px;
         border: 2px solid #667eea;
       }
 
+      .schedule {
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid #ddd;
+      }
+
       .schedule h4 {
         color: #667eea;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         text-align: center;
+        font-size: 1.2em;
       }
 
       .time-slot {
-        padding: 8px;
-        margin: 5px 0;
+        padding: 10px;
+        margin: 8px 0;
         background: #f0f0f0;
         border-radius: 5px;
-        font-size: 0.9em;
+        font-size: 0.95em;
       }
 
       .time-slot.busy {
         background: #ffe0e0;
+        border-left: 4px solid #ff5252;
       }
 
       .redemittel-section {
@@ -159,12 +164,13 @@
       }
 
       .redemittel-item {
-        padding: 8px;
-        margin: 5px 0;
+        padding: 10px;
+        margin: 8px 0;
         background: #f0f8ff;
         border-radius: 5px;
         cursor: pointer;
-        transition: background 0.3s;
+        transition: all 0.3s;
+        border-left: 3px solid #667eea;
       }
 
       .redemittel-item:hover {
@@ -355,6 +361,36 @@
         font-style: italic;
         border-left: 3px solid #ff9800;
       }
+
+      .flow-chart {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border: 2px solid #4caf50;
+      }
+
+      .flow-step {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        padding: 10px;
+        background: #f0f8ff;
+        border-radius: 8px;
+      }
+
+      .flow-number {
+        background: #4caf50;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -365,30 +401,60 @@
       <div class="menu" id="menu">
         <button class="menu-button" onclick="startGame(1)">
           📚 BÀI 1: HỌC REDEMITTEL<br />
-          <small>Học 50+ mẫu câu chuẩn</small>
+          <small>Học 60+ mẫu câu chuẩn A2</small>
         </button>
         <button class="menu-button" onclick="startGame(2)">
           🎯 BÀI 2: LUYỆN TẬP<br />
-          <small>Áp dụng vào 10 tình huống</small>
+          <small>120 tình huống thực tế</small>
         </button>
         <button class="menu-button" onclick="startGame(3)">
           ⚡ BÀI 3: THI THỬ<br />
-          <small>3 đề thi thật (như hình)</small>
+          <small>3 đề thi thật (9 câu hỏi)</small>
         </button>
       </div>
 
+      <!-- BÀI 1 -->
       <div class="game-area" id="game1">
         <h2 style="color: #667eea; margin-bottom: 20px">
-          📚 BÀI 1: HỌC REDEMITTEL CƠ BẢN
+          📚 BÀI 1: HỌC REDEMITTEL ĐẦY ĐỦ
         </h2>
 
-        <div class="redemittel-section">
-          <h4>🎯 CẤU TRÚC HỘI THOẠI TEIL 3</h4>
-          <div class="hint">
-            <strong>Quy trình 6 bước:</strong><br />
-            1️⃣ Đưa ra đề nghị → 2️⃣ Hỏi thời gian → 3️⃣ Thương lượng → 4️⃣ Đề nghị
-            khác → 5️⃣ Đồng ý → 6️⃣ Kết thúc
+        <div class="flow-chart">
+          <h4 style="color: #4caf50; margin-bottom: 15px">
+            🎯 QUY TRÌNH HỘI THOẠI TEIL 3
+          </h4>
+          <div class="flow-step">
+            <div class="flow-number">1</div>
+            <div><strong>Vorschlag machen</strong> - Đưa ra đề nghị</div>
           </div>
+          <div class="flow-step">
+            <div class="flow-number">2</div>
+            <div>
+              <strong>Nachfragen</strong> - Hỏi thông tin (thời gian/địa điểm)
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-number">3</div>
+            <div>
+              <strong>Ablehnen/Problem</strong> - Từ chối lịch sự/Nêu vấn đề
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-number">4</div>
+            <div><strong>Gegenvorschlag</strong> - Đưa đề nghị khác</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-number">5</div>
+            <div><strong>Zustimmen</strong> - Đồng ý</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-number">6</div>
+            <div><strong>Zusammenfassen</strong> - Tổng kết kế hoạch</div>
+          </div>
+        </div>
+
+        <div class="redemittel-section">
+          <h4>📖 60+ REDEMITTEL CHUẨN A2</h4>
         </div>
 
         <div class="redemittel-group">
@@ -406,19 +472,21 @@
               <em>(Chúng ta có thể... / nên...)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Ich möchte etwas vorschlagen...
+              ✓ Ich möchte etwas vorschlagen: ...
               <em>(Tôi muốn đề nghị điều gì đó...)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Wollen wir...? <em>(Chúng ta có muốn...?)</em>
+              ✓ Wollen wir...? / Sollen wir...? <em>(Chúng ta có muốn...?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Wie findest du...? / Was meinst du?
-              <em>(Bạn thấy... thế nào? / Bạn nghĩ sao?)</em>
+              ✓ Was meinst du? / Was denkst du? <em>(Bạn nghĩ sao?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Was denkst du? / Wollen wir das machen?
-              <em>(Bạn nghĩ gì? / Chúng ta làm như vậy nhé?)</em>
+              ✓ Wie findest du...? / Wie wäre es mit...?
+              <em>(Bạn thấy... thế nào?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Hast du Lust auf...? <em>(Bạn có muốn...?)</em>
             </div>
           </div>
         </div>
@@ -427,55 +495,64 @@
           <h5>2️⃣ HỎI THỜI GIAN & ĐỊA ĐIỂM (Nachfragen)</h5>
           <div class="redemittel-list">
             <div class="redemittel-item">
-              ✓ Wann hast du Zeit? / Hast du da Zeit?
-              <em>(Khi nào bạn có thời gian? / Lúc đó bạn có rảnh không?)</em>
+              ✓ Wann hast du Zeit? <em>(Khi nào bạn có thời gian?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Wann passt es dir? / Passt es dir?
-              <em>(Khi nào phù hợp với bạn? / Hợp với bạn không?)</em>
+              ✓ Wann passt es dir am besten?
+              <em>(Khi nào hợp với bạn nhất?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Wie findest du das? <em>(Bạn thấy thế nào?)</em>
+              ✓ Passt es dir? / Geht das? <em>(Hợp với bạn không?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Was hältst du davon? <em>(Bạn nghĩ gì về điều đó?)</em>
+              ✓ Wo treffen wir uns? / Wo sollen wir uns treffen?
+              <em>(Chúng ta gặp ở đâu?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Wo wollen wir uns treffen?
-              <em>(Chúng ta muốn gặp nhau ở đâu?)</em>
+              ✓ Um wie viel Uhr? / Wann genau?
+              <em>(Mấy giờ? / Khi nào chính xác?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Um wie viel Uhr treffen wir uns?
-              <em>(Mấy giờ chúng ta gặp nhau?)</em>
+              ✓ Was hältst du davon? <em>(Bạn nghĩ thế nào về điều đó?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wie wäre es mit Montag/Dienstag...?
+              <em>(Vậy thứ Hai/thứ Ba... thì sao?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Passt dir Vormittag oder Nachmittag besser?
+              <em>(Buổi sáng hay chiều hợp hơn?)</em>
             </div>
           </div>
         </div>
 
         <div class="redemittel-group">
-          <h5>3️⃣ TỪ CHỐI LỊCH SỰ (Ablehnen)</h5>
+          <h5>3️⃣ TỪ CHỐI LỊCH SỰ (Höflich ablehnen)</h5>
           <div class="redemittel-list">
             <div class="redemittel-item">
-              ✓ Das geht leider nicht. / Leider nicht.
-              <em>(Rất tiếc không được.)</em>
+              ✓ Das geht leider nicht. <em>(Rất tiếc không được.)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Am Montag kann ich leider nicht.
-              <em>(Rất tiếc thứ Hai tôi không thể.)</em>
+              ✓ Tut mir leid, aber... <em>(Xin lỗi, nhưng...)</em>
             </div>
             <div class="redemittel-item">
               ✓ Das passt mir nicht so gut. <em>(Không hợp với tôi lắm.)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Tut mir leid, aber da habe ich (leider) keine Zeit.
-              <em>(Xin lỗi, nhưng lúc đó tôi không có thời gian.)</em>
+              ✓ Leider habe ich da keine Zeit.
+              <em>(Rất tiếc lúc đó tôi không có thời gian.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Am Montag kann ich leider nicht, weil...
+              <em>(Rất tiếc thứ Hai tôi không thể, vì...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Das ist zu spät/früh/teuer für mich.
+              <em>(Điều đó quá muộn/sớm/đắt với tôi.)</em>
             </div>
             <div class="redemittel-item">
               ✓ Oh Schade, aber da habe ich schon etwas anderes vor.
-              <em>(Ôi tiếc quá, nhưng lúc đó tôi đã có kế hoạch khác rồi.)</em>
-            </div>
-            <div class="redemittel-item">
-              ✓ Das gefällt mir aber nicht.
-              <em>(Tôi không thích điều đó lắm.)</em>
+              <em>(Tiếc quá, nhưng lúc đó tôi đã có kế hoạch khác.)</em>
             </div>
           </div>
         </div>
@@ -487,22 +564,25 @@
               ✓ Wie wäre es mit...? <em>(Vậy... thì sao?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Vielleicht sollten wir lieber...
-              <em>(Có lẽ chúng ta nên... thì tốt hơn)</em>
-            </div>
-            <div class="redemittel-item">
-              ✓ Es wäre mir lieber, wenn... <em>(Tôi thích hơn nếu...)</em>
-            </div>
-            <div class="redemittel-item">
-              ✓ Ich denke, es ist sinnvoller, wenn wir...
-              <em>(Tôi nghĩ sẽ hợp lý hơn nếu chúng ta...)</em>
-            </div>
-            <div class="redemittel-item">
-              ✓ Lass uns mal was anderes machen.
-              <em>(Chúng ta hãy làm điều gì đó khác.)</em>
+              ✓ Vielleicht sollten wir lieber... <em>(Có lẽ... thì tốt hơn)</em>
             </div>
             <div class="redemittel-item">
               ✓ Wir könnten auch... <em>(Chúng ta cũng có thể...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich schlage stattdessen... vor.
+              <em>(Thay vào đó tôi đề nghị...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Es wäre besser, wenn... <em>(Sẽ tốt hơn nếu...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich denke, es ist sinnvoller, wenn wir...
+              <em>(Tôi nghĩ hợp lý hơn nếu chúng ta...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Lass uns mal was anderes machen. Wir könnten...
+              <em>(Chúng ta hãy làm điều khác. Chúng ta có thể...)</em>
             </div>
           </div>
         </div>
@@ -511,75 +591,118 @@
           <h5>5️⃣ ĐỒNG Ý (Zustimmen)</h5>
           <div class="redemittel-list">
             <div class="redemittel-item">
-              ✓ Das ist eine super/tolle Idee!
-              <em>(Đó là một ý tưởng tuyệt vời!)</em>
+              ✓ Das ist eine super/tolle/gute Idee!
+              <em>(Đó là ý tưởng tuyệt vời!)</em>
             </div>
             <div class="redemittel-item">
               ✓ Ja, so sollten wir das machen.
               <em>(Vâng, chúng ta nên làm như vậy.)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Das gefällt mir (sehr gut).
-              <em>(Tôi thích điều đó (rất nhiều).)</em>
+              ✓ Das gefällt mir! / Das finde ich gut!
+              <em>(Tôi thích điều đó!)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Das finde ich gut/super/prima.
-              <em>(Tôi thấy hay/tuyệt/tốt.)</em>
+              ✓ Ich bin dafür. / Ich stimme dir zu. <em>(Tôi tán thành.)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Genau! Einverstanden! In Ordnung!
-              <em>(Chính xác! Đồng ý! Được!)</em>
+              ✓ Prima! / Super! / Genau! <em>(Tuyệt! / Chính xác!)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Ja gut. Machen wir das so.
-              <em>(Được rồi. Chúng ta làm như vậy.)</em>
+              ✓ Einverstanden! / In Ordnung! <em>(Đồng ý!)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Ich bin dafür. / Ich stimme dir zu.
-              <em>(Tôi tán thành. / Tôi đồng ý với bạn.)</em>
+              ✓ Das passt mir perfekt. <em>(Điều đó hoàn hảo với tôi.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Damit bin ich völlig deiner Meinung.
+              <em>(Về điều đó tôi hoàn toàn đồng ý với bạn.)</em>
             </div>
           </div>
         </div>
 
         <div class="redemittel-group">
-          <h5>6️⃣ KẾT THÚC (Am Ende das Ergebnis sagen)</h5>
+          <h5>6️⃣ KHÔNG CHẮC CHẮN (Unsicherheit ausdrücken)</h5>
           <div class="redemittel-list">
             <div class="redemittel-item">
-              ✓ Perfekt, dann treffen wir uns am... um...
-              <em>(Hoàn hảo, vậy chúng ta gặp nhau vào... lúc...)</em>
+              ✓ Ich weiß nicht. Vielleicht sollten wir lieber...?
+              <em>(Tôi không biết. Có lẽ tốt hơn...?)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Okay, dann sagen wir: ... <em>(Được, vậy chúng ta nói:...)</em>
+              ✓ Ich bin mir nicht so sicher. <em>(Tôi không chắc lắm.)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Dann machen wir es so: zuerst..., dann..., jetzt müssen wir nur
-              noch...
-              <em
-                >(Vậy chúng ta làm như sau: đầu tiên..., sau đó..., bây giờ
-                chúng ta chỉ cần...)</em
-              >
+              ✓ Das finde ich nicht so gut. <em>(Tôi thấy không tốt lắm.)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Also dann bis... Ich freue mich.
-              <em>(Vậy hẹn đến... Tôi mong chờ.)</em>
+              ✓ Ich fürchte, das kommt für mich nicht in Frage.
+              <em>(Tôi e rằng điều đó không phù hợp với tôi.)</em>
             </div>
             <div class="redemittel-item">
-              ✓ Ich glaube, wir haben schon alles gut geplant.
-              <em>(Tôi nghĩ chúng ta đã lên kế hoạch tốt rồi.)</em>
-            </div>
-            <div class="redemittel-item">
-              ✓ Alles klar, wir sehen uns dann. <em>(Rõ rồi, hẹn gặp lại.)</em>
+              ✓ Uhmm, das ist aber schlecht. Ich muss...
+              <em>(Ừm, điều đó không tốt. Tôi phải...)</em>
             </div>
           </div>
         </div>
 
-        <div class="explanation">
-          <h5>💡 CÁCH SỬ DỤNG:</h5>
-          <p>
-            <strong>Bước 1:</strong> Đọc to tất cả Redemittel 10 lần để thuộc
-          </p>
-          <p><strong>Bước 2:</strong> Chuyển sang BÀI 2 để luyện tập</p>
-          <p><strong>Bước 3:</strong> Làm BÀI 3 để thi thử như thật</p>
+        <div class="redemittel-group">
+          <h5>7️⃣ KẾT THÚC & TỔNG KẾT (Zusammenfassen & Abschließen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Perfekt, dann treffen wir uns am... um...
+              <em>(Hoàn hảo, vậy gặp vào... lúc...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Also dann bis... / Bis dann!
+              <em>(Vậy hẹn đến... / Hẹn gặp!)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Ich freue mich schon! / Ich freue mich darauf!
+              <em>(Tôi rất mong chờ!)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Okay, wir machen also folgendes: ...
+              <em>(Được rồi, vậy chúng ta làm như sau:...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Dann fasse ich nochmal kurz zusammen: ...
+              <em>(Vậy tôi tóm tắt lại:...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Super, dann sehen wir uns am... <em>(Tuyệt, vậy gặp vào...)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Alles klar, wir sehen uns dann. <em>(Rõ rồi, hẹn gặp.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Das wird bestimmt toll/super! <em>(Chắc chắn sẽ tuyệt!)</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="redemittel-group">
+          <h5>8️⃣ PHẢN ỨNG KHI KHÔNG HIỂU (Wenn Sie etwas nicht verstehen)</h5>
+          <div class="redemittel-list">
+            <div class="redemittel-item">
+              ✓ Entschuldigung, das habe ich nicht verstanden.
+              <em>(Xin lỗi, tôi không hiểu.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Kannst du das bitte noch einmal wiederholen/sagen?
+              <em>(Bạn có thể lặp lại không?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Wie bitte? <em>(Xin lỗi, gì cơ?)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Tut mir leid, ich habe dich/Sie nicht verstanden.
+              <em>(Xin lỗi, tôi không hiểu bạn.)</em>
+            </div>
+            <div class="redemittel-item">
+              ✓ Entschuldigung, was bedeutet...?
+              <em>(Xin lỗi,... nghĩa là gì?)</em>
+            </div>
+          </div>
         </div>
 
         <div class="button-container">
@@ -592,17 +715,18 @@
         </div>
       </div>
 
+      <!-- BÀI 2 -->
       <div class="game-area" id="game2">
         <h2 style="color: #667eea; margin-bottom: 20px">
-          🎯 BÀI 2: LUYỆN TẬP VỚI 10 TÌNH HUỐNG
+          🎯 BÀI 2: LUYỆN TẬP - 120 TÌNH HUỐNG
         </h2>
 
         <div class="score" id="score2">
-          Điểm: <span id="points2">0</span>/10
+          Điểm: <span id="points2">0</span>/120
         </div>
         <div class="progress">
           <div class="progress-bar" id="progress2" style="width: 0%">
-            Câu 1/10
+            Câu 1/120
           </div>
         </div>
 
@@ -629,6 +753,7 @@
         </div>
       </div>
 
+      <!-- BÀI 3 -->
       <div class="game-area" id="game3">
         <h2 style="color: #667eea; margin-bottom: 20px">
           ⚡ BÀI 3: THI THỬ (3 ĐỀ THẬT)
@@ -666,117 +791,377 @@
     </div>
 
     <script>
-      // Data for Game 2
+      // 120 TÌNH HUỐNG - Game 2
       const situations2 = [
+        // LEBENSMITTEL (1-10)
         {
-          scenario: "Bạn muốn đi xem phim với bạn. Hỏi thời gian.",
-          context: "Bạn rảnh tối thứ Sáu và Chủ nhật.",
-          partner:
-            "Hallo! Ich habe am Freitag keine Zeit, aber Sonntag passt mir gut.",
+          scenario: "Đi siêu thị mua thực phẩm",
+          context: "Cần mua rau, trái cây",
+          partner: "...",
           options: [
-            "Wann hast du Zeit für das Kino?",
-            "Ich gehe ins Kino.",
-            "Das Kino ist gut.",
-            "Ich mag Filme.",
+            "Ich schlage vor, dass wir zusammen Lebensmittel einkaufen gehen. Hast du Zeit?",
+            "Ich gehe einkaufen.",
+            "Supermarkt ist da.",
+            "Lebensmittel sind wichtig.",
           ],
           correct: 0,
-          type: "nachfragen",
-          explanation:
-            "Dùng 'Wann hast du Zeit?' để hỏi thời gian rảnh của đối tác.",
+          type: "vorschlag",
+          explanation: "Dùng 'Ich schlage vor' + 'Hast du Zeit?'",
         },
+
         {
-          scenario: "Bạn bè đề nghị đi ăn pizza, nhưng bạn không thích pizza.",
-          context: "Bạn thích ăn sushi hơn.",
-          partner: "Wollen wir Pizza essen gehen?",
+          scenario: "Hỏi cần mua gì",
+          context: "Cần Brot, Milch, Käse",
+          partner: "Was müssen wir kaufen?",
           options: [
-            "Das finde ich nicht gut. Ich habe eine andere Idee...",
+            "Ich denke, wir sollten Brot, Milch, Käse und Obst kaufen. Was meinst du?",
+            "Ja, gut.",
+            "Alles.",
+            "Ich weiß nicht.",
+          ],
+          correct: 0,
+          type: "vorschlag + nachfragen",
+          explanation: "Dùng 'Ich denke...' + 'Was meinst du?'",
+        },
+
+        {
+          scenario: "Từ chối Pizza",
+          context: "Thích nấu tự làm",
+          partner: "Sollen wir Pizza kaufen?",
+          options: [
+            "Nein, ich möchte lieber frisches Gemüse kaufen und kochen.",
             "Ja, super!",
             "Pizza ist lecker.",
-            "Ich esse gern.",
+            "Okay.",
           ],
           correct: 0,
-          type: "ablehnen + gegenvorschlag",
-          explanation:
-            "Dùng 'Das finde ich nicht gut' để từ chối lịch sự, sau đó đưa ra đề nghị khác.",
+          type: "ablehnen",
+          explanation: "Dùng 'Ich möchte lieber...' từ chối và đề nghị",
         },
+
         {
-          scenario: "Đối tác đồng ý gặp bạn lúc 14 giờ ở công viên.",
-          context: "Bạn cũng đồng ý.",
+          scenario: "So sánh giá trái cây",
+          context: "Táo 2€, Chuối 1.5€",
+          partner: "Die Äpfel kosten 2 Euro, Bananen 1,50 Euro.",
+          options: [
+            "Gut, dann kaufen wir Bananen, weil sie billiger sind.",
+            "Zu teuer.",
+            "Ich mag Äpfel.",
+            "Nein.",
+          ],
+          correct: 0,
+          type: "entscheidung",
+          explanation: "Dùng 'dann kaufen wir... weil...'",
+        },
+
+        {
+          scenario: "Từ chối mua thịt",
+          context: "Bạn ăn chay",
+          partner: "Sollen wir Fleisch kaufen?",
+          options: [
+            "Nein, ich bin Vegetarier. Wir könnten stattdessen Tofu kaufen.",
+            "Ja, gut.",
+            "Fleisch ist teuer.",
+            "Vielleicht.",
+          ],
+          correct: 0,
+          type: "ablehnen + alternative",
+          explanation: "Dùng 'ich bin...' + 'stattdessen...'",
+        },
+
+        {
+          scenario: "Đề nghị mua đồ uống",
+          context: "Nước trái cây, nước khoáng",
+          partner: "Was trinken wir?",
+          options: [
+            "Ich schlage vor, wir kaufen Orangensaft und Mineralwasser. Bist du einverstanden?",
+            "Wasser.",
+            "Ich trinke gern.",
+            "Ja.",
+          ],
+          correct: 0,
+          type: "vorschlag",
+          explanation: "Dùng 'Ich schlage vor' + 'Bist du einverstanden?'",
+        },
+
+        {
+          scenario: "Chọn loại bánh mì",
+          context: "Thích Vollkornbrot",
+          partner: "Welches Brot möchtest du?",
+          options: [
+            "Ich mag Vollkornbrot, weil es gesund ist. Und du?",
+            "Brot ist gut.",
+            "Ich esse Brot.",
+            "Alle sind okay.",
+          ],
+          correct: 0,
+          type: "meinung",
+          explanation: "Dùng 'Ich mag... weil...' + 'Und du?'",
+        },
+
+        {
+          scenario: "Chọn siêu thị",
+          context: "REWE hoặc ALDI",
+          partner: "...",
+          options: [
+            "Wo sollen wir einkaufen gehen? Bei REWE oder ALDI? Was denkst du?",
+            "Supermarkt ist gut.",
+            "Ich gehe zu REWE.",
+            "Egal.",
+          ],
+          correct: 0,
+          type: "frage + optionen",
+          explanation: "Dùng 'Wo sollen wir...? Bei... oder...?'",
+        },
+
+        {
+          scenario: "Thương lượng thời gian",
+          context: "9h quá sớm, thích 11h",
+          partner: "Treffen wir uns um 9 Uhr?",
+          options: [
+            "9 Uhr ist zu früh für mich. Wie wäre es mit 11 Uhr?",
+            "Ja, perfekt.",
+            "Ich bin müde.",
+            "Nein.",
+          ],
+          correct: 0,
+          type: "gegenvorschlag",
+          explanation: "Dùng 'ist zu früh' + 'Wie wäre es mit...?'",
+        },
+
+        {
+          scenario: "Tổng kết mua sắm",
+          context: "11h, ALDI, mua rau trái cây",
+          partner: "Alles klar?",
+          options: [
+            "Perfekt! Dann treffen wir uns um 11 Uhr bei ALDI und kaufen Obst und Gemüse. Bis dann!",
+            "Ja.",
+            "Okay.",
+            "Bis später.",
+          ],
+          correct: 0,
+          type: "zusammenfassen",
+          explanation: "Tổng kết: thời gian + địa điểm + mục đích",
+        },
+
+        // RESTAURANT (11-15)
+        {
+          scenario: "Mời đi nhà hàng Ý",
+          context: "Thích Pizza, Pasta",
+          partner: "...",
+          options: [
+            "Ich habe eine Idee. Wir könnten ins italienische Restaurant gehen. Hast du Lust?",
+            "Ich esse gern.",
+            "Restaurant ist gut.",
+            "Pizza ist lecker.",
+          ],
+          correct: 0,
+          type: "einladung",
+          explanation: "Dùng 'Ich habe eine Idee' + 'Hast du Lust?'",
+        },
+
+        {
+          scenario: "Từ chối Sushi",
+          context: "Thích món Việt",
+          partner: "Sollen wir Sushi essen?",
+          options: [
+            "Tut mir leid, ich mag keinen rohen Fisch. Wie wäre es mit einem vietnamesischen Restaurant?",
+            "Ja, gut.",
+            "Sushi ist okay.",
+            "Ich weiß nicht.",
+          ],
+          correct: 0,
+          type: "ablehnen höflich",
+          explanation: "Dùng 'Tut mir leid' + đề nghị khác",
+        },
+
+        {
+          scenario: "Phản đối giá đắt",
+          context: "Ngân sách 20€",
+          partner: "Ein Hauptgericht kostet 25 Euro.",
+          options: [
+            "Das ist zu teuer für mich. Könnten wir ein günstigeres Restaurant finden?",
+            "Okay, wir gehen.",
+            "Ich habe Geld.",
+            "Egal.",
+          ],
+          correct: 0,
+          type: "problem lösen",
+          explanation: "Dùng 'zu teuer' + 'Könnten wir...?'",
+        },
+
+        {
+          scenario: "Gọi món",
+          context: "Muốn Schnitzel + Pommes",
+          partner: "Was möchtest du bestellen?",
+          options: [
+            "Ich nehme ein Schnitzel mit Pommes. Das schmeckt mir immer gut. Und du?",
+            "Ich esse.",
+            "Alles ist gut.",
+            "Schnitzel.",
+          ],
+          correct: 0,
+          type: "bestellung",
+          explanation: "Dùng 'Ich nehme...' + 'Und du?'",
+        },
+
+        {
+          scenario: "Tổng kết đi ăn",
+          context: "19h, nhà hàng Việt, gần công viên",
+          partner: "Wann und wo?",
+          options: [
+            "Also, wir treffen uns um 19 Uhr vor dem vietnamesischen Restaurant beim Park. Ich freue mich darauf!",
+            "Um 19 Uhr.",
+            "Im Restaurant.",
+            "Okay.",
+          ],
+          correct: 0,
+          type: "zusammenfassen + freude",
+          explanation: "Tổng kết + 'Ich freue mich darauf!'",
+        },
+
+        // PARTY (16-20)
+        {
+          scenario: "Tổ chức tiệc nấu ăn",
+          context: "Có thể nấu món Việt",
+          partner: "...",
+          options: [
+            "Wir könnten zusammen kochen und eine kleine Party machen. Ich kann vietnamesisch kochen. Was meinst du?",
+            "Ich koche gut.",
+            "Party ist toll.",
+            "Essen ist wichtig.",
+          ],
+          correct: 0,
+          type: "vorschlag + fähigkeit",
+          explanation: "Dùng 'Wir könnten...' + 'Ich kann...'",
+        },
+
+        {
+          scenario: "Cần mua gì cho tiệc",
+          context: "Kuchen, Getränke, Snacks",
+          partner: "Was brauchen wir?",
+          options: [
+            "Ich denke, wir brauchen Kuchen, Getränke und Snacks. Kannst du die Getränke kaufen?",
+            "Alles.",
+            "Ich weiß nicht.",
+            "Viel Essen.",
+          ],
+          correct: 0,
+          type: "liste + aufgabe",
+          explanation: "Dùng 'wir brauchen...' + 'Kannst du...?'",
+        },
+
+        {
+          scenario: "Phân công công việc",
+          context: "Nấu, trang trí, mua đồ",
+          partner: "Wer macht was?",
+          options: [
+            "Ich koche das Essen. Kannst du die Dekoration übernehmen? Und wer kauft die Getränke?",
+            "Ich mache alles.",
+            "Du machst.",
+            "Wir sehen.",
+          ],
+          correct: 0,
+          type: "aufgabenverteilung",
+          explanation: "Phân công rõ ràng: 'Ich... Kannst du...? Und wer...?'",
+        },
+
+        {
+          scenario: "Từ chối Pizza đặt",
+          context: "Thích tự nấu vì healthy",
+          partner: "Sollen wir einfach Pizza bestellen?",
+          options: [
+            "Nein, ich finde selbst kochen besser, weil es gesünder ist. Außerdem macht das mehr Spaß!",
+            "Ja, gut.",
+            "Pizza ist okay.",
+            "Vielleicht.",
+          ],
+          correct: 0,
+          type: "ablehnen + 2 gründe",
+          explanation: "Từ chối với 2 lý do: 'weil...' + 'Außerdem...'",
+        },
+
+        {
+          scenario: "Tổng kết tiệc",
+          context: "Thứ Bảy 18h, bạn nấu, partner trang trí",
+          partner: "Sind wir fertig?",
+          options: [
+            "Perfekt! Samstag um 18 Uhr bei mir. Ich koche, du machst die Dekoration. Das wird super!",
+            "Ja.",
+            "Wir sind fertig.",
+            "Okay.",
+          ],
+          correct: 0,
+          type: "zusammenfassung",
+          explanation: "Tổng kết với nhiệt tình: 'Das wird super!'",
+        },
+
+        // FREIZEIT (21-25)
+        {
+          scenario: "Mời đi xem phim",
+          context: "Phim mới thú vị",
+          partner: "...",
+          options: [
+            "Ich schlage vor, wir gehen ins Kino. Es gibt einen neuen Film. Hast du Lust?",
+            "Ich mag Filme.",
+            "Kino ist gut.",
+            "Ja.",
+          ],
+          correct: 0,
+          type: "vorschlag",
+          explanation: "Dùng 'Ich schlage vor' + 'Hast du Lust?'",
+        },
+
+        {
+          scenario: "Đồng ý gặp 14h công viên",
+          context: "Bạn cũng đồng ý",
           partner: "Treffen wir uns um 14 Uhr im Park?",
           options: [
-            "Ja, das ist eine gute Idee! Ich bin dafür.",
-            "Nein, das geht nicht.",
+            "Ja, das ist eine gute Idee! Das passt mir perfekt.",
+            "Nein.",
             "Vielleicht.",
             "Ich weiß nicht.",
           ],
           correct: 0,
           type: "zustimmen",
           explanation:
-            "Dùng 'Das ist eine gute Idee!' + 'Ich bin dafür' để đồng ý mạnh mẽ.",
+            "Dùng 'Das ist eine gute Idee!' + 'Das passt mir perfekt'",
         },
+
         {
-          scenario: "Bạn muốn mời bạn bè đi dã ngoại vào cuối tuần.",
-          context: "Bạn có xe đạp và đồ ăn.",
+          scenario: "Mời đi dã ngoại xe đạp",
+          context: "Có xe đạp và đồ ăn",
           partner: "...",
           options: [
-            "Ich habe eine Idee. Wir könnten am Wochenende einen Fahrradausflug machen.",
+            "Wir könnten am Wochenende einen Fahrradausflug machen. Ich bringe Essen mit. Was meinst du?",
             "Wir gehen.",
             "Fahrrad ist gut.",
             "Am Wochenende arbeite ich.",
           ],
           correct: 0,
-          type: "vorschlag machen",
+          type: "vorschlag",
           explanation:
-            "Dùng 'Ich habe eine Idee' + 'Wir könnten...' để đưa ra đề nghị.",
+            "Dùng 'Wir könnten...' + thêm chi tiết + 'Was meinst du?'",
         },
+
         {
-          scenario: "Bạn không rảnh thứ Hai vì có họp đến 17 giờ.",
-          context: "Đối tác hỏi bạn có rảnh thứ Hai không.",
-          partner: "Hast du am Montag Zeit?",
-          options: [
-            "Tut mir leid, am Montag kann ich leider nicht. Ich arbeite bis 17 Uhr.",
-            "Ja, perfekt!",
-            "Montag ist gut.",
-            "Ich komme.",
-          ],
-          correct: 0,
-          type: "ablehnen + grund",
-          explanation:
-            "Dùng 'Tut mir leid' + 'kann ich leider nicht' + lý do để từ chối lịch sự.",
-        },
-        {
-          scenario:
-            "Đối tác đề nghị gặp lúc 9 giờ sáng, nhưng bạn thích 11 giờ hơn.",
-          context: "9 giờ quá sớm với bạn.",
-          partner: "Treffen wir uns um 9 Uhr?",
-          options: [
-            "9 Uhr ist zu früh. Wie wäre es mit 11 Uhr?",
-            "Ja, gut.",
-            "9 Uhr passt.",
-            "Ich bin da.",
-          ],
-          correct: 0,
-          type: "gegenvorschlag",
-          explanation:
-            "Dùng 'ist zu früh' + 'Wie wäre es mit...?' để đề nghị giờ khác.",
-        },
-        {
-          scenario: "Bạn muốn hỏi ý kiến đối tác về việc đi bơi.",
-          context: "Bạn muốn biết họ nghĩ gì.",
+          scenario: "Hỏi ý kiến đi bơi",
+          context: "Muốn biết họ nghĩ gì",
           partner: "...",
           options: [
-            "Was meinst du? Sollen wir schwimmen gehen?",
+            "Sollen wir schwimmen gehen? Was hältst du davon?",
             "Ich gehe schwimmen.",
             "Schwimmen ist gut.",
             "Ich mag Wasser.",
           ],
           correct: 0,
-          type: "vorschlag + nachfragen",
-          explanation: "Dùng 'Was meinst du?' để hỏi ý kiến trước khi đề nghị.",
+          type: "nachfragen",
+          explanation: "Dùng 'Sollen wir...?' + 'Was hältst du davon?'",
         },
+
         {
-          scenario: "Bạn vừa thống nhất kế hoạch gặp nhau. Tổng kết lại.",
-          context: "Gặp nhau thứ Bảy, 14 giờ, ở công viên.",
+          scenario: "Tổng kết gặp gỡ",
+          context: "Thứ Bảy 14h công viên",
           partner: "Also, alles klar?",
           options: [
             "Perfekt, dann treffen wir uns am Samstag um 14 Uhr im Park. Ich freue mich schon!",
@@ -786,298 +1171,1828 @@
           ],
           correct: 0,
           type: "zusammenfassen",
-          explanation:
-            "Dùng 'Perfekt, dann...' để tổng kết lại toàn bộ kế hoạch.",
+          explanation: "Tổng kết + 'Ich freue mich schon!'",
         },
+
+        // TERMIN & ZEIT (26-30)
         {
-          scenario: "Đối tác hỏi bạn có muốn đi chơi không.",
-          context: "Bạn rất muốn.",
-          partner: "Hast du Lust, etwas zusammen zu machen?",
+          scenario: "Từ chối thứ Hai",
+          context: "Họp đến 17h",
+          partner: "Hast du am Montag Zeit?",
           options: [
-            "Ja, gern! Das macht bestimmt viel Spaß.",
-            "Nein.",
-            "Vielleicht.",
+            "Tut mir leid, am Montag kann ich leider nicht. Ich arbeite bis 17 Uhr.",
+            "Ja, perfekt!",
+            "Montag ist gut.",
+            "Ich komme.",
+          ],
+          correct: 0,
+          type: "ablehnen + grund",
+          explanation: "Dùng 'Tut mir leid' + lý do",
+        },
+
+        {
+          scenario: "Đề nghị 11h thay vì 9h",
+          context: "9h quá sớm",
+          partner: "Treffen wir uns um 9 Uhr?",
+          options: [
+            "9 Uhr ist zu früh für mich. Wie wäre es mit 11 Uhr?",
+            "Ja, gut.",
+            "9 Uhr passt.",
+            "Ich bin da.",
+          ],
+          correct: 0,
+          type: "gegenvorschlag",
+          explanation: "Dùng 'ist zu früh' + 'Wie wäre es mit...?'",
+        },
+
+        {
+          scenario: "Hỏi thứ Tư hay thứ Năm",
+          context: "Rảnh cả hai ngày",
+          partner: "...",
+          options: [
+            "Passt dir Mittwoch oder Donnerstag besser? Ich habe beide Tage frei.",
+            "Ich habe Zeit.",
+            "Egal.",
+            "Du entscheidest.",
+          ],
+          correct: 0,
+          type: "optionen geben",
+          explanation: "Dùng 'Passt dir... oder...?' + cho thông tin",
+        },
+
+        {
+          scenario: "Thích buổi chiều",
+          context: "Buổi sáng mệt",
+          partner: "Vormittag oder Nachmittag?",
+          options: [
+            "Nachmittag ist besser für mich, weil ich morgens immer müde bin.",
+            "Vormittag.",
+            "Ich weiß nicht.",
+            "Beide sind gut.",
+          ],
+          correct: 0,
+          type: "präferenz + grund",
+          explanation: "Dùng 'ist besser... weil...'",
+        },
+
+        {
+          scenario: "Xác nhận lại thời gian",
+          context: "Thứ Tư 15h",
+          partner: "Also Mittwoch um 15 Uhr, richtig?",
+          options: [
+            "Ja genau! Mittwoch um 15 Uhr. Das passt perfekt.",
+            "Ja.",
+            "Richtig.",
+            "Okay.",
+          ],
+          correct: 0,
+          type: "bestätigung",
+          explanation: "Dùng 'Ja genau!' + lặp lại + 'Das passt perfekt'",
+        },
+
+        // SPORT (31-35)
+        {
+          scenario: "Mời đi gym",
+          context: "Có thẻ gym",
+          partner: "...",
+          options: [
+            "Willst du mit mir ins Fitnessstudio gehen? Ich habe eine Mitgliedskarte.",
+            "Ich gehe zum Gym.",
+            "Sport ist wichtig.",
+            "Du musst trainieren.",
+          ],
+          correct: 0,
+          type: "einladung",
+          explanation: "Dùng 'Willst du...?' + thông tin thực tế",
+        },
+
+        {
+          scenario: "Nói sở thích thể thao",
+          context: "Thích joggen và schwimmen",
+          partner: "Welchen Sport machst du gern?",
+          options: [
+            "Ich mache gern Joggen und Schwimmen, weil das gut für die Gesundheit ist.",
+            "Sport ist gut.",
+            "Ich trainiere.",
+            "Alles.",
+          ],
+          correct: 0,
+          type: "hobby + grund",
+          explanation: "Dùng 'Ich mache gern... weil...'",
+        },
+
+        {
+          scenario: "Đề nghị chơi bóng",
+          context: "Có sân gần nhà",
+          partner: "Was machen wir am Wochenende?",
+          options: [
+            "Wir könnten am Samstag Fußball spielen. Es gibt einen Platz in der Nähe.",
+            "Wir spielen.",
+            "Fußball ist gut.",
+            "Am Wochenende frei.",
+          ],
+          correct: 0,
+          type: "vorschlag praktisch",
+          explanation: "Dùng 'Wir könnten...' + thông tin thực tế",
+        },
+
+        {
+          scenario: "Từ chối sáng sớm",
+          context: "Sáng phải làm việc",
+          partner: "Treffen wir uns morgens um 7 Uhr?",
+          options: [
+            "Morgens geht nicht, weil ich arbeiten muss. Abends um 19 Uhr wäre besser.",
+            "Ja, gut.",
+            "7 Uhr ist okay.",
+            "Ich komme.",
+          ],
+          correct: 0,
+          type: "ablehnen + alternative",
+          explanation: "Dùng 'geht nicht, weil...' + 'wäre besser'",
+        },
+
+        {
+          scenario: "Tổng kết sport",
+          context: "Thứ Bảy 18h sân bóng",
+          partner: "Sind wir uns einig?",
+          options: [
+            "Ja! Samstag um 18 Uhr auf dem Fußballplatz beim Park. Ich bringe den Ball mit!",
+            "Ja.",
+            "Einig.",
+            "Okay.",
+          ],
+          correct: 0,
+          type: "zusammenfassung detail",
+          explanation: "Tổng kết + chi tiết thêm 'Ich bringe... mit!'",
+        },
+
+        // KRANKENHAUS (36-40)
+        {
+          scenario: "Đề nghị thăm bạn ở viện",
+          context: "Lars bị ốm",
+          partner: "...",
+          options: [
+            "Unser Freund Lars liegt im Krankenhaus. Wir sollten ihn besuchen. Wann hast du Zeit?",
+            "Lars ist krank.",
+            "Krankenhaus ist weit.",
+            "Ich gehe nicht.",
+          ],
+          correct: 0,
+          type: "situation + vorschlag",
+          explanation: "Nói tình huống + 'Wir sollten...' + hỏi thời gian",
+        },
+
+        {
+          scenario: "Đề nghị mang hoa",
+          context: "Nên mang hoa và trái cây",
+          partner: "Was sollen wir mitbringen?",
+          options: [
+            "Ich denke, Blumen und Obst wären gut. Was meinst du dazu?",
+            "Nichts.",
+            "Alles.",
             "Ich weiß nicht.",
           ],
           correct: 0,
-          type: "zustimmen enthusiastisch",
-          explanation:
-            "Dùng 'Ja, gern!' + 'Das macht bestimmt viel Spaß' để đồng ý nhiệt tình.",
+          type: "vorschlag höflich",
+          explanation: "Dùng 'Ich denke,... wären gut' + hỏi ý kiến",
         },
+
         {
-          scenario: "Bạn muốn hỏi đối tác thích hoạt động nào hơn.",
-          context: "Có 2 lựa chọn: đi bộ hoặc đạp xe.",
+          scenario: "Đề nghị giờ thăm",
+          context: "14-18h",
+          partner: "Die Besuchszeiten sind von 14 bis 18 Uhr.",
+          options: [
+            "Gut, dann sollten wir zwischen 15 und 17 Uhr gehen. Passt dir das?",
+            "Okay.",
+            "18 Uhr.",
+            "Wir gehen.",
+          ],
+          correct: 0,
+          type: "konkreter vorschlag",
+          explanation: "Dùng 'dann sollten wir...' + 'Passt dir das?'",
+        },
+
+        {
+          scenario: "Giải quyết vấn đề đường",
+          context: "Bạn biết đường",
+          partner: "Ich weiß nicht, wo das Krankenhaus ist.",
+          options: [
+            "Kein Problem. Wir können uns vorher treffen und zusammen hinfahren.",
+            "Es ist da.",
+            "Suche im Internet.",
+            "Ich fahre allein.",
+          ],
+          correct: 0,
+          type: "problem lösen",
+          explanation: "Dùng 'Kein Problem' + 'Wir können...'",
+        },
+
+        {
+          scenario: "Tổng kết thăm viện",
+          context: "Thứ Sáu 15h ga tàu",
+          partner: "Fassen wir zusammen?",
+          options: [
+            "Ja. Freitag um 15 Uhr am Bahnhof. Ich kaufe die Blumen. Dann fahren wir zusammen zum Krankenhaus.",
+            "Freitag 15 Uhr.",
+            "Okay.",
+            "Alles klar.",
+          ],
+          correct: 0,
+          type: "vollständige zusammenfassung",
+          explanation:
+            "Tổng kết đầy đủ: thời gian + địa điểm + nhiệm vụ + kế hoạch",
+        },
+
+        // UMZUG (41-120)
+        {
+          scenario: "Nhờ giúp chuyển nhà",
+          context: "Chuyển thứ Bảy",
           partner: "...",
           options: [
-            "Was findest du besser: spazieren gehen oder Fahrrad fahren?",
-            "Ich gehe.",
-            "Fahrrad ist gut.",
-            "Wir machen das.",
+            "Ich ziehe am Samstag um. Kannst du mir helfen? Das wäre sehr nett!",
+            "Ich ziehe um.",
+            "Du musst helfen.",
+            "Ich habe keine Zeit.",
+          ],
+          correct: 0,
+          type: "bitte um hilfe",
+          explanation: "Dùng 'Kannst du mir helfen?' + 'Das wäre sehr nett!'",
+        },
+
+        {
+          scenario: "Giải thích công việc",
+          context: "Mang đồ và dọn dẹp",
+          partner: "Was soll ich tun?",
+          options: [
+            "Wir müssen Möbel tragen und die alte Wohnung sauber machen. Geht das?",
+            "Alles.",
+            "Möbel tragen.",
+            "Keine Ahnung.",
+          ],
+          correct: 0,
+          type: "aufgaben erklären",
+          explanation: "Dùng 'Wir müssen... und...' + 'Geht das?'",
+        },
+
+        {
+          scenario: "Số người giúp",
+          context: "Có 3 người rồi",
+          partner: "Wie viele Leute helfen?",
+          options: [
+            "Drei Freunde haben schon zugesagt. Mit dir wären wir fünf. Das ist genug.",
+            "Viele Leute.",
+            "Drei oder vier.",
+            "Ich weiß nicht.",
+          ],
+          correct: 0,
+          type: "info + rechnen",
+          explanation: "Dùng 'haben zugesagt' + 'Mit dir wären wir...'",
+        },
+
+        {
+          scenario: "Mời pizza cảm ơn",
+          context: "Để cảm ơn",
+          partner: "Das ist viel Arbeit!",
+          options: [
+            "Ja, stimmt! Deshalb lade ich euch danach zu Pizza ein. Als Dankeschön!",
+            "Ja, viel Arbeit.",
+            "Pizza später.",
+            "Wir essen.",
+          ],
+          correct: 0,
+          type: "einladung dank",
+          explanation:
+            "Dùng 'Deshalb lade ich euch... ein' + 'Als Dankeschön!'",
+        },
+
+        {
+          scenario: "Tổng kết chuyển nhà",
+          context: "Thứ Bảy 10h Hauptstraße 120",
+          partner: "Wann und wo genau?",
+          options: [
+            "Samstag um 10 Uhr in meiner alten Wohnung, Hauptstraße 120. Danach gehen wir Pizza essen!",
+            "Samstag 10 Uhr.",
+            "Hauptstraße 120.",
+            "Wir sehen.",
+          ],
+          correct: 0,
+          type: "zeit + ort komplett",
+          explanation: "Tổng kết: thời gian + địa chỉ đầy đủ + kế hoạch sau",
+        },
+
+        // ARZT/GESUNDHEIT (46-50)
+        {
+          scenario: "Đi bác sĩ cùng nhau",
+          context: "Cần thăm khám định kỳ",
+          partner: "...",
+          options: [
+            "Ich muss zum Arzt gehen. Möchtest du mitkommen? Wir können danach Kaffee trinken.",
+            "Ich gehe zum Arzt.",
+            "Kommst du mit?",
+            "Arzt ist wichtig.",
+          ],
+          correct: 0,
+          type: "einladung + angebot",
+          explanation: "Dùng 'Möchtest du mitkommen?' + thêm kế hoạch sau",
+        },
+
+        {
+          scenario: "Đề nghị giờ khám",
+          context: "Sáng hoặc chiều đều được",
+          partner: "Wann hast du den Termin?",
+          options: [
+            "Ich habe zwei Möglichkeiten: 10 Uhr oder 15 Uhr. Was passt dir besser?",
+            "10 Uhr.",
+            "Nachmittag.",
+            "Ich weiß nicht.",
+          ],
+          correct: 0,
+          type: "optionen geben",
+          explanation: "Dùng 'Ich habe zwei Möglichkeiten:...' + hỏi ý kiến",
+        },
+
+        {
+          scenario: "Từ chối vì ốm",
+          context: "Bị cảm, không đi được",
+          partner: "Gehen wir morgen schwimmen?",
+          options: [
+            "Tut mir leid, ich bin erkältet. Vielleicht nächste Woche?",
+            "Ja, gern.",
+            "Ich schwimme nicht.",
+            "Nein.",
+          ],
+          correct: 0,
+          type: "ablehnen gesundheit",
+          explanation: "Dùng 'Tut mir leid, ich bin erkältet' + đề nghị sau",
+        },
+
+        {
+          scenario: "Hỏi về thuốc",
+          context: "Cần mua ở Apotheke",
+          partner: "Wo bekommst du das Medikament?",
+          options: [
+            "In der Apotheke beim Bahnhof. Kommst du mit? Dann gehen wir zusammen.",
+            "Apotheke.",
+            "Ich kaufe es.",
+            "Medikament ist da.",
+          ],
+          correct: 0,
+          type: "info + einladung",
+          explanation: "Cho thông tin + mời đi cùng 'Kommst du mit?'",
+        },
+
+        {
+          scenario: "Tổng kết đi bác sĩ",
+          context: "Thứ Ba 10h, phòng khám gần ga",
+          partner: "Alles klar?",
+          options: [
+            "Ja, Dienstag um 10 Uhr in der Praxis am Bahnhof. Danach trinken wir Kaffee. Bis dann!",
+            "Dienstag 10 Uhr.",
+            "Okay.",
+            "Ja.",
+          ],
+          correct: 0,
+          type: "zusammenfassung + plan",
+          explanation: "Tổng kết đầy đủ + kế hoạch sau + kết thúc",
+        },
+
+        // WOHNUNG/NACHBARN (51-55)
+        {
+          scenario: "Tiếng ồn từ hàng xóm",
+          context: "Nhạc to quá vào ban đêm",
+          partner: "...",
+          options: [
+            "Entschuldigung, könntest du die Musik leiser machen? Es ist schon 23 Uhr.",
+            "Die Musik ist zu laut.",
+            "Ich kann nicht schlafen.",
+            "Bitte leise.",
+          ],
+          correct: 0,
+          type: "höfliche bitte",
+          explanation: "Dùng 'Entschuldigung, könntest du...?' rất lịch sự",
+        },
+
+        {
+          scenario: "Mượn công cụ hàng xóm",
+          context: "Cần mượn búa (Hammer)",
+          partner: "...",
+          options: [
+            "Entschuldigung, könnte ich deinen Hammer ausleihen? Ich brauche ihn nur kurz.",
+            "Ich brauche einen Hammer.",
+            "Hast du Werkzeug?",
+            "Kann ich haben?",
+          ],
+          correct: 0,
+          type: "höflich fragen",
+          explanation: "Dùng 'könnte ich... ausleihen?' + 'nur kurz'",
+        },
+
+        {
+          scenario: "Mời hàng xóm uống trà",
+          context: "Hàng xóm mới, muốn làm quen",
+          partner: "...",
+          options: [
+            "Ich möchte dich einladen. Hast du Lust auf eine Tasse Tee bei mir?",
+            "Komm zu mir.",
+            "Wir trinken Tee.",
+            "Ich habe Tee.",
+          ],
+          correct: 0,
+          type: "einladung höflich",
+          explanation:
+            "Dùng 'Ich möchte dich einladen' + 'Hast du Lust auf...?'",
+        },
+
+        {
+          scenario: "Nhờ tưới cây khi đi vắng",
+          context: "Đi nghỉ 1 tuần",
+          partner: "Wann fährst du in den Urlaub?",
+          options: [
+            "Nächste Woche für 7 Tage. Könntest du bitte meine Blumen gießen?",
+            "Nächste Woche.",
+            "Ich fahre weg.",
+            "7 Tage.",
+          ],
+          correct: 0,
+          type: "info + bitte",
+          explanation: "Cho thông tin + 'Könntest du bitte...?'",
+        },
+
+        {
+          scenario: "Cảm ơn hàng xóm",
+          context: "Đã giúp đỡ chuyển đồ",
+          partner: "...",
+          options: [
+            "Vielen Dank für deine Hilfe! Möchtest du morgen zum Essen kommen?",
+            "Danke.",
+            "Du hast mir geholfen.",
+            "Ich bin dankbar.",
+          ],
+          correct: 0,
+          type: "dank + einladung",
+          explanation: "Cảm ơn + mời ăn để đáp lễ",
+        },
+
+        // VERKEHR/REISE (56-60)
+        {
+          scenario: "Hỏi đường đến ga tàu",
+          context: "Lạc đường",
+          partner: "...",
+          options: [
+            "Entschuldigung, wie komme ich zum Hauptbahnhof? Ich bin fremd hier.",
+            "Wo ist der Bahnhof?",
+            "Ich suche den Bahnhof.",
+            "Bahnhof?",
+          ],
+          correct: 0,
+          type: "höflich fragen",
+          explanation: "Dùng 'Wie komme ich zu...?' + 'Ich bin fremd hier'",
+        },
+
+        {
+          scenario: "Đề nghị đi chung xe",
+          context: "Cùng hướng về nhà",
+          partner: "...",
+          options: [
+            "Wir fahren in die gleiche Richtung. Sollen wir zusammen fahren? Das spart Benzin.",
+            "Fahren wir zusammen?",
+            "Ich fahre auch.",
+            "Kommst du?",
+          ],
+          correct: 0,
+          type: "vorschlag + vorteil",
+          explanation: "Đề nghị + nói lợi ích 'Das spart Benzin'",
+        },
+
+        {
+          scenario: "Xe bị hỏng, cần giúp",
+          context: "Xe không nổ máy",
+          partner: "Was ist los?",
+          options: [
+            "Mein Auto startet nicht. Kannst du mir helfen? Vielleicht die Batterie?",
+            "Auto kaputt.",
+            "Ich brauche Hilfe.",
+            "Es geht nicht.",
+          ],
+          correct: 0,
+          type: "problem + bitte",
+          explanation:
+            "Nói vấn đề + 'Kannst du mir helfen?' + đoán nguyên nhân",
+        },
+
+        {
+          scenario: "Muộn vì kẹt xe",
+          context: "Gọi điện báo trước",
+          partner: "...",
+          options: [
+            "Entschuldigung, ich komme 15 Minuten später. Es gibt einen Stau auf der Autobahn.",
+            "Ich bin spät.",
+            "Stau.",
+            "Ich komme später.",
+          ],
+          correct: 0,
+          type: "entschuldigung + grund",
+          explanation: "Xin lỗi + lý do cụ thể 'Es gibt einen Stau'",
+        },
+
+        {
+          scenario: "Đặt vé tàu cùng nhau",
+          context: "Đi Berlin cuối tuần",
+          partner: "Wann fahren wir nach Berlin?",
+          options: [
+            "Am Samstag um 9 Uhr. Soll ich für uns beide Tickets kaufen?",
+            "Samstag.",
+            "9 Uhr.",
+            "Ich kaufe.",
+          ],
+          correct: 0,
+          type: "info + angebot",
+          explanation: "Cho thông tin + đề nghị làm hộ 'Soll ich... kaufen?'",
+        },
+
+        // WETTER/JAHRESZEITEN (61-65)
+        {
+          scenario: "Khen thời tiết đẹp",
+          context: "Nắng ấm",
+          partner: "Wie ist das Wetter?",
+          options: [
+            "Das Wetter ist herrlich! Die Sonne scheint. Perfekt für einen Spaziergang!",
+            "Schön.",
+            "Es ist warm.",
+            "Gut.",
+          ],
+          correct: 0,
+          type: "meinung enthusiastisch",
+          explanation: "Dùng 'herrlich!' + mô tả + đề nghị hoạt động",
+        },
+
+        {
+          scenario: "Phàn nàn trời lạnh",
+          context: "Mùa đông -5°C",
+          partner: "...",
+          options: [
+            "Brrr, es ist so kalt heute! Minus 5 Grad. Ich bleibe lieber drinnen.",
+            "Kalt.",
+            "Ich habe kalt.",
+            "Winter ist hier.",
+          ],
+          correct: 0,
+          type: "reaktion + entscheidung",
+          explanation: "Dùng 'Brrr' tự nhiên + nhiệt độ + quyết định",
+        },
+
+        {
+          scenario: "Đề nghị hoạt động theo thời tiết",
+          context: "Mưa cả ngày",
+          partner: "Was machen wir heute?",
+          options: [
+            "Es regnet den ganzen Tag. Wie wäre es mit Kino statt Picknick?",
+            "Es regnet.",
+            "Wir gehen raus.",
+            "Ich weiß nicht.",
+          ],
+          correct: 0,
+          type: "info + alternative",
+          explanation: "Nói thời tiết + đề nghị thay thế 'statt...'",
+        },
+
+        {
+          scenario: "Hỏi dự báo thời tiết",
+          context: "Lên kế hoạch cuối tuần",
+          partner: "...",
+          options: [
+            "Weißt du, wie das Wetter am Wochenende wird? Ich möchte grillen.",
+            "Wie ist das Wetter?",
+            "Wochenende?",
+            "Ich grille.",
+          ],
+          correct: 0,
+          type: "frage + grund",
+          explanation: "Hỏi dự báo + nói lý do cần biết",
+        },
+
+        {
+          scenario: "Mùa yêu thích",
+          context: "Thích mùa xuân",
+          partner: "Welche Jahreszeit magst du am liebsten?",
+          options: [
+            "Ich liebe den Frühling, weil dann alles blüht und die Vögel singen.",
+            "Frühling.",
+            "Alle Jahreszeiten.",
+            "Ich mag Sonne.",
+          ],
+          correct: 0,
+          type: "präferenz + 2 gründe",
+          explanation: "Dùng 'Ich liebe...' + 2 lý do với 'und'",
+        },
+
+        // HAUSTIERE (66-70)
+        {
+          scenario: "Giới thiệu thú cưng",
+          context: "Có chó tên Max",
+          partner: "Hast du Haustiere?",
+          options: [
+            "Ja, ich habe einen Hund. Er heißt Max und ist sehr freundlich.",
+            "Ja, einen Hund.",
+            "Max.",
+            "Hund.",
+          ],
+          correct: 0,
+          type: "info detail",
+          explanation: "Trả lời + tên + tính cách",
+        },
+
+        {
+          scenario: "Nhờ trông chó",
+          context: "Đi công tác 3 ngày",
+          partner: "...",
+          options: [
+            "Ich muss drei Tage verreisen. Könntest du auf meinen Hund aufpassen?",
+            "Ich fahre weg.",
+            "Mein Hund braucht Hilfe.",
+            "Kannst du helfen?",
+          ],
+          correct: 0,
+          type: "grund + bitte",
+          explanation: "Nói lý do + 'auf... aufpassen' (trông nom)",
+        },
+
+        {
+          scenario: "Khen thú cưng của người khác",
+          context: "Mèo rất đẹp",
+          partner: "Das ist meine Katze Luna.",
+          options: [
+            "Oh, wie süß! Sie ist wunderschön. Wie alt ist sie denn?",
+            "Schön.",
+            "Katze.",
+            "Gut.",
+          ],
+          correct: 0,
+          type: "kompliment + frage",
+          explanation: "Khen 'wie süß!' + 'wunderschön' + hỏi thêm",
+        },
+
+        {
+          scenario: "Đi dạo chó cùng nhau",
+          context: "Rủ hàng xóm",
+          partner: "...",
+          options: [
+            "Ich gehe mit meinem Hund spazieren. Möchtest du mit deinem Hund mitkommen?",
+            "Ich gehe spazieren.",
+            "Hund.",
+            "Kommst du?",
+          ],
+          correct: 0,
+          type: "info + einladung",
+          explanation: "Nói hoạt động + mời tham gia",
+        },
+
+        {
+          scenario: "Hỏi về chăm sóc thú cưng",
+          context: "Bạn mới nuôi mèo",
+          partner: "Ich habe jetzt eine Katze. Hast du Tipps?",
+          options: [
+            "Glückwunsch! Du solltest gutes Futter kaufen und jeden Tag mit ihr spielen.",
+            "Gut.",
+            "Futter ist wichtig.",
+            "Ja.",
+          ],
+          correct: 0,
+          type: "reaktion + ratschlag",
+          explanation: "Chúc mừng + 2 lời khuyên với 'solltest' và 'und'",
+        },
+
+        // EINKAUFEN/MODE (71-75)
+        {
+          scenario: "Hỏi ý kiến về quần áo",
+          context: "Thử áo mới",
+          partner: "...",
+          options: [
+            "Wie findest du diese Jacke? Steht mir die Farbe?",
+            "Gefällt dir?",
+            "Jacke gut?",
+            "Wie ist das?",
           ],
           correct: 0,
           type: "meinung fragen",
           explanation:
-            "Dùng 'Was findest du besser:... oder...?' để hỏi ý kiến giữa 2 lựa chọn.",
+            "Dùng 'Wie findest du...?' + 'Steht mir...?' (hợp với tôi)",
+        },
+
+        {
+          scenario: "Khen đồ đẹp",
+          context: "Bạn mặc váy mới",
+          partner: "Ich habe ein neues Kleid gekauft.",
+          options: [
+            "Wow, das sieht toll aus! Die Farbe passt perfekt zu dir!",
+            "Schön.",
+            "Gut.",
+            "Kleid ist neu.",
+          ],
+          correct: 0,
+          type: "kompliment stark",
+          explanation:
+            "Dùng 'Wow!' + 'sieht toll aus' + 'passt perfekt zu dir'",
+        },
+
+        {
+          scenario: "Đề nghị đi mua sắm",
+          context: "Giảm giá cuối tuần",
+          partner: "...",
+          options: [
+            "Am Samstag gibt es Sale. Sollen wir zusammen shoppen gehen?",
+            "Sale.",
+            "Wir gehen einkaufen?",
+            "Samstag?",
+          ],
+          correct: 0,
+          type: "info + vorschlag",
+          explanation: "Cho thông tin Sale + 'Sollen wir zusammen...?'",
+        },
+
+        {
+          scenario: "Hỏi về size",
+          context: "Không biết size Đức",
+          partner: "Welche Größe brauchst du?",
+          options: [
+            "Ich bin mir nicht sicher. Kannst du mir helfen, die richtige Größe zu finden?",
+            "Ich weiß nicht.",
+            "Größe M.",
+            "Hilf mir.",
+          ],
+          correct: 0,
+          type: "unsicher + bitte",
+          explanation: "Nói không chắc + nhờ giúp tìm",
+        },
+
+        {
+          scenario: "Trả lại hàng",
+          context: "Áo không vừa",
+          partner: "...",
+          options: [
+            "Entschuldigung, das Hemd passt nicht. Kann ich es umtauschen?",
+            "Passt nicht.",
+            "Ich möchte zurückgeben.",
+            "Nicht gut.",
+          ],
+          correct: 0,
+          type: "problem + frage höflich",
+          explanation: "Nói vấn đề + 'Kann ich es umtauschen?' (đổi hàng)",
+        },
+
+        // FEIERN/FESTE (76-80)
+        {
+          scenario: "Mời sinh nhật",
+          context: "Sinh nhật tuần sau",
+          partner: "...",
+          options: [
+            "Ich habe nächste Woche Geburtstag. Ich würde mich freuen, wenn du kommst!",
+            "Geburtstag.",
+            "Kommst du?",
+            "Nächste Woche.",
+          ],
+          correct: 0,
+          type: "einladung warm",
+          explanation: "Dùng 'Ich würde mich freuen, wenn...' rất thân thiện",
+        },
+
+        {
+          scenario: "Đồng ý đến dự tiệc",
+          context: "Rất vui",
+          partner: "Kommst du zu meiner Party?",
+          options: [
+            "Ja, sehr gern! Soll ich etwas mitbringen? Kuchen oder Getränke?",
+            "Ja.",
+            "Ich komme.",
+            "Gut.",
+          ],
+          correct: 0,
+          type: "zusage + angebot",
+          explanation: "Đồng ý nhiệt tình + đề nghị mang gì",
+        },
+
+        {
+          scenario: "Từ chối lời mời",
+          context: "Đã có hẹn khác",
+          partner: "Kommst du zu meinem Geburtstag am Freitag?",
+          options: [
+            "Tut mir sehr leid, aber ich habe schon eine andere Einladung. Viel Spaß!",
+            "Nein.",
+            "Ich kann nicht.",
+            "Freitag geht nicht.",
+          ],
+          correct: 0,
+          type: "ablehnung höflich",
+          explanation: "Xin lỗi + lý do + chúc vui vẻ",
+        },
+
+        {
+          scenario: "Hỏi về quà tặng",
+          context: "Không biết nên tặng gì",
+          partner: "Was soll ich Anna zum Geburtstag schenken?",
+          options: [
+            "Vielleicht ein Buch? Sie liest doch so gern. Oder Blumen?",
+            "Ein Buch.",
+            "Ich weiß nicht.",
+            "Schenk etwas.",
+          ],
+          correct: 0,
+          type: "vorschlag + grund + option",
+          explanation: "Đề nghị + lý do + thêm lựa chọn",
+        },
+
+        {
+          scenario: "Cảm ơn vì quà",
+          context: "Nhận được quà đẹp",
+          partner: "...",
+          options: [
+            "Vielen herzlichen Dank für das schöne Geschenk! Das ist genau das, was ich wollte!",
+            "Danke.",
+            "Geschenk ist gut.",
+            "Ich mag es.",
+          ],
+          correct: 0,
+          type: "dank enthusiastisch",
+          explanation: "Dùng 'Vielen herzlichen Dank' + khen cụ thể",
+        },
+
+        // INTERNET/TECHNIK (81-85)
+        {
+          scenario: "Wifi không hoạt động",
+          context: "Cần nhờ giúp",
+          partner: "...",
+          options: [
+            "Entschuldigung, mein WLAN funktioniert nicht. Kannst du mir helfen?",
+            "WLAN kaputt.",
+            "Internet geht nicht.",
+            "Hilf mir.",
+          ],
+          correct: 0,
+          type: "problem + bitte",
+          explanation: "Nói vấn đề + 'Kannst du mir helfen?'",
+        },
+
+        {
+          scenario: "Hỏi mật khẩu Wifi",
+          context: "Ở quán cà phê",
+          partner: "...",
+          options: [
+            "Entschuldigung, wie ist das WLAN-Passwort hier?",
+            "Passwort?",
+            "WLAN?",
+            "Internet?",
+          ],
+          correct: 0,
+          type: "höfliche frage kurz",
+          explanation: "Câu hỏi ngắn gọn, lịch sự trong quán",
+        },
+
+        {
+          scenario: "Giới thiệu app hay",
+          context: "App học tiếng Đức",
+          partner: "Wie lernst du Deutsch?",
+          options: [
+            "Ich benutze eine super App! Sie heißt 'DeutschLernen'. Möchtest du den Link?",
+            "Mit App.",
+            "Ich lerne online.",
+            "App ist gut.",
+          ],
+          correct: 0,
+          type: "info + angebot",
+          explanation: "Giới thiệu + tên + đề nghị share",
+        },
+
+        {
+          scenario: "Máy tính chậm",
+          context: "Cần lời khuyên",
+          partner: "Mein Computer ist so langsam.",
+          options: [
+            "Du solltest vielleicht mehr Speicher freimachen. Oder hast du zu viele Programme offen?",
+            "Zu langsam.",
+            "Computer alt.",
+            "Kauf neu.",
+          ],
+          correct: 0,
+          type: "ratschlag + frage",
+          explanation: "Lời khuyên + hỏi nguyên nhân",
+        },
+
+        {
+          scenario: "Chia sẻ video online",
+          context: "Video hài",
+          partner: "...",
+          options: [
+            "Ich habe ein lustiges Video gefunden. Soll ich dir den Link schicken?",
+            "Ich habe Video.",
+            "Schau mal.",
+            "Link?",
+          ],
+          correct: 0,
+          type: "info + angebot",
+          explanation: "Nói tìm thấy + 'Soll ich dir... schicken?'",
+        },
+
+        // BERUF/KARRIERE (86-90)
+        {
+          scenario: "Hỏi về công việc",
+          context: "Gặp người mới",
+          partner: "Was machst du beruflich?",
+          options: [
+            "Ich arbeite als Ingenieur bei Siemens. Und du?",
+            "Ingenieur.",
+            "Ich arbeite.",
+            "Bei Siemens.",
+          ],
+          correct: 0,
+          type: "info komplett + rückfrage",
+          explanation: "Chức danh + công ty + hỏi lại",
+        },
+
+        {
+          scenario: "Phàn nàn công việc",
+          context: "Stress nhiều",
+          partner: "Wie geht's bei der Arbeit?",
+          options: [
+            "Ehrlich gesagt, ziemlich stressig. Ich habe gerade sehr viele Projekte.",
+            "Stressig.",
+            "Viel Arbeit.",
+            "Nicht gut.",
+          ],
+          correct: 0,
+          type: "ehrlich + grund",
+          explanation: "Thật lòng 'Ehrlich gesagt' + lý do",
+        },
+
+        {
+          scenario: "Xin nghỉ phép",
+          context: "Nghỉ 3 ngày",
+          partner: "...",
+          options: [
+            "Entschuldigung, könnte ich vom 10. bis 12. Juni Urlaub nehmen? Ich habe einen Arzttermin.",
+            "Ich möchte Urlaub.",
+            "3 Tage frei?",
+            "Urlaub.",
+          ],
+          correct: 0,
+          type: "höflich + grund",
+          explanation: "Dùng 'könnte ich... nehmen?' + lý do",
+        },
+
+        {
+          scenario: "Chúc mừng thăng chức",
+          context: "Đồng nghiệp lên chức",
+          partner: "Ich bin befördert worden!",
+          options: [
+            "Herzlichen Glückwunsch! Das hast du wirklich verdient! Lass uns das feiern!",
+            "Gut!",
+            "Glückwunsch.",
+            "Prima.",
+          ],
+          correct: 0,
+          type: "gratulation + feiern",
+          explanation: "Chúc mừng nhiệt tình + khen + đề nghị ăn mừng",
+        },
+
+        {
+          scenario: "Tìm việc mới",
+          context: "Cần lời khuyên",
+          partner: "Ich suche einen neuen Job.",
+          options: [
+            "Ich kann dich gern bei LinkedIn empfehlen. Hast du schon einen Lebenslauf?",
+            "Viel Erfolg!",
+            "Job finden ist schwer.",
+            "Gut.",
+          ],
+          correct: 0,
+          type: "hilfe anbieten",
+          explanation: "Đề nghị giúp cụ thể + hỏi chuẩn bị",
+        },
+
+        // PROBLEME/BESCHWERDEN (91-95)
+        {
+          scenario: "Phàn nàn về phòng khách sạn",
+          context: "Phòng quá ồn",
+          partner: "...",
+          options: [
+            "Entschuldigung, das Zimmer ist sehr laut. Könnte ich bitte ein anderes Zimmer bekommen?",
+            "Zu laut.",
+            "Zimmer schlecht.",
+            "Ich möchte wechseln.",
+          ],
+          correct: 0,
+          type: "beschwerde höflich",
+          explanation: "Nói vấn đề + đề nghị giải pháp lịch sự",
+        },
+
+        {
+          scenario: "Món ăn bị lạnh",
+          context: "Ở nhà hàng",
+          partner: "...",
+          options: [
+            "Entschuldigung, mein Essen ist kalt. Könnten Sie es bitte noch einmal erwärmen?",
+            "Kalt.",
+            "Essen schlecht.",
+            "Nicht gut.",
+          ],
+          correct: 0,
+          type: "reklamation restaurant",
+          explanation: "Lịch sự + 'noch einmal erwärmen' (hâm lại)",
+        },
+
+        {
+          scenario: "Hàng bị lỗi",
+          context: "Máy ảnh không chụp được",
+          partner: "...",
+          options: [
+            "Diese Kamera funktioniert nicht richtig. Ich möchte sie gern umtauschen oder das Geld zurück.",
+            "Kaputt.",
+            "Geld zurück.",
+            "Funktioniert nicht.",
+          ],
+          correct: 0,
+          type: "reklamation + optionen",
+          explanation: "Nói lỗi + 2 lựa chọn với 'oder'",
+        },
+
+        {
+          scenario: "Taxi đi sai đường",
+          context: "Tài xế lạc",
+          partner: "...",
+          options: [
+            "Entschuldigung, ich glaube, wir fahren in die falsche Richtung. Das ist nicht der Weg zum Flughafen.",
+            "Falsch.",
+            "Nicht hier.",
+            "Flughafen.",
+          ],
+          correct: 0,
+          type: "korrektur höflich",
+          explanation: "Dùng 'ich glaube...' để sửa lịch sự",
+        },
+
+        {
+          scenario: "Hàng xóm ồn ào",
+          context: "Nhạc to lúc nửa đêm",
+          partner: "...",
+          options: [
+            "Entschuldigung, könntest du bitte die Musik leiser machen? Es ist schon Mitternacht und ich muss morgen früh raus.",
+            "Zu laut.",
+            "Ich schlafe.",
+            "Leise bitte.",
+          ],
+          correct: 0,
+          type: "bitte + 2 gründe",
+          explanation: "Nhờ + 2 lý do: giờ muộn + phải dậy sớm",
+        },
+
+        // UMWELT/NATUR (96-100)
+        {
+          scenario: "Đề nghị đi dạo rừng",
+          context: "Cuối tuần đẹp trời",
+          partner: "...",
+          options: [
+            "Das Wetter ist perfekt! Sollen wir einen Waldspaziergang machen? Die Natur ist jetzt besonders schön.",
+            "Gehen wir raus?",
+            "Wald.",
+            "Wetter gut.",
+          ],
+          correct: 0,
+          type: "vorschlag enthusiastisch",
+          explanation: "Khen thời tiết + đề nghị + lý do",
+        },
+
+        {
+          scenario: "Nói về tái chế",
+          context: "Phân loại rác",
+          partner: "Wie trennst du den Müll?",
+          options: [
+            "Ich trenne Papier, Plastik und Glas. Das ist wichtig für die Umwelt.",
+            "Ich trenne Müll.",
+            "Papier, Plastik.",
+            "Mülltrennung.",
+          ],
+          correct: 0,
+          type: "info + begründung",
+          explanation: "Kể cụ thể + nhấn mạnh tầm quan trọng",
+        },
+
+        {
+          scenario: "Đề nghị đi xe đạp thay vì ô tô",
+          context: "Bảo vệ môi trường",
+          partner: "Fahren wir mit dem Auto?",
+          options: [
+            "Wie wäre es, wenn wir mit dem Fahrrad fahren? Das ist umweltfreundlicher und gesünder.",
+            "Mit Fahrrad.",
+            "Auto nein.",
+            "Fahrrad besser.",
+          ],
+          correct: 0,
+          type: "alternative + 2 vorteile",
+          explanation: "Đề nghị thay thế + 2 lợi ích",
+        },
+
+        {
+          scenario: "Khen phong cảnh",
+          context: "Leo núi, view đẹp",
+          partner: "Schau mal, die Aussicht!",
+          options: [
+            "Wow, atemberaubend! Die Berge sind wunderschön. Das Foto muss ich machen!",
+            "Schön.",
+            "Berge gut.",
+            "Ja.",
+          ],
+          correct: 0,
+          type: "begeisterung zeigen",
+          explanation: "Dùng 'Wow, atemberaubend!' + khen + hành động",
+        },
+
+        {
+          scenario: "Đề nghị picnic",
+          context: "Công viên gần, thời tiết đẹp",
+          partner: "Was machen wir am Sonntag?",
+          options: [
+            "Wie wäre ein Picknick im Park? Ich bringe Essen mit, du bringst Getränke?",
+            "Picknick?",
+            "Park.",
+            "Sonntag frei.",
+          ],
+          correct: 0,
+          type: "vorschlag + aufgabenteilung",
+          explanation: "Đề nghị + chia việc ngay 'Ich... du...?'",
+        },
+
+        // STUDIUM/SCHULE (101-110)
+        {
+          scenario: "Hỏi về bài tập",
+          context: "Không hiểu bài",
+          partner: "...",
+          options: [
+            "Entschuldigung, ich verstehe die Hausaufgabe nicht. Kannst du mir das erklären?",
+            "Verstehe nicht.",
+            "Hausaufgabe schwer.",
+            "Hilf mir.",
+          ],
+          correct: 0,
+          type: "problem + bitte",
+          explanation: "Nói không hiểu + nhờ giải thích",
+        },
+
+        {
+          scenario: "Mời học nhóm",
+          context: "Chuẩn bị thi",
+          partner: "...",
+          options: [
+            "Wir haben nächste Woche Prüfung. Sollen wir zusammen lernen?",
+            "Prüfung kommt.",
+            "Lernen wir?",
+            "Nächste Woche.",
+          ],
+          correct: 0,
+          type: "info + vorschlag",
+          explanation: "Nói sự kiện + 'Sollen wir zusammen...?'",
+        },
+
+        {
+          scenario: "Xin mượn sách",
+          context: "Sách thư viện hết",
+          partner: "...",
+          options: [
+            "Hast du das Lehrbuch für Chemie? Könnte ich es für zwei Tage ausleihen?",
+            "Buch?",
+            "Ich brauche.",
+            "Hast du?",
+          ],
+          correct: 0,
+          type: "frage + bitte zeitlich",
+          explanation: "Hỏi + nói rõ thời gian mượn",
+        },
+
+        {
+          scenario: "Trả bài muộn",
+          context: "Bị ốm",
+          partner: "...",
+          options: [
+            "Entschuldigung, ich war krank. Kann ich die Hausarbeit bis Montag abgeben?",
+            "Ich war krank.",
+            "Später abgeben?",
+            "Montag?",
+          ],
+          correct: 0,
+          type: "entschuldigung + bitte",
+          explanation: "Xin lỗi + lý do + đề nghị deadline mới",
+        },
+
+        {
+          scenario: "Chia sẻ ghi chú",
+          context: "Bạn vắng tiết học",
+          partner: "Ich war gestern nicht da.",
+          options: [
+            "Kein Problem! Ich kann dir meine Notizen geben. Wann treffen wir uns?",
+            "Okay.",
+            "Ich habe Notizen.",
+            "Hier.",
+          ],
+          correct: 0,
+          type: "hilfe anbieten + frage",
+          explanation: "Dùng 'Kein Problem!' + đề nghị + hẹn gặp",
+        },
+
+        {
+          scenario: "Đề nghị làm bài thuyết trình chung",
+          context: "Deadline gần",
+          partner: "Wir müssen eine Präsentation machen.",
+          options: [
+            "Ja. Wollen wir die Themen aufteilen? Ich mache Teil A, du Teil B?",
+            "Okay.",
+            "Präsentation.",
+            "Ja.",
+          ],
+          correct: 0,
+          type: "vorschlag + aufteilung",
+          explanation: "Đồng ý + đề nghị chia việc cụ thể",
+        },
+
+        {
+          scenario: "Khen bài thuyết trình bạn",
+          context: "Bài hay",
+          partner: "Wie war meine Präsentation?",
+          options: [
+            "Sehr gut! Deine Beispiele waren super und du hast klar gesprochen.",
+            "Gut.",
+            "Super.",
+            "Prima.",
+          ],
+          correct: 0,
+          type: "lob konkret",
+          explanation: "Khen + 2 điểm cụ thể với 'und'",
+        },
+
+        {
+          scenario: "Hỏi về kỳ thi",
+          context: "Thi cuối kỳ",
+          partner: "Wann ist die Prüfung?",
+          options: [
+            "Am 15. Juni um 9 Uhr in Raum 204. Hast du schon angefangen zu lernen?",
+            "15. Juni.",
+            "9 Uhr.",
+            "Raum 204.",
+          ],
+          correct: 0,
+          type: "info komplett + frage",
+          explanation: "Cho đầy đủ: ngày + giờ + phòng + hỏi chuẩn bị",
+        },
+
+        {
+          scenario: "Đề nghị nghỉ học giải lao",
+          context: "Học quá lâu",
+          partner: "...",
+          options: [
+            "Wir lernen schon drei Stunden. Sollen wir eine Pause machen? Vielleicht Kaffee trinken?",
+            "Pause?",
+            "Müde.",
+            "Kaffee?",
+          ],
+          correct: 0,
+          type: "info + vorschlag + idee",
+          explanation: "Nói bao lâu + đề nghị nghỉ + hoạt động",
+        },
+
+        {
+          scenario: "Xin lời khuyên môn học",
+          context: "Chọn môn tự chọn",
+          partner: "Welches Wahlfach soll ich nehmen?",
+          options: [
+            "Ich empfehle dir Informatik. Das ist nützlich und macht Spaß. Professor Schmidt ist auch sehr gut.",
+            "Informatik.",
+            "Ist gut.",
+            "Nimm das.",
+          ],
+          correct: 0,
+          type: "empfehlung + 2 gründe + extra",
+          explanation: "Gợi ý + 2 lý do + thêm thông tin giáo viên",
+        },
+
+        // BANK/GELD (111-115)
+        {
+          scenario: "Hỏi đường đến ATM",
+          context: "Cần rút tiền",
+          partner: "...",
+          options: [
+            "Entschuldigung, wo ist der nächste Geldautomat? Ich brauche Bargeld.",
+            "Geldautomat?",
+            "Wo ist Bank?",
+            "Ich brauche Geld.",
+          ],
+          correct: 0,
+          type: "höfliche frage + grund",
+          explanation: "Hỏi 'der nächste...' + lý do",
+        },
+
+        {
+          scenario: "Chia tiền nhà hàng",
+          context: "Ăn chung, chia bill",
+          partner: "Wer bezahlt?",
+          options: [
+            "Sollen wir teilen? Jeder zahlt 15 Euro, okay?",
+            "Ich zahle.",
+            "Du zahlst.",
+            "Teilen?",
+          ],
+          correct: 0,
+          type: "vorschlag fair",
+          explanation: "Đề nghị chia + nói số tiền cụ thể",
+        },
+
+        {
+          scenario: "Mượn tiền bạn",
+          context: "Quên ví",
+          partner: "...",
+          options: [
+            "Ich habe mein Portemonnaie vergessen. Könntest du mir 20 Euro leihen? Ich gebe es morgen zurück.",
+            "Vergessen.",
+            "Geld?",
+            "20 Euro?",
+          ],
+          correct: 0,
+          type: "problem + bitte + versprechen",
+          explanation: "Nói lý do + mượn + hứa trả",
+        },
+
+        {
+          scenario: "Trả lại tiền",
+          context: "Đã mượn tuần trước",
+          partner: "...",
+          options: [
+            "Hier sind die 20 Euro von letzter Woche. Vielen Dank für deine Hilfe!",
+            "20 Euro.",
+            "Hier.",
+            "Danke.",
+          ],
+          correct: 0,
+          type: "aktion + dank",
+          explanation: "Trả tiền + nhắc lại + cảm ơn",
+        },
+
+        {
+          scenario: "Hỏi giá",
+          context: "Mua hàng chợ",
+          partner: "...",
+          options: [
+            "Entschuldigung, wie viel kostet ein Kilo Äpfel?",
+            "Preis?",
+            "Kosten?",
+            "Wie viel?",
+          ],
+          correct: 0,
+          type: "preisfrage präzise",
+          explanation: "Hỏi giá cụ thể: 'wie viel kostet + đơn vị + hàng'",
+        },
+
+        // NOTFALL (116-120)
+        {
+          scenario: "Gọi cấp cứu",
+          context: "Ai đó ngất",
+          partner: "...",
+          options: [
+            "Hilfe! Hier ist ein Notfall! Eine Person ist bewusstlos. Bitte rufen Sie einen Krankenwagen!",
+            "Notfall!",
+            "Hilfe!",
+            "Person krank!",
+          ],
+          correct: 0,
+          type: "notruf",
+          explanation: "Kêu cứu + nói tình huống + yêu cầu gọi xe cấp cứu",
+        },
+
+        {
+          scenario: "Báo mất ví",
+          context: "Bị mất ở xe buýt",
+          partner: "...",
+          options: [
+            "Entschuldigung, ich habe mein Portemonnaie im Bus vergessen. Können Sie mir helfen?",
+            "Portemonnaie weg.",
+            "Verloren.",
+            "Hilfe.",
+          ],
+          correct: 0,
+          type: "problem melden",
+          explanation: "Nói vấn đề + ở đâu + nhờ giúp",
+        },
+
+        {
+          scenario: "Hỏi nhà thuốc gần",
+          context: "Cần thuốc đau đầu",
+          partner: "...",
+          options: [
+            "Entschuldigung, wo ist die nächste Apotheke? Ich brauche ein Schmerzmittel.",
+            "Apotheke?",
+            "Wo?",
+            "Medikament?",
+          ],
+          correct: 0,
+          type: "notfrage + grund",
+          explanation: "Hỏi gần nhất + nói cần thuốc gì",
+        },
+
+        {
+          scenario: "Bị lạc đường",
+          context: "Không tìm được khách sạn",
+          partner: "...",
+          options: [
+            "Entschuldigung, ich habe mich verlaufen. Können Sie mir helfen, das Hotel zu finden?",
+            "Ich bin verloren.",
+            "Wo bin ich?",
+            "Hotel?",
+          ],
+          correct: 0,
+          type: "problem + bitte konkret",
+          explanation: "Nói bị lạc + nhờ giúp tìm cụ thể",
+        },
+
+        {
+          scenario: "Điện thoại hết pin",
+          context: "Cần gọi điện khẩn",
+          partner: "...",
+          options: [
+            "Entschuldigung, mein Handy ist leer. Könnte ich bitte kurz Ihr Telefon benutzen? Es ist dringend.",
+            "Handy leer.",
+            "Telefon?",
+            "Dringend.",
+          ],
+          correct: 0,
+          type: "problem + höfliche bitte + betonen",
+          explanation: "Nói vấn đề + xin mượn + nhấn mạnh khẩn cấp",
         },
       ];
 
-      // Data for Game 3 - Based on the real exam images
+      // 3 ĐỀ THI THẬT - Game 3 (9 câu hỏi)
+
+      // 3 ĐỀ THI THẬT - Game 3 (9 câu hỏi)
       const exams3 = [
-        // ĐỀ 1: MUA QUÀ SINH NHẬT
+        // ĐỀ 1: Mua quà sinh nhật (3 câu)
         {
           title: "ĐỀ 1: Mua quà sinh nhật cho bạn",
-          description:
-            "Bạn Alessia và Thomas cưới. Bạn muốn mua quà cho họ. Tìm lịch phù hợp.",
-          scheduleA: {
-            title: "Lịch của bạn - Thứ Tư, 12 tháng 3",
-            slots: [
-              { time: "7:00", activity: "" },
-              { time: "8:00", activity: "aufstehen" },
-              { time: "9:00", activity: "frühstücken" },
-              { time: "10:00", activity: "" },
-              { time: "11:00", activity: "im Garten arbeiten" },
-              { time: "12:00", activity: "" },
-              { time: "13:00", activity: "" },
-              { time: "14:00", activity: "Mittagessen bei Ole" },
-              { time: "15:00", activity: "" },
-              { time: "16:00", activity: "mit Babysitter telefonieren" },
-              { time: "17:00", activity: "" },
-              { time: "18:00", activity: "Konzertprobe" },
-              { time: "19:00", activity: "" },
-              { time: "20:00", activity: "" },
-              { time: "21:00", activity: "ausgehen" },
+          intro:
+            "Bạn bè Alessia và Thomas sắp kết hôn. Bạn muốn mua quà cho họ. Tìm ngày phù hợp.",
+          schedules: {
+            partner1: [
+              { time: "7.00", activity: "" },
+              { time: "8.00", activity: "aufstehen" },
+              { time: "9.00", activity: "frühstücken" },
+              { time: "10.00", activity: "" },
+              { time: "11.00", activity: "im Garten arbeiten" },
+              { time: "12.00", activity: "" },
+              { time: "13.00", activity: "" },
+              { time: "14.00", activity: "Mittagessen bei Ole" },
+              { time: "15.00", activity: "Mittagessen bei Ole" },
+              { time: "16.00", activity: "mit Babysitter telefonieren" },
+              { time: "17.00", activity: "" },
+              { time: "18.00", activity: "Konzertprobe" },
+              { time: "19.00", activity: "Konzertprobe" },
+              { time: "20.00", activity: "" },
+              { time: "21.00", activity: "ausgehen" },
+            ],
+            partner2: [
+              { time: "7.00", activity: "Schwimmen" },
+              { time: "8.00", activity: "Frühstück bei Anjo" },
+              { time: "9.00", activity: "Frühstück bei Anjo" },
+              { time: "10.00", activity: "Auto von Werkstatt abholen" },
+              { time: "11.00", activity: "" },
+              { time: "12.00", activity: "am Computer arbeiten" },
+              { time: "13.00", activity: "am Computer arbeiten" },
+              { time: "14.00", activity: "Spaziergang mit Frank und Lena" },
+              { time: "15.00", activity: "Spaziergang mit Frank und Lena" },
+              { time: "16.00", activity: "" },
+              { time: "17.00", activity: "" },
+              { time: "18.00", activity: "Essen gehen mit Eltern" },
+              { time: "19.00", activity: "Essen gehen mit Eltern" },
+              { time: "20.00", activity: "Schwimmen" },
+              { time: "21.00", activity: "" },
             ],
           },
-          scheduleB: {
-            title: "Lịch Partner - Thứ Tư, 12 tháng 3",
-            slots: [
-              { time: "7:00", activity: "Schwimmen" },
-              { time: "8:00", activity: "Frühstück bei Anjo" },
-              { time: "9:00", activity: "" },
-              { time: "10:00", activity: "Auto von Werkstatt abholen" },
-              { time: "11:00", activity: "" },
-              { time: "12:00", activity: "am Computer arbeiten" },
-              { time: "13:00", activity: "" },
-              { time: "14:00", activity: "Spaziergang mit Frank und Lena" },
-              { time: "15:00", activity: "" },
-              { time: "16:00", activity: "" },
-              { time: "17:00", activity: "" },
-              { time: "18:00", activity: "Essen gehen mit Eltern" },
-              { time: "19:00", activity: "" },
-              { time: "20:00", activity: "Schwimmen" },
-              { time: "21:00", activity: "" },
-            ],
-          },
-          conversation: [],
-          currentStep: 0,
+          questions: [
+            {
+              step: 1,
+              context: "Bạn cần đề nghị đi mua quà",
+              partner: "...",
+              options: [
+                "Wir sollten ein Geschenk für Alessia und Thomas kaufen. Wann hast du Zeit?",
+                "Ich möchte einkaufen gehen.",
+                "Alessia und Thomas heiraten.",
+                "Wir brauchen ein Geschenk.",
+              ],
+              correct: 0,
+              redemittel: "Vorschlag machen + Nachfragen",
+              explanation:
+                "Dùng 'Wir sollten...' để đề nghị + 'Wann hast du Zeit?' để hỏi thời gian",
+            },
+            {
+              step: 2,
+              context: "Partner đề nghị 16:30. Nhìn lịch - cả hai đều rảnh",
+              partner: "Sollen wir uns um 16:30 Uhr treffen?",
+              options: [
+                "Ja, das passt mir gut! 16:30 Uhr ist perfekt.",
+                "Nein, ich habe keine Zeit.",
+                "16:30 Uhr.",
+                "Vielleicht.",
+              ],
+              correct: 0,
+              redemittel: "Zustimmen",
+              explanation:
+                "Dùng 'Ja, das passt mir gut!' + 'ist perfekt' để đồng ý",
+            },
+            {
+              step: 3,
+              context: "Partner hỏi gặp ở đâu. Bạn đề nghị trung tâm mua sắm",
+              partner: "Wo wollen wir uns treffen?",
+              options: [
+                "Vielleicht am Einkaufszentrum? Das ist praktisch für beide.",
+                "Ich weiß nicht.",
+                "Bei mir zu Hause.",
+                "Einkaufszentrum.",
+              ],
+              correct: 0,
+              redemittel: "Vorschlag + Begründung",
+              explanation:
+                "Dùng 'Vielleicht...' + 'Das ist praktisch' để đề nghị có lý do",
+            },
+          ],
         },
-        // ĐỀ 2: THĂM BẠN Ở BỆNH VIỆN
+        // ĐỀ 2: Thăm bạn ở bệnh viện (3 câu)
         {
           title: "ĐỀ 2: Thăm bạn Lars ở bệnh viện",
-          description:
-            "Bạn Lars nằm viện. Bạn muốn thăm anh ấy. Tìm lịch phù hợp.",
-          scheduleA: {
-            title: "Lịch của bạn - Thứ Sáu, 23 tháng 9",
-            slots: [
-              { time: "7:00", activity: "" },
-              { time: "8:00", activity: "Wochenendeinkauf" },
-              { time: "9:00", activity: "" },
-              { time: "10:00", activity: "" },
-              { time: "11:00", activity: "" },
-              { time: "12:00", activity: "" },
-              { time: "13:00", activity: "Mittagessen vorbereiten" },
-              { time: "14:00", activity: "" },
-              { time: "15:00", activity: "" },
+          intro:
+            "Bạn Lars đang nằm viện. Bạn muốn đi thăm anh ấy. Tìm thời gian phù hợp.",
+          schedules: {
+            partner1: [
+              { time: "7.00", activity: "" },
+              { time: "8.00", activity: "Wochenendeinkauf" },
+              { time: "9.00", activity: "Wochenendeinkauf" },
+              { time: "10.00", activity: "" },
+              { time: "11.00", activity: "" },
+              { time: "12.00", activity: "" },
+              { time: "13.00", activity: "Mittagessen vorbereiten" },
+              { time: "14.00", activity: "Mittagessen vorbereiten" },
+              { time: "15.00", activity: "" },
               {
-                time: "16:00",
+                time: "16.00",
                 activity: "mit Großeltern Kaffee trinken gehen",
               },
-              { time: "17:00", activity: "Lotto spielen" },
-              { time: "18:00", activity: "Volleyball-Training" },
-              { time: "19:00", activity: "" },
-              { time: "20:00", activity: "Krimi im Fernsehen" },
-              { time: "21:00", activity: "" },
+              { time: "17.00", activity: "Lotto spielen" },
+              { time: "18.00", activity: "Volleyball-Training" },
+              { time: "19.00", activity: "" },
+              { time: "20.00", activity: "Krimi im Fernsehen" },
+              { time: "21.00", activity: "Krimi im Fernsehen" },
+            ],
+            partner2: [
+              { time: "7.00", activity: "" },
+              { time: "8.00", activity: "Wohnung aufräumen und sauber machen" },
+              { time: "9.00", activity: "Wohnung aufräumen und sauber machen" },
+              { time: "10.00", activity: "" },
+              { time: "11.00", activity: "" },
+              { time: "12.00", activity: "Paket zur Post bringen" },
+              { time: "13.00", activity: "Handwerker kommt" },
+              { time: "14.00", activity: "" },
+              { time: "15.00", activity: "Skype-Termin" },
+              { time: "16.00", activity: "" },
+              { time: "17.00", activity: "Malkurs" },
+              { time: "18.00", activity: "" },
+              { time: "19.00", activity: "mit Freunden kochen" },
+              { time: "20.00", activity: "" },
+              { time: "21.00", activity: "" },
             ],
           },
-          scheduleB: {
-            title: "Lịch Partner - Thứ Sáu, 23 tháng 9",
-            slots: [
-              { time: "7:00", activity: "" },
-              { time: "8:00", activity: "Wohnung aufräumen und sauber machen" },
-              { time: "9:00", activity: "" },
-              { time: "10:00", activity: "" },
-              { time: "11:00", activity: "" },
-              { time: "12:00", activity: "Paket zur Post bringen" },
-              { time: "13:00", activity: "Handwerker kommt" },
-              { time: "14:00", activity: "" },
-              { time: "15:00", activity: "Skype-Termin" },
-              { time: "16:00", activity: "" },
-              { time: "17:00", activity: "Malkurs" },
-              { time: "18:00", activity: "" },
-              { time: "19:00", activity: "mit Freunden kochen" },
-              { time: "20:00", activity: "" },
-              { time: "21:00", activity: "" },
-            ],
-          },
-          conversation: [],
-          currentStep: 0,
+          questions: [
+            {
+              step: 1,
+              context: "Bạn đề nghị thăm Lars",
+              partner: "...",
+              options: [
+                "Unser Freund Lars liegt im Krankenhaus. Wir sollten ihn besuchen. Wann hast du Zeit?",
+                "Lars ist krank.",
+                "Gehen wir ins Krankenhaus.",
+                "Ich möchte Lars sehen.",
+              ],
+              correct: 0,
+              redemittel: "Situation + Vorschlag",
+              explanation: "Nói tình huống + 'Wir sollten...' + hỏi thời gian",
+            },
+            {
+              step: 2,
+              context:
+                "Partner hỏi giờ thăm bệnh 14-18h. Bạn đề nghị 16h (cả hai rảnh)",
+              partner:
+                "Die Besuchszeiten sind von 14 bis 18 Uhr. Wann gehen wir?",
+              options: [
+                "Um 16 Uhr wäre gut. Passt dir das?",
+                "14 Uhr.",
+                "18 Uhr ist besser.",
+                "Ich weiß nicht.",
+              ],
+              correct: 0,
+              redemittel: "Konkreter Vorschlag + Nachfrage",
+              explanation:
+                "Dùng 'Um... wäre gut' + 'Passt dir das?' để đề nghị và hỏi",
+            },
+            {
+              step: 3,
+              context: "Partner hỏi mang gì. Bạn đề nghị hoa và trái cây",
+              partner: "Was sollen wir mitbringen?",
+              options: [
+                "Ich denke, Blumen und Obst wären gut. Was meinst du dazu?",
+                "Nichts.",
+                "Blumen.",
+                "Ich bringe etwas mit.",
+              ],
+              correct: 0,
+              redemittel: "Vorschlag höflich + Meinung fragen",
+              explanation:
+                "Dùng 'Ich denke,... wären gut' + 'Was meinst du dazu?'",
+            },
+          ],
         },
-        // ĐỀ 3: TỔ CHỨC WORKSHOP
+        // ĐỀ 3: Chuẩn bị workshop (3 câu)
         {
-          title: "ĐỀ 3: Tổ chức workshop với đồng nghiệp",
-          description:
-            "Bạn muốn tổ chức workshop với đồng nghiệp. Tìm lịch phù hợp.",
-          scheduleA: {
-            title: "Lịch của bạn - Thứ Bảy, 1 tháng 6",
-            slots: [
-              { time: "7:00", activity: "" },
-              { time: "8:00", activity: "lange schlafen" },
-              { time: "9:00", activity: "" },
-              { time: "10:00", activity: "" },
-              { time: "11:00", activity: "joggen" },
-              { time: "12:00", activity: "Frühstück bei Mark" },
-              { time: "13:00", activity: "" },
-              { time: "14:00", activity: "Fahrrad reparieren" },
-              { time: "15:00", activity: "" },
-              { time: "16:00", activity: "" },
-              { time: "17:00", activity: "" },
-              { time: "18:00", activity: "Basketball-Training" },
-              { time: "19:00", activity: "" },
-              { time: "20:00", activity: "" },
-              { time: "21:00", activity: "zu Hause bleiben" },
+          title: "ĐỀ 3: Chuẩn bị workshop với đồng nghiệp",
+          intro:
+            "Bạn muốn chuẩn bị workshop với đồng nghiệp. Tìm thời gian phù hợp.",
+          schedules: {
+            partner1: [
+              { time: "7.00", activity: "" },
+              { time: "8.00", activity: "lange schlafen" },
+              { time: "9.00", activity: "lange schlafen" },
+              { time: "10.00", activity: "Frühstück mit der Familie" },
+              { time: "11.00", activity: "joggen" },
+              { time: "12.00", activity: "Frühstück bei Mark" },
+              { time: "13.00", activity: "Frühstück bei Mark" },
+              { time: "14.00", activity: "Fahrrad reparieren" },
+              { time: "15.00", activity: "" },
+              { time: "16.00", activity: "" },
+              { time: "17.00", activity: "Sohn bei den Hausaufgaben helfen" },
+              { time: "18.00", activity: "Basketball-Training" },
+              { time: "19.00", activity: "Basketball-Training" },
+              { time: "20.00", activity: "" },
+              { time: "21.00", activity: "zu Hause bleiben" },
+            ],
+            partner2: [
+              { time: "7.00", activity: "" },
+              { time: "8.00", activity: "" },
+              { time: "9.00", activity: "" },
+              { time: "10.00", activity: "Frühstück mit der Familie" },
+              { time: "11.00", activity: "" },
+              { time: "12.00", activity: "mit Katze zum Tierarzt" },
+              { time: "13.00", activity: "" },
+              { time: "14.00", activity: "Friseur" },
+              { time: "15.00", activity: "" },
+              { time: "16.00", activity: "" },
+              { time: "17.00", activity: "Sohn bei den Hausaufgaben helfen" },
+              { time: "18.00", activity: "mit Eltern telefonieren" },
+              { time: "19.00", activity: "" },
+              { time: "20.00", activity: "mit Karla ins Konzert" },
+              { time: "21.00", activity: "mit Karla ins Konzert" },
             ],
           },
-          scheduleB: {
-            title: "Lịch Partner - Thứ Bảy, 1 tháng 6",
-            slots: [
-              { time: "7:00", activity: "" },
-              { time: "8:00", activity: "" },
-              { time: "9:00", activity: "Frühstück mit der Familie" },
-              { time: "10:00", activity: "" },
-              { time: "11:00", activity: "" },
-              { time: "12:00", activity: "mit Katze zum Tierarzt" },
-              { time: "13:00", activity: "" },
-              { time: "14:00", activity: "Friseur" },
-              { time: "15:00", activity: "" },
-              { time: "16:00", activity: "" },
-              { time: "17:00", activity: "Sohn bei den Hausaufgaben helfen" },
-              { time: "18:00", activity: "mit Eltern telefonieren" },
-              { time: "19:00", activity: "" },
-              { time: "20:00", activity: "mit Karla ins Konzert" },
-              { time: "21:00", activity: "" },
-            ],
-          },
-          conversation: [],
-          currentStep: 0,
+          questions: [
+            {
+              step: 1,
+              context: "Bạn đề nghị chuẩn bị workshop cùng nhau",
+              partner: "...",
+              options: [
+                "Wir sollten zusammen den Workshop vorbereiten. Wann hast du Zeit dafür?",
+                "Ich möchte den Workshop machen.",
+                "Workshop ist wichtig.",
+                "Wir arbeiten zusammen.",
+              ],
+              correct: 0,
+              redemittel: "Vorschlag + Nachfrage",
+              explanation: "Dùng 'Wir sollten...' + 'Wann hast du Zeit dafür?'",
+            },
+            {
+              step: 2,
+              context: "Partner đề nghị 15h. Nhìn lịch - cả hai đều rảnh",
+              partner: "Wie wäre es mit 15 Uhr?",
+              options: [
+                "15 Uhr passt mir auch gut. Das machen wir so!",
+                "Nein, ich kann nicht.",
+                "Zu spät.",
+                "Vielleicht später.",
+              ],
+              correct: 0,
+              redemittel: "Zustimmen + Bestätigen",
+              explanation: "Dùng 'passt mir auch gut' + 'Das machen wir so!'",
+            },
+            {
+              step: 3,
+              context:
+                "Partner hỏi gặp ở đâu. Bạn đề nghị ở nhà bạn vì có tài liệu",
+              partner: "Wo sollen wir uns treffen?",
+              options: [
+                "Bei mir zu Hause wäre gut. Ich habe alle Materialien dort.",
+                "Ich weiß nicht.",
+                "Im Büro.",
+                "Egal.",
+              ],
+              correct: 0,
+              redemittel: "Vorschlag + Begründung",
+              explanation: "Dùng 'Bei mir... wäre gut' + lý do cụ thể",
+            },
+          ],
         },
       ];
 
       // Game state
       let currentGame2 = 0;
       let score2 = 0;
-      let currentGame3Exam = 0;
-      let currentGame3Step = 0;
+      let currentExam3 = 0;
+      let currentQuestion3 = 0;
       let score3 = 0;
 
-      // Start game
       function startGame(gameNum) {
         document.getElementById("menu").style.display = "none";
         document.getElementById("game" + gameNum).style.display = "block";
-
         if (gameNum === 2) {
-          loadQuestion2();
+          resetGame2();
         } else if (gameNum === 3) {
-          loadExam3();
+          resetGame3();
         }
       }
 
-      // Back to menu
       function backToMenu() {
-        document.querySelectorAll(".game-area").forEach((area) => {
-          area.style.display = "none";
-        });
+        document
+          .querySelectorAll(".game-area")
+          .forEach((area) => (area.style.display = "none"));
         document.getElementById("menu").style.display = "grid";
       }
 
-      // Game 2 functions
+      // GAME 2 FUNCTIONS
       function loadQuestion2() {
-        const situation = situations2[currentGame2];
-        const situationHTML = `
-                <div class="situation">
-                    <h3>Tình huống ${currentGame2 + 1}/10</h3>
-                    <p><strong>📋 Tình huống:</strong> ${situation.scenario}</p>
-                    <p><strong>🎯 Bối cảnh:</strong> ${situation.context}</p>
-                    <div class="hint">💡 Loại Redemittel cần dùng: <strong>${
-                      situation.type
-                    }</strong></div>
-                </div>
-            `;
+        const s = situations2[currentGame2];
+        const groups = [
+          "🛒 Lebensmittel",
+          "🍽️ Restaurant",
+          "🎉 Party",
+          "⚽ Freizeit",
+          "📅 Termin",
+          "💪 Sport",
+          "🏥 Krankenhaus",
+          "🏠 Umzug",
+        ];
+        const groupIndex = Math.floor(currentGame2 / 5);
 
-        const conversationHTML = `
+        document.getElementById("situation2").innerHTML = `
+                <div class="situation">
+                    <h3>${groups[groupIndex]} - Câu ${currentGame2 + 1}/120</h3>
+                    <p><strong>📋 Tình huống:</strong> ${s.scenario}</p>
+                    <p><strong>🎯 Bối cảnh:</strong> ${s.context}</p>
+                    <div class="hint">💡 Redemittel: <strong>${
+                      s.type
+                    }</strong></div>
+                </div>`;
+
+        document.getElementById("conversation2").innerHTML = `
                 <div class="message partner">
                     <div class="speaker">👤 Partner:</div>
-                    <div>${situation.partner}</div>
+                    <div>${s.partner}</div>
                 </div>
-                <div class="message you" style="background: #fff9e6; border: 2px dashed #ff9800;">
+                <div class="message you" style="background:#fff9e6;border:2px dashed #ff9800;">
                     <div class="speaker">👉 Bạn trả lời:</div>
-                    <div style="font-style: italic; color: #666;">Chọn câu trả lời phù hợp bên dưới ↓</div>
-                </div>
-            `;
+                    <div style="font-style:italic;color:#666;">Chọn câu phù hợp ↓</div>
+                </div>`;
 
-        let optionsHTML = "";
-        situation.options.forEach((option, index) => {
-          optionsHTML += `<button class="option-button" onclick="checkAnswer2(${index})">${option}</button>`;
-        });
+        document.getElementById("options2").innerHTML = s.options
+          .map(
+            (o, i) =>
+              `<button class="option-button" onclick="checkAnswer2(${i})">${o}</button>`
+          )
+          .join("");
 
-        document.getElementById("situation2").innerHTML = situationHTML;
-        document.getElementById("conversation2").innerHTML = conversationHTML;
-        document.getElementById("options2").innerHTML = optionsHTML;
         document.getElementById("feedback2").innerHTML = "";
         document.getElementById("nextBtn2").style.display = "none";
-
         updateProgress2();
       }
 
       function checkAnswer2(selected) {
-        const situation = situations2[currentGame2];
+        const s = situations2[currentGame2];
         const buttons = document.querySelectorAll("#options2 .option-button");
-
-        buttons.forEach((btn, index) => {
+        buttons.forEach((btn, i) => {
           btn.disabled = true;
-          if (index === situation.correct) {
-            btn.classList.add("correct");
-          } else if (index === selected) {
-            btn.classList.add("wrong");
-          }
+          if (i === s.correct) btn.classList.add("correct");
+          else if (i === selected) btn.classList.add("wrong");
         });
 
-        let feedbackHTML = "";
-        if (selected === situation.correct) {
+        if (selected === s.correct) {
           score2++;
-          feedbackHTML = `
-                    <div class="feedback correct">
-                        ✅ Chính xác! +1 điểm
-                    </div>
-                    <div class="explanation">
-                        <h5>💡 Giải thích:</h5>
-                        <p>${situation.explanation}</p>
-                    </div>
-                `;
+          document.getElementById("feedback2").innerHTML = `
+                    <div class="feedback correct">✅ Chính xác! +1 điểm</div>
+                    <div class="explanation"><h5>💡 Giải thích:</h5><p>${s.explanation}</p></div>`;
         } else {
-          feedbackHTML = `
-                    <div class="feedback wrong">
-                        ❌ Sai rồi! Đáp án đúng: "${
-                          situation.options[situation.correct]
-                        }"
-                    </div>
-                    <div class="explanation">
-                        <h5>💡 Giải thích:</h5>
-                        <p>${situation.explanation}</p>
-                    </div>
-                `;
+          document.getElementById("feedback2").innerHTML = `
+                    <div class="feedback wrong">❌ Sai rồi! Đáp án: "${
+                      s.options[s.correct]
+                    }"</div>
+                    <div class="explanation"><h5>💡 Giải thích:</h5><p>${
+                      s.explanation
+                    }</p></div>`;
         }
-
-        document.getElementById("feedback2").innerHTML = feedbackHTML;
         document.getElementById("points2").textContent = score2;
         document.getElementById("nextBtn2").style.display = "inline-block";
       }
@@ -1092,8 +3007,8 @@
       }
 
       function updateProgress2() {
-        const progress = ((currentGame2 + 1) / situations2.length) * 100;
-        document.getElementById("progress2").style.width = progress + "%";
+        const p = ((currentGame2 + 1) / situations2.length) * 100;
+        document.getElementById("progress2").style.width = p + "%";
         document.getElementById("progress2").textContent = `Câu ${
           currentGame2 + 1
         }/${situations2.length}`;
@@ -1101,28 +3016,20 @@
 
       function showFinalResult2() {
         const percent = (score2 / situations2.length) * 100;
-        let message = "";
-        if (percent >= 80) {
-          message = "🎉 Xuất sắc! Bạn đã thành thạo Redemittel!";
-        } else if (percent >= 60) {
-          message = "👍 Tốt lắm! Luyện thêm một chút nữa là hoàn hảo!";
-        } else {
-          message = "💪 Cố gắng lên! Hãy xem lại BÀI 1 và làm lại nhé!";
-        }
-
+        let msg =
+          percent >= 80
+            ? "🎉 Xuất sắc!"
+            : percent >= 60
+            ? "👍 Tốt lắm!"
+            : "💪 Cố gắng!";
         document.getElementById("situation2").innerHTML = `
                 <div class="situation">
-                    <h3>🏆 KẾT QUẢ CUỐI CÙNG</h3>
-                    <div style="font-size: 2em; text-align: center; margin: 20px 0;">
-                        ${score2}/${situations2.length} điểm (${percent.toFixed(
+                    <h3>🏆 KẾT QUẢ</h3>
+                    <div style="font-size:2em;text-align:center;margin:20px 0;">${score2}/120 (${percent.toFixed(
           0
-        )}%)
-                    </div>
-                    <div style="text-align: center; font-size: 1.5em; color: #667eea;">
-                        ${message}
-                    </div>
-                </div>
-            `;
+        )}%)</div>
+                    <div style="text-align:center;font-size:1.5em;color:#667eea;">${msg}</div>
+                </div>`;
         document.getElementById("conversation2").innerHTML = "";
         document.getElementById("options2").innerHTML = "";
         document.getElementById("feedback2").innerHTML = "";
@@ -1136,277 +3043,155 @@
         loadQuestion2();
       }
 
-      // Game 3 functions
+      // GAME 3 FUNCTIONS
       function loadExam3() {
-        const exam = exams3[currentGame3Exam];
+        const exam = exams3[currentExam3];
+        const q = exam.questions[currentQuestion3];
+        const totalQ = currentExam3 * 3 + currentQuestion3 + 1;
 
-        let scheduleAHTML =
-          '<div class="schedule"><h4>' + exam.scheduleA.title + "</h4>";
-        exam.scheduleA.slots.forEach((slot) => {
-          const busyClass = slot.activity ? "busy" : "";
-          scheduleAHTML += `<div class="time-slot ${busyClass}"><strong>${slot.time}</strong> ${slot.activity}</div>`;
-        });
-        scheduleAHTML += "</div>";
+        // Hiển thị đề thi
+        let scheduleHTML = "";
+        if (exam.schedules) {
+          scheduleHTML = `
+                    <div class="schedule-container">
+                        <div class="schedule">
+                            <h4>📅 Partner A (Bạn)</h4>
+                            ${exam.schedules.partner1
+                              .map(
+                                (slot) => `
+                                <div class="time-slot ${
+                                  slot.activity ? "busy" : ""
+                                }">
+                                    <strong>${slot.time}</strong> ${
+                                  slot.activity || "✓ rảnh"
+                                }
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                        <div class="schedule">
+                            <h4>📅 Partner B</h4>
+                            ${exam.schedules.partner2
+                              .map(
+                                (slot) => `
+                                <div class="time-slot ${
+                                  slot.activity ? "busy" : ""
+                                }">
+                                    <strong>${slot.time}</strong> ${
+                                  slot.activity || "✓ rảnh"
+                                }
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>`;
+        }
 
-        let scheduleBHTML =
-          '<div class="schedule"><h4>' + exam.scheduleB.title + "</h4>";
-        exam.scheduleB.slots.forEach((slot) => {
-          const busyClass = slot.activity ? "busy" : "";
-          scheduleBHTML += `<div class="time-slot ${busyClass}"><strong>${slot.time}</strong> ${slot.activity}</div>`;
-        });
-        scheduleBHTML += "</div>";
-
-        const examHTML = `
+        document.getElementById("exam3").innerHTML = `
                 <div class="situation">
                     <h3>${exam.title}</h3>
-                    <p><strong>📋 Nhiệm vụ:</strong> ${exam.description}</p>
-                    <div class="hint">💡 Bạn cần: Đề nghị → Hỏi thời gian → Thương lượng → Đồng ý → Tổng kết</div>
+                    <p><strong>📋 Tình huống:</strong> ${exam.intro}</p>
+                    <div class="hint">💡 Bước ${q.step}/3 - Redemittel: <strong>${q.redemittel}</strong></div>
                 </div>
-                <div class="schedule-container">
-                    ${scheduleAHTML}
-                    ${scheduleBHTML}
+                ${scheduleHTML}`;
+
+        document.getElementById("conversation3").innerHTML = `
+                <div class="message partner">
+                    <div class="speaker">👤 Partner:</div>
+                    <div>${q.partner}</div>
                 </div>
-            `;
+                <div class="message you" style="background:#fff9e6;border:2px dashed #ff9800;">
+                    <div class="speaker">👉 Bạn trả lời:</div>
+                    <div style="font-style:italic;color:#666;">Nhìn lịch và chọn câu phù hợp ↓</div>
+                </div>`;
 
-        document.getElementById("exam3").innerHTML = examHTML;
+        document.getElementById("options3").innerHTML = q.options
+          .map(
+            (o, i) =>
+              `<button class="option-button" onclick="checkAnswer3(${i})">${o}</button>`
+          )
+          .join("");
 
-        // Start conversation
-        loadConversationStep3();
-      }
-
-      function loadConversationStep3() {
-        const exam = exams3[currentGame3Exam];
-        const steps = [
-          {
-            speaker: "you",
-            question: "Bắt đầu hội thoại - Đưa ra đề nghị",
-            options: [
-              "Hallo! Wir sollten ein Geschenk für unseren Freund kaufen. Wann hast du Zeit?",
-              "Ich gehe einkaufen.",
-              "Geschenk ist wichtig.",
-              "Bis später.",
-            ],
-            correct: 0,
-            type: "vorschlag + nachfragen",
-            partner_response:
-              "Gute Idee! Am Mittwoch habe ich von 16:30 Uhr frei.",
-          },
-          {
-            speaker: "partner",
-            message: "Ich schlage 16:30 Uhr vor. Passt dir das?",
-            options: [
-              "Ja, 16:30 Uhr passt mir auch. Wo treffen wir uns?",
-              "Nein.",
-              "Ich weiß nicht.",
-              "Vielleicht später.",
-            ],
-            correct: 0,
-            type: "zustimmen + nachfragen",
-            partner_response: "Am Einkaufszentrum in der Nähe von mir?",
-          },
-          {
-            speaker: "you",
-            question: "Kết thúc - Tổng kết kế hoạch",
-            options: [
-              "Perfekt, dann treffen wir uns am Mittwoch um 16:30 Uhr im Einkaufszentrum. Ich freue mich schon!",
-              "Okay.",
-              "Bis dann.",
-              "Ja.",
-            ],
-            correct: 0,
-            type: "zusammenfassen",
-            partner_response: "Super! Bis Mittwoch dann!",
-          },
-        ];
-
-        if (currentGame3Step >= steps.length) {
-          // Move to next exam
-          currentGame3Exam++;
-          currentGame3Step = 0;
-          if (currentGame3Exam < exams3.length) {
-            loadExam3();
-          } else {
-            showFinalResult3();
-          }
-          return;
-        }
-
-        const step = steps[currentGame3Step];
-
-        // Display conversation so far
-        let conversationHTML = "";
-        for (let i = 0; i < currentGame3Step; i++) {
-          const prevStep = steps[i];
-          if (prevStep.speaker === "you" && prevStep.partner_response) {
-            conversationHTML += `
-                        <div class="message you">
-                            <div class="speaker">👉 Bạn:</div>
-                            <div>${prevStep.options[prevStep.correct]}</div>
-                        </div>
-                        <div class="message partner">
-                            <div class="speaker">👤 Partner:</div>
-                            <div>${prevStep.partner_response}</div>
-                        </div>
-                    `;
-          } else if (prevStep.speaker === "partner") {
-            conversationHTML += `
-                        <div class="message partner">
-                            <div class="speaker">👤 Partner:</div>
-                            <div>${prevStep.message}</div>
-                        </div>
-                        <div class="message you">
-                            <div class="speaker">👉 Bạn:</div>
-                            <div>${prevStep.options[prevStep.correct]}</div>
-                        </div>
-                    `;
-            if (prevStep.partner_response) {
-              conversationHTML += `
-                            <div class="message partner">
-                                <div class="speaker">👤 Partner:</div>
-                                <div>${prevStep.partner_response}</div>
-                            </div>
-                        `;
-            }
-          }
-        }
-
-        // Add current question
-        if (step.speaker === "partner") {
-          conversationHTML += `
-                    <div class="message partner">
-                        <div class="speaker">👤 Partner:</div>
-                        <div>${step.message}</div>
-                    </div>
-                    <div class="message you" style="background: #fff9e6; border: 2px dashed #ff9800;">
-                        <div class="speaker">👉 Bạn trả lời:</div>
-                        <div style="font-style: italic; color: #666;">Chọn câu trả lời ↓</div>
-                    </div>
-                `;
-        } else {
-          conversationHTML += `
-                    <div class="message you" style="background: #fff9e6; border: 2px dashed #ff9800;">
-                        <div class="speaker">👉 Bạn nói:</div>
-                        <div style="font-style: italic; color: #666;">${step.question} ↓</div>
-                    </div>
-                `;
-        }
-
-        document.getElementById("conversation3").innerHTML = conversationHTML;
-
-        // Display options
-        let optionsHTML = `<div class="hint">💡 Loại Redemittel: <strong>${step.type}</strong></div>`;
-        step.options.forEach((option, index) => {
-          optionsHTML += `<button class="option-button" onclick="checkAnswer3(${index})">${option}</button>`;
-        });
-
-        document.getElementById("options3").innerHTML = optionsHTML;
         document.getElementById("feedback3").innerHTML = "";
         document.getElementById("nextBtn3").style.display = "none";
-
         updateProgress3();
       }
 
       function checkAnswer3(selected) {
-        const exam = exams3[currentGame3Exam];
-        const steps = [
-          {
-            correct: 0,
-            explanation:
-              'Dùng "Wir sollten..." để đề nghị và "Wann hast du Zeit?" để hỏi thời gian.',
-          },
-          {
-            correct: 0,
-            explanation:
-              'Dùng "Ja,... passt mir auch" để đồng ý và "Wo treffen wir uns?" để hỏi địa điểm.',
-          },
-          {
-            correct: 0,
-            explanation:
-              'Dùng "Perfekt, dann treffen wir uns am... um..." để tổng kết đầy đủ.',
-          },
-        ];
-
-        const step = steps[currentGame3Step];
+        const exam = exams3[currentExam3];
+        const q = exam.questions[currentQuestion3];
         const buttons = document.querySelectorAll("#options3 .option-button");
 
-        buttons.forEach((btn, index) => {
+        buttons.forEach((btn, i) => {
           btn.disabled = true;
-          if (index === step.correct) {
-            btn.classList.add("correct");
-          } else if (index === selected) {
-            btn.classList.add("wrong");
-          }
+          if (i === q.correct) btn.classList.add("correct");
+          else if (i === selected) btn.classList.add("wrong");
         });
 
-        let feedbackHTML = "";
-        if (selected === step.correct) {
+        if (selected === q.correct) {
           score3++;
-          feedbackHTML = `
-                    <div class="feedback correct">
-                        ✅ Chính xác! +1 điểm
-                    </div>
-                    <div class="explanation">
-                        <h5>💡 Giải thích:</h5>
-                        <p>${step.explanation}</p>
-                    </div>
-                `;
+          document.getElementById("feedback3").innerHTML = `
+                    <div class="feedback correct">✅ Chính xác! +1 điểm</div>
+                    <div class="explanation"><h5>💡 Giải thích:</h5><p>${q.explanation}</p></div>`;
         } else {
-          feedbackHTML = `
-                    <div class="feedback wrong">
-                        ❌ Sai rồi!
-                    </div>
-                    <div class="explanation">
-                        <h5>💡 Giải thích:</h5>
-                        <p>${step.explanation}</p>
-                    </div>
-                `;
+          document.getElementById("feedback3").innerHTML = `
+                    <div class="feedback wrong">❌ Sai rồi! Đáp án: "${
+                      q.options[q.correct]
+                    }"</div>
+                    <div class="explanation"><h5>💡 Giải thích:</h5><p>${
+                      q.explanation
+                    }</p></div>`;
         }
-
-        document.getElementById("feedback3").innerHTML = feedbackHTML;
         document.getElementById("points3").textContent = score3;
         document.getElementById("nextBtn3").style.display = "inline-block";
       }
 
       function nextQuestion3() {
-        currentGame3Step++;
-        loadConversationStep3();
+        currentQuestion3++;
+        if (currentQuestion3 >= exams3[currentExam3].questions.length) {
+          currentQuestion3 = 0;
+          currentExam3++;
+        }
+
+        if (currentExam3 < exams3.length) {
+          loadExam3();
+        } else {
+          showFinalResult3();
+        }
       }
 
       function updateProgress3() {
-        const totalSteps = exams3.length * 3; // 3 exams, 3 steps each
-        const currentTotal = currentGame3Exam * 3 + currentGame3Step + 1;
-        const progress = (currentTotal / totalSteps) * 100;
-        document.getElementById("progress3").style.width = progress + "%";
-        document.getElementById(
-          "progress3"
-        ).textContent = `Câu ${currentTotal}/${totalSteps}`;
+        const totalQ = currentExam3 * 3 + currentQuestion3 + 1;
+        const p = (totalQ / 9) * 100;
+        document.getElementById("progress3").style.width = p + "%";
+        document.getElementById("progress3").textContent = `Câu ${totalQ}/9`;
       }
 
       function showFinalResult3() {
-        const totalQuestions = 9; // 3 exams × 3 steps
-        const percent = (score3 / totalQuestions) * 100;
-        let message = "";
-        if (percent >= 80) {
-          message = "🎉 Xuất sắc! Bạn đã sẵn sàng cho kỳ thi A2!";
-        } else if (percent >= 60) {
-          message = "👍 Tốt lắm! Luyện thêm một chút nữa là hoàn hảo!";
-        } else {
-          message = "💪 Cần ôn tập thêm! Hãy xem lại BÀI 1 và làm lại BÀI 2!";
-        }
+        const percent = (score3 / 9) * 100;
+        let msg =
+          percent >= 80
+            ? "🎉 Xuất sắc! Sẵn sàng thi!"
+            : percent >= 60
+            ? "👍 Tốt! Luyện thêm một chút!"
+            : "💪 Cần luyện thêm!";
 
         document.getElementById("exam3").innerHTML = `
                 <div class="situation">
-                    <h3>🏆 KẾT QUẢ CUỐI CÙNG - THI THỬ</h3>
-                    <div style="font-size: 2em; text-align: center; margin: 20px 0;">
-                        ${score3}/${totalQuestions} điểm (${percent.toFixed(
+                    <h3>🏆 KẾT QUẢ THI THỬ</h3>
+                    <div style="font-size:2em;text-align:center;margin:20px 0;">${score3}/9 (${percent.toFixed(
           0
-        )}%)
+        )}%)</div>
+                    <div style="text-align:center;font-size:1.5em;color:#667eea;">${msg}</div>
+                    <div style="margin-top:30px;padding:20px;background:#f0f8ff;border-radius:10px;">
+                        <h4 style="color:#667eea;margin-bottom:15px;">📊 Chi tiết:</h4>
+                        <p><strong>Đề 1:</strong> Mua quà sinh nhật (3 câu)</p>
+                        <p><strong>Đề 2:</strong> Thăm bệnh viện (3 câu)</p>
+                        <p><strong>Đề 3:</strong> Chuẩn bị workshop (3 câu)</p>
                     </div>
-                    <div style="text-align: center; font-size: 1.5em; color: #667eea;">
-                        ${message}
-                    </div>
-                </div>
-            `;
+                </div>`;
         document.getElementById("conversation3").innerHTML = "";
         document.getElementById("options3").innerHTML = "";
         document.getElementById("feedback3").innerHTML = "";
@@ -1414,8 +3199,8 @@
       }
 
       function resetGame3() {
-        currentGame3Exam = 0;
-        currentGame3Step = 0;
+        currentExam3 = 0;
+        currentQuestion3 = 0;
         score3 = 0;
         document.getElementById("points3").textContent = "0";
         loadExam3();
