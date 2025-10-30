@@ -1,994 +1,1468 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Phân Tích Ngữ Pháp Goethe A2 Schreiben</title>
+    <title>B1 Goethe Zertifikat - Sprechen Komplett</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: "Arial", sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #333;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 20px;
       }
 
       .container {
+        max-width: 1200px;
+        margin: 0 auto;
         background: white;
-        padding: 30px;
         border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
       }
 
-      h1 {
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
         text-align: center;
-        color: #2c3e50;
-        margin-bottom: 30px;
-        border-bottom: 3px solid #3498db;
-        padding-bottom: 10px;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+
+      .nav-btn {
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      .section {
+        display: none;
+        animation: fadeIn 0.5s;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       h2 {
-        color: #e74c3c;
-        margin-top: 30px;
-        background: #ecf0f1;
-        padding: 10px;
-        border-left: 5px solid #e74c3c;
+        color: #667eea;
+        font-size: 2em;
+        margin: 30px 0 20px 0;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #667eea;
       }
 
-      .test-section {
+      h3 {
+        color: #764ba2;
+        font-size: 1.5em;
+        margin: 25px 0 15px 0;
+        padding-left: 15px;
+        border-left: 4px solid #764ba2;
+      }
+
+      h4 {
+        color: #e85d75;
+        font-size: 1.2em;
+        margin: 20px 0 10px 0;
+      }
+
+      .box {
         background: #f8f9fa;
-        border: 2px solid #3498db;
-        border-radius: 10px;
+        border-left: 5px solid #667eea;
         padding: 20px;
         margin: 20px 0;
-      }
-
-      .test-title {
-        background: #3498db;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        font-weight: bold;
-        font-size: 1.1em;
-        margin-bottom: 15px;
-        text-align: center;
-      }
-
-      .part-section {
-        background: white;
-        border: 1px solid #ddd;
         border-radius: 8px;
-        padding: 15px;
-        margin: 15px 0;
       }
 
-      .part-title {
-        background: #27ae60;
-        color: white;
-        padding: 8px 12px;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        display: inline-block;
+      .box-warning {
+        background: #fff3cd;
+        border-left: 5px solid #ffc107;
       }
 
-      .sentence {
-        margin: 15px 0;
-        padding: 15px;
-        background: #f8f9fa;
-        border-left: 4px solid #3498db;
-        border-radius: 5px;
+      .box-success {
+        background: #d4edda;
+        border-left: 5px solid #28a745;
       }
 
-      .german {
-        font-size: 1.1em;
-        font-weight: bold;
-        margin-bottom: 8px;
+      .box-info {
+        background: #d1ecf1;
+        border-left: 5px solid #17a2b8;
+      }
+
+      .box-danger {
+        background: #f8d7da;
+        border-left: 5px solid #dc3545;
+      }
+
+      ul,
+      ol {
+        margin: 15px 0 15px 30px;
+      }
+
+      li {
+        margin: 10px 0;
         line-height: 1.8;
-        color: #2c3e50;
+      }
+
+      .redemittel {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        font-weight: 500;
+      }
+
+      .example {
+        background: #e3f2fd;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border-left: 4px solid #2196f3;
+      }
+
+      .example em {
+        color: #1976d2;
+        font-style: italic;
       }
 
       .vietnamese {
-        color: #7f8c8d;
+        color: #e85d75;
         font-style: italic;
-        margin-bottom: 10px;
-      }
-
-      .analysis {
-        margin-top: 10px;
-        padding: 15px;
-        background: #e8f5e8;
-        border-radius: 5px;
         font-size: 0.95em;
       }
 
-      .word-analysis {
-        background: #fff3cd;
-        padding: 10px;
-        border-radius: 5px;
-        margin: 8px 0;
-        border-left: 3px solid #ffc107;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
 
-      .structure-analysis {
-        background: #d1ecf1;
-        padding: 10px;
-        border-radius: 5px;
-        margin: 8px 0;
-        border-left: 3px solid #17a2b8;
-      }
-
-      .word-item {
-        margin: 3px 0;
-        padding: 2px 0;
-      }
-
-      .intro-section {
-        background: #e8f4fd;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 30px;
-        border: 2px solid #3498db;
-      }
-
-      .highlighted-phrase {
-        background: #ffe6e6;
-        padding: 2px 4px;
-        border-radius: 3px;
+      th {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        text-align: left;
         font-weight: bold;
       }
 
-      .key-info {
-        background: #d4edda;
-        border: 1px solid #c3e6cb;
-        padding: 10px;
-        border-radius: 5px;
-        margin: 10px 0;
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #e0e0e0;
       }
 
-      .nebensatz {
-        border-left-color: #e74c3c;
+      tr:hover {
+        background: #f5f5f5;
       }
 
-      .hauptsatz {
-        border-left-color: #27ae60;
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .strategy {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+      }
+
+      .strategy h4 {
+        color: #333;
+        margin-top: 0;
+      }
+
+      .emoji {
+        font-size: 1.5em;
+        margin-right: 10px;
+      }
+
+      .highlight {
+        background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      code {
+        background: #f4f4f4;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        color: #e85d75;
+      }
+
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          margin: 10px;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        header h1 {
+          font-size: 1.8em;
+        }
+
+        .nav-buttons {
+          flex-direction: column;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+        text-decoration: none;
+        font-size: 24px;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px);
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>PHÂN TÍCH NGỮ PHÁP GOETHE A2 SCHREIBEN</h1>
+      <header>
+        <h1>📚 B1 GOETHE ZERTIFIKAT - SPRECHEN</h1>
+        <p>Tổng hợp đầy đủ Redemittel & Chiến thuật thi nói</p>
+      </header>
 
-      <div class="intro-section">
-        <h3>CẤU TRÚC BÀI VIẾT A2:</h3>
-        <p>
-          <strong>TEIL 1 (SMS):</strong> 20-30 từ - Informal, ngắn gọn, thông
-          tin cần thiết
-        </p>
-        <p>
-          <strong>TEIL 2 (E-Mail):</strong> 30-40 từ - Semi-formal, lịch sự, có
-          câu hỏi
-        </p>
-        <p>
-          <strong>Cấu trúc mệnh đề:</strong> Chủ ngữ + Động từ chia + Đại từ
-          phần thân + Dativ + Akkusativ + nicht/kein + Te-Ka-Mo + Tân ngữ gián
-          tiếp + Lo + Tân ngữ trực tiếp + Tiền tố tách được/Động từ phụ
-        </p>
-      </div>
+      <div class="content">
+        <div class="nav-buttons">
+          <button class="nav-btn" onclick="showSection('overview')">
+            📋 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('teil1')">
+            🗣️ Teil 1
+          </button>
+          <button class="nav-btn" onclick="showSection('teil2')">
+            📊 Teil 2
+          </button>
+          <button class="nav-btn" onclick="showSection('teil3')">
+            💬 Teil 3
+          </button>
+          <button class="nav-btn" onclick="showSection('strategies')">
+            🎯 Chiến thuật
+          </button>
+          <button class="nav-btn" onclick="showSection('example')">
+            📝 Bài mẫu
+          </button>
+        </div>
 
-      <div class="test-section">
-        <div class="test-title">MODELLTEST 1</div>
+        <!-- OVERVIEW SECTION -->
+        <div id="overview" class="section active">
+          <h2>📋 TỔNG QUAN KỲ THI SPRECHEN B1</h2>
 
-        <div class="part-section">
-          <div class="part-title">
-            TEIL 1 - SMS an Tobias (Kino, 20–30 Wörter)
-          </div>
-          <div class="key-info">
-            <strong>Nội dung:</strong> Hallo Tobias! Entschuldige, ich komme zu
-            spät ins Kino, weil mein Bus Verspätung hat. Bitte kaufe schon die
-            Tickets. Warte am Eingang, ich bezahle dir das Geld.
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german"><strong>Câu 1:</strong> Hallo Tobias!</div>
-            <div class="vietnamese">→ Xin chào Tobias!</div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">• Hallo = Lời chào (Interjektion)</div>
-                <div class="word-item">• Tobias = Tên riêng (Eigenname)</div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Lời chào đơn giản - Không có động từ
-              </div>
-            </div>
+          <div class="box box-info">
+            <h3>Cấu trúc bài thi</h3>
+            <p>
+              Bài thi nói B1 Goethe gồm <strong>3 phần (Teil)</strong>, thời
+              gian khoảng <strong>15 phút</strong>
+            </p>
           </div>
 
-          <div class="sentence nebensatz">
-            <div class="german">
-              <strong>Câu 2:</strong> Entschuldige, ich komme zu spät ins Kino,
-              <span class="highlighted-phrase"
-                >weil mein Bus Verspätung hat</span
-              >.
+          <div class="grid">
+            <div class="card">
+              <h3>Teil 1 (4 phút)</h3>
+              <p><strong>Gemeinsam etwas planen</strong></p>
+              <p class="vietnamese">Lên kế hoạch cùng nhau</p>
+              <hr style="margin: 15px 0" />
+              <ul>
+                <li>Thảo luận với partner</li>
+                <li>7-8 điểm cần bàn</li>
+                <li>Đưa đề xuất, đồng ý/phản đối</li>
+              </ul>
             </div>
-            <div class="vietnamese">
-              → Xin lỗi, tôi đến rạp chiếu phim muộn vì xe buýt của tôi bị trễ.
+
+            <div class="card">
+              <h3>Teil 2 (6 phút)</h3>
+              <p><strong>Ein Thema präsentieren</strong></p>
+              <p class="vietnamese">Thuyết trình về một chủ đề</p>
+              <hr style="margin: 15px 0" />
+              <ul>
+                <li>Chuẩn bị: 3 phút</li>
+                <li>Thuyết trình: 3 phút</li>
+                <li>Theo 4-5 slides</li>
+              </ul>
             </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <u>Câu mệnh lệnh:</u><br />
-                <div class="word-item">
-                  • Entschuldige = Động từ mệnh lệnh (Imperativ)
-                </div>
-                <u>Mệnh đề chính:</u><br />
-                <div class="word-item">• ich = Chủ ngữ</div>
-                <div class="word-item">• komme = Động từ chia (vị trí 2)</div>
-                <div class="word-item">• zu spät = Trạng từ</div>
-                <div class="word-item">
-                  • ins Kino = Trạng ngữ nơi chốn (in + das = ins)
-                </div>
-                <u>Mệnh đề phụ:</u><br />
-                <div class="word-item">• weil = Liên từ phụ thuộc</div>
-                <div class="word-item">• mein Bus = Chủ ngữ</div>
-                <div class="word-item">• Verspätung = Tân ngữ trực tiếp</div>
-                <div class="word-item">
-                  • hat = Động từ chia (cuối câu trong Nebensatz)
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Imperativ + Hauptsatz + Nebensatz với
-                "weil"
-              </div>
+
+            <div class="card">
+              <h3>Teil 3 (5 phút)</h3>
+              <p><strong>Über ein Thema sprechen</strong></p>
+              <p class="vietnamese">Thảo luận về bài thuyết trình</p>
+              <hr style="margin: 15px 0" />
+              <ul>
+                <li>Phản hồi bài partner</li>
+                <li>Trả lời câu hỏi</li>
+                <li>Đặt câu hỏi ngược lại</li>
+              </ul>
             </div>
           </div>
 
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 3:</strong> Bitte kaufe schon die Tickets.
-            </div>
-            <div class="vietnamese">→ Làm ơn mua vé trước đi.</div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Bitte = Từ lịch sự (Höflichkeitspartikel)
-                </div>
-                <div class="word-item">
-                  • kaufe = Động từ mệnh lệnh (Imperativ)
-                </div>
-                <div class="word-item">
-                  • schon = Trạng từ thời gian (Modalpartikel)
-                </div>
-                <div class="word-item">
-                  • die Tickets = Tân ngữ trực tiếp (Akkusativ)
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Câu mệnh lệnh (Imperativ) với "bitte"
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 4:</strong>
-              <span class="highlighted-phrase">Warte am Eingang</span>, ich
-              bezahle dir das Geld.
-            </div>
-            <div class="vietnamese">
-              → Đợi ở lối vào, tôi sẽ trả tiền cho bạn.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <u>Mệnh đề 1:</u><br />
-                <div class="word-item">
-                  • Warte = Động từ mệnh lệnh (Imperativ)
-                </div>
-                <div class="word-item">
-                  • am Eingang = Trạng ngữ nơi chốn (an + dem = am)
-                </div>
-                <u>Mệnh đề 2:</u><br />
-                <div class="word-item">• ich = Chủ ngữ</div>
-                <div class="word-item">• bezahle = Động từ chia (vị trí 2)</div>
-                <div class="word-item">• dir = Tân ngữ gián tiếp (Dativ)</div>
-                <div class="word-item">
-                  • das Geld = Tân ngữ trực tiếp (Akkusativ)
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Imperativ + Hauptsatz với cấu trúc
-                "jemandem etwas bezahlen"
-              </div>
-            </div>
+          <div class="box box-warning">
+            <h3>⚠️ Tiêu chí chấm điểm</h3>
+            <ol>
+              <li>
+                <strong>Erfüllung der Aufgabe</strong> - Hoàn thành nhiệm vụ
+                (40%)
+              </li>
+              <li><strong>Wortschatz</strong> - Từ vựng (20%)</li>
+              <li><strong>Grammatik</strong> - Ngữ pháp (20%)</li>
+              <li><strong>Aussprache</strong> - Phát âm (20%)</li>
+            </ol>
           </div>
         </div>
 
-        <div class="part-section">
-          <div class="part-title">
-            TEIL 2 - E-Mail an Herrn Krüger (30–40 Wörter)
-          </div>
-          <div class="key-info">
-            <strong>Nội dung:</strong> Sehr geehrter Herr Krüger, ich finde die
-            Idee mit dem Kennenlern-Wochenende sehr gut. Wann ist das Wochenende
-            genau? Ich kann Flyer verteilen oder Listen mit Jugendlichen machen.
-            So helfe ich gern. Viele Grüße [Name]
-          </div>
+        <!-- TEIL 1 SECTION -->
+        <div id="teil1" class="section">
+          <h2>🗣️ TEIL 1: GEMEINSAM ETWAS PLANEN</h2>
 
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 1:</strong> Sehr geehrter Herr Krüger, ich finde die
-              Idee mit dem Kennenlern-Wochenende sehr gut.
-            </div>
-            <div class="vietnamese">
-              → Kính gửi ông Krüger, tôi thấy ý tưởng về cuối tuần làm quen rất
-              tốt.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Sehr geehrter Herr Krüger = Lời chào trang trọng (formelle
-                  Anrede)
-                </div>
-                <div class="word-item">• ich = Chủ ngữ</div>
-                <div class="word-item">• finde = Động từ chia (vị trí 2)</div>
-                <div class="word-item">
-                  • die Idee mit dem Kennenlern-Wochenende = Tân ngữ trực tiếp
-                </div>
-                <div class="word-item">• sehr gut = Trạng từ + tính từ</div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Anrede + Hauptsatz với động từ
-                "finden"
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 2:</strong>
-              <span class="highlighted-phrase"
-                >Wann ist das Wochenende genau?</span
-              >
-            </div>
-            <div class="vietnamese">→ Cuối tuần đó chính xác là khi nào?</div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">• Wann = Từ hỏi (W-Frage)</div>
-                <div class="word-item">• ist = Động từ chia (vị trí 2)</div>
-                <div class="word-item">
-                  • das Wochenende = Chủ ngữ (vị trí 3)
-                </div>
-                <div class="word-item">• genau = Trạng từ</div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Câu hỏi W-Frage - Từ hỏi + động từ +
-                chủ ngữ
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 3:</strong> Ich kann Flyer verteilen oder Listen mit
-              Jugendlichen machen.
-            </div>
-            <div class="vietnamese">
-              → Tôi có thể phát tờ rơi hoặc làm danh sách với thanh thiếu niên.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">• Ich = Chủ ngữ</div>
-                <div class="word-item">
-                  • kann = Động từ khuyết thiếu (vị trí 2)
-                </div>
-                <div class="word-item">
-                  • Flyer verteilen = Tân ngữ + động từ phụ
-                </div>
-                <div class="word-item">• oder = Liên từ phối hợp</div>
-                <div class="word-item">
-                  • Listen mit Jugendlichen machen = Tân ngữ + trạng ngữ + động
-                  từ phụ
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Hauptsatz với Modalverb + 2 động từ
-                phụ nối bằng "oder"
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-section">
-        <div class="test-title">MODELLTEST 2</div>
-
-        <div class="part-section">
-          <div class="part-title">TEIL 1 - SMS an Paula (20–30 Wörter)</div>
-          <div class="key-info">
-            <strong>Nội dung:</strong> Hallo Paula! Ich möchte dich am
-            Wochenende sehen, weil ich Zeit habe und mit dir sprechen will.
-            Treffen wir uns am Sonntag um 15 Uhr im Stadtpark?
-          </div>
-
-          <div class="sentence nebensatz">
-            <div class="german">
-              <strong>Câu 1:</strong> Ich möchte dich am Wochenende sehen,
-              <span class="highlighted-phrase"
-                >weil ich Zeit habe und mit dir sprechen will</span
-              >.
-            </div>
-            <div class="vietnamese">
-              → Tôi muốn gặp bạn cuối tuần vì tôi có thời gian và muốn nói
-              chuyện với bạn.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <u>Mệnh đề chính:</u><br />
-                <div class="word-item">• Ich = Chủ ngữ</div>
-                <div class="word-item">
-                  • möchte = Động từ khuyết thiếu (vị trí 2)
-                </div>
-                <div class="word-item">
-                  • dich = Tân ngữ trực tiếp (Akkusativ)
-                </div>
-                <div class="word-item">
-                  • am Wochenende = Trạng ngữ thời gian
-                </div>
-                <div class="word-item">• sehen = Động từ phụ</div>
-                <u>Mệnh đề phụ:</u><br />
-                <div class="word-item">• weil = Liên từ phụ thuộc</div>
-                <div class="word-item">
-                  • ich Zeit habe = Chủ ngữ + tân ngữ + động từ chia
-                </div>
-                <div class="word-item">
-                  • und mit dir sprechen will = Liên từ + trạng ngữ + động từ +
-                  động từ khuyết thiếu (cuối câu)
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Hauptsatz với Modalverb + Nebensatz
-                ghép với "und"
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 2:</strong> Treffen wir uns am Sonntag um 15 Uhr im
-              Stadtpark?
-            </div>
-            <div class="vietnamese">
-              → Chúng ta gặp nhau chủ nhật lúc 15 giờ ở công viên thành phố nhé?
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Treffen = Động từ chia (vị trí 1 trong câu hỏi)
-                </div>
-                <div class="word-item">
-                  • wir uns = Chủ ngữ + đại từ phản thân
-                </div>
-                <div class="word-item">• am Sonntag = Trạng ngữ thời gian</div>
-                <div class="word-item">
-                  • um 15 Uhr = Trạng ngữ thời gian chính xác
-                </div>
-                <div class="word-item">• im Stadtpark = Trạng ngữ nơi chốn</div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Câu hỏi có/không (Ja/Nein-Frage) với
-                động từ phản thân "sich treffen"
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="part-section">
-          <div class="part-title">
-            TEIL 2 - E-Mail an Frau Brandt (30–40 Wörter)
-          </div>
-          <div class="key-info">
-            <strong>Nội dung:</strong> Liebe Frau Brandt, danke für die
-            Einladung zum Gartenfest, ich komme sehr gern. Darf ich meine
-            Freundin mitbringen? Bitte sagen Sie mir noch den Weg zu Ihrem Haus.
-            Viele Grüße [Name]
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 1:</strong> Liebe Frau Brandt, danke für die Einladung
-              zum Gartenfest, ich komme sehr gern.
-            </div>
-            <div class="vietnamese">
-              → Bà Brandt thân mến, cảm ơn lời mời tham gia tiệc vườn, tôi rất
-              sẵn lòng đến.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Liebe Frau Brandt = Lời chào thân mật (informelle Anrede)
-                </div>
-                <div class="word-item">
-                  • danke für die Einladung zum Gartenfest = Cảm ơn + giới từ +
-                  tân ngữ
-                </div>
-                <div class="word-item">• ich = Chủ ngữ</div>
-                <div class="word-item">• komme = Động từ chia (vị trí 2)</div>
-                <div class="word-item">
-                  • sehr gern = Trạng từ cường độ + trạng từ thái độ
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Anrede + Cảm ơn + Hauptsatz
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 2:</strong>
-              <span class="highlighted-phrase"
-                >Darf ich meine Freundin mitbringen?</span
-              >
-            </div>
-            <div class="vietnamese">
-              → Tôi có thể đưa bạn gái của tôi đi cùng không?
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Darf = Động từ khuyết thiếu (vị trí 1 trong câu hỏi)
-                </div>
-                <div class="word-item">• ich = Chủ ngữ</div>
-                <div class="word-item">
-                  • meine Freundin = Tân ngữ trực tiếp
-                </div>
-                <div class="word-item">
-                  • mitbringen = Động từ tách rời (cuối câu)
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Câu hỏi có/không với Modalverb + động
-                từ tách rời
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-section">
-        <div class="test-title">MODELLTEST 3</div>
-
-        <div class="part-section">
-          <div class="part-title">TEIL 1 - SMS an John (20–30 Wörter)</div>
-          <div class="key-info">
-            <strong>Nội dung:</strong> Hallo John! Ich habe schöne Schuhe
-            gesehen, sie kosten 89 Euro, aber es gibt 20% Rabatt. Treffen wir
-            uns morgen um 14 Uhr vor dem Geschäft in der Hauptstraße?
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 1:</strong> Ich habe schöne Schuhe gesehen, sie kosten
-              89 Euro, aber es gibt 20% Rabatt.
-            </div>
-            <div class="vietnamese">
-              → Tôi đã thấy đôi giày đẹp, chúng có giá 89 Euro, nhưng có giảm
-              giá 20%.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <u>Mệnh đề 1:</u><br />
-                <div class="word-item">• Ich = Chủ ngữ</div>
-                <div class="word-item">• habe = Động từ trợ (vị trí 2)</div>
-                <div class="word-item">• schöne Schuhe = Tân ngữ trực tiếp</div>
-                <div class="word-item">• gesehen = Phân từ II (Perfekt)</div>
-                <u>Mệnh đề 2:</u><br />
-                <div class="word-item">• sie = Chủ ngữ (đại từ thay thế)</div>
-                <div class="word-item">• kosten = Động từ chia (vị trí 2)</div>
-                <div class="word-item">
-                  • 89 Euro = Tân ngữ trực tiếp (giá cả)
-                </div>
-                <u>Mệnh đề 3:</u><br />
-                <div class="word-item">• aber = Liên từ phối hợp</div>
-                <div class="word-item">• es gibt = Cấu trúc tồn tại</div>
-                <div class="word-item">• 20% Rabatt = Tân ngữ trực tiếp</div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Perfekt + Hauptsatz + Hauptsatz với
-                "aber" + "es gibt"
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 2:</strong> Treffen wir uns morgen um 14 Uhr vor dem
-              Geschäft in der Hauptstraße?
-            </div>
-            <div class="vietnamese">
-              → Chúng ta gặp nhau ngày mai lúc 14 giờ trước cửa hàng ở phố chính
-              nhé?
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Treffen = Động từ chia (vị trí 1 trong câu hỏi)
-                </div>
-                <div class="word-item">
-                  • wir uns = Chủ ngữ + đại từ phản thân
-                </div>
-                <div class="word-item">• morgen = Trạng ngữ thời gian</div>
-                <div class="word-item">
-                  • um 14 Uhr = Trạng ngữ thời gian chính xác
-                </div>
-                <div class="word-item">
-                  • vor dem Geschäft = Trạng ngữ nơi chốn
-                </div>
-                <div class="word-item">
-                  • in der Hauptstraße = Trạng ngữ nơi chốn chi tiết
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Câu hỏi có/không với động từ phản
-                thân + nhiều trạng ngữ Te-Ka-Mo
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="part-section">
-          <div class="part-title">
-            TEIL 2 - E-Mail an Frau Hantke (30–40 Wörter)
-          </div>
-          <div class="key-info">
-            <strong>Nội dung:</strong> Sehr geehrte Frau Hantke, danke für die
-            Einladung zur Karnevalsfeier, ich komme gern. Soll ich Obstsalat
-            oder Getränke mitbringen? Für Musik schlage ich Karnevalslieder und
-            Popmusik vor. Viele Grüße [Name]
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 1:</strong> Sehr geehrte Frau Hantke, danke für die
-              Einladung zur Karnevalsfeier, ich komme gern.
-            </div>
-            <div class="vietnamese">
-              → Kính gửi bà Hantke, cảm ơn lời mời tham gia lễ hội hóa trang,
-              tôi sẵn lòng đến.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Sehr geehrte Frau Hantke = Lời chào trang trọng
-                </div>
-                <div class="word-item">
-                  • danke für die Einladung zur Karnevalsfeier = Cảm ơn + giới
-                  từ + tân ngữ
-                </div>
-                <div class="word-item">• ich = Chủ ngữ</div>
-                <div class="word-item">• komme = Động từ chia (vị trí 2)</div>
-                <div class="word-item">• gern = Trạng từ thái độ</div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Anrede trang trọng + Cảm ơn +
-                Hauptsatz
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 2:</strong> Soll ich Obstsalat oder Getränke
-              mitbringen?
-            </div>
-            <div class="vietnamese">
-              → Tôi có nên mang salad trái cây hay đồ uống không?
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Soll = Động từ khuyết thiếu (vị trí 1 trong câu hỏi)
-                </div>
-                <div class="word-item">• ich = Chủ ngữ</div>
-                <div class="word-item">
-                  • Obstsalat oder Getränke = Tân ngữ trực tiếp với lựa chọn
-                </div>
-                <div class="word-item">
-                  • mitbringen = Động từ tách rời (cuối câu)
-                </div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Câu hỏi có/không với Modalverb
-                "sollen" + động từ tách rời
-              </div>
-            </div>
-          </div>
-
-          <div class="sentence hauptsatz">
-            <div class="german">
-              <strong>Câu 3:</strong> Für Musik schlage ich Karnevalslieder und
-              Popmusik vor.
-            </div>
-            <div class="vietnamese">
-              → Về âm nhạc tôi đề xuất các bài hát carnival và nhạc pop.
-            </div>
-            <div class="analysis">
-              <div class="word-analysis">
-                <strong>Phân tích theo cụm:</strong><br />
-                <div class="word-item">
-                  • Für Musik = Trạng ngữ chủ đề (vị trí 1)
-                </div>
-                <div class="word-item">• schlage = Động từ chia (vị trí 2)</div>
-                <div class="word-item">• ich = Chủ ngữ (vị trí 3)</div>
-                <div class="word-item">
-                  • Karnevalslieder und Popmusik = Tân ngữ trực tiếp
-                </div>
-                <div class="word-item">• vor = Tiền tố tách rời (cuối câu)</div>
-              </div>
-              <div class="structure-analysis">
-                <strong>Cấu trúc:</strong> Hauptsatz với trạng ngữ đầu câu +
-                động từ tách rời "vorschlagen"
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <h2>TỔNG KẾT CẤU TRÚC NGỮ PHÁP</h2>
-
-      <table style="width: 100%; border-collapse: collapse; margin: 20px 0">
-        <tr>
-          <th
-            style="
-              background-color: #3498db;
-              color: white;
-              padding: 12px;
-              border: 1px solid #ddd;
-            "
-          >
-            Cấu trúc ngữ pháp
-          </th>
-          <th
-            style="
-              background-color: #3498db;
-              color: white;
-              padding: 12px;
-              border: 1px solid #ddd;
-            "
-          >
-            Ví dụ từ bài
-          </th>
-          <th
-            style="
-              background-color: #3498db;
-              color: white;
-              padding: 12px;
-              border: 1px solid #ddd;
-            "
-          >
-            Vị trí trong câu
-          </th>
-        </tr>
-        <tr style="background-color: #f2f2f2">
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Nebensatz với "weil"</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            weil mein Bus Verspätung hat
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Động từ chia cuối câu
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Imperativ</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Warte am Eingang
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Động từ vị trí 1
-          </td>
-        </tr>
-        <tr style="background-color: #f2f2f2">
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>W-Frage</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Wann ist das Wochenende genau?
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            W-Wort + động từ + chủ ngữ
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Ja/Nein-Frage</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Treffen wir uns morgen?
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Động từ + chủ ngữ
-          </td>
-        </tr>
-        <tr style="background-color: #f2f2f2">
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Modalverb</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Ich kann Flyer verteilen
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Modal vị trí 2, Infinitiv cuối
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Trennbare Verben</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            mitbringen → bringe...mit
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Động từ vị trí 2, tiền tố cuối
-          </td>
-        </tr>
-        <tr style="background-color: #f2f2f2">
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Perfekt</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Ich habe...gesehen
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            haben/sein + Partizip II
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Reflexive Verben</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">Treffen wir uns</td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Đại từ phản thân vị trí 4
-          </td>
-        </tr>
-        <tr style="background-color: #f2f2f2">
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Dativ + Akkusativ</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            ich bezahle dir das Geld
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Dativ trước Akkusativ
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            <strong>Te-Ka-Mo</strong>
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            morgen um 14 Uhr vor dem Geschäft
-          </td>
-          <td style="padding: 12px; border: 1px solid #ddd">
-            Temporal-Kausal-Modal
-          </td>
-        </tr>
-      </table>
-
-      <div
-        style="
-          background: #fff3cd;
-          border: 1px solid #ffeaa7;
-          padding: 15px;
-          margin: 10px 0;
-          border-radius: 8px;
-        "
-      >
-        <h3>CÔNG THỨC VIẾT BÀI A2:</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
-          <div>
-            <h4>TEIL 1 - SMS (20-30 từ):</h4>
+          <div class="box box-success">
+            <h3>📝 Cấu trúc bài thi</h3>
             <ul>
-              <li><strong>Lời chào:</strong> Hallo + Tên</li>
-              <li><strong>Nội dung chính:</strong> 1-2 câu với lý do (weil)</li>
-              <li><strong>Yêu cầu:</strong> Imperativ hoặc câu hỏi</li>
-              <li><strong>Phong cách:</strong> Thân mật, trực tiếp</li>
+              <li><strong>Thời gian:</strong> ~4 phút</li>
+              <li><strong>Hình thức:</strong> Thảo luận với 1 partner</li>
+              <li>
+                <strong>Nhiệm vụ:</strong> Lên kế hoạch cho một sự kiện/hoạt
+                động
+              </li>
+              <li>
+                <strong>Điểm cần bàn:</strong> 7-8 điểm (Wohin? Wann? Wie? Wo
+                übernachten?...)
+              </li>
             </ul>
           </div>
-          <div>
-            <h4>TEIL 2 - E-Mail (30-40 từ):</h4>
+
+          <h3>🎯 CÁC CHỨC NĂNG GIAO TIẾP</h3>
+
+          <div class="grid">
+            <div class="card">
+              <h4><span class="emoji">💡</span>1. SITUATION NENNEN</h4>
+              <p class="vietnamese">Nêu tình huống</p>
+              <div class="redemittel">
+                <p>• Weißt du was?</p>
+                <p>• Hast du schon mal gehört, dass ...?</p>
+                <p>• Ich habe gehört, dass ...</p>
+                <p>• Wie du weißt, V + S + O.</p>
+              </div>
+              <div class="example">
+                <p>
+                  <em
+                    >"Weißt du was? Wir haben am Wochenende frei. Ich habe
+                    gehört, dass es im Schwarzwald viel zu sehen gibt."</em
+                  >
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">🔑</span>2. VORSCHLÄGE MACHEN</h4>
+              <p class="vietnamese">Đưa ra đề xuất</p>
+              <div class="redemittel">
+                <p>• Ich schlage vor, wir ...</p>
+                <p>• Mein Vorschlag ist/wäre ...</p>
+                <p>• Wir könnten vielleicht/doch ...</p>
+                <p>• Was hältst du davon, wenn ...</p>
+                <p>• Wärst du damit einverstanden, dass ...</p>
+                <p>• Wie findest du die Idee, ... zu + Infinitiv?</p>
+              </div>
+              <div class="example">
+                <p>
+                  <em
+                    >"Ich schlage vor, dass wir nach Freiburg fahren, weil es
+                    dort viel zu sehen gibt."</em
+                  >
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">✅</span>3. ZUSTIMMUNG AUSDRÜCKEN</h4>
+              <p class="vietnamese">Bày tỏ đồng ý</p>
+              <div class="redemittel">
+                <p>• Das ist eine gute Idee!</p>
+                <p>• Die Idee gefällt mir.</p>
+                <p>• Ich bin damit einverstanden.</p>
+                <p>• Ich bin dafür, dass ...</p>
+                <p>• Das stimmt! Auch ich bin der Meinung, dass ...</p>
+                <p>• Ich stimme zu, dass ...</p>
+                <p>• Genau, das finde ich auch / das meine ich auch.</p>
+                <p>• Du hast recht. Das ist ein guter Vorschlag.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">❌</span>4. ABLEHNUNG AUSDRÜCKEN</h4>
+              <p class="vietnamese">Bày tỏ phản đối</p>
+              <div class="redemittel">
+                <p>• Da bin ich aber ganz anderer Meinung.</p>
+                <p>• Das ist aber keine gute Idee.</p>
+                <p>• Ich bin nicht der Meinung, dass ...</p>
+                <p>• Ich bin dagegen, weil ...</p>
+                <p>• Wäre es vielleicht besser, wenn ... ?</p>
+                <p>• Ich kann deine Meinung leider nicht teilen.</p>
+                <p>• Ich würde gern einen anderen Vorschlag machen.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">💭</span>5. MEINUNG ÄUSSERN</h4>
+              <p class="vietnamese">Nêu ý kiến</p>
+              <div class="redemittel">
+                <p>• Meiner Meinung/ Ansicht nach ...</p>
+                <p>• Ich bin der Meinung / Ansicht, dass ...</p>
+                <p>• Ich finde/ ich glaube/ meine/ denke, dass ...</p>
+                <p>• Ich bin sicher/ überzeugt, dass ...</p>
+                <p>• Ich habe gehört / gelesen, dass ...</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">🤝</span>6. EINIGUNG</h4>
+              <p class="vietnamese">Thống nhất</p>
+              <div class="redemittel">
+                <p>• Ja, das könnten wir so machen.</p>
+                <p>• Gut, damit bin ich einverstanden.</p>
+                <p>• Ja, so machen wir es.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">❓</span>7. HỎI Ý KIẾN</h4>
+              <p class="vietnamese">Hỏi ý kiến partner</p>
+              <div class="redemittel">
+                <p>• Was hältst du davon?</p>
+                <p>• Was meinst du?</p>
+                <p>• Wie findest du das?</p>
+                <p>• Was denkst du darüber?</p>
+                <p>• Bist du einverstanden?</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">🔄</span>8. THÊM CÁC CỤM THƯỜNG DÙNG</h4>
+              <div class="redemittel">
+                <p>• Das sehe ich auch so.</p>
+                <p>• Der Meinung bin ich auch.</p>
+                <p>• Da stimme ich Ihnen zu.</p>
+                <p>• Einverstanden!</p>
+                <p>• Im Gegensatz zu (früher) spielt ...</p>
+                <p>• Im Vergleich zu (anderen Ländern) ist ...</p>
+                <p>• Ein weiterer wichtiger Punkt: ...</p>
+                <p>• Damit kommen wir zum Schluss.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>📋 VÍ DỤ CÁC ĐIỂM THẢO LUẬN THƯỜNG GẶP</h3>
+
+          <div class="box">
+            <h4>Chủ đề: Wochenendausflug in den Schwarzwald planen</h4>
+            <ol>
+              <li>☑ Wohin? <span class="vietnamese">(Đi đâu?)</span></li>
+              <li>
+                ☑ Wann genau? / Wie lange?
+                <span class="vietnamese">(Khi nào? Bao lâu?)</span>
+              </li>
+              <li>
+                ☑ Wie? / Mit welchem Verkehrsmittel?
+                <span class="vietnamese">(Đi bằng gì?)</span>
+              </li>
+              <li>
+                ☑ Wo übernachten? <span class="vietnamese">(Ở đâu?)</span>
+              </li>
+              <li>
+                ☑ Aktivitäten dort?
+                <span class="vietnamese">(Hoạt động gì?)</span>
+              </li>
+              <li>
+                ☑ Was müssen Sie dafür mitnehmen?
+                <span class="vietnamese">(Cần mang gì?)</span>
+              </li>
+              <li>
+                ☑ Erlaubnis der Eltern?
+                <span class="vietnamese">(Xin phép bố mẹ?)</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- TEIL 2 SECTION -->
+        <div id="teil2" class="section">
+          <h2>📊 TEIL 2: EIN THEMA PRÄSENTIEREN</h2>
+
+          <div class="box box-info">
+            <h3>📝 Cấu trúc bài thi</h3>
             <ul>
-              <li><strong>Chào:</strong> Sehr geehrte/r hoặc Liebe/r</li>
-              <li><strong>Cảm ơn/Phản hồi:</strong> danke für...</li>
-              <li><strong>Câu hỏi:</strong> W-Frage hoặc Soll ich...?</li>
-              <li><strong>Đề xuất:</strong> Ich schlage...vor</li>
-              <li><strong>Kết thúc:</strong> Viele Grüße + Tên</li>
+              <li><strong>Thời gian chuẩn bị:</strong> 3 phút</li>
+              <li><strong>Thời gian thuyết trình:</strong> 3 phút</li>
+              <li><strong>Số slides:</strong> 4-5 slides</li>
+              <li>
+                <strong>Nhiệm vụ:</strong> Thuyết trình về một chủ đề được cho
+              </li>
+            </ul>
+          </div>
+
+          <h3>📑 CẤU TRÚC BÀI THUYẾT TRÌNH</h3>
+
+          <div class="strategy">
+            <h4>SLIDE 1: BẾGRÜßEN + THEMA, INHALT, STRUKTUR</h4>
+
+            <div class="redemittel">
+              <p><strong>Begrüßen:</strong></p>
+              <p>• Liebe Zuhörer, ... / Guten Tag!</p>
+              <p>• Ich begrüße Sie/euch ganz herzlich.</p>
+            </div>
+
+            <div class="redemittel">
+              <p><strong>Thema nennen:</strong></p>
+              <p>• Meine Präsentation ist zu dem Thema: ...</p>
+              <p>• Ich spreche in meinem Vortrag über ...</p>
+              <p>• Das Thema meiner Präsentation lautet ...</p>
+            </div>
+
+            <div class="redemittel">
+              <p><strong>Struktur angeben:</strong></p>
+              <p>• Mein Vortrag besteht aus folgenden Teilen.</p>
+              <p>
+                • Zuerst möchte ich über meine Erfahrung sprechen. Dann werde
+                ich berichten, wie die Situation in meinem Heimatland aussieht.
+                Zum Schluss werde ich die Vor- und Nachteile nennen und meine
+                eigene Meinung dazu äußern.
+              </p>
+            </div>
+
+            <div class="example">
+              <p>
+                <em
+                  >"Ich möchte Ihnen folgendes Thema präsentieren: 'Lernen im
+                  Internet'. Ich werde Ihnen zuerst meine persönlichen
+                  Erfahrungen und die Situation in meinem Heimatland schildern.
+                  Anschließend werde ich Vor- und Nachteile erwähnen, bevor ich
+                  meine persönliche Meinung zum Thema äußere."</em
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="strategy">
+            <h4>SLIDE 2: ERFAHRUNG</h4>
+
+            <div class="redemittel">
+              <p>• Was mich betrifft, ich ...</p>
+              <p>• Ich stelle immer wieder fest, dass ...</p>
+              <p>• Ich habe einmal Folgendes erlebt:</p>
+              <p>
+                • Ich persönlich habe viel/ einige Erfahrung(en) zu diesem
+                Thema.
+              </p>
+            </div>
+
+            <div class="example">
+              <p>
+                <em
+                  >"Was mich betrifft, ich lerne oft online. Ich habe einmal
+                  Folgendes erlebt: Ich habe einen Online-Kurs für
+                  Programmierung gemacht und das war sehr hilfreich."</em
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="strategy">
+            <h4>SLIDE 3: SITUATION IM HEIMATLAND</h4>
+
+            <div class="redemittel">
+              <p>• In meinem Heimatland ...</p>
+              <p>• Hier in ... ist die Situation so: ...</p>
+              <p>
+                • In meinem Heimatland ist die Situation gleich/ ähnlich/ ganz
+                anders.
+              </p>
+              <p>• Genau wie in Deutschland gibt es bei uns (in ... )...</p>
+            </div>
+
+            <div class="example">
+              <p>
+                <em
+                  >"In meinem Heimatland Vietnam ist Online-Lernen sehr populär.
+                  Hier in Vietnam ist die Situation so: Viele Schüler und
+                  Studenten nutzen Internet-Plattformen zum Lernen."</em
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="strategy">
+            <h4>SLIDE 4: VOR- UND NACHTEILE + MEINUNG</h4>
+
+            <div class="redemittel">
+              <p><strong>Vorteile nennen:</strong></p>
+              <p>• Ich komme jetzt zu den Vorteilen/ Nachteilen von ...</p>
+              <p>• Ein Vorteil / Nachteil ist, dass ...</p>
+              <p>• Einerseits ... , andererseits ...</p>
+              <p>• Auf der einen Seite ... , auf der anderen Seite ...</p>
+              <p>• Ein weiterer Vorteil/ Nachteil ist, dass ...</p>
+            </div>
+
+            <div class="redemittel">
+              <p><strong>Meinung äußern:</strong></p>
+              <p>• Meine Meinung ist deshalb ...</p>
+              <p>• Ich finde/ glaube darum, dass ...</p>
+              <p>• Ich würde also sagen, dass ...</p>
+              <p>• Ich selbst bin der Überzeugung, dass ...</p>
+              <p>• Lassen Sie mich zum Schluss noch sagen, dass ...</p>
+            </div>
+          </div>
+
+          <div class="strategy">
+            <h4>SLIDE 5: ENDE</h4>
+
+            <div class="redemittel">
+              <p>
+                • Hiermit ist meine Präsentation zu Ende. / Damit komme ich zum
+                Schluss meiner Präsentation.
+              </p>
+              <p>• Ich hoffe, mein Vortrag hat Ihnen gut gefallen.</p>
+              <p>
+                • Vielen Dank fürs Zuhören/ Ihre Aufmerksamkeit. Haben Sie noch
+                Fragen?
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-warning">
+            <h3>⚠️ LƯU Ý QUAN TRỌNG</h3>
+            <ul>
+              <li>Nói <strong>TỰ NHIÊN</strong>, không học thuộc lòng</li>
+              <li>
+                Dùng <strong>LIÊN TỪ</strong> để nối các ý: zuerst, dann,
+                danach, zum Schluss, außerdem...
+              </li>
+              <li>Nhìn vào <strong>GIÁM KHẢO</strong> khi nói</li>
+              <li>Giữ <strong>TỐC ĐỘ</strong> vừa phải, không quá nhanh</li>
+              <li>Dùng <strong>GESTURES</strong> (cử chỉ tay) phù hợp</li>
             </ul>
           </div>
         </div>
+
+        <!-- TEIL 3 SECTION -->
+        <div id="teil3" class="section">
+          <h2>💬 TEIL 3: ÜBER EIN THEMA SPRECHEN</h2>
+
+          <div class="box box-success">
+            <h3>📝 Cấu trúc bài thi</h3>
+            <ul>
+              <li><strong>Thời gian:</strong> ~5 phút</li>
+              <li>
+                <strong>Hình thức:</strong> Thảo luận sau bài thuyết trình của
+                partner
+              </li>
+              <li>
+                <strong>Nhiệm vụ:</strong> Đưa phản hồi, hỏi và trả lời câu hỏi
+              </li>
+            </ul>
+          </div>
+
+          <h3>🎯 CÁC CHỨC NĂNG GIAO TIẾP</h3>
+
+          <div class="grid">
+            <div class="card">
+              <h4>
+                <span class="emoji">👍</span>1. RÜCKMELDUNG ZUR PRÄSENTATION
+              </h4>
+              <p class="vietnamese">Phản hồi về bài thuyết trình</p>
+              <div class="redemittel">
+                <p>• Ihr Vortrag war sehr interessant.</p>
+                <p>• Mir hat Ihr Vortrag sehr gut gefallen.</p>
+                <p>• Vielen Dank für Ihren sehr interessanten Vortrag.</p>
+                <p>• Ich habe (sehr) interessant gefunden, dass ...</p>
+                <p>• Ich wusste nicht, dass ...</p>
+              </div>
+              <div class="example">
+                <p>
+                  <em
+                    >"Ihre Präsentation war sehr interessant und informativ.
+                    Hiermit verstehe ich viel über den Unterschied zwischen
+                    ..... und .... Ich habe eine Frage an Sie."</em
+                  >
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">❓</span>2. FRAGEN STELLEN</h4>
+              <p class="vietnamese">Đặt câu hỏi</p>
+              <div class="redemittel">
+                <p>• Ich hätte gern eine Frage für Sie.</p>
+                <p>• Ich würde Ihnen gern eine Frage stellen.</p>
+                <p>• Ich habe aber eine Sache nicht verstanden ...</p>
+                <p>• Was meinen Sie mit ...?</p>
+                <p>• Ich möchte Sie fragen: ... ?</p>
+                <p>
+                  • Könnten Sie mir bitte sagen/ erklären warum/ wie/ wo ... ?
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4><span class="emoji">💡</span>3. REAKTION AUF RÜCKMELDUNG</h4>
+              <p class="vietnamese">Phản ứng với phản hồi</p>
+              <div class="redemittel">
+                <p>• Vielen Dank für Ihre interessante Frage.</p>
+                <p>• Das ist eine interessante / schwere Frage.</p>
+                <p>• Ich würde sagen, dass ...</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>🎪 CÁC TÌNH HUỐNG ĐẶC BIỆT</h3>
+
+          <div class="box box-warning">
+            <h4>WENN DU ETWAS AUCH SAGEN WILLST</h4>
+            <p class="vietnamese">Khi bạn muốn nói thêm điều gì đó</p>
+            <div class="redemittel">
+              <p>• Entschuldigung, ich möchte dazu auch etwas sagen: ...</p>
+              <p>• Entschuldige, dass ich unterbreche, aber ...</p>
+              <p>• Lass mich doch bitte ausreden.</p>
+              <p>
+                • Einen Moment bitte, ich möchte meinen Gedanken noch zu Ende
+                führen.
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-info">
+            <h4>AM ANFANG DER DISKUSSION</h4>
+            <p class="vietnamese">Khi bắt đầu thảo luận</p>
+            <div class="redemittel">
+              <p>• Soll ich anfangen?</p>
+              <p>• Könnte ich/ Könntest du vielleicht anfangen?</p>
+              <p>• Möchtest du als Erster/ Erste den Vortrag halten?</p>
+              <p>• Hast du etwas dagegen, wenn ich anfange?</p>
+            </div>
+          </div>
+
+          <div class="box box-danger">
+            <h4>WENN DU ETWAS NICHT GUT HÖRST</h4>
+            <p class="vietnamese">Khi bạn không nghe rõ</p>
+            <div class="redemittel">
+              <p>
+                • Das habe ich nicht verstanden. Könnten Sie/ Könntest du das
+                bitte wiederholen?
+              </p>
+              <p>• Könnten Sie/ Könntest du das bitte noch einmal erklären?</p>
+              <p>• Was meinen Sie/ meinst du mit ...?</p>
+              <p>• Das Wort ... kenne ich nicht. Was bedeutet es?</p>
+              <p>
+                • Wie bitte? Könnten Sie/ Könntest du bitte etwas lauter/
+                langsamer sprechen?
+              </p>
+              <p>
+                • Sie sprechen/ Du sprichst sehr leise/schnell, ich kann
+                Sie/dich nicht gut verstehen.
+              </p>
+            </div>
+          </div>
+
+          <div class="box">
+            <h4>WENN DICH DEIN PARTNER NICHT GUT VERSTEHT</h4>
+            <p class="vietnamese">Khi partner không hiểu bạn</p>
+            <div class="redemittel">
+              <p>• Haben Sie/ Hast du mich verstanden?</p>
+              <p>• Soll ich das vielleicht wiederholen?</p>
+            </div>
+          </div>
+
+          <div class="box box-success">
+            <h4>DUZEN ODER SIEZEN?</h4>
+            <p class="vietnamese">Dùng "du" hay "Sie"?</p>
+            <div class="redemittel">
+              <p>• Ist es in Ordnung, wenn wir „du" sagen?</p>
+              <p>• Können wir während der Prüfung „du" sagen?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STRATEGIES SECTION -->
+        <div id="strategies" class="section">
+          <h2>🎯 CHIẾN THUẬT THI NÓI B1</h2>
+
+          <h3>📊 CHIẾN THUẬT TEIL 1 - TÙY THEO TRÌNH ĐỘ PARTNER</h3>
+
+          <div class="strategy">
+            <h4>
+              <span class="emoji">⬆️</span>TÌNH HUỐNG 1: PARTNER GIỎI HƠN BẠN
+            </h4>
+            <p><strong>Người A (giỏi hơn) nói trước → Bạn phản hồi</strong></p>
+
+            <div class="box box-info">
+              <p><strong>Partner nói (3 câu):</strong></p>
+              <ol>
+                <li>Đề nghị 💡</li>
+                <li>Lý do 📝</li>
+                <li>Hỏi ý kiến ❓</li>
+              </ol>
+            </div>
+
+            <div class="box box-success">
+              <p><strong>BẠN nói (4 câu):</strong></p>
+              <ol>
+                <li>
+                  <span class="highlight">Đồng ý</span> ✅
+                  <em>"Das ist eine gute Idee!"</em>
+                </li>
+                <li>
+                  <span class="highlight">Đề nghị</span> 💡
+                  <em>"Ich schlage vor, dass..."</em>
+                </li>
+                <li>
+                  <span class="highlight">Lý do</span> 📝 <em>"weil..."</em>
+                </li>
+                <li>
+                  <span class="highlight">Hỏi ý kiến</span> ❓
+                  <em>"Was hältst du davon?"</em>
+                </li>
+              </ol>
+            </div>
+
+            <div class="example">
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Ich habe gelesen, dass es im Schwarzwald viel zu sehen gibt.
+                  Ich schlage vor, dass wir nach Freiburg fahren, weil es dort
+                  viel zu sehen gibt. Was hältst du davon?"</em
+                >
+              </p>
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Ich bin einverstanden, Freiburg ist eine sehr schöne Stadt.
+                  Auch in der Umgebung kann man viel unternehmen. Wann fahren
+                  wir? Ich denke, am Freitag ist besser als jetzt. Was meinst
+                  du?"</em
+                >
+              </p>
+            </div>
+
+            <p><strong>➡️ Lặp lại cho đến hết thời gian</strong></p>
+          </div>
+
+          <div class="strategy">
+            <h4>
+              <span class="emoji">⚖️</span>TÌNH HUỐNG 2: PARTNER NGANG BẰNG
+            </h4>
+            <p>
+              <strong
+                >Có tranh luận tự nhiên → Từ chối lịch sự + Đề nghị mới</strong
+              >
+            </p>
+
+            <div class="box box-warning">
+              <p><strong>Partner nói (3 câu):</strong></p>
+              <ol>
+                <li>Đề nghị 💡</li>
+                <li>Lý do 📝</li>
+                <li>Hỏi ý kiến ❓</li>
+              </ol>
+            </div>
+
+            <div class="box box-danger">
+              <p><strong>BẠN nói (5 câu):</strong></p>
+              <ol>
+                <li>
+                  <span class="highlight">Từ chối lịch sự</span> ❌
+                  <em>"Nein, das finde ich nicht so gut"</em>
+                </li>
+                <li>
+                  <span class="highlight">Lý do từ chối</span> 📝
+                  <em>"weil..."</em>
+                </li>
+                <li>
+                  <span class="highlight">Đề nghị khác</span> 💡
+                  <em>"Aber ich habe gehört, dass..."</em>
+                </li>
+                <li>
+                  <span class="highlight">Lý do đề nghị mới</span> 📝
+                  <em>"Das ist..."</em>
+                </li>
+                <li>
+                  <span class="highlight">Hỏi ý kiến</span> ❓
+                  <em>"Was meinst du?"</em>
+                </li>
+              </ol>
+            </div>
+
+            <div class="example">
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Ich schlage vor, dass wir nach Freiburg fahren. Was hältst
+                  du davon?"</em
+                >
+              </p>
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Nein, das finde ich nicht so gut, weil das auch hier machen
+                  können. Aber ich habe gehört, dass es dort ein paar
+                  interessante Museen gibt. Das ist sehr interessant. Was meinst
+                  du?"</em
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="strategy">
+            <h4>
+              <span class="emoji">⬇️</span>TÌNH HUỐNG 3: PARTNER YẾU HƠN BẠN
+            </h4>
+            <p>
+              <strong>⚠️ Partner không biết nói → BẠN phải chủ động!</strong>
+            </p>
+
+            <div class="box box-danger">
+              <p><strong>BẠN nói TRƯỚC (3 câu):</strong></p>
+              <ol>
+                <li>
+                  <span class="highlight">Đề nghị</span> 💡
+                  <em>"Ich schlage vor, dass..."</em>
+                </li>
+                <li>
+                  <span class="highlight">Lý do</span> 📝 <em>"weil..."</em>
+                </li>
+                <li>
+                  <span class="highlight">Hỏi ý kiến</span> ❓
+                  <em>"Was hältst du davon?"</em>
+                </li>
+              </ol>
+            </div>
+
+            <div class="box box-warning">
+              <p><strong>Nếu partner không trả lời:</strong></p>
+              <p>✅ Bạn tự <strong>CHỐT</strong>:</p>
+              <ul>
+                <li><em>"Das ist eine gute Idee!"</em></li>
+                <li><em>"Du hast recht"</em></li>
+                <li><em>"Ich bin einverstanden"</em></li>
+                <li><em>"Das finde ich gut"</em></li>
+                <li><em>"Super! Toll! Perfekt!"</em></li>
+              </ul>
+              <p>➡️ <strong>Chuyển sang điểm tiếp theo ngay</strong></p>
+            </div>
+
+            <div class="example">
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Ich schlage vor, dass wir nach Freiburg fahren, weil es dort
+                  viel zu sehen gibt. Was hältst du davon?"</em
+                >
+              </p>
+              <p>
+                <strong>Partner:</strong> <em>[im lặng hoặc không biết nói]</em>
+              </p>
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Gut, das ist eine gute Idee. Dann machen wir das! Okay, wir
+                  fahren also nach Freiburg. Und wann genau? Ich denke, am
+                  Freitag ist besser. Was meinst du?"</em
+                >
+              </p>
+            </div>
+
+            <p class="box box-info">
+              <strong>💡 MẸO:</strong> Không chờ lâu! Nếu partner im lặng quá 3
+              giây → Tự chốt và chuyển điểm ngay!
+            </p>
+          </div>
+
+          <h3>⏱️ QUẢN LÝ THỜI GIAN</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Teil</th>
+                <th>Thời gian</th>
+                <th>Mỗi điểm</th>
+                <th>Lưu ý</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Teil 1</strong></td>
+                <td>~4 phút</td>
+                <td>20-30 giây</td>
+                <td>7-8 điểm → Mỗi điểm khoảng 30 giây</td>
+              </tr>
+              <tr>
+                <td><strong>Teil 2</strong></td>
+                <td>3 phút chuẩn bị + 3 phút nói</td>
+                <td>-</td>
+                <td>Viết outline trong 3 phút đầu</td>
+              </tr>
+              <tr>
+                <td><strong>Teil 3</strong></td>
+                <td>~5 phút</td>
+                <td>-</td>
+                <td>Phản hồi ngắn gọn, đặt câu hỏi</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box box-success">
+            <h3>✅ CHECKLIST TRƯỚC KHI THI</h3>
+            <ul>
+              <li>☑ Học thuộc <strong>Redemittel</strong> quan trọng</li>
+              <li>
+                ☑ Luyện tập với <strong>partner</strong> ở 3 trình độ khác nhau
+              </li>
+              <li>
+                ☑ Chuẩn bị <strong>từ vựng</strong> theo chủ đề (Reisen, Lernen,
+                Arbeit, Freizeit...)
+              </li>
+              <li>☑ Luyện <strong>phát âm</strong> rõ ràng</li>
+              <li>
+                ☑ Ghi nhớ <strong>cấu trúc bài thuyết trình</strong> Teil 2
+              </li>
+              <li>☑ Biết cách <strong>xử lý</strong> khi partner yếu/giỏi</li>
+              <li>☑ Thực hành <strong>quản lý thời gian</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- EXAMPLE SECTION -->
+        <div id="example" class="section">
+          <h2>📝 BÀI MẪU HOÀN CHỈNH</h2>
+
+          <h3>Chủ đề: Wochenendausflug in den Schwarzwald planen</h3>
+
+          <div class="box box-info">
+            <h4>TEIL 1 - Gemeinsam planen (4 phút)</h4>
+
+            <div
+              style="
+                background: #fff;
+                padding: 15px;
+                margin: 15px 0;
+                border-left: 4px solid #667eea;
+              "
+            >
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Hallo! Weißt du was? Wir haben am Wochenende frei. Ich habe
+                  gelesen, dass es im Schwarzwald viel zu sehen gibt. Ich
+                  schlage vor, dass wir einen Ausflug dorthin machen. Was hältst
+                  du davon?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Ja, das ist eine gute Idee! Ich war noch nie im
+                  Schwarzwald."</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Super! Und wohin genau? Ich schlage vor, dass wir nach
+                  Freiburg fahren, weil es dort viel zu sehen gibt und die Stadt
+                  sehr schön ist. Was meinst du?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Ich bin einverstanden, Freiburg ist eine sehr schöne Stadt.
+                  Auch in der Umgebung kann man viel unternehmen. Wann fahren
+                  wir?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Wenn wir nach Ostern fahren, ist das Wetter wahrscheinlich
+                  schon besser als jetzt und es ist nicht mehr so kalt. Also,
+                  ich habe keine Lust im Mai vor. Was hältst du davon?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Ja, dann brauchen wir keine Winterkleidung mehr. Wir fahren
+                  also von Freitag bis Sonntagabend. Am besten fahren wir mit
+                  dem Zug. Oder gibt es auch einen Bus?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Ich weiß nicht, aber ich kann ja mal im Internet nachsehen.
+                  Okay, dann übernimmst du das Internet. Und wo sollen wir
+                  übernachten?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"In der Jugendherberge ist es wahrscheinlich am billigsten,
+                  was meinst du?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Gut, das kann ich machen. Ich möchte gern eine Schifffahrt
+                  auf dem Rhein machen. Wie findest du das?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Super! Das finde ich auch toll. Es gibt auch
+                  Mountainbike-Touren....."</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Nein, das finde ich nicht so gut, das können wir auch hier
+                  machen. Aber ich habe gehört, dass es dort ein paar
+                  interessante Museen gibt....."</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Gut, in ein Museum können wir ja gehen, aber ... das reicht
+                  ..."</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Da hast du recht. Glaubst du, dass deine Eltern mit der
+                  Reise einverstanden sind oder soll meine Mutter mal mit deiner
+                  Mutter reden?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Ich glaube, dass sie nichts dagegen haben. Normalerweise
+                  erlauben sie mir alles, was ich mit Mitschülern unternehme.
+                  Vielleicht sollten wir auch ein paar Spiele mitnehmen, falls
+                  es doch nicht so viel Besonderes gibt ...."</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Ja, das ist eine gute Idee. Ich habe eine Menge
+                  Kartenspiele, die kann ich mitbringen. Und meine Gitarre auch,
+                  was hältst du davon?"</em
+                >
+              </p>
+
+              <p>
+                <strong>Partner:</strong>
+                <em
+                  >"Super! Und vergiss nicht dein iPhone! Dann können wir Musik
+                  hören und Fotos machen."</em
+                >
+              </p>
+
+              <p>
+                <strong>Bạn:</strong>
+                <em
+                  >"Ja, klar! Ich glaube, dann haben wir über alle Punkte
+                  gesprochen!"</em
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-success">
+            <h4>TEIL 2 - Präsentation (3 phút)</h4>
+            <p><strong>Thema: Lernen im Internet</strong></p>
+
+            <div
+              style="
+                background: #fff;
+                padding: 15px;
+                margin: 15px 0;
+                border-left: 4px solid #28a745;
+              "
+            >
+              <p><strong>Begrüßen + Thema:</strong></p>
+              <p>
+                <em
+                  >"Liebe Zuhörer! Ich begrüße Sie ganz herzlich. Ich möchte
+                  Ihnen folgendes Thema präsentieren: 'Lernen im Internet'."</em
+                >
+              </p>
+
+              <p><strong>Struktur:</strong></p>
+              <p>
+                <em
+                  >"Ich werde Ihnen zuerst meine persönlichen Erfahrungen und
+                  die Situation in meinem Heimatland schildern. Anschließend
+                  werde ich Vor- und Nachteile erwähnen, bevor ich meine
+                  persönliche Meinung zum Thema äußere."</em
+                >
+              </p>
+
+              <p><strong>Erfahrung:</strong></p>
+              <p>
+                <em
+                  >"Was mich betrifft, ich lerne sehr oft online. Ich habe
+                  einmal Folgendes erlebt: Ich wollte Programmierung lernen und
+                  habe einen Online-Kurs auf Udemy gemacht. Das war sehr
+                  hilfreich, weil ich in meinem eigenen Tempo lernen
+                  konnte."</em
+                >
+              </p>
+
+              <p><strong>Situation im Heimatland:</strong></p>
+              <p>
+                <em
+                  >"In meinem Heimatland Vietnam ist Online-Lernen sehr populär
+                  geworden. Bei uns in Vietnam hat fast jeder Schüler und
+                  Student Zugang zum Internet. Genau wie in Deutschland gibt es
+                  bei uns viele Online-Lernplattformen und Kurse."</em
+                >
+              </p>
+
+              <p><strong>Vor- und Nachteile:</strong></p>
+              <p>
+                <em
+                  >"Ich komme jetzt zu den Vorteilen und Nachteilen von
+                  Online-Lernen. Ein Vorteil ist, dass man flexibel lernen kann
+                  - zu jeder Zeit und an jedem Ort. Ein weiterer Vorteil ist,
+                  dass Online-Kurse oft günstiger sind als traditionelle
+                  Kurse."</em
+                >
+              </p>
+
+              <p>
+                <em
+                  >"Aber es gibt auch Nachteile. Ein Nachteil ist, dass man viel
+                  Selbstdisziplin braucht. Ein weiterer Nachteil ist, dass man
+                  keinen direkten Kontakt zu den Lehrern und Mitschülern
+                  hat."</em
+                >
+              </p>
+
+              <p><strong>Meinung:</strong></p>
+              <p>
+                <em
+                  >"Meine Meinung ist deshalb, dass Online-Lernen eine gute
+                  Ergänzung zum traditionellen Lernen ist, aber es kann das
+                  traditionelle Lernen nicht vollständig ersetzen. Ich finde,
+                  dass die Kombination von beiden Methoden am besten ist."</em
+                >
+              </p>
+
+              <p><strong>Ende:</strong></p>
+              <p>
+                <em
+                  >"Hiermit ist meine Präsentation zu Ende. Ich hoffe, mein
+                  Vortrag hat Ihnen gut gefallen. Vielen Dank fürs Zuhören!
+                  Haben Sie noch Fragen?"</em
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-warning">
+            <h4>TEIL 3 - Diskussion (5 phút)</h4>
+
+            <div
+              style="
+                background: #fff;
+                padding: 15px;
+                margin: 15px 0;
+                border-left: 4px solid #ffc107;
+              "
+            >
+              <p><strong>Rückmeldung zur Präsentation des Partners:</strong></p>
+              <p>
+                <em
+                  >"Ihre Präsentation war sehr interessant und informativ.
+                  Hiermit verstehe ich viel über den Unterschied zwischen
+                  Online-Lernen und traditionellem Lernen. Ich habe eine Frage
+                  an Sie: Welche Online-Plattform würden Sie für Anfänger
+                  empfehlen?"</em
+                >
+              </p>
+
+              <p><strong>Partner antwortet...</strong></p>
+
+              <p><strong>Reaktion:</strong></p>
+              <p>
+                <em
+                  >"Vielen Dank, es freut mich, dass dir/ Ihnen meine
+                  Präsentation gefallen hat. Es ist in der Tat so, dass... Und
+                  nun zu deiner/ Ihrer Frage: Die Antwort ist (nicht so)
+                  einfach: ..."</em
+                >
+              </p>
+
+              <p><strong>Weitere Frage stellen:</strong></p>
+              <p>
+                <em
+                  >"Ich habe nun folgende Frage: Glauben Sie, dass Online-Lernen
+                  in Zukunft wichtiger wird?"</em
+                >
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div
-        style="
-          background: #d4edda;
-          border: 1px solid #c3e6cb;
-          padding: 15px;
-          margin: 10px 0;
-          border-radius: 8px;
-        "
-      >
-        <h3>CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:</h3>
-        <ul>
-          <li>
-            <strong>Vị trí động từ sai:</strong> "weil ich habe Zeit" → "weil
-            ich Zeit habe"
-          </li>
-          <li>
-            <strong>Quên động từ tách rời:</strong> "mitbringen" →
-            "bringe...mit"
-          </li>
-          <li>
-            <strong>Thứ tự Dativ-Akkusativ:</strong> "das Geld dir" → "dir das
-            Geld"
-          </li>
-          <li>
-            <strong>Te-Ka-Mo sai thứ tự:</strong> "im Park morgen" → "morgen im
-            Park"
-          </li>
-          <li><strong>Lẫn lộn Sie/du:</strong> Dùng nhất quán trong cả bài</li>
-        </ul>
-      </div>
-
-      <div
-        style="
-          background: #e8f4fd;
-          border: 2px solid #3498db;
-          padding: 15px;
-          margin: 10px 0;
-          border-radius: 8px;
-        "
-      >
-        <h3>MẸO ĐẠT ĐIỂM CAO:</h3>
-        <ul>
-          <li><strong>Đủ từ:</strong> SMS: 20-30 từ, E-Mail: 30-40 từ</li>
-          <li>
-            <strong>Trả lời đúng yêu cầu:</strong> Đọc kỹ tình huống và trả lời
-            đầy đủ
-          </li>
-          <li>
-            <strong>Ngữ pháp chuẩn:</strong> Vị trí động từ, cách chia động từ
-          </li>
-          <li>
-            <strong>Từ nối phù hợp:</strong> weil, aber, und, oder, deshalb
-          </li>
-          <li>
-            <strong>Phong cách phù hợp:</strong> SMS thân mật, E-Mail lịch sự
-          </li>
-          <li>
-            <strong>Câu hỏi rõ ràng:</strong> Dùng W-Frage hoặc Ja/Nein-Frage
-          </li>
-        </ul>
-      </div>
+      <footer>
+        <p>&copy; 2025 B1 Goethe Zertifikat - Sprechen Komplett Guide</p>
+        <p>Viel Erfolg bei der Prüfung! 🍀</p>
+      </footer>
     </div>
+
+    <a
+      href="#"
+      class="back-to-top"
+      onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
+      >↑</a
+    >
+
+    <script>
+      function showSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll(".section");
+        sections.forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Show selected section
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+          selectedSection.classList.add("active");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+
+      // Show overview section by default
+      document.addEventListener("DOMContentLoaded", function () {
+        showSection("overview");
+      });
+    </script>
   </body>
 </html>
