@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>B1 Sprechen - Luyện Tập Game</title>
+    <title>🎮 B1 Sprechen Master Game - Luyện thi nói B1 Goethe</title>
     <style>
       * {
         margin: 0;
@@ -15,93 +15,74 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 20px;
-        color: #333;
       }
 
-      .container {
-        max-width: 1000px;
-        margin: 0 auto;
+      .game-container {
+        max-width: 1200px;
+        width: 100%;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
       }
 
       .game-header {
-        background: white;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
         padding: 30px;
-        border-radius: 20px;
         text-align: center;
-        margin-bottom: 30px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
       }
 
       .game-header h1 {
-        color: #667eea;
         font-size: 2.5em;
         margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       }
 
-      .score-board {
+      .stats-bar {
         display: flex;
         justify-content: space-around;
         margin-top: 20px;
-        flex-wrap: wrap;
+        gap: 15px;
       }
 
-      .score-item {
-        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-        padding: 15px 30px;
+      .stat-item {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 15px 25px;
         border-radius: 15px;
+        backdrop-filter: blur(10px);
+        flex: 1;
+      }
+
+      .stat-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+      }
+
+      .stat-value {
+        font-size: 2em;
         font-weight: bold;
-        font-size: 1.2em;
-        margin: 5px;
+        margin-top: 5px;
       }
 
-      .game-menu {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-        margin-bottom: 30px;
-      }
-
-      .game-card {
-        background: white;
-        padding: 30px;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        text-align: center;
-      }
-
-      .game-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-      }
-
-      .game-card .icon {
-        font-size: 4em;
-        margin-bottom: 15px;
-      }
-
-      .game-card h3 {
-        color: #667eea;
-        margin-bottom: 10px;
-        font-size: 1.5em;
-      }
-
-      .game-card p {
-        color: #666;
-        line-height: 1.6;
-      }
-
-      .game-area {
-        background: white;
+      .game-content {
         padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .menu-screen,
+      .game-screen,
+      .results-screen {
         display: none;
       }
 
-      .game-area.active {
+      .menu-screen.active,
+      .game-screen.active,
+      .results-screen.active {
         display: block;
         animation: fadeIn 0.5s;
       }
@@ -109,264 +90,495 @@
       @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: scale(0.95);
+          transform: translateY(20px);
         }
         to {
           opacity: 1;
-          transform: scale(1);
+          transform: translateY(0);
         }
       }
 
-      .question-box {
-        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      .game-modes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .game-mode-card {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         padding: 30px;
         border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 3px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .game-mode-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .game-mode-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        border-color: #667eea;
+      }
+
+      .game-mode-card:hover::before {
+        opacity: 0.1;
+      }
+
+      .game-mode-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .mode-icon {
+        font-size: 4em;
+        margin-bottom: 15px;
+      }
+
+      .mode-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .mode-desc {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .mode-difficulty {
+        display: flex;
+        gap: 5px;
+        margin-top: 15px;
+      }
+
+      .difficulty-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ddd;
+      }
+
+      .difficulty-dot.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .question-card {
+        background: #f8f9fa;
+        padding: 40px;
+        border-radius: 15px;
         margin-bottom: 30px;
-        font-size: 1.3em;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .question-text {
+        font-size: 1.4em;
+        color: #333;
+        margin-bottom: 30px;
         line-height: 1.8;
       }
 
-      .options {
+      .situation {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        font-style: italic;
+      }
+
+      .options-grid {
         display: grid;
         gap: 15px;
-        margin-bottom: 20px;
       }
 
       .option-btn {
         background: white;
-        border: 3px solid #667eea;
         padding: 20px;
-        border-radius: 15px;
+        border: 3px solid #e0e0e0;
+        border-radius: 12px;
         cursor: pointer;
         transition: all 0.3s;
-        font-size: 1.1em;
         text-align: left;
+        font-size: 1.1em;
+        position: relative;
+        overflow: hidden;
       }
 
       .option-btn:hover {
-        background: #667eea;
-        color: white;
-        transform: translateX(10px);
+        border-color: #667eea;
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
       .option-btn.correct {
-        background: #28a745;
-        color: white;
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
         border-color: #28a745;
+        animation: correctPulse 0.5s;
       }
 
       .option-btn.wrong {
-        background: #dc3545;
-        color: white;
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
         border-color: #dc3545;
+        animation: wrongShake 0.5s;
       }
 
-      .option-btn.disabled {
+      @keyframes correctPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes wrongShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        75% {
+          transform: translateX(10px);
+        }
+      }
+
+      .fill-blank-input {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2em;
+        border: 3px solid #e0e0e0;
+        border-radius: 10px;
+        margin: 20px 0;
+        transition: all 0.3s;
+      }
+
+      .fill-blank-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+      }
+
+      .sentence-builder {
+        min-height: 150px;
+        background: white;
+        border: 3px solid #667eea;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .word-bank {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 20px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 12px;
+      }
+
+      .draggable-word {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        cursor: pointer;
+        user-select: none;
+        font-weight: 600;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+      }
+
+      .draggable-word:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .draggable-word.used {
+        opacity: 0.3;
         pointer-events: none;
-        opacity: 0.6;
       }
 
       .btn {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
         padding: 15px 40px;
-        border-radius: 25px;
-        cursor: pointer;
         font-size: 1.1em;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
         font-weight: bold;
         transition: all 0.3s;
-        margin: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
 
-      .btn:hover {
-        transform: translateY(-3px);
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
         box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
       }
 
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+      }
+
       .btn-secondary {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background: #6c757d;
+        color: white;
       }
 
-      .feedback {
-        padding: 20px;
-        border-radius: 15px;
-        margin: 20px 0;
-        font-size: 1.1em;
+      .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-3px);
       }
 
-      .feedback.correct {
-        background: #d4edda;
-        border: 2px solid #28a745;
-        color: #155724;
+      .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
       }
 
-      .feedback.wrong {
-        background: #f8d7da;
-        border: 2px solid #dc3545;
-        color: #721c24;
-      }
-
-      .practice-area {
-        background: #f8f9fa;
-        padding: 25px;
-        border-radius: 15px;
-        margin: 20px 0;
-        border-left: 5px solid #667eea;
-      }
-
-      .timer {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        padding: 15px 30px;
-        border-radius: 15px;
-        font-size: 1.5em;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .scenario-box {
-        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-        padding: 25px;
-        border-radius: 15px;
-        margin-bottom: 25px;
-      }
-
-      .scenario-box h4 {
-        color: #333;
-        margin-bottom: 15px;
-        font-size: 1.3em;
-      }
-
-      .role-play {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        margin: 15px 0;
-        border-left: 4px solid #667eea;
-      }
-
-      .role-play strong {
-        color: #667eea;
-        font-size: 1.1em;
+      .button-group {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+        flex-wrap: wrap;
       }
 
       .progress-bar {
         width: 100%;
-        height: 30px;
+        height: 25px;
         background: #e0e0e0;
         border-radius: 15px;
         overflow: hidden;
-        margin: 20px 0;
+        margin-bottom: 30px;
+        position: relative;
       }
 
       .progress-fill {
         height: 100%;
         background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        transition: width 0.3s;
+        transition: width 0.5s ease;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
         font-weight: bold;
+        font-size: 0.9em;
       }
 
-      .hint-box {
-        background: #fff3cd;
-        border: 2px solid #ffc107;
-        padding: 20px;
-        border-radius: 10px;
-        margin: 15px 0;
+      .timer {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background: rgba(255, 255, 255, 0.3);
+        padding: 15px 25px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        font-size: 1.5em;
+        font-weight: bold;
       }
 
-      .hint-box h5 {
-        color: #856404;
+      .feedback-box {
+        padding: 25px;
+        border-radius: 12px;
+        margin: 25px 0;
+        display: none;
+        animation: slideIn 0.5s;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .feedback-box.show {
+        display: block;
+      }
+
+      .feedback-box.correct {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        border: 3px solid #28a745;
+      }
+
+      .feedback-box.wrong {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        border: 3px solid #dc3545;
+      }
+
+      .feedback-title {
+        font-size: 1.3em;
+        font-weight: bold;
         margin-bottom: 10px;
       }
 
-      .answer-input {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid #667eea;
-        border-radius: 10px;
-        font-size: 1.1em;
-        margin: 10px 0;
-      }
-
-      .dialog-box {
-        background: #e3f2fd;
-        padding: 20px;
-        border-radius: 10px;
-        margin: 15px 0;
-        border-left: 4px solid #2196f3;
-      }
-
-      .celebration {
+      .results-summary {
         text-align: center;
         padding: 40px;
-        animation: bounce 1s;
       }
 
-      .celebration .emoji {
-        font-size: 5em;
-      }
-
-      @keyframes bounce {
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-30px);
-        }
-        60% {
-          transform: translateY(-15px);
-        }
-      }
-
-      .vocabulary-card {
-        background: white;
-        border: 2px solid #667eea;
-        padding: 20px;
-        border-radius: 15px;
-        margin: 10px 0;
-        cursor: pointer;
-        transition: all 0.3s;
-      }
-
-      .vocabulary-card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-      }
-
-      .vocabulary-card.flipped {
+      .score-circle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 30px auto;
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
       }
 
-      .level-badge {
-        display: inline-block;
-        padding: 5px 15px;
-        border-radius: 20px;
+      .score-number {
+        font-size: 4em;
         font-weight: bold;
-        font-size: 0.9em;
-        margin: 5px;
       }
 
-      .level-beginner {
-        background: #28a745;
-        color: white;
+      .score-label {
+        font-size: 1.2em;
+        margin-top: 10px;
       }
-      .level-intermediate {
-        background: #ffc107;
-        color: #333;
+
+      .performance-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
       }
-      .level-advanced {
-        background: #dc3545;
+
+      .performance-item {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .performance-value {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #667eea;
+        margin: 10px 0;
+      }
+
+      .achievement-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin: 10px;
+        font-weight: bold;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .hint-box {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+        border-left: 5px solid #ff9a56;
+      }
+
+      .matching-game {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin: 30px 0;
+      }
+
+      .matching-column {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .match-item {
+        padding: 20px;
+        background: white;
+        border: 3px solid #e0e0e0;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-align: center;
+      }
+
+      .match-item:hover {
+        border-color: #667eea;
+        transform: scale(1.05);
+      }
+
+      .match-item.selected {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
+        border-color: #667eea;
+      }
+
+      .match-item.matched {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        border-color: #28a745;
+        pointer-events: none;
+      }
+
+      .combo-counter {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 5em;
+        font-weight: bold;
+        color: #667eea;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1000;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      .combo-counter.show {
+        animation: comboAnimation 1s;
+      }
+
+      @keyframes comboAnimation {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.5);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(1);
+        }
       }
 
       @media (max-width: 768px) {
@@ -374,1460 +586,1284 @@
           font-size: 1.8em;
         }
 
-        .game-menu {
-          grid-template-columns: 1fr;
+        .stats-bar {
+          flex-direction: column;
         }
 
-        .game-area {
+        .game-content {
           padding: 20px;
         }
 
-        .score-board {
-          flex-direction: column;
+        .game-modes {
+          grid-template-columns: 1fr;
         }
-      }
 
-      .audio-btn {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 1em;
-        margin: 5px;
-      }
-
-      .audio-btn:hover {
-        opacity: 0.8;
-      }
-
-      .recording {
-        background: #dc3545;
-        animation: pulse 1s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
+        .matching-game {
+          grid-template-columns: 1fr;
         }
-        50% {
-          opacity: 0.5;
-        }
-      }
 
-      .speech-text {
-        background: #f8f9fa;
-        padding: 15px;
-        border-radius: 10px;
-        margin: 10px 0;
-        min-height: 50px;
-        border: 2px dashed #667eea;
+        .score-circle {
+          width: 150px;
+          height: 150px;
+        }
+
+        .score-number {
+          font-size: 3em;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <!-- Header -->
+    <div class="combo-counter" id="comboCounter"></div>
+
+    <div class="game-container">
       <div class="game-header">
-        <h1>🎮 B1 SPRECHEN - LUYỆN TẬP GAME</h1>
-        <p style="color: #666; margin-top: 10px">
-          Luyện tập tất cả kỹ năng nói cho kỳ thi B1 Goethe
-        </p>
-        <div class="score-board">
-          <div class="score-item">🏆 Điểm: <span id="totalScore">0</span></div>
-          <div class="score-item">
-            ✅ Đúng: <span id="correctCount">0</span>
+        <h1>🎮 B1 SPRECHEN MASTER</h1>
+        <p>Luyện tập nói tiếng Đức B1 Goethe qua game</p>
+
+        <div class="stats-bar">
+          <div class="stat-item">
+            <div class="stat-label">🏆 Điểm</div>
+            <div class="stat-value" id="totalScore">0</div>
           </div>
-          <div class="score-item">❌ Sai: <span id="wrongCount">0</span></div>
-          <div class="score-item">
-            🎯 Cấp độ: <span id="level">Beginner</span>
+          <div class="stat-item">
+            <div class="stat-label">📊 Độ chính xác</div>
+            <div class="stat-value" id="accuracy">0%</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">🔥 Streak</div>
+            <div class="stat-value" id="streak">0</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">⭐ Level</div>
+            <div class="stat-value" id="level">1</div>
           </div>
         </div>
       </div>
 
-      <!-- Game Menu -->
-      <div id="gameMenu" class="game-menu">
-        <div class="game-card" onclick="startGame('redemittel')">
-          <div class="icon">💬</div>
-          <h3>Redemittel Quiz</h3>
-          <p>Trắc nghiệm các cụm từ giao tiếp quan trọng</p>
-          <span class="level-badge level-beginner">Dễ</span>
+      <div class="game-content">
+        <!-- MENU SCREEN -->
+        <div class="menu-screen active" id="menuScreen">
+          <h2
+            style="
+              text-align: center;
+              color: #333;
+              margin-bottom: 30px;
+              font-size: 2em;
+            "
+          >
+            Chọn chế độ chơi
+          </h2>
+
+          <div class="game-modes">
+            <div class="game-mode-card" onclick="startGame('multiple-choice')">
+              <div class="mode-icon">🎯</div>
+              <div class="mode-title">Trắc nghiệm Redemittel</div>
+              <div class="mode-desc">
+                Chọn cụm từ đúng trong các tình huống giao tiếp. Luyện Teil 1 &
+                3.
+              </div>
+              <div class="mode-difficulty">
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot"></div>
+              </div>
+            </div>
+
+            <div class="game-mode-card" onclick="startGame('fill-blank')">
+              <div class="mode-icon">✍️</div>
+              <div class="mode-title">Điền từ vào chỗ trống</div>
+              <div class="mode-desc">
+                Hoàn thiện câu với từ đúng. Luyện ngữ pháp và từ vựng.
+              </div>
+              <div class="mode-difficulty">
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+              </div>
+            </div>
+
+            <div class="game-mode-card" onclick="startGame('sentence-builder')">
+              <div class="mode-icon">🧩</div>
+              <div class="mode-title">Xếp câu</div>
+              <div class="mode-desc">
+                Sắp xếp các từ để tạo thành câu đúng. Luyện cấu trúc câu.
+              </div>
+              <div class="mode-difficulty">
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot"></div>
+              </div>
+            </div>
+
+            <div class="game-mode-card" onclick="startGame('matching')">
+              <div class="mode-icon">🔗</div>
+              <div class="mode-title">Ghép cặp Deutsch-Việt</div>
+              <div class="mode-desc">
+                Ghép cụm tiếng Đức với nghĩa tiếng Việt. Luyện từ vựng nhanh.
+              </div>
+              <div class="mode-difficulty">
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot"></div>
+                <div class="difficulty-dot"></div>
+              </div>
+            </div>
+
+            <div
+              class="game-mode-card"
+              onclick="startGame('situation-response')"
+            >
+              <div class="mode-icon">💬</div>
+              <div class="mode-title">Phản ứng tình huống</div>
+              <div class="mode-desc">
+                Chọn cách phản ứng phù hợp trong các tình huống thực tế Teil 1.
+              </div>
+              <div class="mode-difficulty">
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+              </div>
+            </div>
+
+            <div class="game-mode-card" onclick="startGame('speed-round')">
+              <div class="mode-icon">⚡</div>
+              <div class="mode-title">Vòng tốc độ</div>
+              <div class="mode-desc">
+                60 giây để trả lời càng nhiều câu càng tốt. Thử thách tốc độ!
+              </div>
+              <div class="mode-difficulty">
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+                <div class="difficulty-dot active"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="game-card" onclick="startGame('situation')">
-          <div class="icon">🗣️</div>
-          <h3>Tình Huống Teil 1</h3>
-          <p>Luyện tập lên kế hoạch cùng nhau</p>
-          <span class="level-badge level-intermediate">Trung bình</span>
+        <!-- GAME SCREEN -->
+        <div class="game-screen" id="gameScreen">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill">Câu 1/10</div>
+          </div>
+
+          <div id="gameArea"></div>
+
+          <div class="feedback-box" id="feedbackBox">
+            <div class="feedback-title" id="feedbackTitle"></div>
+            <div id="feedbackText"></div>
+          </div>
+
+          <div class="button-group">
+            <button
+              class="btn btn-primary"
+              id="submitBtn"
+              onclick="checkAnswer()"
+            >
+              Kiểm tra
+            </button>
+            <button
+              class="btn btn-secondary"
+              id="nextBtn"
+              onclick="nextQuestion()"
+              style="display: none"
+            >
+              Câu tiếp theo →
+            </button>
+            <button class="btn btn-secondary" onclick="returnToMenu()">
+              ← Quay lại menu
+            </button>
+          </div>
         </div>
 
-        <div class="game-card" onclick="startGame('presentation')">
-          <div class="icon">📊</div>
-          <h3>Thuyết Trình Teil 2</h3>
-          <p>Luyện tập cấu trúc bài thuyết trình</p>
-          <span class="level-badge level-intermediate">Trung bình</span>
-        </div>
+        <!-- RESULTS SCREEN -->
+        <div class="results-screen" id="resultsScreen">
+          <div class="results-summary">
+            <h2 style="color: #667eea; font-size: 2.5em; margin-bottom: 20px">
+              🎉 Hoàn thành!
+            </h2>
 
-        <div class="game-card" onclick="startGame('dialogue')">
-          <div class="icon">💭</div>
-          <h3>Đối Thoại Teil 3</h3>
-          <p>Luyện phản hồi và đặt câu hỏi</p>
-          <span class="level-badge level-intermediate">Trung bình</span>
-        </div>
+            <div class="score-circle">
+              <div class="score-number" id="finalScore">0</div>
+              <div class="score-label">điểm</div>
+            </div>
 
-        <div class="game-card" onclick="startGame('strategy')">
-          <div class="icon">🎯</div>
-          <h3>Chiến Thuật Partner</h3>
-          <p>Học cách ứng phó với 3 loại partner</p>
-          <span class="level-badge level-advanced">Khó</span>
-        </div>
+            <div class="performance-grid">
+              <div class="performance-item">
+                <div>✅ Đúng</div>
+                <div class="performance-value" id="correctCount">0</div>
+              </div>
+              <div class="performance-item">
+                <div>❌ Sai</div>
+                <div class="performance-value" id="wrongCount">0</div>
+              </div>
+              <div class="performance-item">
+                <div>📊 Độ chính xác</div>
+                <div class="performance-value" id="finalAccuracy">0%</div>
+              </div>
+              <div class="performance-item">
+                <div>🔥 Streak tốt nhất</div>
+                <div class="performance-value" id="bestStreak">0</div>
+              </div>
+            </div>
 
-        <div class="game-card" onclick="startGame('vocabulary')">
-          <div class="icon">📚</div>
-          <h3>Flashcards</h3>
-          <p>Ôn lại từ vựng và cụm từ quan trọng</p>
-          <span class="level-badge level-beginner">Dễ</span>
-        </div>
+            <div id="achievementsList"></div>
 
-        <div class="game-card" onclick="startGame('roleplay')">
-          <div class="icon">🎭</div>
-          <h3>Role-Play</h3>
-          <p>Mô phỏng bài thi thực tế</p>
-          <span class="level-badge level-advanced">Khó</span>
-        </div>
+            <div
+              id="performanceMessage"
+              style="font-size: 1.3em; margin: 30px 0; color: #666"
+            ></div>
 
-        <div class="game-card" onclick="startGame('speed')">
-          <div class="icon">⚡</div>
-          <h3>Speed Challenge</h3>
-          <p>Trả lời nhanh trong thời gian giới hạn</p>
-          <span class="level-badge level-advanced">Khó</span>
+            <div class="button-group">
+              <button class="btn btn-success" onclick="restartGame()">
+                🔄 Chơi lại
+              </button>
+              <button class="btn btn-primary" onclick="returnToMenu()">
+                🏠 Về menu
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <!-- Game Area -->
-      <div id="gameArea" class="game-area"></div>
     </div>
 
     <script>
       // Game State
       let gameState = {
+        mode: "",
+        currentQuestion: 0,
+        totalQuestions: 10,
         score: 0,
         correct: 0,
         wrong: 0,
-        level: "Beginner",
-        currentGame: null,
-        currentQuestion: 0,
-        timer: null,
+        streak: 0,
+        bestStreak: 0,
+        level: 1,
+        timeLeft: 60,
+        timerInterval: null,
+        selectedAnswer: null,
       };
 
-      // Questions Database
-      const redemittelQuestions = [
-        {
-          question: "Bạn muốn đề xuất một ý tưởng. Cụm từ nào phù hợp?",
-          options: [
-            "Ich schlage vor, dass...",
-            "Ich bin dagegen, weil...",
-            "Das finde ich nicht gut.",
-            "Ich verstehe nicht.",
-          ],
-          correct: 0,
-          explanation:
-            "✅ 'Ich schlage vor, dass...' là cụm từ đúng để đưa ra đề xuất.",
-        },
-        {
-          question: "Partner đề nghị một ý tốt. Bạn muốn đồng ý. Nói gì?",
-          options: [
-            "Da bin ich anderer Meinung.",
-            "Das ist eine gute Idee!",
-            "Ich weiß nicht.",
-            "Nein, das geht nicht.",
-          ],
-          correct: 1,
-          explanation:
-            "✅ 'Das ist eine gute Idee!' thể hiện sự đồng ý tích cực.",
-        },
-        {
-          question: "Bạn không đồng ý với đề xuất của partner. Cụm từ phù hợp?",
-          options: [
-            "Ja, genau!",
-            "Das stimmt!",
-            "Da bin ich aber ganz anderer Meinung.",
-            "Das ist super!",
-          ],
-          correct: 2,
-          explanation:
-            "✅ 'Da bin ich aber ganz anderer Meinung.' là cách lịch sự để phản đối.",
-        },
-        {
-          question: "Bạn muốn hỏi ý kiến partner. Nói gì?",
-          options: [
-            "Das ist falsch!",
-            "Was hältst du davon?",
-            "Ich bin fertig.",
-            "Das geht nicht.",
-          ],
-          correct: 1,
-          explanation: "✅ 'Was hältst du davon?' là cách hỏi ý kiến lịch sự.",
-        },
-        {
-          question: "Bắt đầu bài thuyết trình Teil 2, bạn nên nói gì?",
-          options: [
-            "Tschüss!",
-            "Ich weiß nicht.",
-            "Liebe Zuhörer, ich begrüße Sie herzlich.",
-            "Das ist alles.",
-          ],
-          correct: 2,
-          explanation: "✅ Câu chào mở đầu chuyên nghiệp cho bài thuyết trình.",
-        },
-        {
-          question: "Giới thiệu chủ đề bài thuyết trình, dùng cụm từ nào?",
-          options: [
-            "Meine Präsentation ist zu dem Thema...",
-            "Ich verstehe das nicht.",
-            "Das ist schwer.",
-            "Auf Wiedersehen!",
-          ],
-          correct: 0,
-          explanation:
-            "✅ 'Meine Präsentation ist zu dem Thema...' là cách giới thiệu chủ đề chuẩn.",
-        },
-        {
-          question: "Chia sẻ kinh nghiệm cá nhân trong bài thuyết trình, dùng:",
-          options: [
-            "Ich kenne das nicht.",
-            "Was mich betrifft, ich...",
-            "Das ist unmöglich.",
-            "Ich bin müde.",
-          ],
-          correct: 1,
-          explanation:
-            "✅ 'Was mich betrifft, ich...' là cách tự nhiên để chia sẻ kinh nghiệm.",
-        },
-        {
-          question: "Nêu ưu điểm trong bài thuyết trình:",
-          options: [
-            "Ein Vorteil ist, dass...",
-            "Das ist schlecht.",
-            "Ich verstehe nichts.",
-            "Das geht nicht.",
-          ],
-          correct: 0,
-          explanation: "✅ 'Ein Vorteil ist, dass...' dùng để nêu ưu điểm.",
-        },
-        {
-          question: "Kết thúc bài thuyết trình Teil 2:",
-          options: [
-            "Ich bin fertig. Tschüss!",
-            "Das war's.",
-            "Hiermit ist meine Präsentation zu Ende. Vielen Dank fürs Zuhören!",
-            "Okay, genug!",
-          ],
-          correct: 2,
-          explanation: "✅ Kết thúc chuyên nghiệp với lời cảm ơn khán giả.",
-        },
-        {
-          question: "Phản hồi bài thuyết trình của partner (Teil 3):",
-          options: [
-            "Das war langweilig.",
-            "Ihr Vortrag war sehr interessant.",
-            "Ich habe nicht zugehört.",
-            "Das verstehe ich nicht.",
-          ],
-          correct: 1,
-          explanation:
-            "✅ 'Ihr Vortrag war sehr interessant.' là phản hồi tích cực và lịch sự.",
-        },
-        {
-          question: "Đặt câu hỏi cho partner sau bài thuyết trình:",
-          options: [
-            "Ich möchte Sie fragen: ...?",
-            "Das ist falsch!",
-            "Ich bin nicht einverstanden.",
-            "Das geht mich nichts an.",
-          ],
-          correct: 0,
-          explanation:
-            "✅ 'Ich möchte Sie fragen: ...?' là cách lịch sự để đặt câu hỏi.",
-        },
-        {
-          question: "Bạn không nghe rõ partner nói gì. Nói gì?",
-          options: [
-            "Du sprichst zu leise!",
-            "Könnten Sie das bitte wiederholen?",
-            "Das ist falsch!",
-            "Ich höre nicht zu.",
-          ],
-          correct: 1,
-          explanation: "✅ Cách lịch sự để yêu cầu nhắc lại.",
-        },
-        {
-          question: "Thống nhất với partner về một kế hoạch:",
-          options: [
-            "Nein!",
-            "Ja, so machen wir es.",
-            "Das will ich nicht.",
-            "Ich gehe jetzt.",
-          ],
-          correct: 1,
-          explanation:
-            "✅ 'Ja, so machen wir es.' thể hiện sự thống nhất và sẵn sàng.",
-        },
-        {
-          question: "Mô tả tình hình ở quê nhà trong Teil 2:",
-          options: [
-            "In meinem Heimatland...",
-            "Ich weiß es nicht.",
-            "Das ist mir egal.",
-            "Keine Ahnung!",
-          ],
-          correct: 0,
-          explanation:
-            "✅ 'In meinem Heimatland...' là cách tự nhiên để bắt đầu mô tả.",
-        },
-        {
-          question: "Nêu ý kiến cá nhân:",
-          options: [
-            "Alle denken so.",
-            "Meiner Meinung nach...",
-            "Das ist falsch.",
-            "Ich sage nichts.",
-          ],
-          correct: 1,
-          explanation:
-            "✅ 'Meiner Meinung nach...' là cách chuẩn để nêu ý kiến.",
-        },
-      ];
-
-      const situationScenarios = [
-        {
-          title: "Wochenendausflug planen",
-          points: [
-            "Wohin?",
-            "Wann genau? / Wie lange?",
-            "Wie? / Mit welchem Verkehrsmittel?",
-            "Wo übernachten?",
-            "Aktivitäten dort?",
-            "Was mitnehmen?",
-            "Erlaubnis der Eltern?",
-          ],
-          partnerType: "normal",
-          dialogue: [
-            {
-              speaker: "Sie",
-              text: "Weißt du was? Ich habe gehört, dass es im Schwarzwald viel zu sehen gibt. Ich schlage vor, dass wir einen Ausflug dorthin machen. Was hältst du davon?",
-            },
-            {
-              speaker: "Partner",
-              text: "Das ist eine gute Idee! Wohin genau sollen wir fahren?",
-            },
-            {
-              speaker: "Sie",
-              text: "Ich schlage vor, dass wir nach Freiburg fahren, weil es dort sehr schön ist. Was meinst du?",
-            },
-          ],
-        },
-        {
-          title: "Geburtstagsparty organisieren",
-          points: [
-            "Wann?",
-            "Wo?",
-            "Wie viele Gäste?",
-            "Essen und Trinken?",
-            "Musik und Unterhaltung?",
-            "Geschenke?",
-            "Dekoration?",
-          ],
-          partnerType: "stark",
-          dialogue: [
-            {
-              speaker: "Partner",
-              text: "Ich schlage vor, wir machen die Party am Samstag. Was hältst du davon?",
-            },
-            {
-              speaker: "Sie",
-              text: "Das ist eine gute Idee! Ich denke, bei mir zu Hause wäre gut. Was meinst du?",
-            },
-          ],
-        },
-        {
-          title: "Gemeinsam Deutsch lernen",
-          points: [
-            "Wo lernen?",
-            "Wie oft pro Woche?",
-            "Welche Materialien?",
-            "Online oder offline?",
-            "Welche Themen?",
-            "Wie lange pro Sitzung?",
-            "Kosten teilen?",
-          ],
-          partnerType: "schwach",
-          dialogue: [
-            {
-              speaker: "Sie",
-              text: "Ich schlage vor, dass wir zweimal pro Woche zusammen lernen. Was hältst du davon?",
-            },
-            { speaker: "Partner", text: "[schweigt oder antwortet unklar]" },
-            {
-              speaker: "Sie",
-              text: "Gut, das machen wir! Und wo sollen wir lernen? In der Bibliothek ist es ruhig. Was meinst du?",
-            },
-          ],
-        },
-      ];
-
-      const presentationTopics = [
-        {
-          topic: "Lernen im Internet",
-          structure: [
-            {
-              slide: 1,
-              title: "Begrüßen + Thema",
-              example:
-                "Liebe Zuhörer! Meine Präsentation ist zu dem Thema: Lernen im Internet",
-            },
-            {
-              slide: 2,
-              title: "Erfahrung",
-              example:
-                "Was mich betrifft, ich lerne oft online. Ich habe einmal einen Programmier-Kurs gemacht...",
-            },
-            {
-              slide: 3,
-              title: "Situation im Heimatland",
-              example:
-                "In meinem Heimatland Vietnam ist Online-Lernen sehr populär...",
-            },
-            {
-              slide: 4,
-              title: "Vor- und Nachteile",
-              example:
-                "Ein Vorteil ist, dass man flexibel lernen kann. Ein Nachteil ist, dass man viel Disziplin braucht...",
-            },
-            {
-              slide: 5,
-              title: "Ende",
-              example:
-                "Hiermit ist meine Präsentation zu Ende. Vielen Dank fürs Zuhören!",
-            },
-          ],
-        },
-        {
-          topic: "Sport und Gesundheit",
-          structure: [
-            {
-              slide: 1,
-              title: "Begrüßen + Thema",
-              example: "Guten Tag! Ich spreche heute über Sport und Gesundheit",
-            },
-            {
-              slide: 2,
-              title: "Erfahrung",
-              example: "Ich persönlich treibe dreimal pro Woche Sport...",
-            },
-            {
-              slide: 3,
-              title: "Situation im Heimatland",
-              example: "In Vietnam wird Sport immer wichtiger...",
-            },
-            {
-              slide: 4,
-              title: "Vor- und Nachteile",
-              example:
-                "Einerseits ist Sport sehr gesund, andererseits kostet es Zeit...",
-            },
-            {
-              slide: 5,
-              title: "Ende",
-              example: "Damit komme ich zum Schluss. Haben Sie noch Fragen?",
-            },
-          ],
-        },
-        {
-          topic: "Soziale Medien",
-          structure: [
-            {
-              slide: 1,
-              title: "Begrüßen + Thema",
-              example:
-                "Ich begrüße Sie herzlich. Das Thema meiner Präsentation ist: Soziale Medien",
-            },
-            {
-              slide: 2,
-              title: "Erfahrung",
-              example:
-                "Ich nutze täglich soziale Medien wie Facebook und Instagram...",
-            },
-            {
-              slide: 3,
-              title: "Situation im Heimatland",
-              example:
-                "In meinem Heimatland sind soziale Medien sehr beliebt...",
-            },
-            {
-              slide: 4,
-              title: "Vor- und Nachteile",
-              example:
-                "Ein Vorteil ist die schnelle Kommunikation, aber ein Nachteil ist die Zeitverschwendung...",
-            },
-            {
-              slide: 5,
-              title: "Ende",
-              example:
-                "Ich hoffe, mein Vortrag hat Ihnen gefallen. Vielen Dank!",
-            },
-          ],
-        },
-      ];
-
-      const vocabularyCards = [
-        {
-          front: "Ich schlage vor, dass...",
-          back: "Tôi đề nghị rằng...",
-          category: "Vorschläge",
-        },
-        {
-          front: "Was hältst du davon?",
-          back: "Bạn nghĩ sao về điều đó?",
-          category: "Meinung fragen",
-        },
-        {
-          front: "Das ist eine gute Idee!",
-          back: "Đó là một ý tưởng hay!",
-          category: "Zustimmung",
-        },
-        {
-          front: "Da bin ich anderer Meinung",
-          back: "Tôi có ý kiến khác",
-          category: "Ablehnung",
-        },
-        {
-          front: "Meiner Meinung nach...",
-          back: "Theo ý kiến của tôi...",
-          category: "Meinung äußern",
-        },
-        {
-          front: "Was mich betrifft, ich...",
-          back: "Về phần tôi, tôi...",
-          category: "Erfahrung",
-        },
-        {
-          front: "In meinem Heimatland...",
-          back: "Ở quê hương tôi...",
-          category: "Situation",
-        },
-        {
-          front: "Ein Vorteil ist, dass...",
-          back: "Một ưu điểm là...",
-          category: "Vorteile",
-        },
-        {
-          front: "Ein Nachteil ist, dass...",
-          back: "Một nhược điểm là...",
-          category: "Nachteile",
-        },
-        {
-          front: "Hiermit ist meine Präsentation zu Ende",
-          back: "Đến đây bài thuyết trình của tôi kết thúc",
-          category: "Ende",
-        },
-        {
-          front: "Ihr Vortrag war sehr interessant",
-          back: "Bài thuyết trình của bạn rất thú vị",
-          category: "Rückmeldung",
-        },
-        {
-          front: "Ich möchte Sie fragen: ...?",
-          back: "Tôi muốn hỏi bạn: ...?",
-          category: "Fragen",
-        },
-        {
-          front: "Könnten Sie das bitte wiederholen?",
-          back: "Bạn có thể lặp lại được không?",
-          category: "Verständnis",
-        },
-        {
-          front: "Ja, so machen wir es",
-          back: "Vâng, chúng ta làm như vậy",
-          category: "Einigung",
-        },
-        {
-          front: "Ich bin damit einverstanden",
-          back: "Tôi đồng ý với điều đó",
-          category: "Zustimmung",
-        },
-      ];
-
-      // Update Score
-      function updateScore(points, isCorrect) {
-        gameState.score += points;
-        if (isCorrect) {
-          gameState.correct++;
-        } else {
-          gameState.wrong++;
-        }
-
-        // Update level
-        if (gameState.score < 50) gameState.level = "Beginner";
-        else if (gameState.score < 150) gameState.level = "Intermediate";
-        else gameState.level = "Advanced";
-
-        document.getElementById("totalScore").textContent = gameState.score;
-        document.getElementById("correctCount").textContent = gameState.correct;
-        document.getElementById("wrongCount").textContent = gameState.wrong;
-        document.getElementById("level").textContent = gameState.level;
-      }
+      // Question Banks - Game data trực tiếp từ tài liệu B1
+      const questionBanks = {
+        "multiple-choice": [
+          {
+            question:
+              "Partner nói: 'Ich schlage vor, dass wir nach Freiburg fahren.' Bạn muốn ĐỒNG Ý. Nên nói gì?",
+            options: [
+              "Das ist eine gute Idee! Ich bin einverstanden.",
+              "Nein, das finde ich nicht so gut.",
+              "Ich habe aber eine Sache nicht verstanden.",
+              "Entschuldigung, ich möchte dazu auch etwas sagen.",
+            ],
+            correct: 0,
+            explanation:
+              "Đây là cách bày tỏ đồng ý phổ biến nhất trong Teil 1. Dùng 'Das ist eine gute Idee' + 'Ich bin einverstanden' để nhấn mạnh sự đồng ý.",
+          },
+          {
+            question:
+              "Trong Teil 2, bạn muốn giới thiệu chủ đề thuyết trình. Nên dùng cụm nào?",
+            options: [
+              "Was mich betrifft, ich...",
+              "Meine Präsentation ist zu dem Thema: ...",
+              "In meinem Heimatland...",
+              "Hiermit ist meine Präsentation zu Ende.",
+            ],
+            correct: 1,
+            explanation:
+              "Đây là cách chuẩn để giới thiệu chủ đề trong phần mở đầu Teil 2. Luôn bắt đầu với 'Meine Präsentation ist zu dem Thema: ...'.",
+          },
+          {
+            question:
+              "Partner hỏi ý kiến bạn: 'Was hältst du davon?' Bạn muốn TỪ CHỐI lịch sự. Chọn câu nào?",
+            options: [
+              "Super! Das finde ich auch toll.",
+              "Ja, klar! Ich glaube schon.",
+              "Nein, das finde ich nicht so gut, weil...",
+              "Gut, das kann ich machen.",
+            ],
+            correct: 2,
+            explanation:
+              "Từ chối lịch sự bằng cách dùng 'Nein, das finde ich nicht so gut' và LUÔN đưa ra lý do với 'weil'.",
+          },
+          {
+            question:
+              "Trong Teil 3, bạn muốn đặt câu hỏi cho partner. Nên dùng cụm nào?",
+            options: [
+              "Vielen Dank fürs Zuhören!",
+              "Ich hätte gern eine Frage für Sie.",
+              "Das ist eine gute Idee!",
+              "Mein Vortrag besteht aus folgenden Teilen.",
+            ],
+            correct: 1,
+            explanation:
+              "Đây là cách lịch sự để bắt đầu đặt câu hỏi trong Teil 3. Dùng Konjunktiv II 'hätte' để thể hiện sự lịch sự.",
+          },
+          {
+            question:
+              "Bạn muốn nói về kinh nghiệm cá nhân trong Teil 2. Cụm nào phù hợp?",
+            options: [
+              "In meinem Heimatland ist...",
+              "Was mich betrifft, ich...",
+              "Ein Vorteil ist, dass...",
+              "Damit komme ich zum Schluss.",
+            ],
+            correct: 1,
+            explanation:
+              "Dùng 'Was mich betrifft' (Về phần tôi) để bắt đầu phần chia sẻ kinh nghiệm cá nhân trong Folie 2.",
+          },
+          {
+            question:
+              "Partner đề xuất một ý bạn không thích. Bạn muốn đưa ra ĐỀ XUẤT KHÁC. Nên nói gì?",
+            options: [
+              "Ich bin damit einverstanden.",
+              "Das stimmt! Auch ich bin der Meinung.",
+              "Aber ich habe gehört, dass... (đề xuất khác)",
+              "Genau, das finde ich auch.",
+            ],
+            correct: 2,
+            explanation:
+              "Sau khi từ chối, dùng 'Aber' để đưa ra đề xuất mới. Đây là chiến thuật quan trọng khi partner ở trình độ ngang bằng.",
+          },
+          {
+            question: "Trong Teil 2, bạn muốn nêu ƯU ĐIỂM. Chọn cụm nào?",
+            options: [
+              "Ein Vorteil ist, dass...",
+              "Ein Nachteil ist, dass...",
+              "Ich habe einmal Folgendes erlebt:",
+              "Liebe Zuhörer!",
+            ],
+            correct: 0,
+            explanation:
+              "'Ein Vorteil ist, dass...' là cách chuẩn để nêu ưu điểm trong Folie 4. Sau 'dass' là mệnh đề phụ với động từ cuối câu.",
+          },
+          {
+            question: "Bạn không nghe rõ partner nói gì. Nên hỏi thế nào?",
+            options: [
+              "Das ist eine gute Idee!",
+              "Könnten Sie das bitte wiederholen?",
+              "Ich bin einverstanden.",
+              "Vielen Dank für Ihre Frage.",
+            ],
+            correct: 1,
+            explanation:
+              "Đây là cách lịch sự để nhờ partner nhắc lại. Dùng Konjunktiv II 'könnten' + 'bitte' để thể hiện sự lịch sự.",
+          },
+          {
+            question: "Kết thúc Teil 2, bạn nên nói gì?",
+            options: [
+              "Zuerst möchte ich über...",
+              "Was mich betrifft...",
+              "Hiermit ist meine Präsentation zu Ende. Vielen Dank fürs Zuhören!",
+              "Ich schlage vor, dass...",
+            ],
+            correct: 2,
+            explanation:
+              "Đây là cách kết thúc bài thuyết trình chuyên nghiệp. Luôn cảm ơn người nghe và hỏi 'Haben Sie noch Fragen?'",
+          },
+          {
+            question:
+              "Partner phản hồi tích cực về bài của bạn trong Teil 3. Bạn nên đáp lại thế nào?",
+            options: [
+              "Nein, das stimmt nicht.",
+              "Vielen Dank, es freut mich, dass dir/Ihnen meine Präsentation gefallen hat.",
+              "Ich habe eine Frage.",
+              "Das ist keine gute Idee.",
+            ],
+            correct: 1,
+            explanation:
+              "Cảm ơn và bày tỏ vui mừng khi nhận phản hồi tích cực. Thể hiện sự lịch sự và chuyên nghiệp.",
+          },
+        ],
+        "fill-blank": [
+          {
+            question: "Ich _____ vor, dass wir nach München fahren.",
+            answer: "schlage",
+            hint: "Động từ 'đề xuất' - chia ngôi ich. (vorschlagen - schlage vor)",
+            explanation:
+              "Dùng 'schlage vor' (đề xuất) trong Teil 1. Đây là separable verb, 'vor' đứng cuối câu trong mệnh đề chính.",
+          },
+          {
+            question: "Das ist eine gute _____!",
+            answer: "Idee",
+            hint: "Danh từ nữ (die) nghĩa là 'ý tưởng', viết hoa chữ cái đầu",
+            explanation:
+              "Cụm 'Das ist eine gute Idee!' dùng để đồng ý. Danh từ trong tiếng Đức luôn viết hoa.",
+          },
+          {
+            question:
+              "Meine Präsentation ist zu dem _____: 'Lernen im Internet'.",
+            answer: "Thema",
+            hint: "Danh từ trung tính (das) nghĩa là 'chủ đề', viết hoa",
+            explanation:
+              "Dùng 'Thema' để giới thiệu chủ đề thuyết trình trong Teil 2. 'zu dem Thema' = 'về chủ đề'.",
+          },
+          {
+            question: "Was mich _____, ich lerne oft online.",
+            answer: "betrifft",
+            hint: "Động từ 'liên quan đến' - chia ngôi es (was)",
+            explanation:
+              "'Was mich betrifft' = 'Về phần tôi' - cụm cố định để mở đầu phần chia sẻ kinh nghiệm trong Teil 2.",
+          },
+          {
+            question: "Ein _____ ist, dass Online-Lernen flexibel ist.",
+            answer: "Vorteil",
+            hint: "Danh từ nam (der) nghĩa là 'ưu điểm', viết hoa",
+            explanation:
+              "Dùng 'Vorteil' để nêu ưu điểm trong Teil 2, Folie 4. Tương tự có 'Nachteil' (nhược điểm).",
+          },
+          {
+            question: "Ich bin damit _____.",
+            answer: "einverstanden",
+            hint: "Tính từ nghĩa là 'đồng ý', không viết hoa",
+            explanation:
+              "'Ich bin damit einverstanden' = 'Tôi đồng ý với điều đó'. Cấu trúc quan trọng trong Teil 1.",
+          },
+          {
+            question: "In meinem _____ ist die Situation anders.",
+            answer: "Heimatland",
+            hint: "Danh từ trung tính (das) nghĩa là 'quê hương/tổ quốc', viết hoa",
+            explanation:
+              "Dùng 'Heimatland' khi nói về tình hình ở quê nhà trong Teil 2, Folie 3.",
+          },
+          {
+            question: "Ich _____ gern eine Frage für Sie.",
+            answer: "hätte",
+            hint: "Động từ haben ở dạng Konjunktiv II ngôi ich",
+            explanation:
+              "'Ich hätte gern...' là cách lịch sự để bày tỏ mong muốn. Dùng trong Teil 3 khi đặt câu hỏi.",
+          },
+          {
+            question: "Damit komme ich zum _____ meiner Präsentation.",
+            answer: "Schluss",
+            hint: "Danh từ nam (der) nghĩa là 'kết thúc', viết hoa",
+            explanation:
+              "Dùng 'zum Schluss' để kết thúc bài thuyết trình trong Teil 2. 'Schluss' viết hoa vì là danh từ.",
+          },
+          {
+            question: "Könnten Sie das bitte _____?",
+            answer: "wiederholen",
+            hint: "Động từ nguyên thể nghĩa là 'lặp lại', không tách tiền tố",
+            explanation:
+              "Nhờ partner nhắc lại khi không nghe rõ. 'wiederholen' không phải separable verb nên giữ nguyên.",
+          },
+        ],
+        "sentence-builder": [
+          {
+            question: "Sắp xếp các từ thành câu đúng (Đề xuất):",
+            words: [
+              "Ich",
+              "schlage",
+              "vor,",
+              "dass",
+              "wir",
+              "nach",
+              "Berlin",
+              "fahren.",
+            ],
+            correct: "Ich schlage vor, dass wir nach Berlin fahren.",
+            explanation:
+              "Cấu trúc đề xuất chuẩn trong Teil 1: 'Ich schlage vor, dass...' + mệnh đề phụ (động từ cuối).",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Giới thiệu chủ đề):",
+            words: [
+              "Meine",
+              "Präsentation",
+              "ist",
+              "zu",
+              "dem",
+              "Thema:",
+              "Sport.",
+            ],
+            correct: "Meine Präsentation ist zu dem Thema: Sport.",
+            explanation:
+              "Giới thiệu chủ đề trong Teil 2. 'zu dem Thema' có thể viết tắt thành 'zum Thema'.",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Đồng ý):",
+            words: ["Das", "ist", "eine", "gute", "Idee!"],
+            correct: "Das ist eine gute Idee!",
+            explanation:
+              "Bày tỏ đồng ý đơn giản và hiệu quả nhất. Có thể thêm 'Ich bin einverstanden' để nhấn mạnh.",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Kinh nghiệm):",
+            words: [
+              "Was",
+              "mich",
+              "betrifft,",
+              "ich",
+              "lerne",
+              "gern",
+              "Deutsch.",
+            ],
+            correct: "Was mich betrifft, ich lerne gern Deutsch.",
+            explanation:
+              "Chia sẻ kinh nghiệm cá nhân trong Teil 2, Folie 2. Sau dấu phẩy bắt đầu mệnh đề mới.",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Ưu điểm):",
+            words: [
+              "Ein",
+              "Vorteil",
+              "ist,",
+              "dass",
+              "man",
+              "flexibel",
+              "lernen",
+              "kann.",
+            ],
+            correct: "Ein Vorteil ist, dass man flexibel lernen kann.",
+            explanation:
+              "Nêu ưu điểm với mệnh đề 'dass' - động từ chia (kann) + động từ nguyên thể (lernen) ở cuối.",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Đặt câu hỏi):",
+            words: ["Ich", "hätte", "gern", "eine", "Frage", "für", "Sie."],
+            correct: "Ich hätte gern eine Frage für Sie.",
+            explanation:
+              "Đặt câu hỏi lịch sự trong Teil 3. Konjunktiv II 'hätte' thể hiện sự lịch sự.",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Tình hình quê nhà):",
+            words: [
+              "In",
+              "meinem",
+              "Heimatland",
+              "ist",
+              "die",
+              "Situation",
+              "anders.",
+            ],
+            correct: "In meinem Heimatland ist die Situation anders.",
+            explanation:
+              "Mô tả tình hình ở quê nhà trong Teil 2, Folie 3. Có thể thay 'anders' bằng 'ähnlich/gleich'.",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Từ chối):",
+            words: ["Nein,", "das", "finde", "ich", "nicht", "so", "gut."],
+            correct: "Nein, das finde ich nicht so gut.",
+            explanation:
+              "Từ chối lịch sự một đề xuất. LUÔN đưa ra lý do sau đó với 'weil...'.",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Cảm ơn):",
+            words: ["Vielen", "Dank", "fürs", "Zuhören!"],
+            correct: "Vielen Dank fürs Zuhören!",
+            explanation:
+              "Cảm ơn người nghe khi kết thúc Teil 2. 'fürs' = 'für das' (dành cho việc).",
+          },
+          {
+            question: "Sắp xếp thành câu đúng (Đồng ý mạnh):",
+            words: ["Ich", "bin", "damit", "einverstanden."],
+            correct: "Ich bin damit einverstanden.",
+            explanation:
+              "Thể hiện sự đồng ý rõ ràng. 'damit' = 'với điều đó' (chỉ về đề xuất vừa nghe).",
+          },
+        ],
+        matching: [
+          {
+            pairs: [
+              { de: "Ich schlage vor, dass...", vi: "Tôi đề xuất rằng..." },
+              { de: "Das ist eine gute Idee!", vi: "Đó là một ý tưởng hay!" },
+              { de: "Was hältst du davon?", vi: "Bạn nghĩ sao về điều đó?" },
+              { de: "Ich bin einverstanden.", vi: "Tôi đồng ý." },
+              { de: "Was mich betrifft...", vi: "Về phần tôi..." },
+            ],
+          },
+          {
+            pairs: [
+              { de: "Ein Vorteil ist, dass...", vi: "Một ưu điểm là..." },
+              { de: "Ein Nachteil ist, dass...", vi: "Một nhược điểm là..." },
+              { de: "In meinem Heimatland...", vi: "Ở quê hương tôi..." },
+              { de: "Meiner Meinung nach...", vi: "Theo ý kiến của tôi..." },
+              {
+                de: "Zum Schluss möchte ich sagen...",
+                vi: "Cuối cùng tôi muốn nói...",
+              },
+            ],
+          },
+          {
+            pairs: [
+              { de: "Ich hätte gern eine Frage.", vi: "Tôi muốn hỏi một câu." },
+              {
+                de: "Vielen Dank für Ihre Frage.",
+                vi: "Cảm ơn câu hỏi của bạn.",
+              },
+              { de: "Das ist interessant.", vi: "Điều đó thật thú vị." },
+              {
+                de: "Könnten Sie das wiederholen?",
+                vi: "Bạn có thể nhắc lại được không?",
+              },
+              { de: "Ich verstehe nicht ganz.", vi: "Tôi không hiểu hẳn." },
+            ],
+          },
+        ],
+        "situation-response": [
+          {
+            situation:
+              "Partner nói: 'Ich schlage vor, dass wir mit dem Zug fahren, weil das umweltfreundlich ist. Was meinst du?'",
+            scenario: "Bạn đồng ý và muốn bổ sung thêm lý do",
+            options: [
+              "Das ist eine gute Idee! Außerdem ist der Zug auch bequemer als das Auto. Wann fahren wir?",
+              "Nein, das finde ich nicht so gut. Ich würde lieber mit dem Auto fahren.",
+              "Ich weiß nicht. Vielleicht können wir später entscheiden.",
+              "Das verstehe ich nicht. Kannst du das wiederholen?",
+            ],
+            correct: 0,
+            explanation:
+              "Đồng ý + bổ sung lý do với 'Außerdem' (Hơn nữa) + hỏi tiếp về chi tiết khác. Đây là cách thể hiện sự hợp tác tốt.",
+          },
+          {
+            situation:
+              "Partner nói: 'Wir könnten im Hotel übernachten. Das ist am bequemsten.'",
+            scenario:
+              "Bạn không đồng ý vì khách sạn đắt, muốn đề xuất ở nhà trẻ",
+            options: [
+              "Ja, das stimmt! Hotels sind immer die beste Option.",
+              "Nein, das finde ich nicht so gut, weil Hotels zu teuer sind. Ich schlage vor, dass wir in der Jugendherberge übernachten. Das ist billiger. Was hältst du davon?",
+              "Ich bin einverstanden. Das machen wir!",
+              "Super! Dann buche ich gleich ein Hotelzimmer.",
+            ],
+            correct: 1,
+            explanation:
+              "Từ chối lịch sự + lý do + đề xuất mới + hỏi ý kiến. Đây là cấu trúc 5 câu khi partner ngang bằng.",
+          },
+          {
+            situation:
+              "Giám khảo hỏi: 'Warum haben Sie dieses Thema gewählt?' (Tại sao bạn chọn chủ đề này?)",
+            scenario: "Teil 3 - Trả lời câu hỏi về bài thuyết trình",
+            options: [
+              "Ich weiß nicht. Das war nur ein Zufall.",
+              "Weil ich das Thema sehr interessant finde und persönliche Erfahrung damit habe. Außerdem ist dieses Thema in meinem Heimatland sehr aktuell.",
+              "Das möchte ich nicht sagen.",
+              "Können Sie die Frage wiederholen?",
+            ],
+            correct: 1,
+            explanation:
+              "Đưa ra lý do cụ thể với 'weil' và liên hệ với kinh nghiệm bản thân. Thêm 'Außerdem' để bổ sung lý do thứ hai.",
+          },
+          {
+            situation:
+              "Partner hỏi: 'Was können wir dort machen?' (Chúng ta có thể làm gì ở đó?)",
+            scenario: "Teil 1 - Nói về hoạt động",
+            options: [
+              "Ich weiß es nicht genau.",
+              "Wir könnten wandern gehen und die Natur genießen. Außerdem gibt es dort auch interessante Museen. Was meinst du?",
+              "Das ist mir egal. Du kannst entscheiden.",
+              "Vielleicht nichts Besonderes.",
+            ],
+            correct: 1,
+            explanation:
+              "Đưa ra nhiều đề xuất hoạt động với 'Wir könnten...' + 'Außerdem' (Hơn nữa) + hỏi ý kiến partner.",
+          },
+          {
+            situation:
+              "Partner không đồng ý: 'Nein, ich finde das nicht so gut.'",
+            scenario: "Phản ứng khi partner từ chối đề xuất của bạn",
+            options: [
+              "Warum nicht? Du musst mir zustimmen!",
+              "Okay, das ist kein Problem. Was wäre denn dein Vorschlag?",
+              "Das ist dumm. Meine Idee ist besser.",
+              "Dann machen wir gar nichts!",
+            ],
+            correct: 1,
+            explanation:
+              "Chấp nhận ý kiến với 'Okay, das ist kein Problem' + hỏi đề xuất của partner (thể hiện sự hợp tác và linh hoạt).",
+          },
+          {
+            situation: "Bạn vừa thuyết trình xong Teil 2",
+            scenario: "Kết thúc bài thuyết trình",
+            options: [
+              "Ich gehe jetzt. Auf Wiedersehen!",
+              "Hiermit ist meine Präsentation zu Ende. Vielen Dank fürs Zuhören! Haben Sie noch Fragen?",
+              "Das war's. Fertig.",
+              "Ich habe nichts mehr zu sagen.",
+            ],
+            correct: 1,
+            explanation:
+              "Kết thúc chuyên nghiệp: tuyên bố kết thúc + cảm ơn + mở ra cho câu hỏi. Ba yếu tố này PHẢI có.",
+          },
+        ],
+        "speed-round": [
+          { q: "Đề xuất: Ich _____ vor, dass...", a: "schlage" },
+          { q: "Đồng ý: Das ist eine gute _____!", a: "Idee" },
+          { q: "Hỏi ý kiến: Was _____ du davon?", a: "hältst" },
+          {
+            q: "Giới thiệu chủ đề: Meine Präsentation ist zu dem _____",
+            a: "Thema",
+          },
+          { q: "Ưu điểm: Ein _____ ist, dass...", a: "Vorteil" },
+          { q: "Nhược điểm: Ein _____ ist, dass...", a: "Nachteil" },
+          { q: "Quê hương: In meinem _____", a: "Heimatland" },
+          { q: "Từ chối: Nein, das finde ich nicht so _____", a: "gut" },
+          { q: "Ý kiến: Meiner _____ nach...", a: "Meinung" },
+          { q: "Kinh nghiệm: Was mich _____", a: "betrifft" },
+          { q: "Câu hỏi: Ich _____ gern eine Frage", a: "hätte" },
+          { q: "Kết thúc: Vielen Dank fürs _____!", a: "Zuhören" },
+          { q: "Đồng ý: Ich bin _____", a: "einverstanden" },
+          { q: "Lặp lại: Könnten Sie das _____?", a: "wiederholen" },
+          { q: "Kết luận: Zum _____ möchte ich sagen...", a: "Schluss" },
+        ],
+      };
 
       // Start Game
-      function startGame(gameType) {
-        document.getElementById("gameMenu").style.display = "none";
-        document.getElementById("gameArea").classList.add("active");
-        gameState.currentGame = gameType;
+      function startGame(mode) {
+        gameState.mode = mode;
         gameState.currentQuestion = 0;
+        gameState.score = 0;
+        gameState.correct = 0;
+        gameState.wrong = 0;
+        gameState.streak = 0;
+        gameState.selectedAnswer = null;
 
-        switch (gameType) {
-          case "redemittel":
-            startRedemittelQuiz();
-            break;
-          case "situation":
-            startSituationGame();
-            break;
-          case "presentation":
-            startPresentationGame();
-            break;
-          case "dialogue":
-            startDialogueGame();
-            break;
-          case "strategy":
-            startStrategyGame();
-            break;
-          case "vocabulary":
-            startVocabularyGame();
-            break;
-          case "roleplay":
-            startRolePlayGame();
-            break;
-          case "speed":
-            startSpeedChallenge();
-            break;
+        document.getElementById("menuScreen").classList.remove("active");
+        document.getElementById("gameScreen").classList.add("active");
+
+        if (mode === "speed-round") {
+          gameState.timeLeft = 60;
+          startTimer();
         }
+
+        loadQuestion();
       }
 
-      // Redemittel Quiz
-      function startRedemittelQuiz() {
+      // Load Question
+      function loadQuestion() {
+        const mode = gameState.mode;
+        const questionIndex = gameState.currentQuestion;
         const gameArea = document.getElementById("gameArea");
-        gameArea.innerHTML = `
-                <h2>💬 Redemittel Quiz</h2>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress" style="width: 0%">0/${redemittelQuestions.length}</div>
-                </div>
-                <div id="quizContent"></div>
-            `;
-        showRedemittelQuestion();
-      }
+        const feedbackBox = document.getElementById("feedbackBox");
 
-      function showRedemittelQuestion() {
-        if (gameState.currentQuestion >= redemittelQuestions.length) {
-          showQuizComplete();
-          return;
+        feedbackBox.classList.remove("show");
+        document.getElementById("submitBtn").style.display = "block";
+        document.getElementById("nextBtn").style.display = "none";
+        gameState.selectedAnswer = null;
+
+        // Update progress
+        const progress = ((questionIndex + 1) / gameState.totalQuestions) * 100;
+        document.getElementById("progressFill").style.width = progress + "%";
+        document.getElementById("progressFill").textContent = `Câu ${
+          questionIndex + 1
+        }/${gameState.totalQuestions}`;
+
+        let html = "";
+
+        if (mode === "multiple-choice") {
+          const q = questionBanks[mode][questionIndex];
+          html = `
+                    <div class="question-card">
+                        <div class="question-text">${q.question}</div>
+                        <div class="options-grid">
+                            ${q.options
+                              .map(
+                                (opt, i) => `
+                                <div class="option-btn" onclick="selectOption(${i})">
+                                    ${opt}
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                `;
+        } else if (mode === "fill-blank") {
+          const q = questionBanks[mode][questionIndex];
+          html = `
+                    <div class="question-card">
+                        <div class="question-text">${q.question}</div>
+                        <div class="hint-box">💡 Gợi ý: ${q.hint}</div>
+                        <input type="text" class="fill-blank-input" id="answerInput" 
+                               placeholder="Nhập câu trả lời..." 
+                               onkeypress="if(event.key==='Enter') checkAnswer()">
+                    </div>
+                `;
+        } else if (mode === "sentence-builder") {
+          const q = questionBanks[mode][questionIndex];
+          const shuffled = [...q.words].sort(() => Math.random() - 0.5);
+          html = `
+                    <div class="question-card">
+                        <div class="question-text">${q.question}</div>
+                        <div class="sentence-builder" id="sentenceBuilder"></div>
+                        <div class="word-bank">
+                            ${shuffled
+                              .map(
+                                (word) => `
+                                <div class="draggable-word" onclick="addToSentence(this)">${word}</div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                `;
+        } else if (mode === "matching") {
+          const q =
+            questionBanks[mode][
+              Math.floor(Math.random() * questionBanks[mode].length)
+            ];
+          gameState.matchingPairs = q.pairs;
+          const shuffledLeft = [...q.pairs].sort(() => Math.random() - 0.5);
+          const shuffledRight = [...q.pairs].sort(() => Math.random() - 0.5);
+
+          html = `
+                    <div class="question-card">
+                        <div class="question-text">Ghép cặp Tiếng Đức - Tiếng Việt</div>
+                        <div class="matching-game">
+                            <div class="matching-column" id="leftColumn">
+                                ${shuffledLeft
+                                  .map(
+                                    (pair, i) => `
+                                    <div class="match-item" data-text="${pair.de}" onclick="selectMatch(this, 'left')">
+                                        ${pair.de}
+                                    </div>
+                                `
+                                  )
+                                  .join("")}
+                            </div>
+                            <div class="matching-column" id="rightColumn">
+                                ${shuffledRight
+                                  .map(
+                                    (pair, i) => `
+                                    <div class="match-item" data-text="${pair.vi}" onclick="selectMatch(this, 'right')">
+                                        ${pair.vi}
+                                    </div>
+                                `
+                                  )
+                                  .join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
+          gameState.matchingState = {
+            selectedLeft: null,
+            selectedRight: null,
+            matches: 0,
+          };
+        } else if (mode === "situation-response") {
+          const q = questionBanks[mode][questionIndex];
+          html = `
+                    <div class="question-card">
+                        <div class="situation">
+                            <strong>🎬 Tình huống:</strong><br>
+                            ${q.situation}
+                        </div>
+                        <div class="hint-box">
+                            <strong>📝 Nhiệm vụ:</strong> ${q.scenario}
+                        </div>
+                        <div class="options-grid">
+                            ${q.options
+                              .map(
+                                (opt, i) => `
+                                <div class="option-btn" onclick="selectOption(${i})">
+                                    ${opt}
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                `;
+        } else if (mode === "speed-round") {
+          const q =
+            questionBanks[mode][questionIndex % questionBanks[mode].length];
+          html = `
+                    <div class="question-card">
+                        <div class="timer">${gameState.timeLeft}s</div>
+                        <div class="question-text">${q.q}</div>
+                        <input type="text" class="fill-blank-input" id="answerInput" 
+                               placeholder="Trả lời nhanh!" 
+                               onkeypress="if(event.key==='Enter') checkAnswer()"
+                               autofocus>
+                    </div>
+                `;
         }
 
-        const question = redemittelQuestions[gameState.currentQuestion];
-        const content = document.getElementById("quizContent");
+        gameArea.innerHTML = html;
 
-        content.innerHTML = `
-                <div class="question-box">
-                    <strong>Câu ${gameState.currentQuestion + 1}:</strong><br>
-                    ${question.question}
-                </div>
-                <div class="options" id="options">
-                    ${question.options
-                      .map(
-                        (opt, idx) => `
-                        <div class="option-btn" onclick="checkAnswer(${idx}, ${question.correct})">${opt}</div>
-                    `
-                      )
-                      .join("")}
-                </div>
-                <div id="feedback"></div>
-            `;
-
-        updateProgress();
+        if (mode === "fill-blank" || mode === "speed-round") {
+          setTimeout(
+            () => document.getElementById("answerInput")?.focus(),
+            100
+          );
+        }
       }
 
-      function checkAnswer(selected, correct) {
-        const options = document.querySelectorAll(".option-btn");
-        const feedback = document.getElementById("feedback");
-        const question = redemittelQuestions[gameState.currentQuestion];
+      // Select Option
+      function selectOption(index) {
+        gameState.selectedAnswer = index;
+        document.querySelectorAll(".option-btn").forEach((btn, i) => {
+          btn.style.background =
+            i === index
+              ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+              : "white";
+          btn.style.color = i === index ? "white" : "#333";
+        });
+      }
 
-        options.forEach((opt, idx) => {
-          opt.classList.add("disabled");
-          if (idx === correct) {
-            opt.classList.add("correct");
-          } else if (idx === selected) {
-            opt.classList.add("wrong");
+      // Add word to sentence (for sentence builder)
+      function addToSentence(wordEl) {
+        if (wordEl.classList.contains("used")) return;
+
+        const builder = document.getElementById("sentenceBuilder");
+        const clone = wordEl.cloneNode(true);
+
+        clone.onclick = function () {
+          wordEl.classList.remove("used");
+          this.remove();
+        };
+
+        builder.appendChild(clone);
+        wordEl.classList.add("used");
+      }
+
+      // Matching game functions
+      function selectMatch(element, side) {
+        if (element.classList.contains("matched")) return;
+
+        const column = side === "left" ? "leftColumn" : "rightColumn";
+        document.querySelectorAll(`#${column} .match-item`).forEach((item) => {
+          if (!item.classList.contains("matched")) {
+            item.classList.remove("selected");
           }
         });
 
-        if (selected === correct) {
-          updateScore(10, true);
-          feedback.innerHTML = `
-                    <div class="feedback correct">
-                        <strong>🎉 Chính xác!</strong><br>
-                        ${question.explanation}
-                        <br><br>
-                        <button class="btn" onclick="nextQuestion()">Câu tiếp theo →</button>
-                    </div>
-                `;
+        element.classList.add("selected");
+
+        if (side === "left") {
+          gameState.matchingState.selectedLeft = element.dataset.text;
         } else {
-          updateScore(-5, false);
-          feedback.innerHTML = `
-                    <div class="feedback wrong">
-                        <strong>❌ Chưa đúng!</strong><br>
-                        Đáp án đúng: <strong>${
-                          redemittelQuestions[gameState.currentQuestion]
-                            .options[correct]
-                        }</strong><br>
-                        ${question.explanation}
-                        <br><br>
-                        <button class="btn" onclick="nextQuestion()">Câu tiếp theo →</button>
-                    </div>
-                `;
+          gameState.matchingState.selectedRight = element.dataset.text;
+        }
+
+        if (
+          gameState.matchingState.selectedLeft &&
+          gameState.matchingState.selectedRight
+        ) {
+          checkMatch();
         }
       }
 
-      function nextQuestion() {
-        gameState.currentQuestion++;
-        showRedemittelQuestion();
-      }
+      function checkMatch() {
+        const leftText = gameState.matchingState.selectedLeft;
+        const rightText = gameState.matchingState.selectedRight;
 
-      function updateProgress() {
-        const progress = document.getElementById("progress");
-        const percentage =
-          (gameState.currentQuestion / redemittelQuestions.length) * 100;
-        progress.style.width = percentage + "%";
-        progress.textContent = `${gameState.currentQuestion}/${redemittelQuestions.length}`;
-      }
-
-      function showQuizComplete() {
-        const content = document.getElementById("quizContent");
-        const percentage = Math.round(
-          (gameState.correct / redemittelQuestions.length) * 100
+        const pair = gameState.matchingPairs.find(
+          (p) => p.de === leftText && p.vi === rightText
         );
 
-        content.innerHTML = `
-                <div class="celebration">
-                    <div class="emoji">🎉</div>
-                    <h2>Hoàn thành!</h2>
-                    <p style="font-size: 1.3em; margin: 20px 0;">
-                        Bạn đã trả lời đúng <strong>${gameState.correct}/${
-          redemittelQuestions.length
-        }</strong> câu<br>
-                        Tỷ lệ đúng: <strong>${percentage}%</strong>
-                    </p>
-                    ${
-                      percentage >= 80
-                        ? '<p style="color: #28a745; font-size: 1.2em;">🌟 Xuất sắc! Bạn đã nắm vững Redemittel!</p>'
-                        : percentage >= 60
-                        ? '<p style="color: #ffc107; font-size: 1.2em;">👍 Khá tốt! Hãy luyện tập thêm nhé!</p>'
-                        : '<p style="color: #dc3545; font-size: 1.2em;">💪 Cố gắng lên! Ôn lại Redemittel nhé!</p>'
-                    }
-                    <button class="btn" onclick="startGame('redemittel')">Chơi lại</button>
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
-      }
+        const leftEl = document.querySelector(
+          `#leftColumn .match-item[data-text="${leftText}"]`
+        );
+        const rightEl = document.querySelector(
+          `#rightColumn .match-item[data-text="${rightText}"]`
+        );
 
-      // Situation Game (Teil 1)
-      function startSituationGame() {
-        const gameArea = document.getElementById("gameArea");
-        const scenario =
-          situationScenarios[
-            Math.floor(Math.random() * situationScenarios.length)
-          ];
+        if (pair) {
+          leftEl.classList.add("matched");
+          rightEl.classList.add("matched");
+          leftEl.classList.remove("selected");
+          rightEl.classList.remove("selected");
 
-        gameArea.innerHTML = `
-                <h2>🗣️ Tình Huống Teil 1: ${scenario.title}</h2>
-                
-                <div class="scenario-box">
-                    <h4>📋 Các điểm cần thảo luận:</h4>
-                    <ul>
-                        ${scenario.points.map((p) => `<li>${p}</li>`).join("")}
-                    </ul>
-                </div>
+          gameState.matchingState.matches++;
+          gameState.score += 10;
+          gameState.correct++;
+          gameState.streak++;
+          updateStats();
 
-                <div class="practice-area">
-                    <h4>💡 Partner Type: <span style="color: #667eea;">${
-                      scenario.partnerType === "stark"
-                        ? "Giỏi hơn bạn"
-                        : scenario.partnerType === "schwach"
-                        ? "Yếu hơn bạn"
-                        : "Ngang bằng"
-                    }</span></h4>
-                    
-                    <h4 style="margin-top: 20px;">🎭 Ví dụ đối thoại:</h4>
-                    ${scenario.dialogue
-                      .map(
-                        (d) => `
-                        <div class="role-play">
-                            <strong>${d.speaker}:</strong> ${d.text}
-                        </div>
-                    `
-                      )
-                      .join("")}
-                </div>
+          if (gameState.matchingState.matches === 5) {
+            setTimeout(() => {
+              showFeedback(true, "matching", 0);
+              document.getElementById("submitBtn").style.display = "none";
+              document.getElementById("nextBtn").style.display = "block";
+            }, 500);
+          }
+        } else {
+          leftEl.style.animation = "wrongShake 0.5s";
+          rightEl.style.animation = "wrongShake 0.5s";
 
-                <div class="hint-box">
-                    <h5>💡 Gợi ý:</h5>
-                    <p><strong>Cấu trúc của BẠN:</strong></p>
-                    <ol>
-                        ${
-                          scenario.partnerType === "schwach"
-                            ? `
-                            <li>Đề nghị 💡 (Ich schlage vor, dass...)</li>
-                            <li>Lý do 📝 (weil...)</li>
-                            <li>Hỏi ý kiến ❓ (Was hältst du davon?)</li>
-                            <li>⚠️ Nếu partner im lặng → Tự chốt và chuyển điểm!</li>
-                        `
-                            : scenario.partnerType === "stark"
-                            ? `
-                            <li>Đồng ý ✅ (Das ist eine gute Idee!)</li>
-                            <li>Đề nghị 💡 (Ich schlage vor, dass...)</li>
-                            <li>Lý do 📝 (weil...)</li>
-                            <li>Hỏi ý kiến ❓ (Was meinst du?)</li>
-                        `
-                            : `
-                            <li>Từ chối lịch sự ❌ (Nein, das finde ich nicht so gut)</li>
-                            <li>Lý do từ chối 📝 (weil...)</li>
-                            <li>Đề nghị khác 💡 (Aber ich habe gehört, dass...)</li>
-                            <li>Lý do đề nghị mới 📝</li>
-                            <li>Hỏi ý kiến ❓</li>
-                        `
-                        }
-                    </ol>
-                </div>
+          setTimeout(() => {
+            leftEl.classList.remove("selected");
+            rightEl.classList.remove("selected");
+            leftEl.style.animation = "";
+            rightEl.style.animation = "";
+          }, 500);
 
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn" onclick="generateNewSituation()">Tình huống mới</button>
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
-
-        updateScore(5, true);
-      }
-
-      function generateNewSituation() {
-        startSituationGame();
-      }
-
-      // Presentation Game (Teil 2)
-      function startPresentationGame() {
-        const gameArea = document.getElementById("gameArea");
-        const topic =
-          presentationTopics[
-            Math.floor(Math.random() * presentationTopics.length)
-          ];
-
-        gameArea.innerHTML = `
-                <h2>📊 Thuyết Trình Teil 2: ${topic.topic}</h2>
-                
-                <div class="scenario-box">
-                    <h4>⏱️ Thời gian: 3 phút chuẩn bị + 3 phút thuyết trình</h4>
-                </div>
-
-                <h3 style="margin-top: 30px;">📑 Cấu trúc bài thuyết trình:</h3>
-                
-                ${topic.structure
-                  .map(
-                    (slide, idx) => `
-                    <div class="practice-area" style="margin-bottom: 20px;">
-                        <h4>Slide ${slide.slide}: ${slide.title}</h4>
-                        <div class="example">
-                            <strong>Ví dụ:</strong><br>
-                            <em>${slide.example}</em>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <strong>✍️ Thực hành của bạn:</strong>
-                            <textarea class="answer-input" rows="3" placeholder="Viết câu của bạn tại đây..."></textarea>
-                        </div>
-                    </div>
-                `
-                  )
-                  .join("")}
-
-                <div class="hint-box">
-                    <h5>💡 Lưu ý quan trọng:</h5>
-                    <ul>
-                        <li>✓ Nói TỰ NHIÊN, không học thuộc</li>
-                        <li>✓ Dùng LIÊN TỪ: zuerst, dann, danach, zum Schluss</li>
-                        <li>✓ Nhìn vào GIÁM KHẢO khi nói</li>
-                        <li>✓ Giữ TỐC ĐỘ vừa phải</li>
-                        <li>✓ Dùng CỬ CHỈ TAY phù hợp</li>
-                    </ul>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn" onclick="generateNewPresentation()">Chủ đề mới</button>
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
-
-        updateScore(5, true);
-      }
-
-      function generateNewPresentation() {
-        startPresentationGame();
-      }
-
-      // Dialogue Game (Teil 3)
-      function startDialogueGame() {
-        const gameArea = document.getElementById("gameArea");
-
-        const situations = [
-          {
-            context: "Partner vừa thuyết trình về 'Sport und Gesundheit'",
-            tasks: [
-              "Đưa phản hồi tích cực về bài thuyết trình",
-              "Đặt 1-2 câu hỏi liên quan đến chủ đề",
-              "Chia sẻ quan điểm của bạn",
-            ],
-          },
-          {
-            context: "Partner vừa thuyết trình về 'Lernen mit Internet'",
-            tasks: [
-              "Khen ngợi điểm hay trong bài thuyết trình",
-              "Hỏi về kinh nghiệm cá nhân của partner",
-              "So sánh với tình hình ở quê nhà bạn",
-            ],
-          },
-        ];
-
-        const situation =
-          situations[Math.floor(Math.random() * situations.length)];
-
-        gameArea.innerHTML = `
-                <h2>💬 Đối Thoại Teil 3</h2>
-                
-                <div class="scenario-box">
-                    <h4>📝 Tình huống:</h4>
-                    <p style="font-size: 1.1em;">${situation.context}</p>
-                </div>
-
-                <div class="practice-area">
-                    <h4>🎯 Nhiệm vụ của bạn:</h4>
-                    <ol>
-                        ${situation.tasks.map((t) => `<li>${t}</li>`).join("")}
-                    </ol>
-                </div>
-
-                <div class="hint-box">
-                    <h5>💡 Redemittel hữu ích:</h5>
-                    <p><strong>Phản hồi:</strong></p>
-                    <ul>
-                        <li>Ihr Vortrag war sehr interessant.</li>
-                        <li>Mir hat Ihr Vortrag sehr gut gefallen.</li>
-                        <li>Ich habe (sehr) interessant gefunden, dass...</li>
-                    </ul>
-                    
-                    <p><strong>Đặt câu hỏi:</strong></p>
-                    <ul>
-                        <li>Ich hätte gern eine Frage für Sie.</li>
-                        <li>Ich möchte Sie fragen: ...?</li>
-                        <li>Könnten Sie mir bitte sagen/erklären...?</li>
-                    </ul>
-                </div>
-
-                <div class="practice-area">
-                    <h4>✍️ Thực hành của bạn:</h4>
-                    
-                    <p><strong>1. Phản hồi:</strong></p>
-                    <textarea class="answer-input" rows="2" placeholder="Viết phản hồi của bạn..."></textarea>
-                    
-                    <p style="margin-top: 15px;"><strong>2. Câu hỏi thứ nhất:</strong></p>
-                    <textarea class="answer-input" rows="2" placeholder="Đặt câu hỏi..."></textarea>
-                    
-                    <p style="margin-top: 15px;"><strong>3. Câu hỏi thứ hai:</strong></p>
-                    <textarea class="answer-input" rows="2" placeholder="Đặt câu hỏi..."></textarea>
-                    
-                    <p style="margin-top: 15px;"><strong>4. Chia sẻ quan điểm:</strong></p>
-                    <textarea class="answer-input" rows="3" placeholder="Chia sẻ ý kiến của bạn..."></textarea>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn" onclick="generateNewDialogue()">Tình huống mới</button>
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
-
-        updateScore(5, true);
-      }
-
-      function generateNewDialogue() {
-        startDialogueGame();
-      }
-
-      // Strategy Game
-      function startStrategyGame() {
-        const gameArea = document.getElementById("gameArea");
-
-        gameArea.innerHTML = `
-                <h2>🎯 Chiến Thuật Ứng Phó Partner</h2>
-                
-                <div class="grid" style="margin-top: 30px;">
-                    <div class="card">
-                        <div class="icon">⬆️</div>
-                        <h3>Partner GIỎI HƠN</h3>
-                        <div style="text-align: left; margin-top: 20px;">
-                            <p><strong>Partner nói (3 câu):</strong></p>
-                            <ol style="margin-left: 20px;">
-                                <li>Đề nghị 💡</li>
-                                <li>Lý do 📝</li>
-                                <li>Hỏi ý kiến ❓</li>
-                            </ol>
-                            
-                            <p style="margin-top: 15px;"><strong>BẠN nói (4 câu):</strong></p>
-                            <ol style="margin-left: 20px;">
-                                <li>Đồng ý ✅</li>
-                                <li>Đề nghị 💡</li>
-                                <li>Lý do 📝</li>
-                                <li>Hỏi ý kiến ❓</li>
-                            </ol>
-                        </div>
-                        <button class="btn" style="margin-top: 20px;" onclick="practicePartnerType('stark')">Luyện tập</button>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon">⚖️</div>
-                        <h3>Partner NGANG BẰNG</h3>
-                        <div style="text-align: left; margin-top: 20px;">
-                            <p><strong>BẠN nói (5 câu):</strong></p>
-                            <ol style="margin-left: 20px;">
-                                <li>Từ chối lịch sự ❌</li>
-                                <li>Lý do từ chối 📝</li>
-                                <li>Đề nghị khác 💡</li>
-                                <li>Lý do mới 📝</li>
-                                <li>Hỏi ý kiến ❓</li>
-                            </ol>
-                            
-                            <p style="margin-top: 10px; color: #666;"><em>Có tranh luận tự nhiên!</em></p>
-                        </div>
-                        <button class="btn" style="margin-top: 20px;" onclick="practicePartnerType('normal')">Luyện tập</button>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon">⬇️</div>
-                        <h3>Partner YẾU HƠN</h3>
-                        <div style="text-align: left; margin-top: 20px;">
-                            <p><strong>⚠️ BẠN nói TRƯỚC (3 câu):</strong></p>
-                            <ol style="margin-left: 20px;">
-                                <li>Đề nghị 💡</li>
-                                <li>Lý do 📝</li>
-                                <li>Hỏi ý kiến ❓</li>
-                            </ol>
-                            
-                            <p style="margin-top: 10px;"><strong>Nếu partner im lặng:</strong></p>
-                            <p style="margin-left: 20px;">→ Tự CHỐT ngay!<br>→ Chuyển điểm tiếp theo!</p>
-                        </div>
-                        <button class="btn" style="margin-top: 20px;" onclick="practicePartnerType('schwach')">Luyện tập</button>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
-
-        updateScore(5, true);
-      }
-
-      function practicePartnerType(type) {
-        const gameArea = document.getElementById("gameArea");
-
-        const examples = {
-          stark: {
-            title: "Partner Giỏi Hơn - Luyện Tập",
-            partner:
-              "Ich habe gelesen, dass es im Schwarzwald viel zu sehen gibt. Ich schlage vor, dass wir nach Freiburg fahren, weil es dort sehr schön ist. Was hältst du davon?",
-            hint: "Bạn nên: Đồng ý + Đề nghị thêm + Lý do + Hỏi ý kiến",
-          },
-          normal: {
-            title: "Partner Ngang Bằng - Luyện Tập",
-            partner:
-              "Ich denke, wir sollten mit dem Auto fahren. Was meinst du?",
-            hint: "Bạn nên: Từ chối lịch sự + Lý do + Đề nghị khác + Lý do mới + Hỏi ý kiến",
-          },
-          schwach: {
-            title: "Partner Yếu Hơn - Luyện Tập",
-            partner: "[Partner im lặng hoặc nói rất ngắn]",
-            hint: "Bạn nên: NÓI TRƯỚC! Đề nghị + Lý do + Hỏi ý kiến → Nếu im lặng quá 3 giây → Tự chốt!",
-          },
-        };
-
-        const example = examples[type];
-
-        gameArea.innerHTML = `
-                <h2>${example.title}</h2>
-                
-                <div class="role-play" style="margin: 30px 0;">
-                    <strong>Partner:</strong> ${example.partner}
-                </div>
-
-                <div class="hint-box">
-                    <h5>💡 Gợi ý:</h5>
-                    <p>${example.hint}</p>
-                </div>
-
-                <div class="practice-area">
-                    <h4>✍️ Phản hồi của bạn:</h4>
-                    <textarea class="answer-input" rows="5" placeholder="Viết phản hồi của bạn tại đây..."></textarea>
-                    
-                    <button class="btn" style="margin-top: 15px;" onclick="showSampleAnswer('${type}')">Xem câu trả lời mẫu</button>
-                </div>
-
-                <div id="sampleAnswer"></div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn" onclick="startStrategyGame()">Quay lại</button>
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
-      }
-
-      function showSampleAnswer(type) {
-        const samples = {
-          stark:
-            "Das ist eine gute Idee! Freiburg ist wirklich schön. Ich schlage vor, dass wir auch die Umgebung besuchen, weil dort viele interessante Wanderwege sind. Was hältst du davon?",
-          normal:
-            "Nein, das finde ich nicht so gut, weil das Benzin sehr teuer ist. Ich schlage vor, dass wir mit dem Zug fahren, weil das umweltfreundlicher und günstiger ist. Was meinst du?",
-          schwach:
-            "Ich schlage vor, dass wir nach Freiburg fahren, weil es dort viel zu sehen gibt. Was hältst du davon? [im lặng 3 giây] Gut, das ist eine gute Idee! Wir fahren also nach Freiburg. Und wann genau? Ich denke am Freitag ist besser...",
-        };
-
-        document.getElementById("sampleAnswer").innerHTML = `
-                <div class="example" style="margin-top: 20px;">
-                    <strong>✅ Câu trả lời mẫu:</strong><br><br>
-                    <em>${samples[type]}</em>
-                </div>
-            `;
-      }
-
-      // Vocabulary Flashcards
-      function startVocabularyGame() {
-        const gameArea = document.getElementById("gameArea");
-        let currentCard = 0;
-        let isFlipped = false;
-
-        function showCard() {
-          const card = vocabularyCards[currentCard];
-          const content = isFlipped ? card.back : card.front;
-
-          gameArea.innerHTML = `
-                    <h2>📚 Flashcards - Ôn Redemittel</h2>
-                    
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${
-                          (currentCard / vocabularyCards.length) * 100
-                        }%">
-                            ${currentCard + 1}/${vocabularyCards.length}
-                        </div>
-                    </div>
-
-                    <div style="text-align: center; margin: 30px 0;">
-                        <div class="level-badge level-intermediate">${
-                          card.category
-                        }</div>
-                    </div>
-                    
-                    <div class="vocabulary-card ${
-                      isFlipped ? "flipped" : ""
-                    }" onclick="flipCard()" 
-                         style="cursor: pointer; min-height: 200px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; text-align: center;">
-                        ${content}
-                    </div>
-                    
-                    <p style="text-align: center; color: #666; margin-top: 20px;">
-                        ${isFlipped ? "🇻🇳 Tiếng Việt" : "🇩🇪 Tiếng Đức"}<br>
-                        <em>Nhấn vào thẻ để lật</em>
-                    </p>
-
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button class="btn" onclick="previousCard()" ${
-                          currentCard === 0 ? "disabled" : ""
-                        }>← Trước</button>
-                        <button class="btn" onclick="nextCard()">Tiếp theo →</button>
-                        <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                    </div>
-                `;
+          gameState.wrong++;
+          gameState.streak = 0;
+          updateStats();
         }
 
-        window.flipCard = function () {
-          isFlipped = !isFlipped;
-          showCard();
-        };
+        gameState.matchingState.selectedLeft = null;
+        gameState.matchingState.selectedRight = null;
+      }
 
-        window.nextCard = function () {
-          if (currentCard < vocabularyCards.length - 1) {
-            currentCard++;
-            isFlipped = false;
-            showCard();
-            updateScore(2, true);
+      // Check Answer
+      function checkAnswer() {
+        const mode = gameState.mode;
+        const questionIndex = gameState.currentQuestion;
+        let isCorrect = false;
+        let userAnswer = "";
+
+        if (mode === "multiple-choice" || mode === "situation-response") {
+          const q = questionBanks[mode][questionIndex];
+          isCorrect = gameState.selectedAnswer === q.correct;
+
+          document.querySelectorAll(".option-btn").forEach((btn, i) => {
+            if (i === q.correct) {
+              btn.classList.add("correct");
+            } else if (i === gameState.selectedAnswer && !isCorrect) {
+              btn.classList.add("wrong");
+            }
+            btn.style.pointerEvents = "none";
+          });
+        } else if (mode === "fill-blank") {
+          const q = questionBanks[mode][questionIndex];
+          userAnswer = document
+            .getElementById("answerInput")
+            .value.trim()
+            .toLowerCase();
+          isCorrect = userAnswer === q.answer.toLowerCase();
+
+          document.getElementById("answerInput").style.borderColor = isCorrect
+            ? "#28a745"
+            : "#dc3545";
+          document.getElementById("answerInput").disabled = true;
+        } else if (mode === "speed-round") {
+          const q =
+            questionBanks[mode][questionIndex % questionBanks[mode].length];
+          userAnswer = document
+            .getElementById("answerInput")
+            .value.trim()
+            .toLowerCase();
+          isCorrect = userAnswer === q.a.toLowerCase();
+
+          if (isCorrect) {
+            gameState.currentQuestion++;
+            gameState.score += 10;
+            gameState.correct++;
+            gameState.streak++;
+
+            if (gameState.streak > gameState.bestStreak) {
+              gameState.bestStreak = gameState.streak;
+            }
+
+            updateStats();
+
+            if (gameState.timeLeft > 0) {
+              loadQuestion();
+            } else {
+              showResults();
+            }
+            return;
           } else {
-            gameArea.innerHTML = `
-                        <div class="celebration">
-                            <div class="emoji">🎉</div>
-                            <h2>Hoàn thành tất cả flashcards!</h2>
-                            <p style="font-size: 1.2em; margin: 20px 0;">
-                                Bạn đã ôn xong ${vocabularyCards.length} cụm từ quan trọng!
-                            </p>
-                            <button class="btn" onclick="startVocabularyGame()">Ôn lại</button>
-                            <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                        </div>
-                    `;
+            gameState.wrong++;
+            gameState.streak = 0;
+            document.getElementById("answerInput").value = "";
+            document.getElementById("answerInput").style.borderColor =
+              "#dc3545";
+            setTimeout(() => {
+              document.getElementById("answerInput").style.borderColor =
+                "#e0e0e0";
+              document.getElementById("answerInput").focus();
+            }, 500);
+            updateStats();
+            return;
           }
-        };
+        } else if (mode === "sentence-builder") {
+          const q = questionBanks[mode][questionIndex];
+          const builder = document.getElementById("sentenceBuilder");
+          userAnswer = Array.from(builder.children)
+            .map((el) => el.textContent)
+            .join(" ");
+          isCorrect = userAnswer === q.correct;
+        } else if (mode === "matching") {
+          return; // Matching is handled separately
+        }
 
-        window.previousCard = function () {
-          if (currentCard > 0) {
-            currentCard--;
-            isFlipped = false;
-            showCard();
+        // Update score and streak
+        if (isCorrect) {
+          gameState.score += 10 + gameState.streak * 2;
+          gameState.correct++;
+          gameState.streak++;
+
+          if (gameState.streak > gameState.bestStreak) {
+            gameState.bestStreak = gameState.streak;
           }
-        };
 
-        showCard();
+          if (gameState.streak >= 3) {
+            showCombo(gameState.streak);
+          }
+        } else {
+          gameState.wrong++;
+          gameState.streak = 0;
+        }
+
+        updateStats();
+        showFeedback(isCorrect, mode, questionIndex);
+
+        document.getElementById("submitBtn").style.display = "none";
+        document.getElementById("nextBtn").style.display = "block";
       }
 
-      // Role-Play Game
-      function startRolePlayGame() {
-        const gameArea = document.getElementById("gameArea");
+      // Show Feedback
+      function showFeedback(isCorrect, mode, questionIndex) {
+        const feedbackBox = document.getElementById("feedbackBox");
+        const feedbackTitle = document.getElementById("feedbackTitle");
+        const feedbackText = document.getElementById("feedbackText");
 
-        gameArea.innerHTML = `
-                <h2>🎭 Role-Play - Mô Phỏng Thi Thật</h2>
-                
-                <div class="timer" id="timer">⏱️ Thời gian: 15:00</div>
+        let explanation = "";
 
-                <div class="scenario-box">
-                    <h4>📝 Đề bài:</h4>
-                    <p><strong>Teil 1:</strong> Wochenendausflug in den Schwarzwald planen (4 phút)</p>
-                    <p><strong>Teil 2:</strong> Präsentation über "Lernen im Internet" (3 phút)</p>
-                    <p><strong>Teil 3:</strong> Diskussion über das Thema (5 phút)</p>
-                </div>
+        if (mode === "matching") {
+          explanation = "Bạn đã ghép đúng tất cả các cặp!";
+        } else if (questionBanks[mode] && questionBanks[mode][questionIndex]) {
+          explanation = questionBanks[mode][questionIndex].explanation || "";
+        }
 
-                <div class="practice-area">
-                    <h4>🎯 Hướng dẫn:</h4>
-                    <ol>
-                        <li>Nhấn "Bắt đầu" để bắt đầu đồng hồ đếm ngược</li>
-                        <li>Thực hành nói theo từng Teil</li>
-                        <li>Tự đánh giá sau khi hoàn thành</li>
-                    </ol>
-                </div>
-
-                <div id="roleplayContent">
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button class="btn" style="font-size: 1.3em; padding: 20px 50px;" onclick="startTimer()">
-                            🎬 Bắt đầu thi thử
-                        </button>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
+        if (isCorrect) {
+          feedbackBox.className = "feedback-box correct show";
+          feedbackTitle.textContent = "✅ Chính xác!";
+          feedbackText.textContent = explanation;
+        } else {
+          feedbackBox.className = "feedback-box wrong show";
+          feedbackTitle.textContent = "❌ Chưa đúng";
+          feedbackText.textContent = explanation;
+        }
       }
 
+      // Next Question
+      function nextQuestion() {
+        gameState.currentQuestion++;
+
+        if (gameState.currentQuestion >= gameState.totalQuestions) {
+          showResults();
+        } else {
+          loadQuestion();
+        }
+      }
+
+      // Show Results
+      function showResults() {
+        if (gameState.timerInterval) {
+          clearInterval(gameState.timerInterval);
+        }
+
+        document.getElementById("gameScreen").classList.remove("active");
+        document.getElementById("resultsScreen").classList.add("active");
+
+        const total = gameState.correct + gameState.wrong;
+        const accuracy =
+          total > 0 ? Math.round((gameState.correct / total) * 100) : 0;
+
+        document.getElementById("finalScore").textContent = gameState.score;
+        document.getElementById("correctCount").textContent = gameState.correct;
+        document.getElementById("wrongCount").textContent = gameState.wrong;
+        document.getElementById("finalAccuracy").textContent = accuracy + "%";
+        document.getElementById("bestStreak").textContent =
+          gameState.bestStreak;
+
+        // Performance message
+        let message = "";
+        let achievements = "";
+
+        if (accuracy >= 90) {
+          message = "🌟 Xuất sắc! Bạn đã thành thạo Redemittel!";
+          achievements +=
+            '<span class="achievement-badge">🏆 Bậc Thầy B1</span>';
+        } else if (accuracy >= 75) {
+          message = "👍 Rất tốt! Tiếp tục luyện tập!";
+          achievements +=
+            '<span class="achievement-badge">⭐ Học Viên Giỏi</span>';
+        } else if (accuracy >= 60) {
+          message = "💪 Khá tốt! Hãy ôn lại một số phần.";
+          achievements +=
+            '<span class="achievement-badge">📚 Học Viên Chăm Chỉ</span>';
+        } else {
+          message = "📖 Cần cố gắng thêm! Đừng bỏ cuộc!";
+        }
+
+        if (gameState.bestStreak >= 5) {
+          achievements +=
+            '<span class="achievement-badge">🔥 Streak Master</span>';
+        }
+
+        if (gameState.score >= 150) {
+          achievements += '<span class="achievement-badge">💯 Điểm Cao</span>';
+        }
+
+        document.getElementById("performanceMessage").textContent = message;
+        document.getElementById("achievementsList").innerHTML = achievements;
+      }
+
+      // Update Stats
+      function updateStats() {
+        const total = gameState.correct + gameState.wrong;
+        const accuracy =
+          total > 0 ? Math.round((gameState.correct / total) * 100) : 0;
+
+        document.getElementById("totalScore").textContent = gameState.score;
+        document.getElementById("accuracy").textContent = accuracy + "%";
+        document.getElementById("streak").textContent = gameState.streak;
+
+        // Calculate level based on score
+        gameState.level = Math.floor(gameState.score / 50) + 1;
+        document.getElementById("level").textContent = gameState.level;
+      }
+
+      // Show Combo
+      function showCombo(streak) {
+        const comboCounter = document.getElementById("comboCounter");
+        comboCounter.textContent = `🔥 ${streak}x COMBO!`;
+        comboCounter.classList.add("show");
+
+        setTimeout(() => {
+          comboCounter.classList.remove("show");
+        }, 1000);
+      }
+
+      // Timer for Speed Round
       function startTimer() {
-        let timeLeft = 900; // 15 minutes
-        const timerDisplay = document.getElementById("timer");
-        const content = document.getElementById("roleplayContent");
+        gameState.timerInterval = setInterval(() => {
+          gameState.timeLeft--;
 
-        content.innerHTML = `
-                <div class="practice-area" style="margin-top: 20px;">
-                    <h4>📢 Đang thi - Hãy nói to và rõ ràng!</h4>
-                    <div style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                        <p><strong>Teil 1:</strong> Lên kế hoạch (0:00 - 4:00)</p>
-                        <p><strong>Teil 2:</strong> Thuyết trình (4:00 - 10:00)</p>
-                        <p><strong>Teil 3:</strong> Thảo luận (10:00 - 15:00)</p>
-                    </div>
-                    <button class="btn" onclick="stopTimer()">⏹️ Dừng lại</button>
-                </div>
-            `;
+          const timerEl = document.querySelector(".timer");
+          if (timerEl) {
+            timerEl.textContent = gameState.timeLeft + "s";
 
-        gameState.timer = setInterval(() => {
-          timeLeft--;
-          const minutes = Math.floor(timeLeft / 60);
-          const seconds = timeLeft % 60;
-          timerDisplay.textContent = `⏱️ Thời gian: ${minutes}:${seconds
-            .toString()
-            .padStart(2, "0")}`;
+            if (gameState.timeLeft <= 10) {
+              timerEl.style.background =
+                "linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)";
+            }
+          }
 
-          if (timeLeft <= 0) {
-            clearInterval(gameState.timer);
-            finishRolePlay();
+          if (gameState.timeLeft <= 0) {
+            clearInterval(gameState.timerInterval);
+            showResults();
           }
         }, 1000);
       }
 
-      function stopTimer() {
-        clearInterval(gameState.timer);
-        finishRolePlay();
+      // Return to Menu
+      function returnToMenu() {
+        if (gameState.timerInterval) {
+          clearInterval(gameState.timerInterval);
+        }
+
+        document
+          .querySelectorAll(".menu-screen, .game-screen, .results-screen")
+          .forEach((screen) => {
+            screen.classList.remove("active");
+          });
+
+        document.getElementById("menuScreen").classList.add("active");
       }
 
-      function finishRolePlay() {
-        const content = document.getElementById("roleplayContent");
-        content.innerHTML = `
-                <div class="celebration">
-                    <div class="emoji">🎉</div>
-                    <h2>Hoàn thành!</h2>
-                    
-                    <div class="practice-area" style="text-align: left; margin: 20px auto; max-width: 600px;">
-                        <h4>📊 Tự đánh giá:</h4>
-                        <p><strong>Bạn đã hoàn thành:</strong></p>
-                        <ul>
-                            <li>✓ Teil 1: Lên kế hoạch với partner</li>
-                            <li>✓ Teil 2: Thuyết trình về chủ đề</li>
-                            <li>✓ Teil 3: Thảo luận và đặt câu hỏi</li>
-                        </ul>
-                        
-                        <p style="margin-top: 20px;"><strong>Điểm mạnh của bạn:</strong></p>
-                        <textarea class="answer-input" rows="3" placeholder="Viết điểm mạnh..."></textarea>
-                        
-                        <p style="margin-top: 15px;"><strong>Cần cải thiện:</strong></p>
-                        <textarea class="answer-input" rows="3" placeholder="Viết điểm cần cải thiện..."></textarea>
-                    </div>
-
-                    <button class="btn" onclick="startRolePlayGame()">Thi lại</button>
-                    <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                </div>
-            `;
-        updateScore(50, true);
-      }
-
-      // Speed Challenge
-      function startSpeedChallenge() {
-        const gameArea = document.getElementById("gameArea");
-        let timeLeft = 60;
-        let questionIndex = 0;
-
-        const speedQuestions = [
-          {
-            q: "Đề xuất đi Freiburg",
-            a: "Ich schlage vor, dass wir nach Freiburg fahren",
-          },
-          { q: "Đồng ý với partner", a: "Das ist eine gute Idee" },
-          { q: "Hỏi ý kiến partner", a: "Was hältst du davon?" },
-          { q: "Phản đối lịch sự", a: "Da bin ich anderer Meinung" },
-          {
-            q: "Bắt đầu bài thuyết trình",
-            a: "Liebe Zuhörer, ich begrüße Sie herzlich",
-          },
-          { q: "Chia sẻ kinh nghiệm", a: "Was mich betrifft, ich..." },
-          { q: "Nêu ưu điểm", a: "Ein Vorteil ist, dass..." },
-          { q: "Kết thúc thuyết trình", a: "Vielen Dank fürs Zuhören" },
-          { q: "Khen bài thuyết trình", a: "Ihr Vortrag war sehr interessant" },
-          { q: "Đặt câu hỏi", a: "Ich möchte Sie fragen: ...?" },
-        ];
-
-        gameArea.innerHTML = `
-                <h2>⚡ Speed Challenge - 60 giây!</h2>
-                
-                <div class="timer" id="speedTimer">⏱️ ${timeLeft}s</div>
-                
-                <div class="question-box" id="speedQuestion"></div>
-                
-                <div class="practice-area">
-                    <textarea class="answer-input" id="speedAnswer" rows="2" 
-                              placeholder="Viết câu trả lời nhanh..." 
-                              onkeypress="if(event.key==='Enter'){checkSpeedAnswer()}"></textarea>
-                    <button class="btn" onclick="checkSpeedAnswer()">✓ Kiểm tra</button>
-                    <button class="btn btn-secondary" onclick="skipSpeedQuestion()">→ Bỏ qua</button>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" id="speedProgress" style="width: 0%">0/10</div>
-                </div>
-
-                <div id="speedResult"></div>
-            `;
-
-        function showQuestion() {
-          if (questionIndex < speedQuestions.length) {
-            document.getElementById("speedQuestion").innerHTML = `
-                        <strong>Câu ${questionIndex + 1}/10:</strong><br>
-                        ${speedQuestions[questionIndex].q}
-                    `;
-            document.getElementById("speedAnswer").value = "";
-            document.getElementById("speedAnswer").focus();
-          } else {
-            endSpeedChallenge(questionIndex);
-          }
-        }
-
-        window.checkSpeedAnswer = function () {
-          const answer = document.getElementById("speedAnswer").value.trim();
-          if (answer) {
-            questionIndex++;
-            updateScore(10, true);
-            updateSpeedProgress();
-            showQuestion();
-          }
-        };
-
-        window.skipSpeedQuestion = function () {
-          questionIndex++;
-          updateSpeedProgress();
-          showQuestion();
-        };
-
-        function updateSpeedProgress() {
-          const progress = document.getElementById("speedProgress");
-          const percentage = (questionIndex / speedQuestions.length) * 100;
-          progress.style.width = percentage + "%";
-          progress.textContent = `${questionIndex}/${speedQuestions.length}`;
-        }
-
-        function endSpeedChallenge(answered) {
-          clearInterval(speedTimer);
-          document.getElementById("speedResult").innerHTML = `
-                    <div class="celebration">
-                        <div class="emoji">⚡</div>
-                        <h2>Hết giờ!</h2>
-                        <p style="font-size: 1.3em;">
-                            Bạn đã trả lời <strong>${answered}/10</strong> câu<br>
-                            Thời gian còn lại: <strong>${timeLeft}s</strong>
-                        </p>
-                        <button class="btn" onclick="startSpeedChallenge()">Chơi lại</button>
-                        <button class="btn btn-secondary" onclick="backToMenu()">Về menu</button>
-                    </div>
-                `;
-        }
-
-        const speedTimer = setInterval(() => {
-          timeLeft--;
-          document.getElementById("speedTimer").textContent = `⏱️ ${timeLeft}s`;
-          if (timeLeft <= 0) {
-            endSpeedChallenge(questionIndex);
-          }
-        }, 1000);
-
-        showQuestion();
-      }
-
-      // Back to Menu
-      function backToMenu() {
-        document.getElementById("gameArea").classList.remove("active");
-        document.getElementById("gameMenu").style.display = "grid";
-        if (gameState.timer) {
-          clearInterval(gameState.timer);
-        }
+      // Restart Game
+      function restartGame() {
+        startGame(gameState.mode);
       }
 
       // Initialize
-      document.addEventListener("DOMContentLoaded", function () {
-        console.log("🎮 B1 Sprechen Game loaded!");
-      });
+      updateStats();
     </script>
   </body>
 </html>
